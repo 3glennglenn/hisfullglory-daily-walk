@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.tooling/
+.npm-cache/
+.env*
+!.env.example
+*.tsbuildinfo
