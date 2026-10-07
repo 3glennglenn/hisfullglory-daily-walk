@@ -1,0 +1,305 @@
+import { Component, useEffect, useState, type ReactNode } from "react";
+import { createRoot } from "react-dom/client";
+import {
+  BookOpen,
+  Heart,
+  Home as HomeIcon,
+  MessageCircle,
+  Menu,
+} from "lucide-react";
+import "@fontsource/manrope/latin-400.css";
+import "@fontsource/manrope/latin-600.css";
+import "./styles.css";
+import { PlatformProvider, usePlatform } from "./platform/store";
+import { AuthProvider } from "./platform/auth";
+import { parseRoute, navigate, resolveTheme } from "./platform/router";
+import { detectCapabilities } from "./platform/capabilities";
+import { supabase } from "./supabase";
+import { Home, Walk } from "./features/Home";
+import { Reader } from "./bible/Reader";
+import { Pray } from "./features/Pray";
+import { Grow } from "./features/Grow";
+import { JournalLibrary } from "./features/Journal";
+import { Settings, Profile } from "./features/Settings";
+import { Give, GivingPolicy } from "./giving/Give";
+import { Community } from "./community";
+import { Feed } from "./social/Feed";
+import { ProductCard } from "./features/LegacyWalk";
+import { products } from "./config";
+import { contentFor } from "./data";
+import { localDate } from "./storage";
+import { track } from "./analytics";
+class ErrorBoundary extends Component<
+  { children: ReactNode },
+  { failed: boolean }
+> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? (
+      <main className="shell">
+        <div className="card">
+          <h1>A moment to begin again</h1>
+          <p>Your saved data remains on this device.</p>
+          <button onClick={() => window.location.reload()}>Reload</button>
+        </div>
+      </main>
+    ) : (
+      this.props.children
+    );
+  }
+}
+interface InstallEvent extends Event {
+  prompt(): Promise<void>;
+  userChoice: Promise<{ outcome: string }>;
+}
+const menu = [
+  ["grow", "Grow", "Journeys for the season you’re in"],
+  ["journal", "Journal", "A private place for reflection"],
+  ["give", "Give", "External causes and reviewed support"],
+  ["shop", "Shop", "Bibles from HisFullGlory"],
+  ["profile", "Profile", "Your community account"],
+  ["settings", "Settings", "Your rhythm, theme and privacy"],
+];
+function App() {
+  const { state, notice, update } = usePlatform();
+  const [route, setRoute] = useState(() =>
+    parseRoute(location.pathname, location.search),
+  );
+  const [online, setOnline] = useState(navigator.onLine);
+  const [date, setDate] = useState(localDate);
+  const [install, setInstall] = useState<InstallEvent | null>(null);
+  const [installStatus, setInstallStatus] = useState("");
+  const capabilities = detectCapabilities(!!supabase);
+  useEffect(() => {
+    track("app_opened");
+    const refresh = () => {
+      setRoute(parseRoute(location.pathname, location.search));
+      setDate(localDate());
+    };
+    const connectivity = () => setOnline(navigator.onLine);
+    const clock = setInterval(() => setDate(localDate()), 30000);
+    const installHandler = (e: Event) => {
+      e.preventDefault();
+      setInstall(e as InstallEvent);
+    };
+    window.addEventListener("popstate", refresh);
+    window.addEventListener("online", connectivity);
+    window.addEventListener("offline", connectivity);
+    window.addEventListener("beforeinstallprompt", installHandler);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      clearInterval(clock);
+      window.removeEventListener("popstate", refresh);
+      window.removeEventListener("online", connectivity);
+      window.removeEventListener("offline", connectivity);
+      window.removeEventListener("beforeinstallprompt", installHandler);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, []);
+  useEffect(() => {
+    const media = matchMedia("(prefers-color-scheme: dark)");
+    const apply = () => {
+      const effective = resolveTheme(state.theme, media.matches);
+      document.documentElement.dataset.theme = effective;
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute("content", effective === "dark" ? "#181714" : "#F6F0E7");
+    };
+    apply();
+    media.addEventListener("change", apply);
+    return () => media.removeEventListener("change", apply);
+  }, [state.theme]);
+  const page = route.page;
+  let content: ReactNode;
+  switch (page) {
+    case "home":
+      content = <Home key={date} />;
+      break;
+    case "walk":
+      content = <Walk key={date} />;
+      break;
+    case "bible":
+      content = <Reader route={route} />;
+      break;
+    case "pray":
+      content = <Pray />;
+      break;
+    case "grow":
+      content = <Grow id={route.id} />;
+      break;
+    case "journal":
+      content = <JournalLibrary />;
+      break;
+    case "give":
+      content = <Give />;
+      break;
+    case "giving-policy":
+      content = <GivingPolicy />;
+      break;
+    case "profile":
+      content = <Profile />;
+      break;
+    case "settings":
+      content = <Settings />;
+      break;
+    case "community":
+      content = (
+        <>
+          <h1>Walk together.</h1>
+          <Feed />
+          <details className="card">
+            <summary>Live chat and the original prayer wall</summary>
+            <Community verse={contentFor(date)} online={online} />
+          </details>
+        </>
+      );
+      break;
+    case "shop":
+      content = (
+        <section>
+          <p className="eyebrow">Find a Bible for your journey</p>
+          <h1>Rooted in the Word.</h1>
+          <p>Current price, stock and checkout are shown by the store.</p>
+          {products.map((p) => (
+            <ProductCard key={p.handle} product={p} />
+          ))}
+        </section>
+      );
+      break;
+    case "more":
+      content = (
+        <section>
+          <h1>Make room for more.</h1>
+          {menu.map(([path, title, copy]) => (
+            <button
+              className="card entry"
+              key={path}
+              onClick={() => navigate("/" + path)}
+            >
+              <strong>{title}</strong>
+              <span>{copy}</span>
+            </button>
+          ))}
+          <small>
+            Available now: full WEB, local private writing, external giving
+            {capabilities.community
+              ? ", connected community"
+              : ". Community backend is not configured"}
+            .
+          </small>
+        </section>
+      );
+      break;
+    default:
+      content = (
+        <div className="card">
+          <h1>Page not found</h1>
+          <button onClick={() => navigate("/")}>Go home</button>
+        </div>
+      );
+  }
+  const active = ["home", "walk"].includes(page)
+    ? "home"
+    : ["bible", "pray", "community"].includes(page)
+      ? page
+      : "more";
+  const nav = [
+    { path: "home", label: "Home", Icon: HomeIcon },
+    { path: "bible", label: "Bible", Icon: BookOpen },
+    { path: "pray", label: "Pray", Icon: Heart },
+    { path: "community", label: "Community", Icon: MessageCircle },
+    { path: "more", label: "More", Icon: Menu },
+  ];
+  return (
+    <div className="shell">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <header className="brand">
+        <a
+          href="/"
+          className="brand-name"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/");
+          }}
+        >
+          HisFullGlory<span>JESUS AT THE CENTER</span>
+        </a>
+        <button
+          className="icon-button"
+          aria-label="Open settings"
+          onClick={() => navigate("/settings")}
+        >
+          <Heart size={22} />
+        </button>
+      </header>
+      {(!online || notice) && (
+        <aside className="notice" role="status">
+          {notice ||
+            "You’re offline. Downloaded Scripture and your private walk remain available. Community needs a connection."}
+        </aside>
+      )}
+      <main id="main" tabIndex={-1}>
+        {content}
+        {install && !state.local.installDismissed && (
+          <aside className="card">
+            <h2>Keep your daily walk close</h2>
+            <p>Install for a home-screen shortcut.</p>
+            <button
+              onClick={async () => {
+                await install.prompt();
+                const choice = await install.userChoice;
+                setInstallStatus(
+                  choice.outcome === "accepted"
+                    ? "Installation accepted."
+                    : "Installation dismissed.",
+                );
+                setInstall(null);
+              }}
+            >
+              Install app
+            </button>
+            <button
+              className="secondary"
+              onClick={() =>
+                update((s) => ({
+                  ...s,
+                  local: { ...s.local, installDismissed: true },
+                }))
+              }
+            >
+              Later
+            </button>
+            <small role="status">{installStatus}</small>
+          </aside>
+        )}
+      </main>
+      <nav className="bottom-nav platform-nav" aria-label="Main navigation">
+        {nav.map(({ path, label, Icon }) => (
+          <button
+            key={path}
+            aria-current={active === path ? "page" : undefined}
+            className={active === path ? "active" : ""}
+            onClick={() => navigate(path === "home" ? "/" : "/" + path)}
+          >
+            <Icon size={20} />
+            <span>{label}</span>
+          </button>
+        ))}
+      </nav>
+    </div>
+  );
+}
+createRoot(document.getElementById("root")!).render(
+  <ErrorBoundary>
+    <PlatformProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </PlatformProvider>
+  </ErrorBoundary>,
+);

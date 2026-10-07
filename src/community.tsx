@@ -8,7 +8,8 @@ import {
 import type { Session } from "@supabase/supabase-js";
 import { Heart, MessageCircle, Send, Shield, Trash2 } from "lucide-react";
 import { supabase } from "./supabase";
-import { config } from "./config";
+import { useAuth, AuthPanel } from "./platform/auth";
+import { SafetyControls } from "./social/safety";
 import { track } from "./analytics";
 import type { DailyContent } from "./data";
 
@@ -114,8 +115,6 @@ const timestamp = (value: string) =>
     hour: "numeric",
     minute: "2-digit",
   });
-const report = (id: string, room: string) =>
-  `mailto:${config.supportEmail}?subject=${encodeURIComponent("Community report")}&body=${encodeURIComponent(`Message ID: ${id}\nRoom: ${room}`)}`;
 function Guidelines({ close }: { close: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -152,6 +151,7 @@ export function Community({
   verse: DailyContent;
   online: boolean;
 }) {
+  const { accepted } = useAuth();
   const [view, setView] = useState<"chat" | "prayer">("chat");
   const [session, setSession] = useState<Session | null>(null);
   const [authLoading, setAuthLoading] = useState(!!supabase);
@@ -222,7 +222,7 @@ export function Community({
     return () => {
       alive = false;
     };
-  }, [session?.user.id]);
+  }, [session?.user.id, accepted]);
   const signIn = async (e: FormEvent) => {
     e.preventDefault();
     if (!supabase || authBusy || !online) return;
@@ -282,9 +282,15 @@ export function Community({
     }
   };
   const canWrite =
-    !!supabase && !!session && !!profile && !profileLoading && online;
+    accepted &&
+    !!supabase &&
+    !!session &&
+    !!profile &&
+    !profileLoading &&
+    online;
   return (
     <section aria-labelledby="community-title">
+      {!accepted && <AuthPanel />}
       <div className="section-head">
         <div>
           <p className="eyebrow">Walk together</p>
@@ -441,6 +447,12 @@ function Chat({
 }) {
   const [rooms, setRooms] = useState<Room[]>(supabase ? [] : demoRooms);
   const [roomId, setRoomId] = useState(supabase ? "" : demoRooms[0].id);
+  const [reloadVersion, setReloadVersion] = useState(0);
+  useEffect(() => {
+    const changed = () => setReloadVersion((v) => v + 1);
+    window.addEventListener("hfg-blocks-changed", changed);
+    return () => window.removeEventListener("hfg-blocks-changed", changed);
+  }, []);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(!!supabase);
   const [earlierBusy, setEarlierBusy] = useState(false);
@@ -597,7 +609,7 @@ function Chat({
       clearInterval(interval);
       void client.removeChannel(channel);
     };
-  }, [roomId, retry, online]);
+  }, [roomId, retry, online, reloadVersion]);
   useEffect(() => {
     if (nearBottom.current && feed.current)
       feed.current.scrollTop = feed.current.scrollHeight;
@@ -787,9 +799,15 @@ function Chat({
                   {supabase ? timestamp(m.created_at) : "Example conversation"}
                 </time>
                 {supabase && (
-                  <a href={report(m.id, room?.name ?? "Community")}>Report</a>
+                  <SafetyControls
+                    id={m.id}
+                    kind="chat"
+                    onChange={() =>
+                      window.dispatchEvent(new Event("hfg-blocks-changed"))
+                    }
+                  />
                 )}
-                {canWrite && m.user_id === userId && (
+                {userId && m.user_id === userId && (
                   <button
                     className="text-button"
                     aria-label="Delete your message"
@@ -866,6 +884,13 @@ function PrayerWall({
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const sortRef = useRef(sort);
   sortRef.current = sort;
+  useEffect(() => {
+    const changed = () => {
+      void fetchPosts();
+    };
+    window.addEventListener("hfg-blocks-changed", changed);
+    return () => window.removeEventListener("hfg-blocks-changed", changed);
+  }, []);
   const fetchPosts = useCallback(async () => {
     if (!supabase) return;
     const selected = sortRef.current;
@@ -1062,8 +1087,16 @@ function PrayerWall({
               <Heart size={16} />
               {p.has_prayed ? "You prayed" : "I prayed"} · {p.prayed_count}
             </button>
-            {supabase && <a href={report(p.id, "Prayer Wall")}>Report</a>}
-            {canWrite && p.user_id === userId && (
+            {supabase && (
+              <SafetyControls
+                id={p.id}
+                kind="prayer"
+                onChange={() =>
+                  window.dispatchEvent(new Event("hfg-blocks-changed"))
+                }
+              />
+            )}
+            {userId && p.user_id === userId && (
               <button
                 className="icon-button"
                 disabled={busy}

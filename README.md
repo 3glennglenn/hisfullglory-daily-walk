@@ -1,62 +1,62 @@
-# HisFullGlory Daily Walk
+# HisFullGlory · Jesus at the Center
 
-Installable mobile-first PWA: local WEB Scripture, private journals, streaks, three five-day plans, optional Supabase community, and HisFullGlory store links. No backend server or Shopify integration.
+A mobile-first React/TypeScript/Vite faith platform with an installable PWA, complete public-domain WEB reader, daily guided walk, local private journal and prayer lifecycle, 15 five-day devotional topics, optional Supabase community, external giving and the original HisFullGlory shop links.
 
-## Local development
+## Run and verify
 
-Node 22.12+ (Node 24 recommended).
+Node 22.12+; Node 24 used for validation.
 
 ```sh
 npm install
-cp .env.example .env.local
 npm run dev
-```
-
-Without environment variables the app works with a clearly labeled read-only Community preview. Journals and progress stay in this browser; clearing site data removes them. Storage failures are shown visibly. Internet is needed for initial installation, live community, and store links.
-
-```sh
 npm test
+npm run security
 npm run build
 npm run preview
+# In a second terminal, with Chromium installed (`npx playwright install chromium`):
+npm run test:browser
 ```
 
-Tests cover calendar dates, streak idempotence, corrupt storage recovery, and database authorization in a local in-memory PostgreSQL engine (development only). They verify profile privacy, author-only writes/deletion, anonymous author protection, reactions, cooldowns, and hidden/deleted content. No hosted database is contacted by the tests.
+For an existing Edge installation, set `BROWSER_CHANNEL=msedge` before the browser script (PowerShell: `$env:BROWSER_CHANNEL="msedge"`). The script captures no screenshots and makes no donations.
 
-Build validates strict TypeScript and outputs `dist/`, including manifest and app-shell service worker. Fonts are self-hosted. Only bundled app assets are precached; Supabase responses, product images, and external pages are not cached. Use HTTPS for installation. iPhone: Share → Add to Home Screen. Other browsers: browser install/menu option.
+`npm test` runs pure state/privacy/Bible tests and real PostgreSQL authorization checks using PGlite; no hosted database is contacted. Build includes strict TypeScript and the production service worker. `dist/` is generated, ignored output.
 
-## Supabase setup
+Guest mode needs no credentials. Missing Supabase produces explicit unavailable publishing/support states. Local writing, WEB, Grow, bookmarks and external causes work without auth. Browser storage is local and unencrypted: export Settings → private backup before clearing data. On first run the v1 key is preserved and migrated forward to v2. Already-onboarded users are not forced through onboarding again.
 
-1. Create a Supabase project. Run the entire `supabase/schema.sql` in SQL Editor. It creates five tables, RLS policies, author-only deletion, private profiles, server-controlled author snapshots, a three-second SQL cooldown, prayer count aggregation, and three fixed rooms. Seed/policy/publication setup is idempotent.
-2. Enable email authentication. Configure production Site URL `https://app.hisfullglory.com` and redirect allowlist `https://app.hisfullglory.com/` and `http://localhost:5173/` (or the exact Vite dev URL). Configure production email delivery for magic links. Guests can read without signing in.
-3. Add only these public client settings to `.env.local`, or Vercel project environment:
+## Connected community setup
+
+Apply these files in this exact order in Supabase SQL Editor as the project owner:
+
+1. `supabase/schema.sql` — existing profiles, three chat rooms, chat, original prayer wall and reactions.
+2. `supabase/migrations/001_platform.sql` — current terms, passage/devotional contributions, reactions, private reports, blocks/mutes, moderation audit and legacy posting terms guard.
+3. `supabase/migrations/002_support.sql` — private support drafts, manual review, public safe directory and reviewer notes.
+4. `supabase/migrations/003_aggregate_feed.sql` — paginated community timeline across new posts, existing chat and original prayer posts.
+
+All are rerunnable. Apply the bootstrap before numbered migrations; do not rerun only the bootstrap afterward because it replaces legacy policies/functions. Hosted migrations were **not executed** by this implementation.
+
+Enable email magic links, configure production SMTP, Site URL and exact redirect allowlist. Local development uses `http://localhost:5173/`; set the actual production origin when approved. Copy `.env.example` to `.env.local` and provide only:
 
 ```dotenv
 VITE_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
 VITE_SUPABASE_ANON_KEY=YOUR_PUBLIC_ANON_OR_PUBLISHABLE_KEY
 ```
 
-Never add a service-role/secret key. Vite variables are public at build time. Rebuild when they change. Supabase manages auth tokens; the app does not manually copy them. After sign-in, choose a display name before posting. Profiles are readable/editable only by their owner; existing messages retain their name snapshot.
+These settings are public build inputs. Never put secret/service-role/payment keys in a Vite variable. Rebuild after changing settings. Sign in, set a display name and explicitly accept the current rules in Profile before posting. Google/Apple auth, push, encrypted sync and native payments are unavailable.
 
-4. Verify with two accounts and a guest: guests cannot write, each account can edit only its own profile, delete only its own posts, and toggle one prayer reaction. Check rapid concurrent submissions, pagination, reconnect, moderation, and expired magic links. Live auth/Realtime/RLS verification requires a configured Supabase project.
+Before public release, verify real email delivery, guest/two-account rights, expired sessions, Realtime reconnect, reporting and moderation on the configured project. Local PostgreSQL tests do not certify hosted configuration. See [moderation operations](docs/MODERATION.md).
 
-Prayer Wall lists the latest 50 or 50 most-prayed visible posts. Chat loads 50 messages with `(created_at, id)` cursor pagination. Realtime inserts are deduplicated; periodic reconciliation removes moderated content and refreshes counts. Anonymous display hides the name from readers; project administrators can identify authors.
+## Data, licensing and payments
 
-## Manual moderation
+The full WEB library is imported from the official [eBible bulk USFM archive](https://ebible.org/Scriptures/engwebp_usfm.zip), with [public-domain terms](https://ebible.org/engwebp/copyright.htm). Source text is separate from original editorial devotionals and community stories. No licensed translation, Bible scraping, third-party Bible API or original-language database is included. See [architecture](docs/ARCHITECTURE.md) and [decisions](docs/DECISIONS.md).
 
-Use Supabase Table Editor to set `is_hidden = true` or `deleted_at` on concerning `chat_messages` / `prayer_posts`. Review spam manually; client word checks are only a basic aid. Visible feeds reconcile every 20 seconds. Never share private profile rows or create a public user directory. Confirm the support mailbox in `src/config.ts` before publishing; reports contain only a message/post ID and room name. Community prayer does not replace emergency or professional support.
+Giving offers five independently evaluated options through the official GiveWell checkout. Personal requests require an exact allowlisted external GoFundMe URL and manual approval. No payment is collected by HisFullGlory; no receipts, custody, payouts, platform fees or claimed fundraising totals. See [verified giving catalog](docs/GIVING_CATALOG.md).
 
-## Store content and privacy
+## Hosting and native preparation
 
-Edit product titles, benefit lines, price strings and image URLs in `src/config.ts`. Store product information and USD currency were verified on 2026-10-05. Unavailable images use a CSS fallback. Buttons open the three exact supplied product links in the same tab; all purchases stay in the store.
+No deployment, DNS, Shopify or store settings were changed. A Vercel SPA rewrite is included for `/bible/romans/8/28` and other refreshed deep links. If later approved: Vite preset, `npm run build`, output `dist`, HTTPS, correct auth origins. On another host serve existing static files before falling back to `index.html`.
 
-WEB quotations are the public-domain updated World English Bible: [Psalm 23](https://ebible.org/engwebp/PSA023.htm) and [Psalm 121](https://ebible.org/engwebp/PSA121.htm). All quotations are labeled WEB. Devotionals are local original reflections.
+The service worker precaches the app, fonts, icons and 5.27 MB WEB JSON. It does not cache Supabase/private responses or external pages. Initial internet access is required. Browser installation uses the install prompt where supported; iPhone uses Share → Add to Home Screen. Offline writing and downloaded Bible work; live community does not.
 
-Analytics use a dependency-free console helper with allowed non-sensitive metadata only. Journals, community text, email and display names are never sent to analytics/logs. Community never receives journal state.
+Native wrapper boundaries and App Store release gates are documented, but no Capacitor project, Xcode/Android build, push delivery or native-device result is claimed. Current delivery is a PWA.
 
-## Vercel, domain and Shopify link
-
-Import this GitHub repository into Vercel. Choose Vite, build `npm run build`, output `dist`, Node 24. Add the two public Supabase variables if Community is ready. Tabs use app state, and magic links return to `/`, so no SPA rewrite is needed. Deploy and verify HTTPS manifest/service worker and auth redirects.
-
-Add `app.hisfullglory.com` in Vercel Project Settings → Domains and configure the exact DNS record it specifies with your DNS provider. Update Supabase redirects if the production URL changes. This implementation does not deploy or change DNS.
-
-In Shopify navigation add a “Daily Walk” link to `https://app.hisfullglory.com`, optionally also as a storefront CTA. All commerce stays on the existing store; this app does not modify Shopify.
+See [implementation status](IMPLEMENTATION_STATUS.md), [architecture](docs/ARCHITECTURE.md) and [changelog](CHANGELOG.md) for exact scope and verification limits.

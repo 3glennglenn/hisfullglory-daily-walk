@@ -1,0 +1,287 @@
+import { useEffect, useState } from "react";
+import { usePlatform } from "../platform/store";
+import { backupData } from "../platform/persistence";
+import { goals, type Theme } from "../platform/models";
+import { AuthPanel, useAuth } from "../platform/auth";
+import { supabase } from "../supabase";
+export function Settings() {
+  const { state, update, notice, recover } = usePlatform();
+  const [status, setStatus] = useState("");
+  const [backup, setBackup] = useState(false);
+  function exportBackup() {
+    try {
+      const blob = new Blob([backupData(localStorage)], {
+        type: "application/json",
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `hisfullglory-private-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      setBackup(true);
+      setStatus("Private backup exported. Store it securely.");
+    } catch {
+      setStatus("Backup unavailable: browser storage cannot be read.");
+    }
+  }
+  return (
+    <section>
+      <h1>Your rhythm, your settings.</h1>
+      <div className="card">
+        <h2>Appearance</h2>
+        <label>
+          Theme
+          <select
+            aria-label="Theme"
+            value={state.theme}
+            onChange={(e) =>
+              update((s) => ({ ...s, theme: e.target.value as Theme }))
+            }
+          >
+            {["system", "light", "dark"].map((t) => (
+              <option key={t}>{t}</option>
+            ))}
+          </select>
+        </label>
+        <p>
+          System follows your device, including changes while this app is open.
+        </p>
+      </div>
+      <div className="card">
+        <h2>Your daily rhythm</h2>
+        <label>
+          Minutes
+          <select
+            value={state.preferences.minutes}
+            onChange={(e) =>
+              update((s) => ({
+                ...s,
+                preferences: {
+                  ...s.preferences,
+                  minutes: Number(e.target.value) as 5 | 10 | 20,
+                },
+              }))
+            }
+          >
+            {[5, 10, 20].map((m) => (
+              <option key={m}>{m}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Time
+          <select
+            value={state.preferences.time}
+            onChange={(e) =>
+              update((s) => ({
+                ...s,
+                preferences: {
+                  ...s.preferences,
+                  time: e.target.value as typeof s.preferences.time,
+                },
+              }))
+            }
+          >
+            {["morning", "afternoon", "evening"].map((t) => (
+              <option key={t}>{t}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Faith journey
+          <select
+            value={state.preferences.journey}
+            onChange={(e) =>
+              update((s) => ({
+                ...s,
+                preferences: { ...s.preferences, journey: e.target.value },
+              }))
+            }
+          >
+            {[
+              "New to faith",
+              "Returning to faith",
+              "Growing in faith",
+              "Exploring faith",
+              "Prefer not to say",
+            ].map((j) => (
+              <option key={j}>{j}</option>
+            ))}
+          </select>
+        </label>
+        <p>Focus · choose up to three</p>
+        <div className="chips">
+          {goals.map((g) => (
+            <button
+              className="secondary"
+              key={g}
+              aria-pressed={state.preferences.goals.includes(g)}
+              disabled={
+                state.preferences.goals.length === 3 &&
+                !state.preferences.goals.includes(g)
+              }
+              onClick={() =>
+                update((s) => ({
+                  ...s,
+                  preferences: {
+                    ...s.preferences,
+                    goals: s.preferences.goals.includes(g)
+                      ? s.preferences.goals.filter((x) => x !== g)
+                      : [...s.preferences.goals, g],
+                  },
+                }))
+              }
+            >
+              {g}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="card">
+        <h2>Notification preferences</h2>
+        <p>
+          Preferences only. Push delivery is unavailable; this app does not
+          request notification permission.
+        </p>
+        {[
+          "Daily Walk",
+          "Devotionals",
+          "Someone prayed",
+          "Prayer updates",
+          "Replies",
+          "Giving updates",
+        ].map((n) => (
+          <label className="check" key={n}>
+            <input
+              type="checkbox"
+              checked={state.notifications[n] ?? false}
+              onChange={(e) =>
+                update((s) => ({
+                  ...s,
+                  notifications: { ...s.notifications, [n]: e.target.checked },
+                }))
+              }
+            />
+            {n}
+          </label>
+        ))}
+      </div>
+      <div className="card">
+        <h2>Privacy and recovery</h2>
+        <p>
+          Private journal, prayers, bookmarks and journey progress remain in
+          browser storage. Export before clearing data or switching devices.
+          Public posts are shared only after you publish explicitly.
+        </p>
+        <button onClick={exportBackup}>Export private backup</button>
+        {notice && (
+          <>
+            <p>{notice}</p>
+            <button
+              className="secondary"
+              disabled={!backup}
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "Recover from the preserved v1 data? Your current v2 data will be kept under a recovery key.",
+                  )
+                )
+                  recover();
+              }}
+            >
+              Recover preserved legacy data
+            </button>
+          </>
+        )}
+        <p role="status">{status}</p>
+        <small>
+          No encrypted cloud sync, account-data deletion service or cross-device
+          restore is configured. Contact the operator to remove an account; use
+          own-content deletion controls for public contributions.
+        </small>
+      </div>
+      <BlockedAuthors />
+    </section>
+  );
+}
+function BlockedAuthors() {
+  const { session } = useAuth();
+  const [blocks, setBlocks] = useState<
+    { id: string; action: string; created_at: string }[]
+  >([]);
+  const [status, setStatus] = useState("");
+  async function load() {
+    if (!supabase || !session) return;
+    const { data, error } = await supabase.rpc("read_own_blocks");
+    if (error) setStatus("Block list unavailable.");
+    else setBlocks(data ?? []);
+  }
+  useEffect(() => {
+    void load();
+  }, [session?.user.id]);
+  if (!session) return null;
+  return (
+    <div className="card">
+      <h2>Blocked or muted authors</h2>
+      <p>These private entries do not reveal anonymous profile names.</p>
+      {blocks.map((b, i) => (
+        <p key={b.id}>
+          Author {i + 1} · {b.action} ·{" "}
+          {new Date(b.created_at).toLocaleDateString()}{" "}
+          <button
+            className="secondary"
+            onClick={async () => {
+              const { error } = await supabase!.rpc("remove_block", {
+                blocked_user: b.id,
+              });
+              if (error) setStatus("Could not remove block.");
+              else await load();
+            }}
+          >
+            Remove
+          </button>
+        </p>
+      ))}
+      {!blocks.length && <p>No blocked or muted authors.</p>}
+      <small role="status">{status}</small>
+    </div>
+  );
+}
+export function Profile() {
+  const { state } = usePlatform();
+  return (
+    <section>
+      <h1>Your walk with God.</h1>
+      <div className="card">
+        <p>
+          {state.local.completedDates.length} daily walks completed ·{" "}
+          {state.reading.length} chapters read
+        </p>
+        <p>
+          {state.entries.length} private journal entries ·{" "}
+          {state.prayers.length} private prayers
+        </p>
+        <small>
+          Your reading and private reflections are not attached to a public
+          profile.
+        </small>
+      </div>
+      <AuthPanel />
+      <div className="card">
+        <h2>Account and privacy</h2>
+        <p>
+          Email links are the configured sign-in method. Google and Apple
+          sign-in are unavailable. Signing in does not upload your private
+          journal or prayers.
+        </p>
+        <p>
+          Use Settings to export private data. Contact the operator for an
+          account deletion request; deleting an account must remove its owned
+          server data and respect required audit retention.
+        </p>
+        <a href="mailto:support@hisfullglory.com">Contact support</a>
+      </div>
+    </section>
+  );
+}

@@ -1,13 +1,15 @@
 {
   "name": "hisfullglory-daily-walk",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
+    "security": "node scripts/security-check.mjs",
+    "test:browser": "node scripts/browser-check.mjs",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --experimental-strip-types --test tests/core.test.ts tests/schema.test.mjs"
+    "test": "node --experimental-strip-types --test tests/core.test.ts tests/platform.test.ts tests/schema.test.mjs tests/platform-schema.test.mjs"
   },
   "dependencies": {
     "@fontsource/manrope": "^5.2.8",
@@ -21,6 +23,7 @@
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.3",
+    "playwright": "^1.62.1",
     "typescript": "^5.9.2",
     "vite": "^7.1.7",
     "vite-plugin-pwa": "^1.0.3"

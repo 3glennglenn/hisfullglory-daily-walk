@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!assets/|bible/web.json|icon|apple-touch|manifest|sw.js|workbox-).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
