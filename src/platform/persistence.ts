@@ -110,20 +110,28 @@ export function normalizePlatform(value: unknown): PlatformState | null {
         type: "free journal",
       });
   s.prayers = Array.isArray(v.prayers)
-    ? v.prayers.filter(
-        (p): p is PrivatePrayer =>
-          !!p &&
-          typeof p.id === "string" &&
-          typeof p.title === "string" &&
-          typeof p.body === "string" &&
-          typeof p.answer === "string" &&
-          typeof p.createdAt === "string" &&
-          ["Active", "Waiting", "Answered", "Archived"].includes(p.status) &&
-          Array.isArray(p.updates) &&
-          p.updates.every(
-            (u) => typeof u.body === "string" && typeof u.date === "string",
-          ),
-      )
+    ? v.prayers
+        .filter(
+          (p): p is PrivatePrayer =>
+            !!p &&
+            typeof p.id === "string" &&
+            typeof p.title === "string" &&
+            typeof p.body === "string" &&
+            typeof p.answer === "string" &&
+            typeof p.createdAt === "string" &&
+            ["Active", "Waiting", "Answered", "Archived"].includes(p.status),
+        )
+        .map((p) => ({
+          ...p,
+          updates: Array.isArray(p.updates)
+            ? p.updates.filter(
+                (u) =>
+                  !!u &&
+                  typeof u.body === "string" &&
+                  typeof u.date === "string",
+              )
+            : [],
+        }))
     : [];
   for (const field of ["bookmarks", "reading", "savedDevotionals"] as const)
     s[field] = textArray(v[field]);
@@ -180,8 +188,28 @@ export function loadPlatform(storage: StorageLike): {
       try {
         const state = normalizePlatform(JSON.parse(current));
         if (state) {
-          if (JSON.stringify(state) !== current)
-            storage.setItem(V2_KEY + ":recovery:normalized", current);
+          if (JSON.stringify(state) !== JSON.stringify(JSON.parse(current))) {
+            const recoveryKey = V2_KEY + ":recovery:normalized";
+            try {
+              const previous = storage.getItem(recoveryKey);
+              if (previous !== null && previous !== current)
+                throw new Error("An earlier recovery copy must be preserved");
+              if (previous === null) storage.setItem(recoveryKey, current);
+            } catch {
+              return {
+                state,
+                blocked: true,
+                notice:
+                  "Stored data needs a recovery backup, but storage cannot save it. Your readable data is available; export it in Settings. No stored data was overwritten.",
+              };
+            }
+            return {
+              state,
+              blocked: false,
+              notice:
+                "Some stored fields needed recovery. The original data was preserved in your Settings backup.",
+            };
+          }
           return { state, blocked: false, notice: "" };
         }
       } catch {
@@ -214,7 +242,16 @@ export function loadPlatform(storage: StorageLike): {
       }
     }
     const state = migrateV1(parsed);
-    storage.setItem(V2_KEY, JSON.stringify(state));
+    try {
+      storage.setItem(V2_KEY, JSON.stringify(state));
+    } catch {
+      return {
+        state,
+        blocked: true,
+        notice:
+          "Storage cannot save the migration. Your existing data remains readable and unchanged. Free browser storage, then reload; export a backup in Settings.",
+      };
+    }
     return { state, blocked: false, notice };
   } catch {
     return {

@@ -34,6 +34,7 @@ for (let i = 0; i < 2; i++)
     "001_platform.sql",
     "002_support.sql",
     "003_aggregate_feed.sql",
+    "004_qa_guards.sql",
   ])
     await db.exec(readFileSync("supabase/migrations/" + file, "utf8"));
 ok(true, "all additive migrations rerun");
@@ -279,6 +280,29 @@ await denied(draftSql, "server rejects bank/payment instructions", [
   ...args.slice(3, 9),
   "https://www.gofundme.com/f/another-project",
 ]);
+for (const instruction of [
+  "Send to https://wise.com/pay/me for this community project.",
+  "Use www.revolut.me/example to fund our community project.",
+  "Account number 12345678901 for this community project.",
+  "Card number 4111 1111 1111 1111 for this community project.",
+  "Stuur naar rekeningnummer 123456789 voor dit project.",
+  "Send a wire transfer for this community project.",
+])
+  await assert.rejects(
+    () =>
+      db.query(draftSql, [
+        null,
+        args[1],
+        instruction,
+        ...args.slice(3, 9),
+        "https://www.gofundme.com/f/guard-regression",
+      ]),
+    /No direct payment details/,
+  );
+ok(
+  true,
+  "direct support RPC rejects all six alternate transfer instructions for the intended reason",
+);
 await actor("postgres");
 await db.exec(
   `update public.community_posts set moderation_state='hidden' where id='${post}'`,
@@ -355,5 +379,115 @@ ok(
     .length === 0,
   "pending_review content is not public",
 );
+await actor("postgres");
+const fullPrayer = (
+  await rows(
+    `insert into public.community_posts(user_id,display_name,body,post_type,prayer_status) values('${a}','Alice',repeat('p',2000),'prayer','Active') returning id`,
+  )
+)[0].id;
+await actor("authenticated", a);
+await db.query(
+  "select public.update_public_prayer($1,'Answered','An explicit public answer')",
+  [fullPrayer],
+);
+const fullAnswer = (
+  await rows("select * from public.read_community_feed(null,'prayer')")
+).find((p) => p.id === fullPrayer);
+ok(
+  fullAnswer?.body.includes("An explicit public answer") &&
+    fullAnswer?.body.startsWith("p".repeat(2000)),
+  "maximum-length prayer accepts an answer without losing original text",
+);
+await assert.rejects(
+  () =>
+    db.query("select public.update_public_prayer($1,null,'Invalid')", [
+      fullPrayer,
+    ]),
+  /Valid status/,
+);
+await assert.rejects(
+  () =>
+    db.query("select public.update_public_prayer($1,'Answered',null)", [
+      fullPrayer,
+    ]),
+  /Valid status/,
+);
+ok(true, "null status or answer cannot bypass prayer validation");
+await db.query(
+  "select public.update_public_prayer($1,'Waiting','A new public update')",
+  [fullPrayer],
+);
+await db.query("select public.update_public_prayer($1,'Archived','')", [
+  fullPrayer,
+]);
+ok(
+  (await rows("select * from public.read_aggregate_feed(null,'prayer')"))
+    .find((p) => p.id === fullPrayer)
+    ?.body.includes("A new public update"),
+  "aggregate feed retains public answer and update history after archive",
+);
+await actor("authenticated", b);
+await denied(
+  "select prayer_updates from public.community_posts",
+  "raw public prayer history remains behind constrained feed RPCs",
+);
+await denied(
+  "update public.community_posts set prayer_updates='Forged answer'",
+  "ordinary client cannot forge prayer update history",
+);
+await actor("postgres");
+ok(
+  (
+    await rows(
+      "select c.relname from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind='r' and not c.relrowsecurity",
+    )
+  ).length === 0,
+  "RLS enabled on every public table",
+);
+ok(
+  (
+    await rows(
+      "select p.proname from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.prosecdef and not coalesce(p.proconfig @> ARRAY['search_path=\"\"'],false)",
+    )
+  ).length === 0,
+  "all security definer functions use an empty search path",
+);
+await actor("postgres");
+const unsafeApproved = (
+  await rows(
+    `insert into public.support_requests(user_id,title,story,category,declared_target,currency,expires_at,beneficiary_relationship,country,display_name,fundraiser_url,status,moderation_state) values('${a}','Old approved request','Send to https://wise.com/pay/me for this community project.','Community service',500,'USD',now()+interval '30 days','Organizer','Netherlands','Alice','https://www.gofundme.com/f/old-approved-fixture','approved','visible') returning id`,
+  )
+)[0].id;
+await actor("anon");
+ok(
+  !(await rows("select * from public.read_support_requests()")).some(
+    (r) => r.id === unsafeApproved,
+  ),
+  "pre-existing approved records with direct payment instructions fail closed",
+);
+await actor("postgres");
+const beforeUpgrade = await rows(
+  "select id,body,prayer_updates,prayer_status from public.community_posts order by id",
+);
+await db.exec(readFileSync("supabase/migrations/004_qa_guards.sql", "utf8"));
+assert.deepEqual(
+  await rows(
+    "select id,body,prayer_updates,prayer_status from public.community_posts order by id",
+  ),
+  beforeUpgrade,
+);
+ok(
+  true,
+  "QA migration reruns over populated data without changing prayers or history",
+);
+await assert.rejects(
+  () =>
+    db.query(
+      "select public.review_support_request($1,'fundraising','Operator rechecks the older unsafe campaign')",
+      [unsafeApproved],
+    ),
+  /No direct payment details/,
+);
+ok(true, "privileged review cannot promote an older unsafe approved campaign");
 await db.close();
 console.log(`${checks} platform authorization checks passed`);

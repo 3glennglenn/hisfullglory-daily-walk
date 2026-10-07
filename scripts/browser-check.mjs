@@ -195,6 +195,24 @@ try {
         JSON.parse(localStorage.getItem("hfg-daily-walk:v2")),
       );
       assert.deepEqual(s.devotionalProgress.anxiety, [0]);
+      await page.reload();
+      await page.getByRole("button", { name: "Day 2", exact: true }).waitFor();
+      assert.equal(
+        await page
+          .getByRole("button", { name: "Day 2", exact: true })
+          .getAttribute("aria-pressed"),
+        "true",
+        "direct refresh resumes the next unfinished day",
+      );
+      await go("/");
+      await page.getByRole("button", { name: /Continue your journey/ }).click();
+      assert.equal(new URL(page.url()).pathname, "/grow/anxiety");
+      assert.equal(
+        await page
+          .getByRole("button", { name: "Day 2", exact: true })
+          .getAttribute("aria-pressed"),
+        "true",
+      );
     },
   );
   await check(
@@ -216,6 +234,25 @@ try {
           .getAttribute("href"),
         "https://secure.givewell.org/",
       );
+      const checkoutLink = dialog.getByRole("link", {
+        name: "Continue to provider",
+      });
+      assert.equal(await checkoutLink.getAttribute("target"), "_blank");
+      assert.match(await checkoutLink.getAttribute("rel"), /noopener/);
+      assert.match(await dialog.innerText(), /secure.givewell.org/);
+      for (let i = 0; i < 5; i++) {
+        await page.keyboard.press("Tab");
+        assert.equal(
+          await dialog.evaluate(
+            (d) =>
+              d.matches(":modal") &&
+              (d.contains(document.activeElement) ||
+                document.activeElement === document.body),
+          ),
+          true,
+          "native modal prevents background controls receiving focus (browser chrome is allowed)",
+        );
+      }
       await page.keyboard.press("Escape");
       assert.equal(await page.getByRole("dialog").count(), 0);
       await page
@@ -263,36 +300,199 @@ try {
     },
   );
   await check(
-    "all primary/more routes fit 375px in dark mode without horizontal overflow",
+    "primary/more routes fit 375/390/768/1280px in both themes with accessible controls",
     async () => {
-      for (const path of [
-        "/",
-        "/bible/psalms/23",
-        "/pray",
-        "/community",
-        "/more",
-        "/grow",
-        "/journal",
-        "/give",
-        "/profile",
-        "/settings",
-        "/shop",
-      ]) {
-        await go(path);
-        const overflow = await page.evaluate(
-          () => document.documentElement.scrollWidth > innerWidth,
-        );
-        assert.equal(overflow, false, path);
-        assert.equal(
-          await page
-            .getByRole("navigation", { name: "Main navigation" })
-            .getByRole("button")
-            .count(),
-          5,
-        );
+      for (const width of [375, 390, 768, 1280]) {
+        await page.setViewportSize({ width, height: 812 });
+        for (const theme of ["light", "dark"]) {
+          await go("/settings");
+          await page.getByLabel("Theme", { exact: true }).selectOption(theme);
+          for (const path of [
+            "/",
+            "/bible/psalms/23",
+            "/pray",
+            "/community",
+            "/more",
+            "/grow",
+            "/journal",
+            "/give",
+            "/profile",
+            "/settings",
+            "/shop",
+          ]) {
+            await go(path);
+            const overflow = await page.evaluate(
+              () => document.documentElement.scrollWidth > innerWidth,
+            );
+            assert.equal(overflow, false, path);
+            assert.equal(
+              await page
+                .getByRole("navigation", { name: "Main navigation" })
+                .getByRole("button")
+                .count(),
+              5,
+            );
+            const invalidControls = await page
+              .locator(
+                "button, input:not([type=checkbox]), textarea, select, label.check",
+              )
+              .evaluateAll((nodes) =>
+                nodes
+                  .filter(
+                    (n) =>
+                      n.getClientRects().length &&
+                      (n.getBoundingClientRect().height < 43.9 ||
+                        !(
+                          n.labels?.length ||
+                          n.getAttribute("aria-label") ||
+                          n.getAttribute("aria-labelledby") ||
+                          n.textContent?.trim()
+                        )),
+                  )
+                  .map((n) => ({
+                    tag: n.tagName,
+                    text: n.textContent?.trim(),
+                    height: n.getBoundingClientRect().height,
+                  })),
+              );
+            assert.deepEqual(
+              invalidControls,
+              [],
+              `${path} ${width} ${theme}: labels and 44px targets`,
+            );
+            assert.equal(
+              await page.locator("main h1").count(),
+              1,
+              `${path}: one primary heading`,
+            );
+          }
+        }
       }
     },
   );
+  await check(
+    "unknown routes and unavailable study context stay honest",
+    async () => {
+      await go("/grow/not-a-journey");
+      await page.getByRole("heading", { name: "Journey not found" }).waitFor();
+      await go("/unknown");
+      assert.match(await page.locator("main").innerText(), /not found/i);
+      await go("/bible/genesis/1?tab=context");
+      assert.match(
+        await page.locator("main").innerText(),
+        /not available|unavailable|not yet/i,
+      );
+      await go("/bible/luke/17/36");
+      assert.match(
+        await page.locator("#verse-36").innerText(),
+        /omitted|not included/i,
+      );
+    },
+  );
+  await check(
+    "v1 browser migration avoids onboarding and preserves the private journal",
+    async () => {
+      const migrated = await browser.newContext();
+      const p = await migrated.newPage();
+      await p.addInitScript(() => {
+        if (!localStorage.getItem("hfg-daily-walk:v1"))
+          localStorage.setItem(
+            "hfg-daily-walk:v1",
+            JSON.stringify({
+              version: 1,
+              onboarded: true,
+              goal: "peace-in-god",
+              activePlan: "closer-to-god",
+              installDismissed: true,
+              journals: { "2026-10-05": "Preserved production-shaped journal" },
+              completedDates: ["2026-10-04", "2026-10-05"],
+              progress: {
+                "closer-to-god": [0, 1],
+                "consistent-in-the-word": [2],
+                "peace-in-god": [3],
+              },
+            }),
+          );
+      });
+      await p.goto(base);
+      await p.locator("main h1").waitFor();
+      assert.equal(
+        await p
+          .getByRole("heading", { name: "Welcome to your daily walk" })
+          .count(),
+        0,
+      );
+      await p.goto(base + "/journal");
+      await p
+        .getByRole("button", { name: /Preserved production-shaped journal/ })
+        .waitFor();
+      await p.reload();
+      const s = await p.evaluate(() =>
+        JSON.parse(localStorage.getItem("hfg-daily-walk:v2")),
+      );
+      assert.equal(s.local.activePlan, "closer-to-god");
+      assert.deepEqual(s.local.completedDates, ["2026-10-04", "2026-10-05"]);
+      assert.deepEqual(s.local.progress["closer-to-god"], [0, 1]);
+      assert.equal(s.local.installDismissed, true);
+      await migrated.close();
+    },
+  );
+  await check(
+    "full/unavailable/corrupt storage displays a recoverable state",
+    async () => {
+      for (const mode of ["full", "unavailable", "corrupt"]) {
+        const c = await browser.newContext();
+        const p = await c.newPage();
+        await p.addInitScript((mode) => {
+          if (mode === "corrupt")
+            localStorage.setItem("hfg-daily-walk:v2", "original corrupt data");
+          if (mode === "full")
+            localStorage.setItem(
+              "hfg-daily-walk:v1",
+              JSON.stringify({
+                version: 1,
+                onboarded: true,
+                journals: { "2026-10-05": "Readable quota-full journal" },
+              }),
+            );
+          if (mode !== "corrupt")
+            Storage.prototype.setItem = () => {
+              throw new DOMException("Storage full", "QuotaExceededError");
+            };
+          if (mode === "unavailable")
+            Storage.prototype.getItem = () => {
+              throw new DOMException("Storage unavailable", "SecurityError");
+            };
+        }, mode);
+        await p.goto(base + "/journal");
+        await p.locator("main h1").waitFor();
+        assert.match(await p.locator("body").innerText(), /storage|recovery/i);
+        if (mode === "full")
+          await p
+            .getByRole("button", { name: /Readable quota-full journal/ })
+            .waitFor();
+        if (mode === "corrupt")
+          assert.equal(
+            await p.evaluate(() => localStorage.getItem("hfg-daily-walk:v2")),
+            "original corrupt data",
+          );
+        await c.close();
+      }
+    },
+  );
+  await check("failed Scripture download offers a working retry", async () => {
+    const c = await browser.newContext({ serviceWorkers: "block" });
+    const p = await c.newPage();
+    await p.route("**/bible/web.json", (route) =>
+      route.fulfill({ status: 503, body: "Unavailable" }),
+    );
+    await p.goto(base + "/bible/romans/8/28");
+    await p.getByRole("button", { name: "Try again" }).waitFor();
+    await p.unroute("**/bible/web.json");
+    await p.getByRole("button", { name: "Try again" }).click();
+    await p.locator("#verse-28").waitFor();
+    await c.close();
+  });
   await check(
     "installed static Bible and local journal reload offline",
     async () => {

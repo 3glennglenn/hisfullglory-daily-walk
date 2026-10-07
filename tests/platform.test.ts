@@ -26,6 +26,7 @@ import {
 import {
   approvedFundraiserUrl,
   hasPaymentDetails,
+  supportExpiry,
   causes,
   curatedCharityCatalog,
   goFundMeProvider,
@@ -39,6 +40,17 @@ class Memory implements StorageLike {
     this.data.set(k, v);
   }
 }
+test("empty or impossible support expiry cannot crash saving or normalize silently", () => {
+  for (const value of [
+    "",
+    "invalid",
+    "2026-02-30",
+    "2026-13-01",
+    "2026-10-07T00:00:00Z",
+  ])
+    assert.equal(supportExpiry(value), null);
+  assert.equal(supportExpiry("2028-02-29"), "2028-02-29T23:59:59.000Z");
+});
 test("v1 migrates once without erasing journals, onboarding, all plan progress or source data", () => {
   const legacy = {
     ...blankState(),
@@ -105,6 +117,85 @@ test("migration tolerates partial legacy and sanitizes unknown preferences witho
     "system",
   );
   assert.deepEqual(normalizePlatform(s)?.entries, s.entries);
+});
+
+test("quota-full migration and normalization keep readable private data", () => {
+  for (const version of [1, 2]) {
+    const store = new Memory();
+    const legacy = {
+      ...blankState(),
+      onboarded: true,
+      journals: { "2026-10-05": "Retain these words" },
+    };
+    const key = version === 1 ? V1_KEY : V2_KEY;
+    const raw = JSON.stringify(
+      version === 1 ? legacy : { ...migrateV1(legacy), theme: "invalid" },
+    );
+    store.setItem(key, raw);
+    store.setItem = () => {
+      throw new Error("QuotaExceededError");
+    };
+    const result = loadPlatform(store);
+    assert.equal(result.state.local.onboarded, true);
+    assert.equal(result.state.entries[0]?.body, "Retain these words");
+    assert.equal(result.blocked, true);
+    assert.match(result.notice, /storage|saved/i);
+    assert.equal(store.getItem(key), raw);
+  }
+});
+
+test("normalization never replaces an earlier recovery snapshot", () => {
+  const store = new Memory();
+  const recovery = V2_KEY + ":recovery:normalized";
+  store.setItem(recovery, "earlier recoverable private content");
+  store.setItem(
+    V2_KEY,
+    JSON.stringify({ ...migrateV1(blankState()), theme: "invalid" }),
+  );
+  const result = loadPlatform(store);
+  assert.equal(store.getItem(recovery), "earlier recoverable private content");
+  assert.equal(result.blocked, true);
+});
+
+test("malformed prayer updates are recoverable instead of crashing normalization", () => {
+  const store = new Memory();
+  const state = migrateV1({
+    ...blankState(),
+    journals: { "2026-10-05": "Safe journal" },
+  });
+  store.setItem(
+    V2_KEY,
+    JSON.stringify({
+      ...state,
+      prayers: [
+        {
+          id: "p",
+          title: "Prayer",
+          body: "Private",
+          answer: "",
+          createdAt: "2026-10-05",
+          status: "Active",
+          updates: [null],
+        },
+      ],
+    }),
+  );
+  const result = loadPlatform(store);
+  assert.equal(result.state.entries[0]?.body, "Safe journal");
+  assert.equal(result.state.prayers[0]?.body, "Private");
+  assert.deepEqual(result.state.prayers[0]?.updates, []);
+});
+
+test("support stories reject alternate direct transfers and account numbers", () => {
+  for (const value of [
+    "Send to https://wise.com/pay/me",
+    "Use www.revolut.me/example",
+    "Account number 12345678901",
+    "Card number 4111 1111 1111 1111",
+    "Stuur naar rekeningnummer 123456789",
+    "Send a wire transfer for help",
+  ])
+    assert.equal(hasPaymentDetails(value), true, value);
 });
 test("Bible bookmarks/highlights survive reload and unsupported context remains unavailable", () => {
   const memory = new Memory();

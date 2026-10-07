@@ -161,6 +161,12 @@ export function Home() {
   const { state } = usePlatform();
   const date = localDate();
   const today = contentFor(date);
+  const continuing = devotionals.find((d) => {
+    const done = state.devotionalProgress[d.id]?.length ?? 0;
+    return done > 0 && done < d.days.length;
+  });
+  const journeyId =
+    continuing?.id ?? recommendedJourney(state.preferences.goals);
   return (
     <section>
       <p className="eyebrow">
@@ -217,9 +223,9 @@ export function Home() {
             "Private prayers and public encouragement",
           ],
           [
-            `/grow/${recommendedJourney(state.preferences.goals)}`,
-            "Grow in faith",
-            `Suggested topic: ${devotionals.find((d) => d.id === recommendedJourney(state.preferences.goals))?.topic}`,
+            `/grow/${journeyId}`,
+            continuing ? "Continue your journey" : "Grow in faith",
+            `${continuing ? "Continue" : "Suggested topic"}: ${devotionals.find((d) => d.id === journeyId)?.topic}`,
           ],
           ["/journal", "Reflect privately", "Your own words, on this device"],
         ].map(([path, title, copy]) => (

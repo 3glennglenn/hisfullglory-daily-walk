@@ -7,7 +7,7 @@ A mobile-first React/TypeScript/Vite faith platform with an installable PWA, com
 Node 22.12+; Node 24 used for validation.
 
 ```sh
-npm install
+npm ci
 npm run dev
 npm test
 npm run security
@@ -19,7 +19,7 @@ npm run test:browser
 
 For an existing Edge installation, set `BROWSER_CHANNEL=msedge` before the browser script (PowerShell: `$env:BROWSER_CHANNEL="msedge"`). The script captures no screenshots and makes no donations.
 
-`npm test` runs pure state/privacy/Bible tests and real PostgreSQL authorization checks using PGlite; no hosted database is contacted. Build includes strict TypeScript and the production service worker. `dist/` is generated, ignored output.
+`npm test` runs pure state/privacy/Bible tests and real PostgreSQL authorization checks using PGlite; no hosted database is contacted. Build includes strict TypeScript and the production service worker. `dist/` is generated, ignored output. No lint script is configured. See [release QA evidence and remaining gates](docs/QA_REPORT.md).
 
 Guest mode needs no credentials. Missing Supabase produces explicit unavailable publishing/support states. Local writing, WEB, Grow, bookmarks and external causes work without auth. Browser storage is local and unencrypted: export Settings → private backup before clearing data. On first run the v1 key is preserved and migrated forward to v2. Already-onboarded users are not forced through onboarding again.
 
@@ -32,7 +32,9 @@ Apply these files in this exact order in Supabase SQL Editor as the project owne
 3. `supabase/migrations/002_support.sql` — private support drafts, manual review, public safe directory and reviewer notes.
 4. `supabase/migrations/003_aggregate_feed.sql` — paginated community timeline across new posts, existing chat and original prayer posts.
 
-All are rerunnable. Apply the bootstrap before numbered migrations; do not rerun only the bootstrap afterward because it replaces legacy policies/functions. Hosted migrations were **not executed** by this implementation.
+5. `supabase/migrations/004_qa_guards.sql` — stricter support text validation and safe public reads; separate server-owned prayer update history.
+
+All are rerunnable. Existing installations through 003 apply only 004; fresh installations apply all five in order; do not rerun only the bootstrap afterward because it replaces legacy policies/functions. Hosted migrations were **not executed** by this implementation.
 
 Enable email magic links, configure production SMTP, Site URL and exact redirect allowlist. Local development uses `http://localhost:5173/`; set the actual production origin when approved. Copy `.env.example` to `.env.local` and provide only:
 

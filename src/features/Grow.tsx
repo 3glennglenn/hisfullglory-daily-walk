@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePlatform } from "../platform/store";
 import { devotionals, topics } from "./growData";
 import { Plans } from "./LegacyWalk";
@@ -8,10 +8,27 @@ import { Feed } from "../social/Feed";
 export function Grow({ id }: { id?: string }) {
   const { state, update } = usePlatform();
   const [filter, setFilter] = useState("all");
-  const [day, setDay] = useState(0);
+  const nextDay = () =>
+    [0, 1, 2, 3, 4].find(
+      (i) => !state.devotionalProgress[id ?? ""]?.includes(i),
+    ) ?? 0;
+  const [day, setDay] = useState(nextDay);
+  useEffect(() => {
+    setDay(nextDay());
+    setShowCommunity(false);
+  }, [id]);
   const [showCommunity, setShowCommunity] = useState(false);
   const selected = devotionals.find((d) => d.id === id);
   const done = selected ? (state.devotionalProgress[selected.id] ?? []) : [];
+  if (id && !selected)
+    return (
+      <section className="card">
+        <h1>Journey not found</h1>
+        <button onClick={() => navigate("/grow")}>
+          Browse available journeys
+        </button>
+      </section>
+    );
   if (selected) {
     const current = selected.days[day];
     return (

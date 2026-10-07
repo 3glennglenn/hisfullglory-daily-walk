@@ -108,7 +108,7 @@ export function Plans({
   return (
     <section aria-labelledby="plans-title">
       <p className="eyebrow">Small steps. Lasting roots.</p>
-      <h1 id="plans-title">Your next five days.</h1>
+      <h2 id="plans-title">Your next five days.</h2>
       <p className="intro">
         Choose one gentle journey. Every completed day stays here for you to
         revisit.

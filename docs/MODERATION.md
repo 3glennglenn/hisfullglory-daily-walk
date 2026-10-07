@@ -73,6 +73,6 @@ Audit actor identifies the database role; put human reviewer attribution in note
 
 ## Migration and rollback
 
-Back up the hosted database before changes. Apply schema, 001, 002, 003 in order. Reruns are safe; existing v1 records are retained. Local tests apply migrations twice and exercise real guest/two-user privileges. This does not prove deployed auth, SMTP or Realtime configuration.
+Back up the hosted database before changes. Fresh installs apply schema, 001, 002, 003, 004 in order; existing installations through 003 apply only 004. Before release, inspect any older approved support records excluded by the stricter payment/text guard; reject and request a corrected draft. Inline URLs belong only in the dedicated fundraiser field. Reruns are safe; existing v1 records are retained. Local tests apply migrations twice and exercise real guest/two-user privileges. This does not prove deployed auth, SMTP or Realtime configuration.
 
 Rollback is forward-safe: first disable community/support configuration in a new frontend build, and revoke RPC access or hide visible content if needed. Keep the added tables and preserved records for recovery. Do not DROP tables or run only the old schema to undo an authorization migration. Any structural reverse migration needs a reviewed backup/restore plan. Operators should use the previous commit for a frontend rollback while retaining server terms/security restrictions; old clients may then show a posting error until updated.

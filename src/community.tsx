@@ -294,7 +294,7 @@ export function Community({
       <div className="section-head">
         <div>
           <p className="eyebrow">Walk together</p>
-          <h1 id="community-title">Community</h1>
+          <h2 id="community-title">Community</h2>
         </div>
         <button
           className="icon-button"

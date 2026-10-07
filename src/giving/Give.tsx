@@ -4,6 +4,7 @@ import {
   supportCategories,
   goFundMeProvider,
   hasPaymentDetails,
+  supportExpiry,
   type SupportRequest,
 } from "./catalog";
 import { supabase } from "../supabase";
@@ -126,11 +127,23 @@ export function Give() {
     if (!supabase || !session || busy) return;
     if (
       !goFundMeProvider.accepts(draft.fundraiser_url) ||
-      hasPaymentDetails(draft.story + " " + draft.title)
+      hasPaymentDetails(
+        [
+          draft.story,
+          draft.title,
+          draft.beneficiary_relationship,
+          draft.country,
+        ].join(" "),
+      )
     ) {
       setStatus(
         "Use the exact https://www.gofundme.com/f/... link and remove direct payment details.",
       );
+      return;
+    }
+    const expiry = supportExpiry(draft.expires_at);
+    if (!expiry) {
+      setStatus("Choose a valid expiration date before saving.");
       return;
     }
     setBusy(true);
@@ -141,7 +154,7 @@ export function Give() {
       request_category: draft.category,
       target_amount: Number(draft.declared_target),
       target_currency: draft.currency,
-      expiry: new Date(draft.expires_at + "T23:59:59Z").toISOString(),
+      expiry,
       relationship: draft.beneficiary_relationship,
       request_country: draft.country,
       anonymous: draft.is_anonymous,
@@ -189,8 +202,8 @@ export function Give() {
       <p className="eyebrow">Love made practical</p>
       <h1>Give with intention.</h1>
       <p>
-        Explore independently evaluated causes or reviewed requests from people.
-        All giving stays with the external provider.
+        Explore independently evaluated, high-impact giving options or reviewed
+        requests from people. All giving stays with the external provider.
       </p>
       <button
         className="text-button"

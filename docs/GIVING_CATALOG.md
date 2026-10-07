@@ -1,6 +1,6 @@
 # Giving catalog and verification
 
-Checked 2026-10-07 against official sources. These are independently evaluated programs, not fabricated project campaigns. No donation was made during verification.
+Rechecked 2026-10-07 during release QA against the official evaluator page, checkout and provider references. These are independently evaluated programs, not fabricated project campaigns. No donation was made during verification.
 
 | Option                      | Category           | Exact official donation URL  | Choice in checkout         |
 | --------------------------- | ------------------ | ---------------------------- | -------------------------- |
@@ -14,7 +14,7 @@ The [official GiveWell donation page](https://www.givewell.org/donate) redirects
 
 ## Individual support
 
-Only exact `https://www.gofundme.com/f/<lowercase-hyphenated-slug>` URLs, optionally with one trailing slash, are accepted. No query, fragment, credentials, port, percent encoding, alternate host or shortened link. Client and SQL apply the same allowlist. A permitted domain is not proof a campaign is legitimate. Authors must create their external fundraiser first and explain authorization/beneficiary relationship. Requests remain private pending manual review; details about review are in MODERATION.md. Provider restrictions, country eligibility and beneficiary verification must be checked for the individual campaign.
+Only exact `https://www.gofundme.com/f/<lowercase-hyphenated-slug>` URLs, optionally with one trailing slash, are accepted. No query, fragment, credentials, port, percent encoding, alternate host or shortened link. Client and SQL apply the same allowlist. Title, story, relationship and country reject inline URLs and recognizable direct payment/account instructions; include the hosted URL only in its dedicated field. Migration 004 also excludes unsafe older approved records from public reads. This is conservative validation, not an automated scam classifier. A permitted domain is not proof a campaign is legitimate. Authors must create their external fundraiser first and explain authorization/beneficiary relationship. Requests remain private pending manual review; details about review are in MODERATION.md. Provider restrictions, country eligibility and beneficiary verification must be checked for the individual campaign.
 
 Official references: [GoFundMe process](https://www.gofundme.com/c/how-it-works), [transfer setup](https://support.gofundme.com/hc/en-us/articles/360001992767-How-to-set-up-transfers), [provider guarantee and conditions](https://www.gofundme.com/c/safety/gofundme-guarantee). HisFullGlory does not promise that a provider will verify a specific request, approve a transfer or grant a refund. GoFundMe administers its own payment, identity, payout, dispute and refund rules. Tax/receipt treatment depends on recipient and jurisdiction; no deductibility claim is made.
 
