@@ -1,0 +1,44 @@
+{
+  "book": "john",
+  "records": [
+    {
+      "id": "ai:john/3",
+      "chapter": 3,
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "John 3 has two scenes. In the first (verses 1 to 21) Nicodemus, a Pharisee and a leader, comes to Jesus at night. Jesus tells him that no one can see God’s Kingdom unless he is “born anew”, born “of water and Spirit”. Nicodemus takes this as a second physical birth. Jesus is speaking of a new life that God’s Spirit gives.\n\nJesus then points to the serpent Moses lifted up in the wilderness (Numbers 21). In the same way the Son of Man must be lifted up, so that whoever believes may have eternal life. Verse 16 gives the reason: God loved the world and gave his Son.\n\nIn the second scene (verses 22 to 36) John the Baptist hears that people are now going to Jesus. He answers with joy: “He must increase, but I must decrease.”"
+        },
+        {
+          "kind": "background",
+          "text": "The Pharisees were a group known for careful study and practice of the law. Jesus calls Nicodemus “the teacher of Israel”, so this is a conversation between teachers. Nicodemus returns later in this Gospel: he speaks up for Jesus in chapter 7 and helps to bury him in chapter 19.\n\nThe bronze serpent comes from Israel’s time in the wilderness. People bitten by snakes lived when they looked at the serpent Moses raised on a pole. In John’s Gospel being “lifted up” points to the cross, and beyond it to Jesus being raised and exalted."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Christians differ on what “born of water and Spirit” means.\n\n- Many, especially in Catholic, Orthodox, Lutheran and Anglican traditions, see a reference to baptism.\n- Others read water and Spirit as one picture of inner cleansing and new life, echoing Ezekiel 36:25 to 27.\n- Some take water as natural birth and Spirit as a second, spiritual birth.\n\nIt is also unclear where Jesus’ words end. The earliest Greek copies had no quotation marks, so verses 16 to 21 may be Jesus speaking or the Gospel writer reflecting. The same question applies to verses 31 to 36 and John the Baptist. WEB places the closing quotation mark after verse 21."
+        }
+      ],
+      "translations": [
+        {
+          "verse": 3,
+          "note": "The Greek word can mean again and also from above. Nicodemus hears the first meaning; many readers think Jesus intends both. WEB and the ASV say “born anew”.",
+          "renderings": [
+            { "translation": "KJV", "text": "Except a man be born again, he cannot see the kingdom of God." },
+            { "translation": "ASV", "text": "Except one be born anew, he cannot see the kingdom of God." }
+          ]
+        },
+        {
+          "verse": 16,
+          "note": "WEB says “only born” where the older translations use an older English word for a father’s child. The Greek word describes an only child, one of a kind. The difference is about how to put one word into English, not about who Jesus is said to be.",
+          "renderings": [
+            { "translation": "KJV", "text": "he gave his only begotten Son" },
+            { "translation": "ASV", "text": "he gave his only begotten Son" }
+          ]
+        }
+      ]
+    }
+  ]
+}

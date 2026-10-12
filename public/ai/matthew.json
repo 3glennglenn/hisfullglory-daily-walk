@@ -1,0 +1,44 @@
+{
+  "book": "matthew",
+  "records": [
+    {
+      "id": "ai:matthew/5",
+      "chapter": 5,
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Matthew 5 opens the Sermon on the Mount, which runs through chapter 7. Jesus sits down on a mountain and teaches his disciples, with the crowds nearby.\n\nHe begins with the Beatitudes (verses 3 to 12), a series of sayings that call “Blessed” the people one would not expect: the poor in spirit, those who mourn, those who are persecuted. He then calls his followers “the salt of the earth” and “the light of the world”.\n\nFrom verse 17 Jesus speaks about the law. He says he came not to destroy it but “to fulfill”. Six times he quotes what was said and answers “But I tell you”, taking the command to the heart: from murder to anger, from adultery to the lustful look, from limited revenge to love of enemies."
+        },
+        {
+          "kind": "background",
+          "text": "Matthew’s Gospel has Jewish readers much in view and often shows Jesus in relation to the law and the prophets. A teacher going up a mountain to speak about the law would have reminded many of Moses at Sinai. Sitting down was the usual posture of a teacher.\n\nSeveral details reflect daily life under Roman rule. A soldier could force a civilian to carry his load for a mile (verse 41). Gehenna (verses 22, 29 and 30) is the name of a valley outside Jerusalem that had become a picture of final judgment."
+        },
+        {
+          "kind": "interpretations",
+          "text": "How should these demands be lived? Christians have answered in several ways.\n\n- Some read them as the real way of life for every disciple now, to be practised with God’s help. Peace churches, for example, take “don’t resist him who is evil” as a call to refuse violence.\n- Some stress that the sermon shows how deep God’s will goes, so that it leads readers to seek mercy as well as to obey.\n- Many distinguish between personal conduct and the duties of a public office, such as that of a judge.\n\nMost agree that Jesus is not cancelling the law but showing its full intent. Verse 32 on divorce and verse 48, “you shall be perfect”, are among the most discussed lines."
+        }
+      ],
+      "translations": [
+        {
+          "verse": 22,
+          "note": "WEB and the KJV include “without a cause”; the ASV does not. The words are missing from some of the oldest Greek manuscripts and present in most later ones, so translations differ depending on which manuscripts they follow.",
+          "renderings": [
+            { "translation": "KJV", "text": "whosoever is angry with his brother without a cause shall be in danger of the judgment" },
+            { "translation": "ASV", "text": "every one who is angry with his brother shall be in danger of the judgment" }
+          ]
+        },
+        {
+          "verse": 44,
+          "note": "Here too the longer wording, with “bless those who curse you”, is found in most later manuscripts and in the KJV and WEB, while the ASV follows the shorter reading. The same thoughts appear in Luke 6:27 and 28, so nothing of this teaching is lost either way.",
+          "renderings": [
+            { "translation": "KJV", "text": "Love your enemies, bless them that curse you, do good to them that hate you" },
+            { "translation": "ASV", "text": "love your enemies, and pray for them that persecute you" }
+          ]
+        }
+      ]
+    }
+  ]
+}

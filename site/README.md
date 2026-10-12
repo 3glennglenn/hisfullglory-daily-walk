@@ -31,12 +31,20 @@ block changes shape, the script stops the build with a clear message.
 
 An invalid study file stops the build. The site never writes, generates or rewords a note.
 
+`src/lib/ai.ts` reads the AI explanations from `public/ai/<book>.json` and validates them.
+They are a separate labelled layer (`docs/AI_EXPLANATIONS.md`): written ahead of time,
+shown in their own card below the sourced context, never inside it.
+
 ## Tests
 
 `tests/bible.test.ts` checks the built pages: every book and chapter page exists (1 + 66 +
 1,189), every verse on a chapter page equals the WEB text, every quotation in a note occurs
 in its basis verses, and each page shows its note as written or the "being written"
 fallback.
+
+`tests/ai.test.ts` checks the AI explanations: a misquoted verse or a licensed translation
+is rejected, wording from other translations matches the public-domain verse on file, and
+each page shows the explanation as its own labelled block, apart from the sourced note.
 
 `tests/pages.test.ts` checks the site as a whole: every page loads its styles, every
 internal link leads somewhere, addresses have no trailing slash, navigation items are links

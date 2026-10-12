@@ -10,7 +10,7 @@
     "prebuild": "npm run sync",
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1",
-    "test": "node --experimental-strip-types --test tests/bible.test.ts tests/pages.test.ts",
+    "test": "node --experimental-strip-types --test tests/bible.test.ts tests/pages.test.ts tests/ai.test.ts",
     "check": "npm run build && npm test"
   },
   "engines": {

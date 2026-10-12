@@ -3,7 +3,9 @@ import Breadcrumb from "../../../components/Breadcrumb.astro";
 import ContextNote from "../../../components/ContextNote.astro";
 import { appUrl } from "../../../config";
 import Base from "../../../layouts/Base.astro";
+import AiExplanation from "../../../components/AiExplanation.astro";
 import {
+  aiExplanation,
   chapterNote,
   chapterTitle,
   library,
@@ -43,6 +45,7 @@ const { book, number, previous, next } = Astro.props;
 const chapter = book.chapters[number - 1];
 const title = chapterTitle(book, number);
 const note = chapterNote(book.slug, number);
+const ai = aiExplanation(book.slug, number);
 const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name;
 ---
 
@@ -86,6 +89,14 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
       <div class="block">
         <ContextNote note={note} subject={subject} />
       </div>
+
+      {
+        ai && (
+          <div class="block ai-block">
+            <AiExplanation explanation={ai} book={book} />
+          </div>
+        )
+      }
 
       <div class="card invite">
         <h2>Go further with this chapter</h2>
@@ -143,6 +154,9 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
   }
   .block {
     margin-top: 40px;
+  }
+  .ai-block {
+    margin-top: 18px;
   }
   .invite {
     max-width: 42rem;

@@ -1,0 +1,32 @@
+{
+  "source": "https://bible-api.com",
+  "fetched": "2026-10-12",
+  "license": "Public domain (King James Version; American Standard Version, 1901)",
+  "note": "Verse texts exactly as the source returned them. Used only to check quoted renderings.",
+  "verses": {
+    "KJV": {
+      "genesis/1/2": "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.",
+      "genesis/1/6": "And God said, Let there be a firmament in the midst of the waters, and let it divide the waters from the waters.",
+      "psalms/23/1": "The LORD is my shepherd; I shall not want.",
+      "psalms/23/6": "Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever.",
+      "matthew/5/22": "But I say unto you, That whosoever is angry with his brother without a cause shall be in danger of the judgment: and whosoever shall say to his brother, Raca, shall be in danger of the council: but whosoever shall say, Thou fool, shall be in danger of hell fire.",
+      "matthew/5/44": "But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and persecute you;",
+      "john/3/3": "Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God.",
+      "john/3/16": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+      "romans/8/1": "There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+      "romans/8/16": "The Spirit itself beareth witness with our spirit, that we are the children of God:"
+    },
+    "ASV": {
+      "genesis/1/2": "And the earth was waste and void; and darkness was upon the face of the deep: and the Spirit of God moved upon the face of the waters",
+      "genesis/1/6": "And God said, Let there be a firmament in the midst of the waters, and let it divide the waters from the waters.",
+      "psalms/23/1": "Jehovah is my shepherd; I shall not want.",
+      "psalms/23/6": "Surely goodness and lovingkindness shall follow me all the days of my life; And I shall dwell in the house of Jehovah for ever. Psalm 24 A Psalm of David.",
+      "matthew/5/22": "but I say unto you, that every one who is angry with his brother shall be in danger of the judgment; and whosoever shall say to his brother, Raca, shall be in danger of the council; and whosoever shall say, Thou fool, shall be in danger of the hell of fire.",
+      "matthew/5/44": "but I say unto you, love your enemies, and pray for them that persecute you;",
+      "john/3/3": "Jesus answered and said unto him, Verily, verily, I say unto thee, Except one be born anew, he cannot see the kingdom of God.",
+      "john/3/16": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth on him should not perish, but have eternal life.",
+      "romans/8/1": "There is therefore now no condemnation to them that are in Christ Jesus.",
+      "romans/8/16": "The Spirit himself beareth witness with our spirit, that we are children of God:"
+    }
+  }
+}

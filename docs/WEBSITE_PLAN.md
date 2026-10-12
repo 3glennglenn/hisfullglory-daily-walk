@@ -35,6 +35,9 @@ in the app → Daily Walk, reflection, community → (optional) a study resource
   - `public/study/<book>.json`: study notes, validated with `parseStudyFile` from
     `src/bible/knowledge.ts`. Drafts show the "Editorial draft" label, as in the app.
   - `src/topics/graph.ts`: topic ids, labels and `launchTopics`.
+  - `public/ai/<book>.json`: AI explanations, a separate labelled layer decided on
+    2026-10-12 (`docs/AI_EXPLANATIONS.md`). Shown below the sourced context on a chapter
+    page, never inside it. A pilot of five chapters exists.
 - No user-generated content on the site in v1. Circles, prayers, journals, private topics
   and anything sensitive never appear on the site, now or later.
 - Design: same tokens as the app (`src/styles.css`: warm cream background, Manrope, Light

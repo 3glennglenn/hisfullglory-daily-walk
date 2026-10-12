@@ -9,15 +9,18 @@ import {
   type KnowledgeRecord,
 } from "../../../src/bible/knowledge.ts";
 import type { BibleBook, BibleData } from "../../../src/bible/provider.ts";
+import { loadAiExplanations, type AiExplanation } from "./ai.ts";
 
-export type { BibleBook, BibleData, KnowledgeRecord };
+export type { AiExplanation, BibleBook, BibleData, KnowledgeRecord };
 
 // npm scripts and tests run with site/ as the working directory.
 const appRoot = resolve(process.cwd(), "..");
 const biblePath = join(appRoot, "public", "bible", "web.json");
 const studyDir = join(appRoot, "public", "study");
 
-let cache: { bible: BibleData; notes: KnowledgeRecord[] } | undefined;
+let cache:
+  | { bible: BibleData; notes: KnowledgeRecord[]; ai: AiExplanation[] }
+  | undefined;
 
 export function library() {
   if (cache) return cache;
@@ -36,9 +39,17 @@ export function library() {
         bible,
       ),
     );
-  cache = { bible, notes: [...knowledgeRecords, ...fromFiles] };
+  cache = {
+    bible,
+    notes: [...knowledgeRecords, ...fromFiles],
+    ai: loadAiExplanations(bible),
+  };
   return cache;
 }
+
+/** The AI explanation for a chapter, if one has been written. Never mixed with notes. */
+export const aiExplanation = (book: string, chapter: number) =>
+  library().ai.find((entry) => entry.book === book && entry.chapter === chapter);
 
 export const oldTestamentBooks = 39;
 export const testamentOf = (index: number) =>
