@@ -33,11 +33,15 @@ This file adds the current state and how to work with the founder. Last updated 
 
 - Supabase project `fccwqguqhnbayuowmamy`: migrations 001 to 006 applied; their stored SQL
   matches `supabase/migrations/` in this repo. RLS is on for every public table.
-- `app.hisfullglory.com` production was a Vercel build of `main` at 8209f01 (the merge of
-  `circles-v1`, pull request #1), promoted on 2026-10-12. Pull request #2 then brought
-  `website` into `main` (study library, launch topics, AI explanations, shop prices and
-  the `site/` folder). This file does not record whether production serves that build:
-  look at the latest production deployment in Vercel before calling any of it live.
+- `app.hisfullglory.com` production is a Vercel build of `main` at ee01209, the merge of
+  pull request #2 (study library, launch topics, AI explanations, shop prices and the
+  `site/` folder). Vercel built and assigned it by itself when the founder merged.
+  Checked on the live address afterwards, as a guest: the Reader's Context tab for John 3
+  shows the sourced note and the AI card as two separate blocks, `/ai/john.json` and
+  `/ai/mark.json` are served, the community lists the eight launch topics, and
+  `read_topic_discussions` returns 200.
+- Later production builds come from the daily routine's pushes to `main`. Nobody looks at
+  those before they go live, so the routine may only change files under `public/ai/`.
 - From 2026-10-08 until that promotion the live app could not reach Supabase:
   `VITE_SUPABASE_URL` in Vercel ended in `/rest/v1/`, so every call went to
   `/rest/v1/rest/v1/...` and returned 404. The value is now the bare project URL, set for
@@ -58,7 +62,8 @@ This file adds the current state and how to work with the founder. Last updated 
   settings were fine. If this happens again, check https://www.vercel-status.com before
   changing any connection, and check that a push really produced a deployment.
 - After an instant rollback, new production builds are not assigned to the domain until one
-  is promoted.
+  is promoted. The promotion on 2026-10-12 ended that: the next build of `main` was
+  assigned automatically.
 
 ## Branches
 
