@@ -24,20 +24,39 @@ This file adds the current state and how to work with the founder. Last updated 
 - Community annotations on passages are wanted, always labelled apart from Scripture and
   from sourced context.
 
-## Live state (verified 2026-10-12)
+## Live state (verified 2026-10-12, evening)
 
 - Supabase project `fccwqguqhnbayuowmamy`: migrations 001 to 006 applied; their stored SQL
   matches `supabase/migrations/` in this repo. RLS is on for every public table.
-- `app.hisfullglory.com` production is a Vercel CLI deploy from 2026-10-08 whose source
-  matches branch `circles-v1` (Circles, topics, votes live). It is not tied to a git commit.
-- `main` (76beca5) is behind production. Merging `circles-v1` into `main` is pending founder
-  approval.
-- Still open: a real two-account test on production (private Circle isolation).
+- `app.hisfullglory.com` production is a Vercel build of `main` at 8209f01 (the merge of
+  `circles-v1`, pull request #1), promoted on 2026-10-12. Production and `main` are the
+  same code.
+- From 2026-10-08 until that promotion the live app could not reach Supabase:
+  `VITE_SUPABASE_URL` in Vercel ended in `/rest/v1/`, so every call went to
+  `/rest/v1/rest/v1/...` and returned 404. The value is now the bare project URL, set for
+  Production and Preview. Checked after the fix, as a guest: `read_topic_discussions`,
+  `read_circles` and `chat_rooms` return 200.
+- Not yet tested on production: sign-in, posting, voting, and the two-account test for
+  private Circle isolation.
+- Preview builds use the same Supabase project as production. Anything posted from a
+  preview is real data.
+
+## Vercel notes (2026-10-12)
+
+- `VITE_*` values are baked in at build time. After changing one, redeploy.
+- Pushes did not always start a build, and some builds failed at once with `git_info_fail`
+  (Vercel could not read the commit from GitHub). Starting the deployment by hand worked,
+  once on the second try. Check that a push really produced a deployment.
+- After an instant rollback, new production builds are not assigned to the domain until one
+  is promoted.
 
 ## Branches
 
-- `circles-v1`: snapshot of the Codex work now running in production.
-- `study-first`: current work. Adds the study library and the launch topics.
+- `main`: what runs in production.
+- `circles-v1`: merged into `main` on 2026-10-12; kept for reference.
+- `study-first`: adds the study library, the launch topics and the website plan. Preview
+  only, not in production.
+- `website`: branched from `study-first`; adds the new site in `site/`.
 
 ## Study notes
 
@@ -56,12 +75,14 @@ chapters used by the launch topics.
 3. Home and onboarding "study first": open a passage, read context, write a reflection.
 4. Rename the Shop entry to Resources, matched to study goals.
 
-## New website (planned, not started): full plan in `docs/WEBSITE_PLAN.md`
+## New website (in progress): full plan in `docs/WEBSITE_PLAN.md`
 
 A separate site for `hisfullglory.com` (Bible, topic and article pages, pre-rendered for
-search) reading the same Supabase data and study files; Shopify moves to
+search) reading the same study files and topic graph as the app; Shopify moves to
 `shop.hisfullglory.com` for checkout only. Check the Meta Pixel keeps working when the
-domain moves.
+domain moves. The site lives in `site/` on branch `website`; `site/README.md` says how to
+run it and which build steps are done. It is not deployed: creating its Vercel project and
+every domain, DNS or Shopify step needs the founder's approval first.
 
 ## Environment notes
 
@@ -69,3 +90,5 @@ domain moves.
   laptop folder has `node_modules`; Vercel preview builds (every branch push) verify
   `npm run build`.
 - Vercel CLI deploys upload the whole folder; add a `.vercelignore` before the next one.
+- The founder's laptop has Git and Node 24 (since 2026-10-12). The older project folder
+  there dates from the Codex work and is not a current checkout; clone from GitHub.
