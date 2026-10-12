@@ -18,6 +18,8 @@ const pageTitle = title
   ? `${title} | ${site.name}`
   : `${site.name}: study the Bible together`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// One share image for every page (public/og.png, made by scripts/og-image.mjs).
+const shareImage = new URL("/og.png", Astro.site);
 ---
 
 <!doctype html>
@@ -41,7 +43,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       noindex ? (
         <meta name="robots" content="noindex" />
       ) : (
-        <link rel="canonical" href={canonical} />
+        <>
+          <link rel="canonical" href={canonical} />
+          <meta property="og:site_name" content={site.name} />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={title ?? pageTitle} />
+          <meta property="og:description" content={description} />
+          <meta property="og:url" content={canonical} />
+          <meta property="og:image" content={shareImage} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta
+            property="og:image:alt"
+            content={`${site.name}: study the Bible together`}
+          />
+          <meta name="twitter:card" content="summary_large_image" />
+        </>
       )
     }
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />

@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- The design of public/og.png. scripts/og-image.mjs photographs this page at 1200 x 630.
+     Always Light: a shared link looks the same for everyone. -->
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../src/styles/tokens.generated.css" />
+    <style>
+      @font-face {
+        font-family: Manrope;
+        font-weight: 400;
+        src: url("../node_modules/@fontsource/manrope/files/manrope-latin-400-normal.woff2")
+          format("woff2");
+      }
+      @font-face {
+        font-family: Manrope;
+        font-weight: 600;
+        src: url("../node_modules/@fontsource/manrope/files/manrope-latin-600-normal.woff2")
+          format("woff2");
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        padding: 72px 88px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-family: Manrope, sans-serif;
+        font-synthesis: none;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        font-size: 34px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .brand svg {
+        width: 76px;
+        height: 76px;
+      }
+      .brand rect {
+        fill: var(--paper);
+        stroke: var(--border);
+      }
+      .brand path {
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 3;
+        stroke-linecap: round;
+      }
+      h1 {
+        font-size: 92px;
+        font-weight: 400;
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+        max-width: 900px;
+      }
+      p {
+        margin-top: 24px;
+        font-size: 32px;
+        line-height: 1.4;
+        color: var(--muted);
+        max-width: 880px;
+      }
+      footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--strong);
+      }
+      footer span:first-child {
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        font-size: 20px;
+      }
+      .rule {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 14px;
+        height: 630px;
+        background: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="rule"></div>
+    <div class="brand">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="1" y="1" width="46" height="46" rx="11"></rect>
+        <path d="M24 11v26M15 19.5h18"></path>
+      </svg>
+      HisFullGlory
+    </div>
+    <div>
+      <h1>Study the Bible together.</h1>
+      <p>Read Scripture, understand its context and discuss it with others.</p>
+    </div>
+    <footer>
+      <span>Jesus at the Center</span>
+      <span>hisfullglory.com</span>
+    </footer>
+  </body>
+</html>
