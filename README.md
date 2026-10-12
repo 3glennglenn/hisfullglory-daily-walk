@@ -19,22 +19,21 @@ npm run test:browser
 
 For an existing Edge installation, set `BROWSER_CHANNEL=msedge` before the browser script (PowerShell: `$env:BROWSER_CHANNEL="msedge"`). The script captures no screenshots and makes no donations.
 
-`npm test` runs pure state/privacy/Bible tests and real PostgreSQL authorization checks using PGlite; no hosted database is contacted. Build includes strict TypeScript and the production service worker. `dist/` is generated, ignored output. No lint script is configured. See [release QA evidence and remaining gates](docs/QA_REPORT.md).
+`npm test` runs pure state/privacy/Bible tests and PGlite PostgreSQL privilege/policy checks with simulated JWT claims; no hosted database is contacted. Build includes strict TypeScript and the production service worker. `dist/` is generated, ignored output. No lint script is configured. See [final independent release QA](docs/FINAL_RELEASE_QA.md), [historical Circles implementation QA](docs/CIRCLES_QA.md) and [historical expansion QA](docs/EXPANSION_QA.md); [previous QA](docs/QA_REPORT.md) is a historical record.
 
-Guest mode needs no credentials. Missing Supabase produces explicit unavailable publishing/support states. Local writing, WEB, Grow, bookmarks and external causes work without auth. Browser storage is local and unencrypted: export Settings → private backup before clearing data. On first run the v1 key is preserved and migrated forward to v2. Already-onboarded users are not forced through onboarding again.
+Guest mode needs no credentials. Missing Supabase produces explicit unavailable publishing/support states. Local writing, WEB, Grow, bookmarks and external causes work without auth. Browser storage is local and unencrypted: export Settings → private backup before clearing data. On first run preserved v1/v2 keys migrate forward to v3. Guest and each authenticated account have separate local profiles; sign-in never silently adopts guest writing. Local storage is unencrypted and does not protect against someone inspecting this browser/device. Already-onboarded users are not forced through onboarding again.
+
+## Expansion scope
+
+Private topic preferences, a canonical 26-topic graph, device-side resources, My Walk, two three-step editorial paths and a seven-practice private challenge extend existing flows. Community adds explicit private memberships, topical discussions/one-level replies, sources, private saved links, server votes/ranking and derived reputation through 005. Controlled SDK browser tests exercise production posting components; real hosted Auth/API testing remains pending; guest/local flows and SQL authorization are tested separately. Private prayers retain explicit sharing, with returned public testimony IDs linked only in the local prayer record.
+
+Context has a sourced scope/fallback architecture and “Why we say this”; checked observations still cover only Psalms 23/121 and Romans 8. AI, billing and contributor verification are disabled contracts, not working integrations. Circles v1 adds public/private group discussions, explicit join/application/review, scoped owner/moderator roles and moderation via migration 006. These flows are locally SQL/controlled-SDK-tested; linked deployment/Auth remain unverified. Helper notifications, Walk With Me, Prayer Chain and external insight imports remain future slices. See [scope matrix](docs/EXPANSION_MATRIX.md), [privacy/data flow](docs/PRIVACY_DATA_FLOW.md) and [future integration gates](docs/FUTURE_INTEGRATIONS.md).
 
 ## Connected community setup
 
-Apply these files in this exact order in Supabase SQL Editor as the project owner:
+Final read-only linked inspection confirmed migrations 001–004 recorded remotely, with 005 and 006 pending. The dry run proposed exactly those two migrations; nothing was applied. This does not verify hosted schema drift, Auth or RLS. Production history 001–004 is immutable against commit 76beca5. New migrations: `005_topic_discussions.sql` and `006_circles.sql`, locally tested on fresh and populated upgrade chains, but not deployed by this session. Migrations 001–005 are immutable for the Circles pass.
 
-1. `supabase/schema.sql` — existing profiles, three chat rooms, chat, original prayer wall and reactions.
-2. `supabase/migrations/001_platform.sql` — current terms, passage/devotional contributions, reactions, private reports, blocks/mutes, moderation audit and legacy posting terms guard.
-3. `supabase/migrations/002_support.sql` — private support drafts, manual review, public safe directory and reviewer notes.
-4. `supabase/migrations/003_aggregate_feed.sql` — paginated community timeline across new posts, existing chat and original prayer posts.
-
-5. `supabase/migrations/004_qa_guards.sql` — stricter support text validation and safe public reads; separate server-owned prayer update history.
-
-All are rerunnable. Existing installations through 003 apply only 004; fresh installations apply all five in order; do not rerun only the bootstrap afterward because it replaces legacy policies/functions. Hosted migrations were **not executed** by this implementation.
+Follow [migration inspection and approval steps](docs/MIGRATIONS.md). Do not reapply bootstrap SQL or repair production history as an expansion step. A linked dry-run must show only 006, plus 005 if it genuinely remains undeployed; review its output and obtain explicit approval before a real push.
 
 Enable email magic links, configure production SMTP, Site URL and exact redirect allowlist. Local development uses `http://localhost:5173/`; set the actual production origin when approved. Copy `.env.example` to `.env.local` and provide only:
 

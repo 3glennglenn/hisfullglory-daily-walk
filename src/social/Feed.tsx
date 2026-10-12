@@ -33,7 +33,7 @@ export function ShareForm({
   source?: string;
   initial?: string;
   initialType?: string;
-  onDone?: () => void;
+  onDone?: (postId: string, postType: string) => void;
 }) {
   const { session, accepted } = useAuth();
   const [body, setBody] = useState(initial);
@@ -44,7 +44,7 @@ export function ShareForm({
   async function publish() {
     if (!supabase || busy || !accepted) return;
     setBusy(true);
-    const { error } = await supabase.rpc("publish_community_post", {
+    const { data, error } = await supabase.rpc("publish_community_post", {
       post_body: body.trim(),
       post_kind: type,
       passage_path: source ?? null,
@@ -58,7 +58,7 @@ export function ShareForm({
     );
     if (!error) {
       setBody("");
-      onDone?.();
+      if (typeof data === "string") onDone?.(data,type);
     }
   }
   return (

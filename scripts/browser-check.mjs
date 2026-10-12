@@ -1,6 +1,10 @@
+import {checkCircles} from "../tests/circles.browser.mjs";
 // Run against npm run preview. DOM/behavior checks only; deliberately no screenshots.
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
+import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 const browser = await chromium.launch({
   headless: true,
@@ -15,6 +19,11 @@ const context = await browser.newContext({
 });
 const page = await context.newPage();
 const errors = [];
+const consoleErrors = [];
+const consoleWarnings = [];
+const networkFailures = [];
+page.on("console",message=>{if(message.type()==="error")consoleErrors.push(message.text());if(message.type()==="warning")consoleWarnings.push(message.text());});
+page.on("requestfailed",request=>networkFailures.push(new URL(request.url()).pathname));
 page.on("pageerror", (e) => errors.push(e.message));
 let checks = 0;
 page.setDefaultTimeout(10000);
@@ -50,7 +59,7 @@ try {
         .getByRole("button", { name: "Begin my walk", exact: true })
         .click();
       const saved = await page.evaluate(() =>
-        JSON.parse(localStorage.getItem("hfg-daily-walk:v2")),
+        JSON.parse(localStorage.getItem("hfg-daily-walk:v3")),
       );
       assert.equal(saved.local.onboarded, true);
       assert.equal(saved.preferences.goals.length, 3);
@@ -80,7 +89,7 @@ try {
         true,
       );
       const s = await page.evaluate(() =>
-        JSON.parse(localStorage.getItem("hfg-daily-walk:v2")),
+        JSON.parse(localStorage.getItem("hfg-daily-walk:v3")),
       );
       assert.equal(s.local.completedDates.length, 1);
       assert.ok(s.entries.some((e) => e.body.includes("honest private")));
@@ -150,7 +159,7 @@ try {
         .getByRole("button", { name: "Keep private", exact: true })
         .click();
       const s = await page.evaluate(() =>
-        JSON.parse(localStorage.getItem("hfg-daily-walk:v2")),
+        JSON.parse(localStorage.getItem("hfg-daily-walk:v3")),
       );
       assert.equal(s.prayers[0].status, "Answered");
       assert.ok(s.entries.some((e) => e.type === "answered prayer"));
@@ -192,7 +201,7 @@ try {
         .getByRole("button", { name: "Complete this day", exact: true })
         .click();
       const s = await page.evaluate(() =>
-        JSON.parse(localStorage.getItem("hfg-daily-walk:v2")),
+        JSON.parse(localStorage.getItem("hfg-daily-walk:v3")),
       );
       assert.deepEqual(s.devotionalProgress.anxiety, [0]);
       await page.reload();
@@ -312,6 +321,8 @@ try {
             "/bible/psalms/23",
             "/pray",
             "/community",
+            "/community/grief",
+            "/my-walk",
             "/more",
             "/grow",
             "/journal",
@@ -428,7 +439,7 @@ try {
         .waitFor();
       await p.reload();
       const s = await p.evaluate(() =>
-        JSON.parse(localStorage.getItem("hfg-daily-walk:v2")),
+        JSON.parse(localStorage.getItem("hfg-daily-walk:v3")),
       );
       assert.equal(s.local.activePlan, "closer-to-god");
       assert.deepEqual(s.local.completedDates, ["2026-10-04", "2026-10-05"]);
@@ -511,9 +522,75 @@ try {
       await context.setOffline(false);
     },
   );
+  await check("topic preferences stay local, following is explicit, aliases and invalid links are safe", async()=>{
+    await go("/settings");
+    await page.getByText("What are you walking through right now? · optional",{exact:true}).click();
+    await page.getByRole("button",{name:"Grief",exact:true}).click();
+    await page.reload();
+    const state=await page.evaluate(()=>JSON.parse(localStorage.getItem("hfg-daily-walk:v3")));
+    assert.deepEqual(state.privateTopics,["grief"]);assert.deepEqual(state.followedTopics,[]);
+    await go("/community");await page.getByRole("button",{name:/Grief.*Scripture/}).click();
+    await page.getByRole("button",{name:"Follow privately on this device",exact:true}).click();
+    await page.reload();await page.getByRole("button",{name:"Unfollow topic",exact:true}).waitFor();
+    assert.match(await page.locator("main").innerText(),/not configured/);
+    assert.equal(await page.getByRole("button",{name:"Publish publicly",exact:true}).count(),0);
+    await go("/community/sexual-temptation");await page.getByRole("heading",{name:"Temptation",exact:true}).waitFor();
+    await go("/community/unknown");await page.getByRole("heading",{name:"Topic not found",exact:true}).waitFor();
+    await go("/community/grief?thread=private-words");assert.match(await page.locator("main").innerText(),/not found/i);
+    await go("/my-walk");assert.match(await page.locator("main").innerText(),/Grief/);
+  });
+  await check("path and private challenge progress survive leave, rejoin and reload",async()=>{
+    await go("/grow");await page.locator("summary").filter({hasText:"Return to Scripture"}).click();
+    await page.getByRole("button",{name:"Mark step complete",exact:true}).first().click();
+    await page.locator("summary").filter({hasText:"Seven days in Scripture"}).click();
+    await page.getByRole("button",{name:"Join challenge privately",exact:true}).click();
+    await page.getByRole("button",{name:"Mark practice complete",exact:true}).first().click();
+    await page.getByRole("button",{name:"Leave challenge",exact:true}).click();
+    await page.reload();await page.locator("summary").filter({hasText:"Seven days in Scripture"}).click();
+    await page.getByRole("button",{name:"Join challenge privately",exact:true}).click();
+    assert.equal(await page.getByRole("button",{name:"Practice complete",exact:true}).isDisabled(),true);
+    const state=await page.evaluate(()=>JSON.parse(localStorage.getItem("hfg-daily-walk:v3")));
+    assert.deepEqual(state.pathProgress["return-to-scripture"],[0]);assert.deepEqual(state.challengeProgress["seven-days-in-scripture"],[0]);
+  });
+  await check("saved thread links persist locally and route through visibility checks",async()=>{
+    const id="a0000000-0000-4000-8000-000000000001";
+    await page.evaluate(id=>{const s=JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));s.savedDiscussions=[id];s.savedDiscussionTopics={[id]:"grief"};localStorage.setItem("hfg-daily-walk:v3",JSON.stringify(s));},id);
+    await go("/community");await page.getByRole("button",{name:"Saved",exact:true}).click();
+    await page.getByRole("button",{name:"Saved discussion · Grief",exact:true}).click();
+    assert.equal(new URL(page.url()).searchParams.get("thread"),id);
+    assert.match(await page.locator("main").innerText(),/not configured/);
+    assert.equal(await page.locator("main > section:first-child article").count(),0);
+  });
+  await check("first paint reproduces baseline light flash and resolves system/explicit appearance before React",async()=>{
+    const baseline=readFileSync("tests/fixtures/pre-expansion-index.html","utf8");
+    for(const scenario of [{baseline:true,os:"dark",theme:null,expected:null},{os:"light",theme:null,expected:"light"},{os:"dark",theme:null,expected:"dark"},{os:"dark",theme:"light",expected:"light"},{os:"light",theme:"dark",expected:"dark"}]) {
+      const c=await browser.newContext({colorScheme:scenario.os,serviceWorkers:"block"});const p=await c.newPage();
+      if(scenario.theme)await p.addInitScript(theme=>localStorage.setItem("hfg-daily-walk:v2",JSON.stringify({version:2,theme})),scenario.theme);
+      await p.route("**/*.js",route=>route.abort());
+      if(scenario.baseline) await p.route(base+"/",route=>route.fulfill({contentType:"text/html",body:baseline}));
+      await p.goto(base,{waitUntil:"domcontentloaded"});
+      assert.equal(await p.evaluate(()=>document.documentElement.dataset.theme??null),scenario.expected);
+      assert.equal(await p.locator('meta[name="theme-color"]').getAttribute("content"),scenario.expected==="dark"?"#181714":"#F6F0E7");
+      assert.equal(await p.locator("#root").innerText(),"");await c.close();
+    }
+  });
+  await check("actual account boundary isolates guest/A/B drafts and rejects stale Terms after token refresh (controlled SDK)",()=>checkAuthBoundary(browser,base));
+  await check("topic voting preserves drafts and late publishing cannot erase a new topic draft (controlled SDK)",()=>checkTopicComposer(browser,base));
+  await check("Circle SPA routes reload/back/forward and installed shell launches offline without a fake backend",async()=>{
+    await go("/community/circles");await page.getByRole("heading",{name:"Circles",exact:true}).waitFor();
+    assert.match(await page.locator("main").innerText(),/Live Circles are not configured/);
+    await go("/community/circles/private-walk");await page.reload();await page.getByRole("heading",{name:"Circles",exact:true}).waitFor();
+    await page.goBack();await page.goForward();await page.getByRole("heading",{name:"Circles",exact:true}).waitFor();
+    await context.setOffline(true);await page.reload();await page.getByRole("heading",{name:"Circles",exact:true}).waitFor();
+    assert.match(await page.locator("main").innerText(),/not configured/);await context.setOffline(false);
+  });
+  await check("Circles public/private lifecycle, roles, privacy, errors and responsive UI (controlled SDK)",()=>checkCircles(browser,base));
   assert.deepEqual(errors, []);
+  assert.deepEqual(consoleErrors, [], "no unexpected main-page console errors");
+  assert.deepEqual(consoleWarnings, [], "no unexpected main-page console warnings");
+  assert.deepEqual(networkFailures, [], "no unexpected main-page network failures");
   console.log(
-    `${checks} browser flow checks passed; no uncaught page errors; no screenshots captured.`,
+    `${checks} browser flow checks passed; no page/console errors/warnings or unexpected main-page network failures; no screenshots captured.`,
   );
 } finally {
   await browser.close();

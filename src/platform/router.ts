@@ -4,10 +4,12 @@ export interface Route {
   chapter?: number;
   verse?: number;
   id?: string;
+  thread?: string;
   tab: string;
 }
 const pages = new Set([
   "home",
+  "my-walk",
   "walk",
   "bible",
   "pray",
@@ -46,8 +48,19 @@ export function parseRoute(path: string, search = ""): Route {
         : "read",
     };
   }
-  if (parts.length > (page === "grow" ? 2 : 1))
+  if (page === "community" && parts[1] === "circles") {
+    const slug = parts[2], thread = new URLSearchParams(search).get("thread") ?? undefined;
+    if (parts.length > 3 || slug && !/^[a-z][a-z0-9-]{2,59}$/.test(slug) || thread && !/^[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(thread))
+      return {page:"not-found",tab:"read"};
+    return {page:"circles",id:slug,thread,tab:"read"};
+  }
+  if (parts.length > (["grow", "community"].includes(page) ? 2 : 1))
     return { page: "not-found", tab: "read" };
+  const thread = new URLSearchParams(search).get("thread") ?? undefined;
+  if (page === "community") {
+    if (thread && !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(thread)) return {page:"not-found",tab:"read"};
+    return {page,id:parts[1],thread,tab:"read"};
+  }
   return { page, id: parts[1], tab: "read" };
 }
 export const passagePath = (book: string, chapter: number, verse?: number) =>

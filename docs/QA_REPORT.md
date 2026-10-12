@@ -1,3 +1,5 @@
+> Historical QA of b5671f6/76beca5. Current third-stage evidence and migration status are in [EXPANSION_QA.md](EXPANSION_QA.md); older statements below describe that earlier pass, not current hosted state.
+
 # Release QA — 2026-10-07
 
 Baseline: clean local `main`, `b5671f638a3ca5d792511543f89c447abd277c3e`. This pass repairs the expansion; no deployment or push is authorized. **READY FOR MANUAL TESTING**, not yet certified for public web release.

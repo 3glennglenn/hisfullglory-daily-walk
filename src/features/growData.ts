@@ -1,21 +1,6 @@
 import { daily } from "../data";
-export const topics = [
-  "Anxiety",
-  "Purpose",
-  "Relationships",
-  "Heartbreak",
-  "Temptation",
-  "Faith",
-  "Forgiveness",
-  "Discipline",
-  "Loneliness",
-  "Grief",
-  "Identity",
-  "Marriage",
-  "Money",
-  "Prayer",
-  "Growing closer to God",
-] as const;
+import { devotionalTopics } from "../topics/graph";
+export const topics = devotionalTopics;
 const applications = [
   "Name one worry without judging yourself. Ask God for help, and consider reaching out to someone you trust. Faith and appropriate professional support can belong together.",
   "Look for one ordinary act of faithfulness before asking for a complete map of your future. Serve someone with what you already have.",

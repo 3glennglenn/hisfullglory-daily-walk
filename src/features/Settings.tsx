@@ -1,3 +1,4 @@
+import { TopicPreferences } from "../topics/Preferences";
 import { useEffect, useState } from "react";
 import { usePlatform } from "../platform/store";
 import { backupData } from "../platform/persistence";
@@ -5,12 +6,12 @@ import { goals, type Theme } from "../platform/models";
 import { AuthPanel, useAuth } from "../platform/auth";
 import { supabase } from "../supabase";
 export function Settings() {
-  const { state, update, notice, recover } = usePlatform();
+  const { state, update, notice, recover, storage } = usePlatform();
   const [status, setStatus] = useState("");
   const [backup, setBackup] = useState(false);
   function exportBackup() {
     try {
-      const blob = new Blob([backupData(localStorage)], {
+      const blob = new Blob([backupData(storage)], {
         type: "application/json",
       });
       const url = URL.createObjectURL(blob);
@@ -173,6 +174,10 @@ export function Settings() {
           Private journal, prayers, bookmarks and journey progress remain in
           browser storage. Export before clearing data or switching devices.
           Public posts are shared only after you publish explicitly.
+          Each signed-in account has a separate local profile. Guest data stays in
+          the guest profile and is never automatically adopted. Browser storage
+          is unencrypted; account separation is not protection from someone with
+          access to this browser's developer tools.
         </p>
         <button onClick={exportBackup}>Export private backup</button>
         {notice && (
@@ -184,13 +189,13 @@ export function Settings() {
               onClick={() => {
                 if (
                   window.confirm(
-                    "Recover from the preserved v1 data? Your current v2 data will be kept under a recovery key.",
+                    "Preserve current v3 under a recovery key, then recover available v2/v1 data in this profile? If no readable legacy data exists, this starts fresh.",
                   )
                 )
                   recover();
               }}
             >
-              Recover preserved legacy data
+              Recover legacy / start fresh…
             </button>
           </>
         )}
@@ -201,6 +206,7 @@ export function Settings() {
           own-content deletion controls for public contributions.
         </small>
       </div>
+      <TopicPreferences selected={state.privateTopics} onChange={privateTopics => update(s => ({...s,privateTopics}))} />
       <BlockedAuthors />
     </section>
   );

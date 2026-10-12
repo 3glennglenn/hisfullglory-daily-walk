@@ -1,4 +1,5 @@
 import { blankState, sanitizeState, validDate } from "../storage.ts";
+import { validTopics } from "../topics/graph.ts";
 import {
   goals,
   type PlatformState,
@@ -12,9 +13,11 @@ export interface StorageLike {
   key?(index: number): string | null;
 }
 export const V2_KEY = "hfg-daily-walk:v2";
+export const V3_KEY = "hfg-daily-walk:v3";
 export const V1_KEY = "hfg-daily-walk:v1";
 export const freshPlatform = (): PlatformState => ({
-  version: 2,
+  version: 3,
+  privateTopics: [], followedTopics: [], savedDiscussions: [], savedDiscussionTopics: {}, joinedChallenges: [], pathProgress: {}, challengeProgress: {},
   local: blankState(),
   preferences: {
     goals: [],
@@ -52,7 +55,7 @@ export function migrateV1(value: unknown): PlatformState {
     title: "Daily reflection",
     type: "free journal",
   }));
-  return state;
+  return migrateV2({...state, version: 2})!;
 }
 const textArray = (v: unknown): string[] =>
   Array.isArray(v)
@@ -63,11 +66,26 @@ export function normalizePlatform(value: unknown): PlatformState | null {
     !value ||
     typeof value !== "object" ||
     !("version" in value) ||
-    value.version !== 2
+    (value.version !== 2 && value.version !== 3)
   )
     return null;
   const v = value as Partial<PlatformState>,
     s = freshPlatform();
+  s.privateTopics = validTopics(v.privateTopics);
+  s.followedTopics = validTopics(v.followedTopics);
+  s.savedDiscussions = textArray(v.savedDiscussions).filter(id => /^[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(id));
+  if (v.challengeProgress && typeof v.challengeProgress === "object")
+    s.challengeProgress = Object.fromEntries(Object.entries(v.challengeProgress)
+      .filter(([id, days]) => id === "seven-days-in-scripture" && Array.isArray(days))
+      .map(([id, days]) => [id, [...new Set(days.filter(n => Number.isInteger(n) && n >= 0 && n < 7))]]));
+  s.joinedChallenges = textArray(v.joinedChallenges).filter(id => id === "seven-days-in-scripture");
+  if (v.pathProgress && typeof v.pathProgress === "object")
+    s.pathProgress = Object.fromEntries(Object.entries(v.pathProgress)
+      .filter(([id, days]) => ["return-to-scripture", "walking-through-grief"].includes(id) && Array.isArray(days))
+      .map(([id, days]) => [id, [...new Set(days.filter(n => Number.isInteger(n) && n >= 0 && n < 3))]]));
+  if (v.savedDiscussionTopics && typeof v.savedDiscussionTopics === "object")
+    s.savedDiscussionTopics = Object.fromEntries(Object.entries(v.savedDiscussionTopics)
+      .filter(([id, topic]) => s.savedDiscussions.includes(id) && typeof topic === "string" && validTopics([topic]).length === 1));
   s.local = sanitizeState(v.local);
   s.preferences = { ...s.preferences, ...v.preferences };
   s.preferences.goals = textArray(v.preferences?.goals)
@@ -121,8 +139,10 @@ export function normalizePlatform(value: unknown): PlatformState | null {
             typeof p.createdAt === "string" &&
             ["Active", "Waiting", "Answered", "Archived"].includes(p.status),
         )
-        .map((p) => ({
+        .map(({answeredAt, ...p}) => ({
           ...p,
+          ...(typeof answeredAt === "string" && Number.isFinite(Date.parse(answeredAt)) ? {answeredAt} : {}),
+          ...(p.testimonyIds ? {testimonyIds: textArray(p.testimonyIds).filter(id => /^[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(id))} : {}),
           updates: Array.isArray(p.updates)
             ? p.updates.filter(
                 (u) =>
@@ -177,7 +197,7 @@ export function normalizePlatform(value: unknown): PlatformState | null {
     );
   return s;
 }
-export function loadPlatform(storage: StorageLike): {
+function loadLegacyPlatform(storage: StorageLike): {
   state: PlatformState;
   blocked: boolean;
   notice: string;
@@ -269,7 +289,7 @@ export function savePlatform(
 ): boolean {
   if (blocked) return false;
   try {
-    storage.setItem(V2_KEY, JSON.stringify(state));
+    storage.setItem(V3_KEY, JSON.stringify(state));
     return true;
   } catch {
     return false;
@@ -279,18 +299,23 @@ export function backupData(storage: StorageLike) {
   const recovery: Record<string, string | null> = {};
   for (let i = 0; i < (storage.length ?? 0); i++) {
     const key = storage.key?.(i);
-    if (key?.startsWith(V2_KEY + ":recovery:"))
+    if (key?.startsWith(V2_KEY + ":recovery:") || key?.startsWith(V3_KEY + ":recovery:"))
       recovery[key] = storage.getItem(key);
   }
   return JSON.stringify(
-    { v1: storage.getItem(V1_KEY), v2: storage.getItem(V2_KEY), recovery },
+    { v1: storage.getItem(V1_KEY), v2: storage.getItem(V2_KEY), v3: storage.getItem(V3_KEY), recovery },
     null,
     2,
   );
 }
 export function recoverPlatform(storage: StorageLike): PlatformState {
-  const old = storage.getItem(V2_KEY);
-  if (old !== null) storage.setItem(`${V2_KEY}:recovery:${Date.now()}`, old);
+  const old = storage.getItem(V3_KEY);
+  if (old !== null) {
+    const base = V3_KEY+":recovery:"+Date.now();
+    let key=base,index=0;
+    while(storage.getItem(key)!==null) key=base+":"+(++index);
+    storage.setItem(key,old);
+  }
   const legacy = storage.getItem(V1_KEY);
   let value: unknown = null;
   try {
@@ -298,7 +323,49 @@ export function recoverPlatform(storage: StorageLike): PlatformState {
   } catch {
     /* original retained */
   }
-  const s = migrateV1(value);
-  storage.setItem(V2_KEY, JSON.stringify(s));
+  let prior: PlatformState | null = null;
+  try { prior = migrateV2(JSON.parse(storage.getItem(V2_KEY) ?? "null")); } catch { /* Original v2 remains intact. */ }
+  const s = prior ?? migrateV1(value);
+  storage.setItem(V3_KEY, JSON.stringify(s));
   return s;
+}
+
+export function migrateV2(value: unknown): PlatformState | null {
+  return normalizePlatform(value);
+}
+export function loadPlatform(storage: StorageLike): ReturnType<typeof loadLegacyPlatform> {
+  try {
+    if (storage.getItem(V3_KEY) !== null) {
+      // Reuse tested recovery behavior, scoped to v3. Never fall back over corrupt v3.
+      return loadLegacyPlatform({
+        getItem: key => storage.getItem(key.replace(V2_KEY, V3_KEY)),
+        setItem: (key, value) => storage.setItem(key.replace(V2_KEY, V3_KEY), value),
+      });
+    }
+    const result = loadLegacyPlatform({
+      getItem: key => storage.getItem(key),
+      // Preserve original v2 byte-for-byte; migration writes only the new key.
+      setItem: (key, value) => { if (key !== V2_KEY) storage.setItem(key, value); },
+    });
+    if (!result.blocked && !savePlatform(storage, result.state))
+      return {...result, blocked: true, notice: "Storage cannot save the v3 migration. Readable data and original sources are preserved; export a private backup."};
+    return result;
+  } catch {
+    return {state: freshPlatform(), blocked: true, notice: "Browser storage is unavailable. No private data was overwritten."};
+  }
+}
+
+// Guest data stays in the device guest profile. Login never adopts or merges it.
+export function scopedStorage(storage: StorageLike, userId: string | null): StorageLike {
+  if (!userId) return storage;
+  if (!/^[a-z0-9-]+$/i.test(userId)) throw new Error("Invalid private profile");
+  const prefix = `hfg-private:${userId}:`;
+  const keys = () => Array.from({length: storage.length ?? 0}, (_, i) => storage.key?.(i))
+    .filter((key): key is string => !!key?.startsWith(prefix));
+  return {
+    getItem: key => storage.getItem(prefix + key),
+    setItem: (key, value) => storage.setItem(prefix + key, value),
+    get length() { return keys().length; },
+    key: index => keys()[index]?.slice(prefix.length) ?? null,
+  };
 }

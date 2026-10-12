@@ -1,3 +1,5 @@
+import { TopicPreferences } from "../topics/Preferences";
+import { Resources } from "../topics/Resources";
 import { useState } from "react";
 import { usePlatform } from "../platform/store";
 import { goals } from "../platform/models";
@@ -17,6 +19,7 @@ export function Onboarding() {
   const [minutes, setMinutes] = useState<5 | 10 | 20>(
     state.preferences.minutes,
   );
+  const [privateTopics,setPrivateTopics]=useState(state.privateTopics);
   const [time, setTime] = useState(state.preferences.time);
   function finish() {
     if (
@@ -24,6 +27,7 @@ export function Onboarding() {
         ...s,
         local: { ...s.local, onboarded: true },
         preferences: { goals: selected, journey, minutes, time },
+        privateTopics,
       }))
     )
       track("onboarding_completed");
@@ -113,6 +117,7 @@ export function Onboarding() {
               ))}
             </select>
           </label>
+          <TopicPreferences selected={privateTopics} onChange={setPrivateTopics} />
           <p>
             This is a preference, not a scheduled notification. Push reminders
             are not configured.
@@ -214,6 +219,7 @@ export function Home() {
           A missed day is an invitation to begin again. There is no penalty.
         </small>
       </div>
+      <Resources />
       <div className="quick-grid">
         {[
           ["/bible", "Read Scripture", "Open the complete WEB Bible"],

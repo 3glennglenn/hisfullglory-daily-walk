@@ -1,3 +1,5 @@
+import { Journeys } from "./Journeys";
+import { findTopic } from "../topics/graph";
 import { useEffect, useState } from "react";
 import { usePlatform } from "../platform/store";
 import { devotionals, topics } from "./growData";
@@ -122,6 +124,7 @@ export function Grow({ id }: { id?: string }) {
         >
           Discuss this devotional
         </button>
+        {findTopic(selected.id) && <button className="secondary" onClick={() => navigate("/community/"+selected.id)}>Explore the related topic community</button>}
         {showCommunity && <Feed source={`/grow/${selected.id}`} />}
       </section>
     );
@@ -173,6 +176,7 @@ export function Grow({ id }: { id?: string }) {
             </small>
           </button>
         ))}
+      <Journeys/>
       <details className="card">
         <summary>Your original Daily Walk plans</summary>
         <Plans

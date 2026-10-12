@@ -1095,3 +1095,11 @@ small {
     font-size: 1.9rem;
   }
 }
+
+.circles .entry {overflow-wrap:anywhere;}
+.circles dialog {color:var(--ink);background:var(--paper);border:1px solid var(--border);width:min(440px,calc(100vw - 32px));margin:auto;}
+.circles dialog::backdrop {background:var(--overlay);}
+
+.circles h1,.circles h2,.circles h3,.circles p {overflow-wrap:anywhere;}
+
+.circles article a {display:block;min-height:44px;padding:8px 0;overflow-wrap:anywhere;}
