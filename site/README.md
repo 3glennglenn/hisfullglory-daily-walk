@@ -66,8 +66,8 @@ Editorial content lives in `content/topics/<id>.json` (one per launch topic) and
 `content/articles/<slug>.json`. `src/lib/content.ts` validates every file and an invalid one
 stops the build.
 
-- A file is built only when it says `"review": "approved"`. Only the founder approves; a
-  new file starts as `"draft"`. `/topics` and `/articles`, their navigation items and the
+- A file is built only when it says `"review": "approved"`, with the date in `"approved"`.
+  Only the founder approves; a new file starts as `"draft"`. `/topics` and `/articles`, their navigation items and the
   sitemap entries appear with the first approved file of each kind.
 - Curly double quotes are reserved for words from the WEB text. In a topic file every
   passage reason must quote its own passage. In an article every quotation must occur in
@@ -76,8 +76,8 @@ stops the build.
   opened (`docs/STUDY_NOTES.md` has the same rule). No reconstructed history, no
   original-language claims, no quotations from writers.
 - `"drafted": "ai"` makes the page say that it was written with the help of an AI model.
-  The drafts of 2026-10-13 were written by an AI model and have not been read by a
-  theological reader.
+  The eight topic pages and three articles of 2026-10-13 were written by an AI model and
+  approved by the founder that day. No theological reader has read them.
 - To look at drafts as pages, build and test with `SHOW_DRAFTS=1` (PowerShell:
   `$env:SHOW_DRAFTS = "1"; npm run check`). Drafts then carry a "Draft" label and noindex.
   Never set it in Vercel.
@@ -112,9 +112,8 @@ Done from the build order in `docs/WEBSITE_PLAN.md`, section 9:
 2. Bible pages: `/bible`, `/bible/<book>` and `/bible/<book>/<chapter>`, with the build test.
 3. Home, About, Beta and Resources. The About story is the founder's, approved 2026-10-12.
    The launch topics on Home open in the app until the topic pages of step 4 exist.
-4. Topics and articles: the pages and their checks are built, and drafts exist for the
-   eight launch topics and three articles (2026-10-13). None is approved, so none is
-   online.
+4. Topics and articles: pages for the eight launch topics and three articles, approved by
+   the founder on 2026-10-13. Each passage on a topic page links to the full passage.
 5. Search engines and sharing: titles, descriptions, canonical addresses, sitemap,
    `robots.txt`, share image and a not-found page.
 

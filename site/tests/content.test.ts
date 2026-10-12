@@ -57,6 +57,9 @@ test("a misquoted verse, a reason without a quotation or a wrong reference is re
   );
   assert.throws(() => parseTopic({ ...topic, id: "money" }, "money", bible), /launch topic/);
   assert.throws(() => parseTopic({ ...topic, review: "published" }, "prayer", bible), /review/);
+  // Approval is recorded with its date, and a draft cannot carry one.
+  assert.throws(() => parseTopic({ ...topic, review: "approved", approved: undefined }, "prayer", bible), /date of approval/);
+  assert.throws(() => parseTopic({ ...topic, review: "draft", approved: "2026-10-13" }, "prayer", bible), /date of approval/);
 
   const article = raw("articles", "how-jesus-taught-prayer");
   const withText = (text: string) => ({

@@ -80,8 +80,11 @@ export function passageText(raw: unknown, bible: BibleData, where: string): { re
 function editorial(raw: Raw, where: string): Editorial {
   check(raw.review === "draft" || raw.review === "approved", where, 'review must be "draft" or "approved"');
   check(raw.drafted === "ai" || raw.drafted === "human", where, 'drafted must be "ai" or "human"');
-  check(typeof raw.written === "string" && /^\d{4}-\d{2}-\d{2}$/.test(raw.written), where, "written must be a date");
-  return { review: raw.review, drafted: raw.drafted, written: raw.written };
+  const date = (value: unknown) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
+  check(date(raw.written), where, "written must be a date");
+  // An approved file records the day the founder approved it; a draft has no such date.
+  check(date(raw.approved) === (raw.review === "approved"), where, "approved must be the date of approval, and only on an approved file");
+  return { review: raw.review, drafted: raw.drafted, written: raw.written as string };
 }
 
 export function parseTopic(input: unknown, id: string, bible: BibleData): TopicPage {

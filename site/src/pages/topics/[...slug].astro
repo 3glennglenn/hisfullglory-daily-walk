@@ -56,6 +56,9 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
                   <a href={refHref(passage)}>{refLabel(passage)}</a>
                 </h3>
                 <p>{passage.reason}</p>
+                <p class="more">
+                  <a href={refHref(passage)}>Read {refLabel(passage)} in full</a>
+                </p>
               </li>
             ))}
           </ol>
@@ -149,6 +152,12 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
   }
   .passages p {
     margin-bottom: 0;
+  }
+  .passages .more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
   }
   .list {
     margin-top: 32px;
