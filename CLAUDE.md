@@ -84,8 +84,15 @@ A separate site for `hisfullglory.com` (Bible, topic and article pages, pre-rend
 search) reading the same study files and topic graph as the app; Shopify moves to
 `shop.hisfullglory.com` for checkout only. Check the Meta Pixel keeps working when the
 domain moves. The site lives in `site/` on branch `website`; `site/README.md` says how to
-run it and which build steps are done. It is not deployed: creating its Vercel project and
-every domain, DNS or Shopify step needs the founder's approval first.
+run it and which build steps are done.
+
+Since 2026-10-12 the site has its own Vercel project, `hisfullglory-site` (root directory
+`site`, framework Astro, source files outside the root directory included), reachable for
+review at https://hisfullglory-site.vercel.app. That address sends a noindex header. The
+project is not connected to Git, because the Vercel connector could not link the
+repository, so a push does not update it: start a production deployment of project
+`hisfullglory-site` from branch `website` after each change. Every domain, DNS or Shopify
+step still needs the founder's approval first.
 
 ## Environment notes
 
