@@ -1,0 +1,32 @@
+{
+ "book": "psalms",
+ "records": [
+  {
+   "id": "book:psalms",
+   "scope": "book",
+   "text": "Psalms is a collection of 150 songs and prayers used in Israel’s worship, written by several people over a long period. Headings name David most often, along with Asaph, the sons of Korah and others. The collection falls into five books, each ending with a short blessing of the LORD (41:13, 72:19, 89:52, 106:48), and it closes with a call for everything that has breath to praise the LORD (150:6). The psalms hold praise, lament, thanksgiving, confession and trust, so readers find words for nearly every season of life.",
+   "source": "https://www.biblegateway.com/resources/eastons-bible-dictionary/Psalms",
+   "sources": [
+    {
+     "title": "Easton's Bible Dictionary (1897): Psalms",
+     "url": "https://www.biblegateway.com/resources/eastons-bible-dictionary/Psalms"
+    },
+    {
+     "title": "World English Bible: Psalms",
+     "url": "https://ebible.org/engwebp/PSA001.htm"
+    }
+   ],
+   "basis": [
+    "/bible/psalms/41/13",
+    "/bible/psalms/72/19",
+    "/bible/psalms/72/20",
+    "/bible/psalms/89/52",
+    "/bible/psalms/106/48",
+    "/bible/psalms/150/6"
+   ],
+   "interpretiveStatus": "broad consensus",
+   "review": "editorial draft",
+   "editor": "HisFullGlory editorial"
+  }
+ ]
+}

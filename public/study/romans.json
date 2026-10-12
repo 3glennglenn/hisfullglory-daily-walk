@@ -1,0 +1,34 @@
+{
+ "book": "romans",
+ "records": [
+  {
+   "id": "book:romans",
+   "scope": "book",
+   "text": "Paul writes to believers “in Rome” (1:1, 1:7), a church he had often planned to visit but had not yet reached (1:13), as he prepares to go to Jerusalem to serve the saints (15:25). The letter presents the Good News as “the power of God for salvation for everyone who believes, for the Jew first, and also for the Greek” (1:16 to 17), then turns to how believers live in response to God’s mercy (12:1). Easton’s Bible Dictionary (1897) outlines it as an introduction (1:1 to 15), the gospel of righteousness by faith (1:16 to 11:36), practical instruction (12:1 to 15:13) and a conclusion with many personal greetings (15:14 to the end). Easton places it in Corinth in AD 58; Phoebe, commended in 16:1, may have carried it.",
+   "source": "https://www.biblegateway.com/resources/eastons-bible-dictionary/Romans-Epistle",
+   "sources": [
+    {
+     "title": "Easton's Bible Dictionary (1897): Romans, Epistle to the",
+     "url": "https://www.biblegateway.com/resources/eastons-bible-dictionary/Romans-Epistle"
+    },
+    {
+     "title": "World English Bible: Romans",
+     "url": "https://ebible.org/engwebp/ROM01.htm"
+    }
+   ],
+   "basis": [
+    "/bible/romans/1/1",
+    "/bible/romans/1/7",
+    "/bible/romans/1/13",
+    "/bible/romans/1/16",
+    "/bible/romans/1/17",
+    "/bible/romans/12/1",
+    "/bible/romans/15/25",
+    "/bible/romans/16/1"
+   ],
+   "interpretiveStatus": "common interpretation",
+   "review": "editorial draft",
+   "editor": "HisFullGlory editorial"
+  }
+ ]
+}

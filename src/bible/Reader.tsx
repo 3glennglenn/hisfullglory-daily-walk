@@ -9,7 +9,14 @@ import { usePlatform } from "../platform/store";
 import { navigate, passagePath, type Route } from "../platform/router";
 import { localDate } from "../storage";
 import { Feed } from "../social/Feed";
-import { knowledgeFor, assembleGrounding } from "./knowledge";
+import {
+  knowledgeFor,
+  assembleGrounding,
+  knowledgeRecords,
+  loadStudyRecords,
+  scopeLabel,
+  type KnowledgeRecord,
+} from "./knowledge";
 import { topicGraph } from "../topics/graph";
 export function Reader({ route }: { route: Route }) {
   const { state, update } = usePlatform();
@@ -19,6 +26,17 @@ export function Reader({ route }: { route: Route }) {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<number | undefined>(route.verse);
   const [status, setStatus] = useState("");
+  const studyBook = route.book ?? "psalms";
+  const [study, setStudy] = useState<{ book: string; records: KnowledgeRecord[] }>({ book: "", records: [] });
+  useEffect(() => {
+    let live = true;
+    void loadStudyRecords(studyBook).then((records) => {
+      if (live) setStudy({ book: studyBook, records });
+    });
+    return () => {
+      live = false;
+    };
+  }, [studyBook]);
   async function load() {
     setError("");
     try {
@@ -63,7 +81,8 @@ export function Reader({ route }: { route: Route }) {
   const source = passagePath(book.slug, chapter.number, selected);
   const verse = chapter.verses.find((v) => v.number === selected);
   const reference = `${book.name} ${chapter.number}${selected ? `:${selected}` : ""}`;
-  const note = knowledgeFor(book.slug,chapter.number,selected);
+  const records = study.book === book.slug ? [...knowledgeRecords, ...study.records] : knowledgeRecords;
+  const note = knowledgeFor(book.slug, chapter.number, selected, records);
   const result = searchBible(data, search);
   const tab = route.tab;
   function journal(type: "Bible passage" | "study note") {
@@ -214,20 +233,60 @@ export function Reader({ route }: { route: Route }) {
         </article>
       ) : tab === "context" ? (
         <article className="card">
-          <h3>Curated passage context</h3>
+          <h3>{note ? scopeLabel[note.scope] : "Context"}</h3>
           {note ? (
             <>
+              <p className="eyebrow">
+                {note.scope === "book" ? book.name : note.scope === "chapter" ? `${book.name} ${chapter.number}` : reference}
+                {" · "}
+                {note.review === "reviewed" ? "Reviewed" : note.review === "editorial draft" ? "Editorial draft" : "Editorial observation"}
+              </p>
               <p>{note.text}</p>
-              <a href={note.source} target="_blank" rel="noopener noreferrer">
-                Read source passage and heading
-              </a>
-              <details><summary>Why we say this</summary><p>{note.editor} · {note.scope} fallback · {note.interpretiveStatus}</p><p>These observations come from the linked passage and its source heading. They are not reconstructed history, original-language evidence or a claim of scholarly consensus.</p></details>
+              {note.scope !== "verse" && selected !== undefined && (
+                <p><small>No note for this verse yet, so this shows the wider {note.scope} context.</small></p>
+              )}
+              <details>
+                <summary>Why we say this</summary>
+                <p>
+                  {note.editor} · {note.interpretiveStatus}
+                  {note.review === "editorial draft" && " · not yet reviewed by a theological reader"}
+                </p>
+                {note.basis && note.basis.length > 0 && (
+                  <>
+                    <h4>From the text itself</h4>
+                    <ul>
+                      {note.basis.map((p) => (
+                        <li key={p}>
+                          <a href={p} onClick={(e) => { e.preventDefault(); navigate(p); }}>
+                            {referenceFor(data, p)}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+                <h4>Sources</h4>
+                <ul>
+                  {[{ title: "Primary source", url: note.source }, ...(note.sources ?? [])]
+                    .filter((s, i, all) => all.findIndex((o) => o.url === s.url) === i)
+                    .map((s) => (
+                      <li key={s.url}>
+                        <a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a>
+                      </li>
+                    ))}
+                </ul>
+                <p>
+                  Notes summarise their sources in our own words. Where Christians or scholars
+                  disagree, the note says so. Notes are not original-language evidence and do not
+                  replace the text.
+                </p>
+              </details>
             </>
           ) : (
             <p>
-              Curated historical and literary context is not available for this
-              passage yet. Read the surrounding chapter. We do not generate
-              unsourced scholarship.
+              Context for this book is being written. Read the surrounding chapter,
+              reflect in your journal or discuss it with the community. We do not
+              generate unsourced scholarship.
             </p>
           )}
         </article>
@@ -249,7 +308,7 @@ export function Reader({ route }: { route: Route }) {
           <button onClick={() => journal("study note")}>
             Write a private study note
           </button>
-          <details><summary>Ask HisFullGlory AI · integration pending</summary><p>A server-side grounded explanation provider is not configured. No generated answer or citation is supplied.</p><h4>Available grounding</h4>{assembleGrounding(data,book.slug,chapter.number,selected).map(s => <p key={s.id}>{s.authority} · {s.reference}</p>)}</details>
+          <details><summary>Ask HisFullGlory AI · integration pending</summary><p>A server-side grounded explanation provider is not configured. No generated answer or citation is supplied.</p><h4>Available grounding</h4>{assembleGrounding(data,book.slug,chapter.number,selected,records).map(s => <p key={s.id}>{s.authority} · {s.reference}</p>)}</details>
         </article>
       ) : (
         <Feed source={source} />
@@ -390,4 +449,10 @@ export function Reader({ route }: { route: Route }) {
       )}
     </section>
   );
+}
+
+function referenceFor(data: BibleData, path: string) {
+  const [, , slug, ch, v] = path.split("/");
+  const name = data.books.find((b) => b.slug === slug)?.name ?? slug;
+  return `${name} ${ch}${v ? `:${v}` : ""}`;
 }
