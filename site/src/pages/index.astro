@@ -1,0 +1,43 @@
+---
+import Base from "../layouts/Base.astro";
+import { appUrl, mainNav } from "../config";
+
+// Step 1 shows the hero only. The other Home sections come in step 3 (docs/WEBSITE_PLAN.md, 4.1).
+const bible = mainNav.find((item) => item.href === "/bible");
+---
+
+<Base>
+  <section class="section">
+    <div class="wrap">
+      <h1>Study the Bible together.</h1>
+      <p class="lede">
+        Read Scripture, understand its context, and talk it through with others.
+      </p>
+      <div class="actions">
+        <a class="button" href={appUrl}>Open the app</a>
+        {
+          bible?.ready && (
+            <a class="button secondary" href={bible.href}>
+              Explore the Bible
+            </a>
+          )
+        }
+      </div>
+      <p class="muted small note">
+        The HisFullGlory app is a beta web app. It opens in your browser.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  h1 {
+    max-width: 14ch;
+  }
+  .lede {
+    margin-top: 16px;
+  }
+  .note {
+    margin-top: 18px;
+  }
+</style>

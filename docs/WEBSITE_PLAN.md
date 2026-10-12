@@ -1,6 +1,8 @@
 # Website plan: hisfullglory.com
 
-Status: approved direction, not started. Owner: founder. Last updated 2026-10-12.
+Status: step 1 of section 9 is built on branch `website` (scaffold, shared tokens, layout,
+header, footer; see `site/README.md`). Not deployed: no second Vercel project, no domain,
+DNS or Shopify change. Owner: founder. Last updated 2026-10-12.
 Read `CLAUDE.md` first. Talk to the founder in Dutch; site copy is English.
 
 ## 1. Purpose

@@ -1,0 +1,6 @@
+.astro/
+# Written by scripts/sync-shared.mjs from the app's own files.
+src/styles/tokens.generated.css
+src/styles/tokens.generated.json
+public/icon.svg
+public/apple-touch-icon.png
