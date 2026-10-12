@@ -44,7 +44,7 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
       <>
         <h3>{sectionTitles[section.kind]}</h3>
         {blocks(section.text).map((block) =>
-          block.list ? (
+          "list" in block ? (
             <ul>
               {block.list.map((item) => (
                 <li>{item}</li>

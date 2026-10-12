@@ -1,5 +1,11 @@
 # Changelog
 
+## AI explanations and shop prices: branch `website`, not deployed (2026-10-12)
+- Add AI explanations as a separate labelled layer, decided by the founder: static files in `public/ai/`, validated by `src/bible/ai.ts`, shown in their own card under the sourced note in the Reader's Context tab. No runtime AI. Pilot of five chapters. Rules: docs/AI_EXPLANATIONS.md.
+- Keep AI files out of the installable cache and out of the SPA rewrite; an offline or invalid file shows no card.
+- Update the two shop prices that changed to $49.99 on 2026-10-12.
+- Tests: `tests/ai.test.ts`. The browser check was not run for this change.
+
 ## Final independent release QA — local, uncommitted (2026-10-08)
 - Reproduced the prior 34-test/307-SQL/22-browser baseline; fixed periodic revalidation interrupting slow Circle loads, malformed RPC output crashing rendering, and invalid HTML v-mode input patterns.
 - Added runtime Circle contracts, actual SQL serializer checks, public-member/closure/report-paging regressions, explicit console/focus checks and two successful disposable-copy mutation detections.

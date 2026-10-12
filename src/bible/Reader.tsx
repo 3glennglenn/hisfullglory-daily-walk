@@ -18,6 +18,8 @@ import {
   type KnowledgeRecord,
 } from "./knowledge";
 import { topicGraph } from "../topics/graph";
+import { loadAiExplanations, type AiExplanation } from "./ai";
+import { AiExplanationCard } from "./AiExplanation";
 export function Reader({ route }: { route: Route }) {
   const { state, update } = usePlatform();
   const [data, setData] = useState<BibleData | null>(null);
@@ -37,6 +39,18 @@ export function Reader({ route }: { route: Route }) {
       live = false;
     };
   }, [studyBook]);
+  // AI explanations are a separate layer; a missing or invalid file simply shows none.
+  const [ai, setAi] = useState<{ book: string; records: AiExplanation[] }>({ book: "", records: [] });
+  useEffect(() => {
+    if (!data) return;
+    let live = true;
+    void loadAiExplanations(studyBook, data).then((records) => {
+      if (live) setAi({ book: studyBook, records });
+    });
+    return () => {
+      live = false;
+    };
+  }, [studyBook, data]);
   async function load() {
     setError("");
     try {
@@ -83,6 +97,7 @@ export function Reader({ route }: { route: Route }) {
   const reference = `${book.name} ${chapter.number}${selected ? `:${selected}` : ""}`;
   const records = study.book === book.slug ? [...knowledgeRecords, ...study.records] : knowledgeRecords;
   const note = knowledgeFor(book.slug, chapter.number, selected, records);
+  const aiNote = ai.book === book.slug ? ai.records.find((r) => r.chapter === chapter.number) : undefined;
   const result = searchBible(data, search);
   const tab = route.tab;
   function journal(type: "Bible passage" | "study note") {
@@ -232,7 +247,8 @@ export function Reader({ route }: { route: Route }) {
           </small>
         </article>
       ) : tab === "context" ? (
-        <article className="card">
+        <>
+        <article className="card" data-layer="sourced">
           <h3>{note ? scopeLabel[note.scope] : "Context"}</h3>
           {note ? (
             <>
@@ -285,11 +301,20 @@ export function Reader({ route }: { route: Route }) {
           ) : (
             <p>
               Context for this book is being written. Read the surrounding chapter,
-              reflect in your journal or discuss it with the community. We do not
-              generate unsourced scholarship.
+              reflect in your journal or discuss it with the community. A note
+              appears here only once it names its sources.
             </p>
           )}
         </article>
+        {aiNote && (
+          <AiExplanationCard
+            explanation={aiNote}
+            chapter={chapter}
+            reference={`${book.name} ${chapter.number}`}
+            onVerse={(v) => navigate(passagePath(book.slug, chapter.number, v))}
+          />
+        )}
+        </>
       ) : tab === "study" ? (
         <article className="card">
           <h3>Study, with Scripture first</h3>

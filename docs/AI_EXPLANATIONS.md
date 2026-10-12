@@ -2,8 +2,9 @@
 
 Decided by the founder on 2026-10-12: the app and the website may show an explanation
 written by an AI model, as a separate and clearly labelled layer. It lets readers get
-started on chapters that have no sourced note yet. Status: pilot of five chapters, shown on
-the website only, awaiting the founder's judgment of the quality.
+started on chapters that have no sourced note yet. Status: the founder approved the pilot
+of five chapters on 2026-10-12 and asked for every chapter, in the app and on the website.
+Both now show the layer; the other 1,184 chapters still have to be written.
 
 This changes two earlier rules on purpose. "AI Study" was deferred, and unsourced context
 was not published. Both now read: AI explanations are allowed as their own layer; sourced
@@ -38,7 +39,10 @@ notes (`docs/STUDY_NOTES.md`) stay exactly as they were and are never written by
 }]}
 ```
 
-`site/src/lib/ai.ts` validates every file (`parseAiFile`). An invalid file stops the build.
+`parseAiFile` in `src/bible/ai.ts` validates every file, for the app and the website alike.
+On the website an invalid file stops the build. In the app an invalid, missing or offline
+file shows no AI card at all. The app loads a book's file on demand and keeps it out of the
+installable cache (`vite.config.ts`).
 
 ## Rules for the text
 
@@ -51,6 +55,11 @@ notes (`docs/STUDY_NOTES.md`) stay exactly as they were and are never written by
   `site/tests/fixtures/public-domain-verses.json` holds the verses they are checked against.
 - Where Christians differ, set the main readings side by side and name the traditions
   fairly. Do not pick a winner.
+- Take extra care with hard passages: violence, slavery, sexuality, the place of women,
+  judgment, and texts that have been used against Jews or other groups. Say what the text
+  says and how it has been read, name harmful misuse where it is well known (for example
+  that "the Jews" in John often means the leaders opposing Jesus, not a people), and give
+  no medical, legal or counselling advice.
 - Say "many scholars", "usually dated" or "tradition links" where that is the honest state
   of knowledge. No invented citations, numbers or quotations from writers.
 - Language notes only where the point is well established, stated modestly.
@@ -61,16 +70,19 @@ notes (`docs/STUDY_NOTES.md`) stay exactly as they were and are never written by
 
 ## How it is shown
 
-On a chapter page of the website, below the sourced context: a dashed card titled
-"AI explanation" with an AI badge, the line "Written by an AI model · Not reviewed by a
-theological reader", a short warning, the sections, the translation comparison and a
-"Report a mistake" link. `site/tests/ai.test.ts` checks the label, the warning, that the
-text is shown as written and that it never appears inside the sourced note.
+Below the sourced context, on a chapter page of the website and in the Context tab of the
+app's Reader (`src/bible/AiExplanation.tsx`): a dashed card titled "AI explanation" with an
+AI badge, the line "Written by an AI model · Not reviewed by a theological reader", a short
+warning, the sections, the translation comparison and a "Report a mistake" link.
+`tests/ai.test.ts` checks the files and the loader; `site/tests/ai.test.ts` checks the
+label, the warning, that the text is shown as written and that it never appears inside the
+sourced note.
 
 ## Not done yet
 
-- The app does not show AI explanations. When it does, move the validator next to
-  `src/bible/knowledge.ts`, keep the same files and label, and update the Reader's fallback
-  sentence ("We do not generate unsourced scholarship").
-- Only five chapters exist: Genesis 1, Psalm 23, Matthew 5, John 3 and Romans 8. Writing
-  the other 1,184 waits for the founder's decision after the pilot.
+- Only five chapters exist: Genesis 1, Psalm 23, Matthew 5, John 3 and Romans 8. The other
+  1,184 are approved in principle; how they are produced (and at what cost) is still to be
+  agreed with the founder.
+- The app change is on branch `website` and is not in production. The Reader card has not
+  been checked in a browser on a real device.
+- No theological reader has reviewed any explanation.
