@@ -3,7 +3,7 @@ import { useAuth } from "../platform/auth";
 import { detectCapabilities } from "../platform/capabilities";
 import { supabase } from "../supabase";
 import { navigate } from "../platform/router";
-import { findTopic, topicGraph } from "../topics/graph";
+import { findTopic, launchTopics } from "../topics/graph";
 import { safeSourceUrl } from "./sources";
 import { SafetyControls } from "./safety";
 import { circleRpc, type Circle, type CircleMember, type CirclePost, type CircleReport, type CircleRpcName } from "./circlesApi";
@@ -143,7 +143,7 @@ export function Circles({ slug, thread }: { slug?: string; thread?: string }) {
       {!session && <p>Sign in from <button className="text-button" onClick={() => navigate("/profile")}>Profile</button> to discover private Circles or join. Public discussions can be read without signing in.</p>}
       {session && !accepted && <p>Accept the current Community Guidelines in Profile before creating, joining or posting.</p>}
       {!slug ? <>
-        <label>Filter by topic<select value={topic} onChange={e => setTopic(e.target.value)}><option value="">All topics</option>{topicGraph.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}</select></label>
+        <label>Filter by topic<select value={topic} onChange={e => setTopic(e.target.value)}><option value="">All topics</option>{launchTopics.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}</select></label>
         <label>Find in this page<input type="search" value={query} onChange={e => setQuery(e.target.value)} /></label>
         <label className="check"><input type="checkbox" checked={ownOnly} disabled={!session} onChange={e => setOwnOnly(e.target.checked)} />My active Circles</label>
         {!busy && loaded && !circles.length && <p>No Circles match. There is no seeded activity.</p>}

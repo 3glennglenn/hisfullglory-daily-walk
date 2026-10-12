@@ -3,7 +3,7 @@ import { supabase } from "../supabase";
 import { useAuth } from "../platform/auth";
 import { usePlatform } from "../platform/store";
 import { navigate } from "../platform/router";
-import { findTopic, topicGraph } from "../topics/graph";
+import { findTopic, launchTopics, topicGraph } from "../topics/graph";
 import { SafetyControls } from "./safety";
 import { Feed, postTypes } from "./Feed";
 import { safeSourceUrl } from "./sources";
@@ -82,7 +82,7 @@ export function TopicHub({id,thread}: {id?:string;thread?:string}) {
     {tab==="Saved"?<><p>Private links on this device. Opening a saved thread rechecks its visibility; removed or blocked content is unavailable.</p>{state.savedDiscussions.filter(id=>state.savedDiscussionTopics[id]).map(id=><button className="card entry" key={id} onClick={()=>navigate("/community/"+state.savedDiscussionTopics[id]+"?thread="+id)}>Saved discussion · {findTopic(state.savedDiscussionTopics[id])?.label}</button>)}{!state.savedDiscussions.length&&<p>No saved discussions yet.</p>}</>:tab==="Community feed"?<Feed/>:tab==="Testimonies"?<Feed initialKind="testimony"/>:<>
       <label>Search topics<input type="search" value={query} onChange={e=>setQuery(e.target.value)}/></label>
       {tab==="Following" && <p>Topics you chose to follow in this private local profile. Following does not publish membership.</p>}
-      {topicGraph.filter(t=>(tab!=="Following"||state.followedTopics.includes(t.id))&&t.label.toLowerCase().includes(query.toLowerCase())).map(t=><button className="card entry" key={t.id} onClick={()=>navigate("/community/"+t.id)}><strong>{t.label}</strong><span>Scripture · practical encouragement · discussions</span></button>)}
+      {(tab==="Following"?topicGraph:launchTopics).filter(t=>(tab!=="Following"||state.followedTopics.includes(t.id))&&t.label.toLowerCase().includes(query.toLowerCase())).map(t=><button className="card entry" key={t.id} onClick={()=>navigate("/community/"+t.id)}><strong>{t.label}</strong><span>Scripture · practical encouragement · discussions</span></button>)}
       {tab==="Following"&&!state.followedTopics.length&&<p>No followed topics yet.</p>}
     </>}
   </section>;

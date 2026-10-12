@@ -25,6 +25,10 @@ export const topicGraph: readonly Topic[] = topicLabels.map((label,index) => ({
     : ["/bible/psalms/121"],
   sensitive: ["Temptation", "Pornography", "Alcohol", "Addiction", "Drugs", "Grief", "Heartbreak"].includes(label),
 }));
+// Launch set: the community opens with a few busy topics instead of many empty ones.
+// Other topics keep working for deep links, private preferences and existing posts.
+export const launchTopicIds = ["returning-to-god", "growing-closer-to-god", "anxiety", "prayer", "purpose", "relationships", "grief", "new-christian"] as const satisfies readonly TopicId[];
+export const launchTopics: readonly Topic[] = launchTopicIds.map(id => topicGraph.find(t => t.id === id)!);
 const aliases: Readonly<Record<string, string>> = {
   "sexual-temptation": "temptation", "faith-and-doubt": "faith", "faith-&-doubt": "faith",
   "alcohol-and-sobriety": "alcohol", "addiction-recovery": "addiction", "heartbreak-and-healing": "heartbreak",

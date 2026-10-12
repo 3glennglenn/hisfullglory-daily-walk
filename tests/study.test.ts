@@ -85,3 +85,9 @@ test("study loading falls back honestly on missing, non-JSON or invalid files", 
   const ok = await loadStudyRecords("romans", () => response(200, JSON.parse(readFileSync(`${studyDir}/romans.json`, "utf8"))));
   assert.equal(ok[0].id, "book:romans");
 });
+
+test("the community opens with the eight launch topics", async () => {
+  const { launchTopics, findTopic } = await import("../src/topics/graph.ts");
+  assert.deepEqual(launchTopics.map((t) => t.label), ["Returning to God", "Growing closer to God", "Anxiety", "Prayer", "Purpose", "Relationships", "Grief", "New Christian"]);
+  assert.ok(findTopic("pornography"), "non-launch topics still resolve for deep links and existing posts");
+});
