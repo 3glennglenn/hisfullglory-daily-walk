@@ -8,6 +8,18 @@
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>HisFullGlory Daily Walk</title>
+    <script>
+      (() => {
+        let theme = "system";
+        try {
+          theme = localStorage.getItem("hfg-appearance") ||
+            JSON.parse(localStorage.getItem("hfg-daily-walk:v3") || localStorage.getItem("hfg-daily-walk:v2") || "null")?.theme || "system";
+        } catch { /* Storage failure must never block the app shell. */ }
+        const dark = theme === "dark" || (theme !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document.querySelector('meta[name="theme-color"]').content = dark ? "#181714" : "#F6F0E7";
+      })();
+    </script>
   </head>
   <body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body>
 </html>

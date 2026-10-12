@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "../supabase";
 import { useAuth } from "../platform/auth";
 export type TargetKind = "post" | "chat" | "prayer" | "support";
@@ -10,16 +10,20 @@ export const reportCategories = [
   "spam",
   "dangerous advice",
   "private information",
-  "other",
+  "other", "threats", "sexual exploitation", "direct payment solicitation",
+  "self-harm encouragement", "abuse", "misinformation", "impersonation",
+  "misleading credentials", "misleading sources", "vote manipulation", "coordinated abuse",
 ] as const;
 export function SafetyControls({
   id,
   kind,
   onChange,
+  execute,
 }: {
   id: string;
   kind: TargetKind;
   onChange?: () => void;
+  execute?: (args: Record<string, unknown>) => Promise<void>;
 }) {
   const { session } = useAuth();
   const [open, setOpen] = useState(false);
@@ -27,16 +31,22 @@ export function SafetyControls({
   const [note, setNote] = useState("");
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+  const sequence = useRef(0);
+  useEffect(() => {sequence.current++;setBusy(false);setOpen(false);setNote("");setStatus("");return () => {sequence.current++;};},[id,session?.user.id]);
   async function act(action: "report" | "block" | "mute") {
     if (!supabase || !session || busy) return;
     setBusy(true);
-    const { error } = await supabase.rpc("community_safety_action", {
+    const request = sequence.current;
+    const args = {
       target_kind: kind,
       target_id: id,
       action_name: action,
       report_category: category,
       report_note: note,
-    });
+    };
+    let error: unknown = null;
+    try { if (execute) await execute(args); else {const result = await supabase.rpc("community_safety_action",args);error=result.error;} } catch (failure) {error=failure;}
+    if (request !== sequence.current) return;
     setStatus(
       error
         ? "Action could not be saved. Sign in and check the platform migration."

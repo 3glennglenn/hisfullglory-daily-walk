@@ -19,13 +19,14 @@ function scan(dir) {
   for (const item of readdirSync(dir, { withFileTypes: true })) {
     const path = join(dir, item.name);
     if (item.isDirectory()) scan(path);
-    else if (/\.(tsx?|mjs|sql|md)$/.test(path)) {
+    else if (/\.(tsx?|mjs|sql|md|html)$/.test(path)) {
       inspect(path);
     }
   }
 }
 for (const root of roots) scan(root);
 for (const path of [
+  "index.html",
   "README.md",
   "AGENTS.md",
   "CHANGELOG.md",

@@ -3,6 +3,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useRef,
   type ReactNode,
 } from "react";
 import type { Session } from "@supabase/supabase-js";
@@ -10,35 +11,46 @@ import { supabase } from "../supabase";
 export const TERMS_VERSION = "2026-10-07";
 const Auth = createContext<{
   session: Session | null;
+  ready: boolean;
   accepted: boolean;
   refresh: () => Promise<void>;
-}>({ session: null, accepted: false, refresh: async () => {} });
+}>({ session: null, ready: false, accepted: false, refresh: async () => {} });
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [accepted, setAccepted] = useState(false);
+  const [ready, setReady] = useState(!supabase);
+  const generation = useRef(0);
+  const [authEpoch,setAuthEpoch] = useState(0);
   async function refresh() {
     if (!supabase) return;
+    const request = generation.current;
     const { data } = await supabase
       .from("community_terms")
       .select("version")
       .eq("version", TERMS_VERSION)
       .maybeSingle();
-    setAccepted(data?.version === TERMS_VERSION);
+    if (request === generation.current) setAccepted(data?.version === TERMS_VERSION);
   }
   useEffect(() => {
     if (!supabase) return;
-    void supabase.auth.getSession().then((r) => setSession(r.data.session));
-    const { data } = supabase.auth.onAuthStateChange((_event, s) =>
-      setSession(s),
-    );
-    return () => data.subscription.unsubscribe();
+    let active = true;
+    const initialGeneration = generation.current;
+    void supabase.auth.getSession().then((r) => {
+      if (!active || r.error || generation.current !== initialGeneration) return;
+      setSession(r.data.session); setReady(true);
+    }).catch(() => { /* Remain locked rather than exposing a guest profile. */ });
+    const { data } = supabase.auth.onAuthStateChange((_event, s) => {
+      generation.current++;setAuthEpoch(generation.current);
+      setSession(s); setAccepted(false); setReady(true);
+    });
+    return () => { active = false; data.subscription.unsubscribe(); };
   }, []);
   useEffect(() => {
     setAccepted(false);
     if (session) void refresh();
-  }, [session?.user.id]);
+  }, [session?.user.id,authEpoch]);
   return (
-    <Auth.Provider value={{ session, accepted, refresh }}>
+    <Auth.Provider value={{ session, ready, accepted, refresh }}>
       {children}
     </Auth.Provider>
   );

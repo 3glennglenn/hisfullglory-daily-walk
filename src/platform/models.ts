@@ -32,11 +32,20 @@ export interface PrivatePrayer {
   body: string;
   status: PrayerStatus;
   answer: string;
+  testimonyIds?: string[];
+  answeredAt?: string;
   updates: { date: string; body: string }[];
   createdAt: string;
 }
 export interface PlatformState {
-  version: 2;
+  version: 3;
+  privateTopics: string[];
+  followedTopics: string[];
+  savedDiscussions: string[];
+  savedDiscussionTopics: Record<string,string>;
+  joinedChallenges: string[];
+  pathProgress: Record<string, number[]>;
+  challengeProgress: Record<string, number[]>;
   local: LocalState;
   preferences: {
     goals: string[];
@@ -68,6 +77,7 @@ export function prayerTransition(
   return {
     ...prayer,
     status,
+    ...(status === "Answered" ? {answeredAt: prayer.answeredAt ?? new Date().toISOString()} : {}),
     answer: status === "Answered" ? answer.trim() : prayer.answer,
   };
 }

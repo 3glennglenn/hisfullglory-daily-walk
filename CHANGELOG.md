@@ -1,5 +1,24 @@
 # Changelog
 
+## Final independent release QA — local, uncommitted (2026-10-08)
+- Reproduced the prior 34-test/307-SQL/22-browser baseline; fixed periodic revalidation interrupting slow Circle loads, malformed RPC output crashing rendering, and invalid HTML v-mode input patterns.
+- Added runtime Circle contracts, actual SQL serializer checks, public-member/closure/report-paging regressions, explicit console/focus checks and two successful disposable-copy mutation detections.
+- Preserved all migration bytes and the dirty expansion. Read-only linked history/dry run confirms only 005/006 pending; no commit, push or deployment. Current evidence: docs/FINAL_RELEASE_QA.md.
+
+## Circles v1 — local, uncommitted, undeployed (2026-10-08)
+- Added Community Circle discovery/details, creation, public joining/private applications, scoped owner/moderator roles, discussions/replies, reports, member review/removal, immutable privacy and closure.
+- Added transactional 006; retained 001–005 bytes; isolated private content from legacy readers, broad metadata, global reputation and persistent caches.
+- Added SQL authorization/pagination/upgrade/rollback and controlled browser tests; documented real hosted/Auth/concurrency/device gates in CIRCLES_QA.md.
+
+## Unreleased third-stage expansion — 2026-10-08
+
+- Add stable 26-topic graph, private topic preferences/resources, topical hub and saved/followed links around existing Scripture/devotionals/community.
+- Add local v3 migration and guest/account isolation, auth-readiness/draft boundaries, recovery from retained v2/v1 and protection from stale Terms responses/token refresh.
+- Add additive migration 005 for private memberships, replies, safe sources and server votes/ranking/derived reputation; production migrations 001–004 unchanged and 005 not deployed.
+- Add My Walk, two optional editorial paths, a private seven-practice challenge and explicit prayer/answer/public-testimony linkage.
+- Add source hierarchy/Why we say this and disabled future provider contracts; document pending AI/billing/verification and unimplemented broader social slices.
+- Fix demonstrated pre-React theme initialization; preserve existing Light/Dark/System behavior and all original regression flows. No commit/push/deployment is included.
+
 ## 2.0.0 QA follow-up — 2026-10-07
 
 - Preserve readable private data during full-storage migration/recovery; retain recovery snapshots and isolate malformed prayer updates.

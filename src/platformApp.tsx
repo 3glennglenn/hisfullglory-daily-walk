@@ -1,3 +1,5 @@
+import { Circles } from "./social/Circles";
+import { PrivateProfileBoundary } from "./platform/PrivateProfile";
 import { Component, useEffect, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -10,7 +12,7 @@ import {
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-600.css";
 import "./styles.css";
-import { PlatformProvider, usePlatform } from "./platform/store";
+import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
 import { parseRoute, navigate, resolveTheme } from "./platform/router";
 import { detectCapabilities } from "./platform/capabilities";
@@ -23,7 +25,8 @@ import { JournalLibrary } from "./features/Journal";
 import { Settings, Profile } from "./features/Settings";
 import { Give, GivingPolicy } from "./giving/Give";
 import { Community } from "./community";
-import { Feed } from "./social/Feed";
+import { TopicHub } from "./social/TopicHub";
+import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
 import { products } from "./config";
 import { contentFor } from "./data";
@@ -56,6 +59,7 @@ interface InstallEvent extends Event {
   userChoice: Promise<{ outcome: string }>;
 }
 const menu = [
+  ["my-walk", "My Walk", "Your private focus, prayer and progress"],
   ["grow", "Grow", "Journeys for the season you’re in"],
   ["journal", "Journal", "A private place for reflection"],
   ["give", "Give", "External causes and reviewed support"],
@@ -104,6 +108,7 @@ function App() {
     const apply = () => {
       const effective = resolveTheme(state.theme, media.matches);
       document.documentElement.dataset.theme = effective;
+      try { localStorage.setItem("hfg-appearance", state.theme); } catch { /* Appearance remains usable. */ }
       document
         .querySelector('meta[name="theme-color"]')
         ?.setAttribute("content", effective === "dark" ? "#181714" : "#F6F0E7");
@@ -115,6 +120,9 @@ function App() {
   const page = route.page;
   let content: ReactNode;
   switch (page) {
+    case "my-walk":
+      content = <MyWalk />;
+      break;
     case "home":
       content = <Home key={date} />;
       break;
@@ -145,11 +153,13 @@ function App() {
     case "settings":
       content = <Settings />;
       break;
+    case "circles":
+      content = <Circles key={route.id ?? "discovery"} slug={route.id} thread={route.thread}/>;
+      break;
     case "community":
       content = (
         <>
-          <h1>Walk together.</h1>
-          <Feed />
+          <TopicHub id={route.id} thread={route.thread} />
           <details className="card">
             <summary>Live chat and the original prayer wall</summary>
             <Community verse={contentFor(date)} online={online} />
@@ -201,7 +211,7 @@ function App() {
         </div>
       );
   }
-  const active = ["home", "walk"].includes(page)
+  const active = page === "circles" ? "community" : ["home", "walk"].includes(page)
     ? "home"
     : ["bible", "pray", "community"].includes(page)
       ? page
@@ -296,10 +306,6 @@ function App() {
 }
 createRoot(document.getElementById("root")!).render(
   <ErrorBoundary>
-    <PlatformProvider>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </PlatformProvider>
+    <AuthProvider><PrivateProfileBoundary><App/></PrivateProfileBoundary></AuthProvider>
   </ErrorBoundary>,
 );

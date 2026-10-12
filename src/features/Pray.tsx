@@ -12,6 +12,7 @@ export function Pray() {
   const [answerId, setAnswerId] = useState<string | null>(null);
   const [answer, setAnswer] = useState("");
   const [sharing, setSharing] = useState<string | null>(null);
+  const [sharingPrayerId,setSharingPrayerId] = useState<string|null>(null);
   const [shareType, setShareType] = useState("prayer");
   const [status, setStatus] = useState("");
   function answered(share = false) {
@@ -37,6 +38,7 @@ export function Pray() {
     ) {
       setAnswerId(null);
       if (share) {
+        setSharingPrayerId(p.id);
         setSharing(answer.trim());
         setShareType("testimony");
       }
@@ -139,6 +141,7 @@ export function Pray() {
                     <p className="preserve">{p.answer}</p>
                   </>
                 )}
+                {!!p.testimonyIds?.length&&<p>{p.testimonyIds.length} explicitly published testimony link(s) saved privately. Public posts can be removed independently.</p>}
                 {p.updates.map((u, i) => (
                   <p key={i}>
                     <small>{u.date}</small> {u.body}
@@ -231,6 +234,7 @@ export function Pray() {
                   <button
                     onClick={() => {
                       setShareType(p.answer ? "testimony" : "prayer");
+                      setSharingPrayerId(p.id);
                       setSharing(p.answer || p.body);
                     }}
                   >
@@ -282,7 +286,10 @@ export function Pray() {
           <ShareForm
             initial={sharing}
             initialType={shareType}
-            onDone={() => setSharing(null)}
+            onDone={(postId,postType) => {
+              if(sharingPrayerId&&postType==="testimony") update(s=>({...s,prayers:s.prayers.map(p=>p.id===sharingPrayerId?{...p,testimonyIds:[...new Set([...(p.testimonyIds??[]),postId])]}:p)}));
+              setSharing(null);setSharingPrayerId(null);
+            }}
           />
           <button className="secondary" onClick={() => setSharing(null)}>
             Keep private / cancel

@@ -1,4 +1,7 @@
 export interface Capabilities {
+  circles: boolean;
+  aiStudy: false; premiumBilling: false; churchProBilling: false;
+  creatorMonetization: false; externalCommunityImport: false; trustedContributorVerification: false;
   licensedBibleTranslations: boolean;
   productionGivingPayments: boolean;
   personToPersonSupport: boolean;
@@ -10,7 +13,10 @@ export interface Capabilities {
 }
 export function detectCapabilities(community: boolean): Capabilities {
   return {
+    aiStudy: false, premiumBilling: false, churchProBilling: false,
+    creatorMonetization: false, externalCommunityImport: false, trustedContributorVerification: false,
     community,
+    circles: community,
     personToPersonSupport: community,
     externalCharityGiving: true,
     licensedBibleTranslations: false,

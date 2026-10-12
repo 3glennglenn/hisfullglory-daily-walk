@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   webProvider,
-  contextNotes,
   studyNote,
   type BibleData,
   searchBible,
@@ -10,6 +9,8 @@ import { usePlatform } from "../platform/store";
 import { navigate, passagePath, type Route } from "../platform/router";
 import { localDate } from "../storage";
 import { Feed } from "../social/Feed";
+import { knowledgeFor, assembleGrounding } from "./knowledge";
+import { topicGraph } from "../topics/graph";
 export function Reader({ route }: { route: Route }) {
   const { state, update } = usePlatform();
   const [data, setData] = useState<BibleData | null>(null);
@@ -62,7 +63,7 @@ export function Reader({ route }: { route: Route }) {
   const source = passagePath(book.slug, chapter.number, selected);
   const verse = chapter.verses.find((v) => v.number === selected);
   const reference = `${book.name} ${chapter.number}${selected ? `:${selected}` : ""}`;
-  const note = contextNotes[`${book.slug}/${chapter.number}`];
+  const note = knowledgeFor(book.slug,chapter.number,selected);
   const result = searchBible(data, search);
   const tab = route.tab;
   function journal(type: "Bible passage" | "study note") {
@@ -220,6 +221,7 @@ export function Reader({ route }: { route: Route }) {
               <a href={note.source} target="_blank" rel="noopener noreferrer">
                 Read source passage and heading
               </a>
+              <details><summary>Why we say this</summary><p>{note.editor} · {note.scope} fallback · {note.interpretiveStatus}</p><p>These observations come from the linked passage and its source heading. They are not reconstructed history, original-language evidence or a claim of scholarly consensus.</p></details>
             </>
           ) : (
             <p>
@@ -247,6 +249,7 @@ export function Reader({ route }: { route: Route }) {
           <button onClick={() => journal("study note")}>
             Write a private study note
           </button>
+          <details><summary>Ask HisFullGlory AI · integration pending</summary><p>A server-side grounded explanation provider is not configured. No generated answer or citation is supplied.</p><h4>Available grounding</h4>{assembleGrounding(data,book.slug,chapter.number,selected).map(s => <p key={s.id}>{s.authority} · {s.reference}</p>)}</details>
         </article>
       ) : (
         <Feed source={source} />
@@ -374,6 +377,7 @@ export function Reader({ route }: { route: Route }) {
           Next
         </button>
       </div>
+      <details className="card"><summary>Related topics for reflection</summary><p>Editorial links, not verified interpretations or evidence of what other readers have experienced.</p>{topicGraph.filter(t => t.passages.includes(passagePath(book.slug,chapter.number))).map(t => <button className="text-button" key={t.id} onClick={() => navigate("/community/"+t.id)}>{t.label}</button>)}</details>
       {state.bookmarks.length > 0 && (
         <section className="card">
           <h3>Saved passages</h3>
