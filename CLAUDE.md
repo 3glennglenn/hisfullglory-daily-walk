@@ -24,8 +24,9 @@ This file adds the current state and how to work with the founder. Last updated 
 - Community annotations on passages are wanted, always labelled apart from Scripture and
   from sourced context.
 - AI explanations are allowed since 2026-10-12, as a separate labelled layer written ahead
-  of time (no runtime AI). Sourced notes are never written by AI. Rules, format and the
-  pilot status: `docs/AI_EXPLANATIONS.md`.
+  of time (no runtime AI). Sourced notes are never written by AI. Every book has one; a
+  daily cloud routine adds 30 chapter explanations to branch `website`, so pull before you
+  work there. Rules, format and status: `docs/AI_EXPLANATIONS.md`.
 
 ## Live state (verified 2026-10-12, evening)
 

@@ -103,6 +103,14 @@ Agreed with the founder on 2026-10-12, to keep the cost down:
 - Each portion must pass `tests/ai.test.ts` before it is committed, and the `model` field
   must name the model that actually wrote it.
 
+A cloud routine does this, set up on 2026-10-12: "HisFullGlory: daily AI chapter
+explanations" (https://claude.ai/code/routines/trig_013ZcDYFyML8PRi5ML6tjgjq). It runs
+every day at 04:00 UTC on Claude Sonnet 5.5, writes 30 chapters, commits them to branch
+`website` and pushes. It has no connectors and deploys nothing, so the review site shows
+new chapters only after a redeploy. At 30 a day the New Testament takes about 9 days and
+the whole Bible about 40. Pause it on that page when `status` reports nothing left, or
+sooner if the founder wants to stop.
+
 `scripts/ai-chapters.mjs` does the bookkeeping: `status` counts what is left, `next 30`
 prints the next chapters with their WEB text, and `add drafts.json --model "<name>"` checks
 a batch of drafts (length, exact WEB quotations, no licensed translation names, no em
