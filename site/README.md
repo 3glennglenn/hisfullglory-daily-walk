@@ -51,6 +51,23 @@ internal link leads somewhere, addresses have no trailing slash, navigation item
 only when their page exists, the copy has no em dashes, and each resource links to its
 product in the shop.
 
+`tests/seo.test.ts` checks what search engines and link previews get: the sitemap lists
+every indexable page once and nothing else, `robots.txt` names it, every indexable page has
+its own title and description and its Open Graph tags, the share image is 1200 by 630, and
+the not-found page exists and is not indexed.
+
+## Search engines and sharing
+
+- `src/pages/sitemap.xml.ts` builds the sitemap from `src/lib/pages.ts`. A new page outside
+  the Bible is added to that list in the same change; the test fails if it is forgotten.
+- A page is indexable unless it passes `noindex` to the layout (`/styleguide`, the
+  not-found page). The review address on vercel.app is kept out of search results as a
+  whole by the header in `vercel.json`.
+- Every page shares one image, `public/og.png`. Its design is `scripts/og-image.html`;
+  after changing it, run `npm run og` (see the note at the top of `scripts/og-image.mjs`)
+  and commit the new image.
+- `src/pages/404.astro` becomes `404.html`, which Vercel serves for unknown addresses.
+
 ## Conventions
 
 - `src/config.ts` holds the site name, the app and shop addresses and the navigation.
@@ -69,6 +86,9 @@ Done from the build order in `docs/WEBSITE_PLAN.md`, section 9:
 2. Bible pages: `/bible`, `/bible/<book>` and `/bible/<book>/<chapter>`, with the build test.
 3. Home, About, Beta and Resources. The About story is the founder's, approved 2026-10-12.
    The launch topics on Home open in the app until the topic pages of step 4 exist.
+5. Search engines and sharing: titles, descriptions, canonical addresses, sitemap,
+   `robots.txt`, share image and a not-found page. Built before step 4, which waits for
+   the founder's approval of the topic and article drafts.
 
 Addresses have no trailing slash (`/bible/psalms/23`); each page is built as
 `<address>/index.html` and `vercel.json` is ready for that.
