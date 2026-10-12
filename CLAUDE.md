@@ -90,10 +90,10 @@ run it and which build steps are done.
 Since 2026-10-12 the site has its own Vercel project, `hisfullglory-site` (root directory
 `site`, framework Astro, source files outside the root directory included), reachable for
 review at https://hisfullglory-site.vercel.app. That address sends a noindex header. The
-project is not connected to Git, because the Vercel connector could not link the
-repository, so a push does not update it: start a production deployment of project
-`hisfullglory-site` from branch `website` after each change. Every domain, DNS or Shopify
-step still needs the founder's approval first.
+founder connected the project to this repository on 2026-10-12 and set its production
+branch to `website`, so every push to `website` redeploys the review site. When `website`
+is merged into `main`, set that project's production branch back to `main`. Every domain,
+DNS or Shopify step still needs the founder's approval first.
 
 ## Environment notes
 

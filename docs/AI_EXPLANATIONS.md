@@ -106,8 +106,8 @@ Agreed with the founder on 2026-10-12, to keep the cost down:
 A cloud routine does this, set up on 2026-10-12: "HisFullGlory: daily AI chapter
 explanations" (https://claude.ai/code/routines/trig_013ZcDYFyML8PRi5ML6tjgjq). It runs
 every day at 04:00 UTC on Claude Sonnet 5.5, writes 30 chapters, commits them to branch
-`website` and pushes. It has no connectors and deploys nothing, so the review site shows
-new chapters only after a redeploy. At 30 a day the New Testament takes about 9 days and
+`website` and pushes. It has no connectors and deploys nothing itself; the push is what
+makes Vercel rebuild the review site. At 30 a day the New Testament takes about 9 days and
 the whole Bible about 40. Pause it on that page when `status` reports nothing left, or
 sooner if the founder wants to stop.
 
