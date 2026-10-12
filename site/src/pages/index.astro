@@ -1,9 +1,39 @@
 ---
-import Base from "../layouts/Base.astro";
+// Home, following docs/WEBSITE_PLAN.md, section 4.1.
+import { launchTopics } from "../../../src/topics/graph.ts";
 import { appUrl, mainNav } from "../config";
+import { appFeatures } from "../data/app";
+import Base from "../layouts/Base.astro";
 
-// Step 1 shows the hero only. The other Home sections come in step 3 (docs/WEBSITE_PLAN.md, 4.1).
-const bible = mainNav.find((item) => item.href === "/bible");
+const ready = (href: string) => mainNav.some((item) => item.href === href && item.ready);
+
+const steps = [
+  { title: "Read", text: "Open any chapter of the Bible in the World English Bible." },
+  {
+    title: "Understand",
+    text: "See context that names its sources, so you know where it comes from.",
+  },
+  {
+    title: "Discuss",
+    text: "Bring a question to a topic or a Circle in the app and hear from others.",
+  },
+  {
+    title: "Grow",
+    text: "Return each day to Scripture, reflection and prayer, and trust God with the growth.",
+  },
+];
+
+const promises = [
+  "Scripture comes first. The text is the World English Bible, a public-domain translation.",
+  "Context notes name their sources and carry a label that says how far they have been reviewed.",
+  "Community voices are labelled as community. Popularity does not make something true.",
+  "Your journal and private prayers stay on your own device.",
+  "The community has rules, reporting and moderation.",
+];
+
+// Topic pages on this site arrive in a later step; until then a card opens the topic in the app.
+const topicHref = (id: string) =>
+  ready("/topics") ? `/topics/${id}` : `${appUrl}/community/${id}`;
 ---
 
 <Base>
@@ -16,8 +46,8 @@ const bible = mainNav.find((item) => item.href === "/bible");
       <div class="actions">
         <a class="button" href={appUrl}>Open the app</a>
         {
-          bible?.ready && (
-            <a class="button secondary" href={bible.href}>
+          ready("/bible") && (
+            <a class="button secondary" href="/bible">
               Explore the Bible
             </a>
           )
@@ -28,16 +58,175 @@ const bible = mainNav.find((item) => item.href === "/bible");
       </p>
     </div>
   </section>
+
+  <section class="section band">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <ol class="grid steps">
+        {
+          steps.map((step, i) => (
+            <li class="card">
+              <p class="eyebrow">Step {i + 1}</p>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Inside the app <span class="pill">Beta</span></h2>
+      <ul class="grid plain">
+        {
+          appFeatures.map((feature) => (
+            <li class="card">
+              <h3>{feature.title}</h3>
+              <p>{feature.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="actions">
+        <a class="button" href={appUrl}>Open the app</a>
+        <a class="button secondary" href="/beta">About the beta</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="wrap">
+      <h2>What you can count on</h2>
+      <ul class="promises">
+        {promises.map((promise) => <li>{promise}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Start here</h2>
+      <p class="muted">Eight topics to begin with.</p>
+      <ul class="topics plain">
+        {
+          launchTopics.map((topic) => (
+            <li>
+              <a href={topicHref(topic.id)}>{topic.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="wrap strip">
+      <div>
+        <h2>Resources</h2>
+        <p class="muted">A small selection of study Bibles, chosen with care.</p>
+      </div>
+      <a class="button secondary" href="/resources">See the resources</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Join the beta</h2>
+      <p class="lede">
+        The app is open to try. You can begin as a guest, and your private
+        writing stays on your device.
+      </p>
+      <div class="actions">
+        <a class="button" href={appUrl}>Open the app</a>
+        <a class="button secondary" href="/beta">How the beta works</a>
+      </div>
+    </div>
+  </section>
 </Base>
 
 <style>
   h1 {
     max-width: 14ch;
   }
-  .lede {
+  h1 + .lede {
     margin-top: 16px;
   }
   .note {
     margin-top: 18px;
+  }
+  h2 {
+    margin-bottom: 18px;
+  }
+  h2 + .muted,
+  h2 + .lede {
+    margin-top: -8px;
+  }
+  .band {
+    background: var(--paper);
+    border-block: 1px solid var(--border);
+  }
+  .plain,
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .band .card {
+    background: var(--bg);
+  }
+  .pill {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+    padding: 2px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .promises {
+    margin: 0;
+    padding-left: 1.2rem;
+    max-width: 42rem;
+  }
+  .promises li + li {
+    margin-top: 10px;
+  }
+  .topics {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    margin-top: 16px;
+  }
+  .topics a {
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    padding: 8px 16px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .topics a:hover {
+    border-color: var(--strong);
+  }
+  .strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .strip h2 {
+    margin-bottom: 4px;
+  }
+  .strip .muted {
+    margin: 0;
   }
 </style>

@@ -1,0 +1,88 @@
+---
+import { appUrl, shopUrl } from "../config";
+import { resources } from "../data/resources";
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Resources"
+  description="Study Bibles chosen to support your reading, grouped by study goal. Each one links to the HisFullGlory shop."
+>
+  <section class="section">
+    <div class="wrap">
+      <h1>Resources</h1>
+      <p class="lede">
+        Study Bibles chosen to support your reading. Each one opens in our shop.
+      </p>
+
+      <ul class="grid list">
+        {
+          resources.map((resource) => (
+            <li class="card">
+              <p class="eyebrow">{resource.goal}</p>
+              <h2>{resource.title}</h2>
+              <p>{resource.summary}</p>
+              <a class="button secondary" href={`${shopUrl}/products/${resource.handle}`}>
+                View in the shop
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="muted small note">
+        Prices and availability are shown in the shop. The shop currently ships
+        within the United States.
+      </p>
+
+      <div class="card reading">
+        <h2>Reading comes first</h2>
+        <p>
+          A study Bible can help you read with more understanding. You can also
+          start today with the Bible on this site or in the app.
+        </p>
+        <div class="actions">
+          <a class="button" href={appUrl}>Open the app</a>
+          <a class="button secondary" href="/bible">Explore the Bible</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lede {
+    margin-top: 16px;
+  }
+  .list {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  }
+  .list .card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .list h2 {
+    font-size: 1.15rem;
+  }
+  .list .button {
+    margin-top: auto;
+  }
+  .list p:not(.eyebrow) {
+    margin-bottom: 18px;
+  }
+  .note {
+    margin-top: 16px;
+  }
+  .reading {
+    margin-top: 40px;
+    max-width: 42rem;
+    background: var(--card);
+  }
+  .reading .actions {
+    margin-top: 16px;
+  }
+</style>

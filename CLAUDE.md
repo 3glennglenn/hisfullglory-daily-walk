@@ -90,5 +90,9 @@ every domain, DNS or Shopify step needs the founder's approval first.
   laptop folder has `node_modules`; Vercel preview builds (every branch push) verify
   `npm run build`.
 - Vercel CLI deploys upload the whole folder; add a `.vercelignore` before the next one.
+- An Astro build of `site/` made inside the Claude desktop app's own session workspace
+  comes out without stylesheets, because that folder's real path differs from its visible
+  path. Build and preview from a normal folder. `site/tests/pages.test.ts` fails when
+  pages have no styles.
 - The founder's laptop has Git and Node 24 (since 2026-10-12). The older project folder
   there dates from the Codex work and is not a current checkout; clone from GitHub.

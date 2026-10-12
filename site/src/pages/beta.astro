@@ -1,0 +1,82 @@
+---
+import { appUrl, shopUrl } from "../config";
+import { appFeatures } from "../data/app";
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="The Daily Walk beta"
+  description="What the HisFullGlory Daily Walk beta is, what you can do in it, and how to join."
+>
+  <section class="section">
+    <div class="wrap prose">
+      <h1>The Daily Walk beta</h1>
+      <p class="lede">
+        HisFullGlory Daily Walk is our app for a daily rhythm with Scripture. It
+        is in beta: you can use it today, and we are still improving it.
+      </p>
+      <div class="actions">
+        <a class="button" href={appUrl}>Open the app</a>
+      </div>
+
+      <h2>What it is</h2>
+      <p>
+        A web app. It opens in your browser on a phone, tablet or computer, and
+        you can add it to your home screen. It is not an app from an app store.
+      </p>
+
+      <h2>What you can do in it</h2>
+      <ul>
+        {
+          appFeatures.map((feature) => (
+            <li>
+              <strong>{feature.title}.</strong> {feature.text}
+            </li>
+          ))
+        }
+      </ul>
+
+      <h2>What beta means</h2>
+      <p>
+        Some parts are new and may still change. If something does not work or
+        is unclear, we would like to know.
+        <a href={`${shopUrl}/pages/contact`}>Tell us about it</a>.
+      </p>
+
+      <h2>How to join</h2>
+      <ol>
+        <li>Open the app in your browser.</li>
+        <li>
+          Begin as a guest. Your journal and private prayers stay on your own
+          device.
+        </li>
+        <li>
+          To post in the community, sign in with your email address and accept
+          the community rules.
+        </li>
+      </ol>
+
+      <div class="actions">
+        <a class="button" href={appUrl}>Open the app</a>
+        <a class="button secondary" href="/about">About HisFullGlory</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lede {
+    margin-top: 16px;
+  }
+  h2 {
+    margin: 40px 0 8px;
+  }
+  ul,
+  ol {
+    margin: 10px 0 0;
+    padding-left: 1.2rem;
+  }
+  li + li {
+    margin-top: 8px;
+  }
+</style>

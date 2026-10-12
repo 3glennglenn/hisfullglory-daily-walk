@@ -20,13 +20,13 @@ export const mainNav: NavItem[] = [
   { label: "Bible", href: "/bible", ready: true },
   { label: "Topics", href: "/topics", ready: false },
   { label: "Articles", href: "/articles", ready: false },
-  { label: "Resources", href: "/resources", ready: false },
-  { label: "About", href: "/about", ready: false },
+  { label: "Resources", href: "/resources", ready: true },
+  { label: "About", href: "/about", ready: true },
 ];
 
 // Privacy, Terms and Contact link to the existing shop pages (WEBSITE_PLAN.md, section 8).
 export const footerNav: NavItem[] = [
-  { label: "About", href: "/about", ready: false },
+  { label: "About", href: "/about", ready: true },
   { label: "Privacy", href: `${shopUrl}/policies/privacy-policy`, ready: true },
   { label: "Terms", href: `${shopUrl}/policies/terms-of-service`, ready: true },
   { label: "Contact", href: `${shopUrl}/pages/contact`, ready: true },

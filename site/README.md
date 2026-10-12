@@ -38,6 +38,11 @@ An invalid study file stops the build. The site never writes, generates or rewor
 in its basis verses, and each page shows its note as written or the "being written"
 fallback.
 
+`tests/pages.test.ts` checks the site as a whole: every page loads its styles, every
+internal link leads somewhere, addresses have no trailing slash, navigation items are links
+only when their page exists, the copy has no em dashes, and each resource links to its
+product in the shop.
+
 ## Conventions
 
 - `src/config.ts` holds the site name, the app and shop addresses and the navigation.
@@ -54,6 +59,9 @@ Done from the build order in `docs/WEBSITE_PLAN.md`, section 9:
 
 1. Scaffold, shared tokens, layout, header and footer.
 2. Bible pages: `/bible`, `/bible/<book>` and `/bible/<book>/<chapter>`, with the build test.
+3. Home, About, Beta and Resources. The About story is the founder's, approved 2026-10-12.
+   The launch topics on Home open in the app until the topic pages of step 4 exist.
 
-Addresses have no trailing slash (`/bible/psalms/23`); `vercel.json` is ready for that.
+Addresses have no trailing slash (`/bible/psalms/23`); each page is built as
+`<address>/index.html` and `vercel.json` is ready for that.
 Not deployed. No Vercel project, domain, DNS or Shopify change has been made for the site.

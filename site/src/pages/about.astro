@@ -1,0 +1,113 @@
+---
+// The story is the founder's own, approved on 2026-10-12. No personal details are shown.
+import { appUrl, shopUrl } from "../config";
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="About"
+  description="Why HisFullGlory exists, what we are building, and how we handle Scripture, context, privacy and the community."
+>
+  <section class="section">
+    <div class="wrap prose">
+      <h1>About HisFullGlory</h1>
+      <p class="lede">A calm place to come back to Scripture, each day.</p>
+
+      <h2>Why this exists</h2>
+      <p>
+        HisFullGlory began with something I noticed in my own life: how easily
+        faith slips into the background when the days get full. It never
+        happened through one big decision. It was one busy week after another.
+      </p>
+      <p>
+        I wanted to build something that makes it a little easier to come back.
+        Back to Scripture, to prayer, and to a few honest minutes of reflection,
+        again each day.
+      </p>
+
+      <h2>What we are building</h2>
+      <p>HisFullGlory is meant to be more than a shop.</p>
+      <p>
+        The HisFullGlory app is the heart of it: Scripture for today, a private
+        journal, prayer and a community to talk things through. It is a beta web
+        app, so it opens in your browser and is still growing.
+      </p>
+      <p>
+        This website is where you can read the whole Bible, with context notes
+        that name their sources. More is being added step by step.
+      </p>
+      <p>
+        Both link to our shop, where you will find a small selection of study
+        Bibles, chosen with care.
+      </p>
+
+      <h2>What I hope for</h2>
+      <p>
+        I cannot make anyone’s faith grow, and neither can a website or an app.
+        That is God’s work. What I can do is build something calm and honest
+        that keeps pointing back to His Word and gently encourages a daily walk
+        with God.
+      </p>
+      <p>
+        Our motto is Jesus at the Center. It is also the test for everything we
+        add.
+      </p>
+
+      <h2>How we handle Scripture and context</h2>
+      <ul>
+        <li>
+          Scripture comes first. We use the World English Bible, a public-domain
+          translation.
+        </li>
+        <li>
+          Context notes name their sources. A note that has not yet been
+          reviewed by a theological reader is labelled “Editorial draft”.
+        </li>
+        <li>
+          Community voices are labelled as community. Popularity does not make
+          something true.
+        </li>
+      </ul>
+
+      <h2>Privacy and care in the community</h2>
+      <ul>
+        <li>
+          Your journal and private prayers stay on your own device unless you
+          choose to share something.
+        </li>
+        <li>
+          Before posting, you agree to the community rules. You can report,
+          block or mute, and you can post anonymously.
+        </li>
+        <li>There are no ads in the community.</li>
+      </ul>
+
+      <h2>Get in touch</h2>
+      <p>
+        If you have a question or an idea, we would love to hear it.
+        <a href={`${shopUrl}/pages/contact`}>Contact us</a>.
+      </p>
+
+      <div class="actions">
+        <a class="button" href={appUrl}>Open the app</a>
+        <a class="button secondary" href="/bible">Explore the Bible</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lede {
+    margin-top: 16px;
+  }
+  h2 {
+    margin: 40px 0 8px;
+  }
+  ul {
+    margin: 10px 0 0;
+    padding-left: 1.2rem;
+  }
+  li + li {
+    margin-top: 8px;
+  }
+</style>

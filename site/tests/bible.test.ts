@@ -6,7 +6,7 @@ import test from "node:test";
 import { bookNote, chapterNote, library } from "../src/lib/bible.ts";
 
 const { bible, notes } = library();
-const page = (path: string) => `dist/${path}.html`;
+const page = (path: string) => `dist/${path}/index.html`;
 const clean = (text: string) => text.replace(/\s+/g, " ").trim();
 
 /** The text a reader sees: tags removed, entities decoded, whitespace collapsed. */
@@ -24,7 +24,7 @@ function visibleText(html: string) {
 }
 
 test("the build has been run", () => {
-  assert.ok(existsSync(page("bible")), "dist/bible.html is missing: run npm run build");
+  assert.ok(existsSync(page("bible")), "dist/bible/index.html is missing: run npm run build");
 });
 
 test("every book and chapter has its own page", () => {
