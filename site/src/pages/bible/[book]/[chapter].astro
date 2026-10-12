@@ -64,6 +64,10 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
       />
       <h1>{title}</h1>
       <p class="muted">World English Bible</p>
+      <nav class="jump" aria-label="On this page">
+        <a href="#context">Context</a>
+        {ai && <a href="#ai">AI explanation</a>}
+      </nav>
 
       <article class="scripture">
         {
@@ -86,13 +90,13 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
         </p>
       </article>
 
-      <div class="block">
+      <div class="block" id="context">
         <ContextNote note={note} subject={subject} />
       </div>
 
       {
         ai && (
-          <div class="block ai-block">
+          <div class="block ai-block" id="ai">
             <AiExplanation explanation={ai} book={book} />
           </div>
         )
@@ -152,8 +156,31 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
   .scripture .small {
     margin-top: 24px;
   }
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .jump a:hover {
+    border-color: var(--strong);
+  }
   .block {
     margin-top: 40px;
+    scroll-margin-top: 16px;
   }
   .ai-block {
     margin-top: 18px;
