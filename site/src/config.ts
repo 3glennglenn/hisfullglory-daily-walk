@@ -8,9 +8,9 @@ export const site = {
 
 export const appUrl = "https://app.hisfullglory.com";
 
-// The shop still lives on hisfullglory.com. When it moves (docs/WEBSITE_PLAN.md, section 7),
-// change this one line to https://shop.hisfullglory.com.
-export const shopUrl = "https://hisfullglory.com";
+// The shop's own address since the domain move (docs/WEBSITE_PLAN.md, section 7). Old shop
+// addresses on hisfullglory.com are sent here by the redirects in vercel.json.
+export const shopUrl = "https://shop.hisfullglory.com";
 
 export type NavItem = { label: string; href: string; ready: boolean };
 

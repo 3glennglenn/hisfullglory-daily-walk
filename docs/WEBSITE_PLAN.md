@@ -107,6 +107,16 @@ written." Never generate notes at build time.
    InitiateCheckout, Purchase) still arrive from the shop; the product catalog still syncs;
    Meta domain verification still covers the subdomain; an ad link to a product page works.
 
+Prepared on branch `site-domain-move` (2026-10-13): the redirects of step 4 in
+`site/vercel.json`, with a few more shop paths (blogs, discount links, gift cards, app
+proxies, and order and checkout links that start with the shop number), and `shopUrl` set to
+the shop's new address. Merge that branch after step 2 and before step 3. From that merge on
+the site links to `shop.hisfullglory.com`, so that address has to work first.
+
+Found on 2026-10-13, read-only: the domain's name servers are `ns-cloud-c1` to `c4` at
+`googledomains.com`; `hisfullglory.com` and `www` point at Shopify; `app` points at Vercel;
+`shop` has no record yet. Where the founder edits these records is not confirmed.
+
 ## 8. Tracking and privacy
 
 - v1: no Meta Pixel on the site. Purchases happen on the shop, where the Pixel already runs.
