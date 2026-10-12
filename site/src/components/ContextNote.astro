@@ -1,0 +1,115 @@
+---
+// Shows one sourced note the way the app's Context tab does, or the honest fallback.
+// Labels and wording follow src/bible/Reader.tsx.
+import { scopeLabel } from "../../../src/bible/knowledge.ts";
+import { basisLink, type KnowledgeRecord } from "../lib/bible";
+
+interface Props {
+  note?: KnowledgeRecord;
+  /** What the note is about, for example "Psalms" or "Psalms 23". */
+  subject: string;
+}
+
+const { note, subject } = Astro.props;
+const status = !note
+  ? ""
+  : note.review === "reviewed"
+    ? "Reviewed"
+    : note.review === "editorial draft"
+      ? "Editorial draft"
+      : "Editorial observation";
+const listed = note?.sources ?? [];
+const sources =
+  note && !listed.some((source) => source.url === note.source)
+    ? [{ title: "Primary source", url: note.source }, ...listed]
+    : listed;
+---
+
+<section class="card note">
+  {
+    note ? (
+      <>
+        <h2>{scopeLabel[note.scope]}</h2>
+        <p class="eyebrow">
+          {subject} · {status}
+        </p>
+        <p class="note-text">{note.text}</p>
+        <details>
+          <summary>Why we say this</summary>
+          <p class="small muted">
+            {note.editor} · {note.interpretiveStatus}
+            {note.review === "editorial draft" &&
+              " · not yet reviewed by a theological reader"}
+          </p>
+          {note.basis && note.basis.length > 0 && (
+            <>
+              <h3>From the text itself</h3>
+              <ul>
+                {note.basis.map(basisLink).map((link) => (
+                  <li>
+                    <a href={link.href}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          <h3>Sources</h3>
+          <ul>
+            {sources.map((source) => (
+              <li>
+                <a href={source.url} rel="noopener noreferrer">
+                  {source.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p class="small muted">
+            Notes summarise their sources in our own words. Where Christians or
+            scholars disagree, the note says so. Notes are not original-language
+            evidence and do not replace the text.
+          </p>
+        </details>
+      </>
+    ) : (
+      <>
+        <h2>Context</h2>
+        <p>
+          Context for this book is being written. We do not generate unsourced
+          scholarship.
+        </p>
+      </>
+    )
+  }
+</section>
+
+<style>
+  .note {
+    max-width: 42rem;
+  }
+  .eyebrow {
+    margin-top: 6px;
+  }
+  details {
+    margin-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  h3 {
+    margin-top: 14px;
+  }
+  ul {
+    margin: 6px 0 0;
+    padding-left: 1.2rem;
+  }
+  li a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+</style>

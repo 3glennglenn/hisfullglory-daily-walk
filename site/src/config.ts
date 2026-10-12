@@ -17,7 +17,7 @@ export type NavItem = { label: string; href: string; ready: boolean };
 // `ready` turns true in the build step that adds the page, so the header never links to a
 // page that does not exist yet.
 export const mainNav: NavItem[] = [
-  { label: "Bible", href: "/bible", ready: false },
+  { label: "Bible", href: "/bible", ready: true },
   { label: "Topics", href: "/topics", ready: false },
   { label: "Articles", href: "/articles", ready: false },
   { label: "Resources", href: "/resources", ready: false },
