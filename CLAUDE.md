@@ -56,7 +56,7 @@ chapters used by the launch topics.
 3. Home and onboarding "study first": open a passage, read context, write a reflection.
 4. Rename the Shop entry to Resources, matched to study goals.
 
-## New website (planned, not started)
+## New website (planned, not started): full plan in `docs/WEBSITE_PLAN.md`
 
 A separate site for `hisfullglory.com` (Bible, topic and article pages, pre-rendered for
 search) reading the same Supabase data and study files; Shopify moves to
