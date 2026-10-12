@@ -1,0 +1,80 @@
+{
+  "slug": "what-jesus-said-about-worry",
+  "review": "approved",
+  "approved": "2026-10-13",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "title": "What did Jesus say about worry?",
+  "description": "Matthew 6:25-34 step by step: what Jesus tells his disciples about worry, the reasons he gives, and what the passage does not say.",
+  "topic": "anxiety",
+  "passage": {
+    "book": "matthew",
+    "chapter": 6,
+    "start": 25,
+    "end": 34
+  },
+  "sections": [
+    {
+      "heading": "The short answer",
+      "text": "In Matthew 6:25-34 Jesus tells his disciples not to be anxious about food, drink and clothing, and he gives reasons: God feeds the birds, clothes the fields, and knows what people need. He does not say that needs are unreal, and he does not promise days without trouble.\n\nThis page follows the passage step by step. It is not medical or counseling advice."
+    },
+    {
+      "heading": "Where the passage sits",
+      "text": "These verses belong to the Sermon on the Mount. They follow a paragraph about money, which ends: “You can’t serve both God and Mammon.” The next word is “Therefore”.\n\nSo the worry Jesus has in view first is worry about provision: “what you will eat, or what you will drink”, and “what you will wear”."
+    },
+    {
+      "heading": "The reasons Jesus gives",
+      "text": "He does not simply forbid worry. He argues, and his reasons build on each other.\n\n- Birds do not sow or store, and “Your heavenly Father feeds them.”\n- Wild flowers do no work, yet not even Solomon was dressed like them.\n- Verse 27 asks who can lengthen a life by being anxious.\n- “your heavenly Father knows that you need all these things.”\n\nThen comes the instruction that takes the place of worry: “seek first God’s Kingdom and his righteousness; and all these things will be given to you as well.”"
+    },
+    {
+      "heading": "One day at a time",
+      "text": "The passage ends with a limit: “don’t be anxious for tomorrow, for tomorrow will be anxious for itself. Each day’s own evil is sufficient.” Jesus does not promise days without trouble. He says each day has its own, and asks his hearers to carry one day’s worth."
+    },
+    {
+      "heading": "What the rest of the New Testament adds",
+      "text": "Paul gives the churches the same instruction with a practice attached: “In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God” (Philippians 4:6). The first letter of Peter gives the reason in five words: “because he cares for you” (1 Peter 5:7).\n\nThe New Testament also shows that distress is not the same as unbelief. Paul lists among his burdens “anxiety for all the assemblies” (2 Corinthians 11:28). In Gethsemane Jesus “began to be sorrowful and severely troubled”, and he prayed (Matthew 26:37-39)."
+    },
+    {
+      "heading": "What the passage does not say",
+      "text": "- It is not a statement about anxiety as a medical condition. Jesus is speaking to his disciples about daily needs.\n- It does not say that a person who feels anxious has no faith. The phrase “you of little faith” is addressed to the disciples he is teaching, inside an argument meant to reassure them.\n- It does not tell anyone to carry worry alone. The letters quoted above point to prayer, and to a God who cares.\n\nScripture and community do not replace appropriate professional or pastoral support. If you are in immediate danger, contact local emergency services or someone who can help you reach safety."
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 6,
+      "start": 19,
+      "end": 34
+    },
+    {
+      "book": "philippians",
+      "chapter": 4,
+      "start": 4,
+      "end": 7
+    },
+    {
+      "book": "1-peter",
+      "chapter": 5,
+      "start": 6,
+      "end": 7
+    },
+    {
+      "book": "2-corinthians",
+      "chapter": 11,
+      "start": 28,
+      "end": 28
+    },
+    {
+      "book": "matthew",
+      "chapter": 26,
+      "start": 37,
+      "end": 39
+    }
+  ],
+  "sources": [
+    {
+      "title": "World English Bible, preface",
+      "url": "https://ebible.org/eng-web/FRT01.htm"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "slug": "turn-the-other-cheek",
+  "review": "approved",
+  "approved": "2026-10-13",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "title": "What does turning the other cheek mean?",
+  "description": "Matthew 5:38-42 in its setting: the rule Jesus quotes, what he asks instead, how he acted when he was struck, and where Christians differ.",
+  "topic": "relationships",
+  "passage": {
+    "book": "matthew",
+    "chapter": 5,
+    "start": 38,
+    "end": 42
+  },
+  "sections": [
+    {
+      "heading": "The short answer",
+      "text": "In Matthew 5:38-42 Jesus tells his followers not to answer an injury with an injury. Where the rule he quotes measured out a penalty, he asks for something no rule can demand: an open hand toward the person who did the wrong.\n\nChristians agree on that much. They differ on how far it reaches. This page sets out what the text says and where the readings part."
+    },
+    {
+      "heading": "What the passage says",
+      "text": "The words come from the Sermon on the Mount, the teaching in Matthew 5 to 7 that Jesus gives to his disciples on a mountain (Matthew 5:1-2). Several times in chapter 5 he quotes something his hearers had been taught and then goes further.\n\nHere he quotes “An eye for an eye, and a tooth for a tooth” and answers with four pictures: someone strikes you on the cheek, someone sues you for your coat, someone compels you to go a mile, someone asks to borrow from you. Each time the response gives more than was taken: “whoever strikes you on your right cheek, turn to him the other also”."
+    },
+    {
+      "heading": "Where the rule comes from",
+      "text": "The rule appears three times in the law of Moses: Exodus 21:23-25, Leviticus 24:19-20 and Deuteronomy 19:21. In each place it belongs to the laws for handling injuries and disputes. Exodus mentions what “the judges allow”. Deuteronomy describes “the priests and the judges” who must “make diligent inquisition”. The rule sets a penalty that matches the harm.\n\nJesus does not discuss courts here. His four pictures are about what a person does when wronged, and the next lines of the sermon go further still: “love your enemies” (Matthew 5:44)."
+    },
+    {
+      "heading": "How Jesus and the first Christians acted",
+      "text": "The Gospels show what this looked like in practice. When Jesus was questioned by the high priest, an officer slapped him. He did not strike back, and he did not stay silent either: “If I have spoken evil, testify of the evil; but if well, why do you beat me?” (John 18:22-23). The first letter of Peter describes the same pattern: “When he was cursed, he didn’t curse back. When he suffered, he didn’t threaten” (1 Peter 2:23).\n\nPaul gives the churches the same instruction and adds a reason. “Repay no one evil for evil”, he writes, and “Don’t seek revenge yourselves, beloved, but give place to God’s wrath” (Romans 12:17-19). Justice is not cancelled. It is left with God."
+    },
+    {
+      "heading": "Where Christians read it differently",
+      "text": "Some Christians, among them the historic peace churches, take these words as a rule for every situation and refuse all violence, including military service.\n\nMany others hold that Jesus is speaking about personal retaliation, and that protecting other people and the work of courts and governments are a separate matter. They point to Romans 13:1-4, where Paul says the governing authority “doesn’t bear the sword in vain”.\n\nBoth readings take the passage seriously. This page does not choose between them."
+    },
+    {
+      "heading": "What it does not say",
+      "text": "The passage has sometimes been used to tell people to stay where they are being abused or in danger. The text does not say that. Its four pictures are a blow to the cheek, a lawsuit, a forced mile and a request for a loan, and Jesus himself objected when he was struck unjustly.\n\nIf you are not safe, contact local emergency services or someone who can help you reach safety."
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 5,
+      "start": 1,
+      "end": 2
+    },
+    {
+      "book": "matthew",
+      "chapter": 5,
+      "start": 38,
+      "end": 45
+    },
+    {
+      "book": "exodus",
+      "chapter": 21,
+      "start": 22,
+      "end": 25
+    },
+    {
+      "book": "leviticus",
+      "chapter": 24,
+      "start": 19,
+      "end": 20
+    },
+    {
+      "book": "deuteronomy",
+      "chapter": 19,
+      "start": 16,
+      "end": 21
+    },
+    {
+      "book": "john",
+      "chapter": 18,
+      "start": 19,
+      "end": 23
+    },
+    {
+      "book": "1-peter",
+      "chapter": 2,
+      "start": 21,
+      "end": 23
+    },
+    {
+      "book": "romans",
+      "chapter": 12,
+      "start": 17,
+      "end": 21
+    },
+    {
+      "book": "romans",
+      "chapter": 13,
+      "start": 1,
+      "end": 4
+    }
+  ],
+  "sources": [
+    {
+      "title": "World English Bible, preface",
+      "url": "https://ebible.org/eng-web/FRT01.htm"
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+---
+// /topics and /topics/<id>. Neither exists until at least one topic page is approved, so
+// this is one route with a list of paths instead of two page files.
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import DraftBanner from "../../components/DraftBanner.astro";
+import EditorialNote from "../../components/EditorialNote.astro";
+import { appUrl } from "../../config";
+import Base from "../../layouts/Base.astro";
+import {
+  publishedArticles,
+  publishedTopics,
+  refHref,
+  refLabel,
+  showDrafts,
+  type TopicPage,
+} from "../../lib/content";
+
+export function getStaticPaths() {
+  const topics = publishedTopics();
+  if (!topics.length) return [];
+  return [
+    { params: { slug: undefined }, props: { topics } },
+    ...topics.map((topic) => ({ params: { slug: topic.id }, props: { topics, topic } })),
+  ];
+}
+
+interface Props {
+  topics: TopicPage[];
+  topic?: TopicPage;
+}
+
+const { topics, topic } = Astro.props;
+const articles = topic ? publishedArticles().filter((article) => article.topic === topic.id) : [];
+---
+
+{
+  topic ? (
+    <Base
+      title={`${topic.label}: Bible passages`}
+      description={`${topic.label}: ${topic.passages.length} Bible passages to start with, each with a one-line reason taken from the text itself.`}
+      noindex={topic.review !== "approved"}
+    >
+      <section class="section">
+        <div class="wrap prose">
+          <Breadcrumb trail={[{ label: "Topics", href: "/topics" }]} current={topic.label} />
+          {topic.review === "draft" && <DraftBanner />}
+          <h1>{topic.label}</h1>
+          <p class="lede">{topic.intro}</p>
+          {topic.care && <p class="card care">{topic.care}</p>}
+
+          <h2>Passages to start with</h2>
+          <ol class="passages">
+            {topic.passages.map((passage) => (
+              <li class="card">
+                <h3>
+                  <a href={refHref(passage)}>{refLabel(passage)}</a>
+                </h3>
+                <p>{passage.reason}</p>
+                <p class="more">
+                  <a href={refHref(passage)}>Read {refLabel(passage)} in full</a>
+                </p>
+              </li>
+            ))}
+          </ol>
+          <p class="small muted">
+            Each passage opens in the World English Bible on this site. The
+            reason beside it quotes the passage itself.
+          </p>
+
+          {articles.length > 0 && (
+            <>
+              <h2>Read more</h2>
+              <ul>
+                {articles.map((article) => (
+                  <li>
+                    <a href={`/articles/${article.slug}`}>{article.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          <div class="actions">
+            <a class="button" href={`${appUrl}/community/${topic.id}`}>
+              Join the conversation
+            </a>
+            <a class="button secondary" href="/topics">
+              All topics
+            </a>
+          </div>
+          <p class="small muted">
+            The conversation is in the HisFullGlory app, a beta web app that
+            opens in your browser.
+          </p>
+
+          <EditorialNote review={topic.review} drafted={topic.drafted} />
+        </div>
+      </section>
+    </Base>
+  ) : (
+    <Base
+      title="Topics"
+      description="Bible passages on the topics people ask about most, each with a short reason taken from the text itself."
+      noindex={showDrafts()}
+    >
+      <section class="section">
+        <div class="wrap">
+          <h1>Topics</h1>
+          <p class="lede">
+            Places to start reading, by topic. Each page lists a few passages
+            and says in one line why each is there.
+          </p>
+          <ul class="grid list">
+            {topics.map((entry) => (
+              <li class="card">
+                <h2>
+                  <a href={`/topics/${entry.id}`}>{entry.label}</a>
+                </h2>
+                <p class="muted">{entry.passages.length} passages</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </Base>
+  )
+}
+
+<style>
+  .lede {
+    margin-top: 16px;
+  }
+  h2 {
+    margin: 40px 0 12px;
+  }
+  .care {
+    margin-top: 24px;
+    background: var(--card);
+    font-size: 0.95rem;
+  }
+  .passages,
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .passages .card + .card {
+    margin-top: 12px;
+  }
+  .passages h3 {
+    font-size: 1.05rem;
+  }
+  .passages p {
+    margin-bottom: 0;
+  }
+  .passages .more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+  }
+  .list {
+    margin-top: 32px;
+  }
+  .list h2 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+  .list p {
+    margin-bottom: 0;
+  }
+</style>
