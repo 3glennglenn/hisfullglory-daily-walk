@@ -2,6 +2,27 @@
   "book": "matthew",
   "records": [
     {
+      "id": "ai:matthew",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Matthew presents Jesus as the Messiah promised to Israel, the son of David and of Abraham. It begins with his family line and birth and follows his teaching, healings and conflicts to his death and resurrection in Jerusalem.\n\nThe book is built around five large blocks of teaching, the first of which is the Sermon on the Mount (chapters 5 to 7). Again and again it notes that something happened to fulfill what the prophets had said. It ends with the risen Jesus sending his followers to make disciples of all nations."
+        },
+        {
+          "kind": "background",
+          "text": "Early tradition names the author as Matthew, the tax collector who became one of the twelve. Most scholars date the book to the 70s or 80s of the first century and think it draws on Mark; some date it earlier. It seems written with Jewish Christians especially in mind."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Matthew raises the question of how Jesus relates to the law of Moses: he says he came to fulfill it, and Christians explain that in different ways. The words to Peter about the rock on which the church is built (16:18) are read differently by Catholics, Orthodox and Protestants. The parables of judgment in chapters 24 and 25 are also read in several ways."
+        }
+      ]
+    },
+    {
       "id": "ai:matthew/5",
       "chapter": 5,
       "model": "Claude Opus 5.5",
@@ -18,7 +39,7 @@
         },
         {
           "kind": "interpretations",
-          "text": "How should these demands be lived? Christians have answered in several ways.\n\n- Some read them as the real way of life for every disciple now, to be practised with God’s help. Peace churches, for example, take “don’t resist him who is evil” as a call to refuse violence.\n- Some stress that the sermon shows how deep God’s will goes, so that it leads readers to seek mercy as well as to obey.\n- Many distinguish between personal conduct and the duties of a public office, such as that of a judge.\n\nMost agree that Jesus is not cancelling the law but showing its full intent. Verse 32 on divorce and verse 48, “you shall be perfect”, are among the most discussed lines."
+          "text": "How should these demands be lived? Christians have answered in several ways.\n\n- Some read them as the real way of life for every disciple now, to be practiced with God’s help. Peace churches, for example, take “don’t resist him who is evil” as a call to refuse violence.\n- Some stress that the sermon shows how deep God’s will goes, so that it leads readers to seek mercy as well as to obey.\n- Many distinguish between personal conduct and the duties of a public office, such as that of a judge.\n\nMost agree that Jesus is not cancelling the law but showing its full intent. Verse 32 on divorce and verse 48, “you shall be perfect”, are among the most discussed lines."
         }
       ],
       "translations": [
@@ -26,16 +47,28 @@
           "verse": 22,
           "note": "WEB and the KJV include “without a cause”; the ASV does not. The words are missing from some of the oldest Greek manuscripts and present in most later ones, so translations differ depending on which manuscripts they follow.",
           "renderings": [
-            { "translation": "KJV", "text": "whosoever is angry with his brother without a cause shall be in danger of the judgment" },
-            { "translation": "ASV", "text": "every one who is angry with his brother shall be in danger of the judgment" }
+            {
+              "translation": "KJV",
+              "text": "whosoever is angry with his brother without a cause shall be in danger of the judgment"
+            },
+            {
+              "translation": "ASV",
+              "text": "every one who is angry with his brother shall be in danger of the judgment"
+            }
           ]
         },
         {
           "verse": 44,
           "note": "Here too the longer wording, with “bless those who curse you”, is found in most later manuscripts and in the KJV and WEB, while the ASV follows the shorter reading. The same thoughts appear in Luke 6:27 and 28, so nothing of this teaching is lost either way.",
           "renderings": [
-            { "translation": "KJV", "text": "Love your enemies, bless them that curse you, do good to them that hate you" },
-            { "translation": "ASV", "text": "love your enemies, and pray for them that persecute you" }
+            {
+              "translation": "KJV",
+              "text": "Love your enemies, bless them that curse you, do good to them that hate you"
+            },
+            {
+              "translation": "ASV",
+              "text": "love your enemies, and pray for them that persecute you"
+            }
           ]
         }
       ]

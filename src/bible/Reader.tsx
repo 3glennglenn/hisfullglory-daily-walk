@@ -18,7 +18,7 @@ import {
   type KnowledgeRecord,
 } from "./knowledge";
 import { topicGraph } from "../topics/graph";
-import { loadAiExplanations, type AiExplanation } from "./ai";
+import { aiFor, loadAiExplanations, type AiExplanation } from "./ai";
 import { AiExplanationCard } from "./AiExplanation";
 export function Reader({ route }: { route: Route }) {
   const { state, update } = usePlatform();
@@ -97,7 +97,7 @@ export function Reader({ route }: { route: Route }) {
   const reference = `${book.name} ${chapter.number}${selected ? `:${selected}` : ""}`;
   const records = study.book === book.slug ? [...knowledgeRecords, ...study.records] : knowledgeRecords;
   const note = knowledgeFor(book.slug, chapter.number, selected, records);
-  const aiNote = ai.book === book.slug ? ai.records.find((r) => r.chapter === chapter.number) : undefined;
+  const aiNote = ai.book === book.slug ? aiFor(ai.records, book.slug, chapter.number) : undefined;
   const result = searchBible(data, search);
   const tab = route.tab;
   function journal(type: "Bible passage" | "study note") {
@@ -309,8 +309,7 @@ export function Reader({ route }: { route: Route }) {
         {aiNote && (
           <AiExplanationCard
             explanation={aiNote}
-            chapter={chapter}
-            reference={`${book.name} ${chapter.number}`}
+            book={book}
             onVerse={(v) => navigate(passagePath(book.slug, chapter.number, v))}
           />
         )}

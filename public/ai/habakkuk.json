@@ -1,0 +1,26 @@
+{
+  "book": "habakkuk",
+  "records": [
+    {
+      "id": "ai:habakkuk",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Habakkuk is a conversation between a prophet and God. Habakkuk asks why God allows injustice among his people. God answers that he is raising up the Babylonians. Habakkuk protests: how can God use a nation more wicked than the one it punishes?\n\nGod’s reply is that the proud will fall and the righteous will live by faith. The book ends with a prayer that chooses to rejoice in God even if every crop fails."
+        },
+        {
+          "kind": "background",
+          "text": "The book belongs to the late seventh century before Christ, as Babylon was rising to power and shortly before it conquered Judah."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The line about the righteous living by faith (2:4) is quoted three times in the New Testament, in Romans, Galatians and Hebrews, and stood at the center of the Reformation. The book also shows that bringing hard questions to God is itself an act of faith."
+        }
+      ]
+    }
+  ]
+}

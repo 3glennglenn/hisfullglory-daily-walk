@@ -1,0 +1,26 @@
+{
+  "book": "ezekiel",
+  "records": [
+    {
+      "id": "ai:ezekiel",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ezekiel was a priest taken to Babylon with the first exiles. The book opens with an overwhelming vision of God’s glory. In its first half Ezekiel announces, in words and acted signs, that Jerusalem will fall, and he sees the glory of God leave the temple.\n\nAfter the city falls, the message turns to hope: a new heart and a new spirit, a valley of dry bones brought to life, and a final vision of a new temple to which God’s glory returns."
+        },
+        {
+          "kind": "background",
+          "text": "Ezekiel’s visions are dated between 593 and 571 before Christ. He lived among exiles by a canal in Babylonia. The book’s imagery influenced later Jewish writing and the book of Revelation."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Christians differ most over the temple vision of chapters 40 to 48. Some expect a literal temple in the future. Others read it as a picture of God living with his people, fulfilled in Christ, in the church and finally in the new creation described at the end of Revelation. The promise of a new heart in chapter 36 is widely linked with the work of the Holy Spirit."
+        }
+      ]
+    }
+  ]
+}

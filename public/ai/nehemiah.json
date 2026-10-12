@@ -1,0 +1,26 @@
+{
+  "book": "nehemiah",
+  "records": [
+    {
+      "id": "ai:nehemiah",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Nehemiah is the cupbearer of the Persian king. Hearing that Jerusalem still lies in ruins, he prays, asks the king for leave, and goes to rebuild the city walls. Despite threats and mockery the work is finished in fifty-two days.\n\nThe second half turns from walls to people. Ezra reads the law aloud, the people confess and renew the covenant, and Nehemiah deals with injustice and neglect."
+        },
+        {
+          "kind": "background",
+          "text": "Nehemiah arrived in Jerusalem in 445 before Christ, under King Artaxerxes I. Much of the book is written in the first person and reads like a memoir. It continues the story of Ezra."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Readers often turn to Nehemiah for its picture of prayer and practical action going together. The book is honest about its ending: in the last chapter the same problems have returned. Many see in that a pointer to the need for a deeper renewal than any reform can give, which the prophets describe as a new heart."
+        }
+      ]
+    }
+  ]
+}

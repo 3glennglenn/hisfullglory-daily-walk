@@ -1,0 +1,26 @@
+{
+  "book": "jude",
+  "records": [
+    {
+      "id": "ai:jude",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jude is a short and forceful letter. The writer had meant to write about the salvation believers share, but instead urges them to contend for the faith, because people have slipped in who treat God’s grace as permission to live as they please.\n\nHe compares them with examples of judgment from Israel’s history and then tells his readers how to respond: build yourselves up in faith, pray, keep yourselves in God’s love, and show mercy to those who doubt. The letter closes with a well-loved blessing."
+        },
+        {
+          "kind": "background",
+          "text": "The author introduces himself as Jude, brother of James, which would make him also a brother of Jesus. The letter closely resembles 2 Peter 2. It refers to two Jewish writings outside the Old Testament, known as 1 Enoch and the Assumption of Moses."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Jude’s use of writings outside the Bible has long been discussed. Most readers conclude that quoting a source for a point is not the same as treating the whole work as Scripture. The letter’s balance is often noted: firmness about the faith, and mercy toward people."
+        }
+      ]
+    }
+  ]
+}

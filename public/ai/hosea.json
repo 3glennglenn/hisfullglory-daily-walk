@@ -1,0 +1,26 @@
+{
+  "book": "hosea",
+  "records": [
+    {
+      "id": "ai:hosea",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Hosea is told to marry a woman who will be unfaithful to him, and his marriage becomes a picture of God and Israel. The book moves between accusation and tenderness: Israel has chased other gods and trusted foreign powers, and yet God cannot give his people up.\n\nIt ends with a call to return and a promise of healing."
+        },
+        {
+          "kind": "background",
+          "text": "Hosea prophesied in the northern kingdom of Israel in the eighth century before Christ, in its last prosperous and then chaotic decades before Assyria destroyed it."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Readers have asked whether the marriage was a real one or a parable; most take it as real. The book’s picture of God as a husband wronged and as a parent teaching a child to walk (chapter 11) is among the most moving in the prophets. Jesus twice quotes its line that God desires mercy and not sacrifice, and Matthew applies 11:1 to Jesus’ childhood."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "book": "song-of-solomon",
+  "records": [
+    {
+      "id": "ai:song-of-solomon",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The Song of Solomon is a series of love poems. A woman and a man speak to and about each other with longing and delight, in pictures drawn from gardens, vineyards, spices and the countryside. A chorus of friends joins in at points. There is no clear storyline; the poems circle around seeking, finding and belonging."
+        },
+        {
+          "kind": "background",
+          "text": "The first verse links the book with Solomon, which may mean it was written by him, for him or in his tradition. Its date is debated. Love poetry with similar imagery is known from ancient Egypt."
+        },
+        {
+          "kind": "interpretations",
+          "text": "For most of history Jews read the Song as a picture of God’s love for Israel, and Christians as a picture of Christ’s love for the church or for the believer. Most readers today take it first as a celebration of love between a woman and a man, which Scripture calls good. Many hold both together: human love is a gift in its own right and also a reflection of a greater love."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "book": "revelation",
+  "records": [
+    {
+      "id": "ai:revelation",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Revelation records visions given to John, a prisoner on the island of Patmos. It begins with messages to seven churches. John is then shown the throne of God and a Lamb who was slain, and a series of judgments pictured as seals, trumpets and bowls.\n\nThe visions portray the conflict between God and the powers of evil, shown as a dragon, beasts and the city Babylon. They end with the return of Christ, the final judgment, and a new heaven and a new earth where God lives with his people."
+        },
+        {
+          "kind": "background",
+          "text": "The book is usually dated to the mid 90s, under the emperor Domitian; some date it to the 60s under Nero. It belongs to a kind of writing that speaks through symbols and numbers, and it draws constantly on the Old Testament."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Christians read Revelation in four main ways: as mostly about the first century, as a map of church history, as mostly about events still to come, or as a picture of the struggle between good and evil in every age. They also differ on the thousand years of chapter 20. All agree on its core: God and the Lamb win, and the churches are called to stay faithful."
+        }
+      ]
+    }
+  ]
+}

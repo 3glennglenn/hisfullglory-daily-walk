@@ -1,0 +1,26 @@
+{
+  "book": "obadiah",
+  "records": [
+    {
+      "id": "ai:obadiah",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Obadiah is the shortest book of the Old Testament, a single chapter. It announces judgment on Edom, the nation descended from Esau, for standing by and gloating when Jerusalem was destroyed and for handing over its survivors.\n\nIt widens at the end to the day of the LORD on all nations and closes with the words that the kingdom will be the LORD’s."
+        },
+        {
+          "kind": "background",
+          "text": "The setting is most likely the fall of Jerusalem to Babylon in 586 or 587 before Christ. Edom lay south-east of the Dead Sea, and the long rivalry between Edom and Israel is traced back in Genesis to the brothers Esau and Jacob."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The book is a warning against pride and against taking pleasure in another’s disaster, especially a brother’s. Readers take its ending as its center: beyond the fall of any one nation, God’s rule is what remains."
+        }
+      ]
+    }
+  ]
+}

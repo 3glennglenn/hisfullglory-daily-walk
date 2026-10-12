@@ -1,0 +1,26 @@
+{
+  "book": "galatians",
+  "records": [
+    {
+      "id": "ai:galatians",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Galatians is an urgent letter. Teachers had told the non-Jewish believers in Galatia that they must be circumcised and keep the law of Moses. Paul answers that this would abandon the good news itself: people are made right with God through faith in Christ, not by works of the law.\n\nHe appeals to his own story, to Abraham who believed before the law was given, and to the Galatians’ experience of the Spirit. Freedom in Christ is not license; it shows itself in love and in the fruit of the Spirit."
+        },
+        {
+          "kind": "background",
+          "text": "Galatia was a region in what is now Turkey. Whether Paul wrote to churches in its north or its south is debated, and with it the date, between about 48 and 55. It may be his earliest letter."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Galatians was central to the Reformation. In recent decades scholars have debated what Paul means by works of the law: any effort to earn God’s favor, or the particular marks that set Jews apart, such as circumcision and food laws. Readers also compare Paul’s teaching here with James 2 and generally find the two address different errors."
+        }
+      ]
+    }
+  ]
+}

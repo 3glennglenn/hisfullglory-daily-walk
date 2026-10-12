@@ -1,0 +1,26 @@
+{
+  "book": "1-kings",
+  "records": [
+    {
+      "id": "ai:1-kings",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "1 Kings begins with Solomon. He is given wisdom, builds the temple in Jerusalem and rules in great splendour, but in later life he turns to other gods. After his death the kingdom splits in two: Israel in the north and Judah in the south.\n\nThe rest of the book judges each king by one measure, faithfulness to the LORD. Its last chapters are dominated by the prophet Elijah and his confrontation with King Ahab and the prophets of Baal on Mount Carmel."
+        },
+        {
+          "kind": "background",
+          "text": "1 and 2 Kings were originally one work. 1 Kings covers roughly 970 to 850 before Christ. The writer refers to royal records he used as sources, and the work was probably completed during the exile in Babylon."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Kings is history told to answer a question: why did the kingdoms fall? Its answer is that kings and people abandoned the covenant, though God kept sending prophets. Elijah becomes a major figure in later hope. The New Testament connects him with John the Baptist, and he appears with Moses at the transfiguration of Jesus."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "book": "2-corinthians",
+  "records": [
+    {
+      "id": "ai:2-corinthians",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "2 Corinthians is the most personal of Paul’s letters. After a painful conflict with the church in Corinth, he writes to explain himself and to rebuild trust. He describes the comfort God gives in suffering and the ministry of reconciliation, and compares the good news to treasure carried in jars of clay.\n\nChapters 8 and 9 encourage generous giving for poor believers in Jerusalem. In the last chapters Paul answers rivals who mock his weakness, and reports the word he was given: God’s power is made perfect in weakness."
+        },
+        {
+          "kind": "background",
+          "text": "Paul wrote from Macedonia around the year 55 or 56, some months after 1 Corinthians. The sharp change of tone at chapter 10 has led some scholars to think the book joins more than one letter."
+        },
+        {
+          "kind": "interpretations",
+          "text": "What Paul’s thorn in the flesh was (12:7) is unknown; illness, opposition and temptation have all been suggested. The chapters on giving are widely used to teach generosity, and readers note that Paul appeals to grace and willingness and sets no fixed amount."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "book": "titus",
+  "records": [
+    {
+      "id": "ai:titus",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Titus is a short letter to a coworker Paul left on the island of Crete to finish organizing the churches. Titus is to appoint elders of proven character, correct teachers who cause trouble, and teach each group in the church how to live.\n\nTwice the letter grounds this in what God has done: his grace has appeared, bringing salvation and teaching people to live well, and he saved us not because of what we had done but because of his mercy."
+        },
+        {
+          "kind": "background",
+          "text": "Titus was a Greek and a trusted helper of Paul, mentioned in Galatians and 2 Corinthians. The letter is one of the three Pastoral Letters and shares their questions of date and authorship."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The letter shows the link between belief and conduct: sound teaching produces a good life. Its instructions to different groups, including slaves, are read with the same care as the household passages in Ephesians and Colossians."
+        }
+      ]
+    }
+  ]
+}

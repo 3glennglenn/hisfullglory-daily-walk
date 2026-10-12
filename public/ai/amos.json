@@ -1,0 +1,26 @@
+{
+  "book": "amos",
+  "records": [
+    {
+      "id": "ai:amos",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Amos is sent from Judah to the northern kingdom at the height of its wealth. He announces judgment on the surrounding nations and then, to his hearers’ shock, on Israel itself: the rich crush the poor, the courts are corrupt, and worship goes on as if nothing were wrong.\n\nA series of visions shows that the end is near. The book’s last verses promise that the fallen house of David will be raised again."
+        },
+        {
+          "kind": "background",
+          "text": "Amos was a herdsman and tender of fig trees from Tekoa, south of Jerusalem. He spoke around 760 before Christ, a generation before Assyria ended the northern kingdom."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Amos is the prophet most often quoted on justice; his call for justice to roll on like a river (5:24) was made famous again in the twentieth century. He insists that worship without justice is unacceptable to God. In Acts 15 James quotes the closing promise to show that God always meant to include the nations."
+        }
+      ]
+    }
+  ]
+}

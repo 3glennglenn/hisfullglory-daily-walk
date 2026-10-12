@@ -6,6 +6,7 @@ import { parseAiFile, type AiExplanation } from "../../../src/bible/ai.ts";
 import type { BibleData } from "../../../src/bible/provider.ts";
 
 export {
+  aiFor,
   blocks,
   parseAiFile,
   publicDomainTranslations,

@@ -3,12 +3,12 @@
 // generated at runtime. Shared by the app and the website. Rules: docs/AI_EXPLANATIONS.md.
 import type { BibleData } from "./provider.ts";
 
+export type AiScope = "book" | "chapter";
 export const sectionTitles = {
-  summary: "What this chapter says",
-  background: "Background",
-  interpretations: "How Christians read it",
+  chapter: { summary: "What this chapter says", background: "Background", interpretations: "How Christians read it" },
+  book: { summary: "What this book is about", background: "Background", interpretations: "How Christians read it" },
 } as const;
-export type SectionKind = keyof typeof sectionTitles;
+export type SectionKind = keyof typeof sectionTitles.chapter;
 
 // Only public-domain translations may be quoted beside the WEB.
 export const publicDomainTranslations = {
@@ -23,7 +23,7 @@ export interface TranslationNote {
   renderings: { translation: TranslationCode; text: string }[];
 }
 export interface AiExplanation {
-  id: string; book: string; chapter: number; model: string; written: string;
+  id: string; book: string; scope: AiScope; chapter?: number; model: string; written: string;
   review: "ai draft" | "reviewed";
   sections: AiSection[]; translations: TranslationNote[];
 }
@@ -32,7 +32,8 @@ const text = (value: unknown, min: number, max: number): value is string =>
   typeof value === "string" && value.trim().length >= min && value.length <= max;
 
 /**
- * Validates one AI file against the Bible it explains. Anything invalid throws, so a
+ * Validates one AI file against the Bible it explains. A file holds at most one record for
+ * the book as a whole ("scope": "book") and one per chapter. Anything invalid throws, so a
  * faulty file is rejected whole instead of showing an unchecked explanation.
  */
 export function parseAiFile(raw: unknown, book: string, bible: BibleData): AiExplanation[] {
@@ -40,14 +41,16 @@ export function parseAiFile(raw: unknown, book: string, bible: BibleData): AiExp
   if (!file || typeof file !== "object" || file.book !== book) throw new Error(`AI file must declare book "${book}"`);
   const chapters = bible.books.find((b) => b.slug === book)?.chapters;
   if (!chapters) throw new Error(`Unknown book "${book}"`);
-  if (!Array.isArray(file.records) || !file.records.length || file.records.length > chapters.length)
+  if (!Array.isArray(file.records) || !file.records.length || file.records.length > chapters.length + 1)
     throw new Error(`${book}: AI file needs records`);
-  const seen = new Set<number>();
+  const seen = new Set<number | "book">();
   return file.records.map((r: Record<string, unknown>) => {
-    const chapter = chapters.find((c) => c.number === r?.chapter);
-    const where = `ai:${book}/${String(r?.chapter)}`;
-    if (!chapter || seen.has(chapter.number)) throw new Error(`${where}: chapter must exist once`);
-    seen.add(chapter.number);
+    const scope: AiScope = r?.scope === "book" ? "book" : "chapter";
+    const chapter = scope === "chapter" ? chapters.find((c) => c.number === r?.chapter) : undefined;
+    const where = scope === "book" ? `ai:${book}` : `ai:${book}/${String(r?.chapter)}`;
+    if (scope === "book" ? r.chapter !== undefined || seen.has("book") : !chapter || seen.has(chapter.number))
+      throw new Error(scope === "book" ? `${where}: one book record, without a chapter` : `${where}: chapter must exist once`);
+    seen.add(chapter?.number ?? "book");
     if (r.id !== where) throw new Error(`${where}: id must be "${where}"`);
     if (!text(r.model, 3, 80)) throw new Error(`${where}: model must name the AI model`);
     if (typeof r.written !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(r.written)) throw new Error(`${where}: written must be a date`);
@@ -56,32 +59,41 @@ export function parseAiFile(raw: unknown, book: string, bible: BibleData): AiExp
     const sections = r.sections as AiSection[];
     if (!Array.isArray(sections) || !sections.length || sections.length > 3) throw new Error(`${where}: one to three sections`);
     const kinds = new Set(sections.map((s) => s?.kind));
-    if (kinds.size !== sections.length || [...kinds].some((k) => !(k in sectionTitles)))
+    if (kinds.size !== sections.length || [...kinds].some((k) => !(k in sectionTitles.chapter)))
       throw new Error(`${where}: section kinds must be known and used once`);
     if (sections.some((s) => !text(s.text, 80, 3000))) throw new Error(`${where}: section length`);
 
     const translations = (r.translations ?? []) as TranslationNote[];
-    if (!Array.isArray(translations) || translations.length > 6) throw new Error(`${where}: at most six translation notes`);
+    if (!Array.isArray(translations) || translations.length > (chapter ? 6 : 0))
+      throw new Error(`${where}: at most six translation notes, and only on a chapter`);
     for (const t of translations) {
-      if (!chapter.verses.some((v) => v.number === t?.verse && !v.omitted)) throw new Error(`${where}: translation note needs an existing verse`);
+      if (!chapter!.verses.some((v) => v.number === t?.verse && !v.omitted)) throw new Error(`${where}: translation note needs an existing verse`);
       if (!text(t.note, 40, 800)) throw new Error(`${where}: translation note length`);
       if (!Array.isArray(t.renderings) || !t.renderings.length || t.renderings.length > 3 ||
         t.renderings.some((x) => !(x?.translation in publicDomainTranslations) || !text(x.text, 2, 300)))
         throw new Error(`${where}: renderings must come from public-domain translations`);
     }
 
-    // Curly double quotes are reserved for the WEB text of this chapter.
-    const web = chapter.verses.map((v) => v.text).join(" ");
+    // Curly double quotes are reserved for the WEB text being explained: the chapter, or for
+    // a book record any chapter of that book.
+    const web = (chapter ? [chapter] : chapters).flatMap((c) => c.verses.map((v) => v.text)).join(" ");
     for (const prose of [...sections.map((s) => s.text), ...translations.map((t) => t.note)])
       for (const [, quote] of prose.matchAll(/“([^”]+)”/g))
-        if (!web.includes(quote)) throw new Error(`${where}: “${quote}” is not in the WEB text of this chapter`);
+        if (!web.includes(quote)) throw new Error(`${where}: “${quote}” is not in the WEB text of this ${scope}`);
 
     return {
-      id: where, book, chapter: chapter.number, model: r.model as string, written: r.written, review: r.review,
+      id: where, book, scope, ...(chapter ? { chapter: chapter.number } : {}),
+      model: r.model as string, written: r.written, review: r.review,
       sections: sections.map((s) => ({ kind: s.kind, text: s.text })),
       translations: translations.map((t) => ({ verse: t.verse, note: t.note, renderings: t.renderings.map((x) => ({ translation: x.translation, text: x.text })) })),
     };
   });
+}
+
+/** The explanation to show with a chapter: its own, else the one for the whole book. */
+export function aiFor(records: readonly AiExplanation[], book: string, chapter: number): AiExplanation | undefined {
+  const own = records.filter((r) => r.book === book);
+  return own.find((r) => r.chapter === chapter) ?? own.find((r) => r.scope === "book");
 }
 
 /** Splits explanation text into paragraphs and simple lists ("- " lines). */

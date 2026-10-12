@@ -1,0 +1,26 @@
+{
+  "book": "mark",
+  "records": [
+    {
+      "id": "ai:mark",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Mark is the shortest Gospel and moves quickly. It shows Jesus acting with authority: healing, driving out unclean spirits, calming a storm, forgiving sins. Halfway through, Peter recognizes him as the Messiah, and from that point Jesus teaches that he must suffer, die and rise.\n\nThe disciples repeatedly fail to understand. More than a third of the book is given to the last week in Jerusalem, and a Roman officer at the cross is the one who says that this man was the Son of God."
+        },
+        {
+          "kind": "background",
+          "text": "Early tradition says the author was John Mark, writing down the preaching of Peter, probably in Rome. The book is commonly dated to the 60s or around the year 70, and most scholars think it was the first Gospel written."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The oldest copies of Mark end at 16:8, with the women leaving the empty tomb afraid. Verses 9 to 20 appear in later copies, and most Bibles print them with a note. Whether Mark meant to end so abruptly is debated. The book’s center is clear: who Jesus is cannot be understood apart from the cross."
+        }
+      ]
+    }
+  ]
+}

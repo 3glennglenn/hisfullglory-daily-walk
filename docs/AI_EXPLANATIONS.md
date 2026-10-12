@@ -2,9 +2,11 @@
 
 Decided by the founder on 2026-10-12: the app and the website may show an explanation
 written by an AI model, as a separate and clearly labelled layer. It lets readers get
-started on chapters that have no sourced note yet. Status: the founder approved the pilot
-of five chapters on 2026-10-12 and asked for every chapter, in the app and on the website.
-Both now show the layer; the other 1,184 chapters still have to be written.
+started on chapters that have no sourced note yet. Status on 2026-10-12: the founder
+approved the pilot and the app and the website both show the layer. Every one of the 66
+books has an explanation of the book as a whole, which is shown on each of its chapters.
+Five chapters have their own, fuller explanation. The founder chose this route to keep the
+cost down; chapter explanations follow in daily portions (see "Plan for the chapters").
 
 This changes two earlier rules on purpose. "AI Study" was deferred, and unsourced context
 was not published. Both now read: AI explanations are allowed as their own layer; sourced
@@ -21,10 +23,20 @@ notes (`docs/STUDY_NOTES.md`) stay exactly as they were and are never written by
 
 ## Files
 
-`public/ai/<book-slug>.json`, one per WEB book, with one record per chapter:
+`public/ai/<book-slug>.json`, one per WEB book. A file holds at most one record for the
+book as a whole and one per chapter. A chapter shows its own record if it has one, and
+otherwise the book record (`aiFor` in `src/bible/ai.ts`).
 
 ```json
 { "book": "john", "records": [{
+  "id": "ai:john", "scope": "book",
+  "model": "Claude Opus 5.5", "written": "2026-10-12", "review": "ai draft",
+  "sections": [
+    { "kind": "summary", "text": "What the book is about." },
+    { "kind": "background", "text": "..." },
+    { "kind": "interpretations", "text": "..." }
+  ]
+}, {
   "id": "ai:john/3", "chapter": 3,
   "model": "Claude Opus 5.5", "written": "2026-10-12", "review": "ai draft",
   "sections": [
@@ -46,9 +58,11 @@ installable cache (`vite.config.ts`).
 
 ## Rules for the text
 
-- Curly double quotes are reserved for the WEB text of the chapter being explained. Every
-  such quotation must occur in that chapter word for word; the validator enforces it. Refer
-  to other passages by reference, without quoting them.
+- Curly double quotes are reserved for the WEB text being explained: the chapter, or for a
+  book record any chapter of that book. Every such quotation must occur there word for
+  word; the validator enforces it. Refer to other passages by reference, without quoting
+  them. A book record carries no translation notes.
+- American spelling, for the United States audience.
 - Compare only with public-domain translations. Allowed today: KJV and ASV (1901). Never
   quote or paraphrase the wording of a licensed translation (NIV, ESV, NLT, NBV21 and
   others). Renderings are copied from a public-domain source, not typed from memory, and
@@ -78,11 +92,20 @@ warning, the sections, the translation comparison and a "Report a mistake" link.
 label, the warning, that the text is shown as written and that it never appears inside the
 sourced note.
 
+## Plan for the chapters
+
+Agreed with the founder on 2026-10-12, to keep the cost down:
+
+- Chapters get a shorter record than the pilot: `summary` and `background` only, no
+  `interpretations` and no translation notes. The five pilot chapters stay as they are.
+- They are written in daily portions by a lighter model, starting with the New Testament
+  in Bible order, then the Old Testament.
+- Each portion must pass `tests/ai.test.ts` before it is committed, and the `model` field
+  must name the model that actually wrote it.
+
 ## Not done yet
 
-- Only five chapters exist: Genesis 1, Psalm 23, Matthew 5, John 3 and Romans 8. The other
-  1,184 are approved in principle; how they are produced (and at what cost) is still to be
-  agreed with the founder.
-- The app change is on branch `website` and is not in production. The Reader card has not
-  been checked in a browser on a real device.
+- 1,184 chapters have no explanation of their own yet and show their book's explanation.
+- The app change is on branch `website` and is not in production. The Reader card was
+  viewed in a local build at phone width, not on a real device.
 - No theological reader has reviewed any explanation.

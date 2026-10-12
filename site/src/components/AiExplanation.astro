@@ -1,5 +1,6 @@
 ---
 // The AI layer: always its own block, always labelled, never inside the sourced note.
+// Shows a chapter's own explanation, or the explanation of the book as a whole.
 import { shopUrl } from "../config";
 import {
   blocks,
@@ -15,7 +16,16 @@ interface Props {
 }
 
 const { explanation, book } = Astro.props;
-const verses = book.chapters[explanation.chapter - 1].verses;
+const verses = explanation.chapter ? book.chapters[explanation.chapter - 1].verses : [];
+const subject =
+  explanation.scope === "book"
+    ? `About ${book.name} as a whole`
+    : `${book.name} ${explanation.chapter}`;
+const label = `${subject} · Written by an AI model · ${
+  explanation.review === "reviewed"
+    ? "Reviewed by a theological reader"
+    : "Not reviewed by a theological reader"
+}`;
 const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString("en-GB", {
   day: "numeric",
   month: "long",
@@ -26,13 +36,7 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
 
 <section class="card ai" data-layer="ai">
   <h2>AI explanation <span class="pill">AI</span></h2>
-  <p class="eyebrow">
-    {
-      explanation.review === "reviewed"
-        ? "Written by an AI model · Reviewed by a theological reader"
-        : "Written by an AI model · Not reviewed by a theological reader"
-    }
-  </p>
+  <p class="eyebrow">{label}</p>
   <p class="small muted">
     This explanation was written by an AI model to help you get started. It
     names no sources and can contain mistakes. Scripture comes first, and
@@ -42,7 +46,7 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
   {
     explanation.sections.map((section) => (
       <>
-        <h3>{sectionTitles[section.kind]}</h3>
+        <h3>{sectionTitles[explanation.scope][section.kind]}</h3>
         {blocks(section.text).map((block) =>
           "list" in block ? (
             <ul>

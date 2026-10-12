@@ -1,0 +1,26 @@
+{
+  "book": "judges",
+  "records": [
+    {
+      "id": "ai:judges",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Judges covers the time between Joshua and the first kings. It follows a repeated cycle: Israel turns from God, falls under an oppressor, cries out, and is rescued by a leader God raises up, only to turn away again.\n\nThe best known of these leaders are Deborah, Gideon, Jephthah and Samson. The cycle spirals downward, and the last chapters (17 to 21) are among the darkest in the Bible. The book’s closing comment is that there was no king and everyone did what seemed right to them."
+        },
+        {
+          "kind": "background",
+          "text": "The judges were tribal leaders and deliverers more than judges in a courtroom. The period is commonly placed between about 1200 and 1050 before Christ. Israel at this time was a loose group of tribes without central government."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Most readers take the book as describing what happened, not recommending it. The violence, including terrible violence against women, is told as evidence of how far the people had fallen. Hebrews 11 still names several judges as examples of faith, which shows God working through deeply flawed people. The book leaves the reader looking for a better leader than any it describes."
+        }
+      ]
+    }
+  ]
+}

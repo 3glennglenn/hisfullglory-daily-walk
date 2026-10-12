@@ -5,6 +5,7 @@
 - Keep AI files out of the installable cache and out of the SPA rewrite; an offline or invalid file shows no card.
 - Update the two shop prices that changed to $49.99 on 2026-10-12.
 - Tests: `tests/ai.test.ts`. The browser check was not run for this change.
+- Add an AI explanation of each of the 66 books as a whole (`"scope": "book"`), shown with every chapter that has no explanation of its own, in the Reader and on the website's book and chapter pages.
 
 ## Final independent release QA — local, uncommitted (2026-10-08)
 - Reproduced the prior 34-test/307-SQL/22-browser baseline; fixed periodic revalidation interrupting slow Circle loads, malformed RPC output crashing rendering, and invalid HTML v-mode input patterns.

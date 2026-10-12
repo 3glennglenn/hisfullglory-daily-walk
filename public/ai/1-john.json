@@ -1,0 +1,26 @@
+{
+  "book": "1-john",
+  "records": [
+    {
+      "id": "ai:1-john",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "1 John is written to reassure a community shaken by people who have left it. It circles around three marks of real faith: believing that Jesus is the Christ come in the flesh, obeying God’s commands, and loving one another.\n\nIt declares that God is light and that God is love, and that love is known by this: that he sent his Son. The letter is written, it says, so that those who believe may know they have eternal life."
+        },
+        {
+          "kind": "background",
+          "text": "The letter names no author. Tradition links it, and the two short letters that follow, with the apostle John and the church in Ephesus near the end of the first century. Its language is very close to that of John’s Gospel."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The letter says both that anyone who claims to be without sin is deceived and that those born of God do not go on sinning. Readers generally understand the second as describing a settled way of life, not single failures. The King James Version includes a longer sentence about three heavenly witnesses at 5:7 that is absent from the early Greek copies and from most Bibles today."
+        }
+      ]
+    }
+  ]
+}

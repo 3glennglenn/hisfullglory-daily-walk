@@ -1,0 +1,26 @@
+{
+  "book": "jonah",
+  "records": [
+    {
+      "id": "ai:jonah",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jonah is told to preach to Nineveh, the capital of Israel’s enemy Assyria, and runs the other way. A storm, a great fish and a prayer bring him back. He delivers his message, the city repents, and God spares it.\n\nJonah is furious. The book ends with God’s question to him: should I not care about this great city?"
+        },
+        {
+          "kind": "background",
+          "text": "A prophet named Jonah son of Amittai is mentioned in 2 Kings 14:25, in the eighth century before Christ. When the book about him was written is debated. Unlike other prophetic books it is almost all story and contains only one short line of preaching."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Christians differ on whether the book is a historical account or a parable; both views are held by readers who take Scripture seriously. Jesus points to Jonah’s three days in the fish as a sign of his own death and resurrection. The book’s message is not in dispute: God’s mercy reaches people his own servants would prefer to see judged."
+        }
+      ]
+    }
+  ]
+}

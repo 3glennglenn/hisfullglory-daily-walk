@@ -1,0 +1,26 @@
+{
+  "book": "haggai",
+  "records": [
+    {
+      "id": "ai:haggai",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Haggai speaks to the people who have returned from exile and have left the temple in ruins while building their own houses. In four short messages he urges them to rebuild, promises that God is with them, and says that the glory of this house will be greater than the first. The people listen, and the work begins again."
+        },
+        {
+          "kind": "background",
+          "text": "The four messages are dated precisely to a few months in the year 520 before Christ, under the Persian king Darius. The leaders named are the governor Zerubbabel, a descendant of David, and the high priest Joshua. The events are also told in Ezra 5 and 6."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Haggai connects the people’s priorities with their well-being, without turning that into a formula. Christians read the promise of greater glory in the light of Christ, who taught in the rebuilt temple and spoke of his own body as the temple."
+        }
+      ]
+    }
+  ]
+}

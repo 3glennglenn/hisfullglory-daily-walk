@@ -1,0 +1,26 @@
+{
+  "book": "1-corinthians",
+  "records": [
+    {
+      "id": "ai:1-corinthians",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "1 Corinthians answers reports and questions from a gifted and troubled church. Paul deals with rival groups, a case of sexual immorality, lawsuits between believers, marriage and singleness, food offered to idols, behavior in worship and abuses at the Lord’s Supper.\n\nIn chapters 12 to 14 he discusses spiritual gifts, with the chapter on love at the center. Chapter 15 is the Bible’s longest treatment of the resurrection, of Christ and of those who belong to him."
+        },
+        {
+          "kind": "background",
+          "text": "Corinth was a wealthy port city in Greece, and Paul had started the church there. He wrote this letter from Ephesus around the year 54 or 55."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Christians differ on whether gifts such as tongues and prophecy continue today. The passages on women in worship (chapters 11 and 14) are read differently: some see lasting instructions, others guidance for a particular situation. Most readers agree that the instruction about head coverings reflects the customs of the time, while differing on the principle behind it."
+        }
+      ]
+    }
+  ]
+}

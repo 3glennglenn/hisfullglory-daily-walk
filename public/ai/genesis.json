@@ -2,6 +2,27 @@
   "book": "genesis",
   "records": [
     {
+      "id": "ai:genesis",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Genesis is the book of beginnings. Chapters 1 to 11 tell of creation, the first sin, the flood and the tower of Babel. From chapter 12 the story narrows to one family: Abraham and Sarah, Isaac, Jacob and his twelve sons, and Joseph in Egypt.\n\nThe thread through the whole book is God’s promise to Abraham of land, descendants and blessing for all nations. The book ends with the family safe in Egypt and the promise still open."
+        },
+        {
+          "kind": "background",
+          "text": "Genesis is the first of the five books of the Law, which Jewish and Christian tradition link with Moses. Many scholars think these books reached their final form over a long period, drawing on older material. The book itself names no author. Its stories are set in Mesopotamia, Canaan and Egypt, in a world of herders, city states and great empires."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Christians read Genesis as the foundation for the rest of Scripture: God as creator, people made in his image, the entrance of sin, and the promise that the New Testament sees fulfilled in Christ. They differ on how chapters 1 to 11 relate to history and science. Some read them as a plain historical account, some as history told in a highly shaped and symbolic way, and some chiefly as teaching about God and humanity."
+        }
+      ]
+    },
+    {
       "id": "ai:genesis/1",
       "chapter": 1,
       "model": "Claude Opus 5.5",
@@ -26,16 +47,28 @@
           "verse": 2,
           "note": "WEB says God’s Spirit “was hovering”; the older translations say it moved. The Hebrew verb is rare. It is also used of a bird over its young in Deuteronomy 32:11, which is why many later translations choose a word like hover.",
           "renderings": [
-            { "translation": "KJV", "text": "the Spirit of God moved upon the face of the waters" },
-            { "translation": "ASV", "text": "the Spirit of God moved upon the face of the waters" }
+            {
+              "translation": "KJV",
+              "text": "the Spirit of God moved upon the face of the waters"
+            },
+            {
+              "translation": "ASV",
+              "text": "the Spirit of God moved upon the face of the waters"
+            }
           ]
         },
         {
           "verse": 6,
           "note": "WEB uses “expanse” where the older translations use a word that suggests something solid. The Hebrew word comes from a verb for beating or spreading out, and translators differ on whether to picture a spread-out space or a firm dome.",
           "renderings": [
-            { "translation": "KJV", "text": "Let there be a firmament in the midst of the waters" },
-            { "translation": "ASV", "text": "Let there be a firmament in the midst of the waters" }
+            {
+              "translation": "KJV",
+              "text": "Let there be a firmament in the midst of the waters"
+            },
+            {
+              "translation": "ASV",
+              "text": "Let there be a firmament in the midst of the waters"
+            }
           ]
         }
       ]

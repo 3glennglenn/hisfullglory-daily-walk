@@ -1,0 +1,26 @@
+{
+  "book": "ecclesiastes",
+  "records": [
+    {
+      "id": "ai:ecclesiastes",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ecclesiastes records the reflections of a speaker called the Teacher. He examines work, pleasure, wealth and wisdom and finds that none of them lasts or satisfies. His repeated word for this is often translated vanity; it pictures a breath or a vapour.\n\nAlongside that hard look, the book keeps returning to simple gifts: food, work and companionship received from God’s hand. It closes with a call to fear God and keep his commandments."
+        },
+        {
+          "kind": "background",
+          "text": "The Teacher is introduced as a son of David and king in Jerusalem, and tradition identifies him with Solomon. Many scholars think the Hebrew of the book points to a later date. A narrator frames the Teacher’s words at the beginning and the end."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Readers differ on the Teacher’s tone. Some hear a skeptic whose view the closing verses correct. Others hear a realist who shows honestly what life looks like when it is measured only by what can be seen. Christians often read the book as clearing the ground: it exposes what cannot bear the weight of a life, and so points beyond itself."
+        }
+      ]
+    }
+  ]
+}

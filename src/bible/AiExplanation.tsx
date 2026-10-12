@@ -1,17 +1,20 @@
 import { config } from "../config";
 import { blocks, publicDomainTranslations, sectionTitles, type AiExplanation } from "./ai";
-import type { Chapter } from "./provider";
+import type { BibleBook } from "./provider";
 
 // The AI layer is always its own labelled card, never part of the sourced note.
-export function AiExplanationCard({ explanation, chapter, reference, onVerse }: {
-  explanation: AiExplanation; chapter: Chapter; reference: string; onVerse: (verse: number) => void;
+export function AiExplanationCard({ explanation, book, onVerse }: {
+  explanation: AiExplanation; book: BibleBook; onVerse: (verse: number) => void;
 }) {
   const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+  const subject = explanation.chapter ? `${book.name} ${explanation.chapter}` : book.name;
+  const verses = explanation.chapter ? book.chapters[explanation.chapter - 1].verses : [];
   return (
     <article className="card ai-explanation" data-layer="ai">
       <h3>AI explanation <span className="ai-badge">AI</span></h3>
       <p className="eyebrow">
-        Written by an AI model · {explanation.review === "reviewed" ? "Reviewed by a theological reader" : "Not reviewed by a theological reader"}
+        {explanation.scope === "book" ? `About ${book.name} as a whole` : subject} · Written by an AI model ·{" "}
+        {explanation.review === "reviewed" ? "Reviewed by a theological reader" : "Not reviewed by a theological reader"}
       </p>
       <p>
         <small>
@@ -21,7 +24,7 @@ export function AiExplanationCard({ explanation, chapter, reference, onVerse }: 
       </p>
       {explanation.sections.map((section) => (
         <section key={section.kind}>
-          <h4>{sectionTitles[section.kind]}</h4>
+          <h4>{sectionTitles[explanation.scope][section.kind]}</h4>
           {blocks(section.text).map((block, i) =>
             "list" in block ? (
               <ul key={i}>{block.list.map((item) => <li key={item}>{item}</li>)}</ul>
@@ -40,7 +43,7 @@ export function AiExplanationCard({ explanation, chapter, reference, onVerse }: 
               <button className="text-button" onClick={() => onVerse(entry.verse)}>Verse {entry.verse}</button>
               <dl>
                 <dt>World English Bible</dt>
-                <dd>{chapter.verses.find((v) => v.number === entry.verse)?.text}</dd>
+                <dd>{verses.find((v) => v.number === entry.verse)?.text}</dd>
                 {entry.renderings.map((rendering) => (
                   <div key={rendering.translation}>
                     <dt>{publicDomainTranslations[rendering.translation]}</dt>
@@ -63,7 +66,7 @@ export function AiExplanationCard({ explanation, chapter, reference, onVerse }: 
           </small>
         </p>
         <p>
-          <a href={`mailto:${config.supportEmail}?subject=${encodeURIComponent(`Mistake in the AI explanation of ${reference}`)}`}>
+          <a href={`mailto:${config.supportEmail}?subject=${encodeURIComponent(`Mistake in the AI explanation of ${subject}`)}`}>
             Report a mistake
           </a>
         </p>

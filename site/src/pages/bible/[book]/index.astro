@@ -3,7 +3,9 @@ import Breadcrumb from "../../../components/Breadcrumb.astro";
 import ContextNote from "../../../components/ContextNote.astro";
 import { appUrl } from "../../../config";
 import Base from "../../../layouts/Base.astro";
+import AiExplanation from "../../../components/AiExplanation.astro";
 import {
+  bookAiExplanation,
   bookNote,
   chapterTitle,
   library,
@@ -25,6 +27,7 @@ interface Props {
 
 const { book, index } = Astro.props;
 const note = bookNote(book.slug);
+const ai = bookAiExplanation(book.slug);
 const count = book.chapters.length;
 const chapters = count === 1 ? "1 chapter" : `${count} chapters`;
 ---
@@ -50,6 +53,14 @@ const chapters = count === 1 ? "1 chapter" : `${count} chapters`;
         <ContextNote note={note} subject={book.name} />
       </div>
 
+      {
+        ai && (
+          <div class="block ai-block">
+            <AiExplanation explanation={ai} book={book} />
+          </div>
+        )
+      }
+
       <h2>Chapters</h2>
       <ul class="chapters">
         {
@@ -72,6 +83,9 @@ const chapters = count === 1 ? "1 chapter" : `${count} chapters`;
 <style>
   .block {
     margin-top: 36px;
+  }
+  .ai-block {
+    margin-top: 18px;
   }
   h2 {
     margin: 40px 0 14px;

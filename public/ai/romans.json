@@ -2,6 +2,27 @@
   "book": "romans",
   "records": [
     {
+      "id": "ai:romans",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Romans is Paul’s fullest explanation of the good news. He argues that all people, Jews and non-Jews alike, have sinned, and that God makes people right with himself through faith in Jesus Christ and not by keeping the law (chapters 1 to 4). He then describes the new life this brings: peace with God, freedom from sin’s rule, and life in the Spirit (5 to 8).\n\nChapters 9 to 11 wrestle with the place of Israel. The last chapters turn to daily life: love, humility, and unity between groups with different scruples."
+        },
+        {
+          "kind": "background",
+          "text": "Paul wrote Romans around the year 57, probably from Corinth, to a church he had not founded or visited. He hoped to visit Rome on his way to Spain."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Romans has shaped Christian thought more than any other letter. Its teaching on being made right with God stood at the center of the Reformation, and Catholics and Protestants have explained it differently. Chapter 9 is central to the debate on predestination. Chapter 13 on governing authorities is read with care, since it has been misused to demand obedience to unjust rule."
+        }
+      ]
+    },
+    {
       "id": "ai:romans/8",
       "chapter": 8,
       "model": "Claude Opus 5.5",
@@ -26,16 +47,28 @@
           "verse": 1,
           "note": "WEB and the KJV continue with “who don’t walk according to the flesh, but according to the Spirit”; the ASV ends the verse at Christ Jesus. The longer wording is missing from the oldest manuscripts at this point. The same words stand in verse 4 in all of them.",
           "renderings": [
-            { "translation": "KJV", "text": "who walk not after the flesh, but after the Spirit" },
-            { "translation": "ASV", "text": "There is therefore now no condemnation to them that are in Christ Jesus." }
+            {
+              "translation": "KJV",
+              "text": "who walk not after the flesh, but after the Spirit"
+            },
+            {
+              "translation": "ASV",
+              "text": "There is therefore now no condemnation to them that are in Christ Jesus."
+            }
           ]
         },
         {
           "verse": 16,
           "note": "The Greek word for Spirit is grammatically neuter, and the KJV follows the grammar. The ASV and WEB say “himself”, because the passage speaks of the Spirit as one who testifies and prays.",
           "renderings": [
-            { "translation": "KJV", "text": "The Spirit itself beareth witness with our spirit" },
-            { "translation": "ASV", "text": "The Spirit himself beareth witness with our spirit" }
+            {
+              "translation": "KJV",
+              "text": "The Spirit itself beareth witness with our spirit"
+            },
+            {
+              "translation": "ASV",
+              "text": "The Spirit himself beareth witness with our spirit"
+            }
           ]
         }
       ]

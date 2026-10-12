@@ -1,0 +1,26 @@
+{
+  "book": "2-thessalonians",
+  "records": [
+    {
+      "id": "ai:2-thessalonians",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "2 Thessalonians follows up the first letter. The church is still suffering, and some have been shaken by a claim that the day of the Lord has already come. Paul says that certain things must happen first, including the appearing of a figure he calls the man of lawlessness.\n\nHe also addresses members who have stopped working and live off others, telling them to earn their own bread."
+        },
+        {
+          "kind": "background",
+          "text": "The letter presents itself as written by Paul with Silvanus and Timothy, soon after 1 Thessalonians. Some scholars think it was written later in Paul’s name, pointing to differences in tone."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Who or what the man of lawlessness is, and what holds him back, has been explained in many ways: a Roman emperor, a future individual, or a recurring pattern of opposition to God. Paul refers to teaching he gave in person, which we do not have, so caution is wise."
+        }
+      ]
+    }
+  ]
+}

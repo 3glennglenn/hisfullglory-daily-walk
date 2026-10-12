@@ -1,0 +1,26 @@
+{
+  "book": "2-samuel",
+  "records": [
+    {
+      "id": "ai:2-samuel",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "2 Samuel is the story of David as king. He is crowned first over Judah and then over all Israel, takes Jerusalem as his capital and brings the ark there. In chapter 7 God promises him a dynasty that will last.\n\nThe turning point is David’s sin with Bathsheba and the killing of her husband Uriah. The prophet Nathan confronts him, David repents, and the rest of the book follows the damage in his own family, including the revolt of his son Absalom."
+        },
+        {
+          "kind": "background",
+          "text": "The book continues 1 Samuel without a break and covers roughly forty years around 1000 before Christ. It is remarkable among ancient royal histories for how frankly it reports the king’s wrongdoing."
+        },
+        {
+          "kind": "interpretations",
+          "text": "God’s promise in chapter 7 is the root of the hope for a Messiah, a son of David whose kingdom has no end. The New Testament applies that promise to Jesus. David’s fall and repentance have shaped how Jews and Christians pray; the heading of Psalm 51 links that psalm with this story. Readers today also attend to Bathsheba, whom the text presents as wronged."
+        }
+      ]
+    }
+  ]
+}

@@ -9,7 +9,7 @@ import {
   type KnowledgeRecord,
 } from "../../../src/bible/knowledge.ts";
 import type { BibleBook, BibleData } from "../../../src/bible/provider.ts";
-import { loadAiExplanations, type AiExplanation } from "./ai.ts";
+import { aiFor, loadAiExplanations, type AiExplanation } from "./ai.ts";
 
 export type { AiExplanation, BibleBook, BibleData, KnowledgeRecord };
 
@@ -47,9 +47,13 @@ export function library() {
   return cache;
 }
 
-/** The AI explanation for a chapter, if one has been written. Never mixed with notes. */
+/** The AI explanation for a chapter: its own, else the book's. Never mixed with notes. */
 export const aiExplanation = (book: string, chapter: number) =>
-  library().ai.find((entry) => entry.book === book && entry.chapter === chapter);
+  aiFor(library().ai, book, chapter);
+
+/** The AI explanation of a book as a whole, if one has been written. */
+export const bookAiExplanation = (book: string) =>
+  library().ai.find((entry) => entry.book === book && entry.scope === "book");
 
 export const oldTestamentBooks = 39;
 export const testamentOf = (index: number) =>
