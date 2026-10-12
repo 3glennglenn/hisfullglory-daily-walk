@@ -1,0 +1,77 @@
+{
+  "book": "romans",
+  "records": [
+    {
+      "id": "ai:romans",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Romans is Paul’s fullest explanation of the good news. He argues that all people, Jews and non-Jews alike, have sinned, and that God makes people right with himself through faith in Jesus Christ and not by keeping the law (chapters 1 to 4). He then describes the new life this brings: peace with God, freedom from sin’s rule, and life in the Spirit (5 to 8).\n\nChapters 9 to 11 wrestle with the place of Israel. The last chapters turn to daily life: love, humility, and unity between groups with different scruples."
+        },
+        {
+          "kind": "background",
+          "text": "Paul wrote Romans around the year 57, probably from Corinth, to a church he had not founded or visited. He hoped to visit Rome on his way to Spain."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Romans has shaped Christian thought more than any other letter. Its teaching on being made right with God stood at the center of the Reformation, and Catholics and Protestants have explained it differently. Chapter 9 is central to the debate on predestination. Chapter 13 on governing authorities is read with care, since it has been misused to demand obedience to unjust rule."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/8",
+      "chapter": 8,
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Romans 8 is a high point of Paul’s letter. It opens with “no condemnation” for those who are in Christ Jesus and closes with the assurance that nothing can separate them from God’s love.\n\nIn between, Paul contrasts two ways of living: according to the flesh, meaning human nature turned away from God, and according to the Spirit. Those led by the Spirit are God’s children and can call him “Abba! Father!”\n\nPaul is honest about suffering. The whole creation “groans”, believers groan while they wait, and the Spirit helps in prayer when words fail. Verse 28 belongs with verses 29 and 30: the good that God works toward is that his people become like his Son."
+        },
+        {
+          "kind": "background",
+          "text": "Paul wrote this letter to Christians in Rome, a church he had not yet visited, probably in the mid to late 50s of the first century. The church included both Jewish and non-Jewish believers, and much of the letter deals with how God makes both right with himself.\n\n“Abba” is an Aramaic word for father, from the language Jesus spoke. Mark 14:36 records Jesus using it in prayer. Adoption was familiar in the Roman world: an adopted son received the family name and the full rights of an heir, which is the picture behind verses 15 to 17."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Verses 29 and 30 are read differently across traditions.\n\n- Reformed Christians understand “foreknew” and “predestined” as God’s free choice of those he will save.\n- Arminian and Wesleyan Christians understand that God foreknew who would believe, and predestined those believers to become like Christ.\n- Others stress that Paul is speaking about God’s people as a whole and about where God is taking them.\n\nAll agree on the purpose Paul names: being “conformed to the image of his Son”. Verse 28 is sometimes quoted on its own as a promise that everything will turn out pleasant. In its setting it is spoken to people who suffer, and the good in view is that likeness to Christ."
+        }
+      ],
+      "translations": [
+        {
+          "verse": 1,
+          "note": "WEB and the KJV continue with “who don’t walk according to the flesh, but according to the Spirit”; the ASV ends the verse at Christ Jesus. The longer wording is missing from the oldest manuscripts at this point. The same words stand in verse 4 in all of them.",
+          "renderings": [
+            {
+              "translation": "KJV",
+              "text": "who walk not after the flesh, but after the Spirit"
+            },
+            {
+              "translation": "ASV",
+              "text": "There is therefore now no condemnation to them that are in Christ Jesus."
+            }
+          ]
+        },
+        {
+          "verse": 16,
+          "note": "The Greek word for Spirit is grammatically neuter, and the KJV follows the grammar. The ASV and WEB say “himself”, because the passage speaks of the Spirit as one who testifies and prays.",
+          "renderings": [
+            {
+              "translation": "KJV",
+              "text": "The Spirit itself beareth witness with our spirit"
+            },
+            {
+              "translation": "ASV",
+              "text": "The Spirit himself beareth witness with our spirit"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

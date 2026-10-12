@@ -1,0 +1,26 @@
+{
+  "book": "1-chronicles",
+  "records": [
+    {
+      "id": "ai:1-chronicles",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "1 Chronicles retells Israel’s story from Adam to David. The first nine chapters are genealogies that connect the readers to their ancestors. The rest of the book is about David, with most attention on his care for worship: bringing the ark to Jerusalem, organizing priests, Levites and musicians, and preparing for the temple his son will build."
+        },
+        {
+          "kind": "background",
+          "text": "Chronicles was written after the exile, often dated to the fifth or fourth century before Christ, for a community that had returned to a small and poor Judah. Tradition names Ezra as its author. It draws heavily on Samuel and Kings and names other sources as well."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Chronicles differs from Samuel and Kings in what it includes. It leaves out David’s sin with Bathsheba, for example, and adds much about worship. Most readers see this as a deliberate choice of emphasis for a later generation, not an attempt to hide what the earlier books had already told. Its message is that the returned community still belongs to God’s people and still has a calling to worship him."
+        }
+      ]
+    }
+  ]
+}

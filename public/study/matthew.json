@@ -1,0 +1,30 @@
+{
+ "book": "matthew",
+ "records": [
+  {
+   "id": "book:matthew",
+   "scope": "book",
+   "text": "Matthew opens by presenting Jesus as “the son of David, the son of Abraham” (1:1) and keeps connecting his life to the Hebrew Scriptures. Its teaching centres on the Kingdom of Heaven (4:17), gathers long blocks of Jesus’ teaching such as the Sermon on the Mount (chapters 5 to 7), and closes with the commission to make disciples of all nations (28:19). The book does not name its author; early church tradition attributes it to the apostle Matthew. Easton’s Bible Dictionary (1897) dates it around AD 60 to 65 and holds that it was the first Gospel written. Many later scholars think Mark came first, so the order of the Gospels is debated.",
+   "source": "https://www.biblegateway.com/resources/eastons-bible-dictionary/Matthew-Gospel-according",
+   "sources": [
+    {
+     "title": "Easton's Bible Dictionary (1897): Matthew, Gospel according to",
+     "url": "https://www.biblegateway.com/resources/eastons-bible-dictionary/Matthew-Gospel-according"
+    },
+    {
+     "title": "World English Bible: Matthew",
+     "url": "https://ebible.org/engwebp/MAT01.htm"
+    }
+   ],
+   "basis": [
+    "/bible/matthew/1/1",
+    "/bible/matthew/4/17",
+    "/bible/matthew/5/1",
+    "/bible/matthew/28/19"
+   ],
+   "interpretiveStatus": "debated",
+   "review": "editorial draft",
+   "editor": "HisFullGlory editorial"
+  }
+ ]
+}

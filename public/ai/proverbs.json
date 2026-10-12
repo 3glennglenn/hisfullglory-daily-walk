@@ -1,0 +1,26 @@
+{
+  "book": "proverbs",
+  "records": [
+    {
+      "id": "ai:proverbs",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Proverbs gathers short sayings and longer poems about living wisely. Its starting point is that the fear of the LORD is the beginning of wisdom. It contrasts the wise and the foolish in speech, work, money, friendship, marriage and the raising of children.\n\nIn the opening chapters wisdom is pictured as a woman calling out in the streets. The book ends with a poem in praise of a capable wife."
+        },
+        {
+          "kind": "background",
+          "text": "Most of the sayings are linked with Solomon. Others are credited to Agur, to King Lemuel and to unnamed wise teachers, and one section was copied by officials of King Hezekiah about two centuries after Solomon (25:1). Similar collections of wisdom are known from Egypt and Mesopotamia."
+        },
+        {
+          "kind": "interpretations",
+          "text": "A proverb states what is generally true, not a guarantee for every case. Reading the sayings as promises leads to disappointment, and the books of Job and Ecclesiastes show the exceptions. The New Testament speaks of Christ as the wisdom of God, and many Christians read the figure of wisdom in chapter 8 in that light."
+        }
+      ]
+    }
+  ]
+}

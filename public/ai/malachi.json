@@ -1,0 +1,26 @@
+{
+  "book": "malachi",
+  "records": [
+    {
+      "id": "ai:malachi",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Malachi is a series of disputes between God and his people. God makes a statement, the people answer back, and God replies. The subjects are careless worship, unfaithful priests, broken marriages, withheld offerings and the complaint that serving God makes no difference.\n\nThe book ends by promising a messenger who will prepare the way, and the coming of the prophet Elijah before the day of the LORD."
+        },
+        {
+          "kind": "background",
+          "text": "Malachi belongs to the fifth century before Christ, after the temple had been rebuilt and early hopes had faded. The name means my messenger and may be a title. It is the last of the twelve shorter prophets."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The New Testament applies the promised messenger to John the Baptist. Christians differ on whether the book’s teaching on tithes sets a rule for the church or reflects the support of the temple, with the New Testament asking instead for generous and willing giving."
+        }
+      ]
+    }
+  ]
+}

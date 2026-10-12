@@ -1,0 +1,26 @@
+{
+ "book": "john",
+ "records": [
+  {
+   "id": "book:john",
+   "scope": "book",
+   "text": "John states its own purpose near the end: these signs “are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in his name” (20:31). It opens with Jesus as the Word who “became flesh and lived among us” (1:14), and it is built around a selection of signs and long conversations (20:30). The closing verses attribute the book to “the disciple who testifies about these things” (21:24). Church tradition identifies him as the apostle John; scholars still discuss who that disciple was. Much of John’s material and order differs from Matthew, Mark and Luke.",
+   "source": "https://ebible.org/engwebp/JHN01.htm",
+   "sources": [
+    {
+     "title": "World English Bible: John",
+     "url": "https://ebible.org/engwebp/JHN01.htm"
+    }
+   ],
+   "basis": [
+    "/bible/john/1/14",
+    "/bible/john/20/30",
+    "/bible/john/20/31",
+    "/bible/john/21/24"
+   ],
+   "interpretiveStatus": "common interpretation",
+   "review": "editorial draft",
+   "editor": "HisFullGlory editorial"
+  }
+ ]
+}

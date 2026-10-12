@@ -1,0 +1,26 @@
+{
+  "book": "1-thessalonians",
+  "records": [
+    {
+      "id": "ai:1-thessalonians",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "1 Thessalonians is written to a young church that Paul had to leave in a hurry. He gives thanks for their faith under pressure, recalls his time with them, and is relieved by Timothy’s good report.\n\nHe encourages them to live holy lives and to keep working quietly. He comforts them about believers who have died: when the Lord returns, the dead in Christ will rise, and all will be with him. No one knows when that day will come, so they are to stay awake and sober."
+        },
+        {
+          "kind": "background",
+          "text": "Thessalonica was the chief city of Macedonia. Paul founded the church there on his second journey (Acts 17) and wrote from Corinth around the year 50 or 51. It is among the earliest of his letters, and of the whole New Testament."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The passage about being caught up to meet the Lord (4:17) is the main basis for the teaching called the rapture. Some Christians expect believers to be taken before a period of great trouble. Many others read it as part of the single return of Christ, with believers going out to welcome him."
+        }
+      ]
+    }
+  ]
+}

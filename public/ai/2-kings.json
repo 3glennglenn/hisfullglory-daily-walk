@@ -1,0 +1,26 @@
+{
+  "book": "2-kings",
+  "records": [
+    {
+      "id": "ai:2-kings",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "2 Kings continues the story of the two kingdoms to their end. It opens with the prophet Elisha, then follows a long decline. The northern kingdom falls to Assyria and its people are deported. Judah survives longer, with faithful kings such as Hezekiah and Josiah, but Jerusalem is finally destroyed by Babylon and its people taken into exile.\n\nThe last verses report that the exiled king Jehoiachin is released from prison, a small sign that the story is not over."
+        },
+        {
+          "kind": "background",
+          "text": "The fall of Samaria is dated to 722 before Christ and the fall of Jerusalem to 586 or 587. Assyrian and Babylonian records mention several of the same kings and events."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The book explains the exile as the result of long unfaithfulness, in line with the warnings of Deuteronomy. It also shows that reform and repentance were possible to the very end. Christians read the ending in the light of what follows: the line of David is not extinguished, and the New Testament traces it to Jesus."
+        }
+      ]
+    }
+  ]
+}

@@ -46,6 +46,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,png,woff2,json}"],
+        // AI explanations are optional and load on demand, so they stay out of the install.
+        globIgnores: ["ai/**"],
         maximumFileSizeToCacheInBytes: 8000000,
         navigateFallback: "/index.html",
         navigateFallbackDenylist: [/^\/auth\//],

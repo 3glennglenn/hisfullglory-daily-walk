@@ -1,0 +1,26 @@
+{
+  "book": "acts",
+  "records": [
+    {
+      "id": "ai:acts",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Acts continues Luke’s Gospel. The risen Jesus tells his followers they will be his witnesses in Jerusalem, in Judea and Samaria, and to the ends of the earth, and the book follows that outline. The Holy Spirit comes at Pentecost, a community forms in Jerusalem, and persecution scatters it.\n\nA turning point is the welcome of non-Jews without requiring them to keep the whole law. The second half follows Paul on his journeys through what is now Turkey and Greece and ends with him under guard in Rome, still teaching."
+        },
+        {
+          "kind": "background",
+          "text": "Acts is by the same author as Luke and addressed to the same Theophilus. Parts are written as we, which suggests the writer traveled with Paul. It covers about thirty years, from around the year 30 to the early 60s."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Christians differ on how far Acts describes the early church and how far it sets a pattern. Pentecostal and charismatic churches expect the gifts of the Spirit seen here to continue in the same way; others think some belonged to the founding period. Baptism, the sharing of possessions and the way churches are led are debated on the same lines."
+        }
+      ]
+    }
+  ]
+}

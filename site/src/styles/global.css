@@ -1,0 +1,168 @@
+/* Base styles for hisfullglory.com. Colours come from tokens.generated.css, which is the
+   app's own token set (src/styles.css). Type and spacing are sized for reading pages. */
+* {
+  box-sizing: border-box;
+}
+html {
+  font-family:
+    Manrope,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-synthesis: none;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+main:focus {
+  outline: none;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1 {
+  font-weight: 400;
+  font-size: clamp(2.15rem, 6vw, 3.4rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+h2 {
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+h3 {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+p {
+  margin: 10px 0;
+}
+a {
+  color: var(--strong);
+  text-underline-offset: 3px;
+  -webkit-tap-highlight-color: transparent;
+}
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: min(100% - 40px, 68rem);
+  margin-inline: auto;
+}
+.section {
+  padding-block: clamp(40px, 8vw, 88px);
+}
+.prose {
+  max-width: 42rem;
+}
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+.lede {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 36rem;
+}
+.muted {
+  color: var(--muted);
+}
+.small {
+  font-size: 0.86rem;
+}
+
+.button {
+  min-height: 44px;
+  border: 1px solid transparent;
+  background: var(--strong);
+  color: var(--on-strong);
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.45;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.button:hover {
+  filter: brightness(0.96);
+}
+.button.secondary {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--border);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 2px 4px var(--shadow-soft);
+}
+.grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 10;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

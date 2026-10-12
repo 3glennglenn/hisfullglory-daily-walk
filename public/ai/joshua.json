@@ -1,0 +1,26 @@
+{
+  "book": "joshua",
+  "records": [
+    {
+      "id": "ai:joshua",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Joshua tells how Israel entered the land of Canaan after the death of Moses. The first half describes crossing the Jordan, the fall of Jericho and a series of campaigns (chapters 1 to 12). The second half divides the land among the tribes (13 to 22).\n\nThe book ends with Joshua’s farewell and a renewal of the covenant at Shechem, where the people commit themselves to serve the LORD."
+        },
+        {
+          "kind": "background",
+          "text": "The book names no author and its date is debated. How its account relates to the findings of archaeology is also debated among scholars. Joshua’s name is the Hebrew form of the name Jesus."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The warfare in this book raises hard questions, and Christians do not treat it as a model for violence. Some read the commands as a unique act of judgment at one moment in the history of salvation. Others point out that ancient war accounts used sweeping language, and that the book itself shows Canaanites such as Rahab being spared and many peoples remaining. Hebrews 4 reads the rest that Joshua gave as pointing to a greater rest still to come."
+        }
+      ]
+    }
+  ]
+}

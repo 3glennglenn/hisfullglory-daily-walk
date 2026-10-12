@@ -1,0 +1,143 @@
+---
+import BrandMark from "./BrandMark.astro";
+import { appUrl, mainNav, site } from "../config";
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href || path.startsWith(href + "/");
+---
+
+<header class="site-header">
+  <div class="wrap header-grid">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <BrandMark />
+      <span class="brand-text">{site.name}<span>{site.tagline}</span></span>
+    </a>
+    <a class="button cta" href={appUrl}>Open the app</a>
+    <nav class="main-nav" aria-label="Main">
+      <ul>
+        {
+          mainNav.map((item) => (
+            <li>
+              {item.ready ? (
+                <a
+                  href={item.href}
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <span class="pending">{item.label}</span>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand cta"
+      "nav nav";
+    align-items: center;
+    column-gap: 16px;
+    padding-top: 14px;
+  }
+  .brand {
+    grid-area: brand;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    color: var(--ink);
+    text-decoration: none;
+    justify-self: start;
+  }
+  .brand-text {
+    font-size: 1.3rem;
+    line-height: 1.1;
+  }
+  .brand-text span {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.54rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+  .cta {
+    grid-area: cta;
+  }
+  .main-nav {
+    grid-area: nav;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 6px -20px 0;
+    padding: 0 8px;
+  }
+  .main-nav::-webkit-scrollbar {
+    display: none;
+  }
+  ul {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .main-nav a,
+  .pending {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+  .main-nav a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .main-nav a:hover {
+    background: var(--card);
+  }
+  .main-nav a[aria-current="page"] {
+    color: var(--strong);
+    box-shadow: inset 0 -2px 0 var(--strong);
+    border-radius: 0;
+  }
+  .pending {
+    color: var(--muted);
+  }
+  @media (min-width: 52rem) {
+    .header-grid {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: "brand nav cta";
+      padding-block: 14px;
+    }
+    .brand-text span {
+      font-size: 0.58rem;
+      letter-spacing: 0.23em;
+    }
+    .main-nav {
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+    ul {
+      justify-content: center;
+    }
+  }
+</style>

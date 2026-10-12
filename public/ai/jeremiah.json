@@ -1,0 +1,26 @@
+{
+  "book": "jeremiah",
+  "records": [
+    {
+      "id": "ai:jeremiah",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jeremiah prophesied in Judah’s last decades, up to and beyond the destruction of Jerusalem. He calls the people to turn back to God, warns that the temple will not protect them, and is opposed by kings, priests and other prophets. The book includes his own anguished prayers.\n\nIn the middle of the warnings stands a promise: God will make a new covenant and write his law on his people’s hearts (31:31 to 34)."
+        },
+        {
+          "kind": "background",
+          "text": "Jeremiah’s ministry ran from about 627 to after 586 before Christ. His scribe Baruch wrote down his words. The book is not in time order, and the ancient Greek version is shorter and arranged differently from the Hebrew."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The promise of a new covenant is taken up at the Last Supper and quoted in full in Hebrews 8. Jeremiah 29:11 is one of the most quoted verses in the Bible. In its setting it is addressed to a whole people in exile and comes with the news that they will stay there for seventy years, which guards against reading it as a promise of quick relief."
+        }
+      ]
+    }
+  ]
+}

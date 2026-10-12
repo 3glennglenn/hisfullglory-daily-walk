@@ -1,0 +1,26 @@
+{
+  "book": "leviticus",
+  "records": [
+    {
+      "id": "ai:leviticus",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Leviticus gives instructions for worship and holy living to a people among whom God has come to dwell. It covers the offerings (chapters 1 to 7), the priests (8 to 10), what is clean and unclean (11 to 15), the Day of Atonement (16) and holiness in everyday life (17 to 27).\n\nIts refrain is that the people are to be holy because the LORD is holy. The command to love your neighbor as yourself comes from this book (19:18)."
+        },
+        {
+          "kind": "background",
+          "text": "The book is set at Mount Sinai, directly after the tabernacle is built. Its name comes from the Levites, the tribe that served at the sanctuary. Much of it is written for priests, which is why it reads like a manual."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Christians read the sacrifices as pointing forward to the death of Christ, an argument the letter to the Hebrews works out at length. Most hold that the food and purity laws no longer bind Christians, pointing to passages such as Mark 7 and Acts 10. There is real disagreement about which other commands carry over, and about how to tell. The book’s own center is plain: a holy God makes a way for people to live near him."
+        }
+      ]
+    }
+  ]
+}

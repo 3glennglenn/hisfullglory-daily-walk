@@ -1,0 +1,26 @@
+{
+  "book": "philemon",
+  "records": [
+    {
+      "id": "ai:philemon",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Philemon is a personal letter of one chapter. Onesimus, a slave from Philemon’s household, has been with Paul and has become a believer. Paul sends him back with this letter, asking Philemon to receive him no longer as a slave but as a dear brother, and offering to repay anything Onesimus owes."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes from prison. Philemon was a believer in Colossae in whose house a church met. Slavery was built into the Roman world; a slave who left a household was at the mercy of the owner."
+        },
+        {
+          "kind": "interpretations",
+          "text": "This letter was used in past centuries to defend slavery, a reading that churches now reject. Many readers see it working the other way: Paul places master and slave side by side as brothers, which leaves no room for one to own the other. Whether Paul is asking outright for Onesimus’ freedom is debated; he hints that Philemon will do even more than he asks."
+        }
+      ]
+    }
+  ]
+}

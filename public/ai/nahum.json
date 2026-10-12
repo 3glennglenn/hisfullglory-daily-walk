@@ -1,0 +1,26 @@
+{
+  "book": "nahum",
+  "records": [
+    {
+      "id": "ai:nahum",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Nahum announces the fall of Nineveh, the capital of the Assyrian empire. In vivid poetry it describes the city’s defenses failing and its cruelty coming back upon it. For the peoples Assyria had crushed, the message is relief: the oppressor will not rise again."
+        },
+        {
+          "kind": "background",
+          "text": "The book was written between the fall of the Egyptian city of Thebes in 663 before Christ, which it mentions, and the fall of Nineveh in 612. Assyria was known for the brutality of its conquests and had destroyed the northern kingdom of Israel a century earlier."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Nahum is often read beside Jonah. In Jonah Nineveh repents and is spared; in Nahum, generations later, it faces judgment. Together they show God as both patient and just. The tone is harsh, and readers do well to remember who is speaking: the victims of an empire, hearing that its violence will end."
+        }
+      ]
+    }
+  ]
+}

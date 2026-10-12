@@ -1,0 +1,26 @@
+{
+  "book": "zechariah",
+  "records": [
+    {
+      "id": "ai:zechariah",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Zechariah encouraged the same returned community as Haggai. The first part of the book (chapters 1 to 8) contains eight night visions and messages that promise God’s return to Jerusalem and call for justice and mercy.\n\nThe second part (9 to 14) is harder to place. It speaks of a humble king riding on a donkey, of a shepherd who is struck, of one who is pierced and mourned, and of a day when the LORD will be king over all the earth."
+        },
+        {
+          "kind": "background",
+          "text": "The dated messages fall between 520 and 518 before Christ. Many scholars think chapters 9 to 14 come from a later time; others hold that Zechariah wrote the whole book."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The Gospels quote Zechariah repeatedly in telling of Jesus’ last week: the entry into Jerusalem on a donkey, the thirty pieces of silver, the scattered sheep and the pierced one. Christians differ on how much of the final chapters still lies ahead."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+---
+// Internal reference page for the house style. Not linked in the navigation and not indexed.
+import Base from "../layouts/Base.astro";
+import tokens from "../styles/tokens.generated.json";
+---
+
+<Base title="Style guide" noindex>
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Internal reference</p>
+      <h1>Style guide</h1>
+      <p class="lede">
+        The colours, type and components every page on this site uses. The
+        colours are read from the app, so the site and the app stay in step.
+      </p>
+
+      <h2>Colours</h2>
+      <p class="muted">
+        Each swatch shows the token for the theme your device is using now.
+      </p>
+      <ul class="swatches">
+        {
+          tokens.map((token) => (
+            <li>
+              <span class="chip" style={`background: var(${token.name})`} />
+              <code>{token.name}</code>
+              <span class="muted small">
+                Light {token.light} · Dark {token.dark}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <h2>Type</h2>
+      <div class="card type">
+        <p class="eyebrow">Eyebrow label</p>
+        <h1>Heading one</h1>
+        <h2>Heading two</h2>
+        <h3>Heading three</h3>
+        <p class="lede">Lede: one or two sentences that open a page.</p>
+        <p>
+          Body text is set in Manrope at a comfortable reading size. Links look
+          like <a href="/styleguide">this link</a>.
+        </p>
+        <p class="muted small">Small muted text for notes and labels.</p>
+      </div>
+
+      <h2>Buttons</h2>
+      <div class="actions">
+        <a class="button" href="/styleguide">Primary button</a>
+        <a class="button secondary" href="/styleguide">Secondary button</a>
+      </div>
+
+      <h2>Cards</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Card title</h3>
+          <p>Cards group one idea, with a title and a short line of text.</p>
+        </div>
+        <div class="card">
+          <h3>Card title</h3>
+          <p>They sit in a grid that becomes one column on a phone.</p>
+        </div>
+        <div class="card">
+          <h3>Card title</h3>
+          <p>Borders and soft shadows come from the same tokens as the app.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  h2 {
+    margin: 48px 0 12px;
+  }
+  .lede {
+    margin-top: 16px;
+  }
+  .swatches {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
+  .swatches li {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: 12px;
+    align-items: center;
+  }
+  .chip {
+    grid-row: span 2;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  code {
+    font-size: 0.9rem;
+  }
+  .type > * + * {
+    margin-top: 12px;
+  }
+</style>

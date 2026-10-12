@@ -1,0 +1,26 @@
+{
+  "book": "3-john",
+  "records": [
+    {
+      "id": "ai:3-john",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "3 John is the shortest book in the Bible by word count. The elder writes to his friend Gaius, praising him for welcoming traveling teachers and helping them on their way.\n\nHe criticizes a man named Diotrephes, who loves to be first, refuses to welcome these teachers and puts out those who do. He commends Demetrius, who is probably the one carrying the letter."
+        },
+        {
+          "kind": "background",
+          "text": "Like 2 John, the letter is from the elder, traditionally the apostle John. It gives a rare glimpse of everyday tensions in an early church: who has authority, and who is to be received."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Read beside 2 John, the letter shows the other side of hospitality: there, a warning against supporting false teaching; here, a call to support those who teach faithfully. It is often read as a study in contrasting kinds of leadership."
+        }
+      ]
+    }
+  ]
+}

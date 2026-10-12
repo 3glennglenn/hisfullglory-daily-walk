@@ -1103,3 +1103,14 @@ small {
 .circles h1,.circles h2,.circles h3,.circles p {overflow-wrap:anywhere;}
 
 .circles article a {display:block;min-height:44px;padding:8px 0;overflow-wrap:anywhere;}
+
+/* AI explanations: a separate, labelled layer, never part of the sourced note. */
+.ai-explanation {border-style:dashed;background:var(--bg);}
+.ai-badge {display:inline-block;vertical-align:middle;margin-left:6px;padding:1px 9px;border:1px solid var(--border);border-radius:999px;font-size:0.68rem;font-weight:600;color:var(--muted);}
+.ai-explanation h4 {margin:16px 0 4px;font-size:0.88rem;}
+.ai-explanation ul {margin:6px 0;padding-left:1.2rem;font-size:0.92rem;}
+.ai-explanation li + li {margin-top:5px;}
+.ai-compare {border-top:1px solid var(--border);margin-top:10px;padding-top:6px;}
+.ai-compare dl {margin:0 0 6px;}
+.ai-compare dt {margin-top:8px;font-size:0.72rem;font-weight:600;color:var(--muted);}
+.ai-compare dd {margin:2px 0 0;font-size:0.92rem;}

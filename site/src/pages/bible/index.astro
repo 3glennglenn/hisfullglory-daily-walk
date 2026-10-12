@@ -1,0 +1,81 @@
+---
+import Base from "../../layouts/Base.astro";
+import { bookNote, library, oldTestamentBooks } from "../../lib/bible";
+
+const { books } = library().bible;
+const testaments = [
+  { name: "Old Testament", books: books.slice(0, oldTestamentBooks) },
+  { name: "New Testament", books: books.slice(oldTestamentBooks) },
+];
+---
+
+<Base
+  title="Read the Bible"
+  description="Read all 66 books of the Bible in the World English Bible, with sourced context where it has been written."
+>
+  <section class="section">
+    <div class="wrap">
+      <h1>The Bible</h1>
+      <p class="lede">
+        All 66 books in the World English Bible, a public-domain translation.
+        Pick a book to start reading.
+      </p>
+      {
+        testaments.map((testament) => (
+          <>
+            <h2>{testament.name}</h2>
+            <ul class="books">
+              {testament.books.map((book) => (
+                <li>
+                  <a href={`/bible/${book.slug}`}>
+                    <span>{book.name}</span>
+                    {bookNote(book.slug) && (
+                      <span class="small muted">With context</span>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        ))
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lede {
+    margin-top: 16px;
+  }
+  h2 {
+    margin: 44px 0 14px;
+  }
+  .books {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  }
+  .books a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 56px;
+    padding: 8px 14px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.35;
+  }
+  .books a:hover {
+    border-color: var(--strong);
+  }
+  .books .small {
+    font-weight: 400;
+  }
+</style>

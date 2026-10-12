@@ -1,0 +1,26 @@
+{
+  "book": "luke",
+  "records": [
+    {
+      "id": "ai:luke",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Luke sets out to give an orderly account of the life of Jesus. It opens with the births of John the Baptist and Jesus and includes songs of praise still used in worship. Much of the book is a long journey toward Jerusalem, filled with teaching.\n\nLuke shows special interest in the poor, in women, in outsiders and in prayer. Some of the best-known parables are found only here, among them the Good Samaritan and the Prodigal Son. It ends with the risen Jesus on the road to Emmaus and his ascension."
+        },
+        {
+          "kind": "background",
+          "text": "Early tradition names the author as Luke, a doctor and companion of Paul. The book is addressed to a man called Theophilus and is the first half of a two-part work that continues in Acts. It is commonly dated to the 70s or 80s; some date it to the early 60s."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Luke says he drew on eyewitnesses and earlier accounts, and most scholars think Mark was one of them. Readers differ on how to hold together Luke’s sharp words about wealth with other parts of Scripture. His account has shaped the Christian year more than any other: Christmas, the ascension and Pentecost all rest largely on Luke and Acts."
+        }
+      ]
+    }
+  ]
+}

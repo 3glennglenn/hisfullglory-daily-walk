@@ -1,0 +1,31 @@
+{
+ "book": "luke",
+ "records": [
+  {
+   "id": "book:luke",
+   "scope": "book",
+   "text": "Luke begins with a short preface: many had already written accounts, and the author, having traced everything carefully, writes an orderly account for “most excellent Theophilus” so that he may know the certainty of what he was taught (1:1 to 4). The Gospel pays close attention to people others overlooked and sums up Jesus’ mission as seeking and saving the lost (19:10). The author is not named; church tradition attributes the book to Luke, a companion of Paul. Acts is also addressed to Theophilus (Acts 1:1), and the two books are widely read as one work in two parts.",
+   "source": "https://ebible.org/engwebp/LUK01.htm",
+   "sources": [
+    {
+     "title": "World English Bible: Luke",
+     "url": "https://ebible.org/engwebp/LUK01.htm"
+    },
+    {
+     "title": "World English Bible: Acts",
+     "url": "https://ebible.org/engwebp/ACT01.htm"
+    }
+   ],
+   "basis": [
+    "/bible/luke/1/1",
+    "/bible/luke/1/3",
+    "/bible/luke/1/4",
+    "/bible/luke/19/10",
+    "/bible/acts/1/1"
+   ],
+   "interpretiveStatus": "common interpretation",
+   "review": "editorial draft",
+   "editor": "HisFullGlory editorial"
+  }
+ ]
+}

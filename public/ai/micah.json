@@ -1,0 +1,26 @@
+{
+  "book": "micah",
+  "records": [
+    {
+      "id": "ai:micah",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Micah speaks against the leaders of Samaria and Jerusalem: rulers who take bribes, prophets who say what pays, and the powerful who seize the fields of the poor. He announces that both cities will fall.\n\nWoven through the warnings are promises: nations streaming to learn God’s ways, swords beaten into plowshares, and a ruler who will come from the small town of Bethlehem."
+        },
+        {
+          "kind": "background",
+          "text": "Micah came from Moresheth, a country town in Judah, and prophesied in the late eighth century before Christ, at the same time as Isaiah. A century later Jeremiah’s defenders quoted him in court (Jeremiah 26)."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Micah 6:8 is one of the best-known summaries of what God asks: to act justly, to love mercy and to walk humbly with God. Matthew quotes the promise about Bethlehem in the story of Jesus’ birth. The book ends by marvelling at a God who pardons and delights in mercy."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "book": "esther",
+  "records": [
+    {
+      "id": "ai:esther",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Esther is set among Jews living in Persia. Esther, an orphan raised by her cousin Mordecai, becomes queen. When the official Haman obtains a decree to destroy all the Jews, Esther risks her life by going to the king uninvited.\n\nThe plot is reversed: Haman falls, the Jews are allowed to defend themselves, and the feast of Purim is founded to remember the rescue."
+        },
+        {
+          "kind": "background",
+          "text": "The king, Ahasuerus, is usually identified with Xerxes I, who ruled from 486 to 465 before Christ. In the Hebrew text God is never named. The ancient Greek version includes extra passages with prayers, which are part of Catholic and Orthodox Bibles."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Many read the silence about God as the point of the book: his care is at work in what looks like coincidence. Jews read Esther aloud every year at Purim. How the book relates to Persian history is debated among scholars. Christians read it as a story of God preserving his people when they are powerless, and of courage used for others."
+        }
+      ]
+    }
+  ]
+}

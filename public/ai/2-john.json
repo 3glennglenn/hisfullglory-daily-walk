@@ -1,0 +1,26 @@
+{
+  "book": "2-john",
+  "records": [
+    {
+      "id": "ai:2-john",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "2 John is a note of thirteen verses from one who calls himself the elder, to the chosen lady and her children. He is glad that they are walking in the truth and repeats the old command to love one another.\n\nHe warns that deceivers are going about who deny that Jesus Christ came in the flesh, and tells his readers not to give such teachers a welcome or a platform."
+        },
+        {
+          "kind": "background",
+          "text": "The chosen lady is most often understood as a local church and her children as its members, though some take her to be an individual woman. Tradition identifies the elder with the apostle John. In the first century traveling teachers depended on the hospitality of believers."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The instruction not to welcome false teachers is about lending support to their teaching, and readers generally do not take it as a ban on ordinary kindness or conversation. The letter holds truth and love together and will not let either stand without the other."
+        }
+      ]
+    }
+  ]
+}

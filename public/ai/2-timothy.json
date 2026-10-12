@@ -1,0 +1,26 @@
+{
+  "book": "2-timothy",
+  "records": [
+    {
+      "id": "ai:2-timothy",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "2 Timothy reads as Paul’s last words. He is in prison, expects to die, and writes to Timothy as to a son. He urges him not to be ashamed, to endure hardship, to keep to what he has learned, and to pass it on to people who can teach others.\n\nNear the end Paul looks back: he has fought the good fight and finished the race. He asks Timothy to come soon, and to bring his coat and his books."
+        },
+        {
+          "kind": "background",
+          "text": "The letter presents itself as written from prison in Rome, shortly before Paul’s death, which tradition places in the mid 60s under Nero. The questions about authorship are the same as for 1 Timothy."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The statement that all Scripture is God-breathed and useful for teaching (3:16) is central to how Christians understand the Bible. When it was written it referred first to the Scriptures Timothy knew from childhood, the Old Testament. Churches differ on how to describe the Bible’s inspiration and authority while agreeing on this starting point."
+        }
+      ]
+    }
+  ]
+}

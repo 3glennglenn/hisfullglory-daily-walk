@@ -1,0 +1,26 @@
+{
+  "book": "ephesians",
+  "records": [
+    {
+      "id": "ai:ephesians",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ephesians looks at God’s purpose on the widest scale: to bring everything together under Christ. The first three chapters praise God for choosing, forgiving and raising believers with Christ, by grace and through faith, and for making Jews and non-Jews into one new people.\n\nThe last three chapters describe a life that fits this calling: unity, truthful speech, forgiveness, relationships in the household, and standing firm in what the letter pictures as the armor of God."
+        },
+        {
+          "kind": "background",
+          "text": "The letter presents itself as written by Paul from prison. The words in Ephesus are missing from some of the earliest copies, so it may have been a circular letter for several churches. Some scholars think a follower of Paul wrote it in his name."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The instructions to wives and husbands, children and parents, slaves and masters (5:21 to 6:9) are read in different ways. Some see a lasting pattern for marriage; others stress the opening call to submit to one another and see the passage pointing toward mutuality. The words to slaves were misused to defend slavery, a reading churches now reject."
+        }
+      ]
+    }
+  ]
+}

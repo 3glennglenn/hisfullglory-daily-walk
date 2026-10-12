@@ -1,0 +1,26 @@
+{
+  "book": "deuteronomy",
+  "records": [
+    {
+      "id": "ai:deuteronomy",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Deuteronomy is Moses’ farewell to Israel on the plains of Moab. In a series of speeches he retells the journey, restates the law for a generation about to enter the land, and sets before them blessing and curse, life and death.\n\nAt its heart is the call to love the LORD with heart, soul and strength (6:4 and 5). The book closes with the death of Moses, in sight of the land he does not enter."
+        },
+        {
+          "kind": "background",
+          "text": "The name means second law, in the sense of the law given again. Many scholars note that the book is shaped like the treaties ancient kings made with their peoples. Tradition links it with Moses; many scholars think it reached its final form later, and connect it with the reform of King Josiah in the seventh century before Christ."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Deuteronomy is one of the books the New Testament quotes most. Jesus answers each temptation in the wilderness with words from it, and names its call to love God as the greatest commandment. Its teaching that faithfulness leads to life and unfaithfulness to loss shapes the books from Joshua to Kings. Christians read its promises and warnings in the light of the new covenant in Christ."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "book": "1-peter",
+  "records": [
+    {
+      "id": "ai:1-peter",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "1 Peter is written to scattered groups of believers who are being insulted and treated as outsiders. It reminds them of their living hope through the resurrection of Jesus and of who they now are: a chosen people, a holy nation, called out of darkness into light.\n\nThey are to live good lives among their neighbors, to respect authorities, and to bear unjust suffering as Christ did, without paying back evil for evil."
+        },
+        {
+          "kind": "background",
+          "text": "The letter presents itself as written by the apostle Peter from a place it calls Babylon, generally understood as Rome, with the help of Silvanus. It is usually dated to the early 60s. Some scholars think it was written later in his name. The readers lived in regions of what is now Turkey."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The passage about Christ preaching to the spirits in prison (3:19 and 20) is one of the most puzzling in the New Testament and has several explanations. The instructions to slaves and to wives are read with the same care as similar passages in Paul’s letters. The book’s teaching on suffering has sustained Christians under pressure in every century."
+        }
+      ]
+    }
+  ]
+}

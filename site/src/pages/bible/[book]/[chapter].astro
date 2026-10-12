@@ -1,0 +1,204 @@
+---
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+import ContextNote from "../../../components/ContextNote.astro";
+import { appUrl } from "../../../config";
+import Base from "../../../layouts/Base.astro";
+import AiExplanation from "../../../components/AiExplanation.astro";
+import {
+  aiExplanation,
+  chapterNote,
+  chapterTitle,
+  library,
+  type BibleBook,
+} from "../../../lib/bible";
+
+type Step = { label: string; href: string };
+
+export function getStaticPaths() {
+  const pages = library().bible.books.flatMap((book) =>
+    book.chapters.map((chapter) => ({ book, number: chapter.number })),
+  );
+  const step = (page?: (typeof pages)[number]): Step | undefined =>
+    page && {
+      label: chapterTitle(page.book, page.number),
+      href: `/bible/${page.book.slug}/${page.number}`,
+    };
+  return pages.map((page, i) => ({
+    params: { book: page.book.slug, chapter: String(page.number) },
+    props: {
+      book: page.book,
+      number: page.number,
+      previous: step(pages[i - 1]),
+      next: step(pages[i + 1]),
+    },
+  }));
+}
+
+interface Props {
+  book: BibleBook;
+  number: number;
+  previous?: Step;
+  next?: Step;
+}
+
+const { book, number, previous, next } = Astro.props;
+const chapter = book.chapters[number - 1];
+const title = chapterTitle(book, number);
+const note = chapterNote(book.slug, number);
+const ai = aiExplanation(book.slug, number);
+const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name;
+---
+
+<Base
+  title={`${title} (WEB)`}
+  description={`Read ${title} in the World English Bible${note ? `, with ${note.scope} context and its sources` : ""}.`}
+>
+  <section class="section">
+    <div class="wrap">
+      <Breadcrumb
+        trail={[
+          { label: "Bible", href: "/bible" },
+          { label: book.name, href: `/bible/${book.slug}` },
+        ]}
+        current={`Chapter ${number}`}
+      />
+      <h1>{title}</h1>
+      <p class="muted">World English Bible</p>
+      <nav class="jump" aria-label="On this page">
+        <a href="#context">Context</a>
+        {ai && <a href="#ai">AI explanation</a>}
+      </nav>
+
+      <article class="scripture">
+        {
+          chapter.verses.map((verse) => (
+            <p class="verse" id={`v${verse.number}`}>
+              <sup>{verse.number}</sup>{" "}
+              {verse.omitted ? (
+                <em>Verse omitted in this WEB edition. See the source notes.</em>
+              ) : (
+                verse.text
+              )}
+            </p>
+          ))
+        }
+        <p class="small muted">
+          World English Bible.{" "}
+          <a href="https://ebible.org/engwebp/copyright.htm" rel="noopener noreferrer">
+            Public-domain source and edition notes
+          </a>
+        </p>
+      </article>
+
+      <div class="block" id="context">
+        <ContextNote note={note} subject={subject} />
+      </div>
+
+      {
+        ai && (
+          <div class="block ai-block" id="ai">
+            <AiExplanation explanation={ai} book={book} />
+          </div>
+        )
+      }
+
+      <div class="card invite">
+        <h2>Go further with this chapter</h2>
+        <p class="muted">Opens the HisFullGlory beta web app.</p>
+        <a class="button" href={`${appUrl}/bible/${book.slug}/${number}`}>
+          Study and discuss this chapter in the app
+        </a>
+      </div>
+
+      <nav class="pager" aria-label="Chapters">
+        {
+          previous ? (
+            <a class="button secondary" href={previous.href}>
+              ← {previous.label}
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          next && (
+            <a class="button secondary" href={next.href}>
+              {next.label} →
+            </a>
+          )
+        }
+      </nav>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .scripture {
+    max-width: 42rem;
+    margin-top: 28px;
+    font-size: 1.12rem;
+    line-height: 1.85;
+  }
+  .verse {
+    margin: 0 0 12px;
+    scroll-margin-top: 16px;
+  }
+  .verse:target {
+    background: var(--highlight-gold);
+    border-radius: 8px;
+    box-shadow: 0 0 0 6px var(--highlight-gold);
+  }
+  .verse sup {
+    font-size: 0.7em;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .scripture .small {
+    margin-top: 24px;
+  }
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .jump a:hover {
+    border-color: var(--strong);
+  }
+  .block {
+    margin-top: 40px;
+    scroll-margin-top: 16px;
+  }
+  .ai-block {
+    margin-top: 18px;
+  }
+  .invite {
+    max-width: 42rem;
+    margin-top: 18px;
+    background: var(--card);
+  }
+  .invite .button {
+    margin-top: 10px;
+  }
+  .pager {
+    max-width: 42rem;
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+  }
+</style>

@@ -1,0 +1,26 @@
+{
+  "book": "1-timothy",
+  "records": [
+    {
+      "id": "ai:1-timothy",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "1 Timothy gives guidance to Timothy, whom Paul has left in charge of the church at Ephesus. He is to oppose teachers who trade in speculation, and to see that the church’s life is in order: prayer for all people, the character required of overseers and deacons, care for widows, respect for elders.\n\nThe letter warns against the love of money and urges Timothy to pursue a godly life and guard what has been entrusted to him."
+        },
+        {
+          "kind": "background",
+          "text": "1 and 2 Timothy and Titus are called the Pastoral Letters. They present themselves as written by Paul near the end of his life, in the 60s. Many scholars think a follower wrote them later in his name; others defend Paul as author."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The instruction about women teaching (2:11 to 15) is among the most debated passages in the New Testament. Some churches take it as a lasting rule for church leadership; others read it as addressing a particular problem in Ephesus, and point to women who worked alongside Paul. The lists of qualities for leaders are widely used and stress character over ability."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+ "book": "mark",
+ "records": [
+  {
+   "id": "book:mark",
+   "scope": "book",
+   "text": "Mark opens with “The beginning of the Good News of Jesus Christ, the Son of God” (1:1) and moves quickly from scene to scene, starting with Jesus announcing that God’s Kingdom is at hand (1:14 to 15). It explains Jewish terms such as “Corban” for its readers (7:11), which suggests an audience not all familiar with Jewish practice. A central saying is that the Son of Man came “to serve, and to give his life as a ransom for many” (10:45). The text does not name its author; early tradition links it to John Mark and the preaching of Peter, and Easton’s Bible Dictionary (1897) places it in Rome around AD 63. Many scholars today regard Mark as the earliest Gospel.",
+   "source": "https://www.biblegateway.com/resources/eastons-bible-dictionary/Mark-Gospel-according",
+   "sources": [
+    {
+     "title": "Easton's Bible Dictionary (1897): Mark, Gospel according to",
+     "url": "https://www.biblegateway.com/resources/eastons-bible-dictionary/Mark-Gospel-according"
+    },
+    {
+     "title": "World English Bible: Mark",
+     "url": "https://ebible.org/engwebp/MRK01.htm"
+    }
+   ],
+   "basis": [
+    "/bible/mark/1/1",
+    "/bible/mark/1/14",
+    "/bible/mark/1/15",
+    "/bible/mark/7/11",
+    "/bible/mark/10/45"
+   ],
+   "interpretiveStatus": "common interpretation",
+   "review": "editorial draft",
+   "editor": "HisFullGlory editorial"
+  }
+ ]
+}

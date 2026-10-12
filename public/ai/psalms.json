@@ -1,0 +1,77 @@
+{
+  "book": "psalms",
+  "records": [
+    {
+      "id": "ai:psalms",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Psalms is a collection of 150 songs and prayers. It holds praise, thanksgiving, lament, confession, songs for the king, and reflections on wisdom and on God’s law. The collection is arranged in five books and moves, on the whole, from many laments at the start to pure praise at the end.\n\nWhat marks the Psalms is honesty before God. Joy, fear, anger, guilt and doubt are all spoken to him directly."
+        },
+        {
+          "kind": "background",
+          "text": "The psalms were written and gathered over several centuries. Their headings link about half of them with David and others with Asaph, the sons of Korah, Solomon and Moses. They were sung in the worship of the temple and later in synagogues and churches."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Jews and Christians have prayed the Psalms daily for well over two thousand years. The New Testament quotes them more than any other book and reads many as speaking of Christ, among them Psalms 2, 22 and 110. The psalms that call for judgment on enemies are hard to read. Many understand them as handing vengeance over to God instead of taking it oneself."
+        }
+      ]
+    },
+    {
+      "id": "ai:psalms/23",
+      "chapter": 23,
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Psalm 23 is a short song of trust. In verses 1 to 4 the LORD is a shepherd who feeds, leads, restores and protects. In verses 5 and 6 the picture changes to a host who sets a table, anoints his guest and gives more than enough.\n\nNotice the change of voice. The psalm begins by speaking about God: “He leads me”. In its darkest part it turns to speak to him: “you are with me”. The comfort of the psalm does not come from the absence of danger. The valley and the enemies are still there. What changes things is who is present."
+        },
+        {
+          "kind": "background",
+          "text": "The heading in the Hebrew text links this psalm with David, who according to 1 Samuel kept sheep before he became king. In the ancient Near East kings were often called shepherds of their people, so calling the LORD “my shepherd” also says something about who truly rules and provides.\n\nA shepherd’s rod and staff are usually explained as working tools: one to defend the flock, the other to guide it. Anointing a guest’s head with oil and filling the cup were signs of a generous welcome."
+        },
+        {
+          "kind": "interpretations",
+          "text": "Jews and Christians have prayed this psalm for centuries, at sickbeds and funerals and on ordinary days. Christians often read it alongside John 10, where Jesus calls himself the good shepherd. That link is made by later readers and by the New Testament; the psalm itself speaks of the LORD.\n\nReaders also differ on the last line. Some take dwelling in the LORD’s house “forever” as life with God beyond death. Others note that the Hebrew phrase can mean for length of days: a long life lived near God’s presence in worship. Both hopes are found elsewhere in Scripture."
+        }
+      ],
+      "translations": [
+        {
+          "verse": 1,
+          "note": "All three translate the same Hebrew name of God, which is written with four letters. The KJV and this edition of the WEB follow the old custom of writing LORD in capitals; the ASV of 1901 wrote the name out. WEB says “I shall lack nothing” where the older versions use want, a word that used to mean lack.",
+          "renderings": [
+            {
+              "translation": "KJV",
+              "text": "The LORD is my shepherd; I shall not want."
+            },
+            {
+              "translation": "ASV",
+              "text": "Jehovah is my shepherd; I shall not want."
+            }
+          ]
+        },
+        {
+          "verse": 6,
+          "note": "The Hebrew word here describes loyal, committed love. No single English word covers it, which is why the translations choose different ones. WEB has “loving kindness”.",
+          "renderings": [
+            {
+              "translation": "KJV",
+              "text": "Surely goodness and mercy shall follow me"
+            },
+            {
+              "translation": "ASV",
+              "text": "Surely goodness and lovingkindness shall follow me"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

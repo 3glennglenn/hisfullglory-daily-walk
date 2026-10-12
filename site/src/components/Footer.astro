@@ -1,0 +1,94 @@
+---
+import { footerNav, site } from "../config";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-name">{site.name}</p>
+      <p class="muted">{site.positioning}</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        {
+          footerNav.map((item) => (
+            <li>
+              {item.ready ? (
+                <a href={item.href}>{item.label}</a>
+              ) : (
+                <span class="pending">{item.label}</span>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-small">
+    <p>
+      Scripture quotations are from the World English Bible (WEB), which is in
+      the public domain.
+    </p>
+    <p>&copy; {year} {site.name}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--paper);
+    padding-block: 36px 28px;
+    margin-top: 40px;
+  }
+  .footer-grid {
+    display: grid;
+    gap: 20px;
+  }
+  .footer-name {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+  }
+  .footer-grid .muted {
+    margin-top: 4px;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    list-style: none;
+    margin: 0 0 0 -10px;
+    padding: 0;
+  }
+  a,
+  .pending {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 10px;
+    font-size: 0.95rem;
+  }
+  a {
+    color: var(--ink);
+  }
+  .pending {
+    color: var(--muted);
+  }
+  .footer-small {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .footer-small p {
+    margin: 4px 0;
+  }
+  @media (min-width: 52rem) {
+    .footer-grid {
+      grid-template-columns: 1fr auto;
+      align-items: start;
+    }
+  }
+</style>

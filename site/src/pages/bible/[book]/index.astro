@@ -1,0 +1,117 @@
+---
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+import ContextNote from "../../../components/ContextNote.astro";
+import { appUrl } from "../../../config";
+import Base from "../../../layouts/Base.astro";
+import AiExplanation from "../../../components/AiExplanation.astro";
+import {
+  bookAiExplanation,
+  bookNote,
+  chapterTitle,
+  library,
+  testamentOf,
+  type BibleBook,
+} from "../../../lib/bible";
+
+export function getStaticPaths() {
+  return library().bible.books.map((book, index) => ({
+    params: { book: book.slug },
+    props: { book, index },
+  }));
+}
+
+interface Props {
+  book: BibleBook;
+  index: number;
+}
+
+const { book, index } = Astro.props;
+const note = bookNote(book.slug);
+const ai = bookAiExplanation(book.slug);
+const count = book.chapters.length;
+const chapters = count === 1 ? "1 chapter" : `${count} chapters`;
+---
+
+<Base
+  title={book.name}
+  description={`Read ${book.name} in the World English Bible: ${chapters}${note ? ", with book context and its sources" : ""}.`}
+>
+  <section class="section">
+    <div class="wrap">
+      <Breadcrumb trail={[{ label: "Bible", href: "/bible" }]} current={book.name} />
+      <p class="eyebrow">{testamentOf(index)}</p>
+      <h1>{book.name}</h1>
+      <p class="muted">{chapters} · World English Bible</p>
+      <div class="actions">
+        <a class="button" href={`/bible/${book.slug}/1`}>Read chapter 1</a>
+        <a class="button secondary" href={`${appUrl}/bible/${book.slug}/1`}>
+          Open in the app
+        </a>
+      </div>
+
+      <div class="block">
+        <ContextNote note={note} subject={book.name} />
+      </div>
+
+      {
+        ai && (
+          <div class="block ai-block">
+            <AiExplanation explanation={ai} book={book} />
+          </div>
+        )
+      }
+
+      <h2>Chapters</h2>
+      <ul class="chapters">
+        {
+          book.chapters.map((chapter) => (
+            <li>
+              <a
+                href={`/bible/${book.slug}/${chapter.number}`}
+                aria-label={chapterTitle(book, chapter.number)}
+              >
+                {chapter.number}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .block {
+    margin-top: 36px;
+  }
+  .ai-block {
+    margin-top: 18px;
+  }
+  h2 {
+    margin: 40px 0 14px;
+  }
+  .chapters {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+    max-width: 42rem;
+  }
+  .chapters a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .chapters a:hover {
+    border-color: var(--strong);
+  }
+</style>

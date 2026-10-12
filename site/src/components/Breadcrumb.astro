@@ -1,0 +1,54 @@
+---
+interface Props {
+  /** Parent pages, outermost first. The current page is not listed. */
+  trail: { label: string; href: string }[];
+  current: string;
+}
+
+const { trail, current } = Astro.props;
+---
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    {
+      trail.map((step) => (
+        <li>
+          <a href={step.href}>{step.label}</a>
+        </li>
+      ))
+    }
+    <li aria-current="page">{current}</li>
+  </ol>
+</nav>
+
+<style>
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0 0 10px -8px;
+    padding: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  li {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 8px;
+  }
+  li + li::before {
+    content: "/";
+    margin-right: 16px;
+    color: var(--border);
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    color: var(--muted);
+  }
+</style>

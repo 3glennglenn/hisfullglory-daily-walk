@@ -1,0 +1,26 @@
+{
+  "book": "colossians",
+  "records": [
+    {
+      "id": "ai:colossians",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Colossians was written to a church unsettled by teaching that added rules, special days and spiritual experiences to faith in Christ. Paul answers by setting out who Christ is: the image of the invisible God, the one through whom all things were made and in whom all the fullness of God lives.\n\nBecause believers have died and been raised with Christ, they need no such additions. The letter goes on to describe the new life, with compassion, forgiveness and love, in the church and in the home."
+        },
+        {
+          "kind": "background",
+          "text": "Colossae was a small town in what is now Turkey. Paul had not visited it; the church was started by his coworker Epaphras. The letter is written from prison and is closely related to Ephesians and Philemon. Some scholars question whether Paul wrote it himself."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The poem about Christ in 1:15 to 20 has been central to Christian teaching about him. Exactly what the rival teaching was remains uncertain, since we hear only Paul’s side. The household instructions raise the same questions as those in Ephesians."
+        }
+      ]
+    }
+  ]
+}

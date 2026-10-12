@@ -1,0 +1,26 @@
+{
+  "book": "ezra",
+  "records": [
+    {
+      "id": "ai:ezra",
+      "scope": "book",
+      "model": "Claude Opus 5.5",
+      "written": "2026-10-12",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ezra tells of the return from exile in Babylon. In the first part (chapters 1 to 6) a group goes back to Jerusalem by decree of the Persian king Cyrus and, after long opposition, rebuilds the temple. In the second part (7 to 10) Ezra, a priest and teacher of the law, arrives decades later to teach and to reform the community."
+        },
+        {
+          "kind": "background",
+          "text": "Ezra and Nehemiah were originally one book. Cyrus’ decree is dated to 538 before Christ and the temple was completed about 515. Ezra’s arrival is commonly dated to 458. Parts of the book are written in Aramaic, the language of the Persian administration, and quote official letters."
+        },
+        {
+          "kind": "interpretations",
+          "text": "The book ends with a hard passage: men who had married foreign wives send them away (chapters 9 and 10). Most readers understand this as a measure to protect the faith of a small and fragile community, not a rule about ethnicity, and set it beside Ruth, where a foreign woman is welcomed. The New Testament gives different counsel to believers married to unbelievers in 1 Corinthians 7."
+        }
+      ]
+    }
+  ]
+}
