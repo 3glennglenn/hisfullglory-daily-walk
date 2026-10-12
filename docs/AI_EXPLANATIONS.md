@@ -5,8 +5,9 @@ written by an AI model, as a separate and clearly labelled layer. It lets reader
 started on chapters that have no sourced note yet. Status on 2026-10-12: the founder
 approved the pilot and the app and the website both show the layer. Every one of the 66
 books has an explanation of the book as a whole, which is shown on each of its chapters.
-Five chapters have their own, fuller explanation. The founder chose this route to keep the
-cost down; chapter explanations follow in daily portions (see "Plan for the chapters").
+Five pilot chapters have their own, fuller explanation. The founder chose this route to
+keep the cost down; shorter chapter explanations follow in daily portions (see "Plan for
+the chapters").
 
 This changes two earlier rules on purpose. "AI Study" was deferred, and unsourced context
 was not published. Both now read: AI explanations are allowed as their own layer; sourced
@@ -105,11 +106,13 @@ Agreed with the founder on 2026-10-12, to keep the cost down:
 
 A cloud routine does this, set up on 2026-10-12: "HisFullGlory: daily AI chapter
 explanations" (https://claude.ai/code/routines/trig_013ZcDYFyML8PRi5ML6tjgjq). It runs
-every day at 04:00 UTC on Claude Sonnet 5.5, writes 30 chapters, commits them to branch
-`website` and pushes. It has no connectors and deploys nothing itself; the push is what
-makes Vercel rebuild the review site. At 30 a day the New Testament takes about 9 days and
-the whole Bible about 40. Pause it on that page when `status` reports nothing left, or
-sooner if the founder wants to stop.
+every day at 04:00 UTC on Claude Sonnet 5.5, writes 30 chapters, commits them to `main`
+and pushes (until pull request #2 on 2026-10-12 it used branch `website`). It has no
+connectors and deploys nothing itself; the push is what makes Vercel rebuild the app and
+the site, so both show the new chapters each morning. The founder approved those daily
+production builds on 2026-10-12. At 30 a day the New Testament takes about 9 days and the
+whole Bible about 40. Pause it on that page when `status` reports nothing left, or sooner
+if the founder wants to stop.
 
 `scripts/ai-chapters.mjs` does the bookkeeping: `status` counts what is left, `next 30`
 prints the next chapters with their WEB text, and `add drafts.json --model "<name>"` checks
@@ -118,7 +121,8 @@ dashes) and writes the records only if every draft passes.
 
 ## Not done yet
 
-- 1,184 chapters have no explanation of their own yet and show their book's explanation.
-- The app change is on branch `website` and is not in production. The Reader card was
-  viewed in a local build at phone width, not on a real device.
+- Most chapters have no explanation of their own yet and show their book's explanation;
+  `node scripts/ai-chapters.mjs status` gives the count.
+- The app change reached `main` with pull request #2. The Reader card was viewed in a
+  local build at phone width, not on a real device.
 - No theological reader has reviewed any explanation.

@@ -1,8 +1,8 @@
 # Website plan: hisfullglory.com
 
-Status: steps 1 to 3 of section 9 are built on branch `website` (scaffold, shared tokens,
-layout; Bible index, book and chapter pages with their build test; Home, About, Beta and
-Resources; see `site/README.md`).
+Status: steps 1 to 3 of section 9 are built and in `main` since pull request #2 (scaffold,
+shared tokens, layout; Bible index, book and chapter pages with their build test; Home,
+About, Beta and Resources; see `site/README.md`).
 A review copy runs at https://hisfullglory-site.vercel.app (second Vercel project, created
 2026-10-12, noindex). No domain, DNS or Shopify change has been made. Owner: founder.
 Last updated 2026-10-12.

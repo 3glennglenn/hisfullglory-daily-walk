@@ -25,16 +25,19 @@ This file adds the current state and how to work with the founder. Last updated 
   from sourced context.
 - AI explanations are allowed since 2026-10-12, as a separate labelled layer written ahead
   of time (no runtime AI). Sourced notes are never written by AI. Every book has one; a
-  daily cloud routine adds 30 chapter explanations to branch `website`, so pull before you
-  work there. Rules, format and status: `docs/AI_EXPLANATIONS.md`.
+  daily cloud routine adds 30 chapter explanations to `main`, so pull before you work.
+  Each of its pushes redeploys the app and the site; the founder approved that on
+  2026-10-12. Rules, format and status: `docs/AI_EXPLANATIONS.md`.
 
 ## Live state (verified 2026-10-12, evening)
 
 - Supabase project `fccwqguqhnbayuowmamy`: migrations 001 to 006 applied; their stored SQL
   matches `supabase/migrations/` in this repo. RLS is on for every public table.
-- `app.hisfullglory.com` production is a Vercel build of `main` at 8209f01 (the merge of
-  `circles-v1`, pull request #1), promoted on 2026-10-12. Production and `main` are the
-  same code.
+- `app.hisfullglory.com` production was a Vercel build of `main` at 8209f01 (the merge of
+  `circles-v1`, pull request #1), promoted on 2026-10-12. Pull request #2 then brought
+  `website` into `main` (study library, launch topics, AI explanations, shop prices and
+  the `site/` folder). This file does not record whether production serves that build:
+  look at the latest production deployment in Vercel before calling any of it live.
 - From 2026-10-08 until that promotion the live app could not reach Supabase:
   `VITE_SUPABASE_URL` in Vercel ended in `/rest/v1/`, so every call went to
   `/rest/v1/rest/v1/...` and returned 404. The value is now the bare project URL, set for
@@ -59,11 +62,10 @@ This file adds the current state and how to work with the founder. Last updated 
 
 ## Branches
 
-- `main`: what runs in production.
-- `circles-v1`: merged into `main` on 2026-10-12; kept for reference.
-- `study-first`: adds the study library, the launch topics and the website plan. Preview
-  only, not in production.
-- `website`: branched from `study-first`; adds the new site in `site/`.
+- `main`: what both Vercel projects build for production. The daily routine pushes here.
+- `circles-v1`: merged into `main` on 2026-10-12 (pull request #1); kept for reference.
+- `study-first` and `website`: merged into `main` on 2026-10-12 (pull request #2); kept
+  for reference. Start new work on a fresh branch from `main`.
 
 ## Study notes
 
@@ -87,16 +89,16 @@ chapters used by the launch topics.
 A separate site for `hisfullglory.com` (Bible, topic and article pages, pre-rendered for
 search) reading the same study files and topic graph as the app; Shopify moves to
 `shop.hisfullglory.com` for checkout only. Check the Meta Pixel keeps working when the
-domain moves. The site lives in `site/` on branch `website`; `site/README.md` says how to
-run it and which build steps are done.
+domain moves. The site lives in `site/`; `site/README.md` says how to run it and which
+build steps are done.
 
 Since 2026-10-12 the site has its own Vercel project, `hisfullglory-site` (root directory
 `site`, framework Astro, source files outside the root directory included), reachable for
 review at https://hisfullglory-site.vercel.app. That address sends a noindex header. The
-founder connected the project to this repository on 2026-10-12 and set its production
-branch to `website`, so every push to `website` redeploys the review site. When `website`
-is merged into `main`, set that project's production branch back to `main`. Every domain,
-DNS or Shopify step still needs the founder's approval first.
+founder connected the project to this repository on 2026-10-12. Its production branch has
+to be `main` (it was `website` until pull request #2). If the review site stops following
+`main`, check that setting first: Settings, Environments, Production, Branch Tracking.
+Every domain, DNS or Shopify step still needs the founder's approval first.
 
 ## Environment notes
 
