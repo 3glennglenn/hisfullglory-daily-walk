@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
+import { content, showDrafts } from "../src/lib/content.ts";
 import { indexablePaths } from "../src/lib/pages.ts";
 
 const origin = "https://hisfullglory.com";
@@ -36,7 +37,8 @@ test("the sitemap lists every indexable page once, and nothing else", () => {
   assert.equal(new Set(listed).size, listed.length, "no address twice");
   assert.deepEqual([...listed].sort(), indexable.map((page) => page.canonical).sort());
   assert.deepEqual(listed, indexablePaths().map((path) => new URL(path, origin).href));
-  assert.equal(listed.length, 5 + 66 + 1189);
+  // Five fixed pages, 66 books and 1,189 chapters, plus approved topic pages and articles.
+  assert.ok(listed.length >= 5 + 66 + 1189);
 });
 
 test("robots.txt allows crawling and names the sitemap", () => {
@@ -47,9 +49,19 @@ test("robots.txt allows crawling and names the sitemap", () => {
 });
 
 test("pages kept out of search results say so and are not in the sitemap", () => {
+  // A build made with SHOW_DRAFTS=1 also hides its draft pages and the two overviews.
+  const { topics, articles } = content();
+  const drafts = showDrafts()
+    ? [
+        ...(topics.length ? ["dist/topics/index.html"] : []),
+        ...(articles.length ? ["dist/articles/index.html"] : []),
+        ...topics.filter((topic) => topic.review === "draft").map((topic) => `dist/topics/${topic.id}/index.html`),
+        ...articles.filter((article) => article.review === "draft").map((article) => `dist/articles/${article.slug}/index.html`),
+      ]
+    : [];
   assert.deepEqual(
     hidden.map((page) => page.file.replaceAll("\\", "/")).sort(),
-    ["dist/404.html", "dist/styleguide/index.html"],
+    ["dist/404.html", "dist/styleguide/index.html", ...drafts].sort(),
   );
   for (const page of hidden)
     assert.ok(page.html.includes('<meta name="robots" content="noindex"'), page.file);

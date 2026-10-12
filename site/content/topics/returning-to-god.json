@@ -1,0 +1,44 @@
+{
+  "id": "returning-to-god",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "intro": "People come back to God from many places: after years away, after a hard season, or after something they regret. These passages show how the Bible speaks about turning back, and how it describes God meeting those who do.",
+  "passages": [
+    {
+      "book": "luke",
+      "chapter": 15,
+      "start": 17,
+      "end": 24,
+      "reason": "In Jesus’ story of the lost son, the father sees him “while he was still far off” and runs to meet him before the son has said a word."
+    },
+    {
+      "book": "joel",
+      "chapter": 2,
+      "start": 12,
+      "end": 13,
+      "reason": "Through the prophet Joel, God calls his people to “turn to me with all your heart”, and the reason given is that he is gracious, merciful and slow to anger."
+    },
+    {
+      "book": "isaiah",
+      "chapter": 55,
+      "start": 6,
+      "end": 7,
+      "reason": "The invitation is open and the promise is plain: whoever returns to the LORD will find mercy, “for he will freely pardon”."
+    },
+    {
+      "book": "psalms",
+      "chapter": 51,
+      "start": 10,
+      "end": 12,
+      "reason": "A prayer for someone who knows they have done wrong, asking God to “Restore to me the joy of your salvation”."
+    },
+    {
+      "book": "1-john",
+      "chapter": 1,
+      "start": 9,
+      "end": 9,
+      "reason": "A short promise about confession: God “is faithful and righteous to forgive us the sins”."
+    }
+  ]
+}

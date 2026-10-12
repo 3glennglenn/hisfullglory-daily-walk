@@ -1,0 +1,51 @@
+{
+  "id": "new-christian",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "intro": "For someone starting out as a Christian, a few questions come first: what the good news is, what has changed, and where to begin reading. These passages are common starting points. Reading them with other people helps.",
+  "passages": [
+    {
+      "book": "john",
+      "chapter": 3,
+      "start": 16,
+      "end": 17,
+      "reason": "The best-known summary of the good news, with the verse that follows it: God sent his Son not to judge the world, “but that the world should be saved through him”."
+    },
+    {
+      "book": "ephesians",
+      "chapter": 2,
+      "start": 8,
+      "end": 9,
+      "reason": "Paul on how a person is saved: “by grace you have been saved through faith”, as a gift and not as something earned."
+    },
+    {
+      "book": "romans",
+      "chapter": 10,
+      "start": 9,
+      "end": 10,
+      "reason": "A short statement of Christian faith: confessing “that Jesus is Lord” and believing that God raised him from the dead."
+    },
+    {
+      "book": "2-corinthians",
+      "chapter": 5,
+      "start": 17,
+      "end": 17,
+      "reason": "What Paul says has changed: “if anyone is in Christ, he is a new creation”."
+    },
+    {
+      "book": "acts",
+      "chapter": 2,
+      "start": 42,
+      "end": 42,
+      "reason": "What the first believers kept doing together: the apostles’ teaching, fellowship, “the breaking of bread, and prayer”."
+    },
+    {
+      "book": "philippians",
+      "chapter": 1,
+      "start": 6,
+      "end": 6,
+      "reason": "A reason for patience with slow growth: “he who began a good work in you will complete it”."
+    }
+  ]
+}

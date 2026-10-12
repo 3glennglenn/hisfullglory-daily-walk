@@ -4,8 +4,9 @@ import { launchTopics } from "../../../src/topics/graph.ts";
 import { appUrl, mainNav } from "../config";
 import { appFeatures } from "../data/app";
 import Base from "../layouts/Base.astro";
+import { publishedTopics } from "../lib/content";
 
-const ready = (href: string) => mainNav.some((item) => item.href === href && item.ready);
+const ready =(href: string) => mainNav.some((item) => item.href === href && item.ready);
 
 const steps = [
   { title: "Read", text: "Open any chapter of the Bible in the World English Bible." },
@@ -32,9 +33,11 @@ const promises = [
   "The community has rules, reporting and moderation.",
 ];
 
-// Topic pages on this site arrive in a later step; until then a card opens the topic in the app.
+// A card opens the topic page on this site once that page is approved, and the topic in
+// the app until then.
+const onSite = new Set(publishedTopics().map((topic) => topic.id));
 const topicHref = (id: string) =>
-  ready("/topics") ? `/topics/${id}` : `${appUrl}/community/${id}`;
+  onSite.has(id) ? `/topics/${id}` : `${appUrl}/community/${id}`;
 ---
 
 <Base>

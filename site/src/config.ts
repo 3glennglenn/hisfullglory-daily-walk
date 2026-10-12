@@ -1,3 +1,5 @@
+import { publishedArticles, publishedTopics } from "./lib/content.ts";
+
 export const site = {
   name: "HisFullGlory",
   tagline: "Jesus at the Center",
@@ -15,11 +17,12 @@ export const shopUrl = "https://hisfullglory.com";
 export type NavItem = { label: string; href: string; ready: boolean };
 
 // `ready` turns true in the build step that adds the page, so the header never links to a
-// page that does not exist yet.
+// page that does not exist yet. Topics and Articles appear once the founder has approved
+// at least one of them (src/lib/content.ts).
 export const mainNav: NavItem[] = [
   { label: "Bible", href: "/bible", ready: true },
-  { label: "Topics", href: "/topics", ready: false },
-  { label: "Articles", href: "/articles", ready: false },
+  { label: "Topics", href: "/topics", ready: publishedTopics().length > 0 },
+  { label: "Articles", href: "/articles", ready: publishedArticles().length > 0 },
   { label: "Resources", href: "/resources", ready: true },
   { label: "About", href: "/about", ready: true },
 ];

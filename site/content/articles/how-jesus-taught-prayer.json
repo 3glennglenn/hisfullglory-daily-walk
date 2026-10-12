@@ -1,0 +1,61 @@
+{
+  "slug": "how-jesus-taught-prayer",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "title": "How did Jesus teach his followers to pray?",
+  "description": "The Lord’s Prayer in Matthew 6 and Luke 11, line by line: what Jesus said before it, what each request asks, and how the two versions differ.",
+  "topic": "prayer",
+  "passage": {
+    "book": "matthew",
+    "chapter": 6,
+    "start": 5,
+    "end": 15
+  },
+  "sections": [
+    {
+      "heading": "The short answer",
+      "text": "When Jesus taught prayer, he gave his followers a short prayer and a warning about show. The prayer appears twice, in Matthew 6:9-13 and in Luke 11:2-4. It is addressed to God as Father. It begins with God’s name, kingdom and will, and then asks for bread, forgiveness and protection."
+    },
+    {
+      "heading": "What Jesus said first",
+      "text": "In Matthew the prayer comes with two cautions. The first is about praying to be noticed: “enter into your inner room, and having shut your door, pray to your Father who is in secret”. The second is about piling up words: “don’t use vain repetitions”.\n\nThe reason he gives is that “your Father knows what things you need before you ask him”. In this teaching prayer does not inform God, and it does not need an audience.\n\nIn Luke the setting is different. Jesus has been praying, and a disciple asks: “Lord, teach us to pray”."
+    },
+    {
+      "heading": "The prayer, line by line",
+      "text": "- “Our Father in heaven”: the prayer is said to a Father, and it is said together. Its words are us and our throughout.\n- “may your name be kept holy”: the first request is about God, not about the person praying.\n- “Let your Kingdom come. Let your will be done on earth as it is in heaven”: a request that what God wants would happen here.\n- “Give us today our daily bread”: a request for today’s needs, in plain words.\n- “Forgive us our debts, as we also forgive our debtors”: asking for forgiveness is tied to giving it. Jesus returns to this line straight after the prayer (Matthew 6:14-15).\n- “Bring us not into temptation, but deliver us from the evil one”: a request for protection from failing and from evil."
+    },
+    {
+      "heading": "Two versions, and a closing line",
+      "text": "Luke’s version is almost the same. It asks for bread “day by day” and says “Forgive us our sins” where Matthew has debts. Jesus’ own comment in Matthew 6:14-15 uses a third word, “trespasses”, for the same thing.\n\nIn Matthew the prayer ends with a line of praise: “For yours is the Kingdom, the power, and the glory forever. Amen.” The World English Bible prints it and adds a footnote that another edition of the Greek New Testament, the Nestle-Aland/UBS text, leaves it out. Luke’s version ends without it. Christians differ on whether to say the line, and many do."
+    },
+    {
+      "heading": "A script or a pattern",
+      "text": "Matthew introduces the prayer with “Pray like this”. Luke has “When you pray, say”. Christians have taken both seriously. Many churches say the prayer word for word, often every week. Many people also use it as an outline, taking each line as a heading for their own words. The two introductions support both uses, and this page does not rank them."
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 6,
+      "start": 5,
+      "end": 15
+    },
+    {
+      "book": "luke",
+      "chapter": 11,
+      "start": 1,
+      "end": 4
+    }
+  ],
+  "sources": [
+    {
+      "title": "World English Bible, preface",
+      "url": "https://ebible.org/eng-web/FRT01.htm"
+    },
+    {
+      "title": "World English Bible, Matthew 6, footnote at verse 13",
+      "url": "https://ebible.org/eng-web/MAT06.htm"
+    }
+  ]
+}

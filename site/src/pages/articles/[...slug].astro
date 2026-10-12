@@ -1,0 +1,168 @@
+---
+// /articles and /articles/<slug>. Neither exists until at least one article is approved.
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import DraftBanner from "../../components/DraftBanner.astro";
+import EditorialNote from "../../components/EditorialNote.astro";
+import { appUrl } from "../../config";
+import Base from "../../layouts/Base.astro";
+import { blocks } from "../../lib/ai";
+import {
+  publishedArticles,
+  publishedTopics,
+  refHref,
+  refLabel,
+  showDrafts,
+  type Article,
+} from "../../lib/content";
+
+export function getStaticPaths() {
+  const articles = publishedArticles();
+  if (!articles.length) return [];
+  return [
+    { params: { slug: undefined }, props: { articles } },
+    ...articles.map((article) => ({ params: { slug: article.slug }, props: { articles, article } })),
+  ];
+}
+
+interface Props {
+  articles: Article[];
+  article?: Article;
+}
+
+const { articles, article } = Astro.props;
+const topic = article && publishedTopics().find((entry) => entry.id === article.topic);
+---
+
+{
+  article ? (
+    <Base title={article.title} description={article.description} noindex={article.review !== "approved"}>
+      <section class="section">
+        <div class="wrap prose">
+          <Breadcrumb trail={[{ label: "Articles", href: "/articles" }]} current={article.title} />
+          {article.review === "draft" && <DraftBanner />}
+          <h1>{article.title}</h1>
+          <p class="lede">{article.description}</p>
+
+          {article.sections.map((section) => (
+            <>
+              <h2>{section.heading}</h2>
+              {blocks(section.text).map((block) =>
+                "list" in block ? (
+                  <ul>
+                    {block.list.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>{block.paragraph}</p>
+                ),
+              )}
+            </>
+          ))}
+
+          <div class="card sources" data-layer="sourced">
+            <h2>Why we say this</h2>
+            <p class="small muted">
+              This page rests on these passages, quoted from the World English
+              Bible:
+            </p>
+            <ul>
+              {article.basis.map((ref) => (
+                <li>
+                  <a href={refHref(ref)}>{refLabel(ref)}</a>
+                </li>
+              ))}
+            </ul>
+            <p class="small muted">Other sources:</p>
+            <ul>
+              {article.sources.map((source) => (
+                <li>
+                  <a href={source.url} rel="noopener">
+                    {source.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="actions">
+            <a class="button" href={`${appUrl}/bible/${article.passage.book}/${article.passage.chapter}`}>
+              Study this passage in the app
+            </a>
+            {topic && (
+              <a class="button secondary" href={`/topics/${topic.id}`}>
+                More on {topic.label}
+              </a>
+            )}
+          </div>
+
+          <EditorialNote review={article.review} drafted={article.drafted} />
+        </div>
+      </section>
+    </Base>
+  ) : (
+    <Base
+      title="Articles"
+      description="Short explainers on Bible passages people often ask about. Each one names the passages it rests on."
+      noindex={showDrafts()}
+    >
+      <section class="section">
+        <div class="wrap">
+          <h1>Articles</h1>
+          <p class="lede">
+            Short explainers on passages people often ask about. Each one names
+            the passages it rests on.
+          </p>
+          <ul class="grid list">
+            {articles.map((entry) => (
+              <li class="card">
+                <h2>
+                  <a href={`/articles/${entry.slug}`}>{entry.title}</a>
+                </h2>
+                <p>{entry.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </Base>
+  )
+}
+
+<style>
+  .lede {
+    margin-top: 16px;
+  }
+  h2 {
+    margin: 40px 0 8px;
+  }
+  ul {
+    margin: 10px 0 0;
+    padding-left: 1.2rem;
+  }
+  li + li {
+    margin-top: 8px;
+  }
+  .sources {
+    margin-top: 40px;
+  }
+  .sources h2 {
+    margin-top: 0;
+  }
+  .list {
+    list-style: none;
+    margin-top: 32px;
+    padding: 0;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  }
+  .list li + li {
+    margin-top: 0;
+  }
+  .list h2 {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+  }
+  .list p {
+    margin-bottom: 0;
+  }
+</style>

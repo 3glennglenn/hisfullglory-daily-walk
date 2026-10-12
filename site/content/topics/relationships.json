@@ -1,0 +1,44 @@
+{
+  "id": "relationships",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "intro": "Most of what the Bible says about relationships applies to every kind: family, friendship, marriage, church and work. These passages describe the love, patience and forgiveness it asks for. They are about how to love, and they are not a reason to stay where you are not safe.",
+  "passages": [
+    {
+      "book": "john",
+      "chapter": 13,
+      "start": 34,
+      "end": 35,
+      "reason": "Jesus gives his followers one measure for love: “Just as I have loved you, you also love one another”."
+    },
+    {
+      "book": "1-corinthians",
+      "chapter": 13,
+      "start": 4,
+      "end": 7,
+      "reason": "Paul describes love by what it does and does not do, beginning with “Love is patient and is kind”."
+    },
+    {
+      "book": "colossians",
+      "chapter": 3,
+      "start": 12,
+      "end": 14,
+      "reason": "A list of what to wear in life with others: compassion, kindness, humility and perseverance, and forgiveness “even as Christ forgave you”."
+    },
+    {
+      "book": "romans",
+      "chapter": 12,
+      "start": 17,
+      "end": 18,
+      "reason": "Paul is realistic about conflict: “If it is possible, as much as it is up to you, be at peace with all men”."
+    },
+    {
+      "book": "matthew",
+      "chapter": 18,
+      "start": 21,
+      "end": 22,
+      "reason": "Peter asks how often he must forgive, and Jesus answers “until seventy times seven”."
+    }
+  ]
+}

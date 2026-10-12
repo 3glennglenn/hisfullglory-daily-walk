@@ -1,0 +1,44 @@
+{
+  "id": "prayer",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "intro": "Prayer in the Bible is plain speech with God: asking, thanking, confessing, and sometimes only groaning. These passages show how Jesus taught it and how the first Christians practiced it.",
+  "passages": [
+    {
+      "book": "matthew",
+      "chapter": 6,
+      "start": 5,
+      "end": 13,
+      "reason": "Jesus teaches prayer without show, to a Father who “knows what things you need before you ask him”, and gives the prayer known as the Lord’s Prayer."
+    },
+    {
+      "book": "luke",
+      "chapter": 11,
+      "start": 1,
+      "end": 4,
+      "reason": "A disciple asks, “Lord, teach us to pray”, and Jesus answers with a short prayer."
+    },
+    {
+      "book": "1-thessalonians",
+      "chapter": 5,
+      "start": 16,
+      "end": 18,
+      "reason": "Three short commands that belong together: rejoice, “Pray without ceasing”, and give thanks in everything."
+    },
+    {
+      "book": "romans",
+      "chapter": 8,
+      "start": 26,
+      "end": 27,
+      "reason": "For the times when words fail: “the Spirit also helps our weaknesses, for we don’t know how to pray as we ought”."
+    },
+    {
+      "book": "psalms",
+      "chapter": 62,
+      "start": 8,
+      "end": 8,
+      "reason": "The psalms model honest prayer: “Pour out your heart before him”."
+    }
+  ]
+}

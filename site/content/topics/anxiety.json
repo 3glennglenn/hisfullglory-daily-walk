@@ -1,0 +1,45 @@
+{
+  "id": "anxiety",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "intro": "The Bible speaks often about worry and fear, and it does not pretend they are small. These passages are places many readers start. They are Scripture to read and think about, and they are not medical advice.",
+  "care": "Scripture and community do not replace appropriate professional or pastoral support. If you are in immediate danger, contact local emergency services or someone who can help you reach safety.",
+  "passages": [
+    {
+      "book": "matthew",
+      "chapter": 6,
+      "start": 25,
+      "end": 34,
+      "reason": "In the Sermon on the Mount Jesus tells his disciples not to be anxious about food and clothing, points to birds and lilies, and says “your heavenly Father knows that you need all these things”."
+    },
+    {
+      "book": "philippians",
+      "chapter": 4,
+      "start": 6,
+      "end": 7,
+      "reason": "Paul tells the church to bring every request to God with thanksgiving, and speaks of a peace “which surpasses all understanding”."
+    },
+    {
+      "book": "1-peter",
+      "chapter": 5,
+      "start": 6,
+      "end": 7,
+      "reason": "The letter gives the reason for handing worries over to God: “because he cares for you”."
+    },
+    {
+      "book": "psalms",
+      "chapter": 94,
+      "start": 19,
+      "end": 19,
+      "reason": "A psalm describes a crowded mind honestly: “In the multitude of my thoughts within me, your comforts delight my soul”."
+    },
+    {
+      "book": "isaiah",
+      "chapter": 41,
+      "start": 10,
+      "end": 10,
+      "reason": "Words spoken to Israel through Isaiah: “Don’t you be afraid, for I am with you”."
+    }
+  ]
+}

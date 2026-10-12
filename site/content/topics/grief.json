@@ -1,0 +1,45 @@
+{
+  "id": "grief",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "intro": "The Bible gives grief room. It records tears, laments and unanswered questions next to its words of hope, and it does not hurry people from one to the other. These passages are often read in times of loss.",
+  "care": "Scripture and community do not replace appropriate professional or pastoral support. If you are in immediate danger, contact local emergency services or someone who can help you reach safety.",
+  "passages": [
+    {
+      "book": "john",
+      "chapter": 11,
+      "start": 33,
+      "end": 36,
+      "reason": "At the grave of his friend Lazarus, with Mary and the others weeping, the text says simply: “Jesus wept”."
+    },
+    {
+      "book": "psalms",
+      "chapter": 34,
+      "start": 18,
+      "end": 18,
+      "reason": "A psalm says where God is when someone is crushed: “The LORD is near to those who have a broken heart”."
+    },
+    {
+      "book": "psalms",
+      "chapter": 23,
+      "start": 4,
+      "end": 4,
+      "reason": "The psalm does not say the valley is avoided. It says: “I will fear no evil, for you are with me”."
+    },
+    {
+      "book": "1-thessalonians",
+      "chapter": 4,
+      "start": 13,
+      "end": 14,
+      "reason": "Paul does not tell believers not to grieve. He writes so that they do not grieve “like the rest, who have no hope”."
+    },
+    {
+      "book": "revelation",
+      "chapter": 21,
+      "start": 3,
+      "end": 4,
+      "reason": "The Bible’s closing vision of what God will do: “He will wipe away every tear from their eyes”."
+    }
+  ]
+}
