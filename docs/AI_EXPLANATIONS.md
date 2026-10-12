@@ -103,6 +103,11 @@ Agreed with the founder on 2026-10-12, to keep the cost down:
 - Each portion must pass `tests/ai.test.ts` before it is committed, and the `model` field
   must name the model that actually wrote it.
 
+`scripts/ai-chapters.mjs` does the bookkeeping: `status` counts what is left, `next 30`
+prints the next chapters with their WEB text, and `add drafts.json --model "<name>"` checks
+a batch of drafts (length, exact WEB quotations, no licensed translation names, no em
+dashes) and writes the records only if every draft passes.
+
 ## Not done yet
 
 - 1,184 chapters have no explanation of their own yet and show their book's explanation.
