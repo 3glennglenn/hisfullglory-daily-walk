@@ -50,7 +50,10 @@ This file adds the current state and how to work with the founder. Last updated 
 - `VITE_*` values are baked in at build time. After changing one, redeploy.
 - Pushes did not always start a build, and some builds failed at once with `git_info_fail`
   (Vercel could not read the commit from GitHub). Starting the deployment by hand worked,
-  once on the second try. Check that a push really produced a deployment.
+  once on the second try. The cause was on Vercel's side: its status page reported a
+  partial outage of builds and Git integrations from 13:35 UTC that day. The project
+  settings were fine. If this happens again, check https://www.vercel-status.com before
+  changing any connection, and check that a push really produced a deployment.
 - After an instant rollback, new production builds are not assigned to the domain until one
   is promoted.
 
