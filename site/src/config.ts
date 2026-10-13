@@ -1,3 +1,5 @@
+import { publishedArticles, publishedTopics } from "./lib/content.ts";
+
 export const site = {
   name: "HisFullGlory",
   tagline: "Jesus at the Center",
@@ -8,18 +10,19 @@ export const site = {
 
 export const appUrl = "https://app.hisfullglory.com";
 
-// The shop still lives on hisfullglory.com. When it moves (docs/WEBSITE_PLAN.md, section 7),
-// change this one line to https://shop.hisfullglory.com.
-export const shopUrl = "https://hisfullglory.com";
+// The shop's own address since the domain move (docs/WEBSITE_PLAN.md, section 7). Old shop
+// addresses on hisfullglory.com are sent here by the redirects in vercel.json.
+export const shopUrl = "https://shop.hisfullglory.com";
 
 export type NavItem = { label: string; href: string; ready: boolean };
 
 // `ready` turns true in the build step that adds the page, so the header never links to a
-// page that does not exist yet.
+// page that does not exist yet. Topics and Articles appear once the founder has approved
+// at least one of them (src/lib/content.ts).
 export const mainNav: NavItem[] = [
   { label: "Bible", href: "/bible", ready: true },
-  { label: "Topics", href: "/topics", ready: false },
-  { label: "Articles", href: "/articles", ready: false },
+  { label: "Topics", href: "/topics", ready: publishedTopics().length > 0 },
+  { label: "Articles", href: "/articles", ready: publishedArticles().length > 0 },
   { label: "Resources", href: "/resources", ready: true },
   { label: "About", href: "/about", ready: true },
 ];

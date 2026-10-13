@@ -1,0 +1,31 @@
+---
+// Says plainly how an editorial page was made and how far it has been checked.
+import type { Review } from "../lib/content";
+
+interface Props {
+  review: Review;
+  drafted: "ai" | "human";
+}
+
+const { review, drafted } = Astro.props;
+const made =
+  drafted === "ai"
+    ? "Written with the help of an AI model. Scripture quotations are checked against the World English Bible."
+    : "Written by HisFullGlory. Scripture quotations are checked against the World English Bible.";
+const status =
+  review === "approved"
+    ? "Approved by HisFullGlory. Not reviewed by a theological reader."
+    : "Not approved yet.";
+const note = `${made} ${status}`;
+---
+
+<p class="small muted editorial" data-layer="editorial">{note}</p>
+
+<style>
+  .editorial {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    max-width: 42rem;
+  }
+</style>

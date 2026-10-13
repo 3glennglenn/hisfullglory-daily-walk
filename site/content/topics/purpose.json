@@ -1,0 +1,45 @@
+{
+  "id": "purpose",
+  "review": "approved",
+  "approved": "2026-10-13",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "intro": "Questions about purpose are old. The Bible says more about what kind of people to be than about which path to choose: to love God, to love a neighbor, and to do the good that is in front of them. These passages are the ones most often read on the subject.",
+  "passages": [
+    {
+      "book": "matthew",
+      "chapter": 22,
+      "start": 36,
+      "end": 40,
+      "reason": "Asked for the greatest commandment, Jesus names two: to love God with heart, soul and mind, and to “love your neighbor as yourself”."
+    },
+    {
+      "book": "micah",
+      "chapter": 6,
+      "start": 8,
+      "end": 8,
+      "reason": "The prophet sums up what God asks: “to act justly, to love mercy, and to walk humbly with your God”."
+    },
+    {
+      "book": "ephesians",
+      "chapter": 2,
+      "start": 8,
+      "end": 10,
+      "reason": "Paul places purpose after grace: people are saved as a gift, and are “created in Christ Jesus for good works”."
+    },
+    {
+      "book": "colossians",
+      "chapter": 3,
+      "start": 23,
+      "end": 24,
+      "reason": "Ordinary work is given weight: “whatever you do, work heartily, as for the Lord and not for men”."
+    },
+    {
+      "book": "jeremiah",
+      "chapter": 29,
+      "start": 10,
+      "end": 13,
+      "reason": "Verse 11 is often quoted as a personal promise. It was first written to exiles in Babylon who were told to wait seventy years, and it shows God’s intent toward his people: “to give you hope and a future”."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "growing-closer-to-god",
+  "review": "approved",
+  "approved": "2026-10-13",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "intro": "The Bible describes growing closer to God with slow, living pictures: staying, being rooted, walking, bearing fruit. These passages give the main ones. The growth they describe is God’s work in a person, and it is not a technique.",
+  "passages": [
+    {
+      "book": "john",
+      "chapter": 15,
+      "start": 4,
+      "end": 5,
+      "reason": "Jesus pictures himself as a vine and his followers as branches: fruit comes from staying connected, “for apart from me you can do nothing”."
+    },
+    {
+      "book": "psalms",
+      "chapter": 1,
+      "start": 1,
+      "end": 3,
+      "reason": "The first psalm compares a person who keeps returning to God’s teaching to “a tree planted by the streams of water”."
+    },
+    {
+      "book": "james",
+      "chapter": 4,
+      "start": 8,
+      "end": 8,
+      "reason": "A direct call with a promise attached: “Draw near to God, and he will draw near to you”."
+    },
+    {
+      "book": "colossians",
+      "chapter": 2,
+      "start": 6,
+      "end": 7,
+      "reason": "Paul describes the Christian life as continuing the way it began, “rooted and built up in him”, with thanksgiving."
+    },
+    {
+      "book": "psalms",
+      "chapter": 119,
+      "start": 105,
+      "end": 105,
+      "reason": "Scripture is described as light for the next step: “Your word is a lamp to my feet, and a light for my path”."
+    }
+  ]
+}

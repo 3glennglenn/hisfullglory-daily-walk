@@ -6,5 +6,28 @@
       "has": [{ "type": "host", "value": ".*\\.vercel\\.app" }],
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
     }
+  ],
+  "redirects": [
+    { "source": "/products/:path*", "destination": "https://shop.hisfullglory.com/products/:path*", "permanent": true },
+    { "source": "/collections/:path*", "destination": "https://shop.hisfullglory.com/collections/:path*", "permanent": true },
+    { "source": "/cart/:path*", "destination": "https://shop.hisfullglory.com/cart/:path*", "permanent": true },
+    { "source": "/checkout/:path*", "destination": "https://shop.hisfullglory.com/checkout/:path*", "permanent": true },
+    { "source": "/checkouts/:path*", "destination": "https://shop.hisfullglory.com/checkouts/:path*", "permanent": true },
+    { "source": "/account/:path*", "destination": "https://shop.hisfullglory.com/account/:path*", "permanent": true },
+    { "source": "/pages/:path*", "destination": "https://shop.hisfullglory.com/pages/:path*", "permanent": true },
+    { "source": "/policies/:path*", "destination": "https://shop.hisfullglory.com/policies/:path*", "permanent": true },
+    { "source": "/search", "destination": "https://shop.hisfullglory.com/search", "permanent": true },
+    { "source": "/blogs/:path*", "destination": "https://shop.hisfullglory.com/blogs/:path*", "permanent": true },
+    { "source": "/discount/:path*", "destination": "https://shop.hisfullglory.com/discount/:path*", "permanent": true },
+    { "source": "/gift_cards/:path*", "destination": "https://shop.hisfullglory.com/gift_cards/:path*", "permanent": true },
+    { "source": "/apps/:path*", "destination": "https://shop.hisfullglory.com/apps/:path*", "permanent": true },
+    { "source": "/a/:path*", "destination": "https://shop.hisfullglory.com/a/:path*", "permanent": true },
+    { "source": "/tools/:path*", "destination": "https://shop.hisfullglory.com/tools/:path*", "permanent": true },
+    { "source": "/cdn/:path*", "destination": "https://shop.hisfullglory.com/cdn/:path*", "permanent": true },
+    {
+      "source": "/:shop(\\d+)/:kind(orders|checkouts|invoices)/:path*",
+      "destination": "https://shop.hisfullglory.com/:shop/:kind/:path*",
+      "permanent": true
+    }
   ]
 }

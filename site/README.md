@@ -56,6 +56,32 @@ every indexable page once and nothing else, `robots.txt` names it, every indexab
 its own title and description and its Open Graph tags, the share image is 1200 by 630, and
 the not-found page exists and is not indexed.
 
+`tests/content.test.ts` checks the topic pages and articles on file: a misquoted verse, a
+passage reason without a quotation or a wrong reference is rejected, only approved files
+are built, and a built page shows its text as written and says how it was made.
+
+## Topic pages and articles
+
+Editorial content lives in `content/topics/<id>.json` (one per launch topic) and
+`content/articles/<slug>.json`. `src/lib/content.ts` validates every file and an invalid one
+stops the build.
+
+- A file is built only when it says `"review": "approved"`, with the date in `"approved"`.
+  Only the founder approves; a new file starts as `"draft"`. `/topics` and `/articles`, their navigation items and the
+  sitemap entries appear with the first approved file of each kind.
+- Curly double quotes are reserved for words from the WEB text. In a topic file every
+  passage reason must quote its own passage. In an article every quotation must occur in
+  one of its `basis` passages.
+- Sources are the WEB text and public-domain or openly licensed works that were actually
+  opened (`docs/STUDY_NOTES.md` has the same rule). No reconstructed history, no
+  original-language claims, no quotations from writers.
+- `"drafted": "ai"` makes the page say that it was written with the help of an AI model.
+  The eight topic pages and three articles of 2026-10-13 were written by an AI model and
+  approved by the founder that day. No theological reader has read them.
+- To look at drafts as pages, build and test with `SHOW_DRAFTS=1` (PowerShell:
+  `$env:SHOW_DRAFTS = "1"; npm run check`). Drafts then carry a "Draft" label and noindex.
+  Never set it in Vercel.
+
 ## Search engines and sharing
 
 - `src/pages/sitemap.xml.ts` builds the sitemap from `src/lib/pages.ts`. A new page outside
@@ -86,9 +112,10 @@ Done from the build order in `docs/WEBSITE_PLAN.md`, section 9:
 2. Bible pages: `/bible`, `/bible/<book>` and `/bible/<book>/<chapter>`, with the build test.
 3. Home, About, Beta and Resources. The About story is the founder's, approved 2026-10-12.
    The launch topics on Home open in the app until the topic pages of step 4 exist.
+4. Topics and articles: pages for the eight launch topics and three articles, approved by
+   the founder on 2026-10-13. Each passage on a topic page links to the full passage.
 5. Search engines and sharing: titles, descriptions, canonical addresses, sitemap,
-   `robots.txt`, share image and a not-found page. Built before step 4, which waits for
-   the founder's approval of the topic and article drafts.
+   `robots.txt`, share image and a not-found page.
 
 Addresses have no trailing slash (`/bible/psalms/23`); each page is built as
 `<address>/index.html` and `vercel.json` is ready for that.
