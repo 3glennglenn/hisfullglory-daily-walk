@@ -5,22 +5,23 @@
       "id": "ai:matthew",
       "scope": "book",
       "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-13",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Matthew presents Jesus as the Messiah promised to Israel, the son of David and of Abraham. It begins with his family line and birth and follows his teaching, healings and conflicts to his death and resurrection in Jerusalem.\n\nThe book is built around five large blocks of teaching, the first of which is the Sermon on the Mount (chapters 5 to 7). Again and again it notes that something happened to fulfill what the prophets had said. It ends with the risen Jesus sending his followers to make disciples of all nations."
+          "text": "It opens with a list of names. “The book of the genealogy of Jesus Christ, the son of David, the son of Abraham.” Before a single story is told, Matthew has made his claim: the Messiah promised to Israel has a family line, and it leads here.\n\nFrom that line and a birth, the book follows Jesus through teaching, healings and conflict to his death and resurrection in Jerusalem. Five times it slows down for a long block of teaching. The first is the Sermon on the Mount, in chapters 5 to 7, and when it ends the crowds are astonished, “for he taught them with authority, and not like the scribes.” Again and again Matthew stops to say that something happened to fulfill what the prophets had said.\n\nThe last scene is a mountain in Galilee. Eleven disciples bow down, “but some doubted.” To that group, doubters included, the risen Jesus gives a task as wide as the world: make disciples of all nations. His last words in the book are a promise: “I am with you always, even to the end of the age.”"
         },
         {
           "kind": "background",
-          "text": "Early tradition names the author as Matthew, the tax collector who became one of the twelve. Most scholars date the book to the 70s or 80s of the first century and think it draws on Mark; some date it earlier. It seems written with Jewish Christians especially in mind."
+          "text": "There is a tax collector in this book. Jesus passes the tax collection office, sees him sitting there and says, “Follow me.” The man gets up and follows. His name is Matthew, he becomes one of the twelve, and early tradition names him as the author of this Gospel.\n\nMost scholars date the book to the 70s or 80s of the first century and think its writer drew on Mark; some date it earlier. It seems to have been written with Jewish Christians especially in mind, which fits a book that returns so often to the law and the prophets."
         },
         {
           "kind": "interpretations",
-          "text": "Matthew raises the question of how Jesus relates to the law of Moses: he says he came to fulfill it, and Christians explain that in different ways. The words to Peter about the rock on which the church is built (16:18) are read differently by Catholics, Orthodox and Protestants. The parables of judgment in chapters 24 and 25 are also read in several ways."
+          "text": "On the mountain Jesus says something readers have weighed ever since: “Don’t think that I came to destroy the law or the prophets. I didn’t come to destroy, but to fulfill.” What it means that he fulfills the law of Moses, Christians explain in different ways.\n\nThey also differ over one sentence spoken to Peter, about the rock on which the church is built (16:18). Catholics, Orthodox and Protestants each read it in their own way. The parables of judgment in chapters 24 and 25 are read in several ways too.\n\nThese are old conversations among Christians who read the same pages with the same care."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/1",

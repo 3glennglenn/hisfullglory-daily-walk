@@ -1,6 +1,7 @@
 {
   "slug": "1-corinthians-10-13",
-  "review": "draft",
+  "review": "approved",
+  "approved": "2026-10-13",
   "drafted": "ai",
   "written": "2026-10-13",
   "verse": {
@@ -10,11 +11,11 @@
     "end": 13
   },
   "hook": "You know the saying that God never gives you more than you can handle. But did you know 1 Corinthians 10:13 is about temptation?",
-  "known": "Usually passed on as a saying that God will never give a person more than they can handle.",
-  "who": "Paul, writing to the church in Corinth.",
-  "audience": "Believers he calls “brothers”, some of whom felt sure of themselves: “let him who thinks he stands be careful that he doesn’t fall”.",
-  "setting": "A warning drawn from Israel’s time in the wilderness. Paul lists what went wrong there, idolatry, sexual immorality, testing and grumbling, and says “these things were our examples”.",
+  "story": "Paul reaches for one of the darkest moments in his people’s memory. They had walked out of Egypt with the waters standing like a wall on either side. They were camped at the mountain where God had met them. And with Moses gone up the mountain, they made a calf of gold, held a feast and “sat down to eat and to drink, and rose up to play”.\n\nPaul quotes that very sentence to the Corinthians. Some of them felt strong enough to sit at table in an idol’s temple (1 Corinthians 8:10). His warning is gentle and unsparing at once: the people who fell in the wilderness were no strangers to God. They had passed through the sea.\n\nThen, at the point of greatest danger, comes the kindness. No temptation is unique. God is faithful. And he does not leave anyone without a door: “the way of escape”.",
+  "storyStatus": "scripture",
+  "moment": "The young church in Corinth was full of confidence. Some of its members were sure their faith was strong enough for anything. They could sit down to eat in an idol’s temple, they thought, and it would not touch them.\n\nPaul loves these people and he is worried for them. He does not call them weak. He tells them a story about people who were just as sure, and he ends it with a sentence aimed straight at their confidence: “let him who thinks he stands be careful that he doesn’t fall”. Only then does he give them the promise.",
   "around": "The verse speaks of temptation: “God is faithful, who will not allow you to be tempted above what you are able, but will with the temptation also make the way of escape”. The next verse says what to do with that: “flee from idolatry”.",
+  "readings": "In everyday speech this verse has become a saying about suffering: God will not give you more than you can handle. People say it to comfort one another at hospital beds and funerals, and they mean it kindly.\n\nThe verse itself is about temptation. It promises that no pull toward wrong is too strong to resist, because God always leaves a way out.\n\nMany pastors gently point out the difference, because the saying can hurt. Some burdens are more than a person can carry, and Paul knew it. He wrote that he had been “weighed down exceedingly, beyond our power”. The comfort of the Bible in such times is not that the load will be light. It is that no one is asked to carry it alone.",
   "point": "The promise is about temptation to sin, and it comes with a way out and a command to take it. It does not say that suffering will never be more than a person can bear. Paul himself writes elsewhere that he and his companions “were weighed down exceedingly, beyond our power” (2 Corinthians 1:8).",
   "basis": [
     {
@@ -34,6 +35,24 @@
       "chapter": 1,
       "start": 8,
       "end": 9
+    },
+    {
+      "book": "exodus",
+      "chapter": 32,
+      "start": 4,
+      "end": 6
+    },
+    {
+      "book": "1-corinthians",
+      "chapter": 8,
+      "start": 10,
+      "end": 10
+    },
+    {
+      "book": "exodus",
+      "chapter": 14,
+      "start": 21,
+      "end": 22
     }
   ]
 }

@@ -1,6 +1,7 @@
 {
   "slug": "matthew-7-1",
-  "review": "draft",
+  "review": "approved",
+  "approved": "2026-10-13",
   "drafted": "ai",
   "written": "2026-10-13",
   "verse": {
@@ -10,11 +11,41 @@
     "end": 1
   },
   "hook": "You know “Don’t judge”. But did you know the same paragraph ends with helping your brother get the speck out of his eye?",
-  "known": "Often quoted to say that nobody may call anything wrong.",
-  "who": "Jesus, in the Sermon on the Mount (Matthew 5 to 7).",
-  "audience": "His disciples, with the crowds listening (Matthew 5:1-2).",
-  "setting": "Part of a long teaching on how his followers are to live with God and with one another.",
+  "story": "He held no office and had no famous teacher behind him. In his home town they asked, “Isn’t this the carpenter’s son?” He went up a hillside, sat down and began to speak, and the world has not finished listening.\n\nHe did not lean on the great names. He spoke as if the last word was his to give. Love your enemies. Pray for those who mistreat you. Take the beam out of your own eye first. When he stopped, Matthew says, “the multitudes were astonished at his teaching, for he taught them with authority, and not like the scribes.”\n\nSome of it had been said before. Israel’s Scriptures already told God’s people to love their neighbor and to feed an enemy who is hungry (Leviticus 19:18, Proverbs 25:21). What Jesus does is gather it, sharpen it and ask for all of it, from the heart, toward everyone.\n\nThe astonishment never quite wore off. Centuries later, people far outside the church were still stopped by this sermon, as the voices below show.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "M. K. Gandhi, An Autobiography, part 1, chapter 20 (mkgandhi.org)",
+      "url": "https://www.mkgandhi.org/autobio/chap20.htm"
+    },
+    {
+      "title": "Thomas Jefferson to John Adams, 12 October 1813 (Thomas Jefferson Foundation)",
+      "url": "https://tjrs.monticello.org/letter/297"
+    }
+  ],
+  "voices": [
+    {
+      "name": "Mohandas Gandhi",
+      "about": "Hindu leader of India’s independence movement, in his autobiography",
+      "words": "But the New Testament produced a different impression, especially the Sermon on the Mount which went straight to my heart.",
+      "source": {
+        "title": "M. K. Gandhi, An Autobiography, part 1, chapter 20 (mkgandhi.org)",
+        "url": "https://www.mkgandhi.org/autobio/chap20.htm"
+      }
+    },
+    {
+      "name": "Thomas Jefferson",
+      "about": "third president of the United States, in a letter of 1813 about the words of Jesus he had gathered from the Gospels",
+      "words": "there will be found remaining the most sublime and benevolent code of morals which has ever been offered to man.",
+      "source": {
+        "title": "Thomas Jefferson to John Adams, 12 October 1813 (Thomas Jefferson Foundation)",
+        "url": "https://tjrs.monticello.org/letter/297"
+      }
+    }
+  ],
+  "moment": "The people on that hillside had come from everywhere: “from Galilee, Decapolis, Jerusalem, Judea, and from beyond the Jordan”. Many were there because someone they loved was sick. Matthew says that when Jesus looked at crowds like this he was moved, because they were “harassed and scattered, like sheep without a shepherd”.\n\nEarlier in the same sermon he had told them that their righteousness must go deeper than that of “the scribes and Pharisees”, the religious experts of their day. Now he shows what deeper means. It does not begin with the faults of other people. It begins with your own eye.",
   "around": "The next verses give the reason and a picture: “with whatever measure you measure, it will be measured to you”, and a man with a beam in his own eye offering to remove a speck from his brother’s. Jesus does not end by leaving the speck where it is. He ends: “First remove the beam out of your own eye, and then you can see clearly to remove the speck out of your brother’s eye.”",
+  "readings": "This is one of the best-known sentences Jesus ever spoke, and people mean very different things by it.\n\nSome take it as a ban on every moral judgment: nobody may call anything wrong. But in this same chapter Jesus tells his followers to watch for false prophets, and adds: “By their fruits you will know them.” That takes discernment.\n\nChristian teachers have mostly read it as a warning against one kind of judging: the kind that condemns, that enjoys another person’s failure, that never turns the light on itself. In John’s Gospel Jesus holds the two sides together in one line: “Don’t judge according to appearance, but judge righteous judgment.”\n\nSo the verse does not ask for silence about right and wrong. It asks who you are when you speak.",
   "point": "The warning is against hypocritical judgment, the kind that sees faults in others and not in oneself. The passage still expects followers of Jesus to help one another see clearly, after looking at themselves first.",
   "basis": [
     {
@@ -28,6 +59,66 @@
       "chapter": 7,
       "start": 1,
       "end": 6
+    },
+    {
+      "book": "matthew",
+      "chapter": 7,
+      "start": 28,
+      "end": 29
+    },
+    {
+      "book": "matthew",
+      "chapter": 13,
+      "start": 54,
+      "end": 56
+    },
+    {
+      "book": "leviticus",
+      "chapter": 19,
+      "start": 17,
+      "end": 18
+    },
+    {
+      "book": "proverbs",
+      "chapter": 25,
+      "start": 21,
+      "end": 22
+    },
+    {
+      "book": "matthew",
+      "chapter": 5,
+      "start": 43,
+      "end": 45
+    },
+    {
+      "book": "matthew",
+      "chapter": 4,
+      "start": 23,
+      "end": 25
+    },
+    {
+      "book": "matthew",
+      "chapter": 9,
+      "start": 36,
+      "end": 36
+    },
+    {
+      "book": "matthew",
+      "chapter": 5,
+      "start": 17,
+      "end": 20
+    },
+    {
+      "book": "matthew",
+      "chapter": 7,
+      "start": 15,
+      "end": 16
+    },
+    {
+      "book": "john",
+      "chapter": 7,
+      "start": 24,
+      "end": 24
     }
   ]
 }

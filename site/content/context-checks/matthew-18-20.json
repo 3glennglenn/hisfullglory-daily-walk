@@ -1,6 +1,7 @@
 {
   "slug": "matthew-18-20",
-  "review": "draft",
+  "review": "approved",
+  "approved": "2026-10-13",
   "drafted": "ai",
   "written": "2026-10-13",
   "verse": {
@@ -10,11 +11,17 @@
     "end": 20
   },
   "hook": "You know Matthew 18:20. But did you know Jesus said it while teaching what to do when a brother sins against you?",
-  "known": "Often quoted to say that Jesus is present whenever a few believers meet for prayer or worship.",
-  "who": "Jesus, answering his disciples (Matthew 18:1).",
-  "audience": "The disciples, as the ones who will have to deal with sin and conflict in the assembly.",
-  "setting": "A step-by-step instruction for when “your brother sins against you”: speak to him alone, then take one or two others, then tell the assembly.",
+  "story": "Two or three. It is about the smallest gathering there can be: a kitchen table, a hospital corridor. Jesus says it is enough.\n\nJewish teaching has a striking echo of this. In the Mishnah, usually dated around the year 200, Rabbi Hananiah ben Teradion says that when two people sit together and words of Torah pass between them, the Shekhinah, the presence of God, rests among them.\n\nJesus goes further. Where two or three gather in his name, the one who is present is himself: “there I am in the middle of them”.\n\nThe rabbi’s saying was written down after the time of Jesus, so it cannot tell us what his hearers already knew. It does show how a Jewish teacher could speak of God drawing near to the smallest circle. And it shows how much Jesus is claiming about who he is.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Mishnah, Pirkei Avot 3:2 (Sefaria)",
+      "url": "https://www.sefaria.org/Pirkei_Avot.3.2"
+    }
+  ],
+  "moment": "The disciples had come to Jesus with a question about rank: “Who then is greatest in the Kingdom of Heaven?” His answer fills the whole chapter, and it turns their question upside down. He speaks of children, of a shepherd who leaves ninety-nine sheep to look for one, and then of what to do when a brother does wrong.\n\nSo these words are for the people who will have to lead when he is gone. He is preparing them for the day a friendship breaks inside the community, and telling them they will not face that day alone.",
   "around": "The “two or three” first appear four verses earlier, as witnesses: “at the mouth of two or three witnesses every word may be established”. The verse just before speaks of two who agree about what they ask.",
+  "readings": "Most believers know this verse as a comfort: Jesus is present in the smallest prayer meeting. That reading is old, and it is loved.\n\nIn the passage itself the promise has a sharper edge. The two or three are people trying to put something right: a wrong that was done, a brother who will not listen. Some churches have therefore heard in these verses the authority Jesus gives his gathered people to decide hard matters together.\n\nBoth readings rest on the same sentence. He does not wait for a crowd. When even two or three act in his name, he is in the middle of it.",
   "point": "In its place the promise is that Jesus stands with his followers in the hard work of correcting and restoring someone. Many Christians also apply it to any small gathering. The passage itself is about winning back a brother and agreeing in prayer about it.",
   "basis": [
     {
@@ -28,6 +35,12 @@
       "chapter": 18,
       "start": 15,
       "end": 20
+    },
+    {
+      "book": "matthew",
+      "chapter": 18,
+      "start": 12,
+      "end": 14
     }
   ]
 }

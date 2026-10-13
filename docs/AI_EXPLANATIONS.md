@@ -10,8 +10,11 @@ keep the cost down; shorter chapter explanations follow in daily portions (see "
 the chapters").
 
 This changes two earlier rules on purpose. "AI Study" was deferred, and unsourced context
-was not published. Both now read: AI explanations are allowed as their own layer; sourced
-notes (`docs/STUDY_NOTES.md`) stay exactly as they were and are never written by AI.
+was not published. Both now read: AI explanations are allowed as their own layer, and
+sourced notes (`docs/STUDY_NOTES.md`) keep their own rules. On 2026-10-13 the founder
+decided that an AI model may draft sourced context too, as long as the page says so, the
+sources were actually opened and he approves it before it goes online (`CLAUDE.md`). That
+does not change this layer: an AI explanation names no sources and stays labelled as such.
 
 ## What it is, and what it is not
 
@@ -52,6 +55,11 @@ otherwise the book record (`aiFor` in `src/bible/ai.ts`).
 }]}
 ```
 
+A record written in the storytelling voice also carries `"voice": "story"` (see "Voice").
+Only the bookkeeping script reads that field; the app and the website ignore it. The
+script also counts every record written on or after 2026-10-14 as told in that voice,
+because the routine has used it since that day's run.
+
 `parseAiFile` in `src/bible/ai.ts` validates every file, for the app and the website alike.
 On the website an invalid file stops the build. In the app an invalid, missing or offline
 file shows no AI card at all. The app loads a book's file on demand and keeps it out of the
@@ -82,6 +90,26 @@ installable cache (`vite.config.ts`).
   dashes, no assumptions about the reader, growth attributed to God.
 - Record the model and the date. Keep `"review": "ai draft"` until a theological reader has
   checked the record; only then `"reviewed"`.
+
+## Voice
+
+Asked for by the founder on 2026-10-13, for everything that explains a verse, a chapter or
+a book: tell it as a story, warmly and with feeling, for believers and for people who do
+not believe. Open with the scene, the person or the tension, not with "This chapter".
+
+- The feeling has to come from what the text says. Invent nothing: no thoughts, faces,
+  weather, numbers or speech that the text does not give. Where a vivid sentence and an
+  accurate sentence pull apart, choose the accurate one.
+- Write with respect for the Bible, for every faith and for every reader. Never mock a
+  person, a people or a way of reading.
+- The explanations written before this voice are retold in it, in daily portions, as the
+  founder chose on 2026-10-13: the 66 book explanations first, then the 65 chapter
+  explanations of 12 and 13 October. Matthew's book explanation was retold that day as the
+  example to follow. `node scripts/ai-chapters.mjs status` says how many are left.
+- A retelling changes the telling, not the facts. What the earlier text says from outside
+  the Bible (dates, authors, history, how a passage is read) stays as it is, and nothing
+  of that kind is added. A scene or a quotation taken from the book itself is read in the
+  WEB text first (`node scripts/ai-chapters.mjs text <book> <chapter>`).
 
 ## How it is shown
 
@@ -114,15 +142,28 @@ production builds on 2026-10-12. At 30 a day the New Testament takes about 9 day
 whole Bible about 40. Pause it on that page when `status` reports nothing left, or sooner
 if the founder wants to stop.
 
+Since 2026-10-13 the routine's instructions have a second part: after the new chapters,
+retell eight earlier explanations in the storytelling voice (see "Voice") and commit them
+separately. At eight a day the 66 books take about nine days and the 65 chapters another
+eight. That part ends by itself when `retell-next` reports nothing left.
+
 `scripts/ai-chapters.mjs` does the bookkeeping: `status` counts what is left, `next 30`
 prints the next chapters with their WEB text, and `add drafts.json --model "<name>"` checks
 a batch of drafts (length, exact WEB quotations, no licensed translation names, no em
-dashes) and writes the records only if every draft passes.
+dashes) and writes the records only if every draft passes. For retelling, `retell-next 8`
+prints the next explanations still in the earlier voice with their present text,
+`retell drafts.json --model "<name>"` runs the same checks and replaces those texts, and
+`text <book> <chapter>` prints the WEB text of a chapter. A retold pilot chapter keeps its
+"How Christians read it" section and its translation notes as they were.
 
 ## Not done yet
 
 - Most chapters have no explanation of their own yet and show their book's explanation;
   `node scripts/ai-chapters.mjs status` gives the count.
+- 65 of the 66 book explanations and the 65 chapter explanations of 12 and 13 October are
+  still in the earlier, plainer voice (counted on 2026-10-13).
+- Nobody reads a retelling before it goes online. The checks catch a misquoted verse, not
+  a wrong detail told in the writer's own words.
 - The app change reached `main` with pull request #2. The Reader card was viewed in a
   local build at phone width, not on a real device.
 - No theological reader has reviewed any explanation.

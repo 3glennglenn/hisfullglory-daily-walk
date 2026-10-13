@@ -4,13 +4,15 @@
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import DraftBanner from "../../components/DraftBanner.astro";
 import EditorialNote from "../../components/EditorialNote.astro";
-import { appUrl } from "../../config";
+import { appUrl, shopUrl } from "../../config";
 import Base from "../../layouts/Base.astro";
+import { blocks } from "../../lib/ai";
 import {
   checkParts,
   publishedChecks,
   refHref,
   refLabel,
+  storyStatuses,
   verses,
   type ContextCheck,
 } from "../../lib/content";
@@ -55,21 +57,63 @@ const label = item && refLabel(item.verse);
             <p class="small muted">{label}, World English Bible</p>
           </blockquote>
 
-          <dl class="parts">
-            {checkParts.map(([name, heading]) => (
-              <>
-                <dt>{heading}</dt>
-                <dd>{item[name]}</dd>
-              </>
-            ))}
-          </dl>
+          <section class="story" data-story={item.storyStatus}>
+            <h2>The story around it</h2>
+            {blocks(item.story).map((block) =>
+              "list" in block ? (
+                <ul>
+                  {block.list.map((line) => (
+                    <li>{line}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>{block.paragraph}</p>
+              ),
+            )}
+            <p class="small muted status">{storyStatuses[item.storyStatus]}</p>
+          </section>
+
+          {
+            item.voices.length > 0 && (
+              <section class="voices" data-layer="voices">
+                <h2>What others have said</h2>
+                {item.voices.map((voice) => (
+                  <figure class="card voice">
+                    <blockquote>{voice.words}</blockquote>
+                    <figcaption class="small muted">
+                      {voice.name}, {voice.about}.{" "}
+                      <a href={voice.source.url} rel="noopener">
+                        Source
+                      </a>
+                    </figcaption>
+                  </figure>
+                ))}
+              </section>
+            )
+          }
+
+          {
+            checkParts.map(([name, heading]) => (
+              <section class="part" data-part={name}>
+                <h2>{heading}</h2>
+                {blocks(item[name]).map((block) =>
+                  "list" in block ? (
+                    <ul>
+                      {block.list.map((line) => (
+                        <li>{line}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>{block.paragraph}</p>
+                  ),
+                )}
+              </section>
+            ))
+          }
 
           <div class="card sources" data-layer="sourced">
             <h2>Why we say this</h2>
-            <p class="small muted">
-              Everything on this page rests on the passage itself. Read it in
-              full in the World English Bible:
-            </p>
+            <p class="small muted">Bible passages this page rests on, in the World English Bible:</p>
             <ul>
               {item.basis.map((ref) => (
                 <li>
@@ -77,6 +121,25 @@ const label = item && refLabel(item.verse);
                 </li>
               ))}
             </ul>
+            {item.sources.length > 0 && (
+              <>
+                <p class="small muted">Sources outside the Bible, for the story:</p>
+                <ul>
+                  {item.sources.map((source) => (
+                    <li>
+                      <a href={source.url} rel="noopener">
+                        {source.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <p class="small muted dispute">
+              Do you know a source that says otherwise, or adds to this?{" "}
+              <a href={`${shopUrl}/pages/contact`}>Send it to us</a> and we will
+              look at it.
+            </p>
           </div>
 
           <div class="actions">
@@ -144,16 +207,48 @@ const label = item && refLabel(item.verse);
     font-weight: 600;
     color: var(--muted);
   }
-  .parts {
-    margin: 32px 0 0;
+  .story {
+    margin-top: 32px;
   }
-  .parts dt {
-    margin-top: 24px;
-    font-weight: 600;
-    font-size: 1.05rem;
+  .story h2 {
+    margin-bottom: 8px;
   }
-  .parts dd {
-    margin: 6px 0 0;
+  .story .status {
+    margin-top: 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--border);
+  }
+  .dispute {
+    margin-top: 14px;
+  }
+  .voices {
+    margin-top: 32px;
+  }
+  .voices h2 {
+    margin-bottom: 12px;
+  }
+  .voice {
+    margin: 0;
+  }
+  .voice + .voice {
+    margin-top: 12px;
+  }
+  .voice blockquote {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  .voice blockquote::before {
+    content: "\201C";
+  }
+  .voice blockquote::after {
+    content: "\201D";
+  }
+  .part {
+    margin-top: 32px;
+  }
+  .part h2 {
+    margin-bottom: 8px;
   }
   .sources {
     margin-top: 40px;

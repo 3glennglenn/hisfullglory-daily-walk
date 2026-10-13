@@ -163,23 +163,38 @@ export interface ContextCheck extends Editorial {
   verse: PassageRef;
   /** One or two sentences that open the page, and the line a video can start with. */
   hook: string;
-  known: string;
-  who: string;
-  audience: string;
-  setting: string;
+  /** The scene: who is speaking, to whom, where, and what was happening to them. */
+  moment: string;
   around: string;
+  /** How the verse has been read, by whom and when, set side by side without a winner. */
+  readings: string;
   point: string;
+  /** The story around the verse: what was going on, or what the verse went on to mean. */
+  story: string;
+  /** How firm the story is. Anything from outside the Bible has to name its sources. */
+  storyStatus: keyof typeof storyStatuses;
+  sources: { title: string; url: string }[];
+  /** What named people said about the verse or its teaching, word for word, each with its source. */
+  voices: { name: string; about: string; words: string; source: { title: string; url: string } }[];
   basis: PassageRef[];
 }
 
-/** The parts of a context check, with their headings, in the order a page shows them. */
+/** The line a page shows under the story, so a reader knows what it rests on. */
+export const storyStatuses = {
+  scripture: "Drawn from the Bible itself.",
+  history: "Background from outside the Bible. The sources are listed below.",
+  reading: "One reading of the evidence. Scholars differ, and the sources are listed below.",
+} as const;
+
+/**
+ * The parts that follow the story, with their headings, in the order a page shows them.
+ * Each is told as part of one continuing story, in paragraphs, not as a list of facts.
+ */
 export const checkParts = [
-  ["known", "How it is often quoted", 40, 220],
-  ["who", "Who is speaking", 15, 320],
-  ["audience", "To whom", 15, 420],
-  ["setting", "The setting", 30, 420],
-  ["around", "What stands around it", 60, 620],
-  ["point", "What the context adds", 60, 520],
+  ["moment", "The moment", 200, 1800],
+  ["around", "What stands around it", 100, 1400],
+  ["readings", "How people have read it", 200, 1800],
+  ["point", "What the context adds", 80, 1000],
 ] as const;
 
 export function parseContextCheck(input: unknown, slug: string, bible: BibleData): ContextCheck {
@@ -197,6 +212,31 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
     return value;
   };
   const parts = Object.fromEntries(checkParts.map(([name, , min, max]) => [name, part(name, min, max)]));
+  check(typeof raw.storyStatus === "string" && raw.storyStatus in storyStatuses, where, "storyStatus must be scripture, history or reading");
+  const storyStatus = raw.storyStatus as keyof typeof storyStatuses;
+  check(raw.sources === undefined || Array.isArray(raw.sources), where, "sources must be a list");
+  const sources = ((raw.sources ?? []) as Raw[]).map((entry, index) => {
+    const at = `${where} source ${index + 1}`;
+    check(typeof entry.url === "string" && entry.url.startsWith("https://"), at, "needs an https link");
+    return { title: text(entry.title, 3, 140, at), url: entry.url };
+  });
+  // A story that leans on anything outside the Bible must say where it comes from.
+  check(storyStatus === "scripture" || sources.length > 0, where, "a story from outside the Bible needs its sources");
+  check(raw.voices === undefined || (Array.isArray(raw.voices) && raw.voices.length <= 4), where, "voices must be a list of at most four");
+  const voices = ((raw.voices ?? []) as Raw[]).map((entry, index) => {
+    const at = `${where} voice ${index + 1}`;
+    const source = entry.source as Raw | undefined;
+    // Someone else's words are only shown with the place where they can be read.
+    check(source && typeof source.url === "string" && source.url.startsWith("https://"), at, "needs a source with an https link");
+    const words = text(entry.words, 20, 400, `${at} words`);
+    check(!quotations(words).length, at, "curly double quotes are for the WEB text; the page adds its own marks");
+    return {
+      name: text(entry.name, 3, 80, `${at} name`),
+      about: text(entry.about, 10, 160, `${at} about`),
+      words,
+      source: { title: text(source.title, 3, 140, `${at} source`), url: source.url },
+    };
+  });
   return {
     slug,
     ...editorial(raw, where),
@@ -204,6 +244,10 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
     // The hook is also the page description, so it keeps to that length.
     hook: part("hook", 60, 160),
     ...(parts as Pick<ContextCheck, (typeof checkParts)[number][0]>),
+    story: part("story", 200, 2000),
+    storyStatus,
+    sources,
+    voices,
     basis: around.map((passage) => passage.ref),
   };
 }

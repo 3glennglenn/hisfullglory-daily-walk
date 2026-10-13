@@ -1,0 +1,93 @@
+{
+  "slug": "matthew-5-39",
+  "review": "approved",
+  "approved": "2026-10-13",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "verse": {
+    "book": "matthew",
+    "chapter": 5,
+    "start": 39,
+    "end": 39
+  },
+  "hook": "You know about turning the other cheek. But did you know Jesus names the right cheek, and that a blow there was a special kind of insult?",
+  "story": "Notice one small word: the right cheek.\n\nAlmost everyone used the right hand, and a right hand reaches another person’s right cheek with its back. That made it an insult more than an attack. Jewish law, written down some generations later in the Mishnah, counted it the graver offense and doubled the fine: two hundred dinars for a slap, four hundred for a blow with the back of the hand.\n\nSo Jesus is probably not picturing a brawl. He is picturing a person being shamed.\n\nThe writer Walter Wink saw something daring here. A backhand, he said, was how a master reminded a slave of his place, and many who listened to Jesus knew that blow. If such a person quietly turns the other cheek, he has not struck back, and he has not bowed either. Without a word he has said: I am a human being, as you are.\n\nNot every scholar reads it this way. Some hear a simpler command, not to repay in kind, and warn against finding one fixed strategy in it. On either reading this is not weakness. It is a courage that refuses both revenge and shame.",
+  "storyStatus": "reading",
+  "sources": [
+    {
+      "title": "Mishnah, Bava Kamma 8:6 (Sefaria)",
+      "url": "https://www.sefaria.org/Mishnah_Bava_Kamma.8.6"
+    },
+    {
+      "title": "Walter Wink, Nonviolence for the Violent, lecture transcript (Lutheran Peace Fellowship)",
+      "url": "https://www.lutheranpeace.org/articles/transcript-of-walter-winks-nonviolence-for-the-violent/"
+    },
+    {
+      "title": "Wikipedia: Turning the other cheek",
+      "url": "https://en.wikipedia.org/wiki/Turning_the_other_cheek"
+    },
+    {
+      "title": "M. K. Gandhi, An Autobiography, part 1, chapter 20 (mkgandhi.org)",
+      "url": "https://www.mkgandhi.org/autobio/chap20.htm"
+    }
+  ],
+  "voices": [
+    {
+      "name": "Mohandas Gandhi",
+      "about": "Hindu leader of India’s independence movement, in his autobiography",
+      "words": "But the New Testament produced a different impression, especially the Sermon on the Mount which went straight to my heart.",
+      "source": {
+        "title": "M. K. Gandhi, An Autobiography, part 1, chapter 20 (mkgandhi.org)",
+        "url": "https://www.mkgandhi.org/autobio/chap20.htm"
+      }
+    }
+  ],
+  "moment": "Word had spread. Jesus had been going through Galilee healing “every disease and every sickness among the people”, and by now crowds were following him from as far as Jerusalem and the far side of the Jordan. They were not the powerful. They were the sick, their families and the people who had carried them there. Matthew says that when Jesus looked at crowds like this he saw people “harassed and scattered, like sheep without a shepherd”.\n\nHe went up the hillside and sat down, and his disciples gathered close. Many readers have felt the echo: long before, Moses had gone up a mountain and come down with God’s law. Now a teacher sits on a mountain and says, again and again, “But I tell you”.",
+  "around": "The rule Jesus quotes, “An eye for an eye, and a tooth for a tooth”, was not cruelty. In the law of Moses it told judges to make the penalty fit the harm (Exodus 21:23-25). It was justice with a measure.\n\nJesus does not call it wrong. He asks for something no court can order. He gives four small scenes from ordinary life: a blow to the cheek, a lawsuit over a coat, being forced to go a mile, someone asking for a loan. Each time the answer gives more than was taken. And then he says the hardest thing of all: “love your enemies”.",
+  "readings": "Few sentences have been argued over as much as this one.\n\nThe Russian novelist Leo Tolstoy took it with complete literalness. In The Kingdom of God Is Within You he argued that a follower of Jesus may never answer force with force, for any reason.\n\nWalter Wink heard the opposite of passivity: a way for people without power to stand up without striking back.\n\nMany churches have taught a third reading. Jesus, they say, forbids personal revenge, while protecting other people and the work of courts and governments are a separate question.\n\nAnd some scholars warn against turning the saying into a rule book at all. They read it as wisdom for the heart, to be applied with judgment.\n\nWhat all these readings share is the thing Jesus plainly forbids: paying a person back in the coin they used on you.",
+  "point": "Jesus forbids hitting back. That much is plain. The small word right suggests he has more than injury in view: he is speaking to people who know what it is to be shamed. He does not tell them the shame is deserved. He shows them a way to keep their dignity without taking anyone else’s.\n\nHe also knew what this teaching would cost. Later he warned that following him would divide even families: “A man’s foes will be those of his own household.”",
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 5,
+      "start": 1,
+      "end": 2
+    },
+    {
+      "book": "matthew",
+      "chapter": 5,
+      "start": 38,
+      "end": 45
+    },
+    {
+      "book": "exodus",
+      "chapter": 21,
+      "start": 22,
+      "end": 25
+    },
+    {
+      "book": "matthew",
+      "chapter": 4,
+      "start": 23,
+      "end": 25
+    },
+    {
+      "book": "matthew",
+      "chapter": 9,
+      "start": 36,
+      "end": 36
+    },
+    {
+      "book": "exodus",
+      "chapter": 19,
+      "start": 20,
+      "end": 20
+    },
+    {
+      "book": "matthew",
+      "chapter": 10,
+      "start": 34,
+      "end": 37
+    }
+  ]
+}
