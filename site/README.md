@@ -119,7 +119,7 @@ Done from the build order in `docs/WEBSITE_PLAN.md`, section 9:
 
 Addresses have no trailing slash (`/bible/psalms/23`); each page is built as
 `<address>/index.html` and `vercel.json` is ready for that.
-Deployed for review only, at https://hisfullglory-site.vercel.app (Vercel project
-`hisfullglory-site`, created 2026-10-12 and connected to this repository; with its
-production branch set to `main`, a push to `main` redeploys it). `vercel.json` sends a
-noindex header on that address. No domain, DNS or Shopify change has been made for the site.
+Live on https://hisfullglory.com since 2026-10-13 (Vercel project `hisfullglory-site`,
+connected to this repository; a push to `main` redeploys it). The review address
+https://hisfullglory-site.vercel.app stays, and `vercel.json` sends a noindex header there
+only. `vercel.json` also sends old shop addresses to `shop.hisfullglory.com`.

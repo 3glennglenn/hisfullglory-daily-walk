@@ -1,7 +1,7 @@
 # HisFullGlory Daily Walk: working notes for Claude
 
 Read `AGENTS.md` first: its product, privacy, Scripture and migration rules still apply.
-This file adds the current state and how to work with the founder. Last updated 2026-10-12.
+This file adds the current state and how to work with the founder. Last updated 2026-10-13.
 
 ## Working with the founder
 
@@ -33,8 +33,8 @@ This file adds the current state and how to work with the founder. Last updated 
 
 - Supabase project `fccwqguqhnbayuowmamy`: migrations 001 to 006 applied; their stored SQL
   matches `supabase/migrations/` in this repo. RLS is on for every public table.
-- `app.hisfullglory.com` production is a Vercel build of `main` at ee01209, the merge of
-  pull request #2 (study library, launch topics, AI explanations, shop prices and the
+- `app.hisfullglory.com` production is a Vercel build of `main`. The app's code is that of
+  ee01209, the merge of pull request #2 (study library, launch topics, AI explanations, shop prices and the
   `site/` folder). Vercel built and assigned it by itself when the founder merged.
   Checked on the live address afterwards, as a guest: the Reader's Context tab for John 3
   shows the sourced note and the AI card as two separate blocks, `/ai/john.json` and
@@ -71,6 +71,9 @@ This file adds the current state and how to work with the founder. Last updated 
 - `circles-v1`: merged into `main` on 2026-10-12 (pull request #1); kept for reference.
 - `study-first` and `website`: merged into `main` on 2026-10-12 (pull request #2); kept
   for reference. Start new work on a fresh branch from `main`.
+- `site-seo`, `site-topics` and `site-domain-move`: merged on 2026-10-13 (pull requests #3
+  and #5; #5 carried the commits of #4). The app's code has not changed since pull
+  request #2.
 
 ## Study notes
 
@@ -89,21 +92,36 @@ chapters used by the launch topics.
 3. Home and onboarding "study first": open a passage, read context, write a reflection.
 4. Rename the Shop entry to Resources, matched to study goals.
 
-## New website (in progress): full plan in `docs/WEBSITE_PLAN.md`
+## Website: live on `hisfullglory.com` since 2026-10-13; plan in `docs/WEBSITE_PLAN.md`
 
-A separate site for `hisfullglory.com` (Bible, topic and article pages, pre-rendered for
-search) reading the same study files and topic graph as the app; Shopify moves to
-`shop.hisfullglory.com` for checkout only. Check the Meta Pixel keeps working when the
-domain moves. The site lives in `site/`; `site/README.md` says how to run it and which
-build steps are done.
+A separate site (Bible, topic and article pages, pre-rendered for search) that reads the
+same study files and topic graph as the app. It lives in `site/`; `site/README.md` says how
+to run it and what is built. The shop moved to `shop.hisfullglory.com` the same night.
 
-Since 2026-10-12 the site has its own Vercel project, `hisfullglory-site` (root directory
-`site`, framework Astro, source files outside the root directory included), reachable for
-review at https://hisfullglory-site.vercel.app. That address sends a noindex header. The
-founder connected the project to this repository on 2026-10-12. Its production branch has
-to be `main` (it was `website` until pull request #2). If the review site stops following
-`main`, check that setting first: Settings, Environments, Production, Branch Tracking.
-Every domain, DNS or Shopify step still needs the founder's approval first.
+Verified on 2026-10-13 after the move: `hisfullglory.com` serves the site from Vercel with
+no noindex header; a wrong address gives the not-found page; the sitemap lists 1,273
+addresses; old shop addresses (products, collections, cart, policies, pages) get a 308 to
+the same path on the shop; the shop's home page, two product pages, cart, policies and
+contact page answer on the new address; the app is unaffected.
+
+Not done or not checked:
+- `www.hisfullglory.com` still points at Shopify and ends up in the shop. It should
+  redirect to the site: Vercel already has the redirect, the DNS record has not changed.
+- Checkout with a real order, the Meta Pixel and the product catalog on the new shop
+  address.
+- The app builds product links from `storeUrl` in `src/config.ts`, still the old address.
+  They work through the redirect; point them at the shop directly when the app is next
+  changed.
+- The Shopify DNS records have a 24-hour lifetime, so until 2026-10-14 some visitors may
+  still be sent to the shop by a remembered address.
+
+How it is set up: the Vercel project `hisfullglory-site` (root directory `site`, Astro,
+source files outside the root directory included) has `hisfullglory.com` as its production
+domain and follows `main`; https://hisfullglory-site.vercel.app stays as a review address
+with a noindex header. The domain is managed in Shopify (Settings, Domains): its A record
+points at Vercel, the AAAA record is removed, and `shop`, `www` and `account` point at
+Shopify. Claude cannot change domain, DNS or certificate settings; the founder makes those
+changes himself, one approved step at a time.
 
 ## Environment notes
 
