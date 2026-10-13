@@ -174,6 +174,8 @@ export interface ContextCheck extends Editorial {
   /** How firm the story is. Anything from outside the Bible has to name its sources. */
   storyStatus: keyof typeof storyStatuses;
   sources: { title: string; url: string }[];
+  /** What named people said about the verse or its teaching, word for word, each with its source. */
+  voices: { name: string; about: string; words: string; source: { title: string; url: string } }[];
   basis: PassageRef[];
 }
 
@@ -186,7 +188,7 @@ export const storyStatuses = {
 
 /** The parts of a context check, with their headings, in the order a page shows them. */
 export const checkParts = [
-  ["known", "How it is often quoted", 40, 220],
+  ["known", "How many people know it", 40, 220],
   ["who", "Who is speaking", 15, 320],
   ["audience", "To whom", 15, 420],
   ["setting", "The setting", 30, 420],
@@ -219,6 +221,21 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
   });
   // A story that leans on anything outside the Bible must say where it comes from.
   check(storyStatus === "scripture" || sources.length > 0, where, "a story from outside the Bible needs its sources");
+  check(raw.voices === undefined || (Array.isArray(raw.voices) && raw.voices.length <= 4), where, "voices must be a list of at most four");
+  const voices = ((raw.voices ?? []) as Raw[]).map((entry, index) => {
+    const at = `${where} voice ${index + 1}`;
+    const source = entry.source as Raw | undefined;
+    // Someone else's words are only shown with the place where they can be read.
+    check(source && typeof source.url === "string" && source.url.startsWith("https://"), at, "needs a source with an https link");
+    const words = text(entry.words, 20, 400, `${at} words`);
+    check(!quotations(words).length, at, "curly double quotes are for the WEB text; the page adds its own marks");
+    return {
+      name: text(entry.name, 3, 80, `${at} name`),
+      about: text(entry.about, 10, 160, `${at} about`),
+      words,
+      source: { title: text(source.title, 3, 140, `${at} source`), url: source.url },
+    };
+  });
   return {
     slug,
     ...editorial(raw, where),
@@ -226,9 +243,10 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
     // The hook is also the page description, so it keeps to that length.
     hook: part("hook", 60, 160),
     ...(parts as Pick<ContextCheck, (typeof checkParts)[number][0]>),
-    story: part("story", 200, 1700),
+    story: part("story", 200, 2000),
     storyStatus,
     sources,
+    voices,
     basis: around.map((passage) => passage.ref),
   };
 }

@@ -77,6 +77,14 @@ that story rests on: `scripture` (the Bible itself), `history` (background from 
 the Bible) or `reading` (one reading that scholars dispute). For the last two, `sources`
 must list what was used, and the page shows those links. Rules for a story:
 
+- Tell it as a story, with feeling: a scene, people, what was at stake. The feeling has
+  to come from what the sources say. No invented detail, and no claim made larger than
+  its source. The founder asked for this style on 2026-10-13.
+- Write with respect, for the faith and for readers. `known` says what a verse means to
+  the people who quote it; it never makes a common use look foolish.
+- `voices` holds what named people said, word for word, each with the page where it can
+  be read. The page adds the quotation marks, because curly double quotes in the files
+  are reserved for the WEB text.
 - Use a source only after opening it, link it, and tell the story in our own words.
 - Say who holds a reading and that others differ, where that is the case. The right
   cheek in Matthew 5:39 is the model: the Mishnah for the facts, Walter Wink for the

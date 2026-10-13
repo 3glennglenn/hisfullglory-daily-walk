@@ -10,13 +10,13 @@
     "end": 13
   },
   "hook": "You know the saying that God never gives you more than you can handle. But did you know 1 Corinthians 10:13 is about temptation?",
-  "known": "Usually passed on as a saying that God will never give a person more than they can handle.",
+  "known": "Many people know this as the comforting saying that God will not give them more than they can bear.",
   "who": "Paul, writing to the church in Corinth.",
   "audience": "Believers he calls “brothers”, some of whom felt sure of themselves: “let him who thinks he stands be careful that he doesn’t fall”.",
   "setting": "A warning drawn from Israel’s time in the wilderness. Paul lists what went wrong there, idolatry, sexual immorality, testing and grumbling, and says “these things were our examples”.",
   "around": "The verse speaks of temptation: “God is faithful, who will not allow you to be tempted above what you are able, but will with the temptation also make the way of escape”. The next verse says what to do with that: “flee from idolatry”.",
   "point": "The promise is about temptation to sin, and it comes with a way out and a command to take it. It does not say that suffering will never be more than a person can bear. Paul himself writes elsewhere that he and his companions “were weighed down exceedingly, beyond our power” (2 Corinthians 1:8).",
-  "story": "Paul’s warning retells a story his readers knew. Israel had only just been brought out of Egypt when, with Moses up the mountain, the people made a golden calf, held a feast and “sat down to eat and to drink, and rose up to play”. Paul quotes that very line.\n\nHe writes this to a church where some felt free to sit at table in an idol’s temple (1 Corinthians 8:10). His point is that the people who fell in the wilderness were not outsiders. They had passed through the sea. Then he adds the promise: the temptation is ordinary, God is faithful, and there is a way out.",
+  "story": "Paul reaches for one of the darkest moments in his people’s memory. They had walked out of Egypt with the waters standing like a wall on either side. They were camped at the mountain where God had met them. And with Moses gone up the mountain, they made a calf of gold, held a feast and “sat down to eat and to drink, and rose up to play”.\n\nPaul quotes that very sentence to the Corinthians. Some of them felt strong enough to sit at table in an idol’s temple (1 Corinthians 8:10). His warning is gentle and unsparing at once: the people who fell in the wilderness were no strangers to God. They had passed through the sea.\n\nThen, at the point of greatest danger, comes the kindness. No temptation is unique. God is faithful. And he does not leave anyone without a door: “the way of escape”.",
   "storyStatus": "scripture",
   "basis": [
     {
@@ -48,6 +48,12 @@
       "chapter": 8,
       "start": 10,
       "end": 10
+    },
+    {
+      "book": "exodus",
+      "chapter": 14,
+      "start": 21,
+      "end": 22
     }
   ]
 }

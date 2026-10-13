@@ -10,13 +10,13 @@
     "end": 11
   },
   "hook": "You know Jeremiah 29:11. But did you know it was written to exiles who had just been told to settle in for seventy years?",
-  "known": "Often quoted on its own as a personal promise that God has a good plan for one person’s life.",
+  "known": "Many people hold this verse close as a personal promise that God has a good plan for their life.",
   "who": "The LORD, in a letter that the prophet Jeremiah sent from Jerusalem (Jeremiah 29:1).",
   "audience": "The people Nebuchadnezzar had “carried away captive from Jerusalem to Babylon”: elders, priests, prophets and all the people. The promise is spoken to them together.",
   "setting": "The exile in Babylon. The letter tells the exiles to build houses, plant gardens, raise families and “Seek the peace of the city” where they now live.",
   "around": "The verse before it sets the time: “After seventy years are accomplished for Babylon, I will visit you”. The verses after it promise that the people will call and pray and be heard, and that God will bring them back.",
   "point": "The hope is real, and it is slow. Seventy years is a lifetime. The promise is given to a people in exile, and it comes with an instruction to live faithfully where they are in the meantime.",
-  "story": "The chapter just before this letter tells of another prophet, who told Jerusalem what it wanted to hear. Hananiah stood in the temple and announced that God would break the power of Babylon and bring the exiles home “Within two full years”. To make his point he took the bar Jeremiah wore on his neck as a sign and broke it in front of everyone.\n\nJeremiah’s answer was blunt: “The LORD has not sent you, but you make this people trust in a lie.” Hananiah died that same year.\n\nThe letter to the exiles follows straight after. Its hope is real, and it is the slower and harder message of the two: seventy years, and not two.",
+  "story": "Picture the people who first heard these words. They had seen their king taken away. They had been marched from their homes to Babylon, the capital of the empire that had conquered them. Every one of them was asking the same question: how long?\n\nBack in Jerusalem a prophet named Hananiah had an answer everyone wanted. In the temple, in front of the crowd, he took the wooden bar Jeremiah wore on his neck as a sign of Babylon’s rule, and broke it. “Within two full years”, he promised, it would all be over.\n\nJeremiah had to say what nobody wanted to hear: “The LORD has not sent you, but you make this people trust in a lie.” Before the year was out, Hananiah was dead.\n\nThen comes the letter. Not two years. Seventy. Long enough that many who heard it read aloud would never see home again. And it is to them that God says he thinks thoughts of peace, “to give you hope and a future”.",
   "storyStatus": "scripture",
   "basis": [
     {
@@ -54,6 +54,12 @@
       "chapter": 28,
       "start": 15,
       "end": 17
+    },
+    {
+      "book": "jeremiah",
+      "chapter": 28,
+      "start": 12,
+      "end": 14
     }
   ]
 }

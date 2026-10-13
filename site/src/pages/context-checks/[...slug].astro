@@ -73,6 +73,25 @@ const label = item && refLabel(item.verse);
             <p class="small muted status">{storyStatuses[item.storyStatus]}</p>
           </section>
 
+          {
+            item.voices.length > 0 && (
+              <section class="voices" data-layer="voices">
+                <h2>What others have said</h2>
+                {item.voices.map((voice) => (
+                  <figure class="card voice">
+                    <blockquote>{voice.words}</blockquote>
+                    <figcaption class="small muted">
+                      {voice.name}, {voice.about}.{" "}
+                      <a href={voice.source.url} rel="noopener">
+                        Source
+                      </a>
+                    </figcaption>
+                  </figure>
+                ))}
+              </section>
+            )
+          }
+
           <dl class="parts">
             {checkParts.map(([name, heading]) => (
               <>
@@ -191,6 +210,29 @@ const label = item && refLabel(item.verse);
   }
   .dispute {
     margin-top: 14px;
+  }
+  .voices {
+    margin-top: 32px;
+  }
+  .voices h2 {
+    margin-bottom: 12px;
+  }
+  .voice {
+    margin: 0;
+  }
+  .voice + .voice {
+    margin-top: 12px;
+  }
+  .voice blockquote {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  .voice blockquote::before {
+    content: "\201C";
+  }
+  .voice blockquote::after {
+    content: "\201D";
   }
   .parts {
     margin: 32px 0 0;

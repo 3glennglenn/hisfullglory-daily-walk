@@ -24,8 +24,11 @@ This file adds the current state and how to work with the founder. Last updated 
 - Community annotations on passages are wanted, always labelled apart from Scripture and
   from sourced context. The founder's picture (2026-10-13): annotations in the manner of
   Genius, with up and down votes, and a way for a reader to dispute a context note by
-  bringing a source, after which the note can be changed. Not designed or built yet;
-  whether votes should also apply to verse context is still open.
+  bringing a source, after which the note can be changed. He wants two separate sections
+  per verse: one for added context and other ways people read the verse, with votes, and
+  one for what the verse means to people personally, with their stories and memories.
+  Not designed or built yet; whether votes should also apply to the editorial verse
+  context is still open.
 - AI explanations are allowed since 2026-10-12, as a separate labelled layer written ahead
   of time (no runtime AI). Every book has one; a daily cloud routine adds 30 chapter
   explanations to `main`, so pull before you work. Each of its pushes redeploys the app
@@ -39,9 +42,12 @@ This file adds the current state and how to work with the founder. Last updated 
 - Context checks are the first selling point the founder chose (2026-10-13): a well-known
   verse with the story around it, for the site and for daily short videos that open with
   "You know this verse. But did you know...". What a video says must be on the site first.
-  The founder wants history, anecdotes and striking facts, not only the surrounding text.
-  A story therefore says what it rests on: the Bible itself, outside sources, or one
-  reading that scholars dispute (`site/README.md`).
+  The founder wants history, anecdotes and striking facts, not only the surrounding text,
+  told with feeling so that it moves believers and non-believers alike, and always with
+  respect for the faith. He leaves checking the facts to Claude: a moving claim that the
+  sources do not carry is rewritten until it is true. A story therefore says what it
+  rests on: the Bible itself, outside sources, or one reading that scholars dispute
+  (`site/README.md`).
 
 ## Live state (verified 2026-10-12, evening)
 

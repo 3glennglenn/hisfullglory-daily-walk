@@ -10,14 +10,44 @@
     "end": 1
   },
   "hook": "You know “Don’t judge”. But did you know the same paragraph ends with helping your brother get the speck out of his eye?",
-  "known": "Often quoted to say that nobody may call anything wrong.",
+  "known": "Many people know this verse as a call not to look down on others.",
   "who": "Jesus, in the Sermon on the Mount (Matthew 5 to 7).",
   "audience": "His disciples, with the crowds listening (Matthew 5:1-2).",
   "setting": "Part of a long teaching on how his followers are to live with God and with one another.",
   "around": "The next verses give the reason and a picture: “with whatever measure you measure, it will be measured to you”, and a man with a beam in his own eye offering to remove a speck from his brother’s. Jesus does not end by leaving the speck where it is. He ends: “First remove the beam out of your own eye, and then you can see clearly to remove the speck out of your brother’s eye.”",
   "point": "The warning is against hypocritical judgment, the kind that sees faults in others and not in oneself. The passage still expects followers of Jesus to help one another see clearly, after looking at themselves first.",
-  "story": "The man saying this held no office. In his home town people asked, “Isn’t this the carpenter’s son?” Yet when he finished this sermon, Matthew says, “the multitudes were astonished at his teaching, for he taught them with authority, and not like the scribes.”\n\nThroughout the sermon Jesus does not quote other teachers. He says what he himself requires. Here he turns the question around: before weighing anyone else, look at the measure you use.",
-  "storyStatus": "scripture",
+  "story": "He held no office and had no famous teacher behind him. In his home town they asked, “Isn’t this the carpenter’s son?” He went up a hillside, sat down and began to speak, and the world has not finished listening.\n\nHe did not lean on the great names. He spoke as if the last word was his to give. Love your enemies. Pray for those who mistreat you. Take the beam out of your own eye first. When he stopped, Matthew says, “the multitudes were astonished at his teaching, for he taught them with authority, and not like the scribes.”\n\nSome of it had been said before. Israel’s Scriptures already told God’s people to love their neighbor and to feed an enemy who is hungry (Leviticus 19:18, Proverbs 25:21). What Jesus does is gather it, sharpen it and ask for all of it, from the heart, toward everyone.\n\nThe astonishment never quite wore off. Centuries later, people far outside the church were still stopped by this sermon, as the voices below show.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "M. K. Gandhi, An Autobiography, part 1, chapter 20 (mkgandhi.org)",
+      "url": "https://www.mkgandhi.org/autobio/chap20.htm"
+    },
+    {
+      "title": "Thomas Jefferson to John Adams, 12 October 1813 (Thomas Jefferson Foundation)",
+      "url": "https://tjrs.monticello.org/letter/297"
+    }
+  ],
+  "voices": [
+    {
+      "name": "Mohandas Gandhi",
+      "about": "Hindu leader of India’s independence movement, in his autobiography",
+      "words": "But the New Testament produced a different impression, especially the Sermon on the Mount which went straight to my heart.",
+      "source": {
+        "title": "M. K. Gandhi, An Autobiography, part 1, chapter 20 (mkgandhi.org)",
+        "url": "https://www.mkgandhi.org/autobio/chap20.htm"
+      }
+    },
+    {
+      "name": "Thomas Jefferson",
+      "about": "third president of the United States, in a letter of 1813 about the words of Jesus he had gathered from the Gospels",
+      "words": "there will be found remaining the most sublime and benevolent code of morals which has ever been offered to man.",
+      "source": {
+        "title": "Thomas Jefferson to John Adams, 12 October 1813 (Thomas Jefferson Foundation)",
+        "url": "https://tjrs.monticello.org/letter/297"
+      }
+    }
+  ],
   "basis": [
     {
       "book": "matthew",
@@ -42,6 +72,24 @@
       "chapter": 13,
       "start": 54,
       "end": 56
+    },
+    {
+      "book": "leviticus",
+      "chapter": 19,
+      "start": 17,
+      "end": 18
+    },
+    {
+      "book": "proverbs",
+      "chapter": 25,
+      "start": 21,
+      "end": 22
+    },
+    {
+      "book": "matthew",
+      "chapter": 5,
+      "start": 43,
+      "end": 45
     }
   ]
 }

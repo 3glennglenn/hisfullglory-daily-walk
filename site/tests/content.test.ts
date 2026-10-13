@@ -135,6 +135,13 @@ test("a context check must quote the verse or the passages around it exactly", (
   assert.throws(() => parseContextCheck({ ...item, storyStatus: "history", sources: [] }, item.slug, bible), /needs its sources/);
   assert.throws(() => parseContextCheck({ ...item, storyStatus: "reading" }, item.slug, bible), /needs its sources/);
   assert.throws(() => parseContextCheck({ ...item, storyStatus: "hearsay" }, item.slug, bible), /storyStatus/);
+  // Someone else's words need a source, and may not borrow the marks reserved for Scripture.
+  const voice = { name: "A reader", about: "someone who is quoted here", words: "This verse carried me through a hard year." };
+  assert.throws(() => parseContextCheck({ ...item, voices: [voice] }, item.slug, bible), /needs a source/);
+  assert.throws(
+    () => parseContextCheck({ ...item, voices: [{ ...voice, words: "He called it “hope and a future” in his letter.", source: { title: "A page", url: "https://example.org/" } }] }, item.slug, bible),
+    /curly double quotes/,
+  );
   assert.throws(
     () => parseContextCheck({ ...item, story: `${item.story} Jeremiah then said: “You will all be home by spring.”` }, item.slug, bible),
     /not in the WEB text/,
@@ -161,6 +168,12 @@ test("only approved context checks are built, and a built one shows the verse an
       assert.ok(text.includes(flat(paragraph)), `${item.slug}: story, ${paragraph.slice(0, 40)}`);
     assert.ok(text.includes(storyStatuses[item.storyStatus]), `${item.slug}: what the story rests on`);
     for (const source of item.sources) assert.ok(text.includes(source.title), `${item.slug}: ${source.title}`);
+    // Other people's words are shown word for word, with their name and a link to the source.
+    const html = readFileSync(page(`/context-checks/${item.slug}`), "utf8");
+    for (const voice of item.voices) {
+      assert.ok(text.includes(voice.words) && text.includes(voice.name), `${item.slug}: ${voice.name}`);
+      assert.ok(html.includes(`href="${voice.source.url}"`), `${item.slug}: source of ${voice.name}`);
+    }
     assert.equal(text.includes("Draft. Not approved"), item.review === "draft", `${item.slug}: draft label`);
     // The chapter page of the verse points to its context check.
     const chapter = readFileSync(page(`/bible/${item.verse.book}/${item.verse.chapter}`), "utf8");
