@@ -7,13 +7,17 @@ import test from "node:test";
 import { launchTopics } from "../../src/topics/graph.ts";
 import { library } from "../src/lib/bible.ts";
 import {
+  checkParts,
   content,
   parseArticle,
+  parseContextCheck,
   parseTopic,
   publishedArticles,
+  publishedChecks,
   publishedTopics,
   refLabel,
   showDrafts,
+  verses,
 } from "../src/lib/content.ts";
 
 const { bible } = library();
@@ -111,5 +115,41 @@ test("a built topic page or article shows its text as written and says how it wa
     for (const ref of article.basis) assert.ok(text.includes(refLabel(ref)), `${article.slug}: ${refLabel(ref)}`);
     for (const source of article.sources) assert.ok(text.includes(source.title), `${article.slug}: ${source.title}`);
     assert.equal(text.includes("Draft. Not approved"), article.review === "draft", `${article.slug}: draft label`);
+  }
+});
+
+test("a context check must quote the verse or the passages around it exactly", () => {
+  const item = raw("context-checks", "jeremiah-29-11");
+  assert.throws(
+    () => parseContextCheck({ ...item, around: "The verse before it promises that “after seventy years in Babylon I will visit you”, which is close to the text." }, item.slug, bible),
+    /not in the WEB text/,
+  );
+  assert.throws(() => parseContextCheck({ ...item, basis: [] }, item.slug, bible), /passages around/);
+  assert.throws(() => parseContextCheck({ ...item, hook: "Too short." }, item.slug, bible), /characters/);
+  assert.throws(
+    () => parseContextCheck({ ...item, verse: { ...item.verse, chapter: 99 } }, item.slug, bible),
+    /unknown chapter/,
+  );
+});
+
+test("only approved context checks are built, and a built one shows the verse and its text as written", () => {
+  const shown = (item: { review: string }) => item.review === "approved" || showDrafts();
+  const { checks } = content();
+  for (const item of checks)
+    assert.equal(existsSync(page(`/context-checks/${item.slug}`)), shown(item), `/context-checks/${item.slug}`);
+  assert.equal(existsSync(page("/context-checks")), checks.some(shown), "/context-checks");
+  for (const item of publishedChecks()) {
+    const text = words(`/context-checks/${item.slug}`);
+    assert.ok(text.includes(item.hook), `${item.slug}: hook`);
+    for (const verse of verses(item.verse)) assert.ok(text.includes(verse.text), `${item.slug}: the verse itself`);
+    for (const [name, heading] of checkParts) {
+      assert.ok(text.includes(heading), `${item.slug}: ${heading}`);
+      assert.ok(text.includes(item[name]), `${item.slug}: ${name}`);
+    }
+    for (const ref of item.basis) assert.ok(text.includes(refLabel(ref)), `${item.slug}: ${refLabel(ref)}`);
+    assert.equal(text.includes("Draft. Not approved"), item.review === "draft", `${item.slug}: draft label`);
+    // The chapter page of the verse points to its context check.
+    const chapter = readFileSync(page(`/bible/${item.verse.book}/${item.verse.chapter}`), "utf8");
+    assert.ok(chapter.includes(`href="/context-checks/${item.slug}"`), `${item.slug}: link on the chapter page`);
   }
 });

@@ -78,6 +78,24 @@ test("every resource links to its product in the shop", () => {
     );
 });
 
+test("every resource shows its picture from the shop, with a description", () => {
+  const html = read("/resources");
+  for (const resource of resources) {
+    assert.ok(html.includes(resource.image.src), `${resource.title}: picture`);
+    assert.ok(html.includes(`alt="${resource.image.alt}"`), `${resource.title}: description of the picture`);
+  }
+});
+
+test("every page offers Auto, Light and Dark, and applies a saved choice before it is drawn", () => {
+  for (const file of pages) {
+    const html = readFileSync(file, "utf8");
+    for (const choice of ["auto", "light", "dark"])
+      assert.ok(html.includes(`data-theme-choice="${choice}"`), `${file}: ${choice}`);
+    const saved = html.indexOf('localStorage.getItem("hfg-theme")');
+    assert.ok(saved > 0 && saved < html.indexOf("</head>"), `${file}: saved theme is read in the head`);
+  }
+});
+
 // Old shop addresses on hisfullglory.com must keep working after the domain move: ads,
 // search results and order emails point at them (docs/WEBSITE_PLAN.md, section 7).
 type Rule = { source: string; destination: string; permanent?: boolean };

@@ -1,0 +1,39 @@
+{
+  "slug": "1-corinthians-10-13",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "verse": {
+    "book": "1-corinthians",
+    "chapter": 10,
+    "start": 13,
+    "end": 13
+  },
+  "hook": "You know the saying that God never gives you more than you can handle. But did you know 1 Corinthians 10:13 is about temptation?",
+  "known": "Usually passed on as a saying that God will never give a person more than they can handle.",
+  "who": "Paul, writing to the church in Corinth.",
+  "audience": "Believers he calls “brothers”, some of whom felt sure of themselves: “let him who thinks he stands be careful that he doesn’t fall”.",
+  "setting": "A warning drawn from Israel’s time in the wilderness. Paul lists what went wrong there, idolatry, sexual immorality, testing and grumbling, and says “these things were our examples”.",
+  "around": "The verse speaks of temptation: “God is faithful, who will not allow you to be tempted above what you are able, but will with the temptation also make the way of escape”. The next verse says what to do with that: “flee from idolatry”.",
+  "point": "The promise is about temptation to sin, and it comes with a way out and a command to take it. It does not say that suffering will never be more than a person can bear. Paul himself writes elsewhere that he and his companions “were weighed down exceedingly, beyond our power” (2 Corinthians 1:8).",
+  "basis": [
+    {
+      "book": "1-corinthians",
+      "chapter": 10,
+      "start": 1,
+      "end": 1
+    },
+    {
+      "book": "1-corinthians",
+      "chapter": 10,
+      "start": 6,
+      "end": 14
+    },
+    {
+      "book": "2-corinthians",
+      "chapter": 1,
+      "start": 8,
+      "end": 9
+    }
+  ]
+}

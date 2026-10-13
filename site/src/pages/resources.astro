@@ -19,6 +19,17 @@ import Base from "../layouts/Base.astro";
         {
           resources.map((resource) => (
             <li class="card">
+              <img
+                class="cover"
+                src={`${resource.image.src}&width=640`}
+                srcset={`${resource.image.src}&width=320 320w, ${resource.image.src}&width=640 640w, ${resource.image.src}&width=960 960w`}
+                sizes="(min-width: 52rem) 18rem, 90vw"
+                width={resource.image.width}
+                height={resource.image.height}
+                alt={resource.image.alt}
+                loading="lazy"
+                decoding="async"
+              />
               <p class="eyebrow">{resource.goal}</p>
               <h2>{resource.title}</h2>
               <p>{resource.summary}</p>
@@ -64,6 +75,16 @@ import Base from "../layouts/Base.astro";
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+  }
+  /* The covers differ in shape, so each sits whole inside the same frame. */
+  .cover {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background: var(--bg);
   }
   .list h2 {
     font-size: 1.15rem;

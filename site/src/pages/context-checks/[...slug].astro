@@ -1,0 +1,184 @@
+---
+// /context-checks and /context-checks/<slug>: a well-known verse put back into its
+// surroundings. Neither exists until at least one check is approved.
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import DraftBanner from "../../components/DraftBanner.astro";
+import EditorialNote from "../../components/EditorialNote.astro";
+import { appUrl } from "../../config";
+import Base from "../../layouts/Base.astro";
+import {
+  checkParts,
+  publishedChecks,
+  refHref,
+  refLabel,
+  verses,
+  type ContextCheck,
+} from "../../lib/content";
+
+export function getStaticPaths() {
+  const checks = publishedChecks();
+  if (!checks.length) return [];
+  return [
+    { params: { slug: undefined }, props: { checks } },
+    ...checks.map((item) => ({ params: { slug: item.slug }, props: { checks, item } })),
+  ];
+}
+
+interface Props {
+  checks: ContextCheck[];
+  item?: ContextCheck;
+}
+
+const { checks, item } = Astro.props;
+const label = item && refLabel(item.verse);
+---
+
+{
+  item ? (
+    <Base title={`${label} in context`} description={item.hook} noindex={item.review !== "approved"}>
+      <section class="section">
+        <div class="wrap prose">
+          <Breadcrumb trail={[{ label: "Context checks", href: "/context-checks" }]} current={label!} />
+          {item.review === "draft" && <DraftBanner />}
+          <p class="eyebrow">Context check</p>
+          <h1>{label} in context</h1>
+          <p class="lede">{item.hook}</p>
+
+          <blockquote class="card verse" data-layer="scripture">
+            {verses(item.verse).map((verse) => (
+              <p>
+                <sup>{verse.number}</sup>
+                {" "}
+                {verse.text}
+              </p>
+            ))}
+            <p class="small muted">{label}, World English Bible</p>
+          </blockquote>
+
+          <dl class="parts">
+            {checkParts.map(([name, heading]) => (
+              <>
+                <dt>{heading}</dt>
+                <dd>{item[name]}</dd>
+              </>
+            ))}
+          </dl>
+
+          <div class="card sources" data-layer="sourced">
+            <h2>Why we say this</h2>
+            <p class="small muted">
+              Everything on this page rests on the passage itself. Read it in
+              full in the World English Bible:
+            </p>
+            <ul>
+              {item.basis.map((ref) => (
+                <li>
+                  <a href={refHref(ref)}>{refLabel(ref)}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="actions">
+            <a class="button" href={`${appUrl}/bible/${item.verse.book}/${item.verse.chapter}`}>
+              Study this passage in the app
+            </a>
+            <a class="button secondary" href={refHref(item.verse)}>
+              Read the whole chapter
+            </a>
+          </div>
+
+          <EditorialNote review={item.review} drafted={item.drafted} />
+        </div>
+      </section>
+    </Base>
+  ) : (
+    <Base
+      title="Context checks"
+      description="Well-known Bible verses put back where they stand: who is speaking, to whom, and what is said around them."
+      noindex={checks.some((entry) => entry.review !== "approved")}
+    >
+      <section class="section">
+        <div class="wrap">
+          <h1>Context checks</h1>
+          <p class="lede">
+            Verses many people know by heart, put back where they stand: who
+            is speaking, to whom, and what is said around them.
+          </p>
+          <ul class="grid list">
+            {checks.map((entry) => (
+              <li class="card">
+                <h2>
+                  <a href={`/context-checks/${entry.slug}`}>{refLabel(entry.verse)}</a>
+                </h2>
+                <p>{entry.hook}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </Base>
+  )
+}
+
+<style>
+  .eyebrow {
+    margin-bottom: 4px;
+  }
+  .lede {
+    margin-top: 16px;
+  }
+  .verse {
+    margin: 28px 0 0;
+    font-size: 1.12rem;
+    line-height: 1.8;
+  }
+  .verse p {
+    margin: 0;
+  }
+  .verse p + p {
+    margin-top: 10px;
+  }
+  .verse sup {
+    font-size: 0.7em;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .parts {
+    margin: 32px 0 0;
+  }
+  .parts dt {
+    margin-top: 24px;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .parts dd {
+    margin: 6px 0 0;
+  }
+  .sources {
+    margin-top: 40px;
+  }
+  .sources h2 {
+    margin-bottom: 8px;
+  }
+  .sources ul {
+    margin: 10px 0 0;
+    padding-left: 1.2rem;
+  }
+  .sources li + li {
+    margin-top: 8px;
+  }
+  .list {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  }
+  .list h2 {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+  }
+  .list p {
+    margin-bottom: 0;
+  }
+</style>

@@ -11,7 +11,6 @@ import {
   publishedTopics,
   refHref,
   refLabel,
-  showDrafts,
   type TopicPage,
 } from "../../lib/content";
 
@@ -93,6 +92,18 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
             opens in your browser.
           </p>
 
+          <div class="card circles">
+            <h2>Talk it through in a Circle</h2>
+            <p>
+              A Circle is a small group in the app that walks through one
+              subject together. You can start one or join one. Some Circles
+              are private and ask you to apply first.
+            </p>
+            <a class="button secondary" href={`${appUrl}/community/circles`}>
+              See Circles in the app
+            </a>
+          </div>
+
           <EditorialNote review={topic.review} drafted={topic.drafted} />
         </div>
       </section>
@@ -101,7 +112,7 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
     <Base
       title="Topics"
       description="Bible passages on the topics people ask about most, each with a short reason taken from the text itself."
-      noindex={showDrafts()}
+      noindex={topics.some((entry) => entry.review !== "approved")}
     >
       <section class="section">
         <div class="wrap">
@@ -137,6 +148,16 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
     margin-top: 24px;
     background: var(--card);
     font-size: 0.95rem;
+  }
+  .circles {
+    margin-top: 32px;
+    background: var(--card);
+  }
+  .circles h2 {
+    margin: 0 0 6px;
+  }
+  .circles .button {
+    margin-top: 10px;
   }
   .passages,
   .list {

@@ -50,13 +50,16 @@ test("robots.txt allows crawling and names the sitemap", () => {
 
 test("pages kept out of search results say so and are not in the sitemap", () => {
   // A build made with SHOW_DRAFTS=1 also hides its draft pages and the two overviews.
-  const { topics, articles } = content();
+  const { topics, articles, checks } = content();
+  const draft = (item: { review: string }) => item.review === "draft";
   const drafts = showDrafts()
     ? [
-        ...(topics.length ? ["dist/topics/index.html"] : []),
-        ...(articles.length ? ["dist/articles/index.html"] : []),
-        ...topics.filter((topic) => topic.review === "draft").map((topic) => `dist/topics/${topic.id}/index.html`),
-        ...articles.filter((article) => article.review === "draft").map((article) => `dist/articles/${article.slug}/index.html`),
+        ...(checks.some(draft) ? ["dist/context-checks/index.html"] : []),
+        ...(topics.some(draft) ? ["dist/topics/index.html"] : []),
+        ...(articles.some(draft) ? ["dist/articles/index.html"] : []),
+        ...checks.filter(draft).map((item) => `dist/context-checks/${item.slug}/index.html`),
+        ...topics.filter(draft).map((item) => `dist/topics/${item.id}/index.html`),
+        ...articles.filter(draft).map((item) => `dist/articles/${item.slug}/index.html`),
       ]
     : [];
   assert.deepEqual(

@@ -11,6 +11,7 @@ import {
   library,
   type BibleBook,
 } from "../../../lib/bible";
+import { checksFor, refLabel } from "../../../lib/content";
 
 type Step = { label: string; href: string };
 
@@ -46,6 +47,7 @@ const chapter = book.chapters[number - 1];
 const title = chapterTitle(book, number);
 const note = chapterNote(book.slug, number);
 const ai = aiExplanation(book.slug, number);
+const checks = checksFor(book.slug, number);
 const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name;
 ---
 
@@ -89,6 +91,22 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
           </a>
         </p>
       </article>
+
+      {
+        checks.length > 0 && (
+          <div class="card checks" data-layer="editorial">
+            <h2>Context check</h2>
+            <ul>
+              {checks.map((item) => (
+                <li>
+                  <a href={`/context-checks/${item.slug}`}>{refLabel(item.verse)} in context</a>
+                  <p class="muted">{item.hook}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
 
       <div class="block" id="context">
         <ContextNote note={note} subject={subject} />
@@ -177,6 +195,24 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
   }
   .jump a:hover {
     border-color: var(--strong);
+  }
+  .checks {
+    max-width: 42rem;
+    margin-top: 32px;
+  }
+  .checks ul {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+  }
+  .checks a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+  }
+  .checks p {
+    margin: 0;
   }
   .block {
     margin-top: 40px;

@@ -48,8 +48,9 @@ each page shows the explanation as its own labelled block, apart from the source
 
 `tests/pages.test.ts` checks the site as a whole: every page loads its styles, every
 internal link leads somewhere, addresses have no trailing slash, navigation items are links
-only when their page exists, the copy has no em dashes, and each resource links to its
-product in the shop.
+only when their page exists, the copy has no em dashes, each resource links to its product
+in the shop and shows its picture, every page carries the theme switch, and no redirect
+hides a page of this site.
 
 `tests/seo.test.ts` checks what search engines and link previews get: the sitemap lists
 every indexable page once and nothing else, `robots.txt` names it, every indexable page has
@@ -60,9 +61,18 @@ the not-found page exists and is not indexed.
 passage reason without a quotation or a wrong reference is rejected, only approved files
 are built, and a built page shows its text as written and says how it was made.
 
-## Topic pages and articles
+## Topic pages, articles and context checks
 
-Editorial content lives in `content/topics/<id>.json` (one per launch topic) and
+A context check (`content/context-checks/<slug>.json`) puts one well-known verse back into
+its surroundings: how it is often quoted, who is speaking, to whom, the setting, what
+stands around it and what that adds. Its only source is the Bible text: every quotation
+must occur in the verse or in its `basis` passages. `hook` opens the page, is its
+description for search engines, and is the opening line for a video about it. A published
+check gets its own page under `/context-checks`, a card on the chapter page of its verse
+and, for the first three, a place on the home page. The ten checks of 2026-10-13 are
+drafts written by an AI model.
+
+Editorial content also lives in `content/topics/<id>.json` (one per launch topic) and
 `content/articles/<slug>.json`. `src/lib/content.ts` validates every file and an invalid one
 stops the build.
 
@@ -100,8 +110,12 @@ stops the build.
   A navigation item gets `ready: true` in the same change that adds its page, so the site
   never links to a page that does not exist.
 - `/styleguide` is an internal reference page: not in the navigation, not indexed.
-- Light and Dark follow the visitor's device setting. A manual switch can set
-  `data-theme="light"` or `"dark"` on `<html>`; the tokens already support it.
+- Light and Dark follow the visitor's device unless they pick one with the switch in the
+  footer (Auto, Light, Dark). The choice is kept in the browser as `hfg-theme` and applied
+  in the page head, before the page is drawn. Without JavaScript the switch stays hidden.
+- The Resources page shows each product's first picture straight from Shopify's image
+  address (`cdn.shopify.com`), so a visitor's browser contacts Shopify on that page only.
+- A topic page ends with a card that points to Circles in the app.
 - Copy rules: `docs/WEBSITE_PLAN.md`, section 5.
 
 ## Status

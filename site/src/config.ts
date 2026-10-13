@@ -1,4 +1,4 @@
-import { publishedArticles, publishedTopics } from "./lib/content.ts";
+import { publishedArticles, publishedChecks, publishedTopics } from "./lib/content.ts";
 
 export const site = {
   name: "HisFullGlory",
@@ -21,6 +21,7 @@ export type NavItem = { label: string; href: string; ready: boolean };
 // at least one of them (src/lib/content.ts).
 export const mainNav: NavItem[] = [
   { label: "Bible", href: "/bible", ready: true },
+  { label: "Context checks", href: "/context-checks", ready: publishedChecks().length > 0 },
   { label: "Topics", href: "/topics", ready: publishedTopics().length > 0 },
   { label: "Articles", href: "/articles", ready: publishedArticles().length > 0 },
   { label: "Resources", href: "/resources", ready: true },

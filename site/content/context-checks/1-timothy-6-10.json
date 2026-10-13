@@ -1,0 +1,33 @@
+{
+  "slug": "1-timothy-6-10",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "verse": {
+    "book": "1-timothy",
+    "chapter": 6,
+    "start": 10,
+    "end": 10
+  },
+  "hook": "You know the saying that money is the root of all evil. But did you know 1 Timothy 6:10 says something else?",
+  "known": "Usually quoted from memory as a saying that money itself is the root of all evil.",
+  "who": "Paul, writing to Timothy (1 Timothy 1:1-2).",
+  "audience": "Timothy, with instructions he is to pass on to the church.",
+  "setting": "A passage about contentment: “godliness with contentment is great gain”, and “having food and clothing, we will be content with that”.",
+  "around": "The verse itself reads: “the love of money is a root of all kinds of evil”. The verse before it is aimed at “those who are determined to be rich”.",
+  "point": "Three small words change the saying. The problem named is the love of money, and not money. It is a root, and not the only one. And it leads to all kinds of evil, which is not the same as every evil there is. The warning is about what a person wants most.",
+  "basis": [
+    {
+      "book": "1-timothy",
+      "chapter": 1,
+      "start": 1,
+      "end": 2
+    },
+    {
+      "book": "1-timothy",
+      "chapter": 6,
+      "start": 6,
+      "end": 10
+    }
+  ]
+}

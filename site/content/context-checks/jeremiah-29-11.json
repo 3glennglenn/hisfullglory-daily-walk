@@ -1,0 +1,39 @@
+{
+  "slug": "jeremiah-29-11",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "verse": {
+    "book": "jeremiah",
+    "chapter": 29,
+    "start": 11,
+    "end": 11
+  },
+  "hook": "You know Jeremiah 29:11. But did you know it was written to exiles who had just been told to settle in for seventy years?",
+  "known": "Often quoted on its own as a personal promise that God has a good plan for one person’s life.",
+  "who": "The LORD, in a letter that the prophet Jeremiah sent from Jerusalem (Jeremiah 29:1).",
+  "audience": "The people Nebuchadnezzar had “carried away captive from Jerusalem to Babylon”: elders, priests, prophets and all the people. The promise is spoken to them together.",
+  "setting": "The exile in Babylon. The letter tells the exiles to build houses, plant gardens, raise families and “Seek the peace of the city” where they now live.",
+  "around": "The verse before it sets the time: “After seventy years are accomplished for Babylon, I will visit you”. The verses after it promise that the people will call and pray and be heard, and that God will bring them back.",
+  "point": "The hope is real, and it is slow. Seventy years is a lifetime. The promise is given to a people in exile, and it comes with an instruction to live faithfully where they are in the meantime.",
+  "basis": [
+    {
+      "book": "jeremiah",
+      "chapter": 29,
+      "start": 1,
+      "end": 1
+    },
+    {
+      "book": "jeremiah",
+      "chapter": 29,
+      "start": 4,
+      "end": 7
+    },
+    {
+      "book": "jeremiah",
+      "chapter": 29,
+      "start": 10,
+      "end": 14
+    }
+  ]
+}
