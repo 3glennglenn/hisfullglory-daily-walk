@@ -56,7 +56,9 @@ otherwise the book record (`aiFor` in `src/bible/ai.ts`).
 ```
 
 A record written in the storytelling voice also carries `"voice": "story"` (see "Voice").
-Only the bookkeeping script reads that field; the app and the website ignore it.
+Only the bookkeeping script reads that field; the app and the website ignore it. The
+script also counts every record written on or after 2026-10-14 as told in that voice,
+because the routine has used it since that day's run.
 
 `parseAiFile` in `src/bible/ai.ts` validates every file, for the app and the website alike.
 On the website an invalid file stops the build. In the app an invalid, missing or offline

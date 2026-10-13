@@ -68,7 +68,9 @@ function problems(draft) {
 }
 
 // A record written in the storytelling voice says so; everything else is still to retell.
-const told = (record) => record.voice === "story";
+// The routine has written in that voice since its run of 2026-10-14, also if that run
+// still used a copy of this script that did not add the marker.
+const told = (record) => record.voice === "story" || record.written >= "2026-10-14";
 const untold = () => [
   ...order.flatMap((book) => load(book.slug).records.filter((r) => r.scope === "book" && !told(r)).map((record) => ({ book, record }))),
   ...order.flatMap((book) => load(book.slug).records.filter((r) => r.scope !== "book" && !told(r)).map((record) => ({ book, record }))),
