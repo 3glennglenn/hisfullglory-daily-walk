@@ -6,9 +6,11 @@ About, Beta and Resources; see `site/README.md`). Step 5 (sitemap, `robots.txt`,
 image, not-found page) is built as well. Step 4: pages for the eight launch
 topics and three articles, written on 2026-10-13 and approved by the founder that day
 (`site/README.md`, "Topic pages and articles").
-A review copy runs at https://hisfullglory-site.vercel.app (second Vercel project, created
-2026-10-12, noindex). No domain, DNS or Shopify change has been made. Owner: founder.
-Last updated 2026-10-12.
+Step 7: the site went live on `hisfullglory.com` on 2026-10-13 and the shop moved to
+`shop.hisfullglory.com`; what is left of it is in section 7. Step 6 is partly done: the
+home page scored 100 for performance, accessibility and best practices on mobile, and the
+founder looked at the review site. A review copy stays at
+https://hisfullglory-site.vercel.app (noindex). Owner: founder. Last updated 2026-10-13.
 Read `CLAUDE.md` first. Talk to the founder in Dutch; site copy is English.
 
 ## 1. Purpose
@@ -24,9 +26,10 @@ in the app → Daily Walk, reflection, community → (optional) a study resource
 
 | Address | Becomes | Today |
 | --- | --- | --- |
-| `hisfullglory.com` | New static site (this plan) | Shopify store |
-| `shop.hisfullglory.com` | Shopify, store and checkout only | Does not exist |
+| `hisfullglory.com` | New static site (this plan) | The site, since 2026-10-13 |
+| `shop.hisfullglory.com` | Shopify, store and checkout only | The shop, since 2026-10-13 |
 | `app.hisfullglory.com` | The app (unchanged) | Live |
+| `www.hisfullglory.com` | Redirect to the site | Still ends up in the shop |
 
 ## 3. Architecture
 
@@ -108,15 +111,20 @@ written." Never generate notes at build time.
    InitiateCheckout, Purchase) still arrive from the shop; the product catalog still syncs;
    Meta domain verification still covers the subdomain; an ad link to a product page works.
 
-Prepared on branch `site-domain-move` (2026-10-13): the redirects of step 4 in
-`site/vercel.json`, with a few more shop paths (blogs, discount links, gift cards, app
-proxies, and order and checkout links that start with the shop number), and `shopUrl` set to
-the shop's new address. Merge that branch after step 2 and before step 3. From that merge on
-the site links to `shop.hisfullglory.com`, so that address has to work first.
+Done on 2026-10-13, by the founder in Shopify and Vercel: steps 2 and 3, with the redirects
+of step 4 merged first (pull request #5). The redirects cover a few more shop paths than
+listed above: blogs, discount links, gift cards, app proxies, and order and checkout links
+that start with the shop number. The domain is managed in Shopify. Its A record points at
+Vercel (`216.198.79.1`) and its AAAA record is removed, because Vercel has no IPv6 address
+and a leftover AAAA record keeps sending visitors to Shopify.
 
-Found on 2026-10-13, read-only: the domain's name servers are `ns-cloud-c1` to `c4` at
-`googledomains.com`; `hisfullglory.com` and `www` point at Shopify; `app` points at Vercel;
-`shop` has no record yet. Where the founder edits these records is not confirmed.
+Still open from this section:
+- `www.hisfullglory.com` is a Shopify subdomain and ends up in the shop. To send it to the
+  site: remove the `www` subdomain in Shopify, add a CNAME for `www` to the value Vercel
+  shows for it, and keep the 308 redirect to `hisfullglory.com` that Vercel already has.
+- Step 5 has not been checked, and no real order has been placed on the new shop address.
+- Shopify's records live for 24 hours. A browser that was sent to the shop during that time
+  may remember the redirect for longer; a private window shows the real state.
 
 ## 8. Tracking and privacy
 
