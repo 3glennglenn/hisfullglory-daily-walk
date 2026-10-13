@@ -72,8 +72,9 @@ fields, because a reader's interest drops there. Every quotation in curly double
 must occur in the verse or in its `basis` passages. `hook` opens the page, is its
 description for search engines, and is the opening line for a video about it. A published
 check gets its own page under `/context-checks`, a card on the chapter page of its verse
-and, for the first three, a place on the home page. The eleven checks of 2026-10-13 are
-drafts written by an AI model.
+and, for the first three, a place on the home page. The eleven checks of 2026-10-13 were
+written by an AI model and approved by the founder that day. No theological reader has
+read them.
 
 Each check also tells `story`, the story around the verse, and says in `storyStatus` what
 that story rests on: `scripture` (the Bible itself), `history` (background from outside
@@ -83,8 +84,8 @@ must list what was used, and the page shows those links. Rules for a story:
 - Tell it as a story, with feeling: a scene, people, what was at stake. The feeling has
   to come from what the sources say. No invented detail, and no claim made larger than
   its source. The founder asked for this style on 2026-10-13.
-- Write with respect, for the faith and for readers. `known` says what a verse means to
-  the people who quote it; it never makes a common use look foolish.
+- Write with respect, for the faith and for readers. `readings` says what a verse means
+  to the people who quote it; it never makes a common use look foolish.
 - `voices` holds what named people said, word for word, each with the page where it can
   be read. The page adds the quotation marks, because curly double quotes in the files
   are reserved for the WEB text.
@@ -154,6 +155,9 @@ Done from the build order in `docs/WEBSITE_PLAN.md`, section 9:
    the founder on 2026-10-13. Each passage on a topic page links to the full passage.
 5. Search engines and sharing: titles, descriptions, canonical addresses, sitemap,
    `robots.txt`, share image and a not-found page.
+
+Added after that plan: context checks, eleven of them, approved by the founder on
+2026-10-13.
 
 Addresses have no trailing slash (`/bible/psalms/23`); each page is built as
 `<address>/index.html` and `vercel.json` is ready for that.
