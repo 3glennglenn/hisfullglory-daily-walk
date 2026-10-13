@@ -11,7 +11,6 @@ import {
   publishedTopics,
   refHref,
   refLabel,
-  showDrafts,
   type TopicPage,
 } from "../../lib/content";
 
@@ -101,7 +100,7 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
     <Base
       title="Topics"
       description="Bible passages on the topics people ask about most, each with a short reason taken from the text itself."
-      noindex={showDrafts()}
+      noindex={topics.some((entry) => entry.review !== "approved")}
     >
       <section class="section">
         <div class="wrap">

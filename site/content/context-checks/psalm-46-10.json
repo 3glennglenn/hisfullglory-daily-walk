@@ -1,0 +1,33 @@
+{
+  "slug": "psalm-46-10",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "verse": {
+    "book": "psalms",
+    "chapter": 46,
+    "start": 10,
+    "end": 10
+  },
+  "hook": "You know “Be still, and know that I am God”. But did you know it is spoken over raging nations and broken weapons?",
+  "known": "Often quoted as an invitation to a quiet moment of rest.",
+  "who": "God. The psalm quotes him directly in this verse, and the singers answer in the next.",
+  "audience": "In the verse’s own words, the nations and the earth: “I will be exalted among the nations. I will be exalted on the earth.”",
+  "setting": "A song about God as a refuge when everything shakes: mountains fall into the sea, nations rage and kingdoms are moved.",
+  "around": "The verse before it describes what God does: “He makes wars cease to the end of the earth. He breaks the bow, and shatters the spear.” The psalm opens with the confidence it ends on: “God is our refuge and strength”.",
+  "point": "“Be still” is first a command to stop fighting and to recognize who God is. The rest it gives his people follows from that: the one who ends wars is their refuge.",
+  "basis": [
+    {
+      "book": "psalms",
+      "chapter": 46,
+      "start": 1,
+      "end": 3
+    },
+    {
+      "book": "psalms",
+      "chapter": 46,
+      "start": 6,
+      "end": 11
+    }
+  ]
+}

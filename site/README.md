@@ -60,9 +60,18 @@ the not-found page exists and is not indexed.
 passage reason without a quotation or a wrong reference is rejected, only approved files
 are built, and a built page shows its text as written and says how it was made.
 
-## Topic pages and articles
+## Topic pages, articles and context checks
 
-Editorial content lives in `content/topics/<id>.json` (one per launch topic) and
+A context check (`content/context-checks/<slug>.json`) puts one well-known verse back into
+its surroundings: how it is often quoted, who is speaking, to whom, the setting, what
+stands around it and what that adds. Its only source is the Bible text: every quotation
+must occur in the verse or in its `basis` passages. `hook` opens the page, is its
+description for search engines, and is the opening line for a video about it. A published
+check gets its own page under `/context-checks`, a card on the chapter page of its verse
+and, for the first three, a place on the home page. The ten checks of 2026-10-13 are
+drafts written by an AI model.
+
+Editorial content also lives in `content/topics/<id>.json` (one per launch topic) and
 `content/articles/<slug>.json`. `src/lib/content.ts` validates every file and an invalid one
 stops the build.
 

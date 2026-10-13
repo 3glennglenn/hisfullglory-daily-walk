@@ -1,0 +1,33 @@
+{
+  "slug": "philippians-4-13",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "verse": {
+    "book": "philippians",
+    "chapter": 4,
+    "start": 13,
+    "end": 13
+  },
+  "hook": "You know Philippians 4:13. But did you know Paul wrote it about going hungry and having plenty, while he was a prisoner?",
+  "known": "Often quoted as a promise of strength to reach any goal, from sport to business.",
+  "who": "Paul. Earlier in the letter he speaks of “my bonds”: he is a prisoner as he writes.",
+  "audience": "The believers in Philippi, who had renewed their care for him. He thanks them in the next breath: “you did well that you shared in my affliction”.",
+  "setting": "The closing lines of the letter, where Paul answers their concern for him.",
+  "around": "The two verses before it say what the “all things” are: “I have learned in whatever state I am, to be content in it”, and “both to be filled and to be hungry, both to abound and to be in need”.",
+  "point": "The strength Paul speaks of is strength to be content, in hunger as much as in plenty. The verse is about enduring any circumstance with Christ, more than about winning in every one.",
+  "basis": [
+    {
+      "book": "philippians",
+      "chapter": 1,
+      "start": 12,
+      "end": 14
+    },
+    {
+      "book": "philippians",
+      "chapter": 4,
+      "start": 10,
+      "end": 14
+    }
+  ]
+}

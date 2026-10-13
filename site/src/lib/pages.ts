@@ -1,23 +1,30 @@
 // The addresses search engines may index, in one place for the sitemap.
 // `tests/seo.test.ts` compares this list with the pages that were actually built.
 import { library } from "./bible.ts";
-import { content } from "./content.ts";
+import { content, showDrafts } from "./content.ts";
 
 /** Pages outside the Bible. Add a page here in the same change that adds its file. */
 const fixedPages = ["/", "/bible", "/resources", "/about", "/beta"];
 
-/** A section's overview page and its own pages; nothing until the first one is approved. */
-const section = (base: string, names: string[]) =>
-  names.length ? [base, ...names.map((name) => `${base}/${name}`)] : [];
+/**
+ * A section's overview page and its approved pages; nothing until the first one is
+ * approved. A draft is never indexable, and neither is an overview that lists one, which
+ * only happens in a build made with SHOW_DRAFTS=1.
+ */
+function section(base: string, items: { review: string; name: string }[]) {
+  const approved = items.filter((item) => item.review === "approved");
+  if (!approved.length) return [];
+  const listsDraft = showDrafts() && approved.length < items.length;
+  return [...(listsDraft ? [] : [base]), ...approved.map((item) => `${base}/${item.name}`)];
+}
 
 export const indexablePaths = (): string[] => {
-  // Only approved pages: a draft shown with SHOW_DRAFTS=1 is never indexable.
-  const approved = <T extends { review: string }>(items: T[]) =>
-    items.filter((item) => item.review === "approved");
+  const { checks, topics, articles } = content();
   return [
     ...fixedPages,
-    ...section("/topics", approved(content().topics).map((topic) => topic.id)),
-    ...section("/articles", approved(content().articles).map((article) => article.slug)),
+    ...section("/context-checks", checks.map((item) => ({ review: item.review, name: item.slug }))),
+    ...section("/topics", topics.map((item) => ({ review: item.review, name: item.id }))),
+    ...section("/articles", articles.map((item) => ({ review: item.review, name: item.slug }))),
     ...library().bible.books.flatMap((book) => [
       `/bible/${book.slug}`,
       ...book.chapters.map((chapter) => `/bible/${book.slug}/${chapter.number}`),

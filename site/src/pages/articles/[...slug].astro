@@ -11,7 +11,6 @@ import {
   publishedTopics,
   refHref,
   refLabel,
-  showDrafts,
   type Article,
 } from "../../lib/content";
 
@@ -104,7 +103,7 @@ const topic = article && publishedTopics().find((entry) => entry.id === article.
     <Base
       title="Articles"
       description="Short explainers on Bible passages people often ask about. Each one names the passages it rests on."
-      noindex={showDrafts()}
+      noindex={articles.some((entry) => entry.review !== "approved")}
     >
       <section class="section">
         <div class="wrap">

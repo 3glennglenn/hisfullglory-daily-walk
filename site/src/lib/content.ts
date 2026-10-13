@@ -157,6 +157,57 @@ export function parseArticle(input: unknown, slug: string, bible: BibleData): Ar
   };
 }
 
+/** A well-known verse put back into its surroundings. Everything rests on the text itself. */
+export interface ContextCheck extends Editorial {
+  slug: string;
+  verse: PassageRef;
+  /** One or two sentences that open the page, and the line a video can start with. */
+  hook: string;
+  known: string;
+  who: string;
+  audience: string;
+  setting: string;
+  around: string;
+  point: string;
+  basis: PassageRef[];
+}
+
+/** The parts of a context check, with their headings, in the order a page shows them. */
+export const checkParts = [
+  ["known", "How it is often quoted", 40, 220],
+  ["who", "Who is speaking", 15, 320],
+  ["audience", "To whom", 15, 420],
+  ["setting", "The setting", 30, 420],
+  ["around", "What stands around it", 60, 620],
+  ["point", "What the context adds", 60, 520],
+] as const;
+
+export function parseContextCheck(input: unknown, slug: string, bible: BibleData): ContextCheck {
+  const raw = input as Raw;
+  const where = `context check ${slug}`;
+  check(/^[a-z0-9-]+$/.test(slug) && raw?.slug === slug, where, "the file name and slug must match");
+  const verse = passageText(raw.verse, bible, `${where} verse`);
+  check(Array.isArray(raw.basis) && raw.basis.length > 0, where, "needs the passages around the verse");
+  const around = raw.basis.map((entry, index) => passageText(entry, bible, `${where} basis ${index + 1}`));
+  // The verse and the passages around it are the only source, so every quotation must be in them.
+  const part = (name: string, min: number, max: number) => {
+    const value = text(raw[name], min, max, `${where} ${name}`);
+    for (const words of quotations(value))
+      check([verse, ...around].some((passage) => passage.words.includes(words)), `${where} ${name}`, `“${words}” is not in the WEB text of the verse or its basis passages`);
+    return value;
+  };
+  const parts = Object.fromEntries(checkParts.map(([name, , min, max]) => [name, part(name, min, max)]));
+  return {
+    slug,
+    ...editorial(raw, where),
+    verse: verse.ref,
+    // The hook is also the page description, so it keeps to that length.
+    hook: part("hook", 60, 160),
+    ...(parts as Pick<ContextCheck, (typeof checkParts)[number][0]>),
+    basis: around.map((passage) => passage.ref),
+  };
+}
+
 // npm scripts and tests run with site/ as the working directory.
 const contentDir = join(process.cwd(), "content");
 
@@ -170,11 +221,15 @@ function readAll<T>(folder: string, parse: (raw: unknown, name: string, bible: B
     .map((file) => parse(JSON.parse(readFileSync(join(dir, file), "utf8")), file.replace(/\.json$/, ""), bible));
 }
 
-let cache: { topics: TopicPage[]; articles: Article[] } | undefined;
+let cache: { topics: TopicPage[]; articles: Article[]; checks: ContextCheck[] } | undefined;
 
-/** Every topic page and article on file, drafts included. */
+/** Every topic page, article and context check on file, drafts included. */
 export function content() {
-  cache ??= { topics: readAll("topics", parseTopic), articles: readAll("articles", parseArticle) };
+  cache ??= {
+    topics: readAll("topics", parseTopic),
+    articles: readAll("articles", parseArticle),
+    checks: readAll("context-checks", parseContextCheck),
+  };
   return cache;
 }
 
@@ -191,6 +246,28 @@ export const publishedArticles = () =>
   content()
     .articles.filter(online)
     .sort((a, b) => b.written.localeCompare(a.written) || a.title.localeCompare(b.title));
+
+/** Context checks that may be shown, in the order of the Bible. */
+export function publishedChecks(): ContextCheck[] {
+  const books = library().bible.books.map((book) => book.slug);
+  const place = (item: ContextCheck) =>
+    books.indexOf(item.verse.book) * 1_000_000 + item.verse.chapter * 1_000 + item.verse.start;
+  return content()
+    .checks.filter(online)
+    .sort((a, b) => place(a) - place(b));
+}
+
+/** The published context checks for one chapter, for the card on its page. */
+export const checksFor = (book: string, chapter: number) =>
+  publishedChecks().filter((item) => item.verse.book === book && item.verse.chapter === chapter);
+
+/** The WEB verses of a reference, to show the text itself. */
+export function verses(ref: PassageRef) {
+  const chapter = library()
+    .bible.books.find((book) => book.slug === ref.book)!
+    .chapters.find((candidate) => candidate.number === ref.chapter)!;
+  return chapter.verses.filter((verse) => verse.number >= ref.start && verse.number <= ref.end);
+}
 
 /** "Psalm 23:4" or "Matthew 6:25-34". */
 export function refLabel(ref: PassageRef): string {

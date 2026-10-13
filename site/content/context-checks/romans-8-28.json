@@ -1,0 +1,39 @@
+{
+  "slug": "romans-8-28",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "verse": {
+    "book": "romans",
+    "chapter": 8,
+    "start": 28,
+    "end": 28
+  },
+  "hook": "You know Romans 8:28. But did you know the very next verse says what the “good” is?",
+  "known": "Often quoted to say that everything will turn out well in the end.",
+  "who": "Paul, in his letter to the Christians in Rome.",
+  "audience": "Believers who suffer. The chapter speaks of “the sufferings of this present time” and names oppression, persecution, famine and sword.",
+  "setting": "The closing part of a chapter about life in the Spirit, hope and hardship.",
+  "around": "The promise is given to a particular group: “those who love God”, who are “called according to his purpose”. The next verse names that purpose: “to be conformed to the image of his Son”.",
+  "point": "The “good” here is becoming like Christ, and Paul says it in a chapter that expects trouble. The verse does not promise that every event is good or that life will become comfortable. It promises that nothing, hardship included, falls outside what God works together for that purpose.",
+  "basis": [
+    {
+      "book": "romans",
+      "chapter": 8,
+      "start": 18,
+      "end": 18
+    },
+    {
+      "book": "romans",
+      "chapter": 8,
+      "start": 26,
+      "end": 30
+    },
+    {
+      "book": "romans",
+      "chapter": 8,
+      "start": 35,
+      "end": 39
+    }
+  ]
+}

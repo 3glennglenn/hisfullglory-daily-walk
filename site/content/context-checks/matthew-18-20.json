@@ -1,0 +1,33 @@
+{
+  "slug": "matthew-18-20",
+  "review": "draft",
+  "drafted": "ai",
+  "written": "2026-10-13",
+  "verse": {
+    "book": "matthew",
+    "chapter": 18,
+    "start": 20,
+    "end": 20
+  },
+  "hook": "You know Matthew 18:20. But did you know Jesus said it while teaching what to do when a brother sins against you?",
+  "known": "Often quoted to say that Jesus is present whenever a few believers meet for prayer or worship.",
+  "who": "Jesus, answering his disciples (Matthew 18:1).",
+  "audience": "The disciples, as the ones who will have to deal with sin and conflict in the assembly.",
+  "setting": "A step-by-step instruction for when “your brother sins against you”: speak to him alone, then take one or two others, then tell the assembly.",
+  "around": "The “two or three” first appear four verses earlier, as witnesses: “at the mouth of two or three witnesses every word may be established”. The verse just before speaks of two who agree about what they ask.",
+  "point": "In its place the promise is that Jesus stands with his followers in the hard work of correcting and restoring someone. Many Christians also apply it to any small gathering. The passage itself is about winning back a brother and agreeing in prayer about it.",
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 18,
+      "start": 1,
+      "end": 1
+    },
+    {
+      "book": "matthew",
+      "chapter": 18,
+      "start": 15,
+      "end": 20
+    }
+  ]
+}
