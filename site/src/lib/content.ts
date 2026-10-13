@@ -163,11 +163,11 @@ export interface ContextCheck extends Editorial {
   verse: PassageRef;
   /** One or two sentences that open the page, and the line a video can start with. */
   hook: string;
-  known: string;
-  who: string;
-  audience: string;
-  setting: string;
+  /** The scene: who is speaking, to whom, where, and what was happening to them. */
+  moment: string;
   around: string;
+  /** How the verse has been read, by whom and when, set side by side without a winner. */
+  readings: string;
   point: string;
   /** The story around the verse: what was going on, or what the verse went on to mean. */
   story: string;
@@ -186,14 +186,15 @@ export const storyStatuses = {
   reading: "One reading of the evidence. Scholars differ, and the sources are listed below.",
 } as const;
 
-/** The parts of a context check, with their headings, in the order a page shows them. */
+/**
+ * The parts that follow the story, with their headings, in the order a page shows them.
+ * Each is told as part of one continuing story, in paragraphs, not as a list of facts.
+ */
 export const checkParts = [
-  ["known", "How many people know it", 40, 220],
-  ["who", "Who is speaking", 15, 320],
-  ["audience", "To whom", 15, 420],
-  ["setting", "The setting", 30, 420],
-  ["around", "What stands around it", 60, 620],
-  ["point", "What the context adds", 60, 520],
+  ["moment", "The moment", 200, 1800],
+  ["around", "What stands around it", 100, 1400],
+  ["readings", "How people have read it", 200, 1800],
+  ["point", "What the context adds", 80, 1000],
 ] as const;
 
 export function parseContextCheck(input: unknown, slug: string, bible: BibleData): ContextCheck {

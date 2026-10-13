@@ -92,14 +92,24 @@ const label = item && refLabel(item.verse);
             )
           }
 
-          <dl class="parts">
-            {checkParts.map(([name, heading]) => (
-              <>
-                <dt>{heading}</dt>
-                <dd>{item[name]}</dd>
-              </>
-            ))}
-          </dl>
+          {
+            checkParts.map(([name, heading]) => (
+              <section class="part" data-part={name}>
+                <h2>{heading}</h2>
+                {blocks(item[name]).map((block) =>
+                  "list" in block ? (
+                    <ul>
+                      {block.list.map((line) => (
+                        <li>{line}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>{block.paragraph}</p>
+                  ),
+                )}
+              </section>
+            ))
+          }
 
           <div class="card sources" data-layer="sourced">
             <h2>Why we say this</h2>
@@ -234,16 +244,11 @@ const label = item && refLabel(item.verse);
   .voice blockquote::after {
     content: "\201D";
   }
-  .parts {
-    margin: 32px 0 0;
+  .part {
+    margin-top: 32px;
   }
-  .parts dt {
-    margin-top: 24px;
-    font-weight: 600;
-    font-size: 1.05rem;
-  }
-  .parts dd {
-    margin: 6px 0 0;
+  .part h2 {
+    margin-bottom: 8px;
   }
   .sources {
     margin-top: 40px;

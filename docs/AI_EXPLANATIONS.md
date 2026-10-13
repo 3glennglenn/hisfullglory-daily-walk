@@ -86,6 +86,20 @@ installable cache (`vite.config.ts`).
 - Record the model and the date. Keep `"review": "ai draft"` until a theological reader has
   checked the record; only then `"reviewed"`.
 
+## Voice
+
+Asked for by the founder on 2026-10-13, for everything that explains a verse, a chapter or
+a book: tell it as a story, warmly and with feeling, for believers and for people who do
+not believe. Open with the scene, the person or the tension, not with "This chapter".
+
+- The feeling has to come from what the text says. Invent nothing: no thoughts, faces,
+  weather, numbers or speech that the text does not give. Where a vivid sentence and an
+  accurate sentence pull apart, choose the accurate one.
+- Write with respect for the Bible, for every faith and for every reader. Never mock a
+  person, a people or a way of reading.
+- Chapter explanations written before 2026-10-14 and all 66 book explanations are still in
+  the earlier, plainer voice. Retelling them is planned and not done.
+
 ## How it is shown
 
 Below the sourced context, on a chapter page of the website and in the Context tab of the

@@ -10,14 +10,12 @@
     "end": 10
   },
   "hook": "You know the saying that money is the root of all evil. But did you know 1 Timothy 6:10 says something else?",
-  "known": "Often remembered as the saying that money is the root of all evil.",
-  "who": "Paul, writing to Timothy (1 Timothy 1:1-2).",
-  "audience": "Timothy, with instructions he is to pass on to the church.",
-  "setting": "A passage about contentment: “godliness with contentment is great gain”, and “having food and clothing, we will be content with that”.",
-  "around": "The verse itself reads: “the love of money is a root of all kinds of evil”. The verse before it is aimed at “those who are determined to be rich”.",
-  "point": "Three small words change the saying. The problem named is the love of money, and not money. It is a root, and not the only one. And it leads to all kinds of evil, which is not the same as every evil there is. The warning is about what a person wants most.",
   "story": "Timothy opened this letter in Ephesus, a city that knew exactly what happens when faith threatens income.\n\nActs tells the story. A silversmith named Demetrius made his living from silver shrines of the goddess Artemis. When Paul’s preaching began to hurt the trade, he called the craftsmen together and started with the plain truth: “Sirs, you know that by this business we have our wealth.” Soon the whole city was in uproar, and a furious crowd poured into the theater shouting the name of their goddess.\n\nSo when Paul warns Timothy about the love of money, he is not being abstract. He had lived through what it could do to a city. And he gives Timothy a different kind of wealth to want: “godliness with contentment is great gain”.",
   "storyStatus": "scripture",
+  "moment": "Paul is writing to Timothy, whom he calls “my true child in faith”. He has left him in Ephesus with a hard task: to stop certain people from teaching a different message.\n\nNear the end of the letter Paul comes to money. Some in the church want to be rich, and he has watched what that wish does to people. He writes like someone who has seen friends go under: they “fall into a temptation, a snare”, and some “have pierced themselves through with many sorrows”. This is a warning from a father to a son about a danger he has seen up close.",
+  "around": "The verse itself reads: “the love of money is a root of all kinds of evil”. The verse before it is aimed at “those who are determined to be rich”.",
+  "readings": "The shortened form of this verse has shaped whole lives. Some Christians have concluded that money itself is the enemy, and through the centuries many have given away everything they owned in order to follow Christ without it.\n\nOthers have read the verse as it stands: the root is the love of money, the wish to be rich at any price. On that reading a person can be poor and ruled by money, or wealthy and free of it.\n\nThe same chapter goes on to speak to believers who are rich. It does not tell them to become poor. It tells them not to set their hope on riches, to do good and to be ready to share (1 Timothy 6:17-18).",
+  "point": "Three small words change the saying. The problem named is the love of money, and not money. It is a root, and not the only one. And it leads to all kinds of evil, which is not the same as every evil there is. The warning is about what a person wants most.",
   "basis": [
     {
       "book": "1-timothy",
@@ -42,6 +40,12 @@
       "chapter": 19,
       "start": 23,
       "end": 29
+    },
+    {
+      "book": "1-timothy",
+      "chapter": 6,
+      "start": 17,
+      "end": 18
     }
   ]
 }

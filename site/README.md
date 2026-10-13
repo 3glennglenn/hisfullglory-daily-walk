@@ -64,8 +64,11 @@ are built, and a built page shows its text as written and says how it was made.
 ## Topic pages, articles and context checks
 
 A context check (`content/context-checks/<slug>.json`) puts one well-known verse back into
-its surroundings: how it is often quoted, who is speaking, to whom, the setting, what
-stands around it and what that adds. Its only source is the Bible text: every quotation
+its surroundings, told as one continuing story: `story` (the story around it), `moment`
+(who is speaking, to whom, and what was happening to them), `around` (what stands around
+the verse), `readings` (how people have read it, side by side and without a winner) and
+`point` (what the context adds). The founder asked for this on 2026-10-13: no short fact
+fields, because a reader's interest drops there. Every quotation in curly double quotes
 must occur in the verse or in its `basis` passages. `hook` opens the page, is its
 description for search engines, and is the opening line for a video about it. A published
 check gets its own page under `/context-checks`, a card on the chapter page of its verse

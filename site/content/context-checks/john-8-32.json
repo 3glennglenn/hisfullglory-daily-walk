@@ -10,14 +10,12 @@
     "end": 32
   },
   "hook": "You know “the truth will make you free”. But did you know the sentence begins with an if?",
-  "known": "Often quoted in praise of truth and learning.",
-  "who": "Jesus, in a public dispute recorded in John 8.",
-  "audience": "In John’s words, “those Jews who had believed him”: a particular group of hearers who had just believed, and not a people as a whole.",
-  "setting": "The middle of a long argument about who Jesus is.",
-  "around": "The promise hangs on the sentence before it: “If you remain in my word, then you are truly my disciples.” When his hearers say they have never been in bondage, he names the bondage he means: “everyone who commits sin is the bondservant of sin”. He ends: “If therefore the Son makes you free, you will be free indeed.”",
-  "point": "The truth in this verse is tied to a person and to a condition: remaining in the word of Jesus. The freedom is freedom from sin, and the Son is the one who gives it.",
   "story": "Listen to the answer his hearers give: “We are Abraham’s offspring, and have never been in bondage to anyone.”\n\nNever? Their people’s story begins with slavery in Egypt, where the Egyptians “made their lives bitter with hard service”. And at the very moment they speak, Rome holds their country. Before long their own leaders will say the fear aloud: “the Romans will come and take away both our place and our nation”.\n\nIt is a very human thing to do, to insist on a freedom one does not fully have.\n\nJesus does not argue history with them. He goes deeper, to a slavery no army imposes: “everyone who commits sin is the bondservant of sin”. Then he offers what he came to give: “If therefore the Son makes you free, you will be free indeed.”",
   "storyStatus": "scripture",
+  "moment": "Jesus is in Jerusalem, in the middle of a long and tense public argument about who he is. Some who are listening want him arrested. Others, John says, have just begun to believe: “As he spoke these things, many believed in him.”\n\nIt is to these new believers that he speaks, and he does not flatter them. A moment of belief is not what he is after. He wants them to stay: “If you remain in my word, then you are truly my disciples.” The promise of freedom is the second half of that same sentence.",
+  "around": "The promise hangs on the sentence before it: “If you remain in my word, then you are truly my disciples.” When his hearers say they have never been in bondage, he names the bondage he means: “everyone who commits sin is the bondservant of sin”. He ends: “If therefore the Son makes you free, you will be free indeed.”",
+  "readings": "These words are quoted wherever people praise learning and free inquiry. In that use the truth means knowledge, and knowledge sets a mind free.\n\nJesus is speaking of something more personal. The truth is what he teaches, and the freedom is freedom from sin. Later in this Gospel he says of himself that he is the truth (John 14:6).\n\nChristians who have lived under oppression have heard a third note in the verse: a freedom no ruler can grant or take away. All three readings honor truth. The second is the one the passage itself gives.",
+  "point": "The truth in this verse is tied to a person and to a condition: remaining in the word of Jesus. The freedom is freedom from sin, and the Son is the one who gives it.",
   "basis": [
     {
       "book": "john",
@@ -36,6 +34,12 @@
       "chapter": 11,
       "start": 47,
       "end": 48
+    },
+    {
+      "book": "john",
+      "chapter": 14,
+      "start": 6,
+      "end": 6
     }
   ]
 }

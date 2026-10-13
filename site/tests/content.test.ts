@@ -160,7 +160,8 @@ test("only approved context checks are built, and a built one shows the verse an
     for (const verse of verses(item.verse)) assert.ok(text.includes(verse.text), `${item.slug}: the verse itself`);
     for (const [name, heading] of checkParts) {
       assert.ok(text.includes(heading), `${item.slug}: ${heading}`);
-      assert.ok(text.includes(item[name]), `${item.slug}: ${name}`);
+      for (const paragraph of item[name].split("\n\n"))
+        assert.ok(text.includes(flat(paragraph)), `${item.slug}: ${name}, ${paragraph.slice(0, 40)}`);
     }
     for (const ref of item.basis) assert.ok(text.includes(refLabel(ref)), `${item.slug}: ${refLabel(ref)}`);
     // The story is shown as written, with the line that says what it rests on and its sources.
