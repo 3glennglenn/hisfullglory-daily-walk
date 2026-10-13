@@ -48,8 +48,9 @@ each page shows the explanation as its own labelled block, apart from the source
 
 `tests/pages.test.ts` checks the site as a whole: every page loads its styles, every
 internal link leads somewhere, addresses have no trailing slash, navigation items are links
-only when their page exists, the copy has no em dashes, and each resource links to its
-product in the shop.
+only when their page exists, the copy has no em dashes, each resource links to its product
+in the shop and shows its picture, every page carries the theme switch, and no redirect
+hides a page of this site.
 
 `tests/seo.test.ts` checks what search engines and link previews get: the sitemap lists
 every indexable page once and nothing else, `robots.txt` names it, every indexable page has
@@ -109,8 +110,12 @@ stops the build.
   A navigation item gets `ready: true` in the same change that adds its page, so the site
   never links to a page that does not exist.
 - `/styleguide` is an internal reference page: not in the navigation, not indexed.
-- Light and Dark follow the visitor's device setting. A manual switch can set
-  `data-theme="light"` or `"dark"` on `<html>`; the tokens already support it.
+- Light and Dark follow the visitor's device unless they pick one with the switch in the
+  footer (Auto, Light, Dark). The choice is kept in the browser as `hfg-theme` and applied
+  in the page head, before the page is drawn. Without JavaScript the switch stays hidden.
+- The Resources page shows each product's first picture straight from Shopify's image
+  address (`cdn.shopify.com`), so a visitor's browser contacts Shopify on that page only.
+- A topic page ends with a card that points to Circles in the app.
 - Copy rules: `docs/WEBSITE_PLAN.md`, section 5.
 
 ## Status

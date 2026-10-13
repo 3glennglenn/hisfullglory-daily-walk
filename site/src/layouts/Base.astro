@@ -61,6 +61,14 @@ const shareImage = new URL("/og.png", Astro.site);
         </>
       )
     }
+    <script is:inline>
+      // A reader's own choice of Light or Dark (the switch in the footer) wins over the
+      // device setting. Applied here, before the page is drawn, so it does not flash.
+      try {
+        var theme = localStorage.getItem("hfg-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch (error) {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
