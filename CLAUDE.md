@@ -34,6 +34,9 @@ This file adds the current state and how to work with the founder. Last updated 
   explanations to `main`, so pull before you work. Each of its pushes redeploys the app
   and the site; the founder approved that on 2026-10-12. Rules, format and status:
   `docs/AI_EXPLANATIONS.md`.
+- The storytelling voice of the context checks is the voice for every explanation, as the
+  founder decided on 2026-10-13. The same routine retells the earlier explanations in it,
+  eight a day, the 66 books first (`docs/AI_EXPLANATIONS.md`, "Voice").
 - Since 2026-10-13 an AI model may also draft context that names sources (context checks,
   study notes), on three conditions the founder set or accepted: the page says an AI model
   helped write it, every source was actually opened and is linked, and nothing goes online
@@ -47,7 +50,8 @@ This file adds the current state and how to work with the founder. Last updated 
   respect for the faith. He leaves checking the facts to Claude: a moving claim that the
   sources do not carry is rewritten until it is true. A story therefore says what it
   rests on: the Bible itself, outside sources, or one reading that scholars dispute
-  (`site/README.md`).
+  (`site/README.md`). The founder approved the first eleven on 2026-10-13, after three
+  rounds of feedback; they are on the site under `/context-checks`.
 
 ## Live state (verified 2026-10-12, evening)
 
@@ -92,7 +96,8 @@ This file adds the current state and how to work with the founder. Last updated 
 - `study-first` and `website`: merged into `main` on 2026-10-12 (pull request #2); kept
   for reference. Start new work on a fresh branch from `main`.
 - `site-seo`, `site-topics` and `site-domain-move`: merged on 2026-10-13 (pull requests #3
-  and #5; #5 carried the commits of #4). The app's code has not changed since pull
+  and #5; #5 carried the commits of #4). `docs-live`, `context-checks` and
+  `context-stories` followed the same day. The app's code has not changed since pull
   request #2.
 
 ## Study notes
