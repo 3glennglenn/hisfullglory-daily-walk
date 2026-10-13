@@ -16,6 +16,8 @@
   "setting": "A passage about contentment: “godliness with contentment is great gain”, and “having food and clothing, we will be content with that”.",
   "around": "The verse itself reads: “the love of money is a root of all kinds of evil”. The verse before it is aimed at “those who are determined to be rich”.",
   "point": "Three small words change the saying. The problem named is the love of money, and not money. It is a root, and not the only one. And it leads to all kinds of evil, which is not the same as every evil there is. The warning is about what a person wants most.",
+  "story": "Timothy received this letter in Ephesus, and Ephesus knew what happens when faith and income meet. Acts tells how a silversmith named Demetrius, who made silver shrines of the goddess Artemis, called the other craftsmen together when Paul’s preaching began to hurt the trade. His first argument was plain: “Sirs, you know that by this business we have our wealth.”\n\nThe meeting ended with a crowd rushing into the city’s theater. In that city Paul tells Timothy that contentment is the real gain, and that the wish to be rich is where the trouble starts.",
+  "storyStatus": "scripture",
   "basis": [
     {
       "book": "1-timothy",
@@ -28,6 +30,18 @@
       "chapter": 6,
       "start": 6,
       "end": 10
+    },
+    {
+      "book": "1-timothy",
+      "chapter": 1,
+      "start": 3,
+      "end": 3
+    },
+    {
+      "book": "acts",
+      "chapter": 19,
+      "start": 23,
+      "end": 29
     }
   ]
 }

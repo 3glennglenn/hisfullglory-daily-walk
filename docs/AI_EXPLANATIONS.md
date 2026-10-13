@@ -10,8 +10,11 @@ keep the cost down; shorter chapter explanations follow in daily portions (see "
 the chapters").
 
 This changes two earlier rules on purpose. "AI Study" was deferred, and unsourced context
-was not published. Both now read: AI explanations are allowed as their own layer; sourced
-notes (`docs/STUDY_NOTES.md`) stay exactly as they were and are never written by AI.
+was not published. Both now read: AI explanations are allowed as their own layer, and
+sourced notes (`docs/STUDY_NOTES.md`) keep their own rules. On 2026-10-13 the founder
+decided that an AI model may draft sourced context too, as long as the page says so, the
+sources were actually opened and he approves it before it goes online (`CLAUDE.md`). That
+does not change this layer: an AI explanation names no sources and stays labelled as such.
 
 ## What it is, and what it is not
 

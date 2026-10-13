@@ -16,6 +16,8 @@
   "setting": "The closing lines of the letter, where Paul answers their concern for him.",
   "around": "The two verses before it say what the “all things” are: “I have learned in whatever state I am, to be content in it”, and “both to be filled and to be hungry, both to abound and to be in need”.",
   "point": "The strength Paul speaks of is strength to be content, in hunger as much as in plenty. The verse is about enduring any circumstance with Christ, more than about winning in every one.",
+  "story": "Paul knew Philippi from the inside of its jail. On his first visit, Acts tells, he and Silas were stripped, “beaten with rods” and locked in the inner prison with their feet in the stocks. “But about midnight Paul and Silas were praying and singing hymns to God, and the prisoners were listening to them.” The jailer who locked them up that night was baptized before morning.\n\nYears later Paul writes to the church that began in that city. He is a prisoner again, and he says he has learned to be content. The people who first read this sentence knew he meant it.",
+  "storyStatus": "scripture",
   "basis": [
     {
       "book": "philippians",
@@ -28,6 +30,18 @@
       "chapter": 4,
       "start": 10,
       "end": 14
+    },
+    {
+      "book": "acts",
+      "chapter": 16,
+      "start": 22,
+      "end": 25
+    },
+    {
+      "book": "acts",
+      "chapter": 16,
+      "start": 33,
+      "end": 34
     }
   ]
 }

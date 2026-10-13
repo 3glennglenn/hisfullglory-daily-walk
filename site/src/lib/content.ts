@@ -169,8 +169,20 @@ export interface ContextCheck extends Editorial {
   setting: string;
   around: string;
   point: string;
+  /** The story around the verse: what was going on, or what the verse went on to mean. */
+  story: string;
+  /** How firm the story is. Anything from outside the Bible has to name its sources. */
+  storyStatus: keyof typeof storyStatuses;
+  sources: { title: string; url: string }[];
   basis: PassageRef[];
 }
+
+/** The line a page shows under the story, so a reader knows what it rests on. */
+export const storyStatuses = {
+  scripture: "Drawn from the Bible itself.",
+  history: "Background from outside the Bible. The sources are listed below.",
+  reading: "One reading of the evidence. Scholars differ, and the sources are listed below.",
+} as const;
 
 /** The parts of a context check, with their headings, in the order a page shows them. */
 export const checkParts = [
@@ -197,6 +209,16 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
     return value;
   };
   const parts = Object.fromEntries(checkParts.map(([name, , min, max]) => [name, part(name, min, max)]));
+  check(typeof raw.storyStatus === "string" && raw.storyStatus in storyStatuses, where, "storyStatus must be scripture, history or reading");
+  const storyStatus = raw.storyStatus as keyof typeof storyStatuses;
+  check(raw.sources === undefined || Array.isArray(raw.sources), where, "sources must be a list");
+  const sources = ((raw.sources ?? []) as Raw[]).map((entry, index) => {
+    const at = `${where} source ${index + 1}`;
+    check(typeof entry.url === "string" && entry.url.startsWith("https://"), at, "needs an https link");
+    return { title: text(entry.title, 3, 140, at), url: entry.url };
+  });
+  // A story that leans on anything outside the Bible must say where it comes from.
+  check(storyStatus === "scripture" || sources.length > 0, where, "a story from outside the Bible needs its sources");
   return {
     slug,
     ...editorial(raw, where),
@@ -204,6 +226,9 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
     // The hook is also the page description, so it keeps to that length.
     hook: part("hook", 60, 160),
     ...(parts as Pick<ContextCheck, (typeof checkParts)[number][0]>),
+    story: part("story", 200, 1700),
+    storyStatus,
+    sources,
     basis: around.map((passage) => passage.ref),
   };
 }

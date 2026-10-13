@@ -69,8 +69,21 @@ stands around it and what that adds. Its only source is the Bible text: every qu
 must occur in the verse or in its `basis` passages. `hook` opens the page, is its
 description for search engines, and is the opening line for a video about it. A published
 check gets its own page under `/context-checks`, a card on the chapter page of its verse
-and, for the first three, a place on the home page. The ten checks of 2026-10-13 are
+and, for the first three, a place on the home page. The eleven checks of 2026-10-13 are
 drafts written by an AI model.
+
+Each check also tells `story`, the story around the verse, and says in `storyStatus` what
+that story rests on: `scripture` (the Bible itself), `history` (background from outside
+the Bible) or `reading` (one reading that scholars dispute). For the last two, `sources`
+must list what was used, and the page shows those links. Rules for a story:
+
+- Use a source only after opening it, link it, and tell the story in our own words.
+- Say who holds a reading and that others differ, where that is the case. The right
+  cheek in Matthew 5:39 is the model: the Mishnah for the facts, Walter Wink for the
+  reading, and a sentence that other scholars are more careful.
+- Curly double quotes stay reserved for the WEB text, also inside a story.
+- A page invites readers to send a source that says otherwise. Disputes inside the app
+  are wanted and not built yet.
 
 Editorial content also lives in `content/topics/<id>.json` (one per launch topic) and
 `content/articles/<slug>.json`. `src/lib/content.ts` validates every file and an invalid one

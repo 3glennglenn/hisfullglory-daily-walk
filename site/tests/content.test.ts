@@ -17,6 +17,7 @@ import {
   publishedTopics,
   refLabel,
   showDrafts,
+  storyStatuses,
   verses,
 } from "../src/lib/content.ts";
 
@@ -130,6 +131,14 @@ test("a context check must quote the verse or the passages around it exactly", (
     () => parseContextCheck({ ...item, verse: { ...item.verse, chapter: 99 } }, item.slug, bible),
     /unknown chapter/,
   );
+  // A story from outside the Bible has to name where it comes from.
+  assert.throws(() => parseContextCheck({ ...item, storyStatus: "history", sources: [] }, item.slug, bible), /needs its sources/);
+  assert.throws(() => parseContextCheck({ ...item, storyStatus: "reading" }, item.slug, bible), /needs its sources/);
+  assert.throws(() => parseContextCheck({ ...item, storyStatus: "hearsay" }, item.slug, bible), /storyStatus/);
+  assert.throws(
+    () => parseContextCheck({ ...item, story: `${item.story} Jeremiah then said: “You will all be home by spring.”` }, item.slug, bible),
+    /not in the WEB text/,
+  );
 });
 
 test("only approved context checks are built, and a built one shows the verse and its text as written", () => {
@@ -147,6 +156,11 @@ test("only approved context checks are built, and a built one shows the verse an
       assert.ok(text.includes(item[name]), `${item.slug}: ${name}`);
     }
     for (const ref of item.basis) assert.ok(text.includes(refLabel(ref)), `${item.slug}: ${refLabel(ref)}`);
+    // The story is shown as written, with the line that says what it rests on and its sources.
+    for (const paragraph of item.story.split("\n\n"))
+      assert.ok(text.includes(flat(paragraph)), `${item.slug}: story, ${paragraph.slice(0, 40)}`);
+    assert.ok(text.includes(storyStatuses[item.storyStatus]), `${item.slug}: what the story rests on`);
+    for (const source of item.sources) assert.ok(text.includes(source.title), `${item.slug}: ${source.title}`);
     assert.equal(text.includes("Draft. Not approved"), item.review === "draft", `${item.slug}: draft label`);
     // The chapter page of the verse points to its context check.
     const chapter = readFileSync(page(`/bible/${item.verse.book}/${item.verse.chapter}`), "utf8");

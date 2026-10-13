@@ -4,13 +4,15 @@
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import DraftBanner from "../../components/DraftBanner.astro";
 import EditorialNote from "../../components/EditorialNote.astro";
-import { appUrl } from "../../config";
+import { appUrl, shopUrl } from "../../config";
 import Base from "../../layouts/Base.astro";
+import { blocks } from "../../lib/ai";
 import {
   checkParts,
   publishedChecks,
   refHref,
   refLabel,
+  storyStatuses,
   verses,
   type ContextCheck,
 } from "../../lib/content";
@@ -55,6 +57,22 @@ const label = item && refLabel(item.verse);
             <p class="small muted">{label}, World English Bible</p>
           </blockquote>
 
+          <section class="story" data-story={item.storyStatus}>
+            <h2>The story around it</h2>
+            {blocks(item.story).map((block) =>
+              "list" in block ? (
+                <ul>
+                  {block.list.map((line) => (
+                    <li>{line}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>{block.paragraph}</p>
+              ),
+            )}
+            <p class="small muted status">{storyStatuses[item.storyStatus]}</p>
+          </section>
+
           <dl class="parts">
             {checkParts.map(([name, heading]) => (
               <>
@@ -66,10 +84,7 @@ const label = item && refLabel(item.verse);
 
           <div class="card sources" data-layer="sourced">
             <h2>Why we say this</h2>
-            <p class="small muted">
-              Everything on this page rests on the passage itself. Read it in
-              full in the World English Bible:
-            </p>
+            <p class="small muted">Bible passages this page rests on, in the World English Bible:</p>
             <ul>
               {item.basis.map((ref) => (
                 <li>
@@ -77,6 +92,25 @@ const label = item && refLabel(item.verse);
                 </li>
               ))}
             </ul>
+            {item.sources.length > 0 && (
+              <>
+                <p class="small muted">Sources outside the Bible, for the story:</p>
+                <ul>
+                  {item.sources.map((source) => (
+                    <li>
+                      <a href={source.url} rel="noopener">
+                        {source.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <p class="small muted dispute">
+              Do you know a source that says otherwise, or adds to this?{" "}
+              <a href={`${shopUrl}/pages/contact`}>Send it to us</a> and we will
+              look at it.
+            </p>
           </div>
 
           <div class="actions">
@@ -143,6 +177,20 @@ const label = item && refLabel(item.verse);
     font-size: 0.7em;
     font-weight: 600;
     color: var(--muted);
+  }
+  .story {
+    margin-top: 32px;
+  }
+  .story h2 {
+    margin-bottom: 8px;
+  }
+  .story .status {
+    margin-top: 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--border);
+  }
+  .dispute {
+    margin-top: 14px;
   }
   .parts {
     margin: 32px 0 0;

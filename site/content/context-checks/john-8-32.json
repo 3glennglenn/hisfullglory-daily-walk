@@ -16,12 +16,26 @@
   "setting": "The middle of a long argument about who Jesus is.",
   "around": "The promise hangs on the sentence before it: “If you remain in my word, then you are truly my disciples.” When his hearers say they have never been in bondage, he names the bondage he means: “everyone who commits sin is the bondservant of sin”. He ends: “If therefore the Son makes you free, you will be free indeed.”",
   "point": "The truth in this verse is tied to a person and to a condition: remaining in the word of Jesus. The freedom is freedom from sin, and the Son is the one who gives it.",
+  "story": "The reply of his hearers is striking: “We are Abraham’s offspring, and have never been in bondage to anyone.” Their own Scriptures begin the nation’s story with slavery in Egypt, where the Egyptians “made their lives bitter with hard service”. And while they speak, Rome governs the land. A few chapters later their leaders fear that “the Romans will come and take away both our place and our nation”.\n\nJesus does not argue history with them. He points to a bondage that is closer than Egypt or Rome: “everyone who commits sin is the bondservant of sin”.",
+  "storyStatus": "scripture",
   "basis": [
     {
       "book": "john",
       "chapter": 8,
       "start": 30,
       "end": 36
+    },
+    {
+      "book": "exodus",
+      "chapter": 1,
+      "start": 13,
+      "end": 14
+    },
+    {
+      "book": "john",
+      "chapter": 11,
+      "start": 47,
+      "end": 48
     }
   ]
 }

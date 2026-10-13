@@ -16,6 +16,8 @@
   "setting": "The closing part of a chapter about life in the Spirit, hope and hardship.",
   "around": "The promise is given to a particular group: “those who love God”, who are “called according to his purpose”. The next verse names that purpose: “to be conformed to the image of his Son”.",
   "point": "The “good” here is becoming like Christ, and Paul says it in a chapter that expects trouble. The verse does not promise that every event is good or that life will become comfortable. It promises that nothing, hardship included, falls outside what God works together for that purpose.",
+  "story": "The man who wrote that all things work together for good had a list. In another letter he sets it down: “Five times I received forty stripes minus one”, and “Three times I was beaten with rods. Once I was stoned. Three times I suffered shipwreck.” He goes on to hunger, cold and danger on every road.\n\nSo this sentence does not come from a comfortable life. It comes from someone who knew those days and still began it with the words “We know”.",
+  "storyStatus": "scripture",
   "basis": [
     {
       "book": "romans",
@@ -34,6 +36,12 @@
       "chapter": 8,
       "start": 35,
       "end": 39
+    },
+    {
+      "book": "2-corinthians",
+      "chapter": 11,
+      "start": 24,
+      "end": 27
     }
   ]
 }

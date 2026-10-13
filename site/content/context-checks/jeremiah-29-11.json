@@ -16,6 +16,8 @@
   "setting": "The exile in Babylon. The letter tells the exiles to build houses, plant gardens, raise families and “Seek the peace of the city” where they now live.",
   "around": "The verse before it sets the time: “After seventy years are accomplished for Babylon, I will visit you”. The verses after it promise that the people will call and pray and be heard, and that God will bring them back.",
   "point": "The hope is real, and it is slow. Seventy years is a lifetime. The promise is given to a people in exile, and it comes with an instruction to live faithfully where they are in the meantime.",
+  "story": "The chapter just before this letter tells of another prophet, who told Jerusalem what it wanted to hear. Hananiah stood in the temple and announced that God would break the power of Babylon and bring the exiles home “Within two full years”. To make his point he took the bar Jeremiah wore on his neck as a sign and broke it in front of everyone.\n\nJeremiah’s answer was blunt: “The LORD has not sent you, but you make this people trust in a lie.” Hananiah died that same year.\n\nThe letter to the exiles follows straight after. Its hope is real, and it is the slower and harder message of the two: seventy years, and not two.",
+  "storyStatus": "scripture",
   "basis": [
     {
       "book": "jeremiah",
@@ -34,6 +36,24 @@
       "chapter": 29,
       "start": 10,
       "end": 14
+    },
+    {
+      "book": "jeremiah",
+      "chapter": 28,
+      "start": 1,
+      "end": 4
+    },
+    {
+      "book": "jeremiah",
+      "chapter": 28,
+      "start": 10,
+      "end": 11
+    },
+    {
+      "book": "jeremiah",
+      "chapter": 28,
+      "start": 15,
+      "end": 17
     }
   ]
 }

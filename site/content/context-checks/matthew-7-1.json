@@ -16,6 +16,8 @@
   "setting": "Part of a long teaching on how his followers are to live with God and with one another.",
   "around": "The next verses give the reason and a picture: “with whatever measure you measure, it will be measured to you”, and a man with a beam in his own eye offering to remove a speck from his brother’s. Jesus does not end by leaving the speck where it is. He ends: “First remove the beam out of your own eye, and then you can see clearly to remove the speck out of your brother’s eye.”",
   "point": "The warning is against hypocritical judgment, the kind that sees faults in others and not in oneself. The passage still expects followers of Jesus to help one another see clearly, after looking at themselves first.",
+  "story": "The man saying this held no office. In his home town people asked, “Isn’t this the carpenter’s son?” Yet when he finished this sermon, Matthew says, “the multitudes were astonished at his teaching, for he taught them with authority, and not like the scribes.”\n\nThroughout the sermon Jesus does not quote other teachers. He says what he himself requires. Here he turns the question around: before weighing anyone else, look at the measure you use.",
+  "storyStatus": "scripture",
   "basis": [
     {
       "book": "matthew",
@@ -28,6 +30,18 @@
       "chapter": 7,
       "start": 1,
       "end": 6
+    },
+    {
+      "book": "matthew",
+      "chapter": 7,
+      "start": 28,
+      "end": 29
+    },
+    {
+      "book": "matthew",
+      "chapter": 13,
+      "start": 54,
+      "end": 56
     }
   ]
 }
