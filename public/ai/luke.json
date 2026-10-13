@@ -21,6 +21,295 @@
           "text": "Luke says he drew on eyewitnesses and earlier accounts, and most scholars think Mark was one of them. Readers differ on how to hold together Luke’s sharp words about wealth with other parts of Scripture. His account has shaped the Christian year more than any other: Christmas, the ascension and Pentecost all rest largely on Luke and Acts."
         }
       ]
+    },
+    {
+      "id": "ai:luke/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Luke opens with a short preface to Theophilus, saying he has traced events carefully so the reader can know they are certain. The story begins with Zacharias, a priest, and his wife Elizabeth, who have no children. While Zacharias serves in the temple, the angel Gabriel tells him they will have a son named John. Zacharias doubts and is made mute until the birth.\n\nSix months later Gabriel appears to Mary in Nazareth. He says she will conceive by the Holy Spirit and bear a son named Jesus, who will reign on David’s throne forever. Mary answers, “Behold, the servant of the Lord; let it be done to me according to your word.”\n\nMary visits Elizabeth and speaks a song of praise, often called the Magnificat. John is born, Zacharias speaks again, and he prophesies a song of blessing."
+        },
+        {
+          "kind": "background",
+          "text": "Luke is the first part of a two-volume work, followed by Acts. Tradition links it with Luke, a companion of Paul, and says he wrote for readers outside Judea. Luke gives special attention to women, the poor and outsiders. The priestly divisions served in the temple in rotation, and burning incense was an honor that a priest might receive only once. Mary’s song echoes Hannah’s prayer in 1 Samuel 2:1 to 10. The virgin birth is held by most Christians as a doctrine, and a few scholars read it differently."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A decree from Caesar Augustus sends everyone to be counted in their own town. Joseph and Mary travel from Nazareth to Bethlehem, where Mary gives birth to her firstborn son and lays him in a feeding trough. An angel tells shepherds nearby of good news of great joy, a Savior who is Christ the Lord, and many angels praise God. The shepherds go to see the baby and tell what they were told.\n\nAt eight days he is named Jesus. Mary and Joseph bring him to the temple in Jerusalem, where Simeon and the prophet Anna recognize him as the one Israel has been waiting for. Simeon warns Mary that a sword will pierce her own soul.\n\nWhen Jesus is twelve, his family goes to Jerusalem for Passover. He stays behind and is found after three days in the temple, listening to teachers and asking them questions."
+        },
+        {
+          "kind": "background",
+          "text": "Luke places the birth within world events and names Roman rulers. Quirinius and the date of the census are debated by historians, and scholars have proposed several ways to line up Luke’s account with other sources. Shepherds were ordinary working people, often of low standing. The offering of two birds in verse 24 was the allowance for families who could not afford a lamb, according to Leviticus 12:8. Simeon’s song is traditionally called the Nunc Dimittis. Passover pilgrimage was a yearly custom for devout families."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Luke dates the start of John’s ministry by naming the Roman emperor, the governor and several rulers, and says the word of God came to John in the wilderness. John preaches a baptism of repentance and quotes Isaiah about preparing the way of the Lord.\n\nHe warns the crowds not to rely on being descended from Abraham, and says the ax is already at the root of the trees. When people ask what to do, he tells them to share clothes and food, tells tax collectors to collect no more than is due, and tells soldiers not to extort or accuse falsely. He says that one more powerful is coming, who will baptize with the Holy Spirit and fire. Herod has John put in prison for criticizing his marriage.\n\nJesus is baptized, the Spirit descends like a dove, and a voice says, “You are my beloved Son.” The chapter ends with a long family line from Jesus back through David and Abraham to Adam."
+        },
+        {
+          "kind": "background",
+          "text": "Tiberius became emperor in the year 14, so the fifteenth year of his reign is usually dated to about 28 or 29. John’s baptism was a washing that marked repentance, and it differs from later Christian baptism. Luke’s family line runs backward and ends at Adam, the son of God, while Matthew’s runs forward from Abraham and differs in several names. Scholars and churches explain the differences in more than one way, for example as two lines of descent or as tracing Mary’s side. Compare Matthew 1."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Led by the Spirit into the wilderness, Jesus fasts for forty days and is tempted by the devil. He is told to turn stone into bread, to worship the devil in return for all the kingdoms, and to throw himself from the temple. Each time Jesus answers with a line from Scripture.\n\nHe returns to Galilee and goes to the synagogue in Nazareth, where he reads from Isaiah about good news for the poor and release for captives. He says, “Today, this Scripture has been fulfilled in your hearing.” The crowd is first impressed, then angry when he points to Elijah and Elisha helping foreigners. They drive him out and try to throw him off a cliff, but he walks away.\n\nIn Capernaum he casts an unclean spirit out of a man, heals Simon’s mother-in-law and many others, and says he must preach to other towns too."
+        },
+        {
+          "kind": "background",
+          "text": "The forty days recall Israel’s forty years in the wilderness, and Jesus answers with lines from Deuteronomy 8:3, 6:13 and 6:16. The passage he reads is Isaiah 61:1 and 2, with a phrase from Isaiah 58:6, and the acceptable year of the Lord points to the jubilee year in Leviticus 25. Synagogues were local places for Scripture reading and teaching on the Sabbath. The Gospels differ on the order of the temptations; compare Matthew 4. Christians understand the devil’s role in the story in a range of ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus teaches the crowd from Simon’s boat, then tells Simon to let down his nets. After a night of catching nothing, they take in so many fish that the nets begin to break. Simon Peter falls at Jesus’s knees and says he is a sinful man, and Jesus tells him he will now catch people. Simon, James and John leave everything and follow him.\n\nJesus touches and cleanses a man with leprosy, and heals a paralyzed man whose friends lowered him through a roof. Jesus first says the man’s sins are forgiven, which makes the scribes and Pharisees object, and then tells him to rise and walk.\n\nHe calls the tax collector Levi, who gives a feast. When the Pharisees complain about eating with sinners, Jesus says he came to call sinners to repentance. He is asked about fasting and answers with images of a bridegroom, a patch and wineskins."
+        },
+        {
+          "kind": "background",
+          "text": "The lake of Gennesaret is another name for the Sea of Galilee. Leprosy in the Bible covers several skin conditions, and the law in Leviticus 13 and 14 required people with it to live apart until a priest declared them clean. By touching the man, Jesus crosses a boundary. Tax collectors worked for Rome and were often seen as dishonest collaborators, which is why eating with them caused offense. Levi is usually identified with Matthew. The roofs of the time were often flat with a stairway outside."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "On a Sabbath, the disciples pick grain and Pharisees object. Jesus reminds them of David eating the consecrated bread and says the Son of Man is lord of the Sabbath. On another Sabbath he heals a man’s withered hand, asking whether it is lawful to do good or harm on the Sabbath. His opponents are furious.\n\nAfter a night of prayer, Jesus chooses twelve apostles and teaches a large crowd on a level place. He gives blessings for the poor, the hungry and those who weep, and matching woes for the rich and those who are well fed. He then teaches love for enemies, giving to those who ask, and the rule to treat others as you want to be treated, and mercy as the Father is merciful.\n\nHe warns against judging, speaks of a speck and a beam, a tree and its fruit, and ends with two builders, one on rock and one without a foundation."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter has a counterpart in the Sermon on the Mount in Matthew 5 to 7. Luke’s version is shorter, and it is set on a level place. The Sabbath rest was a core mark of Jewish identity, and debates about what counted as work were common among teachers. The story of David is in 1 Samuel 21:1 to 6. The twelve apostles recall the twelve tribes of Israel. Christians differ on whether sayings such as offering the other cheek call for non-resistance in every case, and the text gives no guidance for situations of abuse."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "In Capernaum a Roman centurion asks Jesus, through Jewish elders and then friends, to heal his dying servant. He says he is not worthy to have Jesus under his roof and that Jesus need only say the word. Jesus is amazed and says he has not found such faith in Israel, and the servant is well.\n\nIn Nain, Jesus meets a funeral procession for a widow’s only son, has compassion on her, and tells the young man to arise. The crowd says God has visited his people.\n\nJohn the Baptist, now in prison, sends two disciples to ask if Jesus is the coming one. Jesus points to what they have seen and heard, and then speaks about John, calling him more than a prophet.\n\nAt a Pharisee’s house a woman known as a sinner weeps on Jesus’s feet, wipes them with her hair and anoints them. Jesus tells a parable of two debtors and tells her that her sins are forgiven."
+        },
+        {
+          "kind": "background",
+          "text": "A centurion commanded about a hundred soldiers in the Roman army, and this one is described as a friend to the Jewish community. Luke often highlights outsiders who respond with faith. Nain was a small town near Nazareth. In verse 28 the saying that the least in the Kingdom is greater than John is read in different ways. The woman is not named here, and the text does not say what her sin was. Later tradition sometimes linked her with Mary Magdalene, but the Gospel does not. Compare Isaiah 35:5 and 6 and 61:1."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus travels through towns preaching, with the twelve and with several women who support him from their own means, including Mary Magdalene, Joanna and Susanna. He tells the parable of the sower and explains it: the seed is the word of God, and the soils are different ways of hearing it. He speaks of a lamp that should be seen, and says his mother and brothers are those who hear and do God’s word.\n\nCrossing the lake, Jesus calms a storm. In the country of the Gadarenes he frees a man controlled by many demons. The man is later found clothed and in his right mind. The demons enter a herd of pigs that rush into the lake, and the local people ask Jesus to leave.\n\nBack across the lake, Jairus asks Jesus to heal his dying daughter. On the way, a woman with a twelve-year bleeding is healed by touching his cloak. Jesus then raises Jairus’s daughter."
+        },
+        {
+          "kind": "background",
+          "text": "Luke names women among Jesus’s supporters, which was unusual and shows their role in his ministry. Luke’s account of the parables, the storm and the Gadarene man closely parallels Mark 4 and 5. The abyss in verse 31 is a place of confinement for spirits in Jewish thought. Pigs were unclean animals for Jews, and the herd tells the reader that this was largely non-Jewish territory. Verse 10 draws on Isaiah 6:9 and 10, and Christians read it in different ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus sends out the twelve with power over demons and disease, telling them to take nothing for the journey. Herod hears about Jesus and wonders who he is. The apostles return, and Jesus feeds about five thousand with five loaves and two fish.\n\nPeter answers that Jesus is “The Christ of God.” Jesus says the Son of Man must suffer, be rejected, killed and raised, and that followers must take up their cross daily. About eight days later he goes up a mountain to pray with Peter, John and James. His face changes, Moses and Elijah speak with him about his departure, and a voice from the cloud says, “This is my beloved Son. Listen to him!”\n\nHe heals a boy the disciples could not heal, and again speaks of his coming betrayal. The disciples argue about greatness, and Jesus sets a child beside him. He then sets his face toward Jerusalem, rebukes James and John for wanting to call down fire on a Samaritan village, and speaks of the cost of following him."
+        },
+        {
+          "kind": "background",
+          "text": "The word translated departure in verse 31 is the Greek word exodus, which links Jesus’s coming death to Israel’s escape from Egypt. This is the middle of Luke: from verse 51 a long journey toward Jerusalem begins. Samaritans and Jews had a long history of conflict and mutual distrust, because they worshiped at different places. Elijah called down fire in 2 Kings 1, which is the reference in verse 54. Some manuscripts add words to verses 55 and 56, and many Bibles have a note about this."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus appoints seventy others and sends them in pairs ahead of him to the towns he plans to visit. He tells them to pray for workers, travel light, stay in one house, heal the sick, and announce that God’s Kingdom has come near. He pronounces woes on towns that saw his deeds and did not repent. The seventy return with joy, and Jesus tells them to rejoice that their names are written in heaven.\n\nA lawyer asks what he must do to inherit eternal life. Jesus asks him what the law says, and he names love of God and love of neighbor. When he asks who his neighbor is, Jesus tells the story of a man beaten by robbers. A priest and a Levite pass by, and a Samaritan stops to care for him. Jesus ends by saying, “Go and do likewise.”\n\nAt the home of Martha and Mary, Martha is busy serving while Mary sits listening. Jesus tells Martha that Mary has chosen the good part."
+        },
+        {
+          "kind": "background",
+          "text": "The number seventy may recall the seventy elders in Numbers 11 or the seventy nations in Genesis 10, and some manuscripts read seventy-two. The road from Jerusalem to Jericho drops steeply and was known as dangerous. Priests and Levites served in the temple, and a hearer would expect them to help. Samaritans were looked down on by many Jews, which is the point of the story. Verse 19 about serpents and scorpions is read figuratively by many and literally by few. Mary sitting at a teacher’s feet was a place usually kept for male students."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A disciple asks Jesus to teach them to pray, and he gives a short prayer: for God’s name to be honored, the Kingdom to come, daily bread, forgiveness, and deliverance from the evil one. He tells a story of a friend who knocks at midnight and gets bread because of his persistence, and says to keep asking, seeking and knocking. A father gives good gifts to his children, and the heavenly Father gives the Holy Spirit.\n\nWhen Jesus casts out a mute demon, some say he does it by Beelzebul. He answers that a divided kingdom cannot stand, and that if he casts out demons by God’s finger, the Kingdom has come. He says the sign given to this generation is the sign of Jonah.\n\nAt a Pharisee’s table he pronounces woes on Pharisees and lawyers for neglecting justice and the love of God while attending to small details."
+        },
+        {
+          "kind": "background",
+          "text": "This is Luke’s version of what Christians call the Lord’s Prayer; compare Matthew 6:9 to 13. It is shorter than the one in Matthew, and many church traditions add a closing line of praise that does not appear here. Beelzebul was a name connected with a ruler of demons. The sign of Jonah is explained in different ways: Luke ties it to the preaching of Jonah to Nineveh. The woes against Pharisees and lawyers are criticism within Judaism by a Jewish teacher. They have been misused to attack Jews as a people, and that is not what the text says."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "With thousands gathered, Jesus tells his disciples to beware of hypocrisy and not to fear those who can only kill the body. God knows each sparrow and counts the hairs on their heads. Those who acknowledge him before others will be acknowledged before God’s angels, and the Holy Spirit will give words when they are brought before authorities.\n\nWhen a man asks Jesus to settle an inheritance, Jesus warns against greed and tells the story of a rich man who builds bigger barns and dies that night. He tells his disciples not to be anxious about food or clothing, pointing to ravens and lilies, and to seek God’s Kingdom. He tells them to be ready like servants awaiting their master.\n\nHe says he came to bring fire and division, even within families, and urges the crowd to read the present time and settle with an opponent before going to court."
+        },
+        {
+          "kind": "background",
+          "text": "The Pharisees were a lay movement known for careful study of the law. Yeast stands here for something small that spreads. Blaspheming the Holy Spirit in verse 10 has been understood in different ways, and the text gives no help for anyone worried about it beyond what it says. The parable of the watchful servants and the thief at night is about readiness, and Christians differ on how it relates to the return of Christ. Verses 51 to 53 describe division and are not a call to break family ties. Gehenna is the valley near Jerusalem used as an image of judgment."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Some people tell Jesus about Galileans killed by Pilate. Jesus says they were not worse sinners than others, and mentions eighteen who died when a tower fell; he says all need to repent. He tells a parable of a fig tree that bears no fruit, and a gardener who asks for one more year.\n\nOn a Sabbath he heals a woman who had been bent over for eighteen years. The synagogue leader objects, and Jesus calls his critics hypocrites, since they untie their animals on the Sabbath, and says she is a daughter of Abraham. He gives two short parables of the Kingdom: a mustard seed and yeast.\n\nAsked whether few will be saved, he tells people to strive to enter the narrow door and says people will come from east and west to sit in the Kingdom. Pharisees warn him that Herod wants to kill him. He replies that he must go on to Jerusalem, and he laments over the city."
+        },
+        {
+          "kind": "background",
+          "text": "The two disasters are not known from other sources, though Pilate is described as harsh by other ancient writers. The text rejects the idea that those who suffer must be worse sinners, which is a point worth noting for readers who face loss. The woman’s healing happens in a synagogue, and Jesus’s title for her echoes Abraham. Verse 34 pictures a hen gathering chicks, a gentle image of protection. The final quotation comes from Psalm 118:26. Christians differ on how verses 24 to 30 relate to who will be saved."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "On a Sabbath Jesus eats at the house of a leading Pharisee, where a man with swelling in his body stands before him. Jesus asks whether it is lawful to heal on the Sabbath, and when no one answers, he heals the man.\n\nHe sees guests choosing the best seats and tells them to take the lowest place, because those who exalt themselves will be humbled. He tells his host to invite the poor, the crippled and the blind, who cannot repay.\n\nHe then tells a parable of a great supper. The invited guests all make excuses, so the host sends his servant to bring in the poor and those from the roads, until the house is full.\n\nTurning to the crowds, Jesus speaks of the cost of following him. He talks of hating family and one’s own life, carrying a cross, and counting the cost like a builder or a king. He ends with a saying about salt."
+        },
+        {
+          "kind": "background",
+          "text": "Meals were an important place for status and honor in the ancient world, which is why seating and guest lists matter here. The word disregard in verse 26 translates a Greek word often rendered hate. Most readers take it as strong, deliberate hyperbole meaning that loyalty to Jesus must come first, rather than a command to feel hostility toward family. Christians read the phrase many are called but few are chosen in more than one way. Compare the similar parable in Matthew 22:1 to 14, which differs in details."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Tax collectors and sinners gather to hear Jesus, and the Pharisees and scribes complain that he welcomes them and eats with them. Jesus answers with three stories about lost things.\n\nA shepherd leaves ninety-nine sheep to find one that is lost, and a woman searches her house for a lost coin. Each calls friends to celebrate, and Jesus says there is joy in heaven over one sinner who repents.\n\nIn the third story a younger son asks for his share of his father’s property, travels far away and wastes it. When a famine comes he ends up feeding pigs and wanting to eat their food. He decides to go home and ask to be a hired servant. While he is still far off, his father sees him, runs to him and embraces him, and throws a feast.\n\nThe older son, who stayed, is angry and refuses to join. His father comes out and tells him, “Son, you are always with me, and all that is mine is yours.”"
+        },
+        {
+          "kind": "background",
+          "text": "The three parables are told in answer to the complaint in verse 2. The third story is the best known of Jesus’s parables and is often called the parable of the prodigal son, though readers also focus on the father or on the older brother. Feeding pigs would have been the lowest work imaginable for a Jewish listener. The story ends without saying whether the older son goes in, which leaves the question open to the Pharisees who are listening. Compare Ezekiel 34 for the image of God as shepherd."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus tells his disciples about a rich man's manager who is accused of wasting his master's goods. Facing dismissal, the manager reduces what several debtors owe, hoping they will take him in. The master commends his shrewdness. Jesus adds sayings about using worldly wealth, being faithful in little things, and the fact that no one can serve both God and money.\n\nThe Pharisees, who love money, scoff. Jesus says God knows their hearts, speaks of the law and the prophets until John, and says it is easier for heaven and earth to pass away than for a stroke of the law to fall. He gives a short saying about divorce.\n\nHe then tells of a rich man who lives in luxury and a poor beggar named Lazarus at his gate. After they die, Lazarus is comforted and the rich man is in torment. Abraham says a great gulf is fixed, and that the rich man’s brothers have Moses and the prophets."
+        },
+        {
+          "kind": "background",
+          "text": "The parable of the manager is one of the most debated in the Gospels. Readers differ on whether the master praises the manager’s dishonesty or his foresight, and on what the changes to the bills were. The word mammon is an Aramaic word for wealth. The story of the rich man and Lazarus is told as a parable, and Lazarus is the only person named in any of Jesus’s parables. Hades here is the place of the dead, and Christians differ on how this story relates to teaching about the afterlife and judgment."
+        }
+      ]
+    },
+    {
+      "id": "ai:luke/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-13",
+      "review": "ai draft",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus warns that things that make people stumble will come, but woe to those who cause them, especially to little ones. He teaches that a brother who sins should be rebuked, and forgiven if he repents, even seven times in a day. The apostles ask for more faith, and Jesus answers with the picture of a mustard seed, then a short picture of a servant who does his duty.\n\nOn the way to Jerusalem, ten men with leprosy call to him from a distance. He tells them to show themselves to the priests, and they are cleansed as they go. Only one, a Samaritan, returns to give thanks, and Jesus tells him his faith has healed him.\n\nAsked when God’s Kingdom will come, Jesus says it does not come with observation. He then speaks to the disciples of the days of the Son of Man, comparing them to the days of Noah and of Lot, and says to remember Lot’s wife."
+        },
+        {
+          "kind": "background",
+          "text": "Showing themselves to the priests followed the law in Leviticus 14 for those who believed they had been healed of a skin disease. A Samaritan was a double outsider, as a foreigner and a member of a group that many Jews avoided. The phrase in verse 21 is translated within you in some Bibles and among you in others, and Christians differ on which is meant. The sayings about the days of the Son of Man are read in different ways, as are the taken and left in verses 34 and 35. Verse 36 is not in the oldest manuscripts, as the text here notes. See Genesis 6 to 7 and 19."
+        }
+      ]
     }
   ]
 }
