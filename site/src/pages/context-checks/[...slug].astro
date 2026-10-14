@@ -8,12 +8,14 @@ import { appUrl, shopUrl } from "../../config";
 import Base from "../../layouts/Base.astro";
 import { blocks } from "../../lib/ai";
 import {
+  arguedHeading,
   checkParts,
   publishedChecks,
   refHref,
   refLabel,
   storyStatuses,
   verses,
+  withVoices,
   type ContextCheck,
 } from "../../lib/content";
 
@@ -33,6 +35,8 @@ interface Props {
 
 const { checks, item } = Astro.props;
 const label = item && refLabel(item.verse);
+// Voices quoted inside "Who has argued over it" are not repeated as cards.
+const cards = item?.voices.filter((voice) => !voice.id) ?? [];
 ---
 
 {
@@ -74,10 +78,10 @@ const label = item && refLabel(item.verse);
           </section>
 
           {
-            item.voices.length > 0 && (
+            cards.length > 0 && (
               <section class="voices" data-layer="voices">
                 <h2>What others have said</h2>
-                {item.voices.map((voice) => (
+                {cards.map((voice) => (
                   <figure class="card voice">
                     <blockquote>{voice.words}</blockquote>
                     <figcaption class="small muted">
@@ -94,20 +98,35 @@ const label = item && refLabel(item.verse);
 
           {
             checkParts.map(([name, heading]) => (
-              <section class="part" data-part={name}>
-                <h2>{heading}</h2>
-                {blocks(item[name]).map((block) =>
-                  "list" in block ? (
-                    <ul>
-                      {block.list.map((line) => (
-                        <li>{line}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>{block.paragraph}</p>
-                  ),
+              <>
+                <section class="part" data-part={name}>
+                  <h2>{heading}</h2>
+                  {blocks(item[name]).map((block) =>
+                    "list" in block ? (
+                      <ul>
+                        {block.list.map((line) => (
+                          <li>{line}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>{block.paragraph}</p>
+                    ),
+                  )}
+                </section>
+                {name === "readings" && item.argued && (
+                  <section class="part argued" data-part="argued">
+                    <h2>{arguedHeading}</h2>
+                    {blocks(item.argued).map((block) => (
+                      <p>
+                        {withVoices("list" in block ? block.list.join(" ") : block.paragraph, item.voices).map((piece) =>
+                          typeof piece === "string" ? piece : <q cite={piece.source.url}>{piece.words}</q>,
+                        )}
+                      </p>
+                    ))}
+                    <p class="small muted status">{storyStatuses.history}</p>
+                  </section>
                 )}
-              </section>
+              </>
             ))
           }
 
@@ -249,6 +268,14 @@ const label = item && refLabel(item.verse);
   }
   .part h2 {
     margin-bottom: 8px;
+  }
+  .argued q {
+    quotes: "\201C" "\201D" "\2018" "\2019";
+  }
+  .argued .status {
+    margin-top: 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--border);
   }
   .sources {
     margin-top: 40px;

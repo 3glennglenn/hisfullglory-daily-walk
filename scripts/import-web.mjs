@@ -2,20 +2,9 @@
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
+import { verseText } from "./usfm.mjs";
 const folder = process.argv[2];
 if (!folder) throw new Error("Provide the extracted official WEB USFM folder.");
-export function verseText(raw) {
-  return raw
-    .replace(/\\f\s[\s\S]*?\\f\*/g, "")
-    .replace(/\\x\s[\s\S]*?\\x\*/g, "")
-    // Heading lines are not verse text: section headings, Psalm titles, and the speaker
-    // labels of Song of Songs (`\sp Beloved`), which sit just before the next `\v`.
-    .replace(/^\\(?:s\d*|sp|r|d|ms\d*|mr|cl|cp|rem)\b[^\n]*$/gm, "")
-    .replace(/\\\+?w\s+([^|\\]*)(?:\|[^\\]*)?\\\+?w\*/g, "$1")
-    .replace(/\\\+?[a-z]+\d*\*?\s?/gi, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
 const books = [];
 for (const file of readdirSync(folder)
   .filter((f) => f.endsWith(".usfm"))
