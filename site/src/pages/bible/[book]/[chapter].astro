@@ -202,6 +202,10 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
     margin: 20px 0 0;
     line-height: 1.5;
   }
+  /* On the highlighted verse --strong drops below 4.5:1 in dark mode, so its label uses ink. */
+  .verse:target .speaker {
+    color: var(--ink);
+  }
   .speaker-note {
     color: var(--muted);
     font-size: 0.95rem;

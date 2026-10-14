@@ -1036,6 +1036,10 @@ button[aria-pressed="true"] {
 p.speaker {
   margin: 14px 8px 0;
 }
+/* On a highlighted verse --strong drops below 4.5:1 in dark mode, so a label inside it uses ink. */
+.verse:is(.speaking, .highlight-gold, .highlight-sage, .highlight-rose) .speaker {
+  color: var(--ink);
+}
 .speaker-note {
   color: var(--muted);
   font-size: 0.85rem;
