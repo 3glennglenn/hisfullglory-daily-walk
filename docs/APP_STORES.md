@@ -29,8 +29,8 @@ with a daily reminder as a notification.
 
 | Requirement | Status |
 | --- | --- |
-| Account deletion in the app (Apple 5.1.1(v), Google) | Built on branch `account-deletion`: migration `007_account_deletion.sql` and `DeleteAccount` on the Profile page. Migration not applied to the hosted project. |
-| A web page to request deletion (Google) | `site/src/pages/delete-account.astro`, same branch. Uses support@hisfullglory.com, which must forward before it goes live. |
+| Account deletion in the app (Apple 5.1.1(v), Google) | Built: migration `007_account_deletion.sql` and `DeleteAccount` on the Profile page. The founder approved the migration on 2026-10-14 and it was applied to the hosted project that day (migration history: version 20261014190635, name account_deletion). |
+| A web page to request deletion (Google) | `site/src/pages/delete-account.astro`, same branch. Uses support@hisfullglory.com, which must forward before it goes live. The founder approved its promise of deletion by email within 30 days on 2026-10-14. |
 | Sign-in that works inside the app | To do: a 6-digit code instead of only a link, because a link opens the browser, not the app. |
 | A sign-in for the reviewers | To do. They cannot use the founder's mailbox. |
 | Filtering of objectionable content (Apple 1.2) | To do. Reporting and blocking exist. |

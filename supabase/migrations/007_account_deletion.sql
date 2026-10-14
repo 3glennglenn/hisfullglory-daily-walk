@@ -1,5 +1,6 @@
 -- Account deletion, which the App Store and Google Play both require. Forward-only and safe to
--- apply twice; apply after 006. Not applied to the hosted project without the founder's approval.
+-- apply twice; apply after 006. Applied to the hosted project on 2026-10-14 with the founder's
+-- approval; its history lists it as version 20261014190635, name account_deletion.
 --
 -- Deleting the auth user removes everything the server holds for it: every foreign key to
 -- auth.users cascades (checked on the hosted project on 2026-10-14: profiles, legacy chat and
