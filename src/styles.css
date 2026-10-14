@@ -109,6 +109,20 @@ select:focus-visible {
 main:focus {
   outline: none;
 }
+/* Out of sight until a keyboard user tabs to it. */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -64px;
+  z-index: 20;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--strong);
+  color: var(--on-strong);
+}
+.skip-link:focus {
+  top: 12px;
+}
 .shell {
   max-width: 480px;
   margin: 0 auto;
