@@ -82,3 +82,14 @@ test("listening reads the reference and then every verse in this edition, in ord
     { verse: 3, text: "He restores my soul." },
   ]);
 });
+
+test("push setup: the public key decodes to a P-256 point and reminder times stay in the day", async () => {
+  const { keyBytes, suggestedReminderTime, validReminderTime } = await import("../src/platform/pushKeys.ts");
+  const { config } = await import("../src/config.ts");
+  const key = keyBytes(config.pushPublicKey);
+  assert.equal(key.length, 65);
+  assert.equal(key[0], 4);
+  assert.equal(suggestedReminderTime("morning"), "07:30");
+  assert.ok(validReminderTime("05:00") && validReminderTime("22:00") && validReminderTime("12:30"));
+  assert.ok(!validReminderTime("04:59") && !validReminderTime("22:01") && !validReminderTime("7:30") && !validReminderTime("25:00"));
+});
