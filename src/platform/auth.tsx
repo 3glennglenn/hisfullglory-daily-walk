@@ -8,6 +8,7 @@ import {
 } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "../supabase";
+import { CodeEntry } from "./CodeEntry";
 export const TERMS_VERSION = "2026-10-07";
 const Auth = createContext<{
   session: Session | null;
@@ -63,6 +64,7 @@ export function AuthPanel() {
   const [checked, setChecked] = useState(false);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+  const [sentTo, setSentTo] = useState("");
   useEffect(() => {
     if (session && supabase)
       void supabase
@@ -82,8 +84,9 @@ export function AuthPanel() {
     setStatus(
       error
         ? "Sign-in could not be sent. Check configuration and try again."
-        : "Check your email for a sign-in link.",
+        : "Check your email: tap the link, or type the code below.",
     );
+    if (!error) setSentTo(email.trim());
     setBusy(false);
   }
   async function save() {
@@ -204,6 +207,7 @@ export function AuthPanel() {
         </>
       )}
       <p role="status">{status}</p>
+      {!session && sentTo && <CodeEntry email={sentTo} />}
     </section>
   );
 }

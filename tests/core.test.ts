@@ -82,3 +82,13 @@ test("listening reads the reference and then every verse in this edition, in ord
     { verse: 3, text: "He restores my soul." },
   ]);
 });
+
+test("a sign-in code is accepted as people paste it, and nothing else is", async () => {
+  const { cleanCode } = await import("../src/platform/signInCode.ts");
+  assert.equal(cleanCode("123456"), "123456");
+  assert.equal(cleanCode(" 123 456 "), "123456");
+  assert.equal(cleanCode("1234-5678"), "12345678");
+  assert.equal(cleanCode("12345"), null);
+  assert.equal(cleanCode("12345678901"), null);
+  assert.equal(cleanCode("12a456"), null);
+});
