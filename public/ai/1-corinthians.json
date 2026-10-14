@@ -4,23 +4,24 @@
     {
       "id": "ai:1-corinthians",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "1 Corinthians answers reports and questions from a gifted and troubled church. Paul deals with rival groups, a case of sexual immorality, lawsuits between believers, marriage and singleness, food offered to idols, behavior in worship and abuses at the Lord’s Supper.\n\nIn chapters 12 to 14 he discusses spiritual gifts, with the chapter on love at the center. Chapter 15 is the Bible’s longest treatment of the resurrection, of Christ and of those who belong to him."
+          "text": "A church writes to Paul, and Paul has also heard from Chloe's household that there are contentions among them. One says, “I follow Paul”, another “I follow Apollos”. That is the church in Corinth: gifted, lively and troubled. 1 Corinthians is Paul's answer to the reports and the questions.\n\nHe deals with rival groups, a case of sexual immorality, lawsuits between believers, marriage and singleness, food offered to idols, behavior in worship and abuses at the Lord's Supper. None of it is abstract. Each problem is a real quarrel among people who gather for worship.\n\nIn chapters 12 to 14 he discusses spiritual gifts, and the chapter on love sits at the center, ending with the words, “The greatest of these is love.” Then in chapter 15 he rests everything on one claim: that Christ died, was buried and was raised on the third day. It is the Bible's longest treatment of the resurrection, of Christ and of those who belong to him."
         },
         {
           "kind": "background",
-          "text": "Corinth was a wealthy port city in Greece, and Paul had started the church there. He wrote this letter from Ephesus around the year 54 or 55."
+          "text": "Corinth was a wealthy port city in Greece, and Paul had started the church there. He wrote this letter from Ephesus around the year 54 or 55, in answer to reports that had reached him and questions the church had put to him."
         },
         {
           "kind": "interpretations",
           "text": "Christians differ on whether gifts such as tongues and prophecy continue today. The passages on women in worship (chapters 11 and 14) are read differently: some see lasting instructions, others guidance for a particular situation. Most readers agree that the instruction about head coverings reflects the customs of the time, while differing on the principle behind it."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

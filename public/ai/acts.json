@@ -4,13 +4,13 @@
     {
       "id": "ai:acts",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Acts continues Luke’s Gospel. The risen Jesus tells his followers they will be his witnesses in Jerusalem, in Judea and Samaria, and to the ends of the earth, and the book follows that outline. The Holy Spirit comes at Pentecost, a community forms in Jerusalem, and persecution scatters it.\n\nA turning point is the welcome of non-Jews without requiring them to keep the whole law. The second half follows Paul on his journeys through what is now Turkey and Greece and ends with him under guard in Rome, still teaching."
+          "text": "Eleven men stand on a hill and stare at the sky. Jesus has just been taken up, a cloud has hidden him, and two men in white ask why they are still looking up. Just before he went, he told them what comes next: “You will be witnesses to me in Jerusalem, in all Judea and Samaria, and to the uttermost parts of the earth.” Acts follows that outline.\n\nIt continues Luke's Gospel. At Pentecost the believers are filled with the Holy Spirit, a community forms in Jerusalem, and persecution scatters it. A turning point comes when non-Jews are welcomed without being required to keep the whole law. After that the story follows Paul on his journeys through what is now Turkey and Greece.\n\nThe book ends with Paul in Rome, under guard, living in his own rented house. He receives all who come to him, preaching God's Kingdom and teaching about the Lord Jesus Christ with all boldness, without hindrance."
         },
         {
           "kind": "background",
@@ -20,7 +20,8 @@
           "kind": "interpretations",
           "text": "Christians differ on how far Acts describes the early church and how far it sets a pattern. Pentecostal and charismatic churches expect the gifts of the Spirit seen here to continue in the same way; others think some belonged to the founding period. Baptism, the sharing of possessions and the way churches are led are debated on the same lines."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:acts/1",

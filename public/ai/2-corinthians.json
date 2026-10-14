@@ -4,13 +4,13 @@
     {
       "id": "ai:2-corinthians",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "2 Corinthians is the most personal of Paul’s letters. After a painful conflict with the church in Corinth, he writes to explain himself and to rebuild trust. He describes the comfort God gives in suffering and the ministry of reconciliation, and compares the good news to treasure carried in jars of clay.\n\nChapters 8 and 9 encourage generous giving for poor believers in Jerusalem. In the last chapters Paul answers rivals who mock his weakness, and reports the word he was given: God’s power is made perfect in weakness."
+          "text": "After a painful quarrel, a letter goes back to Corinth, and it opens with comfort. God is “the Father of mercies and God of all comfort”, Paul writes, and he comforts us so that we can comfort others. This is the most personal of Paul's letters, written to explain himself and to rebuild trust.\n\nHe describes the ministry of reconciliation and says the good news is a treasure carried in clay vessels, so that the greatness of the power is God's and not ours. Pressed on every side, yet not crushed: it is the language of someone who has suffered and does not hide it.\n\nChapters 8 and 9 encourage generous giving for poor believers in Jerusalem. In the last chapters Paul answers rivals who mock his weakness. He tells how he begged the Lord three times about a thorn in the flesh, and reports the answer: God's power is made perfect in weakness."
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "What Paul’s thorn in the flesh was (12:7) is unknown; illness, opposition and temptation have all been suggested. The chapters on giving are widely used to teach generosity, and readers note that Paul appeals to grace and willingness and sets no fixed amount."
+          "text": "What Paul's thorn in the flesh was (12:7) is unknown, though Paul says he begged the Lord three times about it and was not given what he asked; illness, opposition and temptation have all been suggested. The chapters on giving are widely used to teach generosity, and readers note that Paul appeals to grace and willingness and sets no fixed amount."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

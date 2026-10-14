@@ -4,23 +4,24 @@
     {
       "id": "ai:romans",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Romans is Paul’s fullest explanation of the good news. He argues that all people, Jews and non-Jews alike, have sinned, and that God makes people right with himself through faith in Jesus Christ and not by keeping the law (chapters 1 to 4). He then describes the new life this brings: peace with God, freedom from sin’s rule, and life in the Spirit (5 to 8).\n\nChapters 9 to 11 wrestle with the place of Israel. The last chapters turn to daily life: love, humility, and unity between groups with different scruples."
+          "text": "Paul writes to people he has never met. They are in Rome, and he says he is eager to preach the good news to them too. He is not ashamed of it, because it is “the power of God for salvation for everyone who believes”. That one sentence is the plan of the letter.\n\nHe argues that all people, Jews and non-Jews alike, have sinned, and that God makes people right with himself through faith in Jesus Christ and not by keeping the law (chapters 1 to 4). Then he describes the new life this brings: peace with God, freedom from sin's rule, and life in the Spirit. Chapter 8 ends with the conviction that nothing can separate believers from God's love.\n\nChapters 9 to 11 wrestle with the place of Israel, and Paul does so with evident pain. The last chapters turn to daily life: love, humility, and unity between groups with different scruples."
         },
         {
           "kind": "background",
-          "text": "Paul wrote Romans around the year 57, probably from Corinth, to a church he had not founded or visited. He hoped to visit Rome on his way to Spain."
+          "text": "Paul wrote Romans around the year 57, probably from Corinth, to a church he had not founded or visited. He hoped to visit Rome on his way to Spain. Romans is his fullest explanation of the good news."
         },
         {
           "kind": "interpretations",
           "text": "Romans has shaped Christian thought more than any other letter. Its teaching on being made right with God stood at the center of the Reformation, and Catholics and Protestants have explained it differently. Chapter 9 is central to the debate on predestination. Chapter 13 on governing authorities is read with care, since it has been misused to demand obedience to unjust rule."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:romans/8",

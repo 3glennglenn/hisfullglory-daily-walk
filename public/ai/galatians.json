@@ -4,13 +4,13 @@
     {
       "id": "ai:galatians",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Galatians is an urgent letter. Teachers had told the non-Jewish believers in Galatia that they must be circumcised and keep the law of Moses. Paul answers that this would abandon the good news itself: people are made right with God through faith in Christ, not by works of the law.\n\nHe appeals to his own story, to Abraham who believed before the law was given, and to the Galatians’ experience of the Spirit. Freedom in Christ is not license; it shows itself in love and in the fruit of the Spirit."
+          "text": "Paul is angry, and it shows from the start. He is amazed that the Galatians are so quickly deserting the one who called them. Teachers had told the non-Jewish believers in Galatia that they must be circumcised and keep the law of Moses. Paul answers that this would abandon the good news itself: people are made right with God through faith in Christ, not by works of the law.\n\nHe asks them, with open frustration, whether they received the Spirit by works of the law or by hearing with faith. He appeals to his own story, to Abraham who believed before the law was given, and to the Galatians' own experience of the Spirit.\n\nThen comes the other side. Freedom in Christ is not license. It shows itself in love and in the fruit of the Spirit: love, joy, peace, patience, kindness, goodness, faith, gentleness and self-control."
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "Galatians was central to the Reformation. In recent decades scholars have debated what Paul means by works of the law: any effort to earn God’s favor, or the particular marks that set Jews apart, such as circumcision and food laws. Readers also compare Paul’s teaching here with James 2 and generally find the two address different errors."
+          "text": "Galatians was central to the Reformation. In recent decades scholars have debated what Paul means by works of the law: any effort to earn God's favor, or the particular marks that set Jews apart, such as circumcision and food laws. Readers also compare Paul's teaching here with James 2 and generally find the two address different errors."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

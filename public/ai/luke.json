@@ -4,13 +4,13 @@
     {
       "id": "ai:luke",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Luke sets out to give an orderly account of the life of Jesus. It opens with the births of John the Baptist and Jesus and includes songs of praise still used in worship. Much of the book is a long journey toward Jerusalem, filled with teaching.\n\nLuke shows special interest in the poor, in women, in outsiders and in prayer. Some of the best-known parables are found only here, among them the Good Samaritan and the Prodigal Son. It ends with the risen Jesus on the road to Emmaus and his ascension."
+          "text": "A man sits down to write to a friend. Many have already tried to set the story in order, and he has traced everything accurately from the first, so that Theophilus may know the certainty of what he was taught. That is how Luke begins, as a careful account of the life of Jesus.\n\nIt opens with the births of John the Baptist and Jesus, and with songs of praise still used in worship. Then Jesus sets his face toward Jerusalem, and much of the book is that long journey, filled with teaching. Along the road Luke shows special interest in the poor, in women, in outsiders and in prayer. Some of the best-known parables are found only here, among them the Good Samaritan and the Prodigal Son.\n\nThe journey ends in Jerusalem, at the cross and the empty tomb. On the road to Emmaus the risen Jesus walks beside two sad travelers and opens the Scriptures to them. The book closes with his ascension, and the disciples return to Jerusalem with great joy."
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "Luke says he drew on eyewitnesses and earlier accounts, and most scholars think Mark was one of them. Readers differ on how to hold together Luke’s sharp words about wealth with other parts of Scripture. His account has shaped the Christian year more than any other: Christmas, the ascension and Pentecost all rest largely on Luke and Acts."
+          "text": "Luke says he drew on eyewitnesses and earlier accounts, and most scholars think Mark was one of them. Readers differ on how to hold together Luke's sharp words about wealth with other parts of Scripture. His account has shaped the Christian year more than any other: Christmas, the ascension and Pentecost all rest largely on Luke and Acts."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/1",

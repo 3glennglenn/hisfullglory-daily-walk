@@ -4,23 +4,24 @@
     {
       "id": "ai:john",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "John tells the story of Jesus differently from the other three Gospels. It opens by calling him the Word who was with God and became flesh. It then selects a small number of signs, such as turning water into wine and raising Lazarus, and joins them to long conversations and speeches.\n\nJesus describes himself in a series of sayings that begin with I am: the bread of life, the light of the world, the good shepherd. The book states its purpose plainly: that readers may believe that Jesus is the Christ and have life in his name."
+          "text": "Most Gospels begin with a birth or a name. John begins before the beginning: “In the beginning was the Word, and the Word was with God, and the Word was God.” The Word became flesh and lived among us. Everything that follows is the story of that arrival.\n\nJohn tells it differently from the other three Gospels. He selects a small number of signs, such as turning water into wine and raising Lazarus, and joins them to long conversations and speeches. Jesus speaks to a night visitor, a woman at a well and a crowd on a hillside. And he describes himself in a series of sayings that begin with I am: the bread of life, the light of the world, the good shepherd.\n\nNear the end, the writer steps forward and says why the book exists. Many other signs are not written here, but these are written “that you may believe that Jesus is the Christ, the Son of God”, and that believing, readers may have life in his name."
         },
         {
           "kind": "background",
-          "text": "Early tradition names the author as the apostle John, writing in Ephesus late in the first century. The book itself speaks of the disciple whom Jesus loved as the witness behind it."
+          "text": "Early tradition names the author as the apostle John, writing in Ephesus late in the first century. The book itself speaks of the disciple whom Jesus loved as the witness behind it, and its closing chapter says that this is the disciple who testifies about these things and wrote them."
         },
         {
           "kind": "interpretations",
           "text": "John often says the Jews when it means the leaders who opposed Jesus; Jesus and his disciples were Jews themselves. Reading that phrase as a verdict on a whole people has done great harm and is rejected by churches today. The story of the woman caught in adultery (7:53 to 8:11) is missing from the earliest copies, and most Bibles mark it with a note."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:john/1",
