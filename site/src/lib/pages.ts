@@ -4,7 +4,7 @@ import { library } from "./bible.ts";
 import { content, showDrafts } from "./content.ts";
 
 /** Pages outside the Bible. Add a page here in the same change that adds its file. */
-const fixedPages = ["/", "/bible", "/resources", "/about", "/beta"];
+const fixedPages = ["/", "/bible", "/resources", "/about", "/beta", "/delete-account"];
 
 /**
  * A section's overview page and its approved pages; nothing until the first one is

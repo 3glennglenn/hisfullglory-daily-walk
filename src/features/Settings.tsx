@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { usePlatform } from "../platform/store";
 import { backupData } from "../platform/persistence";
 import { goals, type Theme } from "../platform/models";
-import { AuthPanel, useAuth } from "../platform/auth";
+import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
 import { supabase } from "../supabase";
 export function Settings() {
   const { state, update, notice, recover, storage } = usePlatform();
@@ -282,12 +282,12 @@ export function Profile() {
           journal or prayers.
         </p>
         <p>
-          Use Settings to export private data. Contact the operator for an
-          account deletion request; deleting an account must remove its owned
-          server data and respect required audit retention.
+          Use Settings to export private data. When you are signed in, you can
+          delete your account on this page at any time.
         </p>
         <a href="mailto:support@hisfullglory.com">Contact support</a>
       </div>
+      <DeleteAccount />
     </section>
   );
 }

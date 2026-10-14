@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {freshPlatform,loadPlatform,savePlatform,recoverPlatform,scopedStorage,backupData,V1_KEY,V2_KEY,V3_KEY} from "../src/platform/persistence.ts";
+import {freshPlatform,loadPlatform,savePlatform,recoverPlatform,scopedStorage,backupData,forgetAccount,V1_KEY,V2_KEY,V3_KEY} from "../src/platform/persistence.ts";
 import {blankState} from "../src/storage.ts";
 import {findTopic,validTopics,recommendResources,topicGraph} from "../src/topics/graph.ts";
 import {safeSourceUrl} from "../src/social/sources.ts";
@@ -102,4 +102,16 @@ test("recovery retains corrupt v3 and prefers latest readable v2 over older v1",
   memory.setItem(V3_KEY,"second-source");recoverPlatform(memory);
   const exported=backupData(memory);assert.ok(exported.includes("first-source"));assert.ok(exported.includes("second-source"));
  }finally{Date.now=clock;}
+});
+test("deleting an account removes only that account's private data from the device",()=>{
+  class Removable extends Memory{removeItem(k:string){this.data.delete(k);}}
+  const memory=new Removable(),guest=scopedStorage(memory,null),a=scopedStorage(memory,"user-a"),b=scopedStorage(memory,"user-b");
+  for(const [storage,body] of [[guest,"guest-note"],[a,"A-only-secret"],[b,"B-only-secret"]] as const){const s=loadPlatform(storage).state;s.entries=[{id:"x",date:"2026-10-14",type:"free journal",title:"Note",body}];savePlatform(storage,s);}
+  assert.ok(forgetAccount(memory,"user-a")>0);
+  assert.ok(![...memory.data.keys()].some(k=>k.startsWith("hfg-private:user-a:")));
+  assert.equal(forgetAccount(memory,"user-a"),0);
+  assert.equal(loadPlatform(a).state.entries.length,0);
+  assert.equal(loadPlatform(b).state.entries[0].body,"B-only-secret");
+  assert.equal(loadPlatform(guest).state.entries[0].body,"guest-note");
+  assert.throws(()=>forgetAccount(memory,"../user-b"),/Invalid private profile/);
 });
