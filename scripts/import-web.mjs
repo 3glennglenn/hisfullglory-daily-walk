@@ -2,7 +2,7 @@
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
-import { verseText } from "./usfm.mjs";
+import { verseWithSpeakers } from "./usfm.mjs";
 const folder = process.argv[2];
 if (!folder) throw new Error("Provide the extracted official WEB USFM folder.");
 const books = [];
@@ -19,22 +19,39 @@ for (const file of readdirSync(folder)
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/-$/, "");
   const chapters = [];
+  let opening = []; // speaker labels waiting for the next verse (Song of Songs)
   for (const chapter of raw.split(/\\c\s+/).slice(1)) {
     const number = Number(chapter.match(/^\d+/)?.[0]);
+    const intro = chapter.slice(0, Math.max(0, chapter.search(/\\v\s+\d+\s/)));
+    for (const m of intro.matchAll(/^\\sp[ \t]+([^\n]*)$/gm)) opening.push(m[1].trim());
     const verses = [
       ...chapter.matchAll(/\\v\s+(\d+)\s+([\s\S]*?)(?=\\v\s+\d+\s|$)/g),
-    ].map((m) => ({
-      number: Number(m[1]),
-      text: verseText(m[2]),
-      omitted: !verseText(m[2]),
-    }));
+    ].map((m) => {
+      const { text, speakers, next } = verseWithSpeakers(m[2], opening);
+      opening = next;
+      return {
+        number: Number(m[1]),
+        text,
+        omitted: !text,
+        ...(speakers.length ? { speakers } : {}),
+      };
+    });
     if (
       !verses.length ||
-      verses.some((v) => v.text.includes("\\") || v.text.includes("strong="))
+      verses.some((v) => v.text.includes("\\") || v.text.includes("strong=")) ||
+      verses.some((v) =>
+        v.speakers?.some(
+          (s) =>
+            !/^[A-Z][a-z]+$/.test(s.label) ||
+            (s.at > 0 && v.text[s.at - 1] !== " "),
+        ),
+      )
     )
       throw new Error(`Invalid parsed chapter ${id} ${number}`);
     chapters.push({ number, verses });
   }
+  if (opening.length)
+    throw new Error(`Speaker label after the last verse of ${id}: ${opening}`);
   books.push({ id, slug, name, chapters });
 }
 if (books.length !== 66)

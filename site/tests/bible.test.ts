@@ -3,11 +3,12 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
-import { bookNote, chapterNote, library } from "../src/lib/bible.ts";
+import { bookNote, chapterNote, hasSpeakers, library, speakerNote, speakerParts } from "../src/lib/bible.ts";
 
 const { bible, notes } = library();
 const page = (path: string) => `dist/${path}/index.html`;
 const clean = (text: string) => text.replace(/\s+/g, " ").trim();
+const speakerSpan = /<span[^>]*class="speaker"[^>]*>[^<]*<\/span>/g;
 
 /** The text a reader sees: tags removed, entities decoded, whitespace collapsed. */
 function visibleText(html: string) {
@@ -47,9 +48,10 @@ test("every chapter page shows the WEB text of each verse, unchanged", () => {
   for (const book of bible.books)
     for (const chapter of book.chapters) {
       const html = readFileSync(page(`bible/${book.slug}/${chapter.number}`), "utf8");
+      // Speaker labels inside a verse (Song of Songs) are not verse text; the next test checks them.
       const shown = new Map(
         [...html.matchAll(/<p[^>]*\bid="v(\d+)"[^>]*>([\s\S]*?)<\/p>/g)].map(
-          ([, number, inner]) => [Number(number), visibleText(inner)],
+          ([, number, inner]) => [Number(number), visibleText(inner.replace(speakerSpan, ""))],
         ),
       );
       assert.equal(shown.size, chapter.verses.length, `${book.name} ${chapter.number} verse count`);
@@ -64,6 +66,40 @@ test("every chapter page shows the WEB text of each verse, unchanged", () => {
         );
       }
     }
+});
+
+test("Song of Songs shows each speaker label where the WEB puts it, with the note", () => {
+  // Labels before a verse are their own paragraph; a label mid-verse is a span inside it.
+  let labels = 0;
+  for (const book of bible.books)
+    for (const chapter of book.chapters) {
+      const html = readFileSync(page(`bible/${book.slug}/${chapter.number}`), "utf8");
+      const expected = chapter.verses.flatMap((v) => {
+        const { above, parts } = speakerParts(v);
+        return [
+          ...above.map((label) => `above ${v.number} ${label}`),
+          ...parts.filter((p) => p.label).map((p) => `inside ${v.number} ${p.label}`),
+        ];
+      });
+      const shown: string[] = [];
+      let waiting: string[] = [];
+      let current = 0;
+      for (const [, tag, verse, label] of html.matchAll(
+        /<(p|span)\b[^>]*?(?:\bid="v(\d+)"[^>]*|class="speaker"[^>]*>([^<]+)<)/g,
+      )) {
+        if (verse) {
+          current = Number(verse);
+          shown.push(...waiting.map((l) => `above ${current} ${l}`));
+          waiting = [];
+        } else if (tag === "p") waiting.push(label);
+        else shown.push(`inside ${current} ${label}`);
+      }
+      const where = `${book.name} ${chapter.number}`;
+      assert.deepEqual(shown, expected, where);
+      assert.equal(html.includes(speakerNote), book.id === "SNG" && hasSpeakers(chapter), `${where} note`);
+      labels += shown.length;
+    }
+  assert.equal(labels, 33);
 });
 
 test("no note quotes Scripture that the WEB text does not contain", () => {

@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { verseText } from "../scripts/usfm.mjs";
-import type { BibleData } from "../src/bible/provider.ts";
+import { verseText, verseWithSpeakers } from "../scripts/usfm.mjs";
+import { speakerParts, type BibleData } from "../src/bible/provider.ts";
 
 const bible = JSON.parse(readFileSync("public/bible/web.json", "utf8")) as BibleData;
 
@@ -99,6 +99,59 @@ test("no verse ends with or contains a Song of Songs speaker label", () => {
     verse(1, 4),
     "Take me away with you. Let’s hurry. The king has brought me into his rooms. We will be glad and rejoice in you. We will praise your love more than wine! They are right to love you.",
   );
+});
+
+test("speaker lines become labels that start at a word, apart from the text", () => {
+  // Shortened from the official source: Song of Songs 1:1 ends with the label for verse 2, and
+  // 1:4 changes speaker twice. Labels that stood before a verse come in as `opening`.
+  const end = verseWithSpeakers('\\w Solomon|strong="H8010"\\w*’s.   \n\\sp Beloved  \n\\q1\n');
+  assert.deepEqual(end, { text: "Solomon’s.", speakers: [], next: ["Beloved"] });
+  const inside = verseWithSpeakers(
+    '\\w rooms|strong="H2315"\\w*.  \n\\sp Friends  \n\\q1 We \\w will|strong="H4428"\\w* be glad.  \n\\sp Beloved  \n\\q1 \\w They|strong="H7323"\\w* are right.   \n\\q1\n',
+    ["Lover"],
+  );
+  assert.deepEqual(inside, {
+    text: "rooms. We will be glad. They are right.",
+    speakers: [
+      { at: 0, label: "Lover" },
+      { at: 7, label: "Friends" },
+      { at: 24, label: "Beloved" },
+    ],
+    next: [],
+  });
+  const verse = { number: 4, ...inside };
+  assert.deepEqual(speakerParts(verse), {
+    above: ["Lover"],
+    parts: [
+      { text: "rooms. " },
+      { label: "Friends", text: "We will be glad. " },
+      { label: "Beloved", text: "They are right." },
+    ],
+  });
+  assert.deepEqual(speakerParts({ number: 1, text: "In the beginning" }), { above: [], parts: [{ text: "In the beginning" }] });
+});
+
+test("the 33 speaker labels of Song of Songs sit where the WEB puts them, and only there", () => {
+  // From the source's \sp lines: four stand before a chapter's first verse, the rest before or
+  // inside a verse. "@" gives the first words a label stands before when it starts mid-verse.
+  const expected = [
+    "1:2 Beloved", "1:4 Friends @ We will be", "1:4 Beloved @ They are right", "1:8 Lover", "1:11 Friends",
+    "1:12 Beloved", "1:15 Lover", "1:16 Beloved", "1:17 Lover", "2:1 Beloved", "2:2 Lover", "2:3 Beloved",
+    "2:14 Lover", "2:16 Beloved", "4:1 Lover", "4:16 Beloved", "5:1 Lover", "5:1 Friends @ Eat, friends! Drink,",
+    "5:2 Beloved", "5:9 Friends", "5:10 Beloved", "6:1 Friends", "6:2 Beloved", "6:4 Lover", "6:13 Friends",
+    "6:13 Lover @ Why do you", "7:10 Beloved", "8:5 Friends", "8:5 Beloved @ Under the apple", "8:8 Brothers",
+    "8:10 Beloved", "8:13 Lover", "8:14 Beloved",
+  ];
+  const found: string[] = [];
+  for (const book of bible.books)
+    for (const chapter of book.chapters)
+      for (const v of chapter.verses)
+        for (const { at, label } of v.speakers ?? []) {
+          assert.equal(book.id, "SNG", `${book.name} ${chapter.number}:${v.number} has a speaker label`);
+          assert.ok(at === 0 || (at < v.text.length && v.text[at - 1] === " "), `${chapter.number}:${v.number} ${label} starts at a word`);
+          found.push(`${chapter.number}:${v.number} ${label}${at ? ` @ ${v.text.slice(at).split(" ").slice(0, 3).join(" ")}` : ""}`);
+        }
+  assert.deepEqual(found, expected);
 });
 
 test("the five verses the WEB leaves out stay marked as omitted", () => {
