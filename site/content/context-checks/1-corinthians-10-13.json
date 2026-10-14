@@ -1,7 +1,7 @@
 {
   "slug": "1-corinthians-10-13",
   "review": "approved",
-  "approved": "2026-10-13",
+  "approved": "2026-10-14",
   "drafted": "ai",
   "written": "2026-10-13",
   "verse": {
@@ -16,7 +16,58 @@
   "moment": "The young church in Corinth was full of confidence. Some of its members were sure their faith was strong enough for anything. They could sit down to eat in an idol’s temple, they thought, and it would not touch them.\n\nPaul loves these people and he is worried for them. He does not call them weak. He tells them a story about people who were just as sure, and he ends it with a sentence aimed straight at their confidence: “let him who thinks he stands be careful that he doesn’t fall”. Only then does he give them the promise.",
   "around": "The verse speaks of temptation: “God is faithful, who will not allow you to be tempted above what you are able, but will with the temptation also make the way of escape”. The next verse says what to do with that: “flee from idolatry”.",
   "readings": "In everyday speech this verse has become a saying about suffering: God will not give you more than you can handle. People say it to comfort one another at hospital beds and funerals, and they mean it kindly.\n\nThe verse itself is about temptation. It promises that no pull toward wrong is too strong to resist, because God always leaves a way out.\n\nMany pastors gently point out the difference, because the saying can hurt. Some burdens are more than a person can carry, and Paul knew it. He wrote that he had been “weighed down exceedingly, beyond our power”. The comfort of the Bible in such times is not that the load will be light. It is that no one is asked to carry it alone.",
+  "argued": "Around the year 400 Augustine looked honestly at himself in his Confessions. He did not know, he admitted, which temptations he could resist and which he could not. His hope rested on this verse: [[augustine-temptation]]\n\nA thousand years later Thomas à Kempis wrote in The Imitation of Christ that temptation does not come to everyone in the same measure: [[kempis]] For him that was no reason to despair. It was a reason to cry out to God all the more.\n\nIn our own time the verse has turned into a saying: God will not give you more than you can handle. One version even travels under Mother Teresa’s name, but the Mother Teresa Center lists it among the quotes falsely attributed to her. The pastor John Piper has answered the saying directly. The limit Paul speaks of, he says, is [[piper]]\n\nFrom a bishop who did not trust his own strength to a pastor correcting a well-meant saying, the comfort rests in the same place: God is faithful.",
   "point": "The promise is about temptation to sin, and it comes with a way out and a command to take it. It does not say that suffering will never be more than a person can bear. Paul himself writes elsewhere that he and his companions “were weighed down exceedingly, beyond our power” (2 Corinthians 1:8).",
+  "voices": [
+    {
+      "id": "augustine-temptation",
+      "name": "Augustine",
+      "about": "bishop of Hippo, in his Confessions",
+      "words": "And there is hope, because Thou art faithful, Who wilt not suffer us to be tempted above that we are able",
+      "source": {
+        "title": "Augustine, Confessions, book 10, translated by E. B. Pusey (Project Gutenberg)",
+        "url": "https://www.gutenberg.org/cache/epub/3296/pg3296.txt"
+      }
+    },
+    {
+      "id": "kempis",
+      "name": "Thomas à Kempis",
+      "about": "in The Imitation of Christ",
+      "words": "Some are sorely tried their whole life long.",
+      "source": {
+        "title": "Thomas à Kempis, The Imitation of Christ, book 1, chapter 13, translated by William Benham (Project Gutenberg)",
+        "url": "https://www.gutenberg.org/cache/epub/1653/pg1653.txt"
+      }
+    },
+    {
+      "id": "piper",
+      "name": "John Piper",
+      "about": "pastor and author, on Ask Pastor John, 2015",
+      "words": "not beyond what you are able with God’s help",
+      "source": {
+        "title": "John Piper, Will God Ever Give Us More Than We Can Handle? (Desiring God, Ask Pastor John)",
+        "url": "https://www.desiringgod.org/interviews/will-god-ever-give-us-more-than-we-can-handle"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "Augustine, Confessions, book 10, translated by E. B. Pusey (Project Gutenberg)",
+      "url": "https://www.gutenberg.org/cache/epub/3296/pg3296.txt"
+    },
+    {
+      "title": "Thomas à Kempis, The Imitation of Christ, book 1, chapter 13, translated by William Benham (Project Gutenberg)",
+      "url": "https://www.gutenberg.org/cache/epub/1653/pg1653.txt"
+    },
+    {
+      "title": "John Piper, Will God Ever Give Us More Than We Can Handle? (Desiring God, Ask Pastor John)",
+      "url": "https://www.desiringgod.org/interviews/will-god-ever-give-us-more-than-we-can-handle"
+    },
+    {
+      "title": "Mother Teresa Center: quotes falsely attributed to Mother Teresa",
+      "url": "https://www.motherteresa.org/mtc/false-quotes"
+    }
+  ],
   "basis": [
     {
       "book": "1-corinthians",
