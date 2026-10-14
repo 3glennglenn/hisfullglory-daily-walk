@@ -93,3 +93,13 @@ test("push setup: the public key decodes to a P-256 point and reminder times sta
   assert.ok(validReminderTime("05:00") && validReminderTime("22:00") && validReminderTime("12:30"));
   assert.ok(!validReminderTime("04:59") && !validReminderTime("22:01") && !validReminderTime("7:30") && !validReminderTime("25:00"));
 });
+
+test("a sign-in code is accepted as people paste it, and nothing else is", async () => {
+  const { cleanCode } = await import("../src/platform/signInCode.ts");
+  assert.equal(cleanCode("123456"), "123456");
+  assert.equal(cleanCode(" 123 456 "), "123456");
+  assert.equal(cleanCode("1234-5678"), "12345678");
+  assert.equal(cleanCode("12345"), null);
+  assert.equal(cleanCode("12345678901"), null);
+  assert.equal(cleanCode("12a456"), null);
+});
