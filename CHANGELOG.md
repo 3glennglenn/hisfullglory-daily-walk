@@ -1,5 +1,12 @@
 # Changelog
 
+## Supabase advisor: `rls_auto_enable()` no longer callable over the API (branch `lock-rls-auto-enable`, 2026-10-14)
+- The security advisor (lints 0028 and 0029) listed `public.rls_auto_enable()` as a SECURITY DEFINER function that guests and signed-in users can call at `/rest/v1/rpc/rls_auto_enable`. No migration creates it: it and its event trigger `ensure_rls` have been in the hosted project since before migration 001, and its body is the "Auto-enable RLS for new tables" example from Supabase's Row Level Security guide. It switches RLS on for every new table in `public`.
+- A direct call does nothing but return an error ("trigger functions can only be called as triggers"), and the function can only switch RLS on. The risk was therefore small; no API caller needs it, so the grant goes.
+- Add `supabase/migrations/008_rls_auto_enable_grants.sql`: revokes EXECUTE from `public`, `anon` and `authenticated`, and does nothing where the function does not exist. The function itself, its owner and the event trigger stay as they are; no other function changes.
+- Add `tests/rls-auto-enable-schema.test.mjs` (PGlite, with the hosted definition): the grants are gone, a guest or signed-in call gets permission denied, nothing else changed, and the trigger still switches RLS on for new tables, also for a role without EXECUTE.
+- Not yet applied to the hosted project; that waits for the founder's approval.
+
 ## Song of Songs speaker labels: pull request #11 (branch `bible-speakers`), approved by the founder, waiting for his merge (2026-10-14)
 - Fix the WEB importer: it dropped heading lines but kept the speaker lines of Song of Songs (`\sp Beloved`, `Lover`, `Friends`, `Brothers`). Because such a line sits just before the next verse, its label ended up as a word at the end or in the middle of the previous verse in 27 verses ("…which is Solomon’s. Beloved", "…more than wine! Beloved They are right to love you."). `scripts/usfm.mjs` now drops `\sp` with the other heading lines. No other book uses `\sp`.
 - Regenerate `public/bible/web.json` from the official archive downloaded on 2026-10-14, on top of the spacing fix below (the importer without this fix reproduces that file byte for byte). Compared verse by verse: 29 label words removed from 27 Song of Songs verses, each matching a `\sp` line inside that verse in the source; nothing else changed (same books, chapters, verse numbers and omitted verses). Four more `\sp` lines stand before a chapter's first verse and were never in the text.

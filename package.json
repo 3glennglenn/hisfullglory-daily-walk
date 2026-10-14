@@ -9,7 +9,7 @@
     "security": "node scripts/security-check.mjs",
     "test:browser": "node scripts/browser-check.mjs",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --experimental-strip-types --test tests/core.test.ts tests/context.test.ts tests/platform.test.ts tests/bible-text.test.ts tests/study.test.ts tests/ai.test.ts tests/schema.test.mjs tests/platform-schema.test.mjs tests/expansion.test.ts tests/expansion-schema.test.mjs tests/circles-schema.test.mjs tests/circles.test.ts"
+    "test": "node --experimental-strip-types --test tests/core.test.ts tests/context.test.ts tests/platform.test.ts tests/bible-text.test.ts tests/study.test.ts tests/ai.test.ts tests/schema.test.mjs tests/platform-schema.test.mjs tests/expansion.test.ts tests/expansion-schema.test.mjs tests/circles-schema.test.mjs tests/rls-auto-enable-schema.test.mjs tests/circles.test.ts"
   },
   "dependencies": {
     "@fontsource/manrope": "^5.2.8",
