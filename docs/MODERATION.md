@@ -84,3 +84,21 @@ Rollback is forward-safe: first disable community/support configuration in a new
 Circle owners/moderators may approve/decline pending applications and moderate contributions only in their active Circle. Only owners promote/demote moderators. Moderators can remove ordinary active members; owners may also remove moderators. Neither can change their own role or the owner's protected membership. There is no role restoration or ownership transfer in v1; owners can close a Circle, not leave it. Platform operators still handle broader abuse, reporter details and appeals using the existing private reports/audit records and documented response procedure.
 
 The UI accepts current Community Guidelines before joining/creating/posting. Backend Terms/profile/cooldown enforcement is shared with Community. Report categories now include vote manipulation/coordinated abuse; reports do not alter score or auto-hide content. Scoped reviewers can hide/remove/keep a reported post visible; resolving its reports is server-controlled and auditable. A block cannot grant or revoke a moderator role, hide a pending application from its authorized reviewer, or defeat scoped report review. Application answers are erased after decision, and report notes/identities never enter Circle queues. These workflows are locally tested; live operator coverage and genuine hosted Auth remain release gates.
+
+## Word filter
+
+Added on 2026-10-14 (migration `008_word_filter.sql`, approved by the founder that day and
+applied to the hosted project; history name word_filter). The App Store asks apps with
+user content for a way to filter objectionable material before it is posted (guideline 1.2).
+
+A trigger refuses a post, reply, prayer update, chat message, public prayer, display name,
+Circle text, Circle application or support request that contains a term from
+`public.blocked_terms`. Terms match whole words only and ignore case, so a word inside
+another word is never caught. The app shows "This contains language that is not allowed
+in the community. Please rephrase it." (`src/social/blockedLanguage.ts`).
+
+Deliberately not on the list: words people read in older Bible translations (whore, ass,
+piss, bastard, cock, hell, damn) and words survivors need to name what happened to them
+(rape, abuse). Nobody outside the database can read the list. To add a term, an operator
+runs `insert into public.blocked_terms(term) values ('...') on conflict do nothing;`.
+`tests/word-filter-schema.test.mjs` checks what is refused and what is allowed.

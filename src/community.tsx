@@ -9,6 +9,7 @@ import type { Session } from "@supabase/supabase-js";
 import { Heart, MessageCircle, Send, Shield, Trash2 } from "lucide-react";
 import { supabase } from "./supabase";
 import { CodeEntry } from "./platform/CodeEntry";
+import { postError } from "./social/blockedLanguage";
 import { useAuth, AuthPanel } from "./platform/auth";
 import { SafetyControls } from "./social/safety";
 import { track } from "./analytics";
@@ -686,8 +687,8 @@ function Chat({
         setMessages((prev) => mergeMessages(prev, [data as Message]));
       }
       track("chat_message_posted", { room: room.slug });
-    } catch {
-      setError("Your message was not sent. Wait a few seconds and try again.");
+    } catch (e) {
+      setError(postError(e, "Your message was not sent. Wait a few seconds and try again."));
     } finally {
       lock.current = false;
       setBusy(false);
@@ -980,8 +981,8 @@ function PrayerWall({
       timer.current = setTimeout(() => setCooldown(false), 3000);
       track("prayer_posted");
       await fetchPosts();
-    } catch {
-      setError("Your post was not shared. Wait a few seconds and try again.");
+    } catch (e) {
+      setError(postError(e, "Your post was not shared. Wait a few seconds and try again."));
     } finally {
       lock.current = false;
       setBusy(false);
