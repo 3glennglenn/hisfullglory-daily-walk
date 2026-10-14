@@ -21,6 +21,60 @@
           "text": "Christians differ on how far Acts describes the early church and how far it sets a pattern. Pentecostal and charismatic churches expect the gifts of the Spirit seen here to continue in the same way; others think some belonged to the founding period. Baptism, the sharing of possessions and the way churches are led are debated on the same lines."
         }
       ]
+    },
+    {
+      "id": "ai:acts/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Luke writes again to Theophilus. His first book was about all that Jesus began to do and teach. For forty days after his suffering, Jesus appeared to the apostles with many proofs, speaking about God's Kingdom. He told them to wait in Jerusalem for the promise of the Father, since they will be baptized in the Holy Spirit.\n\nThey ask whether he is now restoring the kingdom to Israel. He says the times belong to the Father, and then: “You will be witnesses to me in Jerusalem, in all Judea and Samaria, and to the uttermost parts of the earth.” He is taken up, and a cloud hides him. Two men in white ask why they stand looking at the sky, and promise that he will come back in the same way.\n\nThe disciples go back to the upper room and pray together. Peter speaks about Judas, and they draw lots, and the lot falls on Matthias."
+        },
+        {
+          "kind": "background",
+          "text": "Acts is the second volume of Luke's work, and Luke 24 ends where Acts 1 begins. The chapter sets the whole book's plan in verse 8. Many scholars date Acts to the later first century. The death of Judas is told here and in Matthew 27, and the two accounts differ in details. Christians have long discussed how to fit them together. Drawing lots is an ancient way of seeking God's choice. Christians differ on whether Matthias was the right choice, since Paul later calls himself an apostle too."
+        }
+      ]
+    },
+    {
+      "id": "ai:acts/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "On the day of Pentecost the believers are all together in one place. Suddenly there is a sound like a mighty wind, and tongues like fire rest on each of them. They are all “filled with the Holy Spirit” and begin to speak in other languages. Jews from many nations are in Jerusalem, and each hears them in his own language.\n\nPeter stands with the eleven and says it is only the third hour of the day. What they see is what Joel spoke of, the Spirit poured out on all flesh. He speaks of Jesus of Nazareth, crucified, whom God raised up, and says that God has made him both Lord and Christ.\n\nThe people are cut to the heart and ask what to do. Peter says, “Repent and be baptized”. About three thousand are added that day. They hold to the apostles' teaching, fellowship, the breaking of bread and prayer, and share what they have."
+        },
+        {
+          "kind": "background",
+          "text": "Pentecost was a Jewish pilgrimage feast, which is why people from so many places are in Jerusalem. The list of nations in verses 9 to 11 shows how far Jewish communities had spread. Christians differ on what speaking in other languages means today. Some see a once-for-all sign of the church's birth, and others expect it to continue. Peter's words to the men of Israel are a message from one Jew to other Jews, and the words about crucifixion have been misused against Jews, which is wrong. Compare Joel 2 and Psalm 16."
+        }
+      ]
+    },
+    {
+      "id": "ai:acts/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Peter and John go up to the temple at the hour of prayer. At the gate called Beautiful sits a man lame from birth, carried there daily to ask for money. He looks at them, expecting a gift. Peter says, “I have no silver or gold, but what I have, that I give you”, and in the name of Jesus Christ of Nazareth tells him to get up and walk. He takes his hand and lifts him, and the man's feet and ankles are strong. He walks, leaps and praises God.\n\nA crowd runs together in Solomon's porch, and Peter speaks. It is not their power or godliness, he says, but faith in Jesus' name. He speaks of Jesus, whom God raised, and says he knows they acted in ignorance, as did their rulers. He calls them to repent and turn, so that their sins may be blotted out and times of refreshing may come."
+        },
+        {
+          "kind": "background",
+          "text": "Acts 3 shows the early believers still going to the temple at the hours of prayer, as faithful Jews did. Peter's speech is addressed to fellow Jews in the temple, and it is full of the language of promise and blessing. Parts of it have been misused to blame Jews for the death of Jesus, and that is a serious misreading. Peter says in verse 17 that he knows they acted in ignorance. Compare Deuteronomy 18 and Genesis 12."
+        }
+      ]
     }
   ]
 }

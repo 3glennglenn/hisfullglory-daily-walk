@@ -23,6 +23,42 @@
       ]
     },
     {
+      "id": "ai:john/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Before there is a person in the story, there is a Word. John begins before the beginning: the Word was with God and was God, all things were made through him, and in him was life. That life was the light of people, and the darkness has not overcome it.\n\nA man named John comes to testify to the light. The Word became flesh and lived among us, full of grace and truth. When priests and Levites ask the Baptist who he is, he says he is not the Christ, only a voice in the wilderness. The next day he sees Jesus and says, “Behold, the Lamb of God, who takes away the sin of the world!”\n\nTwo of John's disciples follow Jesus, and he says, “Come and see.” Andrew brings his brother Simon. Philip finds Nathanael, who doubts that anything good can come out of Nazareth, then calls Jesus the Son of God."
+        },
+        {
+          "kind": "background",
+          "text": "John's Gospel opens with a hymn-like prologue before it turns to the story. Tradition links the book to the apostle John, though scholars differ on who wrote it and when; it is usually dated late in the first century. The Word is a term that echoes the opening of Genesis, and verse 18 hands the task of making God known to the Son. In this chapter the phrase the Jews means the priests and Pharisees who send the questions, and in John the phrase often means leaders. It was never meant for a whole people. Compare Genesis 1 and Mark 1."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A wedding in Cana of Galilee runs out of wine. Jesus’ mother tells him so, and he answers that his hour has not yet come. She tells the servants to do whatever he says. Six stone water pots stand there, and Jesus has them filled to the brim. The ruler of the feast tastes what the servants draw out and tells the bridegroom he has kept the good wine until now. John calls this the beginning of Jesus' signs, and his disciples believed.\n\nAt Passover Jesus goes up to Jerusalem. In the temple he finds people selling oxen, sheep and doves, makes a whip of cords and drives them out, telling the sellers, “Don’t make my Father’s house a marketplace!” Asked for a sign, he says, “Destroy this temple, and in three days I will raise it up.” John explains that he meant the temple of his body."
+        },
+        {
+          "kind": "background",
+          "text": "Cana is a village in Galilee, and John counts the wedding as the first of Jesus' signs. A sign in John points beyond itself to who Jesus is. John places the clearing of the temple near the start of Jesus' ministry, while Matthew, Mark and Luke place a similar event near the end. Scholars and Christians differ over whether there were two events or whether John arranged his account by theme. The leaders' question about sign and authority returns later in the Gospel. John's own note in verse 21 tells the reader how to read the saying about the temple."
+        }
+      ]
+    },
+    {
       "id": "ai:john/3",
       "chapter": 3,
       "model": "Claude Opus 5.5",
@@ -70,6 +106,330 @@
               "text": "he gave his only begotten Son"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "ai:john/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus, tired from the road, sits by Jacob's well in Samaria at about noon. A Samaritan woman comes to draw water, and he asks her for a drink. She is surprised, because Jews have no dealings with Samaritans. He speaks of living water, and she asks for it. He tells her things about her life, and she says he must be a prophet. She asks where one ought to worship. Jesus says that true worshipers will worship the Father “in spirit and truth,” and when she speaks of the Messiah, he says, “I am he”.\n\nShe leaves her water pot and tells the city to come and see. Many Samaritans believe, and they ask him to stay two days. Then in Cana a royal official begs Jesus to heal his dying son. Jesus tells him to go, the boy lives, and the whole household believes."
+        },
+        {
+          "kind": "background",
+          "text": "Jews and Samaritans shared much of Scripture but had long been divided over where to worship. The Samaritans held to Mount Gerizim, and Jews held to Jerusalem. John says Jesus needed to pass through Samaria, and the story shows him crossing a dividing line and speaking to a woman at the well. Readers have often noticed that the first person in John to hear Jesus say plainly that he is the Messiah is a Samaritan woman. The second sign in Cana, in verse 54, matches the first in chapter 2."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "At the pool of Bethesda in Jerusalem lie many sick people, waiting for the water to stir. One man has been ill for thirty-eight years. Jesus asks him, “Do you want to be made well?” The man says he has no one to help him into the pool. Jesus tells him to get up, take his mat and walk, and he does. But it is the Sabbath, and some of the Jews tell him it is not lawful to carry his mat.\n\nThe leaders now want to kill Jesus, because he heals on the Sabbath and calls God his own Father. Jesus answers at length. The Son does what he sees the Father doing. He gives life and he judges. Those who hear his word and believe have passed from death to life. He points to witnesses: John, his works, the Father and the Scriptures. Moses, he says, wrote about him."
+        },
+        {
+          "kind": "background",
+          "text": "Verse 4, about an angel stirring the water, is missing from some of the earliest copies, and some Bibles mark it with a note. The chapter turns from a healing to an argument about Jesus' relationship to the Father. The Jews here are leaders in Jerusalem who object to his actions and claims, not the whole Jewish people. Jesus and his first followers were Jews too. In John, to call God his own Father is to make himself equal to God, and Christians have long read this chapter as important for belief in the Son's divinity. Compare Exodus 20 on the Sabbath."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A great crowd follows Jesus up a mountain beside the sea of Galilee, and Passover is near. He asks Philip where bread can be bought for so many. Andrew points to a boy with five barley loaves and two fish. Jesus has the people sit on the grass, gives thanks and distributes the food. About five thousand men eat as much as they want, and twelve baskets of pieces are left. The people want to make him king, and he withdraws to the mountain.\n\nThat night the disciples row into a rough sea, and Jesus comes to them walking on the water: “Don’t be afraid”. The next day he tells the crowd in Capernaum, “I am the bread of life.” His words about eating his flesh and drinking his blood are a hard saying, and many disciples leave. Peter says, “Lord, to whom would we go? You have the words of eternal life.”"
+        },
+        {
+          "kind": "background",
+          "text": "This is the one miracle before the crucifixion that all four Gospels tell. John places it near Passover, and the bread discourse recalls the manna that Israel ate in the wilderness; see Exodus 16. Christians differ on how to read the words about eating the flesh and drinking the blood. Many in the Catholic, Orthodox and some Lutheran and Anglican traditions link them to the Lord's Supper in a real sense. Others read them as a picture of faith in Christ. The Jews who murmur in verse 41 are people in the crowd who knew Jesus' family."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The Feast of Booths is near, and Jesus' brothers urge him to go to Judea and show himself openly. John says that even his brothers did not believe in him. Jesus stays in Galilee, then goes up later, quietly. At the feast people whisper. Some say he is a good man, others that he leads the crowd astray. In the middle of the feast he teaches in the temple, and listeners marvel that he knows so much. He says his teaching is not his own.\n\nOn the last and greatest day of the feast he cries out, “If anyone is thirsty, let him come to me and drink!” The crowd is divided. Some say he is the prophet, others the Christ. Officers sent to arrest him come back empty-handed: “No man ever spoke like this man!” Nicodemus asks whether the law judges a man before hearing him, and is brushed aside."
+        },
+        {
+          "kind": "background",
+          "text": "The Feast of Booths is a pilgrimage feast, and Jews remembered the wilderness years by living in shelters. Many scholars note that water was part of its ritual, which may help explain why Jesus speaks of thirst here. The chapter shows a city divided over who Jesus is. The Jews who seek to kill him are particular leaders in Jerusalem, and ordinary pilgrims from Jewish communities are among those who believe. Nicodemus first appears in John 3, and he speaks up for Jesus here. Compare John 19. The question about Galilee rests on a debate about the birthplace of the Christ."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Early in the morning in the temple, scribes and Pharisees bring a woman caught in adultery and set her in front of everyone. They say the law of Moses commands stoning and ask what Jesus says. He stoops and writes on the ground. When they press him, he says, “He who is without sin among you, let him throw the first stone at her.” One by one, beginning with the oldest, they go out. Jesus asks the woman where her accusers are. She says, “No one, Lord”, and he says he does not condemn her and tells her to sin no more.\n\nThen Jesus says, “I am the light of the world.” An argument follows about his witness, his Father and who is really free. It ends when Jesus says that before Abraham came into existence, I AM. They take up stones, but Jesus hides himself and leaves the temple."
+        },
+        {
+          "kind": "background",
+          "text": "Most Bibles mark the story of the woman in verses 1 to 11 with a note, because it is missing from the earliest copies of John, and Christians differ on how to treat it. Many keep it as a story that has long been loved. The argument that follows is the hardest to read in the Gospel. When Jesus says to some of the Jews that they are of their father the devil, it is a sharp rebuke of particular people in a bitter debate, spoken by a Jew to Jews. It has been misused to hate Jews, and that use is rejected by the churches."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus passes a man who has been blind from birth. His disciples ask whose sin caused it, the man's or his parents'. Jesus answers that neither sinned, and that God's works are to be revealed in him. He makes mud, puts it on the man's eyes and sends him to wash in the pool of Siloam. The man comes back seeing.\n\nNeighbors argue about whether it is really him. The Pharisees question him, because it was the Sabbath, and they are divided. His parents are afraid and tell them to ask their son. The man says, “though I was blind, now I see.” When the leaders insist that Jesus is a sinner, he points out that nobody has ever opened the eyes of someone born blind, and they throw him out. Jesus finds him, and the man says, “Lord, I believe!” and worships him. Some Pharisees ask whether they are blind too."
+        },
+        {
+          "kind": "background",
+          "text": "The question about whose sin caused the blindness reflects a common belief that suffering is punishment, and Jesus rejects that link in this case. The parents fear the Jews, which in John means the leaders who had agreed to put out of the synagogue anyone who confessed Jesus as Christ. Many scholars think this reflects the time of John's own community, later than the life of Jesus, though they differ on how directly. The chapter has been misused against Jews, and the misuse is wrong. The blind man himself is a Jew. Compare Isaiah 35 on the eyes of the blind."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus speaks of a sheepfold. The one who enters by the door is the shepherd; the sheep know his voice. A thief climbs in another way. Jesus says, “I am the good shepherd.” The good shepherd lays down his life for the sheep, while a hired hand runs when the wolf comes. He knows his own and they know him, as the Father knows him. He has other sheep who are not of this fold, and there will be one flock with one shepherd. No one takes his life; he lays it down himself.\n\nThe crowd is divided again. At the Feast of the Dedication, in winter, in Solomon's porch, they ask him to say plainly whether he is the Christ. He points to his works. No one will snatch his sheep out of his hand, he says, and “I and the Father are one.” They pick up stones. He escapes across the Jordan, where many believe in him."
+        },
+        {
+          "kind": "background",
+          "text": "Shepherds were a familiar figure in Israel's Scriptures, and kings and leaders were often called shepherds; see Psalm 23 and Ezekiel 34. Here the image is more personal: the shepherd knows each sheep by name. The Feast of the Dedication, today called Hanukkah, remembers the rededication of the temple. Christians read the other sheep in different ways, often as a promise of non-Jewish believers joining Jesus' followers. The words about being one with the Father have long been central to Christian teaching on who Jesus is. The Jews in verses 24 to 33 are leaders in the temple."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Lazarus of Bethany is sick, and his sisters Mary and Martha send word to Jesus, who loves them. Jesus stays two more days. When he says they will go to Judea, the disciples warn that people there were just trying to stone him. Thomas says, “Let’s also go, that we may die with him.” Lazarus has already been in the tomb four days.\n\nMartha meets Jesus first: if he had been here, her brother would not have died. Jesus says, “I am the resurrection and the life”, and asks if she believes. She says yes. Mary says the same words and weeps. John records two words: “Jesus wept.” At the cave he has the stone taken away and calls, “Lazarus, come out!” The dead man comes out in his wrappings.\n\nMany believe, but others report to the Pharisees. From that day the council plans to kill Jesus."
+        },
+        {
+          "kind": "background",
+          "text": "Bethany lies close to Jerusalem, so the sign happens in full view of the people who will soon be at the Passover. This is the last and greatest of the signs in John, and it leads straight to the plot against Jesus. Caiaphas speaks as a political calculator, yet John says he prophesied truly without knowing it. Christians have long drawn comfort from Jesus' tears at the tomb. Other Gospels do not tell this story of Lazarus, and scholars and readers have wondered why. Compare Luke 10 for Martha and Mary, and John 12."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Six days before Passover, Jesus is at supper in Bethany. Martha serves, Lazarus sits at the table, and Mary pours a pound of costly nard on Jesus' feet and wipes them with her hair. Judas objects that it could have been sold for the poor, and John says he cared nothing for the poor and used to steal from the money box. Jesus says, “Leave her alone.” She has kept it for the day of his burial.\n\nNext day crowds with palm branches cry “Hosanna!” as Jesus enters Jerusalem on a young donkey.  Jesus says that a grain of wheat must fall into the ground and die to bear fruit. His soul is troubled, a voice comes from the sky, and he says that when he is lifted up he will draw all people to himself. Most still do not believe, yet he cries out that he came not to judge the world but to save it."
+        },
+        {
+          "kind": "background",
+          "text": "John uses the story of the anointing to look ahead to the burial of Jesus. Mark 14 and Matthew 26 tell a similar story with some differences, and Luke 7 has another anointing. Christians differ on how many separate anointings there were. The palm branches and the donkey recall the prophecy cited in verse 15. The chapter closes the public ministry with a warning about unbelief, and John reaches back to Isaiah to explain it. The Jews in this chapter, as often in John, include many who believed, so the word cannot mean the whole nation."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "It is before Passover, and Jesus knows that his time has come. John says he loved his own to the end. At supper he gets up, wraps a towel around his waist and begins to wash his disciples' feet. Peter objects: “You will never wash my feet!” Jesus answers that unless he washes him, Peter has no part with him. When he has finished, Jesus says that as their Lord and Teacher he has given them an example.\n\nHe says one of them will betray him. The disciple Jesus loved leans back on his chest and asks who. Jesus gives a piece of bread to Judas, and Judas goes out. John adds, “It was night.” Then Jesus gives a new commandment, that they love one another as he has loved them. Peter says he will lay down his life, and Jesus tells him the rooster will not crow until he has denied him three times."
+        },
+        {
+          "kind": "background",
+          "text": "The long scene in the upper room that begins here runs through John 17. Washing feet was a task for a servant, and Jesus does it for his friends, even for the one who will betray him. Christians differ on how to carry out his example: some churches wash feet in worship as an ordinance, while many take it as a call to humble service. John does not tell of the bread and cup at this supper, which are told in Luke 22. The new commandment is the center of the chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus has just said he is leaving, and the disciples are shaken. He opens with comfort: “Don’t let your heart be troubled.” In his Father's house are many homes, and he is going to prepare a place and will come again. Thomas says they do not know the way. Jesus answers, “I am the way, the truth, and the life. No one comes to the Father, except through me.”\n\nPhilip asks him to show them the Father. Jesus says that whoever has seen him has seen the Father, and he asks them to trust him, or at least his works. He promises another Counselor, the Spirit of truth, who will be with them forever and will remind them of what he said. He says he will not leave them as orphans. He leaves them his peace, not as the world gives. Then he says, “Arise, let’s go from here.”"
+        },
+        {
+          "kind": "background",
+          "text": "These words are spoken at the supper the night before the crucifixion, to friends who are afraid. Christians read the claim in verse 6 in different ways. Some take it as saying that salvation comes only through Christ, while others stress that the verse says how people come to the Father and does not say who God may welcome. The Counselor is a word that can also be translated as helper or advocate. The promise that the Spirit will teach and remind is the reason many Christians trust the memory of the first disciples. Compare John 16."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus says, “I am the true vine, and my Father is the farmer.” Branches that bear no fruit are taken away, and branches that bear fruit are pruned so they can bear more. The branch cannot bear fruit on its own, and apart from the vine his followers can do nothing. Again and again he says remain. He speaks so that his joy may be in them and be made full.\n\nHis command is that they love one another as he has loved them. “Greater love has no one than this, that someone lay down his life for his friends.” He no longer calls them servants but friends, because he has told them all that he heard from the Father. They did not choose him; he chose them.\n\nThen he turns to the world's hatred. It hated him first, and it will persecute them. The Counselor, the Spirit of truth, will testify about him, and so will they."
+        },
+        {
+          "kind": "background",
+          "text": "The vine was a familiar picture of Israel in the Scriptures; see Isaiah 5 and Psalm 80. Here Jesus takes the place of the vine, and his followers are branches. Christians have read the warning about branches that are taken away in different ways. Some think it speaks of the loss of salvation, and others think it speaks of people who never truly belonged. The hatred of the world in verses 18 to 25 is a warning to disciples who may suffer for their faith. The words about their law in verse 25 are spoken by a Jew to Jews, and they never justify hatred of Jews."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus tells his friends what is coming so that they will not stumble. They will be put out of the synagogues, and some who kill them will think they serve God. Sorrow has filled their hearts. Yet it is to their advantage that he goes, for then the Counselor will come. The Spirit will convict the world about sin, righteousness and judgment, and will guide the disciples into all truth.\n\nHe says that in a little while they will not see him, and then they will see him again. They do not follow. He compares their sorrow to a woman in labor, who forgets the pain for joy that a child is born.\n\nThe disciples say that now they believe. He asks, “Do you now believe?” and tells them they will scatter and leave him alone, yet he is not alone. He ends: “In the world you have trouble; but cheer up! I have overcome the world.”"
+        },
+        {
+          "kind": "background",
+          "text": "This is part of Jesus' last talk with his disciples before his arrest, and it is spoken in the shadow of fear. The warning about being put out of the synagogue reflects pressures that early Jewish followers of Jesus faced, and many scholars think it also speaks to the time when John was written. Christians differ on how to read the little while: some think it points to the resurrection, others to the coming of the Spirit or the return of Christ. Verse 33 closes the long talk that began in John 13, and the prayer follows in John 17."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The talking stops and Jesus prays. He lifts his eyes to heaven and says, “Father, the time has come.” He asks the Father to glorify the Son, so that the Son may glorify the Father. Eternal life, he says, is knowing the only true God and the one he sent. He has finished the work he was given to do.\n\nThen he prays for his disciples. He has made the Father's name known to them, and they have kept his word. He is leaving the world, but they stay in it, and he asks that the Father keep them from the evil one and make them holy in truth. As the Father sent him, he sends them.\n\nFinally he prays for all who will believe through their word: “that they may all be one”. He asks that the world may know the Father sent him and loved them. He desires that they be with him and see his glory."
+        },
+        {
+          "kind": "background",
+          "text": "This is the longest prayer of Jesus in the Gospels, and it is prayed in the hearing of his disciples on the night he is betrayed. It is often called the high priestly prayer, a name given by later readers. The son of destruction in verse 12 refers to Judas. Christians have turned to the prayer for unity throughout history, and divided churches have often cited it. How that unity should look is debated, and traditions differ. Verse 3 is a plain definition of eternal life as knowing God. Compare John 14 to 16."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/18",
+      "chapter": 18,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jesus crosses the brook Kidron with his disciples to a garden, a place Judas knows. Judas arrives with soldiers, officers, lanterns, torches and weapons. Jesus steps forward and asks whom they want. When he says, “I am he,” they fall to the ground. Peter draws a sword and cuts off the ear of the high priest's servant, and Jesus tells him to put it away.\n\nJesus is taken first to Annas. Peter follows into the courtyard, where a servant girl asks if he is also a disciple. He says he is not. Warming himself by a fire, he denies it again, and a rooster crows.\n\nThe leaders bring Jesus to Pilate early, without going in themselves, so they can still eat the Passover. Pilate asks if he is the King of the Jews. Jesus answers, “My Kingdom is not of this world.” Pilate asks, “What is truth?” and says he finds no basis for a charge. The crowd chooses Barabbas, a robber."
+        },
+        {
+          "kind": "background",
+          "text": "John tells the arrest and trial from his own angle. The detail of Jesus' calm and the soldiers falling back shows him in control of events. John names both Annas and Caiaphas, and historians ask how their roles fit together. Pilate was the Roman governor of Judea, and John shows the Roman and the temple leaders both taking part. The words of the Jews in this chapter refer to the officials, and the story has been misused against all Jews, which is wrong. Compare Matthew 26 and 27."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/19",
+      "chapter": 19,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Pilate has Jesus flogged. Soldiers press a crown of thorns on his head, dress him in purple and mock him as King of the Jews. Pilate brings him out and says, “Behold, the man!” The chief priests shout for crucifixion. Pilate says he finds no basis for a charge, and they answer that by their law he must die. The leaders warn that releasing him would make Pilate no friend of Caesar, and Pilate hands him over.\n\nCarrying his cross, Jesus goes to Golgotha, where he is crucified between two others. Pilate's sign calls him the King of the Jews in three languages, and when the chief priests object he answers, “What I have written, I have written.” From the cross Jesus gives his mother and the beloved disciple to each other. He says, “It is finished!” and gives up his spirit. A soldier pierces his side. Joseph of Arimathaea and Nicodemus bury him in a new garden tomb."
+        },
+        {
+          "kind": "background",
+          "text": "John shows Jesus as a king even in his suffering, and the sign over the cross is the center of the scene. The three languages show the message reaching many people. John says the beloved disciple saw the blood and water and that his witness is true. Christians have read the blood and water in different ways, some linking them to baptism and the Lord's Supper. This chapter has been used to blame Jews for the death of Jesus. That is a grave misreading: Jesus and his mother and friends were Jews, and John shows Roman soldiers and a Roman governor carrying out the sentence."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/20",
+      "chapter": 20,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Early on the first day of the week, while it is still dark, Mary Magdalene comes to the tomb and sees the stone taken away. She runs to Peter and the beloved disciple. The two run to it. Peter goes in and sees the linen cloths, and the other disciple goes in, sees and believes.\n\nMary stays outside, weeping. She sees two angels and then a man she takes for the gardener. He says her name: “Mary.” She cries, “Rabboni!” and Jesus tells her to go and tell his brothers.\n\nThat evening the disciples are behind locked doors. Jesus stands among them and says, “Peace be to you.” He shows them his hands and side and sends them as the Father sent him. Thomas was not there and says he will not believe until he sees. A week later Jesus comes again, and Thomas says, “My Lord and my God!”"
+        },
+        {
+          "kind": "background",
+          "text": "John makes Mary Magdalene the first witness to meet the risen Jesus. Early Christians remembered that the first to tell the news were women. Verses 30 and 31 read like an ending, and many scholars think chapter 21 was added by the author or by others who knew him. Christians differ on how to read verse 23 about forgiving and retaining sins. Many Catholic, Orthodox and Anglican readers link it to the church's ministry of absolution, and many Protestants link it to the message of forgiveness. Compare Matthew 28 and Luke 24."
+        }
+      ]
+    },
+    {
+      "id": "ai:john/21",
+      "chapter": 21,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-14",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Some of the disciples are by the sea of Tiberias, and Peter says, “I’m going fishing.” Others go with him. All night they catch nothing. At dawn a man on the beach, whom they do not know, asks if they have anything to eat. He tells them to cast the net on the right side, and it is so full they cannot haul it in. The beloved disciple says, “It’s the Lord!” and Peter throws himself into the sea. On the shore is a fire of coals with fish and bread. Jesus says, “Come and eat breakfast!”\n\nAfter the meal he asks Peter three times, “Simon, son of Jonah, do you love me?” Each time Peter answers that he does, and each time Jesus gives him a charge: feed my lambs, tend my sheep, feed my sheep. Peter is grieved the third time. Jesus says, “Follow me”, and the book closes with a note that the world could not hold the books if everything Jesus did were written."
+        },
+        {
+          "kind": "background",
+          "text": "The fire of coals in verse 9 is the same kind of fire as the one where Peter denied Jesus in John 18, and many readers have noticed the link. Jesus asks three times, and Peter denied him three times. The two words for love in the exchange have been much discussed, and scholars differ on how much weight they carry. The chapter reads as an appendix to the Gospel, and verse 24 speaks of the disciple who wrote these things in a way that is read in several ways. Tradition links the book to John. Compare Luke 5 for another great catch of fish."
         }
       ]
     }
