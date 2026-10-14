@@ -99,6 +99,9 @@ This file adds the current state and how to work with the founder. Last updated 
   and #5; #5 carried the commits of #4). `docs-live`, `context-checks` and
   `context-stories` followed the same day. The app's code has not changed since pull
   request #2.
+- `bible-spacing` (2026-10-14): fixes words that ran together in `public/bible/web.json`
+  (142 New Testament verses, spaces only; see `CHANGELOG.md`). Waiting for the founder's
+  approval; merging it changes the Bible text the live app and site show.
 
 ## Study notes
 
