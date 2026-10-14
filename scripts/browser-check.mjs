@@ -121,9 +121,43 @@ try {
         1,
       );
       await page.getByRole("button", { name: "context", exact: true }).click();
-      await page
-        .getByRole("heading", { name: "Curated passage context" })
+      assert.equal(new URL(page.url()).searchParams.get("tab"), "context");
+      // Romans 8 has a sourced chapter note (no verse note for 8:28) and an AI explanation.
+      const sourced = page.locator('article[data-layer="sourced"]');
+      await sourced
+        .getByRole("heading", { name: "Chapter context", exact: true })
         .waitFor();
+      const sourcedText = await sourced.textContent();
+      assert.match(sourcedText, /Verse 28 belongs with verses 29–30/);
+      assert.match(
+        sourcedText,
+        /No note for this verse yet, so this shows the wider chapter context\./,
+      );
+      assert.doesNotMatch(sourcedText, /\bAI\b/, "sourced note stays free of AI text");
+      await sourced.getByText("Why we say this", { exact: true }).click();
+      assert.equal(
+        await sourced
+          .getByRole("link", { name: "Primary source", exact: true })
+          .getAttribute("href"),
+        "https://ebible.org/engwebp/ROM08.htm",
+      );
+      const ai = page.locator('article[data-layer="ai"]');
+      await ai.getByRole("heading", { name: /^AI explanation/ }).waitFor();
+      assert.match(
+        await ai.locator(".eyebrow").textContent(),
+        /^Romans 8 · Written by an AI model · /,
+      );
+      await ai
+        .getByRole("heading", { name: "What this chapter says", exact: true })
+        .waitFor();
+      assert.equal(await sourced.locator("[data-layer]").count(), 0);
+      assert.deepEqual(
+        await page
+          .locator("main [data-layer]")
+          .evaluateAll((nodes) => nodes.map((n) => n.dataset.layer)),
+        ["sourced", "ai"],
+        "AI explanation is a separate card after the sourced note",
+      );
       await page.goBack();
       await page.locator("#verse-28").waitFor();
       await page
@@ -389,9 +423,21 @@ try {
       await go("/unknown");
       assert.match(await page.locator("main").innerText(), /not found/i);
       await go("/bible/genesis/1?tab=context");
+      // Genesis has no sourced note yet; only the labelled AI explanation is shown.
+      const sourced = page.locator('article[data-layer="sourced"]');
+      await sourced
+        .getByRole("heading", { name: "Context", exact: true })
+        .waitFor();
       assert.match(
-        await page.locator("main").innerText(),
-        /not available|unavailable|not yet/i,
+        await sourced.textContent(),
+        /Context for this book is being written\..*A note appears here only once it names its sources\./s,
+      );
+      assert.equal(await sourced.locator("details, a").count(), 0);
+      const ai = page.locator('article[data-layer="ai"]');
+      await ai.getByRole("heading", { name: /^AI explanation/ }).waitFor();
+      assert.match(
+        await ai.textContent(),
+        /Written by an AI model.*It names no sources and can contain mistakes\./s,
       );
       await go("/bible/luke/17/36");
       assert.match(
@@ -515,8 +561,25 @@ try {
         () => navigator.serviceWorker.controller !== null,
       );
       await context.setOffline(true);
+      // AI explanations stay out of the installed cache by design (vite.config.ts,
+      // docs/AI_EXPLANATIONS.md), so only that fetch may fail while Scripture still loads.
+      const failedBefore = networkFailures.length;
+      const errorsBefore = consoleErrors.length;
+      const aiFailed = page.waitForEvent(
+        "requestfailed",
+        (r) => new URL(r.url()).pathname === "/ai/john.json",
+      );
+      const aiLogged = page.waitForEvent(
+        "console",
+        (m) => m.type() === "error" && m.location().url.endsWith("/ai/john.json"),
+      );
       await go("/bible/john/3/16");
       await page.locator("#verse-16").waitFor();
+      await Promise.all([aiFailed, aiLogged]);
+      assert.deepEqual(networkFailures.splice(failedBefore), ["/ai/john.json"]);
+      assert.deepEqual(consoleErrors.splice(errorsBefore), [
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+      ]);
       await go("/journal");
       await page.getByRole("button", { name: /A study note/ }).waitFor();
       await context.setOffline(false);
