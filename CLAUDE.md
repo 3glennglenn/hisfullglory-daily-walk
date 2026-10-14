@@ -100,8 +100,12 @@ This file adds the current state and how to work with the founder. Last updated 
   `context-stories` followed the same day. The app's code has not changed since pull
   request #2.
 - `bible-spacing` (2026-10-14): fixes words that ran together in `public/bible/web.json`
-  (142 New Testament verses, spaces only; see `CHANGELOG.md`). Waiting for the founder's
-  approval; merging it changes the Bible text the live app and site show.
+  (142 New Testament verses, spaces only; see `CHANGELOG.md`). Merged the same day
+  (pull request #13).
+- `bible-speakers` (2026-10-14, pull request #11): removes the Song of Songs speaker labels
+  ("Beloved", "Lover") that ended up inside 27 verses of `public/bible/web.json`. Approved
+  by the founder; waits for his merge, which changes the Bible text the live app and site
+  show.
 
 ## Study notes
 
