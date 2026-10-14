@@ -7,14 +7,14 @@ export async function checkCircles(browser,base){
  b.onLoad({filter:/.*/,namespace:"fixture"},()=>({loader:"js",contents:`
  // Synthetic UI boundary data only. SQL authorization is tested separately.
  const owner='a0000000-0000-4000-8000-000000000001',other='b0000000-0000-4000-8000-000000000002';
- let actor=window.circleBootstrap ? window.circleBootstrap.actor : owner,listeners=[],count=window.circleBootstrap?.count??10;
+ let actor=window.circleBootstrap ? window.circleBootstrap.actor : owner,listeners=[],count=window.circleBootstrap?.count??10,termsChecks=0;
  const id=()=> 'c0000000-0000-4000-8000-'+String(++count).padStart(12,'0');
  const memberships=window.circleBootstrap?.memberships??{};const posts=window.circleBootstrap?.posts??[];const reports=window.circleBootstrap?.reports??[];
  const circles=window.circleBootstrap?.circles??[{id:id(),slug:'public-walk',name:'Public fixture Walk',description:'Controlled public fixture description',privacy:'public',topic_id:'anxiety',application_question:'',created_at:'2026-10-08T00:00:00Z'}, {id:id(),slug:'private-walk',name:'Private fixture Walk',description:'Controlled discoverable fixture description',privacy:'private',topic_id:'anxiety',application_question:'Optional fixture introduction',created_at:'2026-10-07T00:00:00Z'}];
  const key=(cid,uid=actor)=>cid+':'+uid;
  circles.forEach(c=>{if(!memberships[key(c.id,owner)])memberships[key(c.id,owner)]={id:id(),display_name:'Fixture owner',role:'owner',state:'active',answer:''};});
  const session=()=>actor?{user:{id:actor},access_token:'synthetic-'+actor}:null;
- window.circleFixture={get actor(){return actor;},get count(){return count;},reports,fail:false,hang:false,signIn(uid){actor=uid;listeners.forEach(fn=>fn('SIGNED_IN',session()));},other,owner,posts,circles,memberships};
+ window.circleFixture={get actor(){return actor;},get count(){return count;},get termsChecks(){return termsChecks;},reports,fail:false,hang:false,signIn(uid){actor=uid;listeners.forEach(fn=>fn('SIGNED_IN',session()));},other,owner,posts,circles,memberships};
  function role(cid){const m=memberships[key(cid)];return m?.state==='active'?m.role:null;}
  function readable(cid){const c=circles.find(c=>c.id===cid);return c&&(c.privacy==='public'||role(cid));}
  function render(p){return {...p,is_owner:p.author===actor,voted:p.votes.includes(actor),upvotes:p.votes.length,score:p.votes.length,helped:p.helped.length,reputation:p.anonymous?null:0,replies:posts.filter(r=>r.parent_id===p.id&&!r.deleted&&!r.hidden).length};}
@@ -42,7 +42,7 @@ export async function checkCircles(browser,base){
   if(name==='close_circle')c.closed=true;
   return {data:null,error:null};
  }
- export const supabase={auth:{getSession:async()=>({data:{session:session()},error:null}),onAuthStateChange(fn){listeners.push(fn);return {data:{subscription:{unsubscribe(){listeners=listeners.filter(x=>x!==fn)}}}};}},from(){const q={select(){return q},eq(){return q},maybeSingle:async()=>({data:{version:'2026-10-07'},error:null})};return q;},rpc(name,args={}){let signal;return {abortSignal(s){signal=s;return this;},then(resolve,reject){if(window.circleFixture.hang)return new Promise(r=>signal?.addEventListener('abort',()=>r({data:null,error:{message:'Aborted'}}),{once:true})).then(resolve,reject);return call(name,args).then(resolve,reject);}};}};
+ export const supabase={auth:{getSession:async()=>({data:{session:session()},error:null}),onAuthStateChange(fn){listeners.push(fn);return {data:{subscription:{unsubscribe(){listeners=listeners.filter(x=>x!==fn)}}}};}},from(){const q={select(){return q},eq(){return q},maybeSingle:async()=>{termsChecks++;return {data:{version:'2026-10-07'},error:null};}};return q;},rpc(name,args={}){let signal;return {abortSignal(s){signal=s;return this;},then(resolve,reject){if(window.circleFixture.hang)return new Promise(r=>signal?.addEventListener('abort',()=>r({data:null,error:{message:'Aborted'}}),{once:true})).then(resolve,reject);return call(name,args).then(resolve,reject);}};}};
  `}));
  }}]});
  const c=await browser.newContext({serviceWorkers:"block"});const p=await c.newPage();const errors=[],consoleErrors=[],consoleWarnings=[];p.on("pageerror",e=>errors.push(e.message));p.on("console",m=>{if(m.type()==="error")consoleErrors.push(m.text());if(m.type()==="warning")consoleWarnings.push(m.text());});
@@ -50,7 +50,14 @@ export async function checkCircles(browser,base){
  const css=result.outputFiles.find(f=>f.path.endsWith('.css'))?.text??'';
  let checks=0,bootstrap=null;
  const check=async(label,fn)=>{await fn();checks++;console.log("PASS Circle browser:",label);};
- const signIn=async(which)=>{await p.evaluate(which=>window.circleFixture.signIn(window.circleFixture[which]),which);await p.getByRole('button',{name:'Refresh Circles',exact:true}).waitFor();};
+ // Wait until the new account has settled: its Community Guidelines check ran, the view no longer asks to accept them
+ // and no load runs for two frames. Acting earlier can hit the previous account's view or a load that is about to restart.
+ const signIn=async(which)=>{
+  const before=await p.evaluate(which=>{const f=window.circleFixture,before=f.termsChecks;f.settledFrames=0;f.signIn(f[which]);return before;},which);
+  await p.waitForFunction(before=>{const f=window.circleFixture,refresh=[...document.querySelectorAll('button')].find(b=>b.textContent==='Refresh Circles');
+   const settled=f.termsChecks>before&&!!refresh&&!refresh.disabled&&!document.body.innerText.includes('Accept the current Community Guidelines');
+   f.settledFrames=settled?f.settledFrames+1:0;return f.settledFrames>=2;},before);
+ };
  const open=async(slug)=>{await p.evaluate(slug=>{history.pushState({},'', '/community/circles/'+slug);window.dispatchEvent(new PopStateEvent('popstate'));},slug);await p.getByRole('heading',{name:slug==='private-walk'?'Private fixture Walk':'Public fixture Walk',exact:true}).waitFor();};
  const confirm=async()=>{await p.getByRole('dialog').waitFor();await p.getByRole('button',{name:'Confirm',exact:true}).click();};
  try{
