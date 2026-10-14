@@ -59,7 +59,16 @@ jobs:
             { echo "Preview server did not start"; cat preview.log; } | tee browser.log
             exit 1
           fi
-          npm run test:browser 2>&1 | tee browser.log
+          fails=0
+          for round in 1 2 3 4 5 6; do
+            if ! npm run test:browser > "browser-$round.log" 2>&1; then
+              fails=$((fails+1)); node scripts/ci-failure-note.mjs "browser-$round.log"
+            else
+              tail -n 1 "browser-$round.log"
+            fi
+          done
+          echo "$fails of 6 rounds failed" | tee browser.log
+          [ "$fails" -eq 0 ]
       - name: Show why it failed
         if: failure()
         run: |
