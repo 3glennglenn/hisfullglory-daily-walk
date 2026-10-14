@@ -20,6 +20,11 @@ concurrency:
   group: checks-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: true
 
+defaults:
+  run:
+    # Explicit bash turns on pipefail, so `| tee` keeps a failing command's exit code.
+    shell: bash
+
 jobs:
   app:
     name: App
@@ -32,13 +37,13 @@ jobs:
           node-version: 24
           cache: npm
       - name: Install
-        run: npm ci
+        run: npm ci 2>&1 | tee install.log
       - name: Unit and database tests
-        run: npm test
+        run: npm test 2>&1 | tee test.log
       - name: Security check
-        run: npm run security
+        run: npm run security 2>&1 | tee security.log
       - name: Build
-        run: npm run build
+        run: npm run build 2>&1 | tee build.log
       - name: Install Chromium for the browser check
         run: npx playwright install --with-deps chromium
       - name: Browser check against the built app
@@ -50,11 +55,17 @@ jobs:
             curl -sf "$PREVIEW_URL/" > /dev/null && break
             sleep 1
           done
-          curl -sf "$PREVIEW_URL/" > /dev/null || { echo "Preview server did not start"; exit 1; }
-          npm run test:browser
-      - name: Preview server log
+          if ! curl -sf "$PREVIEW_URL/" > /dev/null; then
+            { echo "Preview server did not start"; cat preview.log; } | tee browser.log
+            exit 1
+          fi
+          npm run test:browser 2>&1 | tee browser.log
+      - name: Show why it failed
         if: failure()
-        run: cat preview.log || true
+        run: |
+          node scripts/ci-failure-note.mjs install.log test.log security.log build.log browser.log
+          echo "--- preview server log"
+          cat preview.log 2>/dev/null || true
 
   site:
     # Built the way Vercel builds hisfullglory.com: only the site's own packages are installed.
@@ -63,6 +74,7 @@ jobs:
     timeout-minutes: 20
     defaults:
       run:
+        shell: bash
         working-directory: site
     steps:
       - uses: actions/checkout@v7
@@ -72,8 +84,11 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - name: Install
-        run: npm ci
+        run: npm ci 2>&1 | tee install.log
       - name: Build
-        run: npm run build
+        run: npm run build 2>&1 | tee build.log
       - name: Tests on the built pages
-        run: npm test
+        run: npm test 2>&1 | tee test.log
+      - name: Show why it failed
+        if: failure()
+        run: node ../scripts/ci-failure-note.mjs install.log build.log test.log
