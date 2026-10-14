@@ -21,6 +21,18 @@
     {
       "title": "Thomas Jefferson to John Adams, 12 October 1813 (Thomas Jefferson Foundation)",
       "url": "https://tjrs.monticello.org/letter/297"
+    },
+    {
+      "title": "Abraham Lincoln, Second Inaugural Address, March 4, 1865 (The Avalon Project, Yale Law School)",
+      "url": "https://avalon.law.yale.edu/19th_century/lincoln2.asp"
+    },
+    {
+      "title": "Leo Tolstoy, My Religion, chapter 3, English edition of 1885 (Project Gutenberg)",
+      "url": "https://www.gutenberg.org/files/43794/43794-h/43794-h.htm"
+    },
+    {
+      "title": "Augustine, Our Lord’s Sermon on the Mount, book 2, chapter 18 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/16012.htm"
     }
   ],
   "voices": [
@@ -41,11 +53,42 @@
         "title": "Thomas Jefferson to John Adams, 12 October 1813 (Thomas Jefferson Foundation)",
         "url": "https://tjrs.monticello.org/letter/297"
       }
+    },
+    {
+      "id": "lincoln",
+      "name": "Abraham Lincoln",
+      "about": "President of the United States, in his second inaugural address, March 4, 1865",
+      "words": "let us judge not, that we be not judged.",
+      "source": {
+        "title": "Abraham Lincoln, Second Inaugural Address, March 4, 1865 (The Avalon Project, Yale Law School)",
+        "url": "https://avalon.law.yale.edu/19th_century/lincoln2.asp"
+      }
+    },
+    {
+      "id": "tolstoy-judge",
+      "name": "Leo Tolstoy",
+      "about": "Russian novelist, in My Religion (1884)",
+      "words": "judge not in courts of justice; take no part in them.",
+      "source": {
+        "title": "Leo Tolstoy, My Religion, chapter 3, English edition of 1885 (Project Gutenberg)",
+        "url": "https://www.gutenberg.org/files/43794/43794-h/43794-h.htm"
+      }
+    },
+    {
+      "id": "augustine-judge",
+      "name": "Augustine",
+      "about": "church father, in Our Lord’s Sermon on the Mount",
+      "words": "in the case of those actions respecting which it is doubtful with what intention they are done, we are to put the better construction on them.",
+      "source": {
+        "title": "Augustine, Our Lord’s Sermon on the Mount, book 2, chapter 18 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/16012.htm"
+      }
     }
   ],
   "moment": "The people on that hillside had come from everywhere: “from Galilee, Decapolis, Jerusalem, Judea, and from beyond the Jordan”. Many were there because someone they loved was sick. Matthew says that when Jesus looked at crowds like this he was moved, because they were “harassed and scattered, like sheep without a shepherd”.\n\nEarlier in the same sermon he had told them that their righteousness must go deeper than that of “the scribes and Pharisees”, the religious experts of their day. Now he shows what deeper means. It does not begin with the faults of other people. It begins with your own eye.",
   "around": "The next verses give the reason and a picture: “with whatever measure you measure, it will be measured to you”, and a man with a beam in his own eye offering to remove a speck from his brother’s. Jesus does not end by leaving the speck where it is. He ends: “First remove the beam out of your own eye, and then you can see clearly to remove the speck out of your brother’s eye.”",
   "readings": "This is one of the best-known sentences Jesus ever spoke, and people mean very different things by it.\n\nSome take it as a ban on every moral judgment: nobody may call anything wrong. But in this same chapter Jesus tells his followers to watch for false prophets, and adds: “By their fruits you will know them.” That takes discernment.\n\nChristian teachers have mostly read it as a warning against one kind of judging: the kind that condemns, that enjoys another person’s failure, that never turns the light on itself. In John’s Gospel Jesus holds the two sides together in one line: “Don’t judge according to appearance, but judge righteous judgment.”\n\nSo the verse does not ask for silence about right and wrong. It asks who you are when you speak.",
+  "argued": "In March 1865, with the Civil War nearly over, Abraham Lincoln gave his second inaugural address. Both sides, he said, read the same Bible and pray to the same God. He found it strange that anyone should ask God’s help in wringing their bread from the sweat of other men’s faces, and in the same breath he added: [[lincoln]]\n\nLincoln named the wrong and still would not condemn the people on the other side. Leo Tolstoy went much further. In 1884 he argued that the words should be taken at their plain meaning, as a ban on courts of law: [[tolstoy-judge]]\n\nAlmost fifteen centuries before him, Augustine drew the line elsewhere. Some deeds, he wrote, plainly cannot be done with a good intention, and those may be judged. But [[augustine-judge]]\n\nA president at the end of a war, a novelist who would close the courts, a church father who asked for charity toward motives: each heard the same sentence, and each drew the line in a different place.",
   "point": "The warning is against hypocritical judgment, the kind that sees faults in others and not in oneself. The passage still expects followers of Jesus to help one another see clearly, after looking at themselves first.",
   "basis": [
     {

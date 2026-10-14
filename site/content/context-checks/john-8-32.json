@@ -16,7 +16,34 @@
   "moment": "Jesus is in Jerusalem, in the middle of a long and tense public argument about who he is. Some who are listening want him arrested. Others, John says, have just begun to believe: “As he spoke these things, many believed in him.”\n\nIt is to these new believers that he speaks, and he does not flatter them. A moment of belief is not what he is after. He wants them to stay: “If you remain in my word, then you are truly my disciples.” The promise of freedom is the second half of that same sentence.",
   "around": "The promise hangs on the sentence before it: “If you remain in my word, then you are truly my disciples.” When his hearers say they have never been in bondage, he names the bondage he means: “everyone who commits sin is the bondservant of sin”. He ends: “If therefore the Son makes you free, you will be free indeed.”",
   "readings": "These words are quoted wherever people praise learning and free inquiry. In that use the truth means knowledge, and knowledge sets a mind free.\n\nJesus is speaking of something more personal. The truth is what he teaches, and the freedom is freedom from sin. Later in this Gospel he says of himself that he is the truth (John 14:6).\n\nChristians who have lived under oppression have heard a third note in the verse: a freedom no ruler can grant or take away. All three readings honor truth. The second is the one the passage itself gives.",
+  "argued": "In the lobby of the CIA’s original headquarters building, this verse is fixed in stone in the old King James wording. The agency’s own history says that Allen Dulles, its fifth and longest-serving director, quoted it at the building’s dedication and insisted that it be set in stone there.\n\nThe California Institute of Technology put the same words on its seal: The truth shall make you free. In places like these the truth means knowledge, gathered and tested.\n\nPope John Paul II pressed the verse in another direction. In his 1993 encyclical Veritatis Splendor he wrote of [[jp2]], and taught that the open acceptance of truth is the condition for real freedom.\n\nKnowledge that frees the mind, moral truth that frees the will: in the passage itself Jesus offers something more personal still, a freedom given by the Son.",
   "point": "The truth in this verse is tied to a person and to a condition: remaining in the word of Jesus. The freedom is freedom from sin, and the Son is the one who gives it.",
+  "voices": [
+    {
+      "id": "jp2",
+      "name": "Pope John Paul II",
+      "about": "in the encyclical Veritatis Splendor, 1993",
+      "words": "the fundamental dependence of freedom upon truth",
+      "source": {
+        "title": "John Paul II, Veritatis Splendor, 1993 (vatican.va)",
+        "url": "https://www.vatican.va/content/john-paul-ii/en/encyclicals/documents/hf_jp-ii_enc_06081993_veritatis-splendor.html"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "CIA: Bible Quote Carving",
+      "url": "https://www.cia.gov/legacy/headquarters/bible-quote-carving"
+    },
+    {
+      "title": "Caltech Archives: the original seal of the California Institute of Technology",
+      "url": "https://digital.archives.caltech.edu/islandora/object/image%3A7370"
+    },
+    {
+      "title": "John Paul II, Veritatis Splendor, 1993 (vatican.va)",
+      "url": "https://www.vatican.va/content/john-paul-ii/en/encyclicals/documents/hf_jp-ii_enc_06081993_veritatis-splendor.html"
+    }
+  ],
   "basis": [
     {
       "book": "john",

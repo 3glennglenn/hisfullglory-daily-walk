@@ -16,7 +16,54 @@
   "moment": "Paul is writing to Timothy, whom he calls “my true child in faith”. He has left him in Ephesus with a hard task: to stop certain people from teaching a different message.\n\nNear the end of the letter Paul comes to money. Some in the church want to be rich, and he has watched what that wish does to people. He writes like someone who has seen friends go under: they “fall into a temptation, a snare”, and some “have pierced themselves through with many sorrows”. This is a warning from a father to a son about a danger he has seen up close.",
   "around": "The verse itself reads: “the love of money is a root of all kinds of evil”. The verse before it is aimed at “those who are determined to be rich”.",
   "readings": "The shortened form of this verse has shaped whole lives. Some Christians have concluded that money itself is the enemy, and through the centuries many have given away everything they owned in order to follow Christ without it.\n\nOthers have read the verse as it stands: the root is the love of money, the wish to be rich at any price. On that reading a person can be poor and ruled by money, or wealthy and free of it.\n\nThe same chapter goes on to speak to believers who are rich. It does not tell them to become poor. It tells them not to set their hope on riches, to do good and to be ready to share (1 Timothy 6:17-18).",
+  "argued": "More than six hundred years ago Geoffrey Chaucer gave this verse to one of his great rogues. In The Canterbury Tales the Pardoner, who sells pardons, boasts that his sermon text never changes. It is this verse in Latin, the love of money is the root of evils, and the text names it: to Timothy, chapter six. Then he admits what he does: [[chaucer]]\n\nIn 1872 the satirist Samuel Butler turned the saying around in his novel Erewhon: [[butler]]\n\nThe novelist and philosopher Ayn Rand took up the shortened saying as a question, so you think money is the root of all evil, and answered it with another: [[rand]]\n\nNotice that Butler and Rand both argue with the shortened saying. Paul wrote something else: the love of money.",
   "point": "Three small words change the saying. The problem named is the love of money, and not money. It is a root, and not the only one. And it leads to all kinds of evil, which is not the same as every evil there is. The warning is about what a person wants most.",
+  "voices": [
+    {
+      "id": "chaucer",
+      "name": "Geoffrey Chaucer",
+      "about": "poet, in the Pardoner’s Prologue of The Canterbury Tales",
+      "words": "Thus can I preche agayn that same vyce / Which that I use, and that is avaryce.",
+      "source": {
+        "title": "Geoffrey Chaucer, The Canterbury Tales, the Pardoner’s Prologue (Project Gutenberg)",
+        "url": "https://www.gutenberg.org/cache/epub/22120/pg22120.txt"
+      }
+    },
+    {
+      "id": "butler",
+      "name": "Samuel Butler",
+      "about": "Victorian novelist, in Erewhon (1872)",
+      "words": "It has been said that the love of money is the root of all evil. The want of money is so quite as truly.",
+      "source": {
+        "title": "Samuel Butler, Erewhon, 1872 (Project Gutenberg)",
+        "url": "https://www.gutenberg.org/cache/epub/1906/pg1906.txt"
+      }
+    },
+    {
+      "id": "rand",
+      "name": "Ayn Rand",
+      "about": "novelist and philosopher, in The Meaning of Money",
+      "words": "Have you ever asked what is the root of money?",
+      "source": {
+        "title": "Ayn Rand, The Meaning of Money, in For the New Intellectual (Ayn Rand Lexicon)",
+        "url": "https://aynrandlexicon.com/lexicon/money.html"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "Geoffrey Chaucer, The Canterbury Tales, the Pardoner’s Prologue (Project Gutenberg)",
+      "url": "https://www.gutenberg.org/cache/epub/22120/pg22120.txt"
+    },
+    {
+      "title": "Samuel Butler, Erewhon, 1872 (Project Gutenberg)",
+      "url": "https://www.gutenberg.org/cache/epub/1906/pg1906.txt"
+    },
+    {
+      "title": "Ayn Rand, The Meaning of Money, in For the New Intellectual (Ayn Rand Lexicon)",
+      "url": "https://aynrandlexicon.com/lexicon/money.html"
+    }
+  ],
   "basis": [
     {
       "book": "1-timothy",
