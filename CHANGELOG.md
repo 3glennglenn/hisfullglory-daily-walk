@@ -3,6 +3,8 @@
 ## Checks on GitHub (2026-10-14)
 - Add `.github/workflows/checks.yml`: on every pull request to `main` and every push to `main`, run the app's `npm test`, `npm run security`, `npm run build` and the browser check against `npm run preview`, and build and test the site. Free GitHub-hosted runners, no secrets; the checks report and never block a push or a Vercel deployment.
 - Bring the browser check up to date with the Reader's Context tab; it had failed since pull request #2 without anyone seeing it, because nothing ran it automatically.
+- Make two browser checks wait until the page has settled. On GitHub's runners they failed most of the time (the offline check counted a late `/ai/luke.json` fetch; the Circles sign-in helper let a click land between two loads), on a laptop rarely. What they assert is unchanged.
+- A failed check puts its first error and the end of its output in an annotation (`scripts/ci-failure-note.mjs`), because GitHub shows full logs only to signed-in users.
 
 ## AI explanations and shop prices: merged into `main` with pull request #2 (2026-10-12)
 - Add AI explanations as a separate labelled layer, decided by the founder: static files in `public/ai/`, validated by `src/bible/ai.ts`, shown in their own card under the sourced note in the Reader's Context tab. No runtime AI. Pilot of five chapters. Rules: docs/AI_EXPLANATIONS.md.
