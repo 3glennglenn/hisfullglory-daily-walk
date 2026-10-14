@@ -1,7 +1,7 @@
 {
   "slug": "matthew-18-20",
   "review": "approved",
-  "approved": "2026-10-13",
+  "approved": "2026-10-14",
   "drafted": "ai",
   "written": "2026-10-13",
   "verse": {
@@ -17,12 +17,47 @@
     {
       "title": "Mishnah, Pirkei Avot 3:2 (Sefaria)",
       "url": "https://www.sefaria.org/Pirkei_Avot.3.2"
+    },
+    {
+      "title": "Tertullian, On Exhortation to Chastity, chapter 7 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/0405.htm"
+    },
+    {
+      "title": "Cyprian, On the Unity of the Church, section 12 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/050701.htm"
+    },
+    {
+      "title": "Book of Common Prayer, Order for Morning Prayer (Church of England)",
+      "url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/order-morning-prayer"
     }
   ],
   "moment": "The disciples had come to Jesus with a question about rank: “Who then is greatest in the Kingdom of Heaven?” His answer fills the whole chapter, and it turns their question upside down. He speaks of children, of a shepherd who leaves ninety-nine sheep to look for one, and then of what to do when a brother does wrong.\n\nSo these words are for the people who will have to lead when he is gone. He is preparing them for the day a friendship breaks inside the community, and telling them they will not face that day alone.",
   "around": "The “two or three” first appear four verses earlier, as witnesses: “at the mouth of two or three witnesses every word may be established”. The verse just before speaks of two who agree about what they ask.",
   "readings": "Most believers know this verse as a comfort: Jesus is present in the smallest prayer meeting. That reading is old, and it is loved.\n\nIn the passage itself the promise has a sharper edge. The two or three are people trying to put something right: a wrong that was done, a brother who will not listen. Some churches have therefore heard in these verses the authority Jesus gives his gathered people to decide hard matters together.\n\nBoth readings rest on the same sentence. He does not wait for a crowd. When even two or three act in his name, he is in the middle of it.",
+  "argued": "Early in the third century, in Carthage in North Africa, the Christian writer Tertullian drew a bold conclusion from this promise. Even where no clergy are present, he wrote, believers can be a church: [[tertullian]] Laics are lay people.\n\nSome decades later Cyprian, the bishop of Carthage, saw the danger in that kind of reading. Groups were breaking away from the church and claiming the promise for their own small gatherings. He would not let them have it: [[cyprian]]\n\nThe Church of England built the promise into its daily prayer. In the Book of Common Prayer, the Prayer of Saint Chrysostom at Morning Prayer reminds God that he has promised to grant the requests of two or three gathered in his name.\n\nA church of three, or a warning against going it alone: the same small number has carried both ever since.",
   "point": "In its place the promise is that Jesus stands with his followers in the hard work of correcting and restoring someone. Many Christians also apply it to any small gathering. The passage itself is about winning back a brother and agreeing in prayer about it.",
+  "voices": [
+    {
+      "id": "tertullian",
+      "name": "Tertullian",
+      "about": "Christian writer in Carthage, in On Exhortation to Chastity",
+      "words": "But where three are, a church is, albeit they be laics.",
+      "source": {
+        "title": "Tertullian, On Exhortation to Chastity, chapter 7 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/0405.htm"
+      }
+    },
+    {
+      "id": "cyprian",
+      "name": "Cyprian",
+      "about": "bishop of Carthage, in On the Unity of the Church",
+      "words": "How can two or three be assembled together in Christ's name, who, it is evident, are separated from Christ and from His Gospel?",
+      "source": {
+        "title": "Cyprian, On the Unity of the Church, section 12 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/050701.htm"
+      }
+    }
+  ],
   "basis": [
     {
       "book": "matthew",

@@ -1,7 +1,7 @@
 {
   "slug": "jeremiah-29-11",
   "review": "approved",
-  "approved": "2026-10-13",
+  "approved": "2026-10-14",
   "drafted": "ai",
   "written": "2026-10-13",
   "verse": {
@@ -16,7 +16,44 @@
   "moment": "The speaker is God, and his words reach the exiles in a letter. Jeremiah wrote it in Jerusalem and sent it to Babylon, addressed to the elders, the priests, the prophets and “all the people whom Nebuchadnezzar had carried away captive”.\n\nImagine it being read aloud to them. They are waiting to hear that they can go home. The letter begins with almost the opposite: “Build houses and dwell in them. Plant gardens and eat their fruit.” Marry. Have children. Pray for the city that holds you captive, “for in its peace you will have peace”. Settle in. This will take a long time.",
   "around": "The verse before it sets the time: “After seventy years are accomplished for Babylon, I will visit you”. The verses after it promise that the people will call and pray and be heard, and that God will bring them back.",
   "readings": "For Jewish readers this is first of all a promise kept. The exile did end, and the people did come home.\n\nChristians have read it in more than one way. Many take it personally: the God who had plans for the exiles has plans for each of his children. Others point out that the promise was made to a whole people, at one moment in their history, and that it took seventy years to come true. They read it as a window into the character of God, who does not forget his people even when the waiting is long.\n\nThe two readings do not have to fight. The first is at its truest when it remembers the second: the hope is certain, and it may not be quick.",
+  "argued": "In May 1887 the London preacher Charles Spurgeon took this verse back to Babylon. The captivity itself, he told his hearers, all seventy years of it, came from the same God who thinks thoughts of peace. He put it in one line: [[spurgeon-jeremiah]]\n\nIn our own time the verse has traveled far from Babylon. At the National Day of Prayer in 2018, Mike Pence, then Vice President of the United States, said it had hung over the mantel of his home for nearly twenty years. He called it [[pence]]\n\nOther Christians ask the verse to slow down. The author Randy Alcorn has written that the promise to bring Israel home after seventy years of exile was not made to readers today, and that it is not a promise of quick prosperity. He still holds that its underlying principles apply to believers now.\n\nBetween a family mantel and a people in exile lies the whole question of this verse: who the promise was for, and how long it took to keep.",
   "point": "The hope is real, and it is slow. Seventy years is a lifetime. The promise is given to a people in exile, and it comes with an instruction to live faithfully where they are in the meantime.",
+  "voices": [
+    {
+      "id": "spurgeon-jeremiah",
+      "name": "Charles Spurgeon",
+      "about": "London Baptist preacher, in a sermon of May 29, 1887",
+      "words": "God’s thoughts towards them are good, though their trials may be grievous.",
+      "source": {
+        "title": "C. H. Spurgeon, God’s Thoughts of Peace, and Our Expected End, sermon of May 29, 1887 (spurgeon.org)",
+        "url": "https://www.spurgeon.org/resource-library/sermons/gods-thoughts-of-peace-and-our-expected-end/"
+      }
+    },
+    {
+      "id": "pence",
+      "name": "Mike Pence",
+      "about": "Vice President of the United States, at the National Day of Prayer, May 3, 2018",
+      "words": "a Bible verse that speaks of a promise our little family has claimed and Americans have cherished through the generations.",
+      "source": {
+        "title": "Remarks by the Vice President at the National Day of Prayer, May 3, 2018 (The American Presidency Project)",
+        "url": "https://www.presidency.ucsb.edu/documents/remarks-the-vice-president-the-national-day-prayer"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "C. H. Spurgeon, God’s Thoughts of Peace, and Our Expected End, sermon of May 29, 1887 (spurgeon.org)",
+      "url": "https://www.spurgeon.org/resource-library/sermons/gods-thoughts-of-peace-and-our-expected-end/"
+    },
+    {
+      "title": "Remarks by the Vice President at the National Day of Prayer, May 3, 2018 (The American Presidency Project)",
+      "url": "https://www.presidency.ucsb.edu/documents/remarks-the-vice-president-the-national-day-prayer"
+    },
+    {
+      "title": "Randy Alcorn on Jeremiah 29:11, 2016 (Eternal Perspective Ministries)",
+      "url": "https://www.epm.org/resources/2016/Nov/18/jeremiah-29-11-apply-believers/"
+    }
+  ],
   "basis": [
     {
       "book": "jeremiah",

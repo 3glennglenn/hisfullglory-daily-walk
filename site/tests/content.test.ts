@@ -135,7 +135,7 @@ test("a context check must quote the verse or the passages around it exactly", (
   );
   // A story from outside the Bible has to name where it comes from.
   assert.throws(() => parseContextCheck({ ...item, storyStatus: "history", sources: [] }, item.slug, bible), /needs its sources/);
-  assert.throws(() => parseContextCheck({ ...item, storyStatus: "reading" }, item.slug, bible), /needs its sources/);
+  assert.throws(() => parseContextCheck({ ...item, storyStatus: "reading", sources: [] }, item.slug, bible), /needs its sources/);
   assert.throws(() => parseContextCheck({ ...item, storyStatus: "hearsay" }, item.slug, bible), /storyStatus/);
   // Someone else's words need a source, and may not borrow the marks reserved for Scripture.
   const voice = { name: "A reader", about: "someone who is quoted here", words: "This verse carried me through a hard year." };
@@ -195,9 +195,12 @@ test("only approved context checks are built, and a built one shows the verse an
     assert.equal(cards, item.voices.filter((voice) => !voice.id).length, `${item.slug}: voice cards`);
     if (item.argued) {
       assert.ok(text.includes(arguedHeading), `${item.slug}: ${arguedHeading}`);
+      // A quotation ends in a tag, which the text of the page turns into a space before
+      // the punctuation that follows it.
+      const tight = (value: string) => value.replace(/\s+([,.;:!?])/g, "$1");
       for (const paragraph of item.argued.split("\n\n")) {
         const told = withVoices(paragraph, item.voices).map((piece) => (typeof piece === "string" ? piece : piece.words)).join("");
-        assert.ok(text.includes(flat(told)), `${item.slug}: argued, ${paragraph.slice(0, 40)}`);
+        assert.ok(tight(text).includes(tight(flat(told))), `${item.slug}: argued, ${paragraph.slice(0, 40)}`);
       }
       for (const voice of item.voices.filter((entry) => entry.id))
         assert.ok(html.includes(`<q cite="${voice.source.url}"`), `${item.slug}: ${voice.name} quoted in the story`);
