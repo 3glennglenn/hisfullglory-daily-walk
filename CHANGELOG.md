@@ -1,5 +1,11 @@
 # Changelog
 
+## WEB text spacing: branch `bible-spacing`, waiting for the founder's approval (2026-10-14)
+- Fix the WEB importer: the space after a closing USFM marker such as `\wj*` (end of Jesus' words, often next to a footnote) was removed with the marker, so 142 New Testament verses ran two words together ("his only bornSon", "The windblows", "righteousness.”Then"). The marker handling moved to `scripts/usfm.mjs`.
+- Regenerate `public/bible/web.json` from the official archive. Compared verse by verse with the previous file: 148 spaces added, nothing else changed (same books, chapters, verse numbers and the five omitted verses). At all 14,628 places where markers sit between two pieces of text, the new file now follows the source's spacing.
+- Add `tests/bible-text.test.ts`: real USFM snippets must convert without running words together, and no verse may contain a lowercase letter followed by a capital or closing punctuation followed by a letter.
+- Found, not changed: in Song of Songs the speaker labels (`\sp` Beloved, Lover, Friends, Brothers) end up inside the text of 27 verses. `npm run test:browser` stops at the step that waits for the heading "Curated passage context", on `main` as well; the Reader no longer has that heading.
+
 ## AI explanations and shop prices: merged into `main` with pull request #2 (2026-10-12)
 - Add AI explanations as a separate labelled layer, decided by the founder: static files in `public/ai/`, validated by `src/bible/ai.ts`, shown in their own card under the sourced note in the Reader's Context tab. No runtime AI. Pilot of five chapters. Rules: docs/AI_EXPLANATIONS.md.
 - Keep AI files out of the installable cache and out of the SPA rewrite; an offline or invalid file shows no card.
