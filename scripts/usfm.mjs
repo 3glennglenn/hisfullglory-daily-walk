@@ -16,3 +16,28 @@ export function verseText(raw) {
     .replace(/\s+/g, " ")
     .trim();
 }
+
+// Song of Songs names who speaks on `\sp` lines, just before the next verse or between two lines
+// of one verse. They are not verse text: this returns the verse text and where each speaker starts
+// (`at` is a character offset into the text, 0 before the first word). `opening` holds labels that
+// stood before this verse; a label after the verse's last words opens the next verse, so it comes
+// back in `next`.
+export function verseWithSpeakers(raw, opening = []) {
+  const parts = raw.split(/^\\sp[ \t]+([^\n]*)$/m);
+  let text = verseText(parts[0]);
+  const speakers = [];
+  let pending = [...opening];
+  if (text) {
+    speakers.push(...pending.map((label) => ({ at: 0, label })));
+    pending = [];
+  }
+  for (let i = 1; i < parts.length; i += 2) {
+    pending.push(parts[i].trim());
+    const words = verseText(parts[i + 1]);
+    if (!words) continue;
+    speakers.push(...pending.map((label) => ({ at: text ? text.length + 1 : 0, label })));
+    pending = [];
+    text = text ? `${text} ${words}` : words;
+  }
+  return { text, speakers, next: pending };
+}

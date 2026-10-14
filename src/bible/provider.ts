@@ -1,11 +1,36 @@
+/** Who starts speaking, and where: `at` is a character offset into the verse text, 0 before
+ * its first word. Only Song of Songs has these; the labels are the WEB's, not verse text. */
+export interface Speaker {
+  at: number;
+  label: string;
+}
 export interface Verse {
   number: number;
   text: string;
   omitted?: boolean;
+  speakers?: Speaker[];
 }
 export interface Chapter {
   number: number;
   verses: Verse[];
+}
+/** Shown above a Song of Songs chapter that has speaker labels, in the app and on the site. */
+export const speakerNote =
+  "Speaker labels come from the WEB translators, not the Hebrew text. Beloved is the woman, Lover is the man.";
+export const hasSpeakers = (chapter: Chapter) => chapter.verses.some((v) => v.speakers?.length);
+/** A verse split where speakers start: `above` are the labels before its first word, `parts` the
+ * text in order, each part after the first opening with the label of who speaks from there. */
+export function speakerParts(verse: Verse) {
+  const speakers = verse.speakers ?? [];
+  const parts: { label?: string; text: string }[] = [{ text: "" }];
+  let from = 0;
+  for (const { at, label } of speakers.filter((s) => s.at > 0)) {
+    parts[parts.length - 1].text = verse.text.slice(from, at);
+    parts.push({ label, text: "" });
+    from = at;
+  }
+  parts[parts.length - 1].text = verse.text.slice(from);
+  return { above: speakers.filter((s) => s.at === 0).map((s) => s.label), parts };
 }
 export interface BibleBook {
   id: string;

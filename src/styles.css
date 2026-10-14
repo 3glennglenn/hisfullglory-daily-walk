@@ -1025,6 +1025,27 @@ button[aria-pressed="true"] {
   font-size: 0.7rem;
   margin-right: 8px;
 }
+/* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
+.speaker {
+  color: var(--strong);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  user-select: none;
+}
+p.speaker {
+  margin: 14px 8px 0;
+}
+/* On a highlighted verse --strong drops below 4.5:1 in dark mode, so a label inside it uses ink. */
+.verse:is(.speaking, .highlight-gold, .highlight-sage, .highlight-rose) .speaker {
+  color: var(--ink);
+}
+.speaker-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0 8px 8px;
+}
 .verse.selected {
   outline: 2px solid var(--strong);
   outline-offset: 0;
@@ -1185,4 +1206,18 @@ small {
   display: block;
   text-align: left;
   margin: 8px 0;
+}
+/* Listen: the verse being read aloud. */
+.verse.speaking {
+  background: var(--highlight-gold);
+}
+.listen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+.listen small {
+  color: var(--muted);
 }

@@ -108,9 +108,11 @@ This file adds the current state and how to work with the founder. Last updated 
   (142 New Testament verses, spaces only; see `CHANGELOG.md`). Merged the same day
   (pull request #13).
 - `bible-speakers` (2026-10-14, pull request #11): removes the Song of Songs speaker labels
-  ("Beloved", "Lover") that ended up inside 27 verses of `public/bible/web.json`. Approved
-  by the founder; waits for his merge, which changes the Bible text the live app and site
-  show.
+  ("Beloved", "Lover") that ended up inside 27 verses of `public/bible/web.json`. Merged
+  the same day.
+- `bible-speaker-labels` (2026-10-14): shows those labels apart from the text, above or
+  inside the verse, in the Reader and on the site, as the founder decided. Waits for his
+  merge.
 
 ## Study notes
 

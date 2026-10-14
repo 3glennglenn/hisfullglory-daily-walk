@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "../supabase";
 import { useAuth } from "../platform/auth";
+import { postError } from "./blockedLanguage";
 import { usePlatform } from "../platform/store";
 import { navigate } from "../platform/router";
 import { findTopic, launchTopics, topicGraph } from "../topics/graph";
@@ -72,7 +73,7 @@ export function TopicHub({id,thread}: {id?:string;thread?:string}) {
     const {error}=await supabase.rpc(name,args);
     if(request!==sequence.current) return false;
     setBusy(false);
-    if(error){setStatus("Could not save. Check sign-in, current rules, ownership, safe sources and rate limits; then retry.");return false;}
+    if(error){setStatus(postError(error,"Could not save. Check sign-in, current rules, ownership, safe sources and rate limits; then retry."));return false;}
     setStatus("Saved.");setRevision(n=>n+1);return true;
   }
   if(id && !topic) return <section><h1>Topic not found</h1><button onClick={()=>navigate("/community")}>Browse topics</button></section>;
