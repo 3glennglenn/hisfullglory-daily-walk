@@ -8,6 +8,7 @@ import { contentFor } from "../data";
 import { completeDate, localDate, streak } from "../storage";
 import { track } from "../analytics";
 import { Journal } from "./LegacyWalk";
+import { ContextOfTheDayCard } from "../context/ContextCheck";
 import { devotionals, recommendedJourney } from "./growData";
 export const dailyPassage = (reference: string) =>
   `/bible/psalms/${reference.includes("121") ? 121 : 23}/${reference.split(":")[1]}`;
@@ -206,6 +207,7 @@ export function Home() {
           Read the passage
         </button>
       </article>
+      <ContextOfTheDayCard />
       <div className="card">
         <h2>A gentle rhythm</h2>
         <p>

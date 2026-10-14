@@ -22,6 +22,7 @@ const pages = new Set([
   "profile",
   "settings",
   "giving-policy",
+  "context",
 ]);
 export function parseRoute(path: string, search = ""): Route {
   const parts = path.split("/").filter(Boolean);
@@ -54,7 +55,9 @@ export function parseRoute(path: string, search = ""): Route {
       return {page:"not-found",tab:"read"};
     return {page:"circles",id:slug,thread,tab:"read"};
   }
-  if (parts.length > (["grow", "community"].includes(page) ? 2 : 1))
+  if (parts.length > (["grow", "community", "context"].includes(page) ? 2 : 1))
+    return { page: "not-found", tab: "read" };
+  if (page === "context" && parts[1] && !/^[a-z0-9-]+$/.test(parts[1]))
     return { page: "not-found", tab: "read" };
   const thread = new URLSearchParams(search).get("thread") ?? undefined;
   if (page === "community") {

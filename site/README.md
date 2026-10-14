@@ -72,7 +72,9 @@ fields, because a reader's interest drops there. Every quotation in curly double
 must occur in the verse or in its `basis` passages. `hook` opens the page, is its
 description for search engines, and is the opening line for a video about it. A published
 check gets its own page under `/context-checks`, a card on the chapter page of its verse
-and, for the first three, a place on the home page. The eleven checks of 2026-10-13 were
+and, for the first three, a place on the home page. The app builds the same approved files
+in (`src/context`): one check a day on its Home page, told one part per screen at
+`/context`, with a picture to share. A change to a check therefore reaches the app too. The eleven checks of 2026-10-13 were
 written by an AI model and approved by the founder that day. No theological reader has
 read them.
 
