@@ -1,7 +1,7 @@
 {
   "slug": "matthew-5-39",
   "review": "approved",
-  "approved": "2026-10-13",
+  "approved": "2026-10-14",
   "drafted": "ai",
   "written": "2026-10-13",
   "verse": {
@@ -29,6 +29,26 @@
     {
       "title": "M. K. Gandhi, An Autobiography, part 1, chapter 20 (mkgandhi.org)",
       "url": "https://www.mkgandhi.org/autobio/chap20.htm"
+    },
+    {
+      "title": "Leo Tolstoy, What I Believe (My Religion), chapter 1, 1884 (marxists.org, from Project Gutenberg)",
+      "url": "https://www.marxists.org/archive/tolstoy/1884/my-religion/chapter-1.html"
+    },
+    {
+      "title": "Wikipedia: The Kingdom of God Is Within You",
+      "url": "https://en.wikipedia.org/wiki/The_Kingdom_of_God_Is_Within_You"
+    },
+    {
+      "title": "M. K. Gandhi, An Autobiography, part 2, chapter 15: Religious Ferment (mkgandhi.org)",
+      "url": "https://www.mkgandhi.org/autobio/chap40.htm"
+    },
+    {
+      "title": "Martin Luther King, Jr. Research and Education Institute, Stanford: Nonviolence",
+      "url": "https://kinginstitute.stanford.edu/nonviolence"
+    },
+    {
+      "title": "Malcolm X, Message to the Grass Roots, Detroit, November 1963 (California State University, Northridge)",
+      "url": "https://www.csun.edu/~hcpas003/grassroots.html"
     }
   ],
   "voices": [
@@ -40,11 +60,42 @@
         "title": "M. K. Gandhi, An Autobiography, part 1, chapter 20 (mkgandhi.org)",
         "url": "https://www.mkgandhi.org/autobio/chap20.htm"
       }
+    },
+    {
+      "id": "tolstoy",
+      "name": "Leo Tolstoy",
+      "about": "Russian novelist, in What I Believe (1884)",
+      "words": "I understood that Jesus meant neither more nor less than what he said.",
+      "source": {
+        "title": "Leo Tolstoy, What I Believe (My Religion), chapter 1, 1884 (marxists.org, from Project Gutenberg)",
+        "url": "https://www.marxists.org/archive/tolstoy/1884/my-religion/chapter-1.html"
+      }
+    },
+    {
+      "id": "gandhi-tolstoy",
+      "name": "Mohandas Gandhi",
+      "about": "in his autobiography, on reading Tolstoy",
+      "words": "Tolstoy’s The Kingdom of God is Within You overwhelmed me. It left an abiding impression on me.",
+      "source": {
+        "title": "M. K. Gandhi, An Autobiography, part 2, chapter 15: Religious Ferment (mkgandhi.org)",
+        "url": "https://www.mkgandhi.org/autobio/chap40.htm"
+      }
+    },
+    {
+      "id": "malcolm-x",
+      "name": "Malcolm X",
+      "about": "Muslim minister and civil rights leader, in a speech in Detroit, November 1963",
+      "words": "You don’t have a turn-the-other-cheek revolution.",
+      "source": {
+        "title": "Malcolm X, Message to the Grass Roots, Detroit, November 1963 (California State University, Northridge)",
+        "url": "https://www.csun.edu/~hcpas003/grassroots.html"
+      }
     }
   ],
   "moment": "Word had spread. Jesus had been going through Galilee healing “every disease and every sickness among the people”, and by now crowds were following him from as far as Jerusalem and the far side of the Jordan. They were not the powerful. They were the sick, their families and the people who had carried them there. Matthew says that when Jesus looked at crowds like this he saw people “harassed and scattered, like sheep without a shepherd”.\n\nHe went up the hillside and sat down, and his disciples gathered close. Many readers have felt the echo: long before, Moses had gone up a mountain and come down with God’s law. Now a teacher sits on a mountain and says, again and again, “But I tell you”.",
   "around": "The rule Jesus quotes, “An eye for an eye, and a tooth for a tooth”, was not cruelty. In the law of Moses it told judges to make the penalty fit the harm (Exodus 21:23-25). It was justice with a measure.\n\nJesus does not call it wrong. He asks for something no court can order. He gives four small scenes from ordinary life: a blow to the cheek, a lawsuit over a coat, being forced to go a mile, someone asking for a loan. Each time the answer gives more than was taken. And then he says the hardest thing of all: “love your enemies”.",
-  "readings": "Few sentences have been argued over as much as this one.\n\nThe Russian novelist Leo Tolstoy took it with complete literalness. In The Kingdom of God Is Within You he argued that a follower of Jesus may never answer force with force, for any reason.\n\nWalter Wink heard the opposite of passivity: a way for people without power to stand up without striking back.\n\nMany churches have taught a third reading. Jesus, they say, forbids personal revenge, while protecting other people and the work of courts and governments are a separate question.\n\nAnd some scholars warn against turning the saying into a rule book at all. They read it as wisdom for the heart, to be applied with judgment.\n\nWhat all these readings share is the thing Jesus plainly forbids: paying a person back in the coin they used on you.",
+  "readings": "Few sentences have been argued over as much as this one.\n\nSome have taken it with complete literalness: a follower of Jesus may never answer force with force, for any reason.\n\nWalter Wink heard the opposite of passivity: a way for people without power to stand up without striking back.\n\nMany churches have taught a third reading. Jesus, they say, forbids personal revenge, while protecting other people and the work of courts and governments are a separate question.\n\nAnd some scholars warn against turning the saying into a rule book at all. They read it as wisdom for the heart, to be applied with judgment.\n\nWhat all these readings share is the thing Jesus plainly forbids: paying a person back in the coin they used on you.",
+  "argued": "In 1884, in a book called What I Believe, the Russian novelist Leo Tolstoy described the day this verse opened up for him: [[tolstoy]] Do not meet evil with force. Those words became the key to the rest of Jesus’ teaching for him, and later he wrote a whole book about them, The Kingdom of God Is Within You. Russia banned it, and it was first printed in Germany in 1894.\n\nA young Indian lawyer in South Africa read that book. Mohandas Gandhi was a Hindu, not a Christian, yet he wrote: [[gandhi-tolstoy]] The two men wrote to each other until Tolstoy died in 1910, and Gandhi went on to lead campaigns of resistance without violence.\n\nIn 1950 a seminary student named Martin Luther King Jr. heard a talk about Gandhi’s life. Five years later, as a Baptist pastor in Montgomery, Alabama, he put Gandhi’s method into practice during the bus boycott. Threats came against his life, and in the end he decided against armed bodyguards. Looking back in 1960, he wrote that Christ gave the movement its spirit and Gandhi gave it its method.\n\nNot everyone was persuaded. In Detroit in November 1963, while Black churches in the South were being bombed, Malcolm X asked how anyone could stay nonviolent under that. He told his audience: [[malcolm-x]]\n\nSo one verse runs through a Russian novelist, a Hindu lawyer, a Baptist preacher and a Muslim minister. Some heard in it the bravest kind of strength. Others heard a call to accept what should never be accepted. The argument is still going on.",
   "point": "Jesus forbids hitting back. That much is plain. The small word right suggests he has more than injury in view: he is speaking to people who know what it is to be shamed. He does not tell them the shame is deserved. He shows them a way to keep their dignity without taking anyone else’s.\n\nHe also knew what this teaching would cost. Later he warned that following him would divide even families: “A man’s foes will be those of his own household.”",
   "basis": [
     {

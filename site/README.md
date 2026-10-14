@@ -89,6 +89,14 @@ must list what was used, and the page shows those links. Rules for a story:
 - `voices` holds what named people said, word for word, each with the page where it can
   be read. The page adds the quotation marks, because curly double quotes in the files
   are reserved for the WEB text.
+- `argued` (optional, shown as "Who has argued over it" after the readings) tells how
+  people took the verse up and disagreed about it: scholars, writers, public figures,
+  believers and others, side by side and without a winner. The founder asked for this on
+  2026-10-14. A marker such as `[[tolstoy]]` stands for the words of the voice with that
+  `id`; the page sets them in quotation marks. Such a voice is quoted exactly once, is not
+  repeated as a card, and its source must also be in `sources`. A famous person appears
+  only when a source shows they said something about this passage. Matthew 5:39 is the
+  model.
 - Use a source only after opening it, link it, and tell the story in our own words.
 - Say who holds a reading and that others differ, where that is the case. The right
   cheek in Matthew 5:39 is the model: the Mishnah for the facts, Walter Wink for the
