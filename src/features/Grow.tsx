@@ -133,6 +133,7 @@ export function Grow({ id }: { id?: string }) {
     <section>
       <p className="eyebrow">Jesus at the center of ordinary life</p>
       <h1>Room to grow.</h1>
+      <Journeys/>
       <label>
         Explore a topic
         <select value={filter} onChange={(e) => setFilter(e.target.value)}>
@@ -176,7 +177,6 @@ export function Grow({ id }: { id?: string }) {
             </small>
           </button>
         ))}
-      <Journeys/>
       <details className="card">
         <summary>Your original Daily Walk plans</summary>
         <Plans

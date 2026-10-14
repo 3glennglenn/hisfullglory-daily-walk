@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "../supabase";
 import { useAuth, AuthPanel } from "../platform/auth";
+import { postError } from "./blockedLanguage";
 import { navigate } from "../platform/router";
 import { SafetyControls, type TargetKind } from "./safety";
 export interface Post {
@@ -53,7 +54,7 @@ export function ShareForm({
     setBusy(false);
     setStatus(
       error
-        ? "Could not publish. Check rules, profile, length and the 30-second posting interval."
+        ? postError(error, "Could not publish. Check rules, profile, length and the 30-second posting interval.")
         : "Published to the community.",
     );
     if (!error) {

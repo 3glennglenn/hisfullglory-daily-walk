@@ -1,0 +1,75 @@
+---
+// Share buttons for a page. Plain links, so nothing from the networks loads until a reader
+// taps one; the phone's own share sheet and "Copy link" need JavaScript and stay hidden
+// without it.
+interface Props {
+  /** The words that go with the link. */
+  text: string;
+}
+const { text } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const both = encodeURIComponent(`${text} ${url}`);
+const links = [
+  ["WhatsApp", `https://wa.me/?text=${both}`],
+  ["Facebook", `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`],
+  ["X", `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`],
+  ["Email", `mailto:?subject=${encodeURIComponent(text)}&body=${encodeURIComponent(url)}`],
+];
+---
+
+<div class="share" data-share-url={url} data-share-text={text}>
+  <p class="small muted">Share this page</p>
+  <div class="row">
+    <button type="button" class="button secondary" data-native hidden>Share…</button>
+    {links.map(([label, href]) => (
+      <a class="button secondary" href={href} rel="noopener" target="_blank">
+        {label}
+      </a>
+    ))}
+    <button type="button" class="button secondary" data-copy hidden>Copy link</button>
+  </div>
+  <p class="small muted" role="status" data-copied></p>
+</div>
+
+<script>
+  for (const box of document.querySelectorAll<HTMLElement>(".share")) {
+    const url = box.dataset.shareUrl ?? location.href;
+    const text = box.dataset.shareText ?? document.title;
+    const status = box.querySelector<HTMLElement>("[data-copied]");
+    const native = box.querySelector<HTMLButtonElement>("[data-native]");
+    const copy = box.querySelector<HTMLButtonElement>("[data-copy]");
+    if (native && "share" in navigator) {
+      native.hidden = false;
+      native.addEventListener("click", () => {
+        navigator.share({ title: document.title, text, url }).catch(() => {});
+      });
+    }
+    if (copy && navigator.clipboard) {
+      copy.hidden = false;
+      copy.addEventListener("click", () => {
+        navigator.clipboard.writeText(url).then(
+          () => status && (status.textContent = "Link copied."),
+          () => status && (status.textContent = url),
+        );
+      });
+    }
+  }
+</script>
+
+<style>
+  .share {
+    margin-top: 28px;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .row .button {
+    min-height: 40px;
+  }
+  [data-copied]:empty {
+    display: none;
+  }
+</style>

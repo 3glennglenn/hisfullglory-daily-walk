@@ -4,6 +4,7 @@ import { usePlatform } from "../platform/store";
 import { backupData } from "../platform/persistence";
 import { goals, type Theme } from "../platform/models";
 import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
+import { Reminders } from "./Reminders";
 import { supabase } from "../supabase";
 export function Settings() {
   const { state, update, notice, recover, storage } = usePlatform();
@@ -139,35 +140,7 @@ export function Settings() {
           ))}
         </div>
       </div>
-      <div className="card">
-        <h2>Notification preferences</h2>
-        <p>
-          Preferences only. Push delivery is unavailable; this app does not
-          request notification permission.
-        </p>
-        {[
-          "Daily Walk",
-          "Devotionals",
-          "Someone prayed",
-          "Prayer updates",
-          "Replies",
-          "Giving updates",
-        ].map((n) => (
-          <label className="check" key={n}>
-            <input
-              type="checkbox"
-              checked={state.notifications[n] ?? false}
-              onChange={(e) =>
-                update((s) => ({
-                  ...s,
-                  notifications: { ...s.notifications, [n]: e.target.checked },
-                }))
-              }
-            />
-            {n}
-          </label>
-        ))}
-      </div>
+      <Reminders />
       <div className="card">
         <h2>Privacy and recovery</h2>
         <p>

@@ -4,6 +4,7 @@
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import DraftBanner from "../../components/DraftBanner.astro";
 import EditorialNote from "../../components/EditorialNote.astro";
+import ShareLinks from "../../components/ShareLinks.astro";
 import { appUrl, shopUrl } from "../../config";
 import Base from "../../layouts/Base.astro";
 import { blocks } from "../../lib/ai";
@@ -169,6 +170,8 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
               Read the whole chapter
             </a>
           </div>
+
+          <ShareLinks text={item.hook} />
 
           <EditorialNote review={item.review} drafted={item.drafted} />
         </div>
