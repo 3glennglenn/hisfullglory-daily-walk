@@ -60,8 +60,8 @@ This file adds the current state and how to work with the founder. Last updated 
 - The project also has a function `public.rls_auto_enable()` and an event trigger
   `ensure_rls` that no migration creates (checked 2026-10-14): they predate migration 001
   and are Supabase's "Auto-enable RLS for new tables" example, which switches RLS on for
-  every new table in `public`. Keep them. Migration 008 only takes away the API's EXECUTE
-  grant on the function; see the comment in that file.
+  every new table in `public`. Keep them. Migration 009 (applied 2026-10-14) takes away
+  the API's EXECUTE grant on the function, nothing else; see the comment in that file.
 - `app.hisfullglory.com` production is a Vercel build of `main`. The app's code is that of
   ee01209, the merge of pull request #2 (study library, launch topics, AI explanations, shop prices and the
   `site/` folder). Vercel built and assigned it by itself when the founder merged.

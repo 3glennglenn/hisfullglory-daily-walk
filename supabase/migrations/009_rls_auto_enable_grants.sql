@@ -1,5 +1,8 @@
 -- Takes the API's EXECUTE grant away from public.rls_auto_enable(). Forward-only and safe to apply
--- twice; apply after 007. Changes no function body, no other function and no event trigger.
+-- twice; apply after 008. Changes no function body, no other function and no event trigger.
+-- Applied to the hosted project on 2026-10-14 with the founder's approval; its history lists it as
+-- version 20261014193724, name rls_auto_enable_grants. It was written as 008, but 008_word_filter
+-- (branch word-filter) reached the hosted project eleven minutes earlier, so this is 009.
 --
 -- Where the function comes from: no migration in this repo creates it. The hosted project has had
 -- it, with the event trigger `ensure_rls` (on ddl_command_end), since before migration 001: their

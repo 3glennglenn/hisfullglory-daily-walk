@@ -1,7 +1,7 @@
 import { PGlite } from "@electric-sql/pglite";
 import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
-// Runs migration 008 against the hosted rls_auto_enable() and its event trigger, which no migration
+// Runs migration 009 against the hosted rls_auto_enable() and its event trigger, which no migration
 // creates: the definition below is pg_get_functiondef from project fccwqguqhnbayuowmamy (2026-10-14).
 const hosted=`CREATE OR REPLACE FUNCTION public.rls_auto_enable()
  RETURNS event_trigger
@@ -37,12 +37,12 @@ let checks=0;
 const ok=(value,label)=>{assert.ok(value,label);checks++;console.log("PASS",label);};
 const db=new PGlite();
 const rows=async(sql,args=[])=>(await db.query(sql,args)).rows;
-const migration=readFileSync("supabase/migrations/008_rls_auto_enable_grants.sql","utf8");
+const migration=readFileSync("supabase/migrations/009_rls_auto_enable_grants.sql","utf8");
 await db.exec(`create role anon;create role authenticated;create role service_role;create schema auth;create table auth.users(id uuid primary key);create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;grant usage on schema public,auth to anon,authenticated,service_role;grant execute on function auth.uid() to anon,authenticated;`);
 
-// A database built only from this repo has no rls_auto_enable(); 008 must not fail there.
+// A database built only from this repo has no rls_auto_enable(); 009 must not fail there.
 await db.exec(migration);
-ok((await rows("select to_regprocedure('public.rls_auto_enable()') fn"))[0].fn===null,"008 is a no-op where the function does not exist");
+ok((await rows("select to_regprocedure('public.rls_auto_enable()') fn"))[0].fn===null,"009 is a no-op where the function does not exist");
 
 // The hosted order: the function and trigger came first, then the app's schema and migrations.
 await db.exec(hosted);
@@ -50,7 +50,7 @@ await db.exec(readFileSync("supabase/schema.sql","utf8"));
 for(const file of ["001_platform.sql","002_support.sql","003_aggregate_feed.sql","004_qa_guards.sql","005_topic_discussions.sql","006_circles.sql"]) await db.exec(readFileSync("supabase/migrations/"+file,"utf8"));
 const canExecute=async role=>(await rows("select has_function_privilege($1,'public.rls_auto_enable()','execute') v",[role]))[0].v;
 const aclFor=async grantee=>(await rows("select count(*)::int n from pg_proc p,aclexplode(coalesce(p.proacl,acldefault('f',p.proowner))) a where p.oid='public.rls_auto_enable()'::regprocedure and a.privilege_type='EXECUTE' and a.grantee=$1",[grantee]))[0].n;
-ok(await canExecute("anon")&&await canExecute("authenticated"),"before 008, guests and signed-in users can execute it, as the advisor reports");
+ok(await canExecute("anon")&&await canExecute("authenticated"),"before 009, guests and signed-in users can execute it, as the advisor reports");
 await db.exec("set role anon");
 await assert.rejects(()=>db.query("select public.rls_auto_enable()"),error=>error.code==="0A000");
 await db.exec("reset role");
@@ -62,7 +62,7 @@ const trigger=async()=>(await rows("select evtevent,evtenabled,evtfoid::regproc:
 const before={definition:await definition(),others:await otherAcls(),trigger:await trigger()};
 await db.exec(migration);
 await db.exec(migration);
-ok(true,"008 applies twice without error");
+ok(true,"009 applies twice without error");
 
 for(const role of ["anon","authenticated","service_role"]) ok(!await canExecute(role),role+" can no longer execute it");
 ok(await aclFor(0)===0,"PUBLIC no longer has EXECUTE");
@@ -82,7 +82,7 @@ await db.exec("create table public.after_owner(id int)");
 await db.exec("create role table_maker;grant create on schema public to table_maker;set role table_maker;create table public.after_maker(id int);create table public.after_maker_as as select 1 id;reset role");
 ok(await canExecute("table_maker")===false,"table_maker has no EXECUTE on rls_auto_enable()");
 const rls=async name=>(await rows("select relrowsecurity v from pg_class where oid=to_regclass($1)",[name]))[0].v;
-ok(await rls("public.after_owner"),"a table the owner creates after 008 gets RLS");
+ok(await rls("public.after_owner"),"a table the owner creates after 009 gets RLS");
 ok(await rls("public.after_maker")&&await rls("public.after_maker_as"),"tables another role creates (CREATE TABLE, CREATE TABLE AS) get RLS");
 ok((await rows("select relname from pg_class join pg_namespace n on n.oid=relnamespace where n.nspname='public' and relkind in ('r','p') and not relrowsecurity")).length===0,"every table in public has RLS");
 await db.close();
