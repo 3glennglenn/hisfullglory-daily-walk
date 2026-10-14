@@ -1025,6 +1025,23 @@ button[aria-pressed="true"] {
   font-size: 0.7rem;
   margin-right: 8px;
 }
+/* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
+.speaker {
+  color: var(--strong);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  user-select: none;
+}
+p.speaker {
+  margin: 14px 8px 0;
+}
+.speaker-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0 8px 8px;
+}
 .verse.selected {
   outline: 2px solid var(--strong);
   outline-offset: 0;

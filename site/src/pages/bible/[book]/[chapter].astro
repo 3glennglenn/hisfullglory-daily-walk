@@ -8,7 +8,10 @@ import {
   aiExplanation,
   chapterNote,
   chapterTitle,
+  hasSpeakers,
   library,
+  speakerNote,
+  speakerParts,
   type BibleBook,
 } from "../../../lib/bible";
 import { checksFor, refLabel } from "../../../lib/content";
@@ -72,17 +75,33 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
       </nav>
 
       <article class="scripture">
+        {book.id === "SNG" && hasSpeakers(chapter) && <p class="speaker-note">{speakerNote}</p>}
         {
-          chapter.verses.map((verse) => (
-            <p class="verse" id={`v${verse.number}`}>
-              <sup>{verse.number}</sup>{" "}
-              {verse.omitted ? (
-                <em>Verse omitted in this WEB edition. See the source notes.</em>
-              ) : (
-                verse.text
-              )}
-            </p>
-          ))
+          chapter.verses.map((verse) => {
+            const { above, parts } = speakerParts(verse);
+            return (
+              <>
+                {above.map((label) => <p class="speaker">{label}</p>)}
+                <p class="verse" id={`v${verse.number}`}>
+                  <sup>{verse.number}</sup>{" "}
+                  {verse.omitted ? (
+                    <em>Verse omitted in this WEB edition. See the source notes.</em>
+                  ) : (
+                    parts.map((part) => (
+                      <>
+                        {part.label && (
+                          <>
+                            <span class="speaker">{part.label}</span>{" "}
+                          </>
+                        )}
+                        {part.text}
+                      </>
+                    ))
+                  )}
+                </p>
+              </>
+            );
+          })
         }
         <p class="small muted">
           World English Bible.{" "}
@@ -170,6 +189,24 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
     font-size: 0.7em;
     font-weight: 600;
     color: var(--muted);
+  }
+  /* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
+  .speaker {
+    color: var(--strong);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    user-select: none;
+  }
+  p.speaker {
+    margin: 20px 0 0;
+    line-height: 1.5;
+  }
+  .speaker-note {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 20px;
   }
   .scripture .small {
     margin-top: 24px;
