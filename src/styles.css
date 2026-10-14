@@ -109,6 +109,20 @@ select:focus-visible {
 main:focus {
   outline: none;
 }
+/* Out of sight until a keyboard user tabs to it. */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -64px;
+  z-index: 20;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--strong);
+  color: var(--on-strong);
+}
+.skip-link:focus {
+  top: 12px;
+}
 .shell {
   max-width: 480px;
   margin: 0 auto;
@@ -1011,6 +1025,27 @@ button[aria-pressed="true"] {
   font-size: 0.7rem;
   margin-right: 8px;
 }
+/* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
+.speaker {
+  color: var(--strong);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  user-select: none;
+}
+p.speaker {
+  margin: 14px 8px 0;
+}
+/* On a highlighted verse --strong drops below 4.5:1 in dark mode, so a label inside it uses ink. */
+.verse:is(.speaking, .highlight-gold, .highlight-sage, .highlight-rose) .speaker {
+  color: var(--ink);
+}
+.speaker-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0 8px 8px;
+}
 .verse.selected {
   outline: 2px solid var(--strong);
   outline-offset: 0;
@@ -1114,3 +1149,75 @@ small {
 .ai-compare dl {margin:0 0 6px;}
 .ai-compare dt {margin-top:8px;font-size:0.72rem;font-weight:600;color:var(--muted);}
 .ai-compare dd {margin:2px 0 0;font-size:0.92rem;}
+/* Context check of the day: one part of the story per screen. */
+.muted {
+  color: var(--muted);
+}
+.context-today h2 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+.story-slide {
+  min-height: 52vh;
+}
+.story-hook {
+  font-size: 1.7rem;
+  line-height: 1.25;
+  font-weight: 400;
+}
+.story-ref {
+  color: var(--strong);
+  font-weight: 600;
+}
+.story-verse {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  line-height: 1.75;
+}
+.story-slide q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+.story-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.story-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0;
+}
+.story-dots {
+  display: flex;
+  gap: 6px;
+}
+.story-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+}
+.story-dots span.on {
+  background: var(--strong);
+}
+.context-story details .text-button {
+  display: block;
+  text-align: left;
+  margin: 8px 0;
+}
+/* Listen: the verse being read aloud. */
+.verse.speaking {
+  background: var(--highlight-gold);
+}
+.listen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+.listen small {
+  color: var(--muted);
+}

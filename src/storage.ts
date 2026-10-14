@@ -106,3 +106,18 @@ export function streak(dates: string[], today: string): number {
   while (numbers.has(cursor--)) count++;
   return count;
 }
+
+/**
+ * The current run of walks, forgiving one missed day: a single day between two walks does
+ * not break it, and the run is still current if the last walk was the day before yesterday.
+ * After a longer break `current` is false and the app welcomes the reader back instead of
+ * showing a zero.
+ */
+export function rhythm(dates: string[], today: string): { days: number; current: boolean; missedYesterday: boolean } {
+  const end = dateNumber(today);
+  const done = [...new Set(dates.filter(validDate).map(dateNumber))].filter((n) => n <= end).sort((a, b) => b - a);
+  if (!done.length) return { days: 0, current: false, missedYesterday: false };
+  let days = 1;
+  while (days < done.length && done[days - 1] - done[days] <= 2) days++;
+  return { days, current: end - done[0] <= 2, missedYesterday: end - done[0] === 2 };
+}

@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { Listen } from "./Listen";
 import {
   webProvider,
   studyNote,
   type BibleData,
   searchBible,
+  speakerNote,
+  speakerParts,
+  hasSpeakers,
 } from "./provider";
 import { usePlatform } from "../platform/store";
 import { navigate, passagePath, type Route } from "../platform/router";
@@ -28,6 +32,7 @@ export function Reader({ route }: { route: Route }) {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<number | undefined>(route.verse);
   const [status, setStatus] = useState("");
+  const [speaking, setSpeaking] = useState<number | undefined>();
   const studyBook = route.book ?? "psalms";
   const [study, setStudy] = useState<{ book: string; records: KnowledgeRecord[] }>({ book: "", records: [] });
   useEffect(() => {
@@ -210,29 +215,50 @@ export function Reader({ route }: { route: Route }) {
       </div>
       <h2>{reference}</h2>
       {tab === "read" ? (
+        <>
+        <Listen reference={reference} chapter={chapter} onVerse={setSpeaking} />
         <article className="card scripture-reader">
+          {book.id === "SNG" && hasSpeakers(chapter) && (
+            <p className="speaker-note">{speakerNote}</p>
+          )}
           {chapter.verses.map((v) => {
             const path = passagePath(book.slug, chapter.number, v.number);
+            const { above, parts } = speakerParts(v);
             return (
-              <button
-                id={`verse-${v.number}`}
-                key={v.number}
-                className={`verse ${selected === v.number ? "selected" : ""} highlight-${state.highlights[path] ?? "none"}`}
-                aria-pressed={selected === v.number}
-                onClick={() => {
-                  setSelected(v.number);
-                  navigate(path);
-                }}
-              >
-                <sup>{v.number}</sup>
-                {v.omitted ? (
-                  <em>
-                    Verse omitted in this WEB edition. See the source notes.
-                  </em>
-                ) : (
-                  v.text
-                )}
-              </button>
+              <Fragment key={v.number}>
+                {above.map((label, i) => (
+                  <p className="speaker" key={i}>
+                    {label}
+                  </p>
+                ))}
+                <button
+                  id={`verse-${v.number}`}
+                  className={`verse ${selected === v.number ? "selected" : ""} ${speaking === v.number ? "speaking" : ""} highlight-${state.highlights[path] ?? "none"}`}
+                  aria-pressed={selected === v.number}
+                  onClick={() => {
+                    setSelected(v.number);
+                    navigate(path);
+                  }}
+                >
+                  <sup>{v.number}</sup>
+                  {v.omitted ? (
+                    <em>
+                      Verse omitted in this WEB edition. See the source notes.
+                    </em>
+                  ) : (
+                    parts.map((part, i) => (
+                      <Fragment key={i}>
+                        {part.label && (
+                          <>
+                            <span className="speaker">{part.label}</span>{" "}
+                          </>
+                        )}
+                        {part.text}
+                      </Fragment>
+                    ))
+                  )}
+                </button>
+              </Fragment>
             );
           })}
           <small>
@@ -246,6 +272,7 @@ export function Reader({ route }: { route: Route }) {
             </a>
           </small>
         </article>
+        </>
       ) : tab === "context" ? (
         <>
         <article className="card" data-layer="sourced">

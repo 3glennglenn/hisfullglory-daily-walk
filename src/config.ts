@@ -1,6 +1,10 @@
 export const config = {
   supportEmail: "support@hisfullglory.com",
-  storeUrl: "https://hisfullglory.com",
+  // The shop moved to its own subdomain on 2026-10-13; hisfullglory.com is the website.
+  storeUrl: "https://shop.hisfullglory.com",
+  // The public half of the Web Push key pair. Public by design; the private half is in
+  // Supabase Vault (supabase/migrations/011_push_schedule.sql).
+  pushPublicKey: "BI2X1QZC6n3ww4Sihf2xfYgsOOfb8DYfIp9Jurf_u7b6n1_QKQQYWQJce8eni3oxN5R1Jy5FsV1f12qVlud9SSg",
 };
 
 export interface Product {

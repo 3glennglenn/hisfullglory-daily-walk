@@ -3,6 +3,7 @@
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import DraftBanner from "../../components/DraftBanner.astro";
 import EditorialNote from "../../components/EditorialNote.astro";
+import ShareLinks from "../../components/ShareLinks.astro";
 import { appUrl } from "../../config";
 import Base from "../../layouts/Base.astro";
 import { blocks } from "../../lib/ai";
@@ -94,6 +95,8 @@ const topic = article && publishedTopics().find((entry) => entry.id === article.
               </a>
             )}
           </div>
+
+          <ShareLinks text={article.title} />
 
           <EditorialNote review={article.review} drafted={article.drafted} />
         </div>
