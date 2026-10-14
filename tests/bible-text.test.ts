@@ -45,6 +45,16 @@ test("USFM markers are removed without running words together", () => {
       "\\f + \\fr 17:36 \\ft Some Greek manuscripts add: “Two will be in the field: the one taken, and the other left.”\\f*   \n\\p\n",
       "",
     ],
+    [
+      "Song of Songs 1:1, speaker line before the next verse",
+      '\\w Song|strong="H7892"\\w* \\w of|strong="H7892"\\w* \\w songs|strong="H7892"\\w*, which \\w is|strong="H8010"\\w* \\w Solomon|strong="H8010"\\w*’s.   \n\\sp Beloved  \n\\q1\n',
+      "Song of songs, which is Solomon’s.",
+    ],
+    [
+      "Song of Songs 1:4, speaker line inside a verse",
+      '\\w rooms|strong="H2315"\\w*.  \n\\sp Friends  \n\\q1 We \\w will|strong="H4428"\\w* \\w be|strong="H4428"\\w* \\w glad|strong="H8055"\\w*',
+      "rooms. We will be glad",
+    ],
   ];
   for (const [where, usfm, text] of cases) assert.equal(verseText(usfm), text, where);
 });
@@ -64,6 +74,31 @@ test("no WEB verse runs two words together or has stray spaces", () => {
         if (/\s\s|^\s|\s$/.test(v.text)) problems.push(`${where}: extra whitespace`);
       }
   assert.deepEqual(problems, []);
+});
+
+test("no verse ends with or contains a Song of Songs speaker label", () => {
+  // Song of Songs marks who speaks with `\sp Beloved`, `\sp Lover`, `\sp Friends` and `\sp Brothers`
+  // lines just before the next verse. Before 2026-10-14 the importer kept them as words, so 27
+  // verses ended with or contained a label: "…which is Solomon’s. Beloved".
+  const label = /(?:^|\s)(?:Beloved|Lover|Friends|Brothers)(?=$|\s[\p{Lu}“‘])/u;
+  const problems: string[] = [];
+  for (const book of bible.books)
+    for (const chapter of book.chapters)
+      for (const v of chapter.verses) {
+        const where = `${book.name} ${chapter.number}:${v.number}`;
+        const hit = v.text.match(label);
+        if (hit) problems.push(`${where}: "${v.text.slice(Math.max(0, hit.index! - 20), hit.index! + 20)}"`);
+        // In the Song's own text these words only appear in lowercase ("my beloved", "Eat, friends!").
+        if (book.id === "SNG" && /\b(?:Beloved|Lover|Friends|Brothers)\b/.test(v.text)) problems.push(`${where}: capitalised label word`);
+      }
+  assert.deepEqual(problems, []);
+  const sng = bible.books.find((b) => b.id === "SNG")!;
+  const verse = (chapter: number, number: number) => sng.chapters[chapter - 1].verses[number - 1].text;
+  assert.equal(verse(1, 1), "The Song of songs, which is Solomon’s.");
+  assert.equal(
+    verse(1, 4),
+    "Take me away with you. Let’s hurry. The king has brought me into his rooms. We will be glad and rejoice in you. We will praise your love more than wine! They are right to love you.",
+  );
 });
 
 test("the five verses the WEB leaves out stay marked as omitted", () => {

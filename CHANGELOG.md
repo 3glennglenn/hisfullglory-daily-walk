@@ -1,6 +1,12 @@
 # Changelog
 
-## WEB text spacing: branch `bible-spacing`, waiting for the founder's approval (2026-10-14)
+## Song of Songs speaker labels: pull request #11 (branch `bible-speakers`), approved by the founder, waiting for his merge (2026-10-14)
+- Fix the WEB importer: it dropped heading lines but kept the speaker lines of Song of Songs (`\sp Beloved`, `Lover`, `Friends`, `Brothers`). Because such a line sits just before the next verse, its label ended up as a word at the end or in the middle of the previous verse in 27 verses ("…which is Solomon’s. Beloved", "…more than wine! Beloved They are right to love you."). `scripts/usfm.mjs` now drops `\sp` with the other heading lines. No other book uses `\sp`.
+- Regenerate `public/bible/web.json` from the official archive downloaded on 2026-10-14, on top of the spacing fix below (the importer without this fix reproduces that file byte for byte). Compared verse by verse: 29 label words removed from 27 Song of Songs verses, each matching a `\sp` line inside that verse in the source; nothing else changed (same books, chapters, verse numbers and omitted verses). Four more `\sp` lines stand before a chapter's first verse and were never in the text.
+- Extend `tests/bible-text.test.ts`: two real Song of Songs snippets with a speaker line, and no verse may end with or contain a speaker label.
+- Not done: showing the speakers apart from the verse text (for example as a small label above the verse) is possible, since the source says where each speaker starts; it waits for the founder's decision.
+
+## WEB text spacing: merged into `main` with pull request #13 (2026-10-14)
 - Fix the WEB importer: the space after a closing USFM marker such as `\wj*` (end of Jesus' words, often next to a footnote) was removed with the marker, so 142 New Testament verses ran two words together ("his only bornSon", "The windblows", "righteousness.”Then"). The marker handling moved to `scripts/usfm.mjs`.
 - Regenerate `public/bible/web.json` from the official archive. Compared verse by verse with the previous file: 148 spaces added, nothing else changed (same books, chapters, verse numbers and the five omitted verses). At all 14,628 places where markers sit between two pieces of text, the new file now follows the source's spacing.
 - Add `tests/bible-text.test.ts`: real USFM snippets must convert without running words together, and no verse may contain a lowercase letter followed by a capital or closing punctuation followed by a letter.
