@@ -1186,3 +1186,17 @@ small {
   text-align: left;
   margin: 8px 0;
 }
+/* Listen: the verse being read aloud. */
+.verse.speaking {
+  background: var(--highlight-gold);
+}
+.listen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+.listen small {
+  color: var(--muted);
+}

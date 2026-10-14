@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Listen } from "./Listen";
 import {
   webProvider,
   studyNote,
@@ -28,6 +29,7 @@ export function Reader({ route }: { route: Route }) {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<number | undefined>(route.verse);
   const [status, setStatus] = useState("");
+  const [speaking, setSpeaking] = useState<number | undefined>();
   const studyBook = route.book ?? "psalms";
   const [study, setStudy] = useState<{ book: string; records: KnowledgeRecord[] }>({ book: "", records: [] });
   useEffect(() => {
@@ -210,6 +212,8 @@ export function Reader({ route }: { route: Route }) {
       </div>
       <h2>{reference}</h2>
       {tab === "read" ? (
+        <>
+        <Listen reference={reference} chapter={chapter} onVerse={setSpeaking} />
         <article className="card scripture-reader">
           {chapter.verses.map((v) => {
             const path = passagePath(book.slug, chapter.number, v.number);
@@ -217,7 +221,7 @@ export function Reader({ route }: { route: Route }) {
               <button
                 id={`verse-${v.number}`}
                 key={v.number}
-                className={`verse ${selected === v.number ? "selected" : ""} highlight-${state.highlights[path] ?? "none"}`}
+                className={`verse ${selected === v.number ? "selected" : ""} ${speaking === v.number ? "speaking" : ""} highlight-${state.highlights[path] ?? "none"}`}
                 aria-pressed={selected === v.number}
                 onClick={() => {
                   setSelected(v.number);
@@ -246,6 +250,7 @@ export function Reader({ route }: { route: Route }) {
             </a>
           </small>
         </article>
+        </>
       ) : tab === "context" ? (
         <>
         <article className="card" data-layer="sourced">
