@@ -4,6 +4,7 @@
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import DraftBanner from "../../components/DraftBanner.astro";
 import EditorialNote from "../../components/EditorialNote.astro";
+import ShareLinks from "../../components/ShareLinks.astro";
 import { appUrl } from "../../config";
 import Base from "../../layouts/Base.astro";
 import {
@@ -103,6 +104,8 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
               See Circles in the app
             </a>
           </div>
+
+          <ShareLinks text={`${topic.label}: Bible passages`} />
 
           <EditorialNote review={topic.review} drafted={topic.drafted} />
         </div>

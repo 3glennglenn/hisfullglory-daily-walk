@@ -5,7 +5,17 @@ import { usePlatform } from "../platform/store";
 import { goals } from "../platform/models";
 import { navigate } from "../platform/router";
 import { contentFor } from "../data";
-import { completeDate, localDate, streak } from "../storage";
+import { completeDate, localDate, rhythm } from "../storage";
+
+/** One line about the reader's rhythm. Never a zero, never a scolding. */
+function rhythmLine(run: ReturnType<typeof rhythm>, completed: number): string {
+  if (!completed) return "Your first walk starts your rhythm.";
+  if (!run.current) return `Welcome back. Pick up where you left off: ${completed} ${completed === 1 ? "day" : "days"} walked so far.`;
+  const days = `${run.days} ${run.days === 1 ? "day" : "days"} in your rhythm`;
+  return run.missedYesterday
+    ? `${days}. You missed yesterday, and that is fine: today keeps it going.`
+    : `${days} · ${completed} ${completed === 1 ? "day" : "days"} walked in all`;
+}
 import { track } from "../analytics";
 import { Journal } from "./LegacyWalk";
 import { ContextOfTheDayCard } from "../context/ContextCheck";
@@ -210,10 +220,7 @@ export function Home() {
       <ContextOfTheDayCard />
       <div className="card">
         <h2>A gentle rhythm</h2>
-        <p>
-          {streak(state.local.completedDates, date)} day streak ·{" "}
-          {state.local.completedDates.length} days completed
-        </p>
+        <p>{rhythmLine(rhythm(state.local.completedDates, date), state.local.completedDates.length)}</p>
         <p>
           {state.preferences.minutes} minutes · {state.preferences.time}
         </p>

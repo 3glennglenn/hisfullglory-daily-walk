@@ -213,3 +213,17 @@ test("only approved context checks are built, and a built one shows the verse an
     assert.ok(chapter.includes(`href="/context-checks/${item.slug}"`), `${item.slug}: link on the chapter page`);
   }
 });
+
+test("context checks, topic pages and articles can be shared, with their own address", () => {
+  const addresses = [
+    ...publishedChecks().map((item) => `/context-checks/${item.slug}`),
+    ...publishedTopics().map((topic) => `/topics/${topic.id}`),
+    ...publishedArticles().map((article) => `/articles/${article.slug}`),
+  ];
+  for (const address of addresses) {
+    const html = readFileSync(page(address), "utf8");
+    const url = encodeURIComponent(`https://hisfullglory.com${address}`);
+    assert.ok(html.includes(`https://www.facebook.com/sharer/sharer.php?u=${url}`), `${address}: share link with its own address`);
+    assert.ok(html.includes("https://wa.me/?text="), `${address}: WhatsApp`);
+  }
+});
