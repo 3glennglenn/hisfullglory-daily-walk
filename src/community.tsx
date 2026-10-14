@@ -239,7 +239,7 @@ export function Community({
       setAuthNote(
         error
           ? "We could not send your sign-in link. Check the address and try again shortly."
-          : "Check your email: tap the link, or type the code below. You can keep reading while you wait.",
+          : "Check your email for a sign-in link. You can keep reading while you wait.",
       );
       if (!error) {
         setSentTo(email.trim());

@@ -26,7 +26,7 @@ export function CodeEntry({ email }: { email: string }) {
   return (
     <form className="code-entry" onSubmit={(e) => void verify(e)}>
       <label>
-        Or type the code from the email
+        Does the email show a code? Type it here
         <input
           id="sign-in-code"
           inputMode="numeric"

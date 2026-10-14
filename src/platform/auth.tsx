@@ -84,7 +84,7 @@ export function AuthPanel() {
     setStatus(
       error
         ? "Sign-in could not be sent. Check configuration and try again."
-        : "Check your email: tap the link, or type the code below.",
+        : "Check your email for a sign-in link.",
     );
     if (!error) setSentTo(email.trim());
     setBusy(false);
