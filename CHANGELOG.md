@@ -1,5 +1,11 @@
 # Changelog
 
+## Song of Songs speaker labels: branch `bible-speakers`, waiting for the founder's approval (2026-10-14)
+- Fix the WEB importer: it dropped heading lines but kept the speaker lines of Song of Songs (`\sp Beloved`, `Lover`, `Friends`, `Brothers`). Because such a line sits just before the next verse, its label ended up as a word at the end or in the middle of the previous verse in 27 verses ("…which is Solomon’s. Beloved", "…more than wine! Beloved They are right to love you."). `\sp` is now dropped with the other heading lines. No other book uses `\sp`.
+- Regenerate `public/bible/web.json` from the official archive downloaded on 2026-10-14 (the unchanged importer reproduces the previous file byte for byte from it). Compared verse by verse with the previous file: 29 label words removed from 27 Song of Songs verses, each matching a `\sp` line inside that verse in the source; nothing else changed (same books, chapters, verse numbers and omitted verses). Four more `\sp` lines stand before a chapter's first verse and were never in the text.
+- Add `tests/bible-speakers.test.ts`: no verse may end with or contain a speaker label, and the affected verses keep the rest of their text.
+- Not done: showing the speakers apart from the verse text (for example as a small label above the verse) is possible, since the source says where each speaker starts; it waits for the founder's decision. This branch and `bible-spacing` both regenerate `web.json`; whichever is merged second has to be rebased and regenerated.
+
 ## AI explanations and shop prices: merged into `main` with pull request #2 (2026-10-12)
 - Add AI explanations as a separate labelled layer, decided by the founder: static files in `public/ai/`, validated by `src/bible/ai.ts`, shown in their own card under the sourced note in the Reader's Context tab. No runtime AI. Pilot of five chapters. Rules: docs/AI_EXPLANATIONS.md.
 - Keep AI files out of the installable cache and out of the SPA rewrite; an offline or invalid file shows no card.
