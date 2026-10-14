@@ -52,6 +52,8 @@ export default defineConfig({
         navigateFallback: "/index.html",
         navigateFallbackDenylist: [/^\/auth\//],
         runtimeCaching: [],
+        // Shows push notifications (supabase/functions/push-sender).
+        importScripts: ["push-sw.js"],
       },
     }),
   ],

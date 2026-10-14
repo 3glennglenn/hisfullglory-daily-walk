@@ -12,6 +12,8 @@ import type { BibleBook, BibleData } from "../../../src/bible/provider.ts";
 import { aiFor, loadAiExplanations, type AiExplanation } from "./ai.ts";
 
 export type { AiExplanation, BibleBook, BibleData, KnowledgeRecord };
+// Song of Songs speaker labels are shown as in the app's Reader.
+export { hasSpeakers, speakerNote, speakerParts } from "../../../src/bible/provider.ts";
 
 // npm scripts and tests run with site/ as the working directory.
 const appRoot = resolve(process.cwd(), "..");
