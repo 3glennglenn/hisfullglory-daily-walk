@@ -4,10 +4,27 @@ import {
   blankState,
   completeDate,
   localDate,
+  rhythm,
   sanitizeState,
   streak,
   validDate,
 } from "../src/storage.ts";
+
+test("the rhythm forgives one missed day and welcomes the reader back after more", () => {
+  const days = ["2026-10-08", "2026-10-09", "2026-10-11", "2026-10-12"];
+  // One missed day (the 10th) does not break the run.
+  assert.deepEqual(rhythm(days, "2026-10-12"), { days: 4, current: true, missedYesterday: false });
+  assert.deepEqual(rhythm(days, "2026-10-13"), { days: 4, current: true, missedYesterday: false });
+  // Missing yesterday keeps the run, and the app says so gently.
+  assert.deepEqual(rhythm(days, "2026-10-14"), { days: 4, current: true, missedYesterday: true });
+  // Two missed days end it: no zero, a welcome back instead.
+  assert.equal(rhythm(days, "2026-10-15").current, false);
+  // Two missed days in the middle split the run.
+  assert.equal(rhythm(["2026-10-01", "2026-10-04", "2026-10-05"], "2026-10-05").days, 2);
+  assert.deepEqual(rhythm([], "2026-10-05"), { days: 0, current: false, missedYesterday: false });
+  // Future dates and duplicates are ignored, across a year boundary too.
+  assert.equal(rhythm(["2025-12-30", "2026-01-01", "2026-01-01", "2026-02-01"], "2026-01-01").days, 2);
+});
 
 test("local date uses the device calendar, including midnight", () => {
   assert.equal(localDate(new Date(2026, 9, 5, 0, 1)), "2026-10-05");

@@ -1,6 +1,7 @@
 export const config = {
   supportEmail: "support@hisfullglory.com",
-  storeUrl: "https://hisfullglory.com",
+  // The shop moved to its own subdomain on 2026-10-13; hisfullglory.com is the website.
+  storeUrl: "https://shop.hisfullglory.com",
 };
 
 export interface Product {

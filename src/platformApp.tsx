@@ -21,6 +21,7 @@ import { Home, Walk } from "./features/Home";
 import { Reader } from "./bible/Reader";
 import { Pray } from "./features/Pray";
 import { Grow } from "./features/Grow";
+import { ContextCheck } from "./context/ContextCheck";
 import { JournalLibrary } from "./features/Journal";
 import { Settings, Profile } from "./features/Settings";
 import { Give, GivingPolicy } from "./giving/Give";
@@ -59,6 +60,7 @@ interface InstallEvent extends Event {
   userChoice: Promise<{ outcome: string }>;
 }
 const menu = [
+  ["context", "Context checks", "Verses you know, back in their story"],
   ["my-walk", "My Walk", "Your private focus, prayer and progress"],
   ["grow", "Grow", "Journeys for the season you’re in"],
   ["journal", "Journal", "A private place for reflection"],
@@ -134,6 +136,9 @@ function App() {
       break;
     case "pray":
       content = <Pray />;
+      break;
+    case "context":
+      content = <ContextCheck key={route.id ?? "today"} slug={route.id} />;
       break;
     case "grow":
       content = <Grow id={route.id} />;
