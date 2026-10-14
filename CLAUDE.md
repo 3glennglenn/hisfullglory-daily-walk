@@ -113,6 +113,11 @@ This file adds the current state and how to work with the founder. Last updated 
 - A routine push that fails a check is live already. The commit gets a red cross on `main`
   and in the Actions tab. Fix it, or revert it, through a pull request; the routine's next
   push gets a run of its own.
+- GitHub shows full logs only to signed-in users. A failed step therefore puts its first
+  error and last lines in an annotation (`scripts/ci-failure-note.mjs`), shown on the pull
+  request and readable without signing in through
+  `https://api.github.com/repos/3glennglenn/hisfullglory-daily-walk/check-runs/<job id>/annotations`
+  (anonymous API calls are limited to 60 an hour).
 
 ## Study notes
 
