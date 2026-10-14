@@ -7,6 +7,7 @@ import test from "node:test";
 import { launchTopics } from "../../src/topics/graph.ts";
 import { library } from "../src/lib/bible.ts";
 import {
+  arguedHeading,
   checkParts,
   content,
   parseArticle,
@@ -19,6 +20,7 @@ import {
   showDrafts,
   storyStatuses,
   verses,
+  withVoices,
 } from "../src/lib/content.ts";
 
 const { bible } = library();
@@ -148,6 +150,19 @@ test("a context check must quote the verse or the passages around it exactly", (
   );
 });
 
+test("people quoted in “Who has argued over it” are real voices, each with its source", () => {
+  const item = raw("context-checks", "matthew-5-39");
+  const parse = (changes: Record<string, unknown>) => () => parseContextCheck({ ...item, ...changes }, item.slug, bible);
+  assert.ok(item.argued && item.voices.some((voice: { id?: string }) => voice.id), "the example on file uses the part");
+  assert.throws(parse({ argued: `${item.argued} Someone else said: [[nobody]]` }), /names no voice/);
+  assert.throws(parse({ argued: item.argued.replace("[[tolstoy]]", "") }), /quoted exactly once/);
+  assert.throws(parse({ argued: `${item.argued} [[tolstoy]]` }), /quoted exactly once/);
+  assert.throws(parse({ sources: item.sources.filter((source: { url: string }) => !source.url.includes("tolstoy")) }), /also be in sources/);
+  // Words of people go through a voice; quotation marks in the text stay for Scripture.
+  assert.throws(parse({ argued: `${item.argued} He said "never".` }), /curly quotes/);
+  assert.throws(parse({ argued: `${item.argued} Jesus said “never hit back”.` }), /not in the WEB text/);
+});
+
 test("only approved context checks are built, and a built one shows the verse and its text as written", () => {
   const shown = (item: { review: string }) => item.review === "approved" || showDrafts();
   const { checks } = content();
@@ -174,6 +189,20 @@ test("only approved context checks are built, and a built one shows the verse an
     for (const voice of item.voices) {
       assert.ok(text.includes(voice.words) && text.includes(voice.name), `${item.slug}: ${voice.name}`);
       assert.ok(html.includes(`href="${voice.source.url}"`), `${item.slug}: source of ${voice.name}`);
+    }
+    // Voices quoted in "Who has argued over it" stand in its text, not again as cards.
+    const cards = html.match(/class="card voice"/g)?.length ?? 0;
+    assert.equal(cards, item.voices.filter((voice) => !voice.id).length, `${item.slug}: voice cards`);
+    if (item.argued) {
+      assert.ok(text.includes(arguedHeading), `${item.slug}: ${arguedHeading}`);
+      for (const paragraph of item.argued.split("\n\n")) {
+        const told = withVoices(paragraph, item.voices).map((piece) => (typeof piece === "string" ? piece : piece.words)).join("");
+        assert.ok(text.includes(flat(told)), `${item.slug}: argued, ${paragraph.slice(0, 40)}`);
+      }
+      for (const voice of item.voices.filter((entry) => entry.id))
+        assert.ok(html.includes(`<q cite="${voice.source.url}"`), `${item.slug}: ${voice.name} quoted in the story`);
+      const at = (name: string) => html.indexOf(`data-part="${name}"`);
+      assert.ok(at("readings") < at("argued") && at("argued") < at("point"), `${item.slug}: argued follows the readings`);
     }
     assert.equal(text.includes("Draft. Not approved"), item.review === "draft", `${item.slug}: draft label`);
     // The chapter page of the verse points to its context check.

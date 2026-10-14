@@ -168,15 +168,41 @@ export interface ContextCheck extends Editorial {
   around: string;
   /** How the verse has been read, by whom and when, set side by side without a winner. */
   readings: string;
+  /**
+   * Who has argued over the verse, told as a story. Optional. A marker such as [[tolstoy]]
+   * stands for the words of the voice with that id; the page sets them in quotation marks.
+   */
+  argued?: string;
   point: string;
   /** The story around the verse: what was going on, or what the verse went on to mean. */
   story: string;
   /** How firm the story is. Anything from outside the Bible has to name its sources. */
   storyStatus: keyof typeof storyStatuses;
   sources: { title: string; url: string }[];
-  /** What named people said about the verse or its teaching, word for word, each with its source. */
-  voices: { name: string; about: string; words: string; source: { title: string; url: string } }[];
+  /**
+   * What named people said about the verse or its teaching, word for word, each with its
+   * source. A voice with an id is quoted inside `argued`; the others are shown on their own.
+   */
+  voices: Voice[];
   basis: PassageRef[];
+}
+export interface Voice {
+  id?: string;
+  name: string;
+  about: string;
+  words: string;
+  source: { title: string; url: string };
+}
+
+/** The heading of the optional `argued` part, shown after "How people have read it". */
+export const arguedHeading = "Who has argued over it";
+const voiceMarker = /\[\[([a-z0-9-]+)\]\]/g;
+
+/** Splits text into its own words and the voices its markers stand for. */
+export function withVoices(value: string, voices: readonly Voice[]): (string | Voice)[] {
+  return value.split(/\[\[([a-z0-9-]+)\]\]/).map((piece, index) =>
+    index % 2 === 0 ? piece : voices.find((voice) => voice.id === piece)!,
+  );
 }
 
 /** The line a page shows under the story, so a reader knows what it rests on. */
@@ -222,21 +248,33 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
   });
   // A story that leans on anything outside the Bible must say where it comes from.
   check(storyStatus === "scripture" || sources.length > 0, where, "a story from outside the Bible needs its sources");
-  check(raw.voices === undefined || (Array.isArray(raw.voices) && raw.voices.length <= 4), where, "voices must be a list of at most four");
-  const voices = ((raw.voices ?? []) as Raw[]).map((entry, index) => {
+  check(raw.voices === undefined || (Array.isArray(raw.voices) && raw.voices.length <= 8), where, "voices must be a list of at most eight");
+  const voices: Voice[] = ((raw.voices ?? []) as Raw[]).map((entry, index) => {
     const at = `${where} voice ${index + 1}`;
     const source = entry.source as Raw | undefined;
     // Someone else's words are only shown with the place where they can be read.
     check(source && typeof source.url === "string" && source.url.startsWith("https://"), at, "needs a source with an https link");
     const words = text(entry.words, 20, 400, `${at} words`);
     check(!quotations(words).length, at, "curly double quotes are for the WEB text; the page adds its own marks");
+    check(entry.id === undefined || (typeof entry.id === "string" && /^[a-z0-9-]+$/.test(entry.id)), at, "id must be lowercase letters, digits and hyphens");
     return {
+      ...(entry.id === undefined ? {} : { id: entry.id as string }),
       name: text(entry.name, 3, 80, `${at} name`),
       about: text(entry.about, 10, 160, `${at} about`),
       words,
       source: { title: text(source.title, 3, 140, `${at} source`), url: source.url },
     };
   });
+  check(voices.filter((voice) => !voice.id).length <= 4, where, "at most four voices are shown on their own");
+  // Voices with an id are quoted inside `argued`, each exactly once, and their source is
+  // listed with the page's other sources so a reader can find it.
+  const quoted = raw.argued === undefined ? [] : [...part("argued", 200, 2400).matchAll(voiceMarker)].map(([, id]) => id);
+  for (const voice of voices.filter((entry) => entry.id)) {
+    const uses = quoted.filter((id) => id === voice.id).length;
+    check(uses === 1, `${where} voice ${voice.id}`, `must be quoted exactly once in argued, is ${uses} times`);
+    check(sources.some((source) => source.url === voice.source.url), `${where} voice ${voice.id}`, "its source must also be in sources");
+  }
+  for (const id of quoted) check(voices.some((voice) => voice.id === id), `${where} argued`, `[[${id}]] names no voice`);
   return {
     slug,
     ...editorial(raw, where),
@@ -244,6 +282,7 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
     // The hook is also the page description, so it keeps to that length.
     hook: part("hook", 60, 160),
     ...(parts as Pick<ContextCheck, (typeof checkParts)[number][0]>),
+    ...(raw.argued === undefined ? {} : { argued: raw.argued as string }),
     story: part("story", 200, 2000),
     storyStatus,
     sources,
