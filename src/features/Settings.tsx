@@ -174,9 +174,10 @@ export function Settings() {
         )}
         <p role="status">{status}</p>
         <small>
-          No encrypted cloud sync, account-data deletion service or cross-device
-          restore is configured. Contact the operator to remove an account; use
-          own-content deletion controls for public contributions.
+          No encrypted cloud sync or cross-device restore is configured. To
+          delete your account and its server data, use "Delete my account" on
+          your Profile page; use own-content deletion controls for public
+          contributions.
         </small>
       </div>
       <TopicPreferences selected={state.privateTopics} onChange={privateTopics => update(s => ({...s,privateTopics}))} />
