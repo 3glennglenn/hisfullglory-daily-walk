@@ -68,3 +68,17 @@ test("real calendar dates only", () => {
   assert.equal(validDate("2024-02-29"), true);
   assert.equal(validDate("2026-02-29"), false);
 });
+
+test("listening reads the reference and then every verse in this edition, in order", async () => {
+  const { speechParts } = await import("../src/bible/speech.ts");
+  const parts = speechParts("Psalm 23", { number: 23, verses: [
+    { number: 1, text: "Yahweh is my shepherd:" },
+    { number: 2, text: "", omitted: true },
+    { number: 3, text: "He restores my soul." },
+  ] });
+  assert.deepEqual(parts, [
+    { text: "Psalm 23." },
+    { verse: 1, text: "Yahweh is my shepherd:" },
+    { verse: 3, text: "He restores my soul." },
+  ]);
+});
