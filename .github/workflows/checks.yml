@@ -1,0 +1,79 @@
+# Runs the app's and the site's checks on every pull request to main and on every push to main.
+# It only reports: it blocks no push, deploys nothing and uses no secrets. Vercel builds and
+# deploys main on its own, whatever these checks say. Do not make them "required" in a branch
+# rule for main: the daily AI routine pushes straight to main and would then be refused.
+name: Checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # A new push to a pull request cancels that pull request's older run.
+  # Every push to main gets a run of its own (run_id is unique), so none is cancelled.
+  group: checks-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  app:
+    name: App
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Unit and database tests
+        run: npm test
+      - name: Security check
+        run: npm run security
+      - name: Build
+        run: npm run build
+      - name: Install Chromium for the browser check
+        run: npx playwright install --with-deps chromium
+      - name: Browser check against the built app
+        env:
+          PREVIEW_URL: http://127.0.0.1:4173
+        run: |
+          npm run preview -- --port 4173 --strictPort > preview.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl -sf "$PREVIEW_URL/" > /dev/null && break
+            sleep 1
+          done
+          curl -sf "$PREVIEW_URL/" > /dev/null || { echo "Preview server did not start"; exit 1; }
+          npm run test:browser
+      - name: Preview server log
+        if: failure()
+        run: cat preview.log || true
+
+  site:
+    # Built the way Vercel builds hisfullglory.com: only the site's own packages are installed.
+    name: Site
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Tests on the built pages
+        run: npm test
