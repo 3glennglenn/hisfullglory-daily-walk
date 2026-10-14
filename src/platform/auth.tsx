@@ -8,6 +8,7 @@ import {
 } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "../supabase";
+import { postError } from "../social/blockedLanguage";
 export const TERMS_VERSION = "2026-10-07";
 const Auth = createContext<{
   session: Session | null;
@@ -108,7 +109,7 @@ export function AuthPanel() {
           .from("profiles")
           .insert({ id: session.user.id, display_name: name.trim() });
     if (error) {
-      setStatus("Name could not be saved. Use 2–40 characters.");
+      setStatus(postError(error, "Name could not be saved. Use 2–40 characters."));
       setBusy(false);
       return;
     }
