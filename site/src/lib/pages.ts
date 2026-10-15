@@ -9,7 +9,7 @@ import { content, showDrafts } from "./content.ts";
  * approved their text, like any other draft. Add each legal page here in the change that adds
  * its file.
  */
-export const gatedLegalPages = ["/privacy"];
+export const gatedLegalPages = ["/privacy", "/terms", "/contact"];
 
 /** Pages outside the Bible. Add a page here in the same change that adds its file. */
 const fixedPages = [

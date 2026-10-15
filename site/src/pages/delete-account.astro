@@ -1,10 +1,10 @@
 ---
 // /delete-account: how to delete an app account without the app. Google Play asks for this
 // address in the store listing. What it says must match migration 007 and DeleteAccount in
-// the app's src/platform/auth.tsx.
+// the app's src/platform/auth.tsx. The support address is printed only once mail to it is known
+// to arrive (supportEmailReady in src/data/legal.ts); plan 07 revises the whole page.
+import { supportEmail, supportEmailReady } from "../data/legal";
 import Base from "../layouts/Base.astro";
-
-const supportEmail = "support@hisfullglory.com";
 ---
 
 <Base
@@ -26,12 +26,18 @@ const supportEmail = "support@hisfullglory.com";
       </p>
 
       <h2>By email</h2>
-      <p>
-        If you cannot use the app, email{" "}
-        <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{" "}
-        from the address you sign in with and ask us to delete your account. We
-        delete it within 30 days and reply to confirm.
-      </p>
+      {
+        supportEmailReady ? (
+          <p>
+            If you cannot use the app, email{" "}
+            <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{" "}
+            from the address you sign in with and ask us to delete your account.
+            We delete it within 30 days and reply to confirm.
+          </p>
+        ) : (
+          <p>Email deletion is being set up. Until then, please use the app.</p>
+        )
+      }
 
       <h2>What is deleted</h2>
       <ul>

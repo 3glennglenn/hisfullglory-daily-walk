@@ -1,0 +1,139 @@
+---
+// /terms: what a person agrees to when they use HisFullGlory and post. The community rules
+// repeat the app's acceptance label word for word (src/platform/auth.tsx), and the Scripture
+// sentences repeat /about. The version shown here must equal TERMS_VERSION in the app
+// (site/tests/legal.test.ts checks it). Open facts stay [CONFIRM: ...] markers in
+// site/src/data/legal.ts; the page is a noindex draft until `approved` is true there.
+import LegalPage from "../layouts/LegalPage.astro";
+import {
+  businessAddress,
+  entity,
+  governingLaw,
+  lastUpdated,
+  minimumAge,
+  postLicence,
+  registration,
+  responseTarget,
+  termsVersion,
+} from "../data/legal";
+
+const sections = [
+  { id: "who-we-are", label: "Who we are" },
+  { id: "who-can-use", label: "Who can use HisFullGlory" },
+  { id: "your-account", label: "Your account" },
+  { id: "community-rules", label: "Community rules" },
+  { id: "what-you-post", label: "What you post" },
+  { id: "reports", label: "Reports and reviews" },
+  { id: "scripture", label: "Scripture, explanations and community voices" },
+  { id: "care-and-safety", label: "Care and safety" },
+  { id: "ending", label: "Ending your use" },
+  { id: "changes", label: "Changes" },
+  { id: "law", label: "Law and contact" },
+];
+---
+
+<LegalPage
+  title="Terms of use"
+  description="The rules for using HisFullGlory and taking part in the community."
+  intro={`Version ${termsVersion}, last updated ${lastUpdated}.`}
+  sections={sections}
+>
+  <section class="card in-short" aria-labelledby="in-short" slot="short">
+    <h2 id="in-short">In short</h2>
+    <p>
+      Be kind and honest. Do not harass, deceive or put anyone at risk. You are
+      responsible for what you post. We review reports, and we can hide or
+      remove content and accounts that break these rules.
+    </p>
+  </section>
+
+  <h2 id="who-we-are">Who we are</h2>
+  <p>
+    HisFullGlory is run by {entity}, registration number {registration}, {businessAddress}.
+  </p>
+
+  <h2 id="who-can-use">Who can use HisFullGlory</h2>
+  <p>
+    You must be {minimumAge} or older to create an account. Reading the Bible,
+    the Daily Walk and your private journal do not need an account.
+  </p>
+
+  <h2 id="your-account">Your account</h2>
+  <p>
+    You sign in with a 6-digit code we email you. Keep your email account
+    secure. Do not share your code.
+  </p>
+
+  <h2 id="community-rules">Community rules</h2>
+  <p>
+    The community rules are: no harassment, threats, hate, sexual content,
+    scams, spam, impersonation, illegal activity, dangerous advice or private
+    information.
+  </p>
+  <p>Do not share other people's private information.</p>
+  <p>Do not ask for money or payment details in posts.</p>
+
+  <h2 id="what-you-post">What you post</h2>
+  <p>
+    You are responsible for what you post. You can delete your own posts.
+    Anonymous posts are anonymous to other readers, not to us.
+  </p>
+  <p>{postLicence}</p>
+
+  <h2 id="reports">Reports and reviews</h2>
+  <p>
+    Anyone signed in can report a post. When two different people report the
+    same post, it is hidden from other readers until a person has reviewed it.
+    The reviewer can restore it, keep it hidden or remove it. We aim to respond
+    within {responseTarget}. We never tell the author who reported.
+  </p>
+
+  <h2 id="scripture">Scripture, explanations and community voices</h2>
+  <ul>
+    <li>
+      Scripture comes first. We use the World English Bible, a public-domain
+      translation.
+    </li>
+    <li>
+      Context notes name their sources. A note that has not yet been reviewed by
+      a theological reader is labelled “Editorial draft”.
+    </li>
+    <li>
+      Where we show an AI explanation, it is labelled as AI and kept apart from
+      Scripture and from sourced notes. It can contain mistakes.
+    </li>
+    <li>
+      Community voices are labelled as community. Popularity does not make
+      something true.
+    </li>
+  </ul>
+
+  <h2 id="care-and-safety">Care and safety</h2>
+  <p>
+    HisFullGlory is a study and community app. It is not pastoral, medical,
+    legal or mental-health care. If you or someone else may be in danger,
+    contact your local emergency services.
+  </p>
+
+  <h2 id="ending">Ending your use</h2>
+  <p>
+    You can delete your account in the app, or see
+    <a href="/delete-account">how to delete your account</a>. We may suspend
+    accounts that break these rules.
+  </p>
+
+  <h2 id="changes">Changes</h2>
+  <p>
+    If we change what you accept, we will ask you to accept the new version
+    before you post again.
+  </p>
+
+  <h2 id="law">Law and contact</h2>
+  <p>{governingLaw}</p>
+  <p>Questions about these terms? <a href="/contact">Contact us</a>.</p>
+
+  <div class="actions">
+    <a class="button secondary" href="/privacy">Read the privacy policy</a>
+    <a class="button secondary" href="/contact">Contact us</a>
+  </div>
+</LegalPage>
