@@ -4,23 +4,24 @@
     {
       "id": "ai:ephesians",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Ephesians looks at God’s purpose on the widest scale: to bring everything together under Christ. The first three chapters praise God for choosing, forgiving and raising believers with Christ, by grace and through faith, and for making Jews and non-Jews into one new people.\n\nThe last three chapters describe a life that fits this calling: unity, truthful speech, forgiveness, relationships in the household, and standing firm in what the letter pictures as the armor of God."
+          "text": "A man in chains asks his friends to pray for him. He calls himself “an ambassador in chains”, and he wants the courage to speak as he ought. That small request near the end of Ephesians tells you what kind of letter this is. It comes from someone who sees a purpose so wide that a prison cannot shrink it.\n\nThat purpose is to bring everything together under Christ. The first three chapters praise God for choosing, forgiving and raising believers with Christ, by grace and through faith. They also tell of two peoples who were kept apart, Jews and non-Jews, and of Christ, who “broke down the middle wall of separation” and made them one new people.\n\nThe last three chapters ask what a life fitting that calling looks like. The answer is unity, truthful speech, forgiveness and right dealing in the household. The letter ends with a picture of standing firm in what it calls the armor of God."
         },
         {
           "kind": "background",
-          "text": "The letter presents itself as written by Paul from prison. The words in Ephesus are missing from some of the earliest copies, so it may have been a circular letter for several churches. Some scholars think a follower of Paul wrote it in his name."
+          "text": "The letter presents itself as written by Paul from prison, and its closing lines do speak of chains. The words that name Ephesus are missing from some of the earliest copies, so it may have been a circular letter meant for several churches rather than for one. Some scholars think a follower of Paul wrote it in his name."
         },
         {
           "kind": "interpretations",
-          "text": "The instructions to wives and husbands, children and parents, slaves and masters (5:21 to 6:9) are read in different ways. Some see a lasting pattern for marriage; others stress the opening call to submit to one another and see the passage pointing toward mutuality. The words to slaves were misused to defend slavery, a reading churches now reject."
+          "text": "The household instructions to wives and husbands, children and parents, slaves and masters (5:21 to 6:9) are read in different ways. Some Christians see in them a lasting pattern for marriage. Others point to the opening call to submit to one another and see the passage reaching toward mutuality. The words to slaves were misused to defend slavery, and churches now reject that reading. The letter itself says of masters and servants alike that “there is no partiality with him”, speaking of the Lord in heaven. Readers on every side are asking what that same page requires of them."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

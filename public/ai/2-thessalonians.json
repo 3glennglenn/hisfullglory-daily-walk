@@ -4,23 +4,24 @@
     {
       "id": "ai:2-thessalonians",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "2 Thessalonians follows up the first letter. The church is still suffering, and some have been shaken by a claim that the day of the Lord has already come. Paul says that certain things must happen first, including the appearing of a figure he calls the man of lawlessness.\n\nHe also addresses members who have stopped working and live off others, telling them to earn their own bread."
+          "text": "The church in Thessalonica is still suffering, and now a rumor has made things worse. A message, even a letter said to be from Paul, is claiming that “the day of Christ has already come.” Paul begs them “not to be quickly shaken in your mind or troubled”.\n\nHe says certain things must happen first. A rebellion must come, and a figure he calls the man of sin, also called the lawless one, must be revealed. Paul reminds them that he told them these things in person.\n\nHe then turns to a plainer problem. Some members have stopped working and live off others. Paul points to his own example of working night and day, and recalls the rule he gave them: “If anyone is not willing to work, don’t let him eat.” They are to work quietly and eat their own bread."
         },
         {
           "kind": "background",
-          "text": "The letter presents itself as written by Paul with Silvanus and Timothy, soon after 1 Thessalonians. Some scholars think it was written later in Paul’s name, pointing to differences in tone."
+          "text": "The letter presents itself as written by Paul with Silvanus and Timothy, soon after 1 Thessalonians. Some scholars think it was written later in Paul's name, pointing to differences in tone between the two letters."
         },
         {
           "kind": "interpretations",
-          "text": "Who or what the man of lawlessness is, and what holds him back, has been explained in many ways: a Roman emperor, a future individual, or a recurring pattern of opposition to God. Paul refers to teaching he gave in person, which we do not have, so caution is wise."
+          "text": "Who or what the man of sin is, and what holds him back, has been explained in many ways: a Roman emperor, a future individual, or a recurring pattern of opposition to God. Paul himself points to teaching he gave in person, saying, “when I was still with you, I told you these things”. We do not have that teaching, so caution is wise, and readers who disagree here often agree about what the letter asks of the church: to stand firm and keep working."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

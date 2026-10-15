@@ -1,0 +1,96 @@
+# Runs the app's and the site's checks on every pull request to main and on every push to main.
+# It only reports: it blocks no push, deploys nothing and uses no secrets. Vercel builds and
+# deploys main on its own, whatever these checks say. Do not make them "required" in a branch
+# rule for main: the daily AI routine pushes straight to main and would then be refused.
+name: Checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # A new push to a pull request cancels that pull request's older run.
+  # Every push to main gets a run of its own (run_id is unique), so none is cancelled.
+  group: checks-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    # Explicit bash turns on pipefail, so `| tee` keeps a failing command's exit code.
+    shell: bash
+
+jobs:
+  # A fixed Ubuntu version, so a change of runner image (ubuntu-latest moves to Ubuntu 26 from
+  # 2026-10-19) cannot turn the checks red by itself. Move it on deliberately, in a pull request.
+  app:
+    name: App
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install
+        run: npm ci 2>&1 | tee install.log
+      - name: Unit and database tests
+        run: npm test 2>&1 | tee test.log
+      - name: Security check
+        run: npm run security 2>&1 | tee security.log
+      - name: Build
+        run: npm run build 2>&1 | tee build.log
+      - name: Install Chromium for the browser check
+        run: npx playwright install --with-deps chromium
+      - name: Browser check against the built app
+        env:
+          PREVIEW_URL: http://127.0.0.1:4173
+        run: |
+          npm run preview -- --port 4173 --strictPort > preview.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl -sf "$PREVIEW_URL/" > /dev/null && break
+            sleep 1
+          done
+          if ! curl -sf "$PREVIEW_URL/" > /dev/null; then
+            { echo "Preview server did not start"; cat preview.log; } | tee browser.log
+            exit 1
+          fi
+          npm run test:browser 2>&1 | tee browser.log
+      - name: Show why it failed
+        if: failure()
+        run: |
+          node scripts/ci-failure-note.mjs install.log test.log security.log build.log browser.log
+          echo "--- preview server log"
+          cat preview.log 2>/dev/null || true
+
+  site:
+    # Built the way Vercel builds hisfullglory.com: only the site's own packages are installed.
+    name: Site
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Install
+        run: npm ci 2>&1 | tee install.log
+      - name: Build
+        run: npm run build 2>&1 | tee build.log
+      - name: Tests on the built pages
+        run: npm test 2>&1 | tee test.log
+      - name: Show why it failed
+        if: failure()
+        run: node ../scripts/ci-failure-note.mjs install.log build.log test.log

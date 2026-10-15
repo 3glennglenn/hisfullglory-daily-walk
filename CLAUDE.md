@@ -57,6 +57,11 @@ This file adds the current state and how to work with the founder. Last updated 
 
 - Supabase project `fccwqguqhnbayuowmamy`: migrations 001 to 006 applied; their stored SQL
   matches `supabase/migrations/` in this repo. RLS is on for every public table.
+- The project also has a function `public.rls_auto_enable()` and an event trigger
+  `ensure_rls` that no migration creates (checked 2026-10-14): they predate migration 001
+  and are Supabase's "Auto-enable RLS for new tables" example, which switches RLS on for
+  every new table in `public`. Keep them. Migration 009 (applied 2026-10-14) takes away
+  the API's EXECUTE grant on the function, nothing else; see the comment in that file.
 - `app.hisfullglory.com` production is a Vercel build of `main`. The app's code is that of
   ee01209, the merge of pull request #2 (study library, launch topics, AI explanations, shop prices and the
   `site/` folder). Vercel built and assigned it by itself when the founder merged.
@@ -88,6 +93,24 @@ This file adds the current state and how to work with the founder. Last updated 
 - After an instant rollback, new production builds are not assigned to the domain until one
   is promoted. The promotion on 2026-10-12 ended that: the next build of `main` was
   assigned automatically.
+- Plan and build limits (written 2026-10-16, from the founder's decision of 2026-10-15):
+  - Both Vercel projects stay on the free Hobby plan until the store launch, around
+    mid-November 2026. Then the founder upgrades the team of both projects to Pro, $20 a
+    month for one seat, himself; Claude gives him the exact clicks at that moment and does
+    not change a plan or spend money. He accepts the fair-use risk until then: Hobby is for
+    personal, non-commercial use, and the site links to the shop.
+  - Hobby allows 100 deployments a day, and one push to a branch that deploys builds both
+    projects (2 deployments). So `vercel.json` and `site/vercel.json` carry the same
+    `git.deploymentEnabled` rules: branches named `docs-*`, `planning-*`, `scratch-*`,
+    `wip-*`, `ci` or `ci-*` get no Vercel deployment. Every other branch gets a preview.
+    Name a branch that needs no preview with one of those prefixes. `tests/vercel-config.test.ts`
+    keeps the two files equal and fails if a rule could match `main`.
+  - Every merge or push to `main` still builds both projects, whatever it changes, and the
+    daily routine's pushes cannot be made free. Batch pushes and merges. A branch cut
+    before these rules reached `main` keeps deploying until it merges `main`.
+  - A red Vercel status "Deployment rate limited" on a branch means the daily quota was
+    used up, not that the code is broken. The GitHub checks are separate and still run.
+  - An Ignored Build Step does not save quota: cancelled builds count as deployments.
 
 ## Branches
 
@@ -108,6 +131,25 @@ This file adds the current state and how to work with the founder. Last updated 
 - `bible-speaker-labels` (2026-10-14): shows those labels apart from the text, above or
   inside the verse, in the Reader and on the site, as the founder decided. Waits for his
   merge.
+
+## Checks on GitHub (since 2026-10-14)
+
+- `.github/workflows/checks.yml` runs on every pull request to `main` and every push to
+  `main`, on GitHub's free hosted runners, with no secrets. Job **App**: `npm ci`,
+  `npm test`, `npm run security`, `npm run build`, then `npm run test:browser` against
+  `npm run preview` with Playwright's Chromium. Job **Site**: `npm ci`, `npm run build` and
+  `npm test` in `site/`, with only the site's own packages installed, as on Vercel.
+- The checks only report. Vercel deploys `main` whatever they say, and the daily routine's
+  pushes are not held up. Do not make the checks required for `main` (branch rule or
+  ruleset): the routine pushes straight to `main` and would then be refused.
+- A routine push that fails a check is live already. The commit gets a red cross on `main`
+  and in the Actions tab. Fix it, or revert it, through a pull request; the routine's next
+  push gets a run of its own.
+- GitHub shows full logs only to signed-in users. A failed step therefore puts its first
+  error and last lines in an annotation (`scripts/ci-failure-note.mjs`), shown on the pull
+  request and readable without signing in through
+  `https://api.github.com/repos/3glennglenn/hisfullglory-daily-walk/check-runs/<job id>/annotations`
+  (anonymous API calls are limited to 60 an hour).
 
 ## Study notes
 

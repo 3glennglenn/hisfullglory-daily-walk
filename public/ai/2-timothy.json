@@ -4,23 +4,24 @@
     {
       "id": "ai:2-timothy",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "2 Timothy reads as Paul’s last words. He is in prison, expects to die, and writes to Timothy as to a son. He urges him not to be ashamed, to endure hardship, to keep to what he has learned, and to pass it on to people who can teach others.\n\nNear the end Paul looks back: he has fought the good fight and finished the race. He asks Timothy to come soon, and to bring his coat and his books."
+          "text": "At the end of his life Paul is thinking about a coat. “Bring the cloak that I left at Troas”, he writes to Timothy, “and the books, especially the parchments.” It is a very human request from a man in prison who expects to die.\n\nThe whole of 2 Timothy reads as Paul's last words, written to Timothy as to a son. He urges him not to be ashamed, to endure hardship, to keep to what he has learned, and to pass it on to people who can teach others.\n\nNear the end Paul looks back over his life. “I have fought the good fight. I have finished the course.” He is not afraid of what is coming. He asks for his friends, and he asks Timothy to hurry: “Be diligent to come to me soon”."
         },
         {
           "kind": "background",
-          "text": "The letter presents itself as written from prison in Rome, shortly before Paul’s death, which tradition places in the mid 60s under Nero. The questions about authorship are the same as for 1 Timothy."
+          "text": "The letter presents itself as written from prison in Rome, shortly before Paul's death, which tradition places in the mid 60s under Nero. The questions about authorship are the same as for 1 Timothy: many scholars think a follower wrote it later in his name, and others defend Paul as author."
         },
         {
           "kind": "interpretations",
-          "text": "The statement that all Scripture is God-breathed and useful for teaching (3:16) is central to how Christians understand the Bible. When it was written it referred first to the Scriptures Timothy knew from childhood, the Old Testament. Churches differ on how to describe the Bible’s inspiration and authority while agreeing on this starting point."
+          "text": "The statement that all Scripture is God-breathed and useful for teaching (3:16) is central to how Christians understand the Bible. When it was written it referred first to the Scriptures Timothy knew from childhood, the Old Testament. Churches differ on how to describe the Bible's inspiration and authority while agreeing on this starting point. The quiet request for a cloak and books reminds readers that these words were first a letter to a friend."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

@@ -1,4 +1,14 @@
 {
+  "git": {
+    "deploymentEnabled": {
+      "docs-*": false,
+      "planning-*": false,
+      "scratch-*": false,
+      "wip-*": false,
+      "ci": false,
+      "ci-*": false
+    }
+  },
   "trailingSlash": false,
   "headers": [
     {

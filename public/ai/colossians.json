@@ -4,13 +4,13 @@
     {
       "id": "ai:colossians",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Colossians was written to a church unsettled by teaching that added rules, special days and spiritual experiences to faith in Christ. Paul answers by setting out who Christ is: the image of the invisible God, the one through whom all things were made and in whom all the fullness of God lives.\n\nBecause believers have died and been raised with Christ, they need no such additions. The letter goes on to describe the new life, with compassion, forgiveness and love, in the church and in the home."
+          "text": "In the greetings at the end of Colossians one name stands out: Epaphras, one of their own, who is “always striving for you in his prayers”. He cares for this church, and Paul writes because that church is unsettled. Teachers there are adding rules, special days and spiritual experiences to faith in Christ.\n\nPaul does not answer with a counter-list. He answers with a portrait. Christ is “the image of the invisible God,” the one through whom all things were made, and in him “all the fullness of the Deity dwells bodily”. Nothing needs adding to that.\n\nBecause believers have died and been raised with Christ, they need no such additions. From there the letter turns to the new life: compassion, forgiveness and love, in the church and in the home."
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "The poem about Christ in 1:15 to 20 has been central to Christian teaching about him. Exactly what the rival teaching was remains uncertain, since we hear only Paul’s side. The household instructions raise the same questions as those in Ephesians."
+          "text": "The poem about Christ in 1:15 to 20 has been central to Christian teaching about him, and many have turned to it when they ask who Christ is. Exactly what the rival teaching was remains uncertain, since we hear only Paul's side of the argument and never the voice of the teachers themselves. The household instructions raise the same questions as those in Ephesians, and are read in the same different ways."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

@@ -4,13 +4,13 @@
     {
       "id": "ai:1-timothy",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "1 Timothy gives guidance to Timothy, whom Paul has left in charge of the church at Ephesus. He is to oppose teachers who trade in speculation, and to see that the church’s life is in order: prayer for all people, the character required of overseers and deacons, care for widows, respect for elders.\n\nThe letter warns against the love of money and urges Timothy to pursue a godly life and guard what has been entrusted to him."
+          "text": "Paul is leaving, and he wants someone to stay behind. He tells Timothy to “stay at Ephesus”, because certain teachers are trading in myths and speculation, and the church needs someone to oppose them. 1 Timothy is guidance for a younger leader whom Paul has left in charge.\n\nMuch of the letter is about the church's ordinary life. There is prayer for all people, the character required of overseers and deacons, care for widows, and respect for elders. The letter keeps coming back to character, and to a goodness that is lived out rather than argued about.\n\nIt also warns about money: “the love of money is a root of all kinds of evil.” Timothy is urged to pursue a godly life and to guard what has been entrusted to him. “Fight the good fight of faith.”"
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "The instruction about women teaching (2:11 to 15) is among the most debated passages in the New Testament. Some churches take it as a lasting rule for church leadership; others read it as addressing a particular problem in Ephesus, and point to women who worked alongside Paul. The lists of qualities for leaders are widely used and stress character over ability."
+          "text": "The instruction about women teaching (2:11 to 15) is among the most debated passages in the New Testament. Some churches take it as a lasting rule for church leadership; others read it as addressing a particular problem in Ephesus, and point to women who worked alongside Paul. The lists of qualities for leaders are widely used and stress character over ability. Christians who read these pages differently agree that Timothy was given something real to guard."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

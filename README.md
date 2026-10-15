@@ -17,6 +17,8 @@ npm run preview
 npm run test:browser
 ```
 
+GitHub Actions runs these checks, plus the site's build and tests, on every pull request to `main` and every push to `main` (`.github/workflows/checks.yml`). They report only; they do not block a push or a deployment.
+
 For an existing Edge installation, set `BROWSER_CHANNEL=msedge` before the browser script (PowerShell: `$env:BROWSER_CHANNEL="msedge"`). The script captures no screenshots and makes no donations.
 
 `npm test` runs pure state/privacy/Bible tests and PGlite PostgreSQL privilege/policy checks with simulated JWT claims; no hosted database is contacted. Build includes strict TypeScript and the production service worker. `dist/` is generated, ignored output. No lint script is configured. See [final independent release QA](docs/FINAL_RELEASE_QA.md), [historical Circles implementation QA](docs/CIRCLES_QA.md) and [historical expansion QA](docs/EXPANSION_QA.md); [previous QA](docs/QA_REPORT.md) is a historical record.
