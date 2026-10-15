@@ -1,5 +1,11 @@
 # Changelog
 
+## Checks on GitHub (2026-10-14)
+- Add `.github/workflows/checks.yml`: on every pull request to `main` and every push to `main`, run the app's `npm test`, `npm run security`, `npm run build` and the browser check against `npm run preview`, and build and test the site. Free GitHub-hosted runners, no secrets; the checks report and never block a push or a Vercel deployment.
+- Nothing ran the browser check automatically, which is how it could fail from pull request #2 until pull request #10 without anyone seeing it.
+- Make two browser checks wait until the page has settled. On GitHub's runners they failed most of the time (the offline check counted a late `/ai/luke.json` fetch; the Circles sign-in helper let a click land between two loads), on a laptop rarely. What they assert is unchanged.
+- A failed check puts its first error and the end of its output in an annotation (`scripts/ci-failure-note.mjs`), because GitHub shows full logs only to signed-in users.
+
 ## Supabase advisor: `rls_auto_enable()` no longer callable over the API (branch `lock-rls-auto-enable`, 2026-10-14)
 - The security advisor (lints 0028 and 0029) listed `public.rls_auto_enable()` as a SECURITY DEFINER function that guests and signed-in users can call at `/rest/v1/rpc/rls_auto_enable`. No migration creates it: it and its event trigger `ensure_rls` have been in the hosted project since before migration 001, and its body is the "Auto-enable RLS for new tables" example from Supabase's Row Level Security guide. It switches RLS on for every new table in `public`.
 - A direct call does nothing but return an error ("trigger functions can only be called as triggers"), and the function can only switch RLS on. The risk was therefore small; no API caller needs it, so the grant goes.

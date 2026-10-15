@@ -114,6 +114,25 @@ This file adds the current state and how to work with the founder. Last updated 
   inside the verse, in the Reader and on the site, as the founder decided. Waits for his
   merge.
 
+## Checks on GitHub (since 2026-10-14)
+
+- `.github/workflows/checks.yml` runs on every pull request to `main` and every push to
+  `main`, on GitHub's free hosted runners, with no secrets. Job **App**: `npm ci`,
+  `npm test`, `npm run security`, `npm run build`, then `npm run test:browser` against
+  `npm run preview` with Playwright's Chromium. Job **Site**: `npm ci`, `npm run build` and
+  `npm test` in `site/`, with only the site's own packages installed, as on Vercel.
+- The checks only report. Vercel deploys `main` whatever they say, and the daily routine's
+  pushes are not held up. Do not make the checks required for `main` (branch rule or
+  ruleset): the routine pushes straight to `main` and would then be refused.
+- A routine push that fails a check is live already. The commit gets a red cross on `main`
+  and in the Actions tab. Fix it, or revert it, through a pull request; the routine's next
+  push gets a run of its own.
+- GitHub shows full logs only to signed-in users. A failed step therefore puts its first
+  error and last lines in an annotation (`scripts/ci-failure-note.mjs`), shown on the pull
+  request and readable without signing in through
+  `https://api.github.com/repos/3glennglenn/hisfullglory-daily-walk/check-runs/<job id>/annotations`
+  (anonymous API calls are limited to 60 an hour).
+
 ## Study notes
 
 See `docs/STUDY_NOTES.md`. Notes live in `public/study/<book>.json`, are validated by

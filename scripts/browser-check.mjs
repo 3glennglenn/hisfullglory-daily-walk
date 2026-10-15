@@ -560,6 +560,9 @@ try {
       await page.waitForFunction(
         () => navigator.serviceWorker.controller !== null,
       );
+      // Let the reloaded page finish its own fetches (such as /ai/luke.json) first, or going
+      // offline makes them fail and they count as failures of this check.
+      await page.waitForLoadState("networkidle");
       await context.setOffline(true);
       // AI explanations stay out of the installed cache by design (vite.config.ts,
       // docs/AI_EXPLANATIONS.md), so only that fetch may fail while Scripture still loads.
