@@ -4,23 +4,24 @@
     {
       "id": "ai:philippians",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Philippians is a warm letter of thanks and encouragement, written from prison. Paul thanks the church for a gift, reports that his imprisonment has helped spread the good news, and urges them to stand together.\n\nAt its heart is a poem about Christ, who humbled himself to death on a cross and was raised to the highest place (2:5 to 11). Paul counts everything else as loss compared with knowing Christ. Joy runs through the whole letter."
+          "text": "Paul is in prison, and the first thing he writes is thanks. He thanks the Philippians for a gift, and he tells them every memory of them brings him joy. Then he reports on his own situation, and it is surprising. His chains have not stopped the good news but helped to spread it, and he is unafraid of what comes, because “to live is Christ, and to die is gain.”\n\nHe asks the church to stand together, and he is specific: two women, Euodia and Syntyche, are asked to think the same way in the Lord.\n\nAt the heart of the letter is a poem about Christ, who “emptied himself,” humbled himself to death on a cross, and was raised to the highest place, so that “every tongue should confess that Jesus Christ is Lord” (2:5 to 11). Paul counts everything else as loss compared with knowing Christ. Joy runs through the whole letter."
         },
         {
           "kind": "background",
-          "text": "Philippi was a Roman colony in Macedonia, and its church was the first Paul founded in Europe (Acts 16). Where Paul was imprisoned when he wrote is debated: Rome, Ephesus and Caesarea are the main proposals."
+          "text": "Philippi was a Roman colony in Macedonia, and its church was the first Paul founded in Europe, a story told in Acts 16. The letter shows a warm bond between Paul and these believers. Where Paul was imprisoned when he wrote is debated: Rome, Ephesus and Caesarea are the main proposals, and the letter does not settle the question."
         },
         {
           "kind": "interpretations",
-          "text": "The poem in chapter 2 is one of the earliest statements of who Christians believe Jesus to be, and much has been written on what it means that he emptied himself. The line about being able to do all things through Christ (4:13) is often quoted about achievement. In its setting it is about being content in hunger and in plenty."
+          "text": "The poem in chapter 2 is one of the earliest statements of who Christians believe Jesus to be, and much has been written on what it means that he emptied himself. The line about being able to do all things through Christ (4:13) is often quoted about achievement. In its setting it comes from a man who says he has learned to be content in hunger and in plenty alike, and the verse is about that contentment."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

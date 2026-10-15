@@ -4,13 +4,13 @@
     {
       "id": "ai:1-thessalonians",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "1 Thessalonians is written to a young church that Paul had to leave in a hurry. He gives thanks for their faith under pressure, recalls his time with them, and is relieved by Timothy’s good report.\n\nHe encourages them to live holy lives and to keep working quietly. He comforts them about believers who have died: when the Lord returns, the dead in Christ will rise, and all will be with him. No one knows when that day will come, so they are to stay awake and sober."
+          "text": "Paul compares himself to a mother. When he first came to Thessalonica, he says, “we were gentle among you, like a nursing mother cherishes her own children.” It is a tender picture from a man who had to leave this young church in a hurry, and who writes to them now with feeling.\n\nHe gives thanks for their faith under pressure and recalls his time with them. When Timothy brings a good report, Paul is relieved. He encourages them to live holy lives and to keep working quietly.\n\nThen he turns to a grief the church is carrying: some believers have died. Paul writes so that they will not grieve like people with no hope. When the Lord returns, “The dead in Christ will rise first,” and all will be with him forever. No one knows when that day will come, so they are told, “let’s watch and be sober.”"
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "The passage about being caught up to meet the Lord (4:17) is the main basis for the teaching called the rapture. Some Christians expect believers to be taken before a period of great trouble. Many others read it as part of the single return of Christ, with believers going out to welcome him."
+          "text": "The passage about being caught up to meet the Lord (4:17) is the main basis for the teaching called the rapture. Some Christians expect believers to be taken before a period of great trouble. Many others read it as part of the single return of Christ, with believers going out to welcome him. Both sides take the passage seriously, and both start from the same comfort the letter offers: that those who have died are not lost."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
