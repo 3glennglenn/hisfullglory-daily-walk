@@ -22,6 +22,8 @@
   --strong: #854b38;
   --on-strong: #fff;
   --success: #456448;
+  --danger: #9b2c24;
+  --on-danger: #ffffff;
   --shadow-soft: #25191408;
   --shadow: #25191430;
   --overlay: #25191460;
@@ -42,6 +44,8 @@
   --strong: #e0a38a;
   --on-strong: #251914;
   --success: #99c49b;
+  --danger: #f2a59b;
+  --on-danger: #251914;
   --shadow-soft: #00000020;
   --shadow: #00000060;
   --overlay: #000000a0;
@@ -103,7 +107,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid var(--secondary);
+  outline: 3px solid var(--strong);
   outline-offset: 3px;
 }
 main:focus {
@@ -291,7 +295,7 @@ select {
   width: 100%;
   color: var(--ink);
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--muted);
   border-radius: 10px;
   padding: 11px 12px;
   min-height: 44px;
@@ -929,7 +933,7 @@ textarea {
   min-width: 0;
   background: var(--paper);
   color: var(--ink);
-  border: 1px solid var(--border);
+  border: 1px solid var(--muted);
   border-radius: 10px;
   padding: 11px;
   min-height: 44px;
@@ -1220,4 +1224,19 @@ small {
 }
 .listen small {
   color: var(--muted);
+}
+/* Destructive actions (UI-SPEC Color, reserved uses): the final "Delete my account
+   permanently" button, the "Delete my account" trigger, and inline error text. Nothing else. */
+button.danger {
+  background: var(--danger);
+  color: var(--on-danger);
+  border-color: var(--danger);
+}
+.secondary.danger {
+  background: var(--paper);
+  color: var(--danger);
+  border-color: var(--danger);
+}
+.danger-text {
+  color: var(--danger);
 }
