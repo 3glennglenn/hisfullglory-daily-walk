@@ -84,6 +84,8 @@ revoke all on function public.community_safety_action(text,uuid,text,text,text) 
 grant execute on function public.community_safety_action(text,uuid,text,text,text) to authenticated;
 
 -- Operator only: the database owner runs it from the SQL editor, like review_support_request.
+-- A support request is only reviewable here while it is approved or fundraising: one that is
+-- still waiting for its first approval is also pending_review, and is decided by review_support_request.
 -- decision restore: visible again. keep_hidden: stays hidden. remove: gone for good.
 -- Every decision resolves this item's open and reviewing reports in the same transaction.
 create or replace function public.review_held_content(item_kind text,item_id uuid,decision text,review_note text) returns void language plpgsql security definer set search_path='' as $$
@@ -98,7 +100,7 @@ begin
   update public.community_posts set moderation_state=wanted,updated_at=clock_timestamp() where id=item_id and deleted_at is null and moderation_state in('pending_review','hidden');
   if not found then raise exception 'Held item not found';end if;
  elsif item_kind='support' then
-  update public.support_requests set moderation_state=wanted,updated_at=clock_timestamp() where id=item_id and deleted_at is null and moderation_state='pending_review';
+  update public.support_requests set moderation_state=wanted,updated_at=clock_timestamp() where id=item_id and deleted_at is null and moderation_state='pending_review' and status in('approved','fundraising');
   if not found then raise exception 'Held item not found';end if;
  elsif item_kind='chat' then
   update public.chat_messages set is_hidden=(decision<>'restore'),deleted_at=case when decision='remove' then clock_timestamp() else deleted_at end where id=item_id and deleted_at is null and is_hidden;

@@ -215,6 +215,9 @@ ok((await rows("select pg_get_function_identity_arguments('public.community_safe
 await denied(() => review("post", held, "approve"), "an unknown decision is refused", ["P0001"], "Valid decision required");
 await denied(() => review("walk_reflection", held, "restore"), "an unknown item kind is refused", ["P0001"], "Valid item required");
 await denied(() => review("post", solo, "restore"), "an item that is not held cannot be reviewed", ["P0001"], "Held item not found");
+const waiting = await addSupport();
+await db.query("update public.support_requests set status='under_review',moderation_state='pending_review' where id=$1", [waiting]);
+await denied(() => review("support", waiting, "restore"), "a support request still waiting for its first approval is not released through review_held_content", ["P0001"], "Held item not found");
 
 await review("post", held, "restore", "Checked, nothing wrong");
 ok(await postState(held) === "visible", "restore makes the post visible again");
@@ -264,6 +267,21 @@ const orphan = await addPost();
 await hold("post", orphan, leaver, reporterC);
 await db.query("delete from auth.users where id=$1", [leaver]);
 ok(await postState(orphan) === "pending_review" && (await reportStatuses("post", orphan)).length === 1, "deleting one reporter's account leaves the item held");
+
+// The runbook's own SQL must run: take the queries from docs/MODERATION.md and execute them.
+const runbook = readFileSync("docs/MODERATION.md", "utf8");
+const heldSection = runbook.slice(runbook.indexOf("## Held for review"), runbook.indexOf("## Contributions and original community"));
+const sqlBlocks = [...heldSection.matchAll(/```sql\r?\n([\s\S]*?)```/g)].map(m => m[1]);
+const statementsOf = (block) => block.replaceAll("ITEM_UUID", orphan).split(/;[ \t]*(?:\r?\n|$)/).map(x => x.replace(/^\s*--.*$/gm, "").trim()).filter(Boolean);
+ok(sqlBlocks.length === 3, "the Held for review runbook has a count query, a read query and the three decisions");
+const countRows = await rows(sqlBlocks[0].trim().replace(/;$/, ""));
+ok(JSON.stringify(Object.keys(countRows[0])) === JSON.stringify(["kind", "held"]) && countRows.map(r => r.kind).join() === "post,chat,prayer,support" && Number(countRows[0].held) >= 1, "the runbook's count-only check returns four numbers and no content");
+for (const statement of statementsOf(sqlBlocks[1])) await rows(statement);
+ok(true, "the runbook's queries for one item and its reports run");
+const decisions = statementsOf(sqlBlocks[2]);
+ok(decisions.length === 3 && decisions.every(d => d.startsWith("select public.review_held_content(")), "the runbook shows restore, keep_hidden and remove");
+await rows(decisions[0]);
+ok(await postState(orphan) === "visible", "the runbook's restore line works on a held post");
 
 // Concurrency cannot be exercised on one PGlite connection; at least prove the lock comes before the count.
 const triggerSource = (await rows("select prosrc from pg_proc where proname='hold_if_reported_twice'"))[0].prosrc;

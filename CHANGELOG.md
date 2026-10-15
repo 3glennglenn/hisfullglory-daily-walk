@@ -1,5 +1,12 @@
 # Changelog
 
+## Held for review: branch `report-hold`, written and tested locally, not applied to the hosted project (2026-10-16)
+- Add `supabase/migrations/013_report_hold.sql` (GATE-06): an item that two different people other than its author have reported is hidden from every reader until a person has reviewed it. It covers community posts (Circle posts too), chat messages, prayer requests and support requests. The author's own report and a repeat report from the same person do not count.
+- Add `public.review_held_content(item_kind, item_id, decision, review_note)` for the database owner only (not granted to `anon` or `authenticated`): `restore`, `keep_hidden` or `remove`, resolving the item's open reports in the same transaction so the next single report does not hold a restored item again.
+- `community_safety_action` keeps its signature and grants and refuses a 31st report from one account within an hour ("Report limit reached"). `community_reports.target_kind` also accepts `walk_reflection` for week 2.
+- Add `tests/report-hold-schema.test.mjs` (PGlite): every storage shape, Circle isolation, flood cap, operator review, a WHERE guard for every UPDATE and DELETE in a database function, and a reader-coverage guard so a future reader that forgets to hold back held content fails the suite. Two reports arriving at the same moment are covered by a per-item lock that PGlite cannot exercise.
+- Document the routine in `docs/MODERATION.md` ("Held for review"): count-only check, how to read an item and its reports, the three decisions, and the limits.
+
 ## Release foundation: branch `release-foundation`, waiting for the founder's merge (2026-10-16)
 - Skip Vercel builds for branches that need no preview: `git.deploymentEnabled` in `vercel.json` and `site/vercel.json` turns off `docs-*`, `planning-*`, `scratch-*`, `wip-*`, `ci` and `ci-*`. Every other branch still gets a preview and `main` always builds. A test push of a `scratch-*` branch created no Vercel status and no deployment.
 - Write down the fair-use answer in `CLAUDE.md` ("Vercel notes"): both projects stay on Hobby until the store launch around mid-November 2026, then the founder upgrades to Pro ($20 a month, one seat) himself.
