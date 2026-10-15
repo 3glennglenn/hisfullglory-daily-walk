@@ -1,5 +1,13 @@
 # Changelog
 
+## Release foundation: branch `release-foundation`, waiting for the founder's merge (2026-10-16)
+- Skip Vercel builds for branches that need no preview: `git.deploymentEnabled` in `vercel.json` and `site/vercel.json` turns off `docs-*`, `planning-*`, `scratch-*`, `wip-*`, `ci` and `ci-*`. Every other branch still gets a preview and `main` always builds. A test push of a `scratch-*` branch created no Vercel status and no deployment.
+- Write down the fair-use answer in `CLAUDE.md` ("Vercel notes"): both projects stay on Hobby until the store launch around mid-November 2026, then the founder upgrades to Pro ($20 a month, one seat) himself.
+- Add the shared tokens `--danger` and `--on-danger` (Light and Dark) with `button.danger`, `.secondary.danger` and `.danger-text`, reserved for deleting an account and inline errors.
+- Fix two contrast defects found by the audit: the keyboard focus ring is `var(--strong)` instead of `var(--secondary)` (2.89:1 on the Light background, now 6.06:1), in the app and on the site; the edges of input, textarea and select use `var(--muted)` instead of `var(--border)` (1.4 to 2.3:1, now 6.09:1 or more).
+- Add `tests/vercel-config.test.ts` (both rule sets equal, no rule can match `main`) and `tests/tokens-contrast.test.ts` (WCAG ratios computed from the token hex values: 4.5:1 for text pairs, 3:1 for the focus ring and control edges, Light and Dark).
+- Add `docs/UX_REVIEW.md`: the review every pull request that adds or changes a screen records (design critique, UX copy, accessibility).
+
 ## Checks on GitHub (2026-10-14)
 - Add `.github/workflows/checks.yml`: on every pull request to `main` and every push to `main`, run the app's `npm test`, `npm run security`, `npm run build` and the browser check against `npm run preview`, and build and test the site. Free GitHub-hosted runners, no secrets; the checks report and never block a push or a Vercel deployment.
 - Nothing ran the browser check automatically, which is how it could fail from pull request #2 until pull request #10 without anyone seeing it.
