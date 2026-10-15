@@ -24,6 +24,96 @@
       "voice": "story"
     },
     {
+      "id": "ai:romans/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A letter to a city Paul has never visited begins with who he is: a servant of Jesus Christ, called to be an apostle, set apart for the Good News of God. That news, he says, was promised in the holy Scriptures and concerns God's Son, declared Son of God by the resurrection. He writes to everyone in Rome who is beloved of God and “called to be saints”, and tells them he longs to see them. “For I am not ashamed of the Good News of Christ,” he writes, for it is the power of God for salvation for everyone who believes, the Jew first and also the Greek.\n\nThen the tone shifts. Paul describes a world that knew God yet did not honor him, trading his glory for images, and he says God gave such people up to what they chose. He lists the results, from lust to envy, murder, deceit and arrogance."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to Christians he has not yet met, probably from Greece, in a letter usually dated to the mid-50s. Acts 20:3 mentions his three months there. He lays out the Good News before he turns to the problem of sin. The long second half of the chapter is among the most debated in the letter. It includes verses 26 and 27 about same-sex relations, which Christians read in different ways, some taking them as describing sin in any form, others as speaking of particular practices tied to idolatry. Romans 2 turns the question around on the reader."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Just when the list of wrongs in the last chapter has you nodding along, Paul turns around. You who judge are without excuse, he says, because you do the same things. Do you think you will escape the judgment of God? God will repay each person according to their works: eternal life for those who seek good by perseverance, wrath for those who obey unrighteousness, the Jew first and also the Greek. For “there is no partiality with God.”\n\nHe speaks of Gentiles who do by nature what the law requires, and whose conscience bears witness. Then he addresses someone who bears the name of a Jew, rests on the law, and teaches others, and asks whether such a person keeps it. A person is a Jew inwardly, and “circumcision is that of the heart,” in the spirit, not in the letter, with praise not from people but from God."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes here as if arguing with someone in front of him, and many scholars think he has an imagined teacher in mind, whom he challenges by name only in verse 17. The target is hypocrisy, not the Jewish people, and Paul was himself a Jew. Christians differ on how judgment according to works in verses 6 to 10 fits with being justified by faith in Romans 3 and 4. Catholic, Orthodox and Protestant readers have each worked out that relationship in their own way."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul has just said that being a Jew is not about outward marks, and he knows what his readers will ask next. What advantage does the Jew have? “Much in every way!” They were entrusted with the revelations of God. If some were unfaithful, will that cancel God's faithfulness? “May it never be!” Then he brings out the hard conclusion: Jews and Greeks alike are under sin, and he strings together lines from the Scriptures, among them, there is no one righteous, no, not one.\n\nThe law cannot fix this, since through it comes the knowledge of sin. But now, apart from the law, a righteousness of God has been revealed, through faith in Jesus Christ, to all who believe. There is no distinction, “for all have sinned, and fall short of the glory of God”, and all are justified freely by his grace through the redemption in Christ Jesus. So boasting is shut out."
+        },
+        {
+          "kind": "background",
+          "text": "This is the center of the letter, where the problem laid out in Romans 1 and 2 meets its answer. The chain of quotations in verses 10 to 18 gathers lines from Psalms and Isaiah; see Psalm 14 and Isaiah 59. Scholars debate whether faith in Jesus Christ in verse 22 means trust placed in him or his own faithfulness. Christians also differ on how to understand atoning sacrifice and justification, and Catholic, Orthodox and Protestant traditions each explain them in their own terms."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul has told his readers that people are put right with God through faith, and he knows the question coming: what about Abraham, our forefather? Paul goes straight to the Scriptures. “Abraham believed God, and it was accounted to him for righteousness.” Wages are owed to a worker, he says, but to someone who does not work and trusts the one who justifies the ungodly, faith is counted as righteousness.\n\nWhen was this counted? Before Abraham was circumcised, not after. So he is the father of all who believe, whether circumcised or not. Then Paul returns to the story. Abraham was about a hundred years old, and Sarah's womb was dead, yet “Against hope, Abraham in hope believed,” giving glory to God and fully assured that God could do what he promised. That, Paul says, was written for us too, who believe in the one who raised Jesus from the dead."
+        },
+        {
+          "kind": "background",
+          "text": "Paul answers the question of whether Abraham's story agrees with what he has just argued. His texts are Genesis 15, where Abraham is counted righteous, and Psalm 32, where David speaks of forgiveness. Circumcision comes later in Genesis 17, which is Paul's point. Christians differ on how Romans 4 fits with James 2, which also speaks of Abraham, and many read the two as speaking to different problems. Romans 5 draws out what this faith brings."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-15",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Being justified by faith, Paul says, “we have peace with God through our Lord Jesus Christ”. They stand in grace and rejoice in hope, even in suffering, because suffering produces perseverance, then proven character, then hope, and hope does not disappoint, since God's love has been poured into their hearts. Hardly anyone would die for a righteous person, but “while we were yet sinners, Christ died for us.”\n\nThen he steps back to look at the whole human story. Sin entered the world through one man, and death through sin, and death reigned from Adam to Moses. But the free gift is not like the trespass. If by one man's trespass the many died, much more did grace abound through the one man Jesus Christ. He sets one act of disobedience beside one act of obedience, and ends: “where sin abounded, grace abounded more exceedingly”, so that grace might reign through righteousness to eternal life."
+        },
+        {
+          "kind": "background",
+          "text": "Paul moves from the argument about faith in chapters 3 and 4 to what faith brings: peace, hope and reconciliation. The Adam passage in verses 12 to 21 has been read in different ways. Western churches, following Augustine, have often spoken of inherited sin and guilt, Eastern Orthodox readers stress inherited death, and others stress that all share in sin. Christians also differ on whether the many and all in verses 18 and 19 mean everyone or those who receive the gift, as verse 17 puts it."
+        }
+      ]
+    },
+    {
       "id": "ai:romans/8",
       "chapter": 8,
       "model": "Claude Opus 5.5",
