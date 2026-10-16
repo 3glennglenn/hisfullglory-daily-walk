@@ -26,3 +26,12 @@ test("the app and the site read the support flag from the same file", () => {
   assert.match(config, /import \{[^}]*supportEmailReady[^}]*\} from "\.\.\/site\/src\/data\/legal\.ts"/);
   assert.equal(typeof supportEmailReady, "boolean");
 });
+
+test("the folder of legal.ts has a tsconfig of its own, so the app builds without the site's packages", () => {
+  // The app is installed without site/node_modules. Vite and esbuild read the nearest tsconfig.json of
+  // every .ts file, and site/tsconfig.json extends astro/tsconfigs/strict, which then cannot be found:
+  // the build failed on Vercel and would on a clean install (found on the first push of the trust branch).
+  const own = JSON.parse(readFileSync("site/src/data/tsconfig.json", "utf8"));
+  assert.equal(own.extends, undefined);
+  assert.equal(typeof own.compilerOptions, "object");
+});
