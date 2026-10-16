@@ -1,5 +1,8 @@
 import {build} from "esbuild";
 import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+// The version the app asks for is read from the app, so this fixture follows it when it changes.
+const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VERSION = "([^"]+)"/)[1];
 
 export async function checkAuthBoundary(browser,base) {
   const result=await build({entryPoints:["tests/fixtures/auth-boundary.tsx"],bundle:true,write:false,format:"iife",jsx:"automatic",define:{"process.env.NODE_ENV":'"production"'},plugins:[{
@@ -14,7 +17,7 @@ export async function checkAuthBoundary(browser,base) {
           initial(id){current=session(id);initialResolve({data:{session:current},error:null});},
           switch(id,event='SIGNED_IN'){current=session(id);listener(event,current);},
           termCount(){return terms.length;},
-          resolveTerm(index,accepted){terms[index]({data:accepted?{version:'2026-10-07'}:null,error:null});}
+          resolveTerm(index,accepted){terms[index]({data:accepted?{version:'${TERMS_VERSION}'}:null,error:null});}
         };
         export const supabase={
           auth:{getSession:()=>new Promise(resolve=>initialResolve=resolve),onAuthStateChange:callback=>{listener=callback;return {data:{subscription:{unsubscribe(){}}}}}},

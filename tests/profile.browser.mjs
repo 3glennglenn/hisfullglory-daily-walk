@@ -485,6 +485,70 @@ async function signInReflow(browser,base) {
   } finally {await context.close();}
 }
 
+// Terms acceptance (UI-SPEC 6c, E11): the label names the age, links the terms and privacy pages and shows the version.
+const termsBox=p=>p.getByRole("checkbox");
+const saveButton=p=>p.getByRole("button",{name:/^Save profile( and accept rules)?$|^Saving…$/});
+async function termsAcceptance(browser,base) {
+  const {context,page:p,problems}=await open(browser,base,{accepted:false});
+  try {
+    const label=p.locator("label.check");
+    const text=withoutHint(await words(label));
+    assert.equal(text,`I am [CONFIRM: minimum age, proposed 16] or older. I accept the Terms of use and the community rules, and I have read the Privacy policy. I understand that reports are reviewed by a person. Version ${TERMS_VERSION}.`);
+    assert.equal(await label.locator(".terms-version").evaluate(el=>getComputedStyle(el).display),"block","the version has its own line");
+    for(const [name,href] of [["Terms of use","https://hisfullglory.com/terms"],["Privacy policy","https://hisfullglory.com/privacy"]]) {
+      const a=label.getByRole("link",{name:name+" (opens in a new tab)",exact:true});
+      assert.equal(await a.getAttribute("href"),href,name);
+      assert.equal(await a.getAttribute("target"),"_blank");
+      assert.match(await a.getAttribute("rel"),/(^|\s)noopener(\s|$)/);
+      const box=await a.boundingBox();
+      assert.ok(box&&box.height>=44,name+" is at least 44px tall ("+box?.height+")");
+    }
+    // Empty: unticked, the person saves their name and accepts nothing.
+    assert.equal(await termsBox(p).isChecked(),false);
+    assert.equal(await saveButton(p).textContent(),"Save profile");
+    await saveButton(p).click();
+    await p.getByRole("status").filter({hasText:"Profile saved."}).waitFor();
+    assert.equal(await p.evaluate(()=>window.profileTest.acceptCalls.length),0,"nothing is accepted without the tick");
+    // Ticked: the button says what it does; loading shows the busy state and calls once.
+    await termsBox(p).check();
+    assert.equal(await saveButton(p).textContent(),"Save profile and accept rules");
+    await p.evaluate(()=>{window.profileTest.acceptMode="hang";});
+    await saveButton(p).click();
+    const saving=p.getByRole("button",{name:"Saving…",exact:true});
+    await saving.waitFor();
+    assert.equal(await saving.isDisabled(),true,"the save button is busy and cannot be pressed twice");
+    assert.deepEqual(await p.evaluate(()=>window.profileTest.acceptCalls),[{terms_version:TERMS_VERSION}],"the version the person saw is the version sent");
+    await p.evaluate(()=>window.profileTest.release(false));
+    await p.getByRole("status").filter({hasText:"Profile saved."}).waitFor();
+    // Error: said in plain words as an alert, and the tick stays for another try.
+    await p.evaluate(()=>{window.profileTest.acceptMode="reject";});
+    await saveButton(p).click();
+    const alert=p.getByRole("alert");
+    await alert.waitFor();
+    assert.equal(await words(alert),"Error: We could not save that. Check your connection and try again.");
+    assert.equal(await termsBox(p).isChecked(),true,"the tick is kept");
+    assert.equal(await saveButton(p).isEnabled(),true);
+    clean(problems);
+  } finally {await context.close();}
+
+  // Overflow and long text: 320px wide, text at 200%.
+  const narrow=await open(browser,base,{accepted:false,viewport:{width:320,height:568}});
+  try {
+    const q=narrow.page;
+    await q.evaluate(()=>{document.documentElement.style.fontSize="200%";});
+    const m=await q.evaluate(()=>{const l=document.querySelector("label.check"),r=l.getBoundingClientRect(),box=l.querySelector("input").getBoundingClientRect();return {page:document.documentElement.scrollWidth,view:window.innerWidth,height:r.height,right:r.right,scroll:l.scrollWidth-l.clientWidth,box:[box.width,box.height]};});
+    assert.ok(m.page<=m.view,"no sideways scroll ("+m.page+" > "+m.view+")");
+    assert.ok(m.right<=m.view&&m.scroll<=0,"the label wraps inside the screen");
+    assert.ok(m.height>=44,"the row is at least 44px tall ("+m.height+")");
+    assert.deepEqual(m.box,[22,22],"the checkbox keeps its 22px size beside the wrapped text");
+    for(const name of ["Terms of use","Privacy policy"]) {
+      const box=await q.locator("label.check").getByRole("link",{name:name+" (opens in a new tab)",exact:true}).boundingBox();
+      assert.ok(box&&box.height>=44&&box.x>=0&&box.x+box.width<=320,name+" stays tappable inside the screen");
+    }
+    clean(narrow.problems);
+  } finally {await narrow.context.close();}
+}
+
 export async function checkProfile(browser,base) {
   await deletionFlow(browser,base);
   await cardStates(browser,base);
@@ -496,5 +560,6 @@ export async function checkProfile(browser,base) {
   await signInCodeFlow(browser,base);
   await signInResend(browser,base);
   await signInReflow(browser,base);
+  await termsAcceptance(browser,base);
   await reflow(browser,base);
 }

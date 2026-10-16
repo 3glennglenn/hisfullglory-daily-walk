@@ -12,7 +12,10 @@ import { forgetAccount } from "./persistence";
 import { deletedWithAccount, isDeleteConfirmation } from "./deleteConfirm";
 import { navigate } from "./router";
 import { config } from "../config";
-import { CodeEntry, SignInNote, codeSendFailed, codeSentStatus } from "./CodeEntry";
+import { CodeEntry, SignInNote, SiteLink, codeSendFailed, codeSentStatus } from "./CodeEntry";
+// Marker text until the founder confirms the age; the production build refuses to ship it
+// (vite.config.ts), so the app never shows a placeholder to the public.
+import { minimumAge } from "../../site/src/data/legal.ts";
 import { postError } from "../social/blockedLanguage";
 export const TERMS_VERSION = "2026-10-07";
 const Auth = createContext<{
@@ -144,10 +147,7 @@ export function AuthPanel() {
         terms_version: TERMS_VERSION,
       });
       if (result.error) {
-        setStatus(
-          "Terms could not be accepted. Apply the platform migrations.",
-          true,
-        );
+        setStatus("We could not save that. Check your connection and try again.", true);
         setBusy(false);
         return;
       }
@@ -205,23 +205,26 @@ export function AuthPanel() {
             />
           </label>
           {!accepted && (
-            <label className="check">
+            <label className="check terms-accept">
               <input
                 type="checkbox"
                 checked={checked}
                 onChange={(e) => setChecked(e.target.checked)}
               />
-              I accept the community rules, version {TERMS_VERSION}: no
-              harassment, threats, hate, sexual content, scams, spam,
-              impersonation, illegal activity, dangerous advice or private
-              information. I understand reports are reviewed manually.
+              <span>
+                I am {minimumAge} or older. I accept the{" "}
+                <SiteLink path="/terms">Terms of use</SiteLink> and the community rules, and I have read the{" "}
+                <SiteLink path="/privacy">Privacy policy</SiteLink>.{" "}
+                I understand that reports are reviewed by a person.{" "}
+                <span className="terms-version">Version {TERMS_VERSION}.</span>
+              </span>
             </label>
           )}
           <button
             onClick={() => void save()}
             disabled={busy || name.trim().length < 2}
           >
-            Save profile{checked ? " and accept rules" : ""}
+            {busy ? "Saving…" : `Save profile${checked ? " and accept rules" : ""}`}
           </button>
           <button
             className="secondary"

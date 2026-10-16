@@ -1,5 +1,8 @@
 import {build} from "esbuild";
 import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+// The version the app asks for is read from the app, so this fixture follows it when it changes.
+const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VERSION = "([^"]+)"/)[1];
 // The report dialog (UI-SPEC Surface 4) against a controlled SDK: states, focus, roles, sizes.
 // Synthetic fixture data only; the server side (hold, limits) is tested in report-hold-schema.test.mjs.
 const NOTE="PRIVATE NOTE 7391 do not log";
@@ -35,7 +38,7 @@ export async function checkSafety(browser,base){
         }
         export const supabase={
           auth:{getSession:async()=>({data:{session:session()},error:null}),onAuthStateChange(fn){listeners.push(fn);return {data:{subscription:{unsubscribe(){listeners=listeners.filter(x=>x!==fn);}}}};}},
-          from(){const q={select(){return q},eq(){return q},maybeSingle:async()=>({data:{version:'2026-10-07'},error:null})};return q;},
+          from(){const q={select(){return q},eq(){return q},maybeSingle:async()=>({data:{version:'${TERMS_VERSION}'},error:null})};return q;},
           rpc:(name,args)=>rpc(name,args||{})
         };
       `}));

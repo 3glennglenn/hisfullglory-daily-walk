@@ -1365,3 +1365,16 @@ button.danger {
   padding: 12px 2px;
   margin: -12px -2px;
 }
+/* Terms acceptance (UI-SPEC Surface 6c): what a person must read to agree is Body size and ink, the
+   version sits on its own line, and the long label wraps beside the 22px checkbox in its 44px row. */
+.terms-accept {
+  color: var(--ink);
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+.terms-accept .terms-version {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
