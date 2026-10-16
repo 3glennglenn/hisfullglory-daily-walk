@@ -114,6 +114,42 @@
       ]
     },
     {
+      "id": "ai:romans/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A question hangs in the air, and grace itself seems to invite it. “Shall we continue in sin, that grace may abound?” Paul answers at once: “May it never be!”\n\nHis reason is baptism. Those baptized into Christ were baptized into his death, buried with him, so that as Christ was raised, they too might walk in newness of life. Christ dies no more, Paul says, and so believers are to count themselves dead to sin and alive to God. Sin must not reign in the body. They are to present themselves to God as instruments of righteousness.\n\nThen he turns to a picture from daily life. Everyone obeys someone. Once they were servants of sin, and the end of that road was death. Now they are servants of righteousness. The chapter closes on a line in two halves: “the wages of sin is death, but the free gift of God is eternal life in Christ Jesus our Lord.”"
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to the believers in Rome, a church he hopes to visit, and he answers a worry that his own argument raises: that free grace makes sin cheap. Many scholars date the letter to the middle of the 50s. He says he uses the picture of servants and masters “in human terms” because of his readers’ weakness, so slavery here is an image, not a teaching about it. Christians differ on how baptism relates to dying and rising with Christ, whether as a sign, a means of grace, or both. See Romans 5 and Romans 7."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul begins with a marriage. A wife is bound to her husband while he lives, and free when he dies. In the same way, he says, believers have died to the law through the body of Christ, so that they can belong to another and serve in the newness of the Spirit.\n\nThen comes the obvious worry. Is the law sin? “May it never be!” The law showed him what coveting was, and sin used the commandment to stir it up. The law itself is holy, righteous and good.\n\nThe chapter then turns into a confession spoken in the first person. The one speaking wants the good and does the very thing he hates. He delights in God’s law, yet sees another law at war within him. The cry breaks out: “What a wretched man I am!” and with it the answer: “I thank God through Jesus Christ, our Lord!”"
+        },
+        {
+          "kind": "background",
+          "text": "Paul is still writing to the church in Rome, and this chapter follows his argument about being freed from sin. The “I” of the second half is one of the most debated voices in the Bible. Many early readers and many modern scholars hear a person before faith, or Israel under the law, or Paul speaking as a representative figure. Others, especially in the Augustinian and Reformed traditions, hear a believer’s ongoing struggle. The chapter stays honest about the law’s limits without calling it bad. See Romans 6 and Romans 8."
+        }
+      ]
+    },
+    {
       "id": "ai:romans/8",
       "chapter": 8,
       "model": "Claude Opus 5.5",
@@ -161,6 +197,150 @@
               "text": "The Spirit himself beareth witness with our spirit"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul begins with an oath of sorrow. He tells the truth, he says, before Christ: “great sorrow and unceasing pain in my heart” for his own people. He could wish himself cut off for their sake. To them belong the adoption, the glory, the covenants, the law, the promises and, as far as human descent goes, the Messiah.\n\nThen he asks how God’s word can still stand. His answer runs through the old family stories: Isaac, not Ishmael, and Jacob, not Esau. Not every descendant is a child of the promise, and “the children of the promise are counted as heirs.” He speaks of God’s mercy, of Pharaoh, and of a potter and his clay, and he asks who can talk back to the Maker.\n\nThe chapter ends with Gentiles who found righteousness by faith, while Israel stumbled over “a stumbling stone and a rock of offense”."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to Rome, where Jewish and Gentile believers lived side by side. This chapter opens a three-chapter reflection on Israel that runs through Romans 11. Christians read its teaching on election differently. Many Calvinists see God choosing individuals before they are born. Many Arminians see God choosing on the basis of foreknown faith. Others read it as God choosing a people and a purpose rather than settling each person’s fate. The text itself is full of grief for Israel, and it has never been a warrant for contempt of Jews."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul speaks plainly about what he wants. “my heart’s desire and my prayer to God is for Israel, that they may be saved.” He grants that his people have zeal for God. His worry is that zeal without knowledge keeps them from the righteousness God gives.\n\nHe sets two ways of speaking side by side. Moses writes of a righteousness that comes by doing the law. The righteousness of faith says that no one needs to climb to heaven or descend to the deep, because the word is near, in the mouth and in the heart. To confess that Jesus is Lord and believe that God raised him is to be saved. There is no distinction between Jew and Greek, and “Whoever will call on the name of the Lord will be saved.”\n\nBut how will people call without hearing, and hear without a preacher? “faith comes by hearing, and hearing by the word of God.”"
+        },
+        {
+          "kind": "background",
+          "text": "This is the middle chapter of Paul’s three-chapter reflection on Israel in Romans 9 to 11. He writes as a Jew who prays for his own people, and the tone is love, not blame. The phrase “Christ is the fulfillment of the law” can also be translated as the end or goal of the law, and readers weigh those senses. The chapter’s emphasis on sending and hearing has long shaped Christian thinking about preaching and mission. Like all of Romans, it was meant to be read aloud to a gathered church."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul asks the question that hangs over the last three chapters: did God reject his people? “May it never be!” He points to himself. He is an Israelite, a descendant of Abraham, of the tribe of Benjamin. He remembers Elijah, who felt he was left alone, and the answer that God had kept seven thousand who had not bowed to Baal. So now too there is a remnant.\n\nThen he turns to the Gentiles in the church with a picture. Some branches of an olive tree were broken off, and a wild olive was grafted in. Do not boast, he says, because the root supports you. God is able to graft the natural branches in again.\n\nHe speaks of a mystery and of “the gifts and the calling of God are irrevocable.” The chapter ends not in argument but in praise: “Oh the depth of the riches both of the wisdom and the knowledge of God!”"
+        },
+        {
+          "kind": "background",
+          "text": "Romans 11 completes the discussion that began in Romans 9. Paul speaks directly to Gentile believers and warns them against pride toward Jews, which is worth remembering because this chapter and others have been twisted into contempt for Jews. The sentence “all Israel will be saved” is read in several ways. Some think it means a future turning of the Jewish people to Christ, some the whole people of God made up of Jews and Gentiles, and some the full number of Jews saved throughout history. Christians have not settled this question."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After eleven chapters about what God has done, Paul says therefore, and the letter turns to the life that follows. He begs his readers, by the mercies of God, to give their bodies as a living sacrifice. “Don’t be conformed to this world, but be transformed by the renewing of your mind”.\n\nHe tells them not to think too highly of themselves. A church is like a body with many members, and each has a different gift: prophecy, service, teaching, encouragement, giving, leading, mercy. Each should do it well and gladly.\n\nThen the commands come quickly, almost like a list of small kindnesses. Love without hypocrisy. Honor one another. Be hospitable. Bless those who persecute you. “Rejoice with those who rejoice. Weep with those who weep.” Do not take revenge, and if an enemy is hungry, feed him. The last line gathers it all: “Don’t be overcome by evil, but overcome evil with good.”"
+        },
+        {
+          "kind": "background",
+          "text": "This chapter begins the practical part of Romans, the move from what God has done to how a community lives. Paul writes to a church of mixed backgrounds in a large city, and much here is about living together. The saying about heaping burning coals on an enemy’s head, quoted from the Old Testament, is read in different ways: as a call to bring the enemy to shame and a change of heart, or as leaving judgment to God. Either way the surrounding verses forbid revenge. See Proverbs 25 and Matthew 5."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul gives his readers a short lesson on how to stand before the powers around them. Everyone should be subject to the higher authorities, he says, because there is no authority except from God. Rulers hold the sword to restrain wrongdoing, and believers are to do good, pay what they owe in taxes and customs, and give respect where respect is due.\n\nThen the tone shifts, and the center of the chapter appears. “Owe no one anything, except to love one another”. The commandments about adultery, murder, stealing and coveting are summed up in loving your neighbor as yourself. “Love doesn’t harm a neighbor.” Love is the fulfillment of the law.\n\nThe chapter ends with an alarm clock. “it is already time for you to awaken out of sleep”. The night is far gone and the day is near, so believers should put off deeds of darkness and put on the Lord Jesus Christ."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to Christians living in the capital of the empire. The first seven verses have been among the most debated in the Bible. Rulers have used them to demand obedience, even to unjust governments, and others have pointed out that Paul does not say rulers can never be wrong, that Christ and the apostles themselves were punished by authorities, and that elsewhere believers must obey God first (see Acts 5). Christians differ on what this means for resistance and civil disobedience today."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Two kinds of believers sit at the same table, and they do not agree. One has faith to eat anything. The other eats only vegetables. One counts a certain day as special. Another counts every day alike. Paul does not tell the churches to argue it out. He tells them to accept one another. “Let each man be fully assured in his own mind.”\n\nHe asks them to stop despising and judging. Each answers to the Lord, and “none of us lives to himself, and none dies to himself.” Christ is Lord of the dead and the living.\n\nThen he turns to those who are free. Do not make a brother stumble over food. “God’s Kingdom is not eating and drinking, but righteousness, peace, and joy in the Holy Spirit.” Pursue what builds up. A closing prayer of praise for the gospel is printed at the end of the chapter here, though ancient copies place it in different spots."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to a church where Jewish and Gentile believers sat side by side, and questions about food and special days likely mattered a great deal to them. He sides with neither group by name, though he describes one as weak in faith and one as strong. The pastoral point is that what is truly disputed is not a matter of salvation. Churches across history have used this chapter to ask which questions are essential and which are not, and have often disagreed on where the line falls. See Romans 15 and 1 Corinthians 8."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul asks the strong to bear with the weak and not to please themselves. His model is Christ, who did not please himself. The old Scriptures were written to give hope, and so he prays for harmony: “accept one another, even as Christ also accepted you”.\n\nHe then shows the reach of that welcome. Christ came to confirm the promises to the fathers and so that the Gentiles might praise God. Paul strings together verses from the law, the Psalms and Isaiah to say it. Then comes a blessing: “Now may the God of hope fill you with all joy and peace in believing”.\n\nThe letter becomes personal. Paul tells of his work from Jerusalem around to Illyricum, always preaching “not where Christ was already named”. He hopes to visit Rome on his way to Spain, but first he goes to Jerusalem with a gift from Macedonia and Achaia for the poor, and he asks for prayer."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter shows why Paul wrote the letter: he planned to reach Rome and then press on to Spain, and he wanted the church there to support him. Rome had not been founded by him, so he writes carefully. The collection for Jerusalem also mattered to him as a sign of unity between Gentile and Jewish believers. Whether he ever reached Spain is not told in the New Testament. See Acts 20 to 28 for the journey toward Jerusalem and Rome."
+        }
+      ]
+    },
+    {
+      "id": "ai:romans/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The letter that has argued about law, grace and the whole sweep of God’s plan now ends with names. “I commend to you Phoebe, our sister,” Paul begins, a servant of the assembly at Cenchreae, a helper of many, and of himself. Then the greetings pour out: Prisca and Aquila, who risked their necks for his life, and the church that meets in their house; Mary, who labored much; Andronicus and Junia, “notable among the apostles”; Tryphaena and Tryphosa; Persis; Rufus and his mother.\n\nA sharper note follows. Paul warns his readers to watch for people who cause divisions with smooth speech. He prays that God will quickly crush Satan under their feet.\n\nThen the secretary breaks in: “I, Tertius, who write the letter, greet you in the Lord.” More names follow, among them Erastus, the city’s treasurer."
+        },
+        {
+          "kind": "background",
+          "text": "Many scholars think Phoebe carried the letter to Rome, and that makes her its first reader to the church. The greetings show a large network of people, men and women, Jews and Gentiles, some enslaved and some not. Christians differ on Junia: whether the name is a woman’s or a man’s, and whether “notable among the apostles” means that she was counted as an apostle or was well regarded by them. Ancient copies place the closing praise in different positions, and this edition leaves it out here."
         }
       ]
     }
