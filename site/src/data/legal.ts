@@ -122,6 +122,114 @@ export const processors: Processor[] = [
 ];
 
 /**
+ * What kind of contact an outside address is, in the words the privacy policy uses:
+ *  - "processor": a company that receives personal data so a feature can work;
+ *  - "loaded by the page": the browser fetches it by itself, so that company sees the reader's IP address;
+ *  - "link you click": nothing is requested until the reader follows the link;
+ *  - "no request": the address only appears as text, for example an XML namespace.
+ */
+export type OutboundKind = "processor" | "loaded by the page" | "link you click" | "no request";
+
+export type OutboundHost = {
+  host: string;
+  /** Why the code names this address, in plain words. */
+  purpose: string;
+  kind: OutboundKind;
+  /** The `id` of the processor card above that covers this address. Required for "processor"
+   *  and "loaded by the page". */
+  processor?: string;
+  /** True when the code never writes the address as a literal: it comes from configuration, so
+   *  tests/third-parties.test.ts does not expect to find it in the source. */
+  viaConfiguration?: boolean;
+};
+
+/**
+ * Every outside address the app and the website use. tests/third-parties.test.ts scans src,
+ * site/src, index.html, vite.config.ts and public/*.js for http(s) hosts and fails when one is
+ * missing here, or when an entry here is no longer used. So a new host cannot ship until
+ * someone has decided what it receives and written it into the privacy policy and
+ * docs/PRIVACY_DATA_FLOW.md. Checked against the code on 2026-10-16.
+ */
+export const outboundHosts: OutboundHost[] = [
+  // Reached through configuration, so not written as literals in the code.
+  {
+    host: "fccwqguqhnbayuowmamy.supabase.co",
+    purpose: "The database, sign-in and live updates. The address comes from VITE_SUPABASE_URL when the app is built.",
+    kind: "processor",
+    processor: "supabase",
+    viaConfiguration: true,
+  },
+  {
+    host: "smtp.resend.com",
+    purpose: "Relays the sign-in email. Set in the Supabase dashboard (custom SMTP), not in our code.",
+    kind: "processor",
+    processor: "resend",
+    viaConfiguration: true,
+  },
+  {
+    host: "fcm.googleapis.com",
+    purpose: "Delivers reminders to Chrome and Android. Allowed by the endpoint check in supabase/migrations/010_push.sql.",
+    kind: "processor",
+    processor: "push",
+    viaConfiguration: true,
+  },
+  {
+    host: "updates.push.services.mozilla.com",
+    purpose: "Delivers reminders to Firefox. Allowed by the endpoint check in supabase/migrations/010_push.sql.",
+    kind: "processor",
+    processor: "push",
+    viaConfiguration: true,
+  },
+  {
+    host: "*.notify.windows.com",
+    purpose: "Delivers reminders to Edge on Windows. Allowed by the endpoint check in supabase/migrations/010_push.sql.",
+    kind: "processor",
+    processor: "push",
+    viaConfiguration: true,
+  },
+  {
+    host: "web.push.apple.com",
+    purpose: "Delivers reminders to Safari and iPhone. Allowed by the endpoint check in supabase/migrations/010_push.sql.",
+    kind: "processor",
+    processor: "push",
+    viaConfiguration: true,
+  },
+  // Written in the code.
+  {
+    host: "cdn.shopify.com",
+    purpose: "Product pictures on the Resources page and in the app's Shop tab.",
+    kind: "loaded by the page",
+    processor: "shopify",
+  },
+  {
+    host: "shop.hisfullglory.com",
+    purpose: "Our shop, run by Shopify. Product links, the shop contact page and the old shop addresses that are sent on.",
+    kind: "link you click",
+    processor: "shopify",
+  },
+  {
+    host: "hisfullglory.com",
+    purpose: "This website, hosted by Vercel. The app links to it.",
+    kind: "link you click",
+    processor: "vercel",
+  },
+  {
+    host: "app.hisfullglory.com",
+    purpose: "The app, hosted by Vercel. The website links to it.",
+    kind: "link you click",
+    processor: "vercel",
+  },
+  { host: "ebible.org", purpose: "Source of the World English Bible text, linked as provenance.", kind: "link you click" },
+  { host: "www.gofundme.com", purpose: "The fundraising platform behind reviewed fundraisers, and its how-it-works page.", kind: "link you click" },
+  { host: "www.givewell.org", purpose: "GiveWell's list of top charities, linked as the source.", kind: "link you click" },
+  { host: "secure.givewell.org", purpose: "GiveWell's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.facebook.com", purpose: "Share to X from the website.", kind: "link you click" },
+  { host: "wa.me", purpose: "WhatsApp share link on the website.", kind: "link you click" },
+  { host: "twitter.com", purpose: "Share to X from the website.", kind: "link you click" },
+  { host: "www.sitemaps.org", purpose: "The XML namespace of the sitemap. It is a name, not an address anyone visits.", kind: "no request" },
+];
+
+/**
  * Stops a production build while the legal pages are not approved, so an early or interrupted
  * merge never publishes draft text: the build fails and Vercel keeps the previous deployment.
  * Preview builds, local builds and builds with no environment name are allowed to show drafts.
