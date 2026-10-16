@@ -1,0 +1,269 @@
+---
+// /privacy: what stays on the device, what the server keeps, and who helps run the service.
+// Every statement here comes from docs/PRIVACY_DATA_FLOW.md or from the code, checked on
+// 2026-10-16 (storage names, outbound hosts, no analytics, no cookies set by our code). What
+// only the founder can know is a [CONFIRM: ...] marker in site/src/data/legal.ts, and the page is
+// a noindex draft until `approved` is true there.
+import LegalPage from "../layouts/LegalPage.astro";
+import {
+  backups,
+  businessAddress,
+  entity,
+  lastUpdated,
+  legalBasis,
+  minimumAge,
+  noSale,
+  processors,
+  registration,
+  retention,
+  rights,
+  supervisoryAuthority,
+  transfers,
+} from "../data/legal";
+
+const sections = [
+  { id: "who-we-are", label: "Who we are" },
+  { id: "on-your-device", label: "What stays on your device" },
+  { id: "on-our-servers", label: "What we keep on our servers" },
+  { id: "who-helps", label: "Who helps us run HisFullGlory" },
+  { id: "cookies", label: "Cookies and similar storage" },
+  { id: "how-long", label: "How long we keep things" },
+  { id: "legal-basis", label: "Legal basis and transfers" },
+  { id: "your-choices", label: "Your choices" },
+  { id: "age", label: "Age" },
+  { id: "changes", label: "Changes" },
+];
+
+const storage = [
+  { name: "hfg-theme", use: "Your choice of Light, Dark or Auto on the website." },
+  { name: "hfg-appearance", use: "The same choice in the app." },
+  { name: "hfg-reminder", use: "Your reminder settings, so the form remembers them on this device." },
+  {
+    name: "hfg-daily-walk:v1, v2 and v3",
+    use: "Your private journal, prayers, notes and progress when you are not signed in, with earlier versions kept so nothing is lost.",
+  },
+  {
+    name: "hfg-private:<account>:…",
+    use: "The same private data for a signed-in account, kept apart for each account on the device.",
+  },
+  { name: "The sign-in session", use: "Kept by Supabase, our sign-in service, so you stay signed in." },
+  {
+    name: "hfg-account-deleted",
+    use: "A one-time note, kept only until the tab closes, that shows the confirmation after you delete your account.",
+  },
+];
+---
+
+<LegalPage
+  title="Privacy policy"
+  description="What HisFullGlory keeps on your device, what it keeps on our servers, who helps us run it, and how to delete your account."
+  intro={`Applies to the HisFullGlory website and the HisFullGlory Daily Walk app. Last updated ${lastUpdated}.`}
+  sections={sections}
+>
+  <section class="card in-short" aria-labelledby="in-short" slot="short">
+    <h2 id="in-short">In short</h2>
+    <ul>
+      <li>
+        Your journal, private prayers, notes and reading progress stay on your
+        device. We do not upload them.
+      </li>
+      <li>
+        If you sign in, we keep your email address, your display name and what
+        you choose to post in the community.
+      </li>
+      <li>
+        You can export your private data and delete your account in the app at
+        any time.
+      </li>
+      <li>There are no ads in the community. {noSale}</li>
+      <li>
+        Notifications use fixed wording. They never contain what you wrote.
+      </li>
+    </ul>
+  </section>
+
+  <h2 id="who-we-are">Who we are</h2>
+  <p>
+    HisFullGlory is run by {entity}, registration number {registration}, {businessAddress}.
+    You can reach us on the <a href="/contact">contact page</a>.
+  </p>
+
+  <h2 id="on-your-device">What stays on your device</h2>
+  <p>
+    Your journal entries, private prayers and answers, struggles, preferences,
+    the topics you follow, and your reading and Daily Walk progress.
+  </p>
+  <p>
+    They are saved in your browser or app storage on this device. Signing in
+    does not upload them, and signing in on another device does not bring them
+    across. Nothing from them becomes a public post unless you open the
+    separate public composer and publish it yourself. This storage is not
+    encrypted, so anyone who can use this device and browser can look at it.
+    Export a backup in Settings before you clear your browser data.
+  </p>
+  <p>
+    If several people sign in on one device, each account keeps its own private
+    data apart. Clearing the browser removes it.
+  </p>
+
+  <h2 id="on-our-servers">What we keep on our servers</h2>
+  <p>We keep these only when you sign in or take part:</p>
+  <ul>
+    <li>Your email address, to send you a sign-in code.</li>
+    <li>Your display name.</li>
+    <li>
+      The posts, replies, prayer requests and chat messages you publish,
+      including anonymous ones. Anonymous means anonymous to other readers, not
+      to us: we can see who wrote them so that we can keep the community safe.
+    </li>
+    <li>
+      A copy of your latest post, kept only to stop the same text being posted
+      twice in a row.
+    </li>
+    <li>Your reactions and votes.</li>
+    <li>
+      The reports you send, and the people you block or mute. When two different
+      people report the same post, it is hidden until a person has reviewed it.
+    </li>
+    <li>
+      Your Circle memberships, and your answers when you ask to join a private
+      Circle. Answers are kept only while the request is waiting.
+    </li>
+    <li>The version of the community rules you accepted.</li>
+    <li>The support requests you make.</li>
+    <li>
+      If you turn reminders on: an address for your device from your browser's
+      or phone's notification service, the details needed to send to it, your
+      reminder time and time zone, and your choice about "someone prayed for
+      you" reminders. You can use reminders without an account, and then the
+      address is not linked to one.
+    </li>
+  </ul>
+  <p>We do not receive your journal or private prayers.</p>
+
+  <h2 id="who-helps">Who helps us run HisFullGlory</h2>
+  <p>These companies handle data for us:</p>
+  <div class="processors">
+    {
+      processors.map((processor) => (
+        <article class="card processor">
+          <h3>{processor.name}</h3>
+          <dl>
+            <dt>What they do</dt>
+            <dd>{processor.does}</dd>
+            <dt>What they receive</dt>
+            <dd>{processor.receives}</dd>
+            <dt>Where</dt>
+            <dd>{processor.where}</dd>
+          </dl>
+        </article>
+      ))
+    }
+  </div>
+  <p>We do not use these companies for advertising.</p>
+  <p>
+    Links to other sites, such as ebible.org, GiveWell, GoFundMe and the share
+    buttons, send nothing until you choose to open them. Those sites have their
+    own policies.
+  </p>
+
+  <h2 id="cookies">Cookies and similar storage</h2>
+  <p>
+    Our code sets no cookies. The website and the app contain no analytics,
+    advertising or tracking tools, and they load no scripts or fonts from other
+    companies. Besides the companies named above, they contact no one while you
+    read.
+  </p>
+  <p>
+    They keep these items in your browser's storage on your device:
+  </p>
+  <ul>
+    {
+      storage.map((item) => (
+        <li>
+          <strong>{item.name}</strong>: {item.use}
+        </li>
+      ))
+    }
+  </ul>
+  <p>
+    The app also keeps its own pages and the Bible text in your browser so it
+    can open quickly. It does not keep your account data there.
+  </p>
+  <p>
+    The shop at shop.hisfullglory.com is run by Shopify and has its own privacy
+    policy, which covers anything the shop stores in your browser.
+  </p>
+
+  <h2 id="how-long">How long we keep things</h2>
+  <p>Delete your account and the server data above is removed at once.</p>
+  <p>
+    A record of moderation decisions can be kept to protect the community: what
+    was decided about which post, Circle or request, and when. It holds no
+    name, email address or post text. Reports other people sent about your posts
+    stay with their accounts.
+  </p>
+  <p>
+    What you save on your device stays there until you clear it. Deleting your
+    account in the app also removes what that account saved on that device.
+  </p>
+  <p>{retention}</p>
+  <p>{backups}</p>
+
+  <h2 id="legal-basis">Legal basis and transfers</h2>
+  <p>{legalBasis}</p>
+  <p>{transfers}</p>
+
+  <h2 id="your-choices">Your choices</h2>
+  <ul>
+    <li>Export your private data in Settings in the app.</li>
+    <li>
+      Delete your account in the app, or see <a href="/delete-account">how to delete your account</a>.
+    </li>
+    <li>Report a post or block a person in the app.</li>
+    <li>Turn reminders off in Settings.</li>
+    <li>Ask us a question on the <a href="/contact">contact page</a>.</li>
+  </ul>
+  <p>{rights}</p>
+  <p>{supervisoryAuthority}</p>
+
+  <h2 id="age">Age</h2>
+  <p>
+    HisFullGlory is for people aged {minimumAge} and over. If you think a child
+    has made an account, <a href="/contact">contact us</a> and we will delete it.
+  </p>
+
+  <h2 id="changes">Changes</h2>
+  <p>
+    If we change this policy in a way that matters, we will say so in the app
+    before it applies. The date at the top is the date of the latest change.
+  </p>
+
+  <div class="actions">
+    <a class="button secondary" href="/delete-account">Delete your account</a>
+    <a class="button secondary" href="/contact">Contact us</a>
+  </div>
+</LegalPage>
+
+<style>
+  .processors {
+    display: grid;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  dl {
+    margin: 0;
+  }
+  dt {
+    font-size: 0.86rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  dd {
+    margin: 0 0 12px;
+  }
+  dd:last-child {
+    margin-bottom: 0;
+  }
+</style>

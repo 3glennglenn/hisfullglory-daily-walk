@@ -6,6 +6,36 @@ import { goals, type Theme } from "../platform/models";
 import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
 import { Reminders } from "./Reminders";
 import { supabase } from "../supabase";
+import { config } from "../config";
+// The trust pages, reachable from inside the app: store reviewers look for them here (GATE-02). The site
+// links open in a new tab so the reader keeps their place; support is shown only once forwarding is
+// proven (config.supportEmailReady), so the app never points at an address nobody reads.
+export function LegalLinks() {
+  const pages = [
+    ["Privacy policy", "/privacy"],
+    ["Terms of use", "/terms"],
+    ["How account deletion works", "/delete-account"],
+  ] as const;
+  return (
+    <nav className="legal-links" aria-label="Privacy and help">
+      <ul>
+        {pages.map(([label, path]) => (
+          <li key={path}>
+            <a href={`${config.siteUrl}${path}`} target="_blank" rel="noopener">
+              {label}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+        ))}
+        {config.supportEmailReady && (
+          <li>
+            <a href={`mailto:${config.supportEmail}`}>Contact support</a>
+          </li>
+        )}
+      </ul>
+    </nav>
+  );
+}
 export function Settings() {
   const { state, update, notice, recover, storage } = usePlatform();
   const [status, setStatus] = useState("");
@@ -182,6 +212,10 @@ export function Settings() {
       </div>
       <TopicPreferences selected={state.privateTopics} onChange={privateTopics => update(s => ({...s,privateTopics}))} />
       <BlockedAuthors />
+      <div className="card">
+        <h2>About and legal</h2>
+        <LegalLinks />
+      </div>
     </section>
   );
 }
@@ -274,15 +308,14 @@ export function Profile() {
       <div className="card">
         <h2>Account and privacy</h2>
         <p>
-          Email links are the configured sign-in method. Google and Apple
-          sign-in are unavailable. Signing in does not upload your private
-          journal or prayers.
+          You sign in with a 6-digit code we email you. Signing in does not
+          upload your private journal or prayers.
         </p>
         <p>
-          Use Settings to export private data. When you are signed in, you can
-          delete your account on this page at any time.
+          Use Settings to export your private data. You can delete your account
+          on this page at any time.
         </p>
-        <a href="mailto:support@hisfullglory.com">Contact support</a>
+        <LegalLinks />
       </div>
       <DeleteAccount />
     </section>

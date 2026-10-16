@@ -4,8 +4,9 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
+import { approved } from "../src/data/legal.ts";
 import { content, showDrafts } from "../src/lib/content.ts";
-import { indexablePaths } from "../src/lib/pages.ts";
+import { gatedLegalPages, indexablePaths } from "../src/lib/pages.ts";
 
 const origin = "https://hisfullglory.com";
 
@@ -62,9 +63,11 @@ test("pages kept out of search results say so and are not in the sitemap", () =>
         ...articles.filter(draft).map((item) => `dist/articles/${item.slug}/index.html`),
       ]
     : [];
+  // The legal pages are drafts until the founder approves their text (site/src/data/legal.ts).
+  const legalDrafts = approved ? [] : gatedLegalPages.map((path) => `dist${path}/index.html`);
   assert.deepEqual(
     hidden.map((page) => page.file.replaceAll("\\", "/")).sort(),
-    ["dist/404.html", "dist/styleguide/index.html", ...drafts].sort(),
+    ["dist/404.html", "dist/styleguide/index.html", ...legalDrafts, ...drafts].sort(),
   );
   for (const page of hidden)
     assert.ok(page.html.includes('<meta name="robots" content="noindex"'), page.file);

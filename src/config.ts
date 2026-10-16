@@ -1,5 +1,13 @@
+// The website's own file decides whether the support address may be shown, so the app and the
+// site cannot disagree (GATE-03). The .ts extension lets Node's test runner resolve it too.
+import { supportEmailReady } from "../site/src/data/legal.ts";
+
 export const config = {
   supportEmail: "support@hisfullglory.com",
+  // True only when mail sent to the support address is known to reach a person. While false, no
+  // screen of the app shows the address or links to it.
+  supportEmailReady,
+  siteUrl: "https://hisfullglory.com",
   // The shop moved to its own subdomain on 2026-10-13; hisfullglory.com is the website.
   storeUrl: "https://shop.hisfullglory.com",
   // The public half of the Web Push key pair. Public by design; the private half is in

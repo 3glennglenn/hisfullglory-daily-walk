@@ -1,10 +1,25 @@
 // The addresses search engines may index, in one place for the sitemap.
 // `tests/seo.test.ts` compares this list with the pages that were actually built.
+import { approved } from "../data/legal.ts";
 import { library } from "./bible.ts";
 import { content, showDrafts } from "./content.ts";
 
+/**
+ * The legal pages (site/src/data/legal.ts). They stay out of the sitemap until the founder has
+ * approved their text, like any other draft. Add each legal page here in the change that adds
+ * its file.
+ */
+export const gatedLegalPages = ["/privacy", "/terms", "/contact", "/delete-account"];
+
 /** Pages outside the Bible. Add a page here in the same change that adds its file. */
-const fixedPages = ["/", "/bible", "/resources", "/about", "/beta", "/delete-account"];
+const fixedPages = [
+  "/",
+  "/bible",
+  "/resources",
+  "/about",
+  "/beta",
+  ...(approved ? gatedLegalPages : []),
+];
 
 /**
  * A section's overview page and its approved pages; nothing until the first one is

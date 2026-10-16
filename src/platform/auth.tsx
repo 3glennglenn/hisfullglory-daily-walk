@@ -9,7 +9,13 @@ import {
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "../supabase";
 import { forgetAccount } from "./persistence";
-import { CodeEntry } from "./CodeEntry";
+import { deletedWithAccount, isDeleteConfirmation } from "./deleteConfirm";
+import { navigate } from "./router";
+import { config } from "../config";
+import { CodeEntry, SignInNote, SiteLink, codeSendFailed, codeSentStatus } from "./CodeEntry";
+// Marker text until the founder confirms the age; the production build refuses to ship it
+// (vite.config.ts), so the app never shows a placeholder to the public.
+import { minimumAge } from "../../site/src/data/legal.ts";
 import { postError } from "../social/blockedLanguage";
 export const TERMS_VERSION = "2026-10-07";
 const Auth = createContext<{
@@ -64,9 +70,12 @@ export function AuthPanel() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [checked, setChecked] = useState(false);
-  const [status, setStatus] = useState("");
+  // An error is announced as an alert that starts with "Error:", everything else as a status.
+  const [status, setStatusLine] = useState({ text: "", error: false });
+  const setStatus = (text: string, error = false) => setStatusLine({ text, error });
   const [busy, setBusy] = useState(false);
   const [sentTo, setSentTo] = useState("");
+  const [sentAt, setSentAt] = useState(0);
   useEffect(() => {
     if (session && supabase)
       void supabase
@@ -76,20 +85,36 @@ export function AuthPanel() {
         .maybeSingle()
         .then((r) => setName(r.data?.display_name ?? ""));
   }, [session?.user.id]);
+  // Asks for an email with the sign-in code. Resolves true when it was sent.
+  async function requestCode(address: string) {
+    if (!supabase) return false;
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email: address,
+        options: { emailRedirectTo: window.location.origin },
+      });
+      return !error;
+    } catch {
+      return false;
+    }
+  }
   async function login() {
-    if (!supabase || busy) return;
+    const address = email.trim();
+    if (!supabase || busy || !address) return;
     setBusy(true);
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: { emailRedirectTo: window.location.origin },
-    });
-    setStatus(
-      error
-        ? "Sign-in could not be sent. Check configuration and try again."
-        : "Check your email for a sign-in link.",
-    );
-    if (!error) setSentTo(email.trim());
+    setStatus("");
+    if (await requestCode(address)) {
+      setSentTo(address);
+      setSentAt(Date.now());
+      setStatus(codeSentStatus);
+    } else setStatus(codeSendFailed, true);
     setBusy(false);
+  }
+  // Asking again resets the wait that CodeEntry counts down.
+  async function resendCode() {
+    const sent = await requestCode(sentTo);
+    if (sent) setSentAt(Date.now());
+    return sent;
   }
   async function save() {
     if (!supabase || !session || name.trim().length < 2 || busy) return;
@@ -100,7 +125,7 @@ export function AuthPanel() {
       .eq("id", session.user.id)
       .maybeSingle();
     if (existing.error) {
-      setStatus("Profile could not be loaded. Try again.");
+      setStatus("Profile could not be loaded. Try again.", true);
       setBusy(false);
       return;
     }
@@ -113,7 +138,7 @@ export function AuthPanel() {
           .from("profiles")
           .insert({ id: session.user.id, display_name: name.trim() });
     if (error) {
-      setStatus(postError(error, "Name could not be saved. Use 2–40 characters."));
+      setStatus(postError(error, "Name could not be saved. Use 2–40 characters."), true);
       setBusy(false);
       return;
     }
@@ -122,9 +147,7 @@ export function AuthPanel() {
         terms_version: TERMS_VERSION,
       });
       if (result.error) {
-        setStatus(
-          "Terms could not be accepted. Apply the platform migrations.",
-        );
+        setStatus("We could not save that. Check your connection and try again.", true);
         setBusy(false);
         return;
       }
@@ -148,7 +171,7 @@ export function AuthPanel() {
   return (
     <section className="card">
       <h2>
-        {session ? "Your community profile" : "Sign in when you’re ready"}
+        {session ? "Your community profile" : "Sign in when you are ready"}
       </h2>
       {!session ? (
         <form
@@ -167,7 +190,8 @@ export function AuthPanel() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <button disabled={busy}>Send secure sign-in link</button>
+          <button disabled={busy}>{busy ? "Sending…" : "Email me a sign-in code"}</button>
+          <SignInNote />
         </form>
       ) : (
         <>
@@ -181,23 +205,26 @@ export function AuthPanel() {
             />
           </label>
           {!accepted && (
-            <label className="check">
+            <label className="check terms-accept">
               <input
                 type="checkbox"
                 checked={checked}
                 onChange={(e) => setChecked(e.target.checked)}
               />
-              I accept the community rules, version {TERMS_VERSION}: no
-              harassment, threats, hate, sexual content, scams, spam,
-              impersonation, illegal activity, dangerous advice or private
-              information. I understand reports are reviewed manually.
+              <span>
+                I am {minimumAge} or older. I accept the{" "}
+                <SiteLink path="/terms">Terms of use</SiteLink> and the community rules, and I have read the{" "}
+                <SiteLink path="/privacy">Privacy policy</SiteLink>.{" "}
+                I understand that reports are reviewed by a person.{" "}
+                <span className="terms-version">Version {TERMS_VERSION}.</span>
+              </span>
             </label>
           )}
           <button
             onClick={() => void save()}
             disabled={busy || name.trim().length < 2}
           >
-            Save profile{checked ? " and accept rules" : ""}
+            {busy ? "Saving…" : `Save profile${checked ? " and accept rules" : ""}`}
           </button>
           <button
             className="secondary"
@@ -208,58 +235,113 @@ export function AuthPanel() {
           {accepted && <small>Community rules accepted.</small>}
         </>
       )}
-      <p role="status">{status}</p>
-      {!session && sentTo && <CodeEntry email={sentTo} />}
+      <p role="status">{status.error ? "" : status.text}</p>
+      {status.error && (
+        <p role="alert" className="danger-text">
+          <span className="sr-only">Error: </span>
+          {status.text}
+        </p>
+      )}
+      {!session && sentTo && (
+        <CodeEntry email={sentTo} sentAt={sentAt} onResend={resendCode} />
+      )}
     </section>
   );
 }
 
-// Signing out remounts the private profile, so the confirmation survives in session storage.
+// Signing out remounts the private profile, so the confirmation survives in session storage. If
+// storage is blocked, the page remembers it for as long as it stays open.
 const deletedNotice = "hfg-account-deleted";
+let deletedOnThisPage = false;
 function takeDeletedNotice() {
+  const here = deletedOnThisPage;
+  deletedOnThisPage = false;
   try {
     const seen = sessionStorage.getItem(deletedNotice) === "1";
     sessionStorage.removeItem(deletedNotice);
-    return seen;
+    return seen || here;
   } catch {
-    return false;
+    return here;
   }
 }
 
 /**
  * Deletes the signed-in account and everything the server holds for it (migration 007), then
  * what this device kept for it. The App Store and Google Play both require this in the app.
+ * Layout, copy and states: UI-SPEC Surface 5.
  */
 export function DeleteAccount() {
   const { session } = useAuth();
-  const [confirming, setConfirming] = useState(false);
+  const [open, setOpen] = useState(false);
   const [typed, setTyped] = useState("");
   const [busy, setBusy] = useState(false);
-  const [status, setStatus] = useState("");
+  const [failed, setFailed] = useState(false);
   const [deleted, setDeleted] = useState(takeDeletedNotice);
-  if (deleted && !session)
+  // A second press can arrive before React shows the busy state, so the call itself is guarded.
+  const calling = useRef(false);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const field = useRef<HTMLInputElement>(null);
+  const doneHeading = useRef<HTMLHeadingElement>(null);
+  const showDone = deleted && !session;
+  // Focus follows the person: into the field when the confirmation opens, onto the confirmation
+  // when the card that held it is replaced (otherwise it falls to <body>).
+  useEffect(() => {
+    if (open) field.current?.focus();
+  }, [open]);
+  useEffect(() => {
+    if (showDone) doneHeading.current?.focus();
+  }, [showDone]);
+  if (showDone)
     return (
-      <section className="card" role="status">
-        <h2>Your account has been deleted</h2>
+      <section className="card" role="status" tabIndex={-1}>
+        <h2 ref={doneHeading} tabIndex={-1}>
+          Your account has been deleted
+        </h2>
         <p>
           Everything the server held for it has been removed, and this device
-          no longer keeps its private data.
+          no longer keeps its private data. You can keep reading and walking as
+          a guest.
         </p>
+        <a
+          className="button secondary"
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/");
+          }}
+        >
+          Go to Today
+        </a>
       </section>
     );
   if (!supabase || !session) return null;
+  const matches = isDeleteConfirmation(typed);
+  const wrong = typed.trim() !== "" && !matches;
+  function keepAccount() {
+    setOpen(false);
+    setTyped("");
+    setFailed(false);
+    trigger.current?.focus();
+  }
   async function remove() {
-    if (!supabase || !session || busy || typed.trim() !== "DELETE") return;
+    if (!supabase || !session || calling.current || !matches) return;
+    calling.current = true;
     setBusy(true);
+    setFailed(false);
     const userId = session.user.id;
-    const { error } = await supabase.rpc("delete_my_account");
+    let error: unknown = null;
+    try {
+      ({ error } = await supabase.rpc("delete_my_account"));
+    } catch (thrown) {
+      error = thrown;
+    }
     if (error) {
-      setStatus(
-        "Your account could not be deleted, and nothing was removed. Try again, or email support@hisfullglory.com.",
-      );
+      setFailed(true);
       setBusy(false);
+      calling.current = false;
       return;
     }
+    deletedOnThisPage = true;
     try {
       forgetAccount(localStorage, userId);
       sessionStorage.setItem(deletedNotice, "1");
@@ -268,60 +350,112 @@ export function DeleteAccount() {
     }
     setDeleted(true);
     // The account no longer exists, so only this device's session is left to end.
-    await supabase.auth.signOut({ scope: "local" });
+    try {
+      await supabase.auth.signOut({ scope: "local" });
+    } catch {
+      /* The token stops working by itself; there is nothing to undo. */
+    }
   }
   return (
-    <section className="card">
-      <h2>Delete your account</h2>
+    <section className="card delete-account" aria-labelledby="delete-account-title">
+      <h2 id="delete-account-title">Delete your account</h2>
       <p>
         This permanently deletes your account and everything the server holds
-        for it: your profile, your posts, prayers and chat messages, reactions
-        and votes, reports you sent, blocks, community memberships and support
-        requests. Replies other people wrote under your posts are removed with
-        them. Circles you own are closed, with their posts.
+        for it. It cannot be undone.
       </p>
+      <ul>
+        {deletedWithAccount.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
       <p>
         The private journal, prayers and reading saved for this account on this
         device are removed too. Export a private backup in Settings first if
         you want to keep them.
       </p>
-      {!confirming ? (
-        <button className="secondary" onClick={() => setConfirming(true)}>
-          Delete my account
-        </button>
-      ) : (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            void remove();
-          }}
-        >
-          <label>
-            Type DELETE to confirm
-            <input
-              id="delete-account-confirm"
-              autoComplete="off"
-              value={typed}
-              onChange={(e) => setTyped(e.target.value)}
-            />
-          </label>
-          <button disabled={busy || typed.trim() !== "DELETE"}>
-            {busy ? "Deleting…" : "Delete my account permanently"}
-          </button>
-          <button
-            type="button"
-            className="secondary"
-            disabled={busy}
-            onClick={() => {
-              setConfirming(false);
-              setTyped("");
+      <button
+        type="button"
+        ref={trigger}
+        className="secondary danger"
+        aria-expanded={open}
+        aria-controls="delete-account-confirmation"
+        onClick={() => {
+          if (busy) return;
+          if (open) keepAccount();
+          else setOpen(true);
+        }}
+      >
+        Delete my account
+      </button>
+      <div id="delete-account-confirmation" hidden={!open}>
+        {open && (
+          <form
+            aria-busy={busy}
+            onSubmit={(e) => {
+              e.preventDefault();
+              void remove();
             }}
           >
-            Cancel
-          </button>
-        </form>
-      )}
-      <p role="status">{status}</p>
+            <h3>Confirm deletion</h3>
+            <p>
+              This cannot be undone. Your account and everything the server
+              holds for it is deleted now.
+            </p>
+            <label>
+              Type DELETE to confirm
+              <input
+                ref={field}
+                id="delete-account-confirm"
+                autoComplete="off"
+                autoCapitalize="characters"
+                spellCheck={false}
+                inputMode="text"
+                value={typed}
+                aria-describedby={wrong ? "delete-account-hint" : undefined}
+                onChange={(e) => setTyped(e.target.value)}
+              />
+            </label>
+            {wrong && (
+              <p id="delete-account-hint" className="delete-hint">
+                Type DELETE exactly to confirm.
+              </p>
+            )}
+            <button
+              className="danger"
+              disabled={!matches}
+              aria-disabled={busy || undefined}
+            >
+              {busy ? "Deleting…" : "Delete my account permanently"}
+            </button>
+            <button
+              type="button"
+              className="secondary"
+              disabled={busy}
+              onClick={keepAccount}
+            >
+              Keep my account
+            </button>
+            <p role="status">{busy ? "Deleting your account." : ""}</p>
+            {failed && (
+              <p role="alert" className="danger-text">
+                <span className="sr-only">Error: </span>
+                Your account was not deleted, and nothing was removed.{" "}
+                {config.supportEmailReady ? (
+                  <>
+                    Try again. If it keeps failing, email{" "}
+                    <a href={`mailto:${config.supportEmail}`}>
+                      {config.supportEmail}
+                    </a>
+                    .
+                  </>
+                ) : (
+                  "Try again later."
+                )}
+              </p>
+            )}
+          </form>
+        )}
+      </div>
     </section>
   );
 }

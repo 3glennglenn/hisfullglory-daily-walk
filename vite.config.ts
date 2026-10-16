@@ -1,6 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
+import { assertReleasable } from "./site/src/data/legal.ts";
+
+// A production build of the app is refused while the legal text is unapproved, so the app never
+// links to pages that are not published and never shows placeholder text. Preview and local builds
+// are unaffected. The project has no Node types, hence the narrow cast instead of `process`.
+assertReleasable((globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env?.VERCEL_ENV);
 
 export default defineConfig({
   plugins: [
