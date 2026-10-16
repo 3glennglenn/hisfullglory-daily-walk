@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { usePlatform } from "../platform/store";
 import { backupData } from "../platform/persistence";
 import { goals, type Theme } from "../platform/models";
-import { AuthPanel, useAuth } from "../platform/auth";
+import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
 import { Reminders } from "./Reminders";
 import { supabase } from "../supabase";
 export function Settings() {
@@ -174,9 +174,10 @@ export function Settings() {
         )}
         <p role="status">{status}</p>
         <small>
-          No encrypted cloud sync, account-data deletion service or cross-device
-          restore is configured. Contact the operator to remove an account; use
-          own-content deletion controls for public contributions.
+          No encrypted cloud sync or cross-device restore is configured. To
+          delete your account and its server data, use "Delete my account" on
+          your Profile page; use own-content deletion controls for public
+          contributions.
         </small>
       </div>
       <TopicPreferences selected={state.privateTopics} onChange={privateTopics => update(s => ({...s,privateTopics}))} />
@@ -278,12 +279,12 @@ export function Profile() {
           journal or prayers.
         </p>
         <p>
-          Use Settings to export private data. Contact the operator for an
-          account deletion request; deleting an account must remove its owned
-          server data and respect required audit retention.
+          Use Settings to export private data. When you are signed in, you can
+          delete your account on this page at any time.
         </p>
         <a href="mailto:support@hisfullglory.com">Contact support</a>
       </div>
+      <DeleteAccount />
     </section>
   );
 }

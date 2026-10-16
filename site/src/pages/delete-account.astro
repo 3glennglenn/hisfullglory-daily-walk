@@ -1,0 +1,66 @@
+---
+// /delete-account: how to delete an app account without the app. Google Play asks for this
+// address in the store listing. What it says must match migration 007 and DeleteAccount in
+// the app's src/platform/auth.tsx.
+import Base from "../layouts/Base.astro";
+
+const supportEmail = "support@hisfullglory.com";
+---
+
+<Base
+  title="Delete your account"
+  description="How to delete your HisFullGlory Daily Walk account, and what is removed when you do."
+>
+  <section class="section">
+    <div class="wrap prose">
+      <h1>Delete your account</h1>
+      <p class="lede">
+        You can delete your HisFullGlory Daily Walk account at any time, in the
+        app or by email.
+      </p>
+
+      <h2>In the app</h2>
+      <p>
+        Sign in, open Profile and choose Delete my account at the bottom of the
+        page. Type DELETE to confirm. Your account is deleted at once.
+      </p>
+
+      <h2>By email</h2>
+      <p>
+        If you cannot use the app, email{" "}
+        <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{" "}
+        from the address you sign in with and ask us to delete your account. We
+        delete it within 30 days and reply to confirm.
+      </p>
+
+      <h2>What is deleted</h2>
+      <ul>
+        <li>Your account and your profile, including your display name.</li>
+        <li>
+          Your posts, reflections, prayers and chat messages in the community,
+          and the replies other people wrote under your posts.
+        </li>
+        <li>Your reactions, votes and the reports you sent.</li>
+        <li>The people you blocked or muted, and anyone's block of you.</li>
+        <li>Your topic and Circle memberships, and the support requests you made.</li>
+        <li>Circles you own. They close, with their posts.</li>
+      </ul>
+
+      <h2>What is kept</h2>
+      <p>
+        A record of moderation decisions can be kept to protect the community:
+        what was decided about which post, Circle or request, and when. It
+        holds no name, email address or post text. Reports other people sent
+        about your posts stay with their accounts.
+      </p>
+
+      <h2>On your device</h2>
+      <p>
+        Your private journal, prayers and reading are kept on your device, not
+        on our server. Deleting your account in the app also removes what that
+        account saved on that device. What you saved without signing in stays
+        on the device until you clear it.
+      </p>
+    </div>
+  </section>
+</Base>

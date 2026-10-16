@@ -355,11 +355,15 @@ export function loadPlatform(storage: StorageLike): ReturnType<typeof loadLegacy
   }
 }
 
+const accountPrefix = (userId: string) => {
+  if (!/^[a-z0-9-]+$/i.test(userId)) throw new Error("Invalid private profile");
+  return `hfg-private:${userId}:`;
+};
+
 // Guest data stays in the device guest profile. Login never adopts or merges it.
 export function scopedStorage(storage: StorageLike, userId: string | null): StorageLike {
   if (!userId) return storage;
-  if (!/^[a-z0-9-]+$/i.test(userId)) throw new Error("Invalid private profile");
-  const prefix = `hfg-private:${userId}:`;
+  const prefix = accountPrefix(userId);
   const keys = () => Array.from({length: storage.length ?? 0}, (_, i) => storage.key?.(i))
     .filter((key): key is string => !!key?.startsWith(prefix));
   return {
@@ -368,4 +372,17 @@ export function scopedStorage(storage: StorageLike, userId: string | null): Stor
     get length() { return keys().length; },
     key: index => keys()[index]?.slice(prefix.length) ?? null,
   };
+}
+
+/**
+ * After an account is deleted, removes what this device kept for it. Nobody can sign in to
+ * that account again, so its private data would otherwise stay behind unreachable. Guest data
+ * and other accounts on the device are left alone. Returns how many entries were removed.
+ */
+export function forgetAccount(storage: StorageLike & { removeItem(key: string): void }, userId: string): number {
+  const prefix = accountPrefix(userId);
+  const doomed = Array.from({ length: storage.length ?? 0 }, (_, i) => storage.key?.(i))
+    .filter((key): key is string => !!key?.startsWith(prefix));
+  for (const key of doomed) storage.removeItem(key);
+  return doomed.length;
 }

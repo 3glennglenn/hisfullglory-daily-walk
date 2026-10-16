@@ -8,6 +8,7 @@ import {
 } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "../supabase";
+import { forgetAccount } from "./persistence";
 import { CodeEntry } from "./CodeEntry";
 import { postError } from "../social/blockedLanguage";
 export const TERMS_VERSION = "2026-10-07";
@@ -209,6 +210,118 @@ export function AuthPanel() {
       )}
       <p role="status">{status}</p>
       {!session && sentTo && <CodeEntry email={sentTo} />}
+    </section>
+  );
+}
+
+// Signing out remounts the private profile, so the confirmation survives in session storage.
+const deletedNotice = "hfg-account-deleted";
+function takeDeletedNotice() {
+  try {
+    const seen = sessionStorage.getItem(deletedNotice) === "1";
+    sessionStorage.removeItem(deletedNotice);
+    return seen;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Deletes the signed-in account and everything the server holds for it (migration 007), then
+ * what this device kept for it. The App Store and Google Play both require this in the app.
+ */
+export function DeleteAccount() {
+  const { session } = useAuth();
+  const [confirming, setConfirming] = useState(false);
+  const [typed, setTyped] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [status, setStatus] = useState("");
+  const [deleted, setDeleted] = useState(takeDeletedNotice);
+  if (deleted && !session)
+    return (
+      <section className="card" role="status">
+        <h2>Your account has been deleted</h2>
+        <p>
+          Everything the server held for it has been removed, and this device
+          no longer keeps its private data.
+        </p>
+      </section>
+    );
+  if (!supabase || !session) return null;
+  async function remove() {
+    if (!supabase || !session || busy || typed.trim() !== "DELETE") return;
+    setBusy(true);
+    const userId = session.user.id;
+    const { error } = await supabase.rpc("delete_my_account");
+    if (error) {
+      setStatus(
+        "Your account could not be deleted, and nothing was removed. Try again, or email support@hisfullglory.com.",
+      );
+      setBusy(false);
+      return;
+    }
+    try {
+      forgetAccount(localStorage, userId);
+      sessionStorage.setItem(deletedNotice, "1");
+    } catch {
+      /* Storage may be blocked. The server data is gone either way. */
+    }
+    setDeleted(true);
+    // The account no longer exists, so only this device's session is left to end.
+    await supabase.auth.signOut({ scope: "local" });
+  }
+  return (
+    <section className="card">
+      <h2>Delete your account</h2>
+      <p>
+        This permanently deletes your account and everything the server holds
+        for it: your profile, your posts, prayers and chat messages, reactions
+        and votes, reports you sent, blocks, community memberships and support
+        requests. Replies other people wrote under your posts are removed with
+        them. Circles you own are closed, with their posts.
+      </p>
+      <p>
+        The private journal, prayers and reading saved for this account on this
+        device are removed too. Export a private backup in Settings first if
+        you want to keep them.
+      </p>
+      {!confirming ? (
+        <button className="secondary" onClick={() => setConfirming(true)}>
+          Delete my account
+        </button>
+      ) : (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            void remove();
+          }}
+        >
+          <label>
+            Type DELETE to confirm
+            <input
+              id="delete-account-confirm"
+              autoComplete="off"
+              value={typed}
+              onChange={(e) => setTyped(e.target.value)}
+            />
+          </label>
+          <button disabled={busy || typed.trim() !== "DELETE"}>
+            {busy ? "Deleting…" : "Delete my account permanently"}
+          </button>
+          <button
+            type="button"
+            className="secondary"
+            disabled={busy}
+            onClick={() => {
+              setConfirming(false);
+              setTyped("");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+      )}
+      <p role="status">{status}</p>
     </section>
   );
 }
