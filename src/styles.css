@@ -1359,11 +1359,14 @@ button.danger {
   margin-top: 10px;
 }
 /* A link inside a sentence still gets a 44px target: padding adds the height and the negative margin
-   takes it out of the line, so the text does not move. */
+   takes it out of the line, so the text does not move. The padding is vertical only and the hidden
+   "(opens in a new tab)" is held inside the link, so a link that ends a line never reaches past the
+   right edge of a narrow screen. */
 .inline-link {
+  position: relative;
   display: inline-block;
-  padding: 12px 2px;
-  margin: -12px -2px;
+  padding: 12px 0;
+  margin: -12px 0;
 }
 /* Terms acceptance (UI-SPEC Surface 6c): what a person must read to agree is Body size and ink, the
    version sits on its own line, and the long label wraps beside the 22px checkbox in its 44px row. */
