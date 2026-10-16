@@ -193,9 +193,75 @@ async function supportReady(browser,base) {
   } finally {await context.close();}
 }
 
+// The Profile card speaks of codes, and the support address is shown only when forwarding is proven.
+async function profileCopyAndSupport(browser,base) {
+  for(const ready of [false,true]) {
+    const {context,page:p,problems}=await open(browser,base,{supportReady:ready});
+    try {
+      const card=p.locator(".card",{has:p.getByRole("heading",{name:"Account and privacy",exact:true})});
+      const text=await words(card);
+      assert.match(text,/You sign in with a 6-digit code we email you\. Signing in does not upload your private journal or prayers\./);
+      assert.match(text,/Use Settings to export your private data\. You can delete your account on this page at any time\./);
+      assert.doesNotMatch(text,/magic|secure link|email links|Google and Apple/i);
+      const mailtos=await p.locator("a[href^='mailto:']").count();
+      if(ready) {
+        assert.equal(mailtos,1,"ready: exactly one support link");
+        assert.equal(await card.getByRole("link",{name:"Contact support",exact:true}).getAttribute("href"),"mailto:support@hisfullglory.com");
+      } else {
+        assert.equal(mailtos,0,"not ready: no mailto link on the page");
+        assert.equal(await p.getByText("support@hisfullglory.com").count(),0,"not ready: the address is not printed either");
+        assert.equal(await p.getByRole("link",{name:"Contact support"}).count(),0);
+      }
+      clean(problems);
+    } finally {await context.close();}
+  }
+}
+
+// 320px wide, text at 200%: the open form, the failure and the success card neither scroll sideways nor
+// clip, and every control is at least 44px tall.
+async function reflow(browser,base) {
+  const {context,page:p,problems}=await open(browser,base,{viewport:{width:320,height:568}});
+  try {
+    await p.evaluate(()=>{document.documentElement.style.fontSize="200%";});
+    const fits=async label=>{
+      const m=await p.evaluate(()=>{
+        const card=document.querySelector(".delete-account")??document.querySelector("section.card[role='status']");
+        const right=[...card.querySelectorAll("*")].reduce((max,el)=>Math.max(max,el.getBoundingClientRect().right),0);
+        return {page:document.documentElement.scrollWidth,view:window.innerWidth,cardScroll:card.scrollWidth,cardClient:card.clientWidth,right};
+      });
+      assert.ok(m.page<=m.view,label+": the page does not scroll sideways ("+m.page+" > "+m.view+")");
+      assert.ok(m.cardScroll<=m.cardClient,label+": nothing in the card is wider than the card");
+      assert.ok(m.right<=m.view,label+": nothing is pushed past the right edge ("+m.right+")");
+    };
+    const tall=async(locator,label)=>{const box=await locator.boundingBox();assert.ok(box&&box.height>=44,label+" is at least 44px tall ("+box?.height+")");assert.ok(box.width>=44,label+" is at least 44px wide");};
+    await fits("collapsed");
+    await tall(trigger(p),"the Delete my account trigger");
+    await p.evaluate(()=>{window.profileTest.rpcMode="reject";});
+    await trigger(p).click();
+    await field(p).fill("delete");
+    await fits("open");
+    await tall(permanent(p),"Delete my account permanently");
+    await tall(keep(p),"Keep my account");
+    await tall(field(p),"the confirm field");
+    await permanent(p).click();
+    await p.getByRole("alert").waitFor();
+    await fits("failed");
+    await p.evaluate(()=>{window.profileTest.rpcMode="resolve";});
+    await permanent(p).click();
+    const done=p.getByRole("heading",{name:"Your account has been deleted",exact:true});
+    await done.waitFor();
+    await fits("deleted");
+    await tall(p.getByRole("link",{name:"Go to Today",exact:true}),"Go to Today");
+    assert.equal(await p.getByRole("link",{name:"Go to Today",exact:true}).getAttribute("href"),"/");
+    clean(problems);
+  } finally {await context.close();}
+}
+
 export async function checkProfile(browser,base) {
   await deletionFlow(browser,base);
   await cardStates(browser,base);
   await busyAndFailure(browser,base);
   await supportReady(browser,base);
+  await profileCopyAndSupport(browser,base);
+  await reflow(browser,base);
 }

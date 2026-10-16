@@ -65,11 +65,13 @@ export function AiExplanationCard({ explanation, book, onVerse }: {
             checked automatically against the WEB text.
           </small>
         </p>
-        <p>
-          <a href={`mailto:${config.supportEmail}?subject=${encodeURIComponent(`Mistake in the AI explanation of ${subject}`)}`}>
-            Report a mistake
-          </a>
-        </p>
+        {config.supportEmailReady && (
+          <p>
+            <a href={`mailto:${config.supportEmail}?subject=${encodeURIComponent(`Mistake in the AI explanation of ${subject}`)}`}>
+              Report a mistake
+            </a>
+          </p>
+        )}
       </details>
     </article>
   );

@@ -1260,9 +1260,14 @@ button.danger {
   width: 100%;
   margin-top: 10px;
 }
+/* The instruction and its hint are text a person must read to act, so Body size, as in the report dialog. */
+.delete-account label {
+  color: var(--ink);
+  font-size: 0.92rem;
+}
 .delete-account .delete-hint {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   margin: 0 0 4px;
 }
 .delete-account button[aria-disabled="true"] {

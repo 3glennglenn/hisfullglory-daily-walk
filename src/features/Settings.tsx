@@ -6,6 +6,7 @@ import { goals, type Theme } from "../platform/models";
 import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
 import { Reminders } from "./Reminders";
 import { supabase } from "../supabase";
+import { config } from "../config";
 export function Settings() {
   const { state, update, notice, recover, storage } = usePlatform();
   const [status, setStatus] = useState("");
@@ -251,15 +252,16 @@ export function Profile() {
       <div className="card">
         <h2>Account and privacy</h2>
         <p>
-          Email links are the configured sign-in method. Google and Apple
-          sign-in are unavailable. Signing in does not upload your private
-          journal or prayers.
+          You sign in with a 6-digit code we email you. Signing in does not
+          upload your private journal or prayers.
         </p>
         <p>
-          Use Settings to export private data. When you are signed in, you can
-          delete your account on this page at any time.
+          Use Settings to export your private data. You can delete your account
+          on this page at any time.
         </p>
-        <a href="mailto:support@hisfullglory.com">Contact support</a>
+        {config.supportEmailReady && (
+          <a href={`mailto:${config.supportEmail}`}>Contact support</a>
+        )}
       </div>
       <DeleteAccount />
     </section>
