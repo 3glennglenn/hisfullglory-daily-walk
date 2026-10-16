@@ -93,6 +93,24 @@ This file adds the current state and how to work with the founder. Last updated 
 - After an instant rollback, new production builds are not assigned to the domain until one
   is promoted. The promotion on 2026-10-12 ended that: the next build of `main` was
   assigned automatically.
+- Plan and build limits (written 2026-10-16, from the founder's decision of 2026-10-15):
+  - Both Vercel projects stay on the free Hobby plan until the store launch, around
+    mid-November 2026. Then the founder upgrades the team of both projects to Pro, $20 a
+    month for one seat, himself; Claude gives him the exact clicks at that moment and does
+    not change a plan or spend money. He accepts the fair-use risk until then: Hobby is for
+    personal, non-commercial use, and the site links to the shop.
+  - Hobby allows 100 deployments a day, and one push to a branch that deploys builds both
+    projects (2 deployments). So `vercel.json` and `site/vercel.json` carry the same
+    `git.deploymentEnabled` rules: branches named `docs-*`, `planning-*`, `scratch-*`,
+    `wip-*`, `ci` or `ci-*` get no Vercel deployment. Every other branch gets a preview.
+    Name a branch that needs no preview with one of those prefixes. `tests/vercel-config.test.ts`
+    keeps the two files equal and fails if a rule could match `main`.
+  - Every merge or push to `main` still builds both projects, whatever it changes, and the
+    daily routine's pushes cannot be made free. Batch pushes and merges. A branch cut
+    before these rules reached `main` keeps deploying until it merges `main`.
+  - A red Vercel status "Deployment rate limited" on a branch means the daily quota was
+    used up, not that the code is broken. The GitHub checks are separate and still run.
+  - An Ignored Build Step does not save quota: cancelled builds count as deployments.
 
 ## Branches
 

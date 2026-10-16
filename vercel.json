@@ -1,4 +1,14 @@
 {
+  "git": {
+    "deploymentEnabled": {
+      "docs-*": false,
+      "planning-*": false,
+      "scratch-*": false,
+      "wip-*": false,
+      "ci": false,
+      "ci-*": false
+    }
+  },
   "rewrites": [
     {
       "source": "/((?!assets/|bible/web.json|study/|ai/|icon|apple-touch|manifest|sw.js|workbox-).*)",

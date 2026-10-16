@@ -1,5 +1,29 @@
 # Changelog
 
+## Reports that hold a post: branch `report-hold`, waiting for the founder's merge (2026-10-16)
+- Server side: migration 013 (next section) hides a post that two different people have reported until a person has reviewed it. It is written and tested locally and not applied to the hosted project. This section is the app side.
+- Replace the inline "Report / block" card with a report dialog (GATE-06 client half, UX-01). The reader picks one of eight reasons, harm first (harassment or threats, hate, sexual content, dangerous advice, scam, private information, spam, something else), none preselected, may add a private note of up to 1,000 characters, and sends it. The reasons are the values the server already accepts; the reason and the note go only to `community_safety_action` and are never logged, stored or put in an address.
+- After sending, a calm confirmation ("Thank you for telling us") says a person will read it and the author is not told who reported, and offers "Block this person" and "Keep reading". Blocking sends no reason and no note, and nothing asks the reader to reload: lists refresh when the dialog closes.
+- Specific, non-technical errors: not sent (connection), post no longer available, signed out, and more than 30 reports in an hour. Escape closes, a click outside is ignored while the note has text, and focus returns to the Report button, which is named for what it reports (post, chat message, prayer request, support request).
+- Settings: the blocked list is "Blocked authors", shows no empty text while loading, "Block list unavailable." when it cannot be read, "No blocked authors." when empty, and each Remove button names its row.
+- Add `src/social/reportReasons.ts`, `tests/safety.test.ts` (reasons stay inside the server's category list) and `tests/safety.browser.mjs` (15 checks plus the blocked list: states, roles, focus, 44px targets at 320px, no logging of the note).
+- Held posts need no client change: the readers return nothing for a held post, so a direct link shows the existing "This thread is unavailable, removed or blocked." line. A distinct "This post is being reviewed." line needs changes to the thread readers and waits for the week-2 surfaces.
+
+## Held for review: branch `report-hold`, written and tested locally, not applied to the hosted project (2026-10-16)
+- Add `supabase/migrations/013_report_hold.sql` (GATE-06): an item that two different people other than its author have reported is hidden from every reader until a person has reviewed it. It covers community posts (Circle posts too), chat messages, prayer requests and support requests. The author's own report and a repeat report from the same person do not count.
+- Add `public.review_held_content(item_kind, item_id, decision, review_note)` for the database owner only (not granted to `anon` or `authenticated`): `restore`, `keep_hidden` or `remove`, resolving the item's open reports in the same transaction so the next single report does not hold a restored item again.
+- `community_safety_action` keeps its signature and grants and refuses a 31st report from one account within an hour ("Report limit reached"). `community_reports.target_kind` also accepts `walk_reflection` for week 2.
+- Add `tests/report-hold-schema.test.mjs` (PGlite): every storage shape, Circle isolation, flood cap, operator review, a WHERE guard for every UPDATE and DELETE in a database function, and a reader-coverage guard so a future reader that forgets to hold back held content fails the suite. Two reports arriving at the same moment are covered by a per-item lock that PGlite cannot exercise.
+- Document the routine in `docs/MODERATION.md` ("Held for review"): count-only check, how to read an item and its reports, the three decisions, and the limits.
+
+## Release foundation: branch `release-foundation`, waiting for the founder's merge (2026-10-16)
+- Skip Vercel builds for branches that need no preview: `git.deploymentEnabled` in `vercel.json` and `site/vercel.json` turns off `docs-*`, `planning-*`, `scratch-*`, `wip-*`, `ci` and `ci-*`. Every other branch still gets a preview and `main` always builds. A test push of a `scratch-*` branch created no Vercel status and no deployment.
+- Write down the fair-use answer in `CLAUDE.md` ("Vercel notes"): both projects stay on Hobby until the store launch around mid-November 2026, then the founder upgrades to Pro ($20 a month, one seat) himself.
+- Add the shared tokens `--danger` and `--on-danger` (Light and Dark) with `button.danger`, `.secondary.danger` and `.danger-text`, reserved for deleting an account and inline errors.
+- Fix two contrast defects found by the audit: the keyboard focus ring is `var(--strong)` instead of `var(--secondary)` (2.89:1 on the Light background, now 6.06:1), in the app and on the site; the edges of input, textarea and select use `var(--muted)` instead of `var(--border)` (1.4 to 2.3:1, now 6.09:1 or more).
+- Add `tests/vercel-config.test.ts` (both rule sets equal, no rule can match `main`) and `tests/tokens-contrast.test.ts` (WCAG ratios computed from the token hex values: 4.5:1 for text pairs, 3:1 for the focus ring and control edges, Light and Dark).
+- Add `docs/UX_REVIEW.md`: the review every pull request that adds or changes a screen records (design critique, UX copy, accessibility).
+
 ## Checks on GitHub (2026-10-14)
 - Add `.github/workflows/checks.yml`: on every pull request to `main` and every push to `main`, run the app's `npm test`, `npm run security`, `npm run build` and the browser check against `npm run preview`, and build and test the site. Free GitHub-hosted runners, no secrets; the checks report and never block a push or a Vercel deployment.
 - Nothing ran the browser check automatically, which is how it could fail from pull request #2 until pull request #10 without anyone seeing it.

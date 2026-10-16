@@ -1,4 +1,5 @@
 import {checkCircles} from "../tests/circles.browser.mjs";
+import {checkSafety} from "../tests/safety.browser.mjs";
 // Run against npm run preview. DOM/behavior checks only; deliberately no screenshots.
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
@@ -651,6 +652,7 @@ try {
     assert.match(await page.locator("main").innerText(),/not configured/);await context.setOffline(false);
   });
   await check("Circles public/private lifecycle, roles, privacy, errors and responsive UI (controlled SDK)",()=>checkCircles(browser,base));
+  await check("report dialog states, focus and sizes (controlled SDK)",()=>checkSafety(browser,base));
   assert.deepEqual(errors, []);
   assert.deepEqual(consoleErrors, [], "no unexpected main-page console errors");
   assert.deepEqual(consoleWarnings, [], "no unexpected main-page console warnings");
