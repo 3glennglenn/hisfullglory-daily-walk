@@ -17,6 +17,97 @@ where id='REPORT_UUID';
 
 Categories preserve the original list and add threats, sexual exploitation, direct payment solicitation, self-harm encouragement, abuse, misinformation, impersonation, misleading credentials and misleading sources. Fraudulent expertise claims fall under misleading credentials; reputation never establishes expertise. Content/author reporting resolves ownership from content IDs privately. Anonymous authors remain identifiable to operators, not ordinary readers. Blocks/mutes apply to the actor's reads across original chat/wall, aggregate feed and support listings; they are not a claim that someone cannot see another person's public content. Settings allows removal. Never disclose the block list or reporting identity to the reported user.
 
+## Held for review
+
+Written in migration `013_report_hold.sql` (Phase 1, GATE-06). It is tested on PGlite
+(`tests/report-hold-schema.test.mjs`). Until the founder approves it and it is applied to the
+hosted project, no hold happens in production.
+
+**The rule.** When two different people, neither of them the author, have reported the same
+item, the item is hidden from every reader until a person has reviewed it. Reports count
+while they are `open` or `reviewing`, once per person. The author's own report does not
+count, and the same person reporting twice is still one person. A hold covers community
+posts (including Circle posts, replies and stories), chat messages, prayer requests and
+support requests. It is the database that holds, so every version of the app is treated alike.
+
+- Posts and support requests go to `moderation_state = 'pending_review'`.
+- Chat messages and prayer requests go to `is_hidden = true`, with an audit row whose actor
+  is `system`. The audit row of a held post or support request is written by the existing
+  trigger.
+- A held item is gone from every list, feed, thread and reply count. There is no
+  placeholder and no count. A third person can no longer report it ("Visible target
+  required").
+- A person who is not a member of a private Circle cannot report its posts, so cannot hold
+  them or learn that they exist.
+
+**Check for held items (numbers only).** Run this in the SQL editor to see whether anything is
+waiting. It returns counts and nothing else.
+
+```sql
+select 'post' as kind, count(*) as held from public.community_posts
+ where moderation_state='pending_review' and deleted_at is null
+union all select 'chat', count(*) from public.chat_messages where is_hidden and deleted_at is null
+union all select 'prayer', count(*) from public.prayer_posts where is_hidden and deleted_at is null
+union all select 'support', count(*) from public.support_requests
+ where moderation_state='pending_review' and status in('approved','fundraising') and deleted_at is null;
+```
+
+Chat and prayer counts also include items an operator hid by hand, because both use the same
+flag. A support request waiting for its first approval is not counted: it is decided with
+`review_support_request`.
+
+**Read one item and its reports.** Replace `ITEM_UUID` and the kind. The reports are private;
+do not copy a reason, a note or a reporter into email, chat, push, analytics or a URL.
+
+```sql
+select id,reporter_id,category,note,status,created_at from public.community_reports
+ where target_kind='post' and target_id='ITEM_UUID' order by created_at;
+select id,body,moderation_state from public.community_posts where id='ITEM_UUID';
+-- chat: public.chat_messages, prayer: public.prayer_posts, support: public.support_requests
+select created_at,actor,old_state,new_state,note from public.moderation_audit
+ where target_id='ITEM_UUID' order by created_at;
+```
+
+**Decide.** `public.review_held_content(item_kind, item_id, decision, review_note)` is the only
+way to release a hold. It cannot be run from the app, by a guest or by a signed-in account;
+only the database owner in the SQL editor can. `item_kind` is `post` (also Circle posts),
+`chat`, `prayer` or `support`. Write your name, the date and the reason in the note, because
+the audit actor is the shared database role.
+
+```sql
+-- Nothing wrong with it: visible again.
+select public.review_held_content('post','ITEM_UUID','restore','Reviewer NAME; DATE; reason');
+-- Not allowed, but keep the record: stays hidden.
+select public.review_held_content('post','ITEM_UUID','keep_hidden','Reviewer NAME; DATE; reason');
+-- Concluded removal: hidden for good (a chat or prayer item also gets deleted_at).
+select public.review_held_content('post','ITEM_UUID','remove','Reviewer NAME; DATE; reason');
+```
+
+Each decision resolves that item's `open` and `reviewing` reports in the same transaction.
+That matters: a restored item has no open reports left, so the next single report does not
+hold it again. "Held item not found" means the item is not held (already decided, deleted,
+or a support request that is not approved or fundraising). A Circle owner or moderator can also
+restore a held Circle post with `moderate_circle_post`, which resolves its reports too;
+Circle moderators still see the reports of a held post in their own queue, without any
+reporter identity.
+
+**Limits to know.**
+
+- Two accounts controlled by one person can still hold a post. That is why every hold is
+  reviewed by a person, and why the author's own report does not count.
+- One account may file 30 reports an hour; the 31st is refused with "Report limit reached".
+  The number is a design choice, not a measured fact, and can be changed in the migration
+  that follows.
+- An open chat window may keep showing a held message until its next refresh; the original
+  chat reconciles periodically.
+- Two reports that arrive at the same moment still hold the item, because the trigger takes a
+  lock per item before it counts. PGlite has one connection and cannot prove that; the
+  hosted project is where it would be seen.
+- Reports about Walk With Me reflections are accepted by the table (`walk_reflection`) but
+  the report function gets its branch for them when that table exists (Phase 4).
+- Deleting a reporter's account removes their reports but leaves a held item held.
+- No report reason, note or reporter goes into email, push, analytics or URLs.
+
 ## Contributions and original community
 
 New `community_posts.moderation_state`: visible, pending_review, hidden, removed. Only visible undeleted rows appear in public feeds. State changes automatically create private audit records. Use pending_review while investigating, hidden to stop display, removed for a concluded removal. Private evidence/rationale belongs in the audit note, not in public post text.

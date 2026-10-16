@@ -22,6 +22,78 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:2-corinthians/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul opens with a blessing that comes from a hard place. “Blessed be the God and Father of our Lord Jesus Christ, the Father of mercies and God of all comfort”. God comforts us in all our affliction so that we can comfort others.\n\nThen he tells of a time in Asia that crushed him. They were weighed down beyond their power, and “we despaired even of life.” They felt they had received the sentence of death, so that they would trust not in themselves but in God who raises the dead. God delivered them, and Paul asks the Corinthians for their prayers.\n\nHe next defends a change of plans. He had meant to visit Corinth and had not, and some say he is fickle. He insists that his word is not yes and no, because God is faithful, and Jesus is God’s yes to all his promises. God has sealed believers and given the Spirit as a down payment. He stayed away to spare them. “We don’t control your faith, but are fellow workers with you for your joy.”"
+        },
+        {
+          "kind": "background",
+          "text": "This letter is usually dated within a year or so after 1 Corinthians. The relationship between Paul and the church had been strained, and he writes with warmth and some pain. Some scholars think 2 Corinthians joins more than one letter, and others hold that it was written as one. The trouble in Asia mentioned in verse 8 is not described in detail here, and its exact nature is unknown. The Acts account of Ephesus is often linked to it. See Acts 19."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-corinthians/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul makes a decision he explains with some feeling: he would not come to them again in sorrow. If he made them grieve, who would be left to cheer him? So he wrote a letter instead, and he tells them how it was written. “out of much affliction and anguish of heart I wrote to you with many tears”. He did not want to hurt them but to show how much he loves them.\n\nThere is an offender whom the church has punished, and Paul now asks them to turn. “you should rather forgive him and comfort him,” so that he is not swallowed up by grief. Paul himself forgives whomever they forgive.\n\nHe then tells of a restless trip to Troas, where a door was opened but he could not rest because he did not find Titus, and so he went on to Macedonia. Suddenly the mood changes to thanksgiving. God leads Paul in triumph and spreads the aroma of Christ, life to some and death to others. “Who is sufficient for these things?”"
+        },
+        {
+          "kind": "background",
+          "text": "This chapter looks back on a painful stretch in the relationship between Paul and Corinth, including a severe letter he mentions and a person who had caused grief. The offender’s identity is not given. Many link him with the man of 1 Corinthians 5, while others think it was someone who had wronged Paul himself. Either way the chapter is a lesson in discipline that ends in forgiveness and restoration. The image of being led in triumph recalls a Roman parade and is read in different ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-corinthians/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Some teachers carry letters of recommendation. Paul has no need of one, and he says why. “You are our letter, written in our hearts,” known and read by everyone, written not with ink but with the Spirit of the living God, not on stone but on hearts of flesh. Any sufficiency, he says, comes from God, who made him a servant of a new covenant, not of the letter but of the Spirit. “the letter kills, but the Spirit gives life.”\n\nThen he looks back to Moses. When the law was given on stone it came with such glory that the people could not look at his face, a glory that was fading. How much more glory belongs to the service of the Spirit. Moses put a veil over his face, and Paul says a veil still lies on the minds of those who read Moses without Christ. When someone turns to the Lord, the veil is taken away. “where the Spirit of the Lord is, there is liberty.” All of us, with unveiled face, are being changed from glory to glory."
+        },
+        {
+          "kind": "background",
+          "text": "Paul is a Jew speaking about his own Scriptures, and he is answering critics who question his authority. He compares his ministry with that of Moses, but he does not set the law against God, for the law came with glory. This chapter has sometimes been used to say that Jews were rejected or that the first covenant was bad, which is not what the text says. The old story of Moses’ veil is told in Exodus 34. Christians read “the letter kills” in several ways, and the debate continues."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-corinthians/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul says that because he has this ministry, and because he has received mercy, he does not lose heart. He has renounced shameful, hidden ways and does not twist God’s word. If the Good News is veiled, it is veiled to those who are perishing, whose minds the god of this world has blinded. Paul preaches not himself but Christ Jesus as Lord. The God who once said light would shine out of darkness has shone in believers’ hearts.\n\nThen comes an image people remember. “we have this treasure in clay vessels,” so that the power is clearly God’s and not theirs. He lists what that looks like. They are “pressed on every side, yet not crushed”, perplexed but not in despair, pursued but not forsaken, struck down but not destroyed. They carry the dying of Jesus so that his life may show in them.\n\nHe ends with hope. The outer person decays, but “our inward person is renewed day by day.” Present trouble is light and brief next to an eternal weight of glory, and the things unseen are the lasting ones."
+        },
+        {
+          "kind": "background",
+          "text": "Paul wrote this passage to a church that had doubted him, and here he tells of his own weakness without apology. The phrase “the god of this world” is understood by most readers to mean Satan, and some think it points more broadly to the powers that shape the age. The clay jars are the ordinary pottery of the time, and Paul’s point is that the contrast between the container and the contents is deliberate. Many have found these verses a comfort in hardship, and they should be read within Paul’s own account of suffering. See 2 Corinthians 11."
+        }
+      ]
     }
   ]
 }

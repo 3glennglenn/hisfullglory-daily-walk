@@ -4,23 +4,24 @@
     {
       "id": "ai:philemon",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Philemon is a personal letter of one chapter. Onesimus, a slave from Philemon’s household, has been with Paul and has become a believer. Paul sends him back with this letter, asking Philemon to receive him no longer as a slave but as a dear brother, and offering to repay anything Onesimus owes."
+          "text": "A man is going home, and he carries a letter that is about him. His name is Onesimus. He belonged to Philemon’s household as a slave, and now he has been with Paul, who writes from prison and says he became Onesimus’ father there, in his chains. Onesimus has become a believer, and Paul is sending him back.\n\nPaul says he could command Philemon, but for love’s sake he appeals instead. Onesimus was once useless to Philemon and is now useful to both of them. Paul asks Philemon to receive him “no longer as a slave, but more than a slave, a beloved brother”. He had wanted to keep Onesimus with him, yet he would do nothing without Philemon’s consent.\n\nThen comes a promise that is almost easy to miss. If Onesimus has wronged Philemon or owes him anything, Paul writes with his own hand, “put that to my account.” He will repay it."
         },
         {
           "kind": "background",
-          "text": "Paul writes from prison. Philemon was a believer in Colossae in whose house a church met. Slavery was built into the Roman world; a slave who left a household was at the mercy of the owner."
+          "text": "Paul writes from prison, with Timothy named beside him. Philemon was a believer in Colossae, and a church met in his house. Slavery was built into the Roman world, and a slave who left a household was at the mercy of the owner. That is what makes the letter so careful: Paul asks, he does not demand, and he puts his own name behind a man who had no power of his own."
         },
         {
           "kind": "interpretations",
-          "text": "This letter was used in past centuries to defend slavery, a reading that churches now reject. Many readers see it working the other way: Paul places master and slave side by side as brothers, which leaves no room for one to own the other. Whether Paul is asking outright for Onesimus’ freedom is debated; he hints that Philemon will do even more than he asks."
+          "text": "This letter was used in past centuries to defend slavery, a reading that churches now reject. Many readers see it working the other way: Paul places master and slave side by side as brothers, which leaves no room for one to own the other. Whether Paul is asking outright for Onesimus’ freedom is debated. He hints that Philemon will do even more than he asks, and says he is sure “you will do even beyond what I say.”"
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

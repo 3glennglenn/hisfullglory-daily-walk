@@ -186,25 +186,47 @@ export function Settings() {
     </section>
   );
 }
-function BlockedAuthors() {
+export function BlockedAuthors() {
   const { session } = useAuth();
   const [blocks, setBlocks] = useState<
     { id: string; action: string; created_at: string }[]
   >([]);
+  // loading: show the heading only; ready: rows or the empty text; error: the status line only.
+  const [phase, setPhase] = useState<"loading" | "ready" | "error">("loading");
   const [status, setStatus] = useState("");
-  async function load() {
+  async function load(isCurrent: () => boolean = () => true) {
     if (!supabase || !session) return;
-    const { data, error } = await supabase.rpc("read_own_blocks");
-    if (error) setStatus("Block list unavailable.");
-    else setBlocks(data ?? []);
+    let rows: { id: string; action: string; created_at: string }[] | null = null;
+    try {
+      const { data, error } = await supabase.rpc("read_own_blocks");
+      if (!error) rows = data ?? [];
+    } catch {
+      rows = null;
+    }
+    if (!isCurrent()) return;
+    if (rows) {
+      setBlocks(rows);
+      setStatus("");
+      setPhase("ready");
+    } else {
+      setBlocks([]);
+      setStatus("Block list unavailable.");
+      setPhase("error");
+    }
   }
   useEffect(() => {
-    void load();
+    let current = true;
+    setPhase("loading");
+    setStatus("");
+    void load(() => current);
+    return () => {
+      current = false;
+    };
   }, [session?.user.id]);
   if (!session) return null;
   return (
     <div className="card">
-      <h2>Blocked or muted authors</h2>
+      <h2>Blocked authors</h2>
       <p>These private entries do not reveal anonymous profile names.</p>
       {blocks.map((b, i) => (
         <p key={b.id}>
@@ -212,6 +234,7 @@ function BlockedAuthors() {
           {new Date(b.created_at).toLocaleDateString()}{" "}
           <button
             className="secondary"
+            aria-label={`Remove ${b.action} for Author ${i + 1}`}
             onClick={async () => {
               const { error } = await supabase!.rpc("remove_block", {
                 blocked_user: b.id,
@@ -224,8 +247,8 @@ function BlockedAuthors() {
           </button>
         </p>
       ))}
-      {!blocks.length && <p>No blocked or muted authors.</p>}
-      <small role="status">{status}</small>
+      {phase === "ready" && !blocks.length && <p>No blocked authors.</p>}
+      <div role="status">{status && <p>{status}</p>}</div>
     </div>
   );
 }

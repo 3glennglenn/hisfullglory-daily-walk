@@ -4,23 +4,24 @@
     {
       "id": "ai:hebrews",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Hebrews reads like a sermon. It argues, step by step, that Jesus is greater than the angels, than Moses and than the priests of the old covenant. He is the high priest who offered himself once for all and now gives free access to God.\n\nBetween the arguments come warnings not to drift away and encouragements to hold on. Chapter 11 lists people who lived by faith, and the letter calls readers to run with endurance, looking to Jesus."
+          "text": "Someone is preaching to a tired and pressured people, and he cannot name everyone he wants to name. In the middle of a long roll call of men and women who lived by faith, he stops. “the time would fail me” if he told of them all. This is Hebrews, and it reads less like a letter than like a sermon.\n\nIts argument is built step by step. Jesus is greater than the angels. He is greater than Moses. He is greater than the priests of the old covenant, because he is the high priest who offered himself once for all, and now gives free access to God.\n\nBetween the arguments come warnings not to drift away, and encouragements to hold on. In chapter 11 comes the definition the writer sets before his readers: “Now faith is assurance of things hoped for, proof of things not seen”, and the chapter fills it with lives. Then the call goes out to run with endurance, “looking to Jesus, the author and perfecter of faith”."
         },
         {
           "kind": "background",
-          "text": "The author is unknown. Paul was named in the eastern churches from early on; Barnabas and Apollos have also been suggested. The readers seem to be Jewish Christians tempted to give up under pressure. Many date it before the year 70, since it speaks of sacrifices as still being offered."
+          "text": "No name stands at the head of this sermon, and the author is unknown. Paul was named in the eastern churches from early on, and Barnabas and Apollos have also been suggested. The readers seem to be Jewish Christians tempted to give up under pressure. Many scholars date it before the year 70, since it speaks of sacrifices as still being offered."
         },
         {
           "kind": "interpretations",
-          "text": "The warnings, especially 6:4 to 6 and 10:26 to 31, are read differently. Some conclude that a true believer can fall away. Others hold that the warnings describe people who belonged to the community without true faith, or that they are the means God uses to keep believers."
+          "text": "The warnings, especially 6:4 to 6 and 10:26 to 31, are read differently. Some conclude that a true believer can fall away. Others hold that the warnings describe people who belonged to the community without true faith, or that they are the means God uses to keep believers going. These are old and serious conversations among Christians, and each side takes the warnings seriously, since the writer himself plainly does."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

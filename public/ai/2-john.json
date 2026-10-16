@@ -4,13 +4,13 @@
     {
       "id": "ai:2-john",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "2 John is a note of thirteen verses from one who calls himself the elder, to the chosen lady and her children. He is glad that they are walking in the truth and repeats the old command to love one another.\n\nHe warns that deceivers are going about who deny that Jesus Christ came in the flesh, and tells his readers not to give such teachers a welcome or a platform."
+          "text": "It is a note of thirteen verses. It comes from one who calls himself only the elder, and it is addressed to the chosen lady and her children, whom he loves in truth. He is glad. He has found some of her children “walking in truth”.\n\nWhat he asks for is not new. It is the old command, the one they have had from the beginning, “that we love one another.” And love, he says, means walking according to God’s commandments.\n\nThen the tone sharpens. Many deceivers have gone out into the world who do not confess that Jesus Christ came in the flesh. He tells his readers to guard what they have gained, and not to give such teachers a welcome. If anyone comes who does not bring this teaching, “don’t receive him into your house, and don’t welcome him”.\n\nThe elder would rather say more face to face than with paper and ink."
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "The instruction not to welcome false teachers is about lending support to their teaching, and readers generally do not take it as a ban on ordinary kindness or conversation. The letter holds truth and love together and will not let either stand without the other."
+          "text": "The instruction not to welcome false teachers is about lending support to their teaching, and readers generally do not take it as a ban on ordinary kindness or conversation. The letter holds truth and love together and will not let either stand without the other. Truth without love becomes hard, and love without truth loses its direction, and so the short note asks for both."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
