@@ -116,7 +116,7 @@ export const processors: Processor[] = [
     id: "push",
     name: "Browser and phone push services",
     does: "Deliver reminders. They are run by the company behind your browser or phone.",
-    receives: "A push address for your device and the fixed reminder text.",
+    receives: "An address for your device from the notification service, and the fixed reminder text.",
     where: "Depends on the company behind your browser or phone.",
   },
 ];
