@@ -5,6 +5,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
+import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 const browser = await chromium.launch({
   headless: true,
@@ -641,6 +642,7 @@ try {
     }
   });
   await check("actual account boundary isolates guest/A/B drafts and rejects stale Terms after token refresh (controlled SDK)",()=>checkAuthBoundary(browser,base));
+  await check("account deletion flow (controlled SDK)",()=>checkProfile(browser,base));
   await check("topic voting preserves drafts and late publishing cannot erase a new topic draft (controlled SDK)",()=>checkTopicComposer(browser,base));
   await check("Circle SPA routes reload/back/forward and installed shell launches offline without a fake backend",async()=>{
     await go("/community/circles");await page.getByRole("heading",{name:"Circles",exact:true}).waitFor();

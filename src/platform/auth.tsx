@@ -9,6 +9,7 @@ import {
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "../supabase";
 import { forgetAccount } from "./persistence";
+import { isDeleteConfirmation } from "./deleteConfirm";
 import { CodeEntry } from "./CodeEntry";
 import { postError } from "../social/blockedLanguage";
 export const TERMS_VERSION = "2026-10-07";
@@ -237,10 +238,18 @@ export function DeleteAccount() {
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("");
   const [deleted, setDeleted] = useState(takeDeletedNotice);
-  if (deleted && !session)
+  const doneHeading = useRef<HTMLHeadingElement>(null);
+  const showDone = deleted && !session;
+  // The card that held the focus is gone, so the confirmation takes it (otherwise it falls to <body>).
+  useEffect(() => {
+    if (showDone) doneHeading.current?.focus();
+  }, [showDone]);
+  if (showDone)
     return (
       <section className="card" role="status">
-        <h2>Your account has been deleted</h2>
+        <h2 ref={doneHeading} tabIndex={-1}>
+          Your account has been deleted
+        </h2>
         <p>
           Everything the server held for it has been removed, and this device
           no longer keeps its private data.
@@ -249,7 +258,7 @@ export function DeleteAccount() {
     );
   if (!supabase || !session) return null;
   async function remove() {
-    if (!supabase || !session || busy || typed.trim() !== "DELETE") return;
+    if (!supabase || !session || busy || !isDeleteConfirmation(typed)) return;
     setBusy(true);
     const userId = session.user.id;
     const { error } = await supabase.rpc("delete_my_account");
@@ -305,7 +314,7 @@ export function DeleteAccount() {
               onChange={(e) => setTyped(e.target.value)}
             />
           </label>
-          <button disabled={busy || typed.trim() !== "DELETE"}>
+          <button disabled={busy || !isDeleteConfirmation(typed)}>
             {busy ? "Deleting…" : "Delete my account permanently"}
           </button>
           <button
