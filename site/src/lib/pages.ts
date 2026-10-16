@@ -7,15 +7,16 @@ import { content, showDrafts } from "./content.ts";
 const fixedPages = ["/", "/bible", "/resources", "/about", "/beta", "/delete-account"];
 
 /**
- * A section's overview page and its approved pages; nothing until the first one is
- * approved. A draft is never indexable, and neither is an overview that lists one, which
- * only happens in a build made with SHOW_DRAFTS=1.
+ * A section's overview page and its published pages (approved ones, and for context checks
+ * also the AI-unreviewed ones); nothing until the first one is published. A draft is never
+ * indexable, and neither is an overview that lists one, which only happens in a build made
+ * with SHOW_DRAFTS=1.
  */
 function section(base: string, items: { review: string; name: string }[]) {
-  const approved = items.filter((item) => item.review === "approved");
-  if (!approved.length) return [];
-  const listsDraft = showDrafts() && approved.length < items.length;
-  return [...(listsDraft ? [] : [base]), ...approved.map((item) => `${base}/${item.name}`)];
+  const published = items.filter((item) => item.review !== "draft");
+  if (!published.length) return [];
+  const listsDraft = showDrafts() && published.length < items.length;
+  return [...(listsDraft ? [] : [base]), ...published.map((item) => `${base}/${item.name}`)];
 }
 
 export const indexablePaths = (): string[] => {
