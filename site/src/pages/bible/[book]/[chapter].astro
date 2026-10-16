@@ -14,7 +14,7 @@ import {
   speakerParts,
   type BibleBook,
 } from "../../../lib/bible";
-import { checksFor, refLabel } from "../../../lib/content";
+import { aiUnreviewedCardLabel, checksFor, refLabel } from "../../../lib/content";
 
 type Step = { label: string; href: string };
 
@@ -120,6 +120,7 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
                 <li>
                   <a href={`/context-checks/${item.slug}`}>{refLabel(item.verse)} in context</a>
                   <p class="muted">{item.hook}</p>
+                  {item.review === "ai-unreviewed" && <p class="small muted">{aiUnreviewedCardLabel}</p>}
                 </li>
               ))}
             </ul>

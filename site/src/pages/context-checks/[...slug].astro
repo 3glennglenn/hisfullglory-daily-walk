@@ -1,6 +1,8 @@
 ---
 // /context-checks and /context-checks/<slug>: a well-known verse put back into its
-// surroundings. Neither exists until at least one check is approved.
+// surroundings. Neither exists until at least one check is published (approved, or written by
+// an AI model and not checked by a person, which the page says; src/lib/content.ts).
+import AiUnreviewedNote from "../../components/AiUnreviewedNote.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import DraftBanner from "../../components/DraftBanner.astro";
 import EditorialNote from "../../components/EditorialNote.astro";
@@ -9,6 +11,7 @@ import { appUrl, shopUrl } from "../../config";
 import Base from "../../layouts/Base.astro";
 import { blocks } from "../../lib/ai";
 import {
+  aiUnreviewedCardLabel,
   arguedHeading,
   checkParts,
   publishedChecks,
@@ -42,11 +45,12 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
 
 {
   item ? (
-    <Base title={`${label} in context`} description={item.hook} noindex={item.review !== "approved"}>
+    <Base title={`${label} in context`} description={item.hook} noindex={item.review === "draft"}>
       <section class="section">
         <div class="wrap prose">
           <Breadcrumb trail={[{ label: "Context checks", href: "/context-checks" }]} current={label!} />
           {item.review === "draft" && <DraftBanner />}
+          {item.review === "ai-unreviewed" && <AiUnreviewedNote />}
           <p class="eyebrow">Context check</p>
           <h1>{label} in context</h1>
           <p class="lede">{item.hook}</p>
@@ -181,7 +185,7 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
     <Base
       title="Context checks"
       description="Well-known Bible verses put back where they stand: who is speaking, to whom, and what is said around them."
-      noindex={checks.some((entry) => entry.review !== "approved")}
+      noindex={checks.some((entry) => entry.review === "draft")}
     >
       <section class="section">
         <div class="wrap">
@@ -197,6 +201,7 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
                   <a href={`/context-checks/${entry.slug}`}>{refLabel(entry.verse)}</a>
                 </h2>
                 <p>{entry.hook}</p>
+                {entry.review === "ai-unreviewed" && <p class="small muted">{aiUnreviewedCardLabel}</p>}
               </li>
             ))}
           </ul>

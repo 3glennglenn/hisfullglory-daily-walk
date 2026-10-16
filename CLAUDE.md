@@ -1,7 +1,7 @@
 # HisFullGlory Daily Walk: working notes for Claude
 
 Read `AGENTS.md` first: its product, privacy, Scripture and migration rules still apply.
-This file adds the current state and how to work with the founder. Last updated 2026-10-13.
+This file adds the current state and how to work with the founder. Last updated 2026-10-16.
 
 ## Working with the founder
 
@@ -41,7 +41,19 @@ This file adds the current state and how to work with the founder. Last updated 
   study notes), on three conditions the founder set or accepted: the page says an AI model
   helped write it, every source was actually opened and is linked, and nothing goes online
   before the founder approves it. This replaces the earlier rule that sourced notes are
-  never written by AI.
+  never written by AI. The third condition no longer holds for context checks (next bullet);
+  it still holds for study notes, topic pages and articles.
+- Since 2026-10-16 a daily cloud routine writes one new context check and publishes it to
+  `main` without the founder's review. His words: "a and b and i don't have to review them".
+  It applies to context checks only. Safeguards, each enforced by code: a script
+  finds the exact words of every quoted person on the linked source page; every source
+  must open (HTTP 200, a text page), and at least two are required; the page says "Written
+  by an AI model from the sources below. Not checked by a person." (review
+  `ai-unreviewed`, no approved date); Bible quotations must match the WEB text and no other
+  quotation marks are allowed; the verse comes from a committed queue, one check a day.
+  The home page and the app keep showing approved checks only. The routine does not exist
+  yet: it is created after the founder's merge and an environment with network access.
+  Rules, limits and the routine prompt: `docs/CONTEXT_CHECKS_ROUTINE.md`.
 - Context checks are the first selling point the founder chose (2026-10-13): a well-known
   verse with the story around it, for the site and for daily short videos that open with
   "You know this verse. But did you know...". What a video says must be on the site first.
@@ -69,8 +81,10 @@ This file adds the current state and how to work with the founder. Last updated 
   shows the sourced note and the AI card as two separate blocks, `/ai/john.json` and
   `/ai/mark.json` are served, the community lists the eight launch topics, and
   `read_topic_discussions` returns 200.
-- Later production builds come from the daily routine's pushes to `main`. Nobody looks at
-  those before they go live, so the routine may only change files under `public/ai/`.
+- Later production builds come from the daily routines' pushes to `main`. Nobody looks at
+  those before they go live, so the AI-explanations routine may only change files under
+  `public/ai/`, and the context-check routine (once it exists) only adds one new file under
+  `site/content/context-checks/`.
 - From 2026-10-08 until that promotion the live app could not reach Supabase:
   `VITE_SUPABASE_URL` in Vercel ended in `/rest/v1/`, so every call went to
   `/rest/v1/rest/v1/...` and returned 404. The value is now the bare project URL, set for
@@ -131,6 +145,9 @@ This file adds the current state and how to work with the founder. Last updated 
 - `bible-speaker-labels` (2026-10-14): shows those labels apart from the text, above or
   inside the verse, in the Reader and on the site, as the founder decided. Waits for his
   merge.
+- `context-check-routine` (2026-10-16): labelled AI-unreviewed context checks on the site,
+  the `scripts/context-checks.mjs` command with its online source and quote checks, and the
+  routine prompt. Waits for the founder's merge.
 
 ## Checks on GitHub (since 2026-10-14)
 

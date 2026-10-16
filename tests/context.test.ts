@@ -7,12 +7,16 @@ import { parseRoute } from "../src/platform/router.ts";
 const dir = "site/content/context-checks";
 const files = readdirSync(dir).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(`${dir}/${f}`, "utf8")));
 
-test("every approved context check on the website reads cleanly in the app, and drafts stay out", () => {
+test("every approved context check on the website reads cleanly in the app, and drafts and AI-unreviewed checks stay out", () => {
   const approved = files.filter((f) => f.review === "approved");
   const checks = approvedChecks(files);
   assert.equal(checks.length, approved.length);
   assert.ok(checks.length > 0);
   assert.equal(toAppCheck({ ...approved[0], review: "draft" }), null);
+  // A check written by an AI model that no person has checked never reaches the app.
+  const { approved: _approved, ...rest } = approved[0];
+  assert.equal(toAppCheck({ ...rest, review: "ai-unreviewed", model: "Test model" }), null);
+  assert.equal(approvedChecks([{ ...rest, review: "ai-unreviewed", model: "Test model" }]).length, 0);
   assert.equal(toAppCheck({ ...approved[0], hook: "" }), null);
   // Every quoted voice in a story is there to be shown.
   for (const check of checks)

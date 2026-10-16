@@ -57,9 +57,15 @@ every indexable page once and nothing else, `robots.txt` names it, every indexab
 its own title and description and its Open Graph tags, the share image is 1200 by 630, and
 the not-found page exists and is not indexed.
 
-`tests/content.test.ts` checks the topic pages and articles on file: a misquoted verse, a
-passage reason without a quotation or a wrong reference is rejected, only approved files
-are built, and a built page shows its text as written and says how it was made.
+`tests/content.test.ts` checks the topic pages, articles and context checks on file: a
+misquoted verse, a passage reason without a quotation or a wrong reference is rejected,
+drafts are never built, an AI-unreviewed context check is built with its label (top of the
+page, cards and closing note) and kept off the home page, and a built page shows its text
+as written and says how it was made.
+
+`tests/context-routine.test.ts` at the repository root checks the context-check command
+(`scripts/context-checks.mjs`) offline: matching of quoted words, the source checks with an
+injected fetch and a local stub server, the routine rules, the queue and the command line.
 
 ## Topic pages, articles and context checks
 
@@ -77,6 +83,18 @@ in (`src/context`): one check a day on its Home page, told one part per screen a
 `/context`, with a picture to share. A change to a check therefore reaches the app too. The eleven checks of 2026-10-13 were
 written by an AI model and approved by the founder that day. No theological reader has
 read them.
+
+Since 2026-10-16 a daily routine also writes context checks and publishes them without
+anyone reading them first (the founder's decision: "a and b and i don't have to review them";
+context checks only). Such a file says `"review": "ai-unreviewed"`, names the
+`model`, has no `approved` date and needs at least two `sources`. Its page says "Written by
+an AI model from the sources below. Not checked by a person." at the top and in a note at
+the bottom, and its cards say "Written by an AI model. Not checked by a person." The home
+page and the app show approved checks only. The build rejects any quotation mark in such a
+file other than the curly double quotes around WEB text, so the words of people can only
+stand in `voices`; `scripts/context-checks.mjs add` then refuses to write the file unless
+every source opens and every voice's words stand on its source page. The command, the
+limits of these checks and the routine prompt are in `docs/CONTEXT_CHECKS_ROUTINE.md`.
 
 Each check also tells `story`, the story around the verse, and says in `storyStatus` what
 that story rests on: `scripture` (the Bible itself), `history` (background from outside
@@ -112,7 +130,9 @@ Editorial content also lives in `content/topics/<id>.json` (one per launch topic
 stops the build.
 
 - A file is built only when it says `"review": "approved"`, with the date in `"approved"`.
-  Only the founder approves; a new file starts as `"draft"`. `/topics` and `/articles`, their navigation items and the
+  Only the founder approves; a new file starts as `"draft"`. The one exception is a context
+  check with `"review": "ai-unreviewed"` (see above), which the build labels as not checked
+  by a person. `/topics` and `/articles`, their navigation items and the
   sitemap entries appear with the first approved file of each kind.
 - Curly double quotes are reserved for words from the WEB text. In a topic file every
   passage reason must quote its own passage. In an article every quotation must occur in
