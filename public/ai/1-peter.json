@@ -4,13 +4,13 @@
     {
       "id": "ai:1-peter",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "1 Peter is written to scattered groups of believers who are being insulted and treated as outsiders. It reminds them of their living hope through the resurrection of Jesus and of who they now are: a chosen people, a holy nation, called out of darkness into light.\n\nThey are to live good lives among their neighbors, to respect authorities, and to bear unjust suffering as Christ did, without paying back evil for evil."
+          "text": "The letter is addressed to foreigners. They are scattered across Pontus, Galatia, Cappadocia, Asia and Bithynia, and they are being insulted and treated as outsiders. Peter begins with a blessing, and the first thing he gives them is hope: God has caused them to be “born again to a living hope” through the resurrection of Jesus.\n\nThen he tells them who they are. They are not nobodies. They are a chosen people, a holy nation, called “out of darkness into his marvelous light.” And so, as they live among their neighbors, they are to be known for good lives. They are to respect authorities and to bear unjust suffering the way Christ did, without paying back evil for evil. Of him Peter says, “When he was cursed, he didn’t curse back.”\n\nThe letter is written to people who may feel they do not belong anywhere. It tells them they belong to God."
         },
         {
           "kind": "background",
@@ -20,7 +20,8 @@
           "kind": "interpretations",
           "text": "The passage about Christ preaching to the spirits in prison (3:19 and 20) is one of the most puzzling in the New Testament and has several explanations. The instructions to slaves and to wives are read with the same care as similar passages in Paul’s letters. The book’s teaching on suffering has sustained Christians under pressure in every century."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

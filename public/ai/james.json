@@ -4,23 +4,24 @@
     {
       "id": "ai:james",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "James is practical from the first line. It speaks about trials, about hearing God’s word and doing it, about treating rich and poor alike, and about the power of the tongue. It warns the wealthy who exploit workers and ends with patience, prayer for the sick and bringing back those who wander.\n\nIts best-known argument is that faith without works is dead: real faith shows itself in what a person does."
+          "text": "James does not ease into his subject. “Count it all joy, my brothers, when you fall into various temptations”, he begins, and the rest of the letter is just as direct. Trials test faith, and testing produces endurance. Anyone who lacks wisdom should ask God. Hearing the word is not enough, and James wants his readers to be doers of it.\n\nHe asks them to picture a meeting. A man with a gold ring and fine clothes walks in, and a poor man in filthy clothes walks in behind him. If the rich man gets the good seat and the poor man is told to stand, partiality has crept into the church.\n\nThe letter speaks about the power of the tongue and warns the wealthy who exploit their workers. It ends with patience, prayer for the sick and bringing back those who wander.\n\nIts best-known argument sounds like a hammer: “faith, if it has no works, is dead in itself.” Real faith shows itself in what a person does."
         },
         {
           "kind": "background",
-          "text": "Tradition identifies the author as James, the brother of Jesus and leader of the church in Jerusalem. The letter is addressed to Jewish Christians scattered abroad and echoes the teaching of Jesus closely. Some date it very early, in the 40s; others later."
+          "text": "Tradition identifies the author as James, the brother of Jesus and leader of the church in Jerusalem. The letter is addressed to Jewish Christians scattered abroad, and it echoes the teaching of Jesus closely. Some date it very early, in the 40s. Others date it later."
         },
         {
           "kind": "interpretations",
           "text": "James 2 seems at first to contradict Paul, who says people are made right with God by faith and not by works. Luther was uneasy with the letter for that reason. Most readers conclude that the two address different errors: Paul opposes earning God’s favor, James opposes a faith that is only words. The instruction to anoint the sick with oil (5:14) is practiced in different ways across churches."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

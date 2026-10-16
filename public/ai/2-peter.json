@@ -4,13 +4,13 @@
     {
       "id": "ai:2-peter",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-16",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "2 Peter is written as a reminder from someone who knows he will soon die. It urges believers to grow in goodness, knowledge and love, and appeals to what the apostles saw of Jesus’ glory.\n\nThe middle chapter warns against teachers who promise freedom while living for themselves. The last chapter answers people who scoff that the Lord has not returned: God is patient, not slow, and wants people to turn to him."
+          "text": "A man who knows his time is short sits down to write. “the putting off of my tent comes swiftly,” he says, and he means to leave his readers with a reminder they will not forget after he is gone. He urges them to grow, step by step, in goodness, knowledge and love. And he points back to what the apostles saw: they were eyewitnesses of Jesus’ majesty, and they heard a voice from heaven on the holy mountain.\n\nThe middle chapter is a warning. Teachers are coming who are “promising them liberty, while they themselves are bondservants of corruption”.\n\nThe last chapter speaks to people who scoff. “Where is the promise of his coming?” they ask, because everything seems to go on as it always has. The writer answers that the Lord is not slow. God is patient, and does not want anyone to perish but all to turn to him. The letter ends with a call to grow in grace."
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "The description of the heavens and the earth being dissolved by fire (3:10 to 13) is read by some as the destruction of the present world and by others as its purifying and renewal. Either way the letter turns the expectation into a question about how to live now."
+          "text": "The description of the heavens and the earth being dissolved by fire (3:10 to 13) is read by some as the destruction of the present world and by others as its purifying and renewal. Either way the letter turns the expectation into a question about how to live now, and its concern stays the same whichever reading a person holds."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
