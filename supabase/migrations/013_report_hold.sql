@@ -1,8 +1,8 @@
 -- Held for review. An item that two different people, neither of them its author, have
 -- reported is hidden from every reader until a person has looked at it (GATE-06). The rule
 -- lives in the database so that old and new clients are held to it alike.
--- Forward-only and safe to apply twice; apply after 012. Founder approval: date written
--- when the migration is applied (see the Phase 1 plan 05 notes).
+-- Forward-only and safe to apply twice; apply after 012. Founder approval: 2026-10-16
+-- ("akkoord 013"); applied to the hosted project with the hosted name report_hold.
 --
 -- What this file does:
 --  1. Widens the kinds a report may name by one value, walk_reflection, for the Walk With Me
