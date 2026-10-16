@@ -71,6 +71,8 @@ export async function checkSafety(browser,base){
       assert.equal(await trigger().getAttribute("aria-label"),"Report this post");
       assert.equal(await trigger().getAttribute("aria-haspopup"),"dialog");
       assert.equal(await dialog().count(),0,"no dialog is mounted until it is opened");
+      const size=await trigger().evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height};});
+      assert.ok(size.width>=44&&size.height>=44,"the trigger is a 44px target: "+JSON.stringify(size));
     });
 
     await check("populated: eight reasons in harm-first order, none preselected, Send before Don't send",async()=>{
@@ -315,6 +317,59 @@ export async function checkSafety(browser,base){
       assert.equal(heights.length,2);
       for(const h of heights)assert.ok(h>=44,"button height "+h);
       await p.setViewportSize({width:375,height:812});
+    });
+
+    await check("blocked list: loading, empty, error, one and many rows, Remove, 44px targets, 320px wrap",async()=>{
+      await reset();
+      const OTHER="b0000000-0000-4000-8000-000000000002",ME="a0000000-0000-4000-8000-000000000001";
+      const heading=p.getByRole("heading",{name:"Blocked authors",level:2});
+      const emptyText=p.getByText("No blocked authors.",{exact:true});
+      const unavailable=p.getByText("Block list unavailable.",{exact:true});
+      // loading: the heading and the privacy sentence show, the empty text does not, until the answer arrives
+      await fixture(()=>{window.safetyFixture.blocksMode="hold";window.safetyFixture.blocks=[];});
+      await fixture(uid=>window.safetyFixture.signIn(uid),OTHER);
+      await heading.waitFor();
+      await p.getByText("These private entries do not reveal anonymous profile names.",{exact:true}).waitFor();
+      await fixture(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+      assert.equal(await emptyText.count(),0,"no empty text while loading");
+      assert.equal(await unavailable.count(),0);
+      await fixture(()=>window.safetyFixture.releaseBlocks());
+      await emptyText.waitFor();
+      // error
+      await fixture(()=>{window.safetyFixture.blocksMode="fail";});
+      await fixture(uid=>window.safetyFixture.signIn(uid),ME);
+      await unavailable.waitFor();
+      assert.equal(await emptyText.count(),0,"an unavailable list is not an empty list");
+      assert.equal(await p.getByRole("status").filter({hasText:"Block list unavailable."}).count(),1);
+      // one row, then many
+      await fixture(()=>{window.safetyFixture.blocksMode="ok";window.safetyFixture.blocks=[{id:"e0000000-0000-4000-8000-000000000001",action:"block",created_at:"2026-10-10T12:00:00Z"}];});
+      await fixture(uid=>window.safetyFixture.signIn(uid),OTHER);
+      await p.getByText(/^Author 1 · block · /).waitFor();
+      assert.equal(await emptyText.count(),0);
+      assert.equal(await unavailable.count(),0);
+      await fixture(()=>{window.safetyFixture.blocks=[{id:"e0000000-0000-4000-8000-000000000001",action:"block",created_at:"2026-10-10T12:00:00Z"},{id:"e0000000-0000-4000-8000-000000000002",action:"mute",created_at:"2026-10-11T12:00:00Z"}];});
+      await fixture(uid=>window.safetyFixture.signIn(uid),ME);
+      await p.getByText(/^Author 2 · mute · /).waitFor();
+      assert.equal(await p.getByRole("button",{name:/^Remove /}).count(),2);
+      await p.getByRole("button",{name:"Remove block for Author 1",exact:true}).waitFor();
+      await p.getByRole("button",{name:"Remove mute for Author 2",exact:true}).waitFor();
+      // 320px: rows wrap, Remove stays a 44px target, nothing scrolls sideways
+      await p.setViewportSize({width:320,height:568});
+      const heights=await p.getByRole("button",{name:/^Remove /}).evaluateAll(list=>list.map(b=>b.getBoundingClientRect().height));
+      for(const h of heights)assert.ok(h>=44,"Remove height "+h);
+      assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),"no sideways scroll at 320px");
+      await p.setViewportSize({width:375,height:812});
+      // Remove calls remove_block and the list reloads
+      await p.getByRole("button",{name:/^Remove /}).first().click();
+      await p.getByText(/^Author 2 · /).waitFor({state:"detached"});
+      await p.getByText(/^Author 1 · mute · /).waitFor();
+      assert.deepEqual(await fixture(()=>window.safetyFixture.calls.filter(x=>x.name==="remove_block").map(x=>x.args)),[{blocked_user:"e0000000-0000-4000-8000-000000000001"}]);
+      // no names and no post text, only the anonymous row
+      const listText=await p.locator("div.card").filter({has:heading}).innerText();
+      assert.ok(!/Synthetic fixture post/.test(listText));
+      await fixture(()=>{window.safetyFixture.blocks=[];});
+      await fixture(uid=>window.safetyFixture.signIn(uid),OTHER);
+      await emptyText.waitFor();
     });
 
     await check("privacy: the note and reason never reach the console, storage or the address",async()=>{

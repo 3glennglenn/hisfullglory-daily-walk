@@ -2,6 +2,7 @@ import {useEffect,useState} from "react";
 import {createRoot} from "react-dom/client";
 import {AuthProvider} from "../../src/platform/auth";
 import {SafetyControls,type TargetKind} from "../../src/social/safety";
+import {BlockedAuthors} from "../../src/features/Settings";
 import "../../src/styles.css";
 // One post with its Report control. The test page switches the kind and the post id by events;
 // the mocked session and the community_safety_action answers are driven through window.safetyFixture.
@@ -17,6 +18,7 @@ function Harness(){
   },[]);
   return <AuthProvider><div className="shell"><main id="main" tabIndex={-1}>
     <article className="card"><p>Synthetic fixture post</p><SafetyControls id={id} kind={kind} onChange={()=>{(window as unknown as {safetyFixture:{changed:number}}).safetyFixture.changed++;}}/></article>
+    <BlockedAuthors/>
   </main></div></AuthProvider>;
 }
 createRoot(document.getElementById("root")!).render(<Harness/>);
