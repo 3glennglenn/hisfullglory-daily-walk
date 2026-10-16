@@ -1326,3 +1326,15 @@ button.danger {
   opacity: 0.65;
   cursor: default;
 }
+/* Links to the trust pages (UI-SPEC Surface 6d): a plain list, each link a 44px block, no icons. */
+.legal-links ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.legal-links a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}

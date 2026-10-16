@@ -46,7 +46,7 @@ async function bundle({supportReady}) {
   return result.outputFiles[0].text;
 }
 
-async function open(browser,base,{supportReady=false,viewport={width:375,height:812}}={}) {
+async function open(browser,base,{supportReady=false,viewport={width:375,height:812},settings=false}={}) {
   const script=await bundle({supportReady});
   const context=await browser.newContext({serviceWorkers:"block",viewport});
   const page=await context.newPage();
@@ -54,8 +54,8 @@ async function open(browser,base,{supportReady=false,viewport={width:375,height:
   page.on("pageerror",e=>problems.errors.push(e.message));
   page.on("console",m=>{if(m.type()==="error")problems.consoleErrors.push(m.text());if(m.type()==="warning")problems.consoleWarnings.push(m.text());});
   await page.route(base+"/__profile",route=>route.fulfill({contentType:"text/html",body:`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css}</style></head><body><div id="root"></div><script>${script}</script></body></html>`}));
-  await page.goto(base+"/__profile");
-  await page.getByRole("heading",{name:"Delete your account",exact:true}).waitFor();
+  await page.goto(base+"/__profile"+(settings?"#settings":""));
+  await page.getByRole("heading",{name:settings?"About and legal":"Delete your account",exact:true}).waitFor();
   return {context,page,problems};
 }
 const clean=problems=>{assert.deepEqual(problems.errors,[]);assert.deepEqual(problems.consoleErrors,[]);assert.deepEqual(problems.consoleWarnings,[]);};
@@ -217,6 +217,53 @@ async function profileCopyAndSupport(browser,base) {
   }
 }
 
+// The trust pages are linked from Profile and from the last card of Settings (GATE-02, UI-SPEC 6d).
+async function legalLinks(browser,base) {
+  const pages=[["Privacy policy","https://hisfullglory.com/privacy"],["Terms of use","https://hisfullglory.com/terms"],["How account deletion works","https://hisfullglory.com/delete-account"]];
+  for(const settings of [false,true]) for(const ready of [false,true]) for(const viewport of [{width:375,height:812},{width:320,height:568}]) {
+    const where=(settings?"Settings":"Profile")+", support "+(ready?"ready":"not ready")+", "+viewport.width+"px";
+    const {context,page:p,problems}=await open(browser,base,{supportReady:ready,settings,viewport});
+    try {
+      const nav=p.getByRole("navigation",{name:"Privacy and help",exact:true});
+      assert.equal(await nav.count(),1,where+": one nav named Privacy and help");
+      const links=nav.getByRole("link");
+      assert.equal(await links.count(),ready?4:3,where+": three links, four when support is ready");
+      for(const [name,href] of pages) {
+        const a=nav.getByRole("link",{name:name+" (opens in a new tab)",exact:true});
+        assert.equal(await a.count(),1,where+": "+name+" is announced as opening in a new tab");
+        assert.equal(await a.getAttribute("href"),href,where+": "+name+" href");
+        assert.equal(await a.getAttribute("target"),"_blank",where+": "+name+" opens in a new tab");
+        assert.match(await a.getAttribute("rel"),/(^|\s)noopener(\s|$)/,where+": "+name+" has rel noopener");
+        assert.equal(await a.evaluate(el=>el.querySelector(".sr-only")?.textContent)," (opens in a new tab)",where+": the hint is visually hidden text");
+        assert.equal(await a.evaluate(el=>[...el.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join("")),name,where+": the visible words are only the name");
+      }
+      // Every list link is a block at least 44px tall and stays inside the screen.
+      for(let i=0;i<await links.count();i++) {
+        const box=await links.nth(i).boundingBox();
+        assert.ok(box&&box.height>=44,where+": link "+i+" is at least 44px tall ("+box?.height+")");
+        assert.ok(box.x+box.width<=viewport.width,where+": link "+i+" stays inside the screen");
+      }
+      assert.equal(await p.locator("a[target='_blank']:not([rel~='noopener'])").count(),0,where+": every new-tab link has rel noopener");
+      const support=nav.getByRole("link",{name:"Contact support",exact:true});
+      if(ready) {
+        assert.equal(await support.getAttribute("href"),"mailto:support@hisfullglory.com",where);
+        assert.equal(await support.getAttribute("target"),null,where+": a mail link does not open a tab");
+      } else {
+        assert.equal(await p.locator("a[href^='mailto:']").count(),0,where+": no mailto while forwarding is unproven");
+        assert.equal(await p.getByText("support@hisfullglory.com").count(),0,where+": and the address is not printed");
+      }
+      const card=p.locator(".card",{has:nav});
+      if(settings) {
+        assert.equal(await card.locator("h2").innerText(),"About and legal");
+        assert.equal(await card.evaluate(el=>el===el.parentElement.lastElementChild),true,where+": About and legal is the final card of Settings");
+      } else {
+        assert.equal(await card.locator("h2").innerText(),"Account and privacy",where+": in Profile the links sit in the Account and privacy card");
+      }
+      clean(problems);
+    } finally {await context.close();}
+  }
+}
+
 // 320px wide, text at 200%: the open form, the failure and the success card neither scroll sideways nor
 // clip, and every control is at least 44px tall.
 async function reflow(browser,base) {
@@ -263,5 +310,6 @@ export async function checkProfile(browser,base) {
   await busyAndFailure(browser,base);
   await supportReady(browser,base);
   await profileCopyAndSupport(browser,base);
+  await legalLinks(browser,base);
   await reflow(browser,base);
 }
