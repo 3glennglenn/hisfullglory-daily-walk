@@ -12,7 +12,7 @@ import { forgetAccount } from "./persistence";
 import { deletedWithAccount, isDeleteConfirmation } from "./deleteConfirm";
 import { navigate } from "./router";
 import { config } from "../config";
-import { CodeEntry } from "./CodeEntry";
+import { CodeEntry, SignInNote, codeSendFailed, codeSentStatus } from "./CodeEntry";
 import { postError } from "../social/blockedLanguage";
 export const TERMS_VERSION = "2026-10-07";
 const Auth = createContext<{
@@ -67,9 +67,12 @@ export function AuthPanel() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [checked, setChecked] = useState(false);
-  const [status, setStatus] = useState("");
+  // An error is announced as an alert that starts with "Error:", everything else as a status.
+  const [status, setStatusLine] = useState({ text: "", error: false });
+  const setStatus = (text: string, error = false) => setStatusLine({ text, error });
   const [busy, setBusy] = useState(false);
   const [sentTo, setSentTo] = useState("");
+  const [sentAt, setSentAt] = useState(0);
   useEffect(() => {
     if (session && supabase)
       void supabase
@@ -79,20 +82,36 @@ export function AuthPanel() {
         .maybeSingle()
         .then((r) => setName(r.data?.display_name ?? ""));
   }, [session?.user.id]);
+  // Asks for an email with the sign-in code. Resolves true when it was sent.
+  async function requestCode(address: string) {
+    if (!supabase) return false;
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email: address,
+        options: { emailRedirectTo: window.location.origin },
+      });
+      return !error;
+    } catch {
+      return false;
+    }
+  }
   async function login() {
-    if (!supabase || busy) return;
+    const address = email.trim();
+    if (!supabase || busy || !address) return;
     setBusy(true);
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: { emailRedirectTo: window.location.origin },
-    });
-    setStatus(
-      error
-        ? "Sign-in could not be sent. Check configuration and try again."
-        : "Check your email for a sign-in link.",
-    );
-    if (!error) setSentTo(email.trim());
+    setStatus("");
+    if (await requestCode(address)) {
+      setSentTo(address);
+      setSentAt(Date.now());
+      setStatus(codeSentStatus);
+    } else setStatus(codeSendFailed, true);
     setBusy(false);
+  }
+  // Asking again resets the wait that CodeEntry counts down.
+  async function resendCode() {
+    const sent = await requestCode(sentTo);
+    if (sent) setSentAt(Date.now());
+    return sent;
   }
   async function save() {
     if (!supabase || !session || name.trim().length < 2 || busy) return;
@@ -103,7 +122,7 @@ export function AuthPanel() {
       .eq("id", session.user.id)
       .maybeSingle();
     if (existing.error) {
-      setStatus("Profile could not be loaded. Try again.");
+      setStatus("Profile could not be loaded. Try again.", true);
       setBusy(false);
       return;
     }
@@ -116,7 +135,7 @@ export function AuthPanel() {
           .from("profiles")
           .insert({ id: session.user.id, display_name: name.trim() });
     if (error) {
-      setStatus(postError(error, "Name could not be saved. Use 2–40 characters."));
+      setStatus(postError(error, "Name could not be saved. Use 2–40 characters."), true);
       setBusy(false);
       return;
     }
@@ -127,6 +146,7 @@ export function AuthPanel() {
       if (result.error) {
         setStatus(
           "Terms could not be accepted. Apply the platform migrations.",
+          true,
         );
         setBusy(false);
         return;
@@ -151,7 +171,7 @@ export function AuthPanel() {
   return (
     <section className="card">
       <h2>
-        {session ? "Your community profile" : "Sign in when you’re ready"}
+        {session ? "Your community profile" : "Sign in when you are ready"}
       </h2>
       {!session ? (
         <form
@@ -170,7 +190,8 @@ export function AuthPanel() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <button disabled={busy}>Send secure sign-in link</button>
+          <button disabled={busy}>{busy ? "Sending…" : "Email me a sign-in code"}</button>
+          <SignInNote />
         </form>
       ) : (
         <>
@@ -211,8 +232,16 @@ export function AuthPanel() {
           {accepted && <small>Community rules accepted.</small>}
         </>
       )}
-      <p role="status">{status}</p>
-      {!session && sentTo && <CodeEntry email={sentTo} />}
+      <p role="status">{status.error ? "" : status.text}</p>
+      {status.error && (
+        <p role="alert" className="danger-text">
+          <span className="sr-only">Error: </span>
+          {status.text}
+        </p>
+      )}
+      {!session && sentTo && (
+        <CodeEntry email={sentTo} sentAt={sentAt} onResend={resendCode} />
+      )}
     </section>
   );
 }

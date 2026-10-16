@@ -102,4 +102,25 @@ test("a sign-in code is accepted as people paste it, and nothing else is", async
   assert.equal(cleanCode("12345"), null);
   assert.equal(cleanCode("12345678901"), null);
   assert.equal(cleanCode("12a456"), null);
+  assert.equal(cleanCode("12345"), null);
+  assert.equal(cleanCode("123 456"), "123456");
+  assert.equal(cleanCode("123-456"), "123456");
+  assert.equal(cleanCode("1234567890"), "1234567890");
+});
+
+test("the resend wait runs from 60 down to 0 at exactly sixty seconds and is never negative", async () => {
+  const { resendSecondsLeft } = await import("../src/platform/signInCode.ts");
+  const sent = 1_000_000;
+  assert.equal(resendSecondsLeft(sent, sent), 60);
+  assert.equal(resendSecondsLeft(sent, sent + 1), 60);
+  assert.equal(resendSecondsLeft(sent, sent + 18_000), 42);
+  assert.equal(resendSecondsLeft(sent, sent + 59_000), 1);
+  assert.equal(resendSecondsLeft(sent, sent + 59_001), 1);
+  assert.equal(resendSecondsLeft(sent, sent + 59_999), 1);
+  assert.equal(resendSecondsLeft(sent, sent + 60_000), 0, "available at exactly 60,000 ms");
+  assert.equal(resendSecondsLeft(sent, sent + 60_001), 0);
+  assert.equal(resendSecondsLeft(sent, sent + 3_600_000), 0, "long after: still 0, not negative");
+  assert.equal(resendSecondsLeft(sent, sent - 5_000), 60, "a clock that moved back never shows more than 60");
+  assert.equal(resendSecondsLeft(sent, sent + 4_000, 10), 6, "the wait length can differ");
+  assert.equal(resendSecondsLeft(sent, sent + 10_000, 10), 0);
 });

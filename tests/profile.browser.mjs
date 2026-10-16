@@ -8,19 +8,38 @@ const css=readFileSync("src/styles.css","utf8");
 
 // The controlled SDK: a signed-in session, answers for profiles and community_terms, and a
 // delete_my_account call that resolves, fails or hangs on demand (window.profileTest.rpcMode).
-const sdk=`
+// The version the app asks for is read from the app, so this fixture follows it when it changes.
+const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VERSION = "([^"]+)"/)[1];
+
+// Besides deletion, the SDK answers the sign-in calls (signInWithOtp, verifyOtp) and the terms
+// acceptance (accept_community_terms), each resolving, failing or hanging on demand through
+// window.profileTest: rpcMode, otpMode, verifyMode, acceptMode. Hanging calls wait in .pending.
+const sdk=({signedOut,accepted})=>`
 const U=${JSON.stringify(USER)};
-const listeners=[];let current={user:{id:U},access_token:'synthetic-test-only'};
+const listeners=[];let current=${signedOut?"null":"{user:{id:U},access_token:'synthetic-test-only'}"};
 const t=window.profileTest={rpcMode:'resolve',rpcCalls:0,signOutCalls:[],pending:[],
+  otpMode:'resolve',otpCalls:[],verifyMode:'reject',verifyCalls:[],signInOnVerify:false,acceptMode:'resolve',acceptCalls:[],
   release(error){const r=t.pending.splice(0);r.forEach(done=>done({data:null,error:error?{message:'synthetic failure'}:null}));}};
+const answer=mode=>{
+  if(mode==='hang')return new Promise(resolve=>t.pending.push(resolve));
+  return Promise.resolve({data:{},error:mode==='reject'?{message:'synthetic failure'}:null});
+};
 export const supabase={
   auth:{
     getSession:()=>Promise.resolve({data:{session:current},error:null}),
     onAuthStateChange:cb=>{listeners.push(cb);return {data:{subscription:{unsubscribe(){const i=listeners.indexOf(cb);if(i>=0)listeners.splice(i,1);}}}}},
-    signOut:async options=>{t.signOutCalls.push(options);current=null;listeners.slice().forEach(l=>l('SIGNED_OUT',null));return {error:null};}
+    signOut:async options=>{t.signOutCalls.push(options);current=null;listeners.slice().forEach(l=>l('SIGNED_OUT',null));return {error:null};},
+    signInWithOtp:args=>{t.otpCalls.push(args);return answer(t.otpMode);},
+    verifyOtp:async args=>{
+      t.verifyCalls.push(args);
+      const result=await answer(t.verifyMode);
+      if(!result.error&&t.signInOnVerify){current={user:{id:U},access_token:'synthetic-test-only'};listeners.slice().forEach(l=>l('SIGNED_IN',current));}
+      return result;
+    }
   },
-  from(table){const q={select(){return q},eq(){return q},maybeSingle(){return Promise.resolve({data:table==='profiles'?{display_name:'Fixture reader'}:{version:'2026-10-07'},error:null});}};return q;},
-  rpc(name){
+  from(table){const q={error:null,select(){return q},eq(){return q},update(){return q},insert(){return q},maybeSingle(){return Promise.resolve({data:table==='profiles'?{display_name:'Fixture reader'}:${accepted?`{version:${JSON.stringify(TERMS_VERSION)}}`:"null"},error:null});}};return q;},
+  rpc(name,args){
+    if(name==='accept_community_terms'){t.acceptCalls.push(args);return answer(t.acceptMode);}
     if(name!=='delete_my_account')return Promise.resolve({data:null,error:null});
     t.rpcCalls++;
     if(t.rpcMode==='hang')return new Promise(resolve=>t.pending.push(resolve));
@@ -28,12 +47,12 @@ export const supabase={
   }
 };`;
 
-async function bundle({supportReady}) {
+async function bundle({supportReady,signedOut,accepted}) {
   const result=await build({entryPoints:["tests/fixtures/profile.tsx"],bundle:true,write:false,format:"iife",jsx:"automatic",define:{"process.env.NODE_ENV":'"production"'},plugins:[{
     name:"controlled-test-sdk",
     setup(b){
       b.onResolve({filter:/^\.\.\/supabase$/},()=>({path:"sdk",namespace:"fixture"}));
-      b.onLoad({filter:/.*/,namespace:"fixture"},()=>({loader:"js",contents:sdk}));
+      b.onLoad({filter:/.*/,namespace:"fixture"},()=>({loader:"js",contents:sdk({signedOut,accepted})}));
       // The shared support flag is flipped for one bundle only, so both states of the gating are tested.
       b.onLoad({filter:/site[\\/]src[\\/]data[\\/]legal\.ts$/},args=>{
         const source=readFileSync(args.path,"utf8");
@@ -46,16 +65,19 @@ async function bundle({supportReady}) {
   return result.outputFiles[0].text;
 }
 
-async function open(browser,base,{supportReady=false,viewport={width:375,height:812},settings=false}={}) {
-  const script=await bundle({supportReady});
+async function open(browser,base,{supportReady=false,viewport={width:375,height:812},settings=false,signedOut=false,accepted=true,clock=false}={}) {
+  const script=await bundle({supportReady,signedOut,accepted});
   const context=await browser.newContext({serviceWorkers:"block",viewport});
   const page=await context.newPage();
   const problems={errors:[],consoleErrors:[],consoleWarnings:[]};
   page.on("pageerror",e=>problems.errors.push(e.message));
   page.on("console",m=>{if(m.type()==="error")problems.consoleErrors.push(m.text());if(m.type()==="warning")problems.consoleWarnings.push(m.text());});
   await page.route(base+"/__profile",route=>route.fulfill({contentType:"text/html",body:`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css}</style></head><body><div id="root"></div><script>${script}</script></body></html>`}));
+  // A clock the test steps by hand (the resend countdown), stopped ten seconds after the page opened.
+  if(clock) await page.clock.install({time:new Date("2026-10-16T10:00:00Z")});
   await page.goto(base+"/__profile"+(settings?"#settings":""));
-  await page.getByRole("heading",{name:settings?"About and legal":"Delete your account",exact:true}).waitFor();
+  await page.getByRole("heading",{name:settings?"About and legal":signedOut?"Sign in when you are ready":"Delete your account",exact:true}).waitFor();
+  if(clock) await page.clock.pauseAt(new Date("2026-10-16T10:00:10Z"));
   return {context,page,problems};
 }
 const clean=problems=>{assert.deepEqual(problems.errors,[]);assert.deepEqual(problems.consoleErrors,[]);assert.deepEqual(problems.consoleWarnings,[]);};
@@ -304,6 +326,165 @@ async function reflow(browser,base) {
   } finally {await context.close();}
 }
 
+// Signed out: the sign-in form and the code entry speak of a 6-digit code like the email does (UI-SPEC 6b, E10).
+const withoutHint=text=>text.replace(/ \(opens in a new tab\)/g,"");
+const signInCard=p=>p.locator("section.card",{has:p.getByRole("heading",{name:"Sign in when you are ready",exact:true})});
+const emailField=p=>p.getByLabel("Email",{exact:true});
+const sendCode=p=>p.getByRole("button",{name:"Email me a sign-in code",exact:true});
+const codeField=p=>p.getByLabel("Enter the 6-digit code from your email");
+const codeButton=p=>p.getByRole("button",{name:/^Sign in with code$|^Signing in…$/});
+const resendButton=p=>p.getByRole("button",{name:/^Send a new code$|^Sending…$/});
+const WAIT_TEXT=n=>`You can ask again in ${n} ${n===1?"second":"seconds"}.`;
+async function signInForm(browser,base) {
+  const {context,page:p,problems}=await open(browser,base,{signedOut:true});
+  try {
+    const card=signInCard(p);
+    assert.equal(await sendCode(p).count(),1,"the button names the outcome");
+    const text=withoutHint(await words(card));
+    assert.match(text,/We will email you a 6-digit code\. No password\. By continuing you agree to the Terms of use and the Privacy policy\./);
+    assert.doesNotMatch(text,/link|magic|6 to 10|secure/i,"no sign-in text mentions a link, a magic link or a range of digits");
+    for(const [name,href] of [["Terms of use","https://hisfullglory.com/terms"],["Privacy policy","https://hisfullglory.com/privacy"]]) {
+      const a=card.getByRole("link",{name:name+" (opens in a new tab)",exact:true});
+      assert.equal(await a.getAttribute("href"),href,name);
+      assert.equal(await a.getAttribute("target"),"_blank");
+      assert.match(await a.getAttribute("rel"),/(^|\s)noopener(\s|$)/);
+      const box=await a.boundingBox();
+      assert.ok(box&&box.height>=44,name+" is at least 44px tall ("+box?.height+")");
+    }
+    // Empty: the address is required, and nothing is sent.
+    await sendCode(p).click();
+    assert.equal(await emailField(p).evaluate(el=>el.validity.valueMissing),true,"an empty address is refused");
+    assert.equal(await p.evaluate(()=>window.profileTest.otpCalls.length),0,"and nothing is sent");
+    clean(problems);
+  } finally {await context.close();}
+}
+
+async function signInCodeFlow(browser,base) {
+  const {context,page:p,problems}=await open(browser,base,{signedOut:true});
+  try {
+    const address="reader@example.org";
+    const card=signInCard(p);
+    // Loading: the send button shows its busy state while the email is requested.
+    await p.evaluate(()=>{window.profileTest.otpMode="hang";});
+    await emailField(p).fill(address);
+    await sendCode(p).click();
+    const busy=p.getByRole("button",{name:"Sending…",exact:true});
+    await busy.waitFor();
+    assert.equal(await busy.isDisabled(),true,"the send button is busy and cannot be pressed twice");
+    assert.equal(await p.evaluate(()=>window.profileTest.otpCalls.length),1);
+    // Error: a failed send says so in plain words and offers no code field.
+    await p.evaluate(()=>window.profileTest.release(true));
+    const alert=p.getByRole("alert");
+    await alert.waitFor();
+    assert.equal(await words(alert),"Error: We could not send the code. Check the address, wait a minute and try again.");
+    assert.equal(await codeField(p).count(),0,"no code field after a failed send");
+    assert.equal(await sendCode(p).isEnabled(),true,"and the form is ready for another try");
+    // Success.
+    await p.evaluate(()=>{window.profileTest.otpMode="resolve";});
+    await sendCode(p).click();
+    await codeField(p).waitFor();
+    assert.equal(await p.evaluate(()=>JSON.stringify(window.profileTest.otpCalls.at(-1).email)),JSON.stringify(address));
+    assert.equal(await alert.count(),0,"the error is gone after a good send");
+    assert.equal(await p.getByRole("status").filter({hasText:"Check your email. The code usually arrives within a minute. Look in spam if you do not see it."}).count(),1,"the status sentence is announced");
+    assert.equal(await card.getByText(`We sent a code to ${address}.`,{exact:true}).count(),1);
+    assert.equal(await codeField(p).getAttribute("inputmode"),"numeric");
+    assert.equal(await codeField(p).getAttribute("autocomplete"),"one-time-code");
+    const hint=card.getByText("Never share this code. We will never ask you for it.",{exact:true});
+    assert.equal(await hint.count(),1,"the code is a credential and the form says so");
+    assert.equal(await codeField(p).getAttribute("aria-describedby"),await hint.getAttribute("id"),"and the hint is tied to the field");
+    assert.doesNotMatch(withoutHint(await words(card)),/link|magic|6 to 10|secure/i,"still no link wording once the code is asked for");
+    // Partial and pasted: fewer than six digits keep the button disabled; spaces and a dash are accepted.
+    assert.equal(await codeButton(p).isDisabled(),true,"empty: disabled");
+    await codeField(p).fill("12345");
+    assert.equal(await codeButton(p).isDisabled(),true,"five digits: disabled");
+    await codeField(p).fill("123 456");
+    assert.equal(await codeButton(p).isDisabled(),false,"six digits with a space: enabled");
+    await codeField(p).fill("123-456");
+    assert.equal(await codeButton(p).isDisabled(),false,"six digits with a dash: enabled");
+    await codeField(p).fill("12a456");
+    assert.equal(await codeButton(p).isDisabled(),true,"a letter among the digits: disabled");
+    // Loading, then a wrong or expired code.
+    await codeField(p).fill("123 456");
+    await p.evaluate(()=>{window.profileTest.verifyMode="hang";});
+    await codeButton(p).click();
+    const signing=p.getByRole("button",{name:"Signing in…",exact:true});
+    await signing.waitFor();
+    assert.equal(await signing.isDisabled(),true);
+    await p.evaluate(()=>window.profileTest.release(true));
+    await alert.waitFor();
+    assert.equal(await words(alert),"Error: That code did not work. Check the 6 digits, or ask for a new email.");
+    assert.deepEqual(await p.evaluate(()=>window.profileTest.verifyCalls),[{email:address,token:"123456",type:"email"}],"the cleaned digits and the address are what is checked");
+    assert.equal(await codeField(p).inputValue(),"123 456","the typed code is kept for another look");
+    // Success.
+    await p.evaluate(()=>{window.profileTest.verifyMode="resolve";});
+    await codeButton(p).click();
+    await p.getByRole("status").filter({hasText:"Signed in."}).waitFor();
+    assert.equal(await alert.count(),0,"the error is gone after a good code");
+    // The code is a credential: it is in the field and nowhere else.
+    assert.equal(p.url().includes("123456"),false,"never in the address");
+    const kept=await p.evaluate(()=>JSON.stringify([{...localStorage},{...sessionStorage}]));
+    assert.equal(kept.includes("123456"),false,"never in storage");
+    clean(problems);
+  } finally {await context.close();}
+}
+
+// The resend wait is a visible countdown on a clock the test steps by hand; it is never an error.
+async function signInResend(browser,base) {
+  const {context,page:p,problems}=await open(browser,base,{signedOut:true,clock:true});
+  try {
+    await emailField(p).fill("reader@example.org");
+    await sendCode(p).click();
+    await codeField(p).waitFor();
+    const resend=resendButton(p);
+    assert.equal(await resend.isDisabled(),true,"asking again is unavailable right after sending");
+    assert.equal(await p.getByText(WAIT_TEXT(60),{exact:true}).count(),1,"the wait is shown as text, from 60");
+    await p.clock.runFor(18_000);
+    assert.equal(await p.getByText(WAIT_TEXT(42),{exact:true}).count(),1,"and counts down");
+    await p.clock.runFor(41_000);
+    assert.equal(await p.getByText(WAIT_TEXT(1),{exact:true}).count(),1,"to one second, in the singular");
+    assert.equal(await resend.isDisabled(),true,"still unavailable one second before the minute is over");
+    await p.clock.runFor(1_000);
+    assert.equal(await resend.isEnabled(),true,"available at exactly sixty seconds");
+    assert.equal(await p.getByText(/You can ask again in/).count(),0,"and the countdown is gone, never negative");
+    assert.equal(await p.getByRole("alert").count(),0,"the wait was never an error");
+    await resend.click();
+    await p.getByText("A new code is on its way. Check your email.",{exact:true}).waitFor();
+    assert.equal(await p.evaluate(()=>window.profileTest.otpCalls.length),2,"one more email was requested");
+    assert.equal(await p.getByText(WAIT_TEXT(60),{exact:true}).count(),1,"and the wait starts again");
+    assert.equal(await resendButton(p).isDisabled(),true);
+    // A failed second send is said plainly; the wait stays where it was.
+    await p.clock.runFor(60_000);
+    await p.evaluate(()=>{window.profileTest.otpMode="reject";});
+    await resendButton(p).click();
+    const alert=p.getByRole("alert");
+    await alert.waitFor();
+    assert.equal(await words(alert),"Error: We could not send a new code. Wait a minute and try again.");
+    clean(problems);
+  } finally {await context.close();}
+}
+
+// A long address wraps inside the card at 320px and at 200% text, and the controls stay at 44px.
+async function signInReflow(browser,base) {
+  const {context,page:p,problems}=await open(browser,base,{signedOut:true,viewport:{width:320,height:568}});
+  try {
+    await p.evaluate(()=>{document.documentElement.style.fontSize="200%";});
+    await emailField(p).fill("a-very-long-address-that-keeps-going-and-going-and-going@a-very-long-domain-name-example.org");
+    await sendCode(p).click();
+    await codeField(p).waitFor();
+    const line=p.getByText(/^We sent a code to /);
+    assert.equal(await line.evaluate(el=>getComputedStyle(el).overflowWrap),"anywhere","the address may wrap anywhere");
+    const m=await p.evaluate(()=>({page:document.documentElement.scrollWidth,view:window.innerWidth,card:[...document.querySelectorAll("section.card")].map(c=>c.scrollWidth-c.clientWidth)}));
+    assert.ok(m.page<=m.view,"no sideways scroll ("+m.page+" > "+m.view+")");
+    assert.ok(m.card.every(extra=>extra<=0),"nothing is wider than its card");
+    for(const [label,locator] of [["the email field",emailField(p)],["the send button",sendCode(p)],["the code field",codeField(p)],["Sign in with code",codeButton(p)],["Send a new code",resendButton(p)]]) {
+      const box=await locator.boundingBox();
+      assert.ok(box&&box.height>=44&&box.width>=44,label+" is at least 44px ("+box?.width+"x"+box?.height+")");
+      assert.ok(box.x>=0&&box.x+box.width<=m.view,label+" stays inside the screen");
+    }
+    clean(problems);
+  } finally {await context.close();}
+}
+
 export async function checkProfile(browser,base) {
   await deletionFlow(browser,base);
   await cardStates(browser,base);
@@ -311,5 +492,9 @@ export async function checkProfile(browser,base) {
   await supportReady(browser,base);
   await profileCopyAndSupport(browser,base);
   await legalLinks(browser,base);
+  await signInForm(browser,base);
+  await signInCodeFlow(browser,base);
+  await signInResend(browser,base);
+  await signInReflow(browser,base);
   await reflow(browser,base);
 }

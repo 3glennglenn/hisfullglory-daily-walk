@@ -8,7 +8,12 @@ import {
 import type { Session } from "@supabase/supabase-js";
 import { Heart, MessageCircle, Send, Shield, Trash2 } from "lucide-react";
 import { supabase } from "./supabase";
-import { CodeEntry } from "./platform/CodeEntry";
+import {
+  CodeEntry,
+  SignInNote,
+  codeSendFailed,
+  codeSentStatus,
+} from "./platform/CodeEntry";
 import { postError } from "./social/blockedLanguage";
 import { useAuth, AuthPanel } from "./platform/auth";
 import { SafetyControls } from "./social/safety";
@@ -165,6 +170,7 @@ export function Community({
   const [authBusy, setAuthBusy] = useState(false);
   const [authNote, setAuthNote] = useState("");
   const [sentTo, setSentTo] = useState("");
+  const [sentAt, setSentAt] = useState(0);
   const [guidelines, setGuidelines] = useState(false);
   useEffect(() => {
     if (!supabase) return;
@@ -237,19 +243,30 @@ export function Community({
         email: email.trim(),
         options: { emailRedirectTo: window.location.origin + "/" },
       });
-      setAuthNote(
-        error
-          ? "We could not send your sign-in link. Check the address and try again shortly."
-          : "Check your email for a sign-in link. You can keep reading while you wait.",
-      );
+      setAuthNote(error ? codeSendFailed : codeSentStatus);
       if (!error) {
         setSentTo(email.trim());
+        setSentAt(Date.now());
         setEmail("");
       }
     } catch {
       setAuthNote("Sign-in is unavailable right now. Please try again.");
     } finally {
       setAuthBusy(false);
+    }
+  };
+  // Asking again for the same address resets the wait that CodeEntry counts down.
+  const resendCode = async () => {
+    if (!supabase) return false;
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email: sentTo,
+        options: { emailRedirectTo: window.location.origin + "/" },
+      });
+      if (!error) setSentAt(Date.now());
+      return !error;
+    } catch {
+      return false;
     }
   };
   const saveName = async (e: FormEvent) => {
@@ -398,15 +415,18 @@ export function Community({
                 required
               />
               <button disabled={authBusy || !online}>
-                {authBusy ? "Sending…" : "Email me a sign-in link"}
+                {authBusy ? "Sending…" : "Email me a sign-in code"}
               </button>
+              <SignInNote />
               <small>
                 Guests are welcome to read. Your email is never displayed.
               </small>
             </form>
           )}
           {authNote && <p role="status">{authNote}</p>}
-          {!session && sentTo && <CodeEntry email={sentTo} />}
+          {!session && sentTo && (
+            <CodeEntry email={sentTo} sentAt={sentAt} onResend={resendCode} />
+          )}
         </div>
       )}
       <div className="segments" aria-label="Community view">

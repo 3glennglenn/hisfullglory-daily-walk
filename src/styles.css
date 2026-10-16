@@ -1338,3 +1338,30 @@ button.danger {
   min-height: 44px;
   overflow-wrap: anywhere;
 }
+/* Sign-in and code entry (UI-SPEC Surface 6b): helper lines are Label size, never the small 0.73rem. */
+.sign-in-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
+.code-entry {
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.code-entry .code-sent {
+  margin: 8px 0 0;
+  overflow-wrap: anywhere;
+}
+.code-entry button {
+  width: 100%;
+  margin-top: 10px;
+}
+/* A link inside a sentence still gets a 44px target: padding adds the height and the negative margin
+   takes it out of the line, so the text does not move. */
+.inline-link {
+  display: inline-block;
+  padding: 12px 2px;
+  margin: -12px -2px;
+}
