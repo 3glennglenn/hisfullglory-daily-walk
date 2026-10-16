@@ -1240,3 +1240,32 @@ button.danger {
 .danger-text {
   color: var(--danger);
 }
+/* Account deletion card (UI-SPEC Surface 5): one column inside the app shell, buttons stacked and
+   full width, every line allowed to wrap at 320px and at large text. */
+.delete-account ul {
+  margin: 12px 0;
+  padding-left: 1.25rem;
+}
+.delete-account li {
+  margin: 6px 0;
+}
+.delete-account li,
+.delete-account p {
+  overflow-wrap: anywhere;
+}
+.delete-account h3 {
+  margin-top: 18px;
+}
+.delete-account form button {
+  width: 100%;
+  margin-top: 10px;
+}
+.delete-account .delete-hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0 0 4px;
+}
+.delete-account button[aria-disabled="true"] {
+  opacity: 0.65;
+  cursor: default;
+}

@@ -58,6 +58,16 @@ ok(await count("select count(*) n from public.community_terms where user_id=$1",
 ok(await count("select count(*) n from public.community_terms where user_id=$1",[stayer])===1,"other people's accepted rules stay");
 ok(await count("select count(*) n from public.support_requests where user_id=$1",[leaver])===0,"its support requests are gone");
 
+// A second press, or a retry after a dropped connection, arrives with the same session after the
+// account is already gone. It must neither fail nor remove anything else (GATE-03 idempotency).
+const before=await count("select (select count(*) from auth.users)+(select count(*) from public.profiles)+(select count(*) from public.community_posts)+(select count(*) from public.circles) n");
+await actor(leaver);
+await db.query("select public.delete_my_account()");
+await db.query("select public.delete_my_account()");
+await operator();
+ok(await count("select (select count(*) from auth.users)+(select count(*) from public.profiles)+(select count(*) from public.community_posts)+(select count(*) from public.circles) n")===before,"calling it again with the same session raises no error and deletes nothing more");
+ok(await count("select count(*) n from auth.users")===2,"both other accounts are still there after the repeat");
+
 // A signed-in user only ever deletes their own account.
 await actor(other);
 await db.query("select public.delete_my_account()");

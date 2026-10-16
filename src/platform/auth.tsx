@@ -9,7 +9,9 @@ import {
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "../supabase";
 import { forgetAccount } from "./persistence";
-import { isDeleteConfirmation } from "./deleteConfirm";
+import { deletedWithAccount, isDeleteConfirmation } from "./deleteConfirm";
+import { navigate } from "./router";
+import { config } from "../config";
 import { CodeEntry } from "./CodeEntry";
 import { postError } from "../social/blockedLanguage";
 export const TERMS_VERSION = "2026-10-07";
@@ -215,60 +217,99 @@ export function AuthPanel() {
   );
 }
 
-// Signing out remounts the private profile, so the confirmation survives in session storage.
+// Signing out remounts the private profile, so the confirmation survives in session storage. If
+// storage is blocked, the page remembers it for as long as it stays open.
 const deletedNotice = "hfg-account-deleted";
+let deletedOnThisPage = false;
 function takeDeletedNotice() {
+  const here = deletedOnThisPage;
+  deletedOnThisPage = false;
   try {
     const seen = sessionStorage.getItem(deletedNotice) === "1";
     sessionStorage.removeItem(deletedNotice);
-    return seen;
+    return seen || here;
   } catch {
-    return false;
+    return here;
   }
 }
 
 /**
  * Deletes the signed-in account and everything the server holds for it (migration 007), then
  * what this device kept for it. The App Store and Google Play both require this in the app.
+ * Layout, copy and states: UI-SPEC Surface 5.
  */
 export function DeleteAccount() {
   const { session } = useAuth();
-  const [confirming, setConfirming] = useState(false);
+  const [open, setOpen] = useState(false);
   const [typed, setTyped] = useState("");
   const [busy, setBusy] = useState(false);
-  const [status, setStatus] = useState("");
+  const [failed, setFailed] = useState(false);
   const [deleted, setDeleted] = useState(takeDeletedNotice);
+  // A second press can arrive before React shows the busy state, so the call itself is guarded.
+  const calling = useRef(false);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const field = useRef<HTMLInputElement>(null);
   const doneHeading = useRef<HTMLHeadingElement>(null);
   const showDone = deleted && !session;
-  // The card that held the focus is gone, so the confirmation takes it (otherwise it falls to <body>).
+  // Focus follows the person: into the field when the confirmation opens, onto the confirmation
+  // when the card that held it is replaced (otherwise it falls to <body>).
+  useEffect(() => {
+    if (open) field.current?.focus();
+  }, [open]);
   useEffect(() => {
     if (showDone) doneHeading.current?.focus();
   }, [showDone]);
   if (showDone)
     return (
-      <section className="card" role="status">
+      <section className="card" role="status" tabIndex={-1}>
         <h2 ref={doneHeading} tabIndex={-1}>
           Your account has been deleted
         </h2>
         <p>
           Everything the server held for it has been removed, and this device
-          no longer keeps its private data.
+          no longer keeps its private data. You can keep reading and walking as
+          a guest.
         </p>
+        <a
+          className="button secondary"
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/");
+          }}
+        >
+          Go to Today
+        </a>
       </section>
     );
   if (!supabase || !session) return null;
+  const matches = isDeleteConfirmation(typed);
+  const wrong = typed.trim() !== "" && !matches;
+  function keepAccount() {
+    setOpen(false);
+    setTyped("");
+    setFailed(false);
+    trigger.current?.focus();
+  }
   async function remove() {
-    if (!supabase || !session || busy || !isDeleteConfirmation(typed)) return;
+    if (!supabase || !session || calling.current || !matches) return;
+    calling.current = true;
     setBusy(true);
+    setFailed(false);
     const userId = session.user.id;
-    const { error } = await supabase.rpc("delete_my_account");
+    let error: unknown = null;
+    try {
+      ({ error } = await supabase.rpc("delete_my_account"));
+    } catch (thrown) {
+      error = thrown;
+    }
     if (error) {
-      setStatus(
-        "Your account could not be deleted, and nothing was removed. Try again, or email support@hisfullglory.com.",
-      );
+      setFailed(true);
       setBusy(false);
+      calling.current = false;
       return;
     }
+    deletedOnThisPage = true;
     try {
       forgetAccount(localStorage, userId);
       sessionStorage.setItem(deletedNotice, "1");
@@ -277,60 +318,112 @@ export function DeleteAccount() {
     }
     setDeleted(true);
     // The account no longer exists, so only this device's session is left to end.
-    await supabase.auth.signOut({ scope: "local" });
+    try {
+      await supabase.auth.signOut({ scope: "local" });
+    } catch {
+      /* The token stops working by itself; there is nothing to undo. */
+    }
   }
   return (
-    <section className="card">
-      <h2>Delete your account</h2>
+    <section className="card delete-account" aria-labelledby="delete-account-title">
+      <h2 id="delete-account-title">Delete your account</h2>
       <p>
         This permanently deletes your account and everything the server holds
-        for it: your profile, your posts, prayers and chat messages, reactions
-        and votes, reports you sent, blocks, community memberships and support
-        requests. Replies other people wrote under your posts are removed with
-        them. Circles you own are closed, with their posts.
+        for it. It cannot be undone.
       </p>
+      <ul>
+        {deletedWithAccount.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
       <p>
         The private journal, prayers and reading saved for this account on this
         device are removed too. Export a private backup in Settings first if
         you want to keep them.
       </p>
-      {!confirming ? (
-        <button className="secondary" onClick={() => setConfirming(true)}>
-          Delete my account
-        </button>
-      ) : (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            void remove();
-          }}
-        >
-          <label>
-            Type DELETE to confirm
-            <input
-              id="delete-account-confirm"
-              autoComplete="off"
-              value={typed}
-              onChange={(e) => setTyped(e.target.value)}
-            />
-          </label>
-          <button disabled={busy || !isDeleteConfirmation(typed)}>
-            {busy ? "Deleting…" : "Delete my account permanently"}
-          </button>
-          <button
-            type="button"
-            className="secondary"
-            disabled={busy}
-            onClick={() => {
-              setConfirming(false);
-              setTyped("");
+      <button
+        type="button"
+        ref={trigger}
+        className="secondary danger"
+        aria-expanded={open}
+        aria-controls="delete-account-confirmation"
+        onClick={() => {
+          if (busy) return;
+          if (open) keepAccount();
+          else setOpen(true);
+        }}
+      >
+        Delete my account
+      </button>
+      <div id="delete-account-confirmation" hidden={!open}>
+        {open && (
+          <form
+            aria-busy={busy}
+            onSubmit={(e) => {
+              e.preventDefault();
+              void remove();
             }}
           >
-            Cancel
-          </button>
-        </form>
-      )}
-      <p role="status">{status}</p>
+            <h3>Confirm deletion</h3>
+            <p>
+              This cannot be undone. Your account and everything the server
+              holds for it is deleted now.
+            </p>
+            <label>
+              Type DELETE to confirm
+              <input
+                ref={field}
+                id="delete-account-confirm"
+                autoComplete="off"
+                autoCapitalize="characters"
+                spellCheck={false}
+                inputMode="text"
+                value={typed}
+                aria-describedby={wrong ? "delete-account-hint" : undefined}
+                onChange={(e) => setTyped(e.target.value)}
+              />
+            </label>
+            {wrong && (
+              <p id="delete-account-hint" className="delete-hint">
+                Type DELETE exactly to confirm.
+              </p>
+            )}
+            <button
+              className="danger"
+              disabled={!matches}
+              aria-disabled={busy || undefined}
+            >
+              {busy ? "Deleting…" : "Delete my account permanently"}
+            </button>
+            <button
+              type="button"
+              className="secondary"
+              disabled={busy}
+              onClick={keepAccount}
+            >
+              Keep my account
+            </button>
+            <p role="status">{busy ? "Deleting your account." : ""}</p>
+            {failed && (
+              <p role="alert" className="danger-text">
+                <span className="sr-only">Error: </span>
+                Your account was not deleted, and nothing was removed.{" "}
+                {config.supportEmailReady ? (
+                  <>
+                    Try again. If it keeps failing, email{" "}
+                    <a href={`mailto:${config.supportEmail}`}>
+                      {config.supportEmail}
+                    </a>
+                    .
+                  </>
+                ) : (
+                  "Try again later."
+                )}
+              </p>
+            )}
+          </form>
+        )}
+      </div>
     </section>
   );
 }

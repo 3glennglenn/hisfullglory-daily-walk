@@ -78,6 +78,124 @@ async function deletionFlow(browser,base) {
   } finally {await context.close();}
 }
 
+const trigger=p=>p.getByRole("button",{name:"Delete my account",exact:true});
+const permanent=p=>p.getByRole("button",{name:"Delete my account permanently",exact:true});
+const keep=p=>p.getByRole("button",{name:"Keep my account",exact:true});
+const field=p=>p.getByLabel("Type DELETE to confirm");
+const focused=locator=>locator.evaluate(el=>el===document.activeElement);
+const words=async locator=>(await locator.textContent()).replace(/\s+/g," ").trim();
+
+// Empty, wrong and right words; what the card lists; focus when it opens and when it is dismissed.
+async function cardStates(browser,base) {
+  const {context,page:p,problems}=await open(browser,base);
+  try {
+    const card=p.locator("section.delete-account");
+    assert.equal(await card.locator("h2").innerText(),"Delete your account");
+    assert.equal(await card.getByRole("listitem").count(),6,"the six things that are deleted are a list");
+    assert.match(await card.innerText(),/Export a private backup in Settings first if you want to keep them\./);
+    const t=trigger(p);
+    assert.equal(await t.getAttribute("aria-expanded"),"false");
+    const controls=await t.getAttribute("aria-controls");
+    assert.ok(controls&&await p.locator("#"+controls).count()===1,"aria-controls names the confirmation region");
+    assert.equal(await field(p).count(),0,"the confirmation is not offered before the trigger is pressed");
+
+    await t.click();
+    assert.equal(await t.getAttribute("aria-expanded"),"true");
+    assert.equal(await focused(field(p)),true,"opening moves focus to the field");
+    assert.equal(await card.locator("h3").innerText(),"Confirm deletion");
+    assert.deepEqual(await card.locator("form button").allInnerTexts(),["Delete my account permanently","Keep my account"],"the dangerous button comes first and the safe one is named");
+    for(const [name,value] of [["autocomplete","off"],["autocapitalize","characters"],["spellcheck","false"],["inputmode","text"]]) assert.equal(await field(p).getAttribute(name),value,name);
+    assert.equal(await permanent(p).isDisabled(),true,"empty word: the permanent button is disabled");
+    assert.equal(await p.locator("#delete-account-hint").count(),0,"empty word: no hint yet");
+
+    await field(p).fill("remove");
+    assert.equal(await permanent(p).isDisabled(),true,"wrong word: still disabled");
+    const hint=p.getByText("Type DELETE exactly to confirm.",{exact:true});
+    assert.equal(await hint.isVisible(),true,"wrong word: the hint is shown");
+    assert.equal(await field(p).getAttribute("aria-describedby"),await hint.getAttribute("id"),"the hint is linked to the field");
+    await field(p).fill("DELETED");
+    assert.equal(await permanent(p).isDisabled(),true,"DELETED is not DELETE");
+    await field(p).fill("");
+    assert.equal(await hint.count(),0,"clearing the field removes the hint");
+    await field(p).fill(" Delete ");
+    assert.equal(await permanent(p).isDisabled(),false,"any letter case and surrounding spaces are accepted");
+    assert.equal(await hint.count(),0);
+
+    await keep(p).click();
+    assert.equal(await t.getAttribute("aria-expanded"),"false","Keep my account collapses the form");
+    assert.equal(await focused(t),true,"and returns focus to the trigger");
+    await t.click();
+    assert.equal(await field(p).inputValue(),"","and the word was cleared");
+    clean(problems);
+  } finally {await context.close();}
+}
+
+// While the call is pending, a second press changes nothing; a failure keeps the form and the word.
+async function busyAndFailure(browser,base) {
+  const {context,page:p,problems}=await open(browser,base);
+  try {
+    await p.evaluate(()=>{window.profileTest.rpcMode="hang";});
+    await trigger(p).click();
+    await field(p).fill("DELETE");
+    await permanent(p).click();
+    await p.getByRole("button",{name:"Deleting…",exact:true}).waitFor();
+    const form=p.locator("section.delete-account form");
+    assert.equal(await form.getAttribute("aria-busy"),"true","the form is busy");
+    assert.equal(await p.getByRole("status").filter({hasText:"Deleting your account."}).count(),1,"the progress is announced");
+    assert.equal(await keep(p).isDisabled(),true,"Keep my account is disabled while deleting");
+    assert.equal(await p.getByRole("button",{name:"Deleting…",exact:true}).getAttribute("aria-disabled"),"true");
+    // A second press from every direction: click, the keyboard on the button, Enter in the field.
+    await p.getByRole("button",{name:"Deleting…",exact:true}).click({force:true});
+    await p.getByRole("button",{name:"Deleting…",exact:true}).press("Enter");
+    await field(p).press("Enter");
+    assert.equal(await p.evaluate(()=>window.profileTest.rpcCalls),1,"delete_my_account was called exactly once");
+    await p.evaluate(()=>window.profileTest.release(false));
+    await p.getByRole("heading",{name:"Your account has been deleted",exact:true}).waitFor();
+    assert.equal(await p.evaluate(()=>window.profileTest.rpcCalls),1,"and still once after it finished");
+    clean(problems);
+  } finally {await context.close();}
+
+  const failing=await open(browser,base);
+  try {
+    const q=failing.page;
+    await q.evaluate(()=>{window.profileTest.rpcMode="reject";});
+    await trigger(q).click();
+    await field(q).fill("delete");
+    await permanent(q).click();
+    const alert=q.getByRole("alert");
+    await alert.waitFor();
+    assert.equal(await words(alert),"Error: Your account was not deleted, and nothing was removed. Try again later.","the failure says what happened and what to do");
+    assert.equal(await q.locator("section.delete-account form").getAttribute("aria-busy"),"false");
+    assert.equal(await field(q).inputValue(),"delete","the typed word is kept");
+    assert.equal(await permanent(q).isDisabled(),false,"and the form is ready for another try");
+    assert.equal(await alert.locator("a").count(),0,"no support address in the failure while forwarding is not proven");
+    await q.evaluate(()=>{window.profileTest.rpcMode="resolve";});
+    await permanent(q).click();
+    await q.getByRole("heading",{name:"Your account has been deleted",exact:true}).waitFor();
+    assert.equal(await q.evaluate(()=>window.profileTest.rpcCalls),2,"the retry is a second, separate call");
+    clean(failing.problems);
+  } finally {await failing.context.close();}
+}
+
+// The shared flag turns the support sentence on, and nothing else changes in the failure.
+async function supportReady(browser,base) {
+  const {context,page:p,problems}=await open(browser,base,{supportReady:true});
+  try {
+    await p.evaluate(()=>{window.profileTest.rpcMode="reject";});
+    await trigger(p).click();
+    await field(p).fill("delete");
+    await permanent(p).click();
+    const alert=p.getByRole("alert");
+    await alert.waitFor();
+    assert.equal(await words(alert),"Error: Your account was not deleted, and nothing was removed. Try again. If it keeps failing, email support@hisfullglory.com.");
+    assert.equal(await alert.locator("a").getAttribute("href"),"mailto:support@hisfullglory.com");
+    clean(problems);
+  } finally {await context.close();}
+}
+
 export async function checkProfile(browser,base) {
   await deletionFlow(browser,base);
+  await cardStates(browser,base);
+  await busyAndFailure(browser,base);
+  await supportReady(browser,base);
 }
