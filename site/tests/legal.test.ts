@@ -1,15 +1,18 @@
-// Checks the privacy, terms and contact pages and the data file behind them
-// (run `npm run build` first; `npm run check` does both). The footer and About links to
-// these pages, and the delete-account page, are checked from plan 07 on.
+// Checks the privacy, terms, contact and delete-account pages, the footer and About links that
+// lead to them, and the data file behind them (run `npm run build` first; `npm run check` does
+// both).
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
+import { appUrl, footerNav, shopUrl } from "../src/config.ts";
 import * as legal from "../src/data/legal.ts";
 import { gatedLegalPages } from "../src/lib/pages.ts";
 
 const { approved, assertReleasable, supportEmail, supportEmailReady, termsVersion } = legal;
-const legalPages = ["/privacy", "/terms", "/contact"];
+const legalPages = ["/privacy", "/terms", "/contact", "/delete-account"];
+/** The pages that state facts the founder still has to confirm. /delete-account states none. */
+const pagesWithFacts = ["/privacy", "/terms", "/contact"];
 
 /** Where a site address lives in the build: "/privacy" is dist/privacy/index.html. */
 const builtFile = (address: string) => `dist${address.replace(/\/$/, "")}/index.html`;
@@ -29,7 +32,7 @@ function htmlFiles(dir: string): string[] {
   });
 }
 
-test("the privacy, terms and contact pages exist, with one h1 and an id on every h2", () => {
+test("the privacy, terms, contact and delete-account pages exist, with one h1 and an id on every h2", () => {
   for (const address of legalPages) {
     assert.ok(existsSync(builtFile(address)), `${address} page`);
     const html = read(address);
@@ -48,7 +51,7 @@ test("the legal pages are listed once in gatedLegalPages and are not under /page
   for (const address of legalPages) assert.ok(!redirected.has(address.split("/")[1]), `${address} is redirected to the shop`);
 });
 
-test("until the founder approves, each legal page is a draft: banner, noindex, markers, not in the sitemap", () => {
+test("until the founder approves, each legal page is a draft: banner, noindex, markers where facts are open, not in the sitemap", () => {
   const sitemap = readFileSync("dist/sitemap.xml", "utf8");
   for (const address of legalPages) {
     const html = read(address);
@@ -61,7 +64,8 @@ test("until the founder approves, each legal page is a draft: banner, noindex, m
     } else {
       assert.ok(/<strong[^>]*>Draft\.<\/strong>/.test(html), `${address}: draft banner`);
       assert.ok(html.includes('<meta name="robots" content="noindex"'), `${address}: noindex`);
-      assert.ok(html.includes("[CONFIRM"), `${address}: unconfirmed facts show as markers`);
+      if (pagesWithFacts.includes(address))
+        assert.ok(html.includes("[CONFIRM"), `${address}: unconfirmed facts show as markers`);
       assert.ok(!html.includes('rel="canonical"'), `${address}: no canonical address`);
       assert.ok(!listed, `${address}: kept out of the sitemap`);
     }
@@ -186,4 +190,109 @@ test("the terms repeat the community rules of the app and the Scripture sentence
     assert.ok(about.includes(sentence), `About says: ${sentence}`);
     assert.ok(terms.includes(sentence), `Terms say: ${sentence}`);
   }
+});
+
+test("the delete-account page gives the in-app route as three numbered steps and the way back to the app", () => {
+  const html = read("/delete-account");
+  const steps = html.match(/<ol[^>]*>([\s\S]*?)<\/ol>/);
+  assert.ok(steps, "an ordered list of steps");
+  assert.equal(html.match(/<ol[\s>]/g)?.length, 1, "one ordered list");
+  assert.equal(steps[1].match(/<li[\s>]/g)?.length, 3, "exactly three steps");
+  assert.ok(html.includes(`href="${appUrl}"`), "links to the app");
+  assert.ok(/<a[^>]*class="button"[^>]*>Open the app<\/a>/.test(html), "an Open the app button");
+  assert.ok(html.includes('href="/privacy"'), "links to the privacy policy");
+  const text = textOf(html).replace(/\s+/g, " ");
+  assert.ok(text.includes("HisFullGlory Daily Walk"), "names the app");
+  assert.ok(text.includes("Your shop account and orders at shop.hisfullglory.com are separate."), "shop accounts are separate");
+  assert.ok(html.includes(`href="${shopUrl}/pages/contact"`), "the shop contact page");
+  assert.ok(text.includes("type DELETE"), "names the word to type");
+});
+
+test("the delete-account page keeps the wording the founder approved for what is deleted, kept and on the device", () => {
+  const html = read("/delete-account");
+  const text = textOf(html).replace(/\s+/g, " ");
+  for (const phrase of [
+    "Your account and your profile, including your display name.",
+    "Your posts, reflections, prayers and chat messages in the community, and the replies other people wrote under your posts.",
+    "Your reactions, votes and the reports you sent.",
+    "The people you blocked or muted, and anyone's block of you.",
+    "Your topic and Circle memberships, and the support requests you made.",
+    "Circles you own. They close, with their posts.",
+    "A record of moderation decisions can be kept to protect the community: what was decided about which post, Circle or request, and when. It holds no name, email address or post text. Reports other people sent about your posts stay with their accounts.",
+    "Your private journal, prayers and reading are kept on your device, not on our server. Deleting your account in the app also removes what that account saved on that device. What you saved without signing in stays on the device until you clear it.",
+  ])
+    assert.ok(text.includes(phrase), `delete-account says: ${phrase}`);
+  const list = html.match(/<h2[^>]*>What is deleted<\/h2>\s*<ul[^>]*>([\s\S]*?)<\/ul>/);
+  assert.ok(list, "the What is deleted list");
+  assert.equal(list[1].match(/<li[\s>]/g)?.length, 6, "six items in What is deleted");
+});
+
+test("the delete-account page shows the email route only when it works", () => {
+  const html = read("/delete-account");
+  if (supportEmailReady) {
+    assert.ok(html.includes(`href="mailto:${supportEmail}?subject=Delete%20my%20account"`), "mailto with subject");
+    assert.ok(textOf(html).includes("within 30 days"), "the 30-day promise");
+    assert.ok(!html.includes("Email deletion is being set up"));
+  } else {
+    assert.ok(html.includes("Email deletion is being set up. Until then, please use the app."), "not-ready text");
+    assert.ok(!html.includes("mailto:"), "no mailto link");
+    assert.ok(!html.includes(supportEmail), "no support address");
+    assert.ok(!/or by email/.test(textOf(html)), "no promise of email while it is not set up");
+  }
+});
+
+/**
+ * Does a vercel.json redirect source capture this address? Segment by segment: a plain word must
+ * be equal, ":name*" takes the rest of the address, ":name(regex)" must match the whole segment.
+ */
+function redirectCaptures(source: string, address: string): boolean {
+  const want = address.split("/").slice(1);
+  const have = source.split("/").slice(1);
+  for (let index = 0; index < have.length; index++) {
+    const part = have[index];
+    if (/^:\w+\*$/.test(part)) return true;
+    if (index >= want.length) return false;
+    const pattern = part.match(/^:\w+\((.+)\)$/);
+    const same = pattern ? new RegExp(`^(?:${pattern[1]})$`).test(want[index]) : /^:\w+$/.test(part) || part === want[index];
+    if (!same) return false;
+  }
+  return have.length === want.length;
+}
+
+test("the footer lists About, Privacy, Terms, Contact, Delete account and Shop, all as links that work", () => {
+  assert.deepEqual(
+    footerNav.map((item) => item.label),
+    ["About", "Privacy", "Terms", "Contact", "Delete account", "Shop"],
+  );
+  assert.deepEqual(
+    footerNav.map((item) => item.href),
+    ["/about", "/privacy", "/terms", "/contact", "/delete-account", shopUrl],
+  );
+  const home = read("/");
+  const footer = home.match(/<footer[\s\S]*?<\/footer>/)?.[0] ?? "";
+  for (const item of footerNav) {
+    assert.ok(item.ready, `${item.label} is ready`);
+    // A site path needs a built page; the shop is another site.
+    if (item.href.startsWith("/")) assert.ok(existsSync(builtFile(item.href)), `${item.label}: built page ${item.href}`);
+    assert.ok(footer.includes(`href="${item.href}"`), `${item.label}: linked in the footer`);
+    assert.ok(!/^\/(pages|policies)\//.test(item.href), `${item.label}: no /pages/ or /policies/ path`);
+  }
+  assert.ok(!/policies\/privacy-policy|policies\/terms-of-service/.test(footer), "no link to the shop's policy pages");
+});
+
+test("no redirect in vercel.json captures Privacy, Terms, Contact or Delete account", () => {
+  const rules: { source: string }[] = JSON.parse(readFileSync("vercel.json", "utf8")).redirects;
+  // The matcher itself must see a capture where there is one, or the loop below proves nothing.
+  assert.ok(redirectCaptures("/pages/:path*", "/pages/contact"));
+  assert.ok(redirectCaptures("/account/:path*", "/account/orders"));
+  assert.ok(redirectCaptures("/search", "/search"));
+  assert.ok(!redirectCaptures("/account/:path*", "/delete-account"));
+  for (const address of legalPages)
+    for (const rule of rules) assert.ok(!redirectCaptures(rule.source, address), `${rule.source} captures ${address}`);
+});
+
+test("the About page leads to the contact page of this site", () => {
+  const html = read("/about");
+  assert.ok(html.includes('href="/contact"'), "Contact us leads to /contact");
+  assert.ok(!html.includes("/pages/contact"), "no link to the shop's /pages/ address");
 });

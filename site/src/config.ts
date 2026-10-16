@@ -28,11 +28,15 @@ export const mainNav: NavItem[] = [
   { label: "About", href: "/about", ready: true },
 ];
 
-// Privacy, Terms and Contact link to the existing shop pages (WEBSITE_PLAN.md, section 8).
+// Privacy, Terms, Contact and Delete account are this site's own pages. They stay behind the
+// approval gate in src/data/legal.ts (noindex and a draft banner until the founder approves
+// the text), so the footer links to them from day one. Never use a path that begins with
+// /pages/ or /policies/: vercel.json sends both to the shop.
 export const footerNav: NavItem[] = [
   { label: "About", href: "/about", ready: true },
-  { label: "Privacy", href: `${shopUrl}/policies/privacy-policy`, ready: true },
-  { label: "Terms", href: `${shopUrl}/policies/terms-of-service`, ready: true },
-  { label: "Contact", href: `${shopUrl}/pages/contact`, ready: true },
+  { label: "Privacy", href: "/privacy", ready: true },
+  { label: "Terms", href: "/terms", ready: true },
+  { label: "Contact", href: "/contact", ready: true },
+  { label: "Delete account", href: "/delete-account", ready: true },
   { label: "Shop", href: shopUrl, ready: true },
 ];

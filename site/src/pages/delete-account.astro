@@ -1,45 +1,72 @@
 ---
-// /delete-account: how to delete an app account without the app. Google Play asks for this
-// address in the store listing. What it says must match migration 007 and DeleteAccount in
-// the app's src/platform/auth.tsx. The support address is printed only once mail to it is known
-// to arrive (supportEmailReady in src/data/legal.ts); plan 07 revises the whole page.
-import { supportEmail, supportEmailReady } from "../data/legal";
+// /delete-account: how to delete an app account, in the app or without it. Google Play asks
+// for this address in the store listing. What it says must match migration 007 and DeleteAccount
+// in the app's src/platform/auth.tsx.
+//
+// Same gate as /privacy, /terms and /contact (site/src/data/legal.ts): noindex, the draft
+// banner and no sitemap entry until `approved` is true, and a production build stops while it
+// is false. The support address is printed only once mail to it is known to arrive
+// (`supportEmailReady`).
+//
+// "What is deleted", "What is kept" and "On your device" keep the wording the founder
+// approved with the first version of this page. Do not edit those three without asking.
+import DraftBanner from "../components/DraftBanner.astro";
+import { appUrl, shopUrl } from "../config";
+import { approved, assertReleasable, supportEmail, supportEmailReady } from "../data/legal";
 import Base from "../layouts/Base.astro";
+
+assertReleasable(process.env.VERCEL_ENV);
+
+// A shop address, not a path of this site, so the /pages/ redirect rule is not involved.
+const shopContact = `${shopUrl}/pages/contact`;
 ---
 
 <Base
   title="Delete your account"
   description="How to delete your HisFullGlory Daily Walk account, and what is removed when you do."
+  noindex={!approved}
 >
   <section class="section">
-    <div class="wrap prose">
+    <div class="wrap prose delete">
+      {!approved && <DraftBanner />}
       <h1>Delete your account</h1>
-      <p class="lede">
-        You can delete your HisFullGlory Daily Walk account at any time, in the
-        app or by email.
+      <p class="muted intro">
+        {
+          supportEmailReady
+            ? "You can delete your HisFullGlory Daily Walk account at any time, in the app or by email."
+            : "You can delete your HisFullGlory Daily Walk account at any time, in the app."
+        }
       </p>
 
-      <h2>In the app</h2>
-      <p>
-        Sign in, open Profile and choose Delete my account at the bottom of the
-        page. Type DELETE to confirm. Your account is deleted at once.
-      </p>
+      <h2 id="in-the-app">Delete it in the app</h2>
+      <ol>
+        <li>Open HisFullGlory and sign in with the code we email you.</li>
+        <li>Open Profile and scroll to Delete your account.</li>
+        <li>
+          Choose Delete my account, type DELETE and confirm. Your account is
+          deleted at once, and you will see a confirmation.
+        </li>
+      </ol>
+      <div class="actions">
+        <a class="button" href={appUrl}>Open the app</a>
+      </div>
 
-      <h2>By email</h2>
+      <h2 id="without-the-app">Cannot use the app?</h2>
       {
         supportEmailReady ? (
           <p>
-            If you cannot use the app, email{" "}
-            <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{" "}
-            from the address you sign in with and ask us to delete your account.
-            We delete it within 30 days and reply to confirm.
+            Email{" "}
+            <a href={`mailto:${supportEmail}?subject=Delete%20my%20account`}>{supportEmail}</a>{" "}
+            from the address you sign in with, with the subject &ldquo;Delete my
+            account&rdquo;. We delete your account within 30 days and email you
+            to confirm.
           </p>
         ) : (
           <p>Email deletion is being set up. Until then, please use the app.</p>
         )
       }
 
-      <h2>What is deleted</h2>
+      <h2 id="what-is-deleted">What is deleted</h2>
       <ul>
         <li>Your account and your profile, including your display name.</li>
         <li>
@@ -52,7 +79,7 @@ import Base from "../layouts/Base.astro";
         <li>Circles you own. They close, with their posts.</li>
       </ul>
 
-      <h2>What is kept</h2>
+      <h2 id="what-is-kept">What is kept</h2>
       <p>
         A record of moderation decisions can be kept to protect the community:
         what was decided about which post, Circle or request, and when. It
@@ -60,13 +87,44 @@ import Base from "../layouts/Base.astro";
         about your posts stay with their accounts.
       </p>
 
-      <h2>On your device</h2>
+      <h2 id="on-your-device">On your device</h2>
       <p>
         Your private journal, prayers and reading are kept on your device, not
         on our server. Deleting your account in the app also removes what that
         account saved on that device. What you saved without signing in stays
         on the device until you clear it.
       </p>
+      <p>
+        Your shop account and orders at shop.hisfullglory.com are separate. To
+        ask about those, use the <a href={shopContact}>shop contact page</a>.
+      </p>
+
+      <p>
+        More about how we handle your data is in the{" "}
+        <a href="/privacy">privacy policy</a>.
+      </p>
     </div>
   </section>
 </Base>
+
+<style>
+  /* Long addresses and URLs wrap instead of pushing the page sideways. */
+  .delete {
+    overflow-wrap: anywhere;
+  }
+  .intro {
+    margin-top: 16px;
+  }
+  h2 {
+    margin: 48px 0 8px;
+    scroll-margin-top: 16px;
+  }
+  ul,
+  ol {
+    margin: 10px 0 0;
+    padding-left: 1.2rem;
+  }
+  li + li {
+    margin-top: 8px;
+  }
+</style>
