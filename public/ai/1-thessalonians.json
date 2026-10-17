@@ -22,6 +22,24 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:1-thessalonians/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "This may be the earliest letter in the New Testament, and it begins with gratitude. Paul, Silvanus and Timothy write to the assembly of the Thessalonians. They always give thanks for them, remembering “your work of faith and labor of love and perseverance of hope in our Lord Jesus Christ”.\n\nThey know the Thessalonians are chosen, because the Good News came to them not in word only but in power, in the Holy Spirit, and with much assurance. And the Thessalonians became imitators of Paul and of the Lord, receiving the word in much affliction, with joy.\n\nTheir story had spread. They became an example to all who believe in Macedonia and Achaia, and the word of the Lord sounded out from them. People everywhere report how they “turned to God from idols to serve a living and true God”, and how they “wait for his Son from heaven”, whom God raised from the dead: Jesus, who delivers us from the wrath to come."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes with Silvanus and Timothy to the young church in Thessalonica, which Paul had visited (see Acts 17). It is usually dated around AD 50 or 51, and many scholars count it among the earliest writings of the New Testament. Tradition holds that Paul wrote it. Christians read the coming of the Son from heaven in different ways, and the later chapters of the letter say more about it."
+        }
+      ]
     }
   ]
 }
