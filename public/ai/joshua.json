@@ -4,23 +4,24 @@
     {
       "id": "ai:joshua",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Joshua tells how Israel entered the land of Canaan after the death of Moses. The first half describes crossing the Jordan, the fall of Jericho and a series of campaigns (chapters 1 to 12). The second half divides the land among the tribes (13 to 22).\n\nThe book ends with Joshua’s farewell and a renewal of the covenant at Shechem, where the people commit themselves to serve the LORD."
+          "text": "The book opens with a death and an order. “Moses my servant is dead.” The leader is gone, and the LORD speaks to Joshua: arise, cross the Jordan, take this people into the land. The same charge comes back again and again: “Be strong and courageous.”\n\nThe first half of the book tells how Israel entered the land of Canaan: the crossing of the Jordan, the fall of Jericho and a series of campaigns (chapters 1 to 12). The second half divides the land among the tribes (13 to 22).\n\nThe last scene is at Shechem. Joshua gathers the tribes and puts a choice to them: “choose today whom you will serve”. Then he says where he stands: “as for me and my house, we will serve the LORD.” The people answer that they will serve the LORD too, and the covenant is renewed."
         },
         {
           "kind": "background",
-          "text": "The book names no author and its date is debated. How its account relates to the findings of archaeology is also debated among scholars. Joshua’s name is the Hebrew form of the name Jesus."
+          "text": "The book names no author and its date is debated. How its account relates to the findings of archaeology is also debated among scholars. The book is named for its main figure, and Joshua’s name is the Hebrew form of the name Jesus."
         },
         {
           "kind": "interpretations",
-          "text": "The warfare in this book raises hard questions, and Christians do not treat it as a model for violence. Some read the commands as a unique act of judgment at one moment in the history of salvation. Others point out that ancient war accounts used sweeping language, and that the book itself shows Canaanites such as Rahab being spared and many peoples remaining. Hebrews 4 reads the rest that Joshua gave as pointing to a greater rest still to come."
+          "text": "The warfare in this book raises hard questions, and Christians do not treat it as a model for violence. Some read the commands as a unique act of judgment at one moment in the history of salvation. Others point out that ancient war accounts used sweeping language, and that the book itself shows Canaanites such as Rahab being spared and many peoples remaining.\n\nHebrews 4 reads the rest that Joshua gave as pointing to a greater rest still to come."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

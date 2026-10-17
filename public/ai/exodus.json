@@ -4,23 +4,24 @@
     {
       "id": "ai:exodus",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Exodus tells how God brought Israel out of slavery in Egypt. God calls Moses, sends plagues on Egypt, and brings the people out on the night remembered as Passover. He then leads them through the sea.\n\nAt Mount Sinai God makes a covenant with Israel and gives the Ten Commandments and other laws. The people break faith almost at once with a golden calf, Moses pleads for them, and the book ends with the tabernacle built and filled with God’s glory."
+          "text": "Moses is looking after sheep at the back of the wilderness when he sees a bush that is burning and not burning up. He goes to look. From the middle of the bush a voice says, “Moses! Moses!” He is told to take off his sandals, because the ground is holy. Then God says, “I have surely seen the affliction of my people who are in Egypt,” God says. The cry of a people in slavery has been heard, and Moses is the one sent.\n\nThat call begins Exodus, the story of how God brought Israel out of slavery in Egypt. Plagues fall on Egypt. The people leave on the night remembered as Passover. God then leads them through the sea.\n\nAt Mount Sinai God makes a covenant with Israel and gives the Ten Commandments and other laws. The people break faith almost at once, with a golden calf, and Moses pleads for them. The book ends with the tabernacle built and filled with God’s glory."
         },
         {
           "kind": "background",
-          "text": "Exodus is the second book of the Law, linked by tradition with Moses. The date of the exodus is debated; the two main proposals place it in the fifteenth or the thirteenth century before Christ. The tabernacle described in the second half is a tent for worship that could travel with the people."
+          "text": "Exodus is the second book of the Law, linked by tradition with Moses. The date of the exodus is debated. The two main proposals place it in the fifteenth or the thirteenth century before Christ. The tabernacle described in the second half is a tent for worship that could travel with the people."
         },
         {
           "kind": "interpretations",
-          "text": "For Jews the exodus is the central saving act of God, remembered every year at Passover. Christians read it as a pattern of rescue that points to Christ: the New Testament calls him the Passover lamb, and the Lord’s Supper began at a Passover meal. Christians differ on how the laws given at Sinai apply today. Many distinguish lasting moral commands from laws for Israel’s worship and national life; others stress that the whole law finds its fulfillment in Christ."
+          "text": "For Jews the exodus is the central saving act of God, remembered every year at Passover. Christians read it as a pattern of rescue that points to Christ. The New Testament calls him the Passover lamb, and the Lord’s Supper began at a Passover meal.\n\nChristians differ on how the laws given at Sinai apply today. Many distinguish lasting moral commands from laws for Israel’s worship and national life. Others stress that the whole law finds its fulfillment in Christ."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

@@ -4,23 +4,24 @@
     {
       "id": "ai:jude",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jude is a short and forceful letter. The writer had meant to write about the salvation believers share, but instead urges them to contend for the faith, because people have slipped in who treat God’s grace as permission to live as they please.\n\nHe compares them with examples of judgment from Israel’s history and then tells his readers how to respond: build yourselves up in faith, pray, keep yourselves in God’s love, and show mercy to those who doubt. The letter closes with a well-loved blessing."
+          "text": "Jude had sat down to write about something joyful, the salvation that he and his readers share. Then word reached him of a danger, and he put that letter aside. Instead he wrote to urge them “to contend earnestly for the faith”. People had slipped in quietly among them, he says, and they were treating God’s grace as permission to live as they please.\n\nTo show what that leads to, he reaches back into Israel’s history and names the people saved out of Egypt who did not believe, Sodom and Gomorrah, Cain, Balaam and Korah. Then the pictures pile up: hidden reefs, clouds without water, trees without fruit, wandering stars. They are sharp, and they are meant to be.\n\nBut the letter turns on the words “But you, beloved”. Build yourselves up in your faith, pray in the Holy Spirit, and “Keep yourselves in God’s love”. Have compassion on those who doubt. The letter ends with a blessing for the One who is able to keep them from stumbling."
         },
         {
           "kind": "background",
-          "text": "The author introduces himself as Jude, brother of James, which would make him also a brother of Jesus. The letter closely resembles 2 Peter 2. It refers to two Jewish writings outside the Old Testament, known as 1 Enoch and the Assumption of Moses."
+          "text": "The man who writes this letter gives his name, Jude, and says he is the brother of James. That would make him also a brother of Jesus. His short letter closely resembles 2 Peter 2, and the two are often read side by side. Jude also refers to two Jewish writings from outside the Old Testament, known as 1 Enoch and the Assumption of Moses."
         },
         {
           "kind": "interpretations",
-          "text": "Jude’s use of writings outside the Bible has long been discussed. Most readers conclude that quoting a source for a point is not the same as treating the whole work as Scripture. The letter’s balance is often noted: firmness about the faith, and mercy toward people."
+          "text": "Readers have long discussed Jude’s use of writings outside the Bible. Most conclude that quoting a source to make a point is not the same as treating the whole work as Scripture.\n\nMany also notice the balance of the letter. The same writer who warns of judgment with such force asks his readers to show compassion to some, and to snatch others from the fire. Firmness about the faith, and mercy toward people, sit side by side."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

@@ -4,23 +4,24 @@
     {
       "id": "ai:numbers",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Numbers follows Israel from Mount Sinai to the edge of the promised land, a journey that takes about forty years. It opens with a census and marching orders, then tells of complaints, rebellion and unbelief. After spies bring a fearful report, the generation that left Egypt is told it will die in the wilderness.\n\nThe book ends with a new generation camped on the plains of Moab, counted again and ready to enter the land."
+          "text": "The whole camp is crying, and it goes on all night. The spies have come back with a fearful report, and the people cry out, “We wish that we had died in the land of Egypt,” they say. Two of the spies, Joshua and Caleb, tear their clothes and plead with them. The land, they say, is “an exceedingly good land”. But the crowd threatens to stone them.\n\nThat night in chapter 14 is the center of Numbers. The book follows Israel from Mount Sinai to the edge of the promised land, a journey that takes about forty years. It opens with a census and marching orders, and then tells of complaints, rebellion and unbelief. After the spies’ report, the generation that left Egypt is told it will die in the wilderness. Yet even then God says that he will bring in their little ones, “they shall know the land which you have rejected.”\n\nThe book ends with a new generation camped on the plains of Moab, counted again and ready to enter the land."
         },
         {
           "kind": "background",
-          "text": "The English name comes from the two censuses in chapters 1 and 26. The Hebrew title means in the wilderness, which describes the book better. The very large numbers of people are debated: some take them at face value, others think the Hebrew word translated thousand may mean a clan or a military unit."
+          "text": "The English name comes from the two censuses in chapters 1 and 26. The Hebrew title means in the wilderness, which describes the book better. The very large numbers of people are debated. Some take them at face value, while others think the Hebrew word translated thousand may mean a clan or a military unit."
         },
         {
           "kind": "interpretations",
-          "text": "The New Testament uses these stories as both warning and encouragement, most clearly in 1 Corinthians 10 and Hebrews 3 and 4. The bronze serpent of chapter 21 is the picture Jesus uses of his own death in John 3. Readers also notice how patient God is in this book: judgment falls, and still he keeps the promise and brings the people on."
+          "text": "The New Testament uses these stories as both warning and encouragement, most clearly in 1 Corinthians 10 and Hebrews 3 and 4. The bronze serpent of chapter 21 is the picture Jesus uses of his own death in John 3.\n\nReaders also notice how patient God is in this book. Judgment falls, and still he keeps the promise and brings the people on."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
