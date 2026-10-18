@@ -22,6 +22,78 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:2-timothy/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul writes from prison, and he writes warmly. He thanks God for Timothy, whom he remembers night and day in prayer. He remembers Timothy’s tears and longs to see him. He recalls the sincere faith that lived first in Timothy’s grandmother Lois and his mother Eunice, and he is sure it lives in Timothy too.\n\nHe asks Timothy to stir up the gift of God that came through the laying on of hands. “God didn’t give us a spirit of fear, but of power, love, and self-control.” He asks Timothy not to be ashamed of the Lord or of Paul his prisoner, but to share in hardship for the Good News. He says he is not ashamed of his own suffering either, because he knows whom he has believed.\n\nThen the letter turns personal. Everyone in Asia has turned away from him. But Onesiphorus often refreshed him, was not ashamed of his chain, and searched diligently for him in Rome until he found him."
+        },
+        {
+          "kind": "background",
+          "text": "Tradition links this letter to Paul in prison in Rome near the end of his life, and it reads like a farewell. Many scholars think a follower wrote in his name, while others accept Paul as the author. Timothy is a younger co-worker who has been with Paul on many journeys, and he needs courage to carry on in Ephesus. See Acts 16 for the first mention of Timothy and his mother, and 1 Timothy 4 for the laying on of hands."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-timothy/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul tells Timothy to be strengthened in grace, and to hand on what he has heard to faithful people who can teach others. Then come three pictures for a life of service: a soldier who does not get tangled in daily affairs, an athlete who is crowned only if he competes by the rules, and a farmer who labors before sharing the crop. Paul asks Timothy to remember Jesus Christ, risen from the dead. For this gospel he suffers in chains like a criminal, but “God’s word isn’t chained”.\n\nA trustworthy saying follows, in the form of a short poem: if we died with him we will live with him, if we endure we will reign with him. If we deny him he will deny us. But “he remains faithful” even if we are faithless, for he cannot deny himself.\n\nPaul warns against quarrels over words and against two men who say that the resurrection is already past. A large house has vessels for honor and for dishonor, and Timothy is to pursue righteousness, faith, love and peace. The Lord’s servant must be gentle and patient, correcting opponents in gentleness."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes near the end of his life, probably from prison in Rome, to a younger leader who is tempted to give up. Many scholars think a follower wrote in Paul’s name, while tradition links the letter to him. The saying that Christ will deny those who deny him, and that he stays faithful when we are not, has been read by Christians in different ways. See Philippians 3 and 1 Corinthians 15 for the hope of the resurrection."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-timothy/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul warns Timothy that in the last days grievous times will come. He then lists what people will be like: lovers of self and of money, boastful, arrogant, disobedient to parents, unforgiving, headstrong, lovers of pleasure rather than lovers of God. They will keep a form of godliness while denying its power. Some of them creep into houses and take advantage of gullible women. Like Jannes and Jambres, who opposed Moses, they will oppose the truth, but their folly will be plain to everyone. The Old Testament does not name these two men.\n\nThen Paul says, but you. Timothy has followed his teaching, his way of life, his patience and his sufferings at Antioch, Iconium and Lystra. All who desire to live godly in Christ Jesus will suffer persecution. Timothy is to remain in what he has learned, and to remember that from infancy he has known the holy Scriptures. “Every Scripture is God-breathed” and useful for teaching, for reproof, for correction and for training in righteousness."
+        },
+        {
+          "kind": "background",
+          "text": "The warning describes the character of people in the last days, and Paul places it in the present as well. Tradition links this letter to Paul at the end of his life, while many scholars think a follower wrote in his name. Christians agree that Scripture is inspired but differ on how that works and on how its authority is understood. The Scriptures Timothy knew from childhood would have been the Old Testament. See Acts 14 and Acts 16 for Lystra and Timothy’s home."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-timothy/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul lays a solemn charge on Timothy before God and Christ Jesus, who will judge the living and the dead. Preach the word, in season and out of season. A time is coming when people will not listen to sound teaching but will collect teachers to suit their own desires. Timothy is to stay sober and fulfill his ministry.\n\nThen Paul speaks of his own end. He is already being poured out like an offering, and the time of his departure has come. “I have fought the good fight. I have finished the course. I have kept the faith.” A crown of righteousness is waiting for him, and for all who have loved the Lord’s appearing.\n\nThe last verses are very human. Demas has left him, loving this present world. “Only Luke is with me.” He asks Timothy to bring Mark, his cloak and his books. At his first defense no one came to help, yet the Lord stood by him. He prays that it not be held against them. He sends greetings and asks Timothy to come before winter."
+        },
+        {
+          "kind": "background",
+          "text": "Tradition places these words in the last days of Paul’s life, in prison in Rome, shortly before his death. Many scholars think a follower wrote in Paul’s name, while others hold that Paul himself wrote them. In either case the chapter is a farewell. The reference to Mark is worth noting because Paul’s earlier trouble with him is told in Acts 15. See also Acts 27 and Acts 28 for Paul’s journey to Rome."
+        }
+      ]
     }
   ]
 }

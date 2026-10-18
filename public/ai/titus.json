@@ -22,6 +22,60 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:titus/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul writes to Titus, his true child in a common faith, and reminds him why he was left on the island of Crete: to set in order what was lacking and to appoint elders in every city. An elder must be blameless, the husband of one wife, with children who believe. An overseer must not be arrogant or quick-tempered, not given to wine, not violent, but hospitable, self-controlled and holding firmly to the faithful word.\n\nThe reason for such care is that there are many unruly people, empty talkers and deceivers, who upset whole households for dishonest gain. Paul quotes one of their own prophets: “Cretans are always liars, evil beasts, and idle gluttons.” He calls this testimony true, and tells Titus to correct them sharply so that they may be sound in the faith. They are not to pay attention to Jewish fables.\n\nThe chapter ends with a saying about the pure and the defiled, and about those who profess to know God but deny him by their deeds."
+        },
+        {
+          "kind": "background",
+          "text": "Paul gives Titus a pattern for appointing leaders in a young church on Crete. The line about Cretans is a sweeping claim about a whole people, and it shows how the letter can use an ancient stereotype. Many readers think it quotes a Cretan writer, and Paul calls it true of the particular opponents here. The remark about Jewish fables should not be read as speaking of Jewish people as a whole. Tradition links the letter to Paul, while many scholars think a follower wrote it. See 1 Timothy 3."
+        }
+      ]
+    },
+    {
+      "id": "ai:titus/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul tells Titus to teach what fits sound doctrine. Older men are to be temperate and sound in faith, love and perseverance. Older women are to be reverent and to train the younger women. Younger women are told to love their husbands and children, and to be in subjection to their own husbands, so that God’s word is not blasphemed. Younger men are to be sober minded. Titus himself is to be an example of good works, with integrity and soundness of speech. Servants are to be subject to their masters and trustworthy in all things.\n\nThe household instructions rest on one reason: “the grace of God has appeared, bringing salvation to all men”. It trains believers to deny ungodliness and to live soberly, righteously and godly now, while looking for the blessed hope and appearing of the glory of our great God and Savior, Jesus Christ. He gave himself to redeem a people for his own possession, zealous for good works."
+        },
+        {
+          "kind": "background",
+          "text": "These instructions are shaped by the households of the first century, in which wives and slaves had little freedom. Christians differ on how they apply today. Some see lasting rules, others see counsel meant to protect the church’s good name. Slavery is accepted here, and the passage has been misused to defend it. See Philemon and 1 Timothy 6 for related passages. Verse 13 is read by many Christians as calling Jesus God, while the grammar can also be read in other ways. Tradition links the letter to Paul."
+        }
+      ]
+    },
+    {
+      "id": "ai:titus/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul tells Titus to remind the believers to be subject to rulers and authorities, to be ready for every good work, to speak evil of no one, and to be gentle and show humility toward everyone. He gives the reason from their own story: they were once foolish, disobedient, led astray and full of malice and envy.\n\nThen the tone brightens. The kindness of God our Savior and his love for humanity appeared, and he saved them, “not by works of righteousness which we did ourselves, but according to his mercy”. He did this through the washing of rebirth and renewal by the Holy Spirit, poured out through Jesus Christ, so that they might become heirs with the hope of eternal life. Those who have believed must be careful to do good works.\n\nTitus should avoid foolish arguments and genealogies and, after two warnings, have nothing to do with a divisive person. Paul ends with plans, names and greetings: Artemas or Tychicus, Nicopolis, Zenas the lawyer and Apollos."
+        },
+        {
+          "kind": "background",
+          "text": "The letter closes with a short summary of the gospel set among practical requests. Christians differ on what the washing of rebirth refers to, with many seeing baptism, and others the inner renewal by the Spirit. The line about being saved not by works has also shaped long debates among Christians about faith and works. Tradition links the letter to Paul, while many scholars think a follower wrote in his name. See Ephesians 2 and Romans 3 for related passages."
+        }
+      ]
     }
   ]
 }

@@ -40,6 +40,78 @@
           "text": "Paul writes with Silvanus and Timothy to the young church in Thessalonica, which Paul had visited (see Acts 17). It is usually dated around AD 50 or 51, and many scholars count it among the earliest writings of the New Testament. Tradition holds that Paul wrote it. Christians read the coming of the Son from heaven in different ways, and the later chapters of the letter say more about it."
         }
       ]
+    },
+    {
+      "id": "ai:1-thessalonians/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul asks the Thessalonians to remember how he came to them. He had just been shamefully treated at Philippi, and still he and his companions grew bold to tell the Good News in much conflict. They did not flatter anyone. They did not ask for money or praise, though they might have claimed the weight of apostles. Instead they were gentle, “like a nursing mother cherishes her own children.” They worked night and day so that no one would be burdened, and they urged each person as a father does his own children.\n\nThen the chapter turns hard. Paul thanks God that they received the message as God’s word, and he says they suffered from their own countrymen as the assemblies in Judea suffered. In that setting he speaks sharply of “the Jews” who killed Jesus and the prophets. The chapter ends in longing: he tried again and again to see them, and he calls them his hope, his joy and his glory."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to a young assembly he had to leave soon after he helped found it, and he reminds them of how he and his co-workers behaved among them. The letter is usually dated around AD 50 to 51, which would make it one of the earliest New Testament writings. See Acts 17 for the visit. The sharp words in verses 14 to 16 come out of a conflict inside the Jewish world, and Paul was a Jew himself. They have been badly misused against Jewish people as a whole, and many readers take them to describe particular opponents."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-thessalonians/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul could not stand the waiting. Alone in Athens, he and his companions decided to send Timothy to the Thessalonians to strengthen them and comfort them in their faith. Paul feared that the tempter had tempted them and that all his work had been for nothing. He reminds them that he had told them beforehand that affliction would come.\n\nThen comes the news he longed for. Timothy has just returned with glad word of their faith and love, and that they remember Paul with good memories and long to see him as he longs to see them. The relief breaks out in a single line: “For now we live, if you stand fast in the Lord.”\n\nHe cannot thank God enough. He prays night and day to see their faces again, and he asks the Lord to make them increase and overflow in love for one another and for all people."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is the emotional center of the letter. Paul is writing just after Timothy’s report, probably from Corinth, and the letter is usually dated around AD 50 to 51. He has been separated from the church by force of circumstances and by worry, and the letter answers a report that has set his mind at rest. See Acts 17 and Acts 18 for his journey. The prayer at the end leads into the practical teaching of the next chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-thessalonians/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul urges the Thessalonians to keep walking in what they were taught about pleasing God. He speaks plainly about sexual conduct: they are to abstain from sexual immorality, to live in holiness and honor, and not to wrong a brother or sister in this matter. He praises their love for the believers across Macedonia and asks for more of it. He asks them to live quietly, mind their own business and work with their hands.\n\nThen he turns to grief. Some of them have died, and the living are afraid for them. Paul does not want them to grieve like those who have no hope. Because Jesus died and rose again, God will bring with him those who have fallen asleep in him. The Lord himself will descend with a shout and a trumpet, the dead in Christ will rise first, and the living will be caught up together with them. The chapter closes with a charge: “Therefore comfort one another with these words.”"
+        },
+        {
+          "kind": "background",
+          "text": "A church that is barely a year or two old has already buried some of its own, and the question of what happens to them presses on the living. The letter is usually dated around AD 50 to 51. Christians differ on how to read the details of the Lord’s coming and being caught up in the clouds, including the order and timing of events. The teaching on sexual conduct and on daily work belongs to the same letter and reflects the everyday life of a new congregation in a Greek city. See also 1 Corinthians 15."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-thessalonians/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul has no need to write about times and seasons, because they already know that the day of the Lord comes like a thief in the night. When people are saying, “Peace and safety,” sudden destruction comes, like birth pains on a pregnant woman. But the Thessalonians are not in darkness. They are children of light and of the day, so they are to stay awake and sober, wearing faith and love as a breastplate and the hope of salvation as a helmet. God did not appoint them to wrath but to salvation, so that whether they wake or sleep they live together with Christ.\n\nThen the letter speeds up. Respect those who labor among you. Be at peace. Admonish the disorderly, encourage the faint-hearted, support the weak. Never return evil for evil. “Always rejoice.” Pray without ceasing. Test all things and hold on to the good. A prayer for the whole person closes the letter."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to a church under pressure, and the closing chapter gathers short instructions that could be read aloud in one sitting. He even commands that the letter be read to all the believers, which shows that these words were meant for the whole assembly. The letter is usually dated around AD 50 to 51. The picture of the day of the Lord as a thief draws on a theme also found in the teaching of Jesus, and Christians differ on how to read the timing of the end. See 2 Thessalonians 2 for what Paul writes next on this subject."
+        }
+      ]
     }
   ]
 }
