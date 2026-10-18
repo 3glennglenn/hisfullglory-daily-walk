@@ -4,23 +4,24 @@
     {
       "id": "ai:ruth",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Ruth is a short story set in the time of the judges. Ruth, a widow from Moab, refuses to leave her mother-in-law Naomi and travels with her to Bethlehem. Gleaning in the fields to find food, she meets Boaz, a relative of Naomi’s husband.\n\nBoaz acts as the family’s redeemer and marries Ruth. Their son Obed becomes the grandfather of King David."
+          "text": "Two widows face a parting. Naomi urges her daughter-in-law to go back. Ruth, a woman from Moab, will not. She says, “Your people will be my people, and your God my God”, and she goes with Naomi to Bethlehem.\n\nThe story is set in the time of the judges. In Bethlehem the two women need food, so Ruth goes out to glean among the ears of grain left by the reapers. The field she comes to belongs to Boaz, a relative of Naomi’s husband.\n\nBoaz acts as the family’s redeemer, and he marries Ruth. The neighbor women celebrate with Naomi: “A son is born to Naomi”. The child is named Obed, and he becomes the grandfather of King David. A story that began with grief ends with a baby in Naomi’s family."
         },
         {
           "kind": "background",
-          "text": "The story depends on two customs of ancient Israel: the right of the poor to gather what harvesters left behind, and the duty of a near relative to protect a family’s land and name. When the book was written is debated; proposals range from the early monarchy to the time after the exile."
+          "text": "The story depends on two customs of ancient Israel. The first is the right of the poor to gather what the harvesters left behind in the fields. The second is the duty of a near relative to protect a family’s land and name. When the book was written is debated, and proposals range from the early monarchy to the time after the exile."
         },
         {
           "kind": "interpretations",
-          "text": "Readers have long loved this book for its picture of loyal love between ordinary people, and of God’s care working quietly through everyday choices. It matters that Ruth is a foreigner who is welcomed among God’s people. Matthew names her in the family line of Jesus."
+          "text": "Readers have long loved this book for its picture of loyal love between ordinary people, and of God’s care working quietly through everyday choices. Nothing grand happens here, and yet the story reaches all the way to David.\n\nIt matters that Ruth is a foreigner who is welcomed among God’s people. Matthew names her in the family line of Jesus."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

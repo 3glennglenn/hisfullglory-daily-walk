@@ -4,23 +4,24 @@
     {
       "id": "ai:2-kings",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "2 Kings continues the story of the two kingdoms to their end. It opens with the prophet Elisha, then follows a long decline. The northern kingdom falls to Assyria and its people are deported. Judah survives longer, with faithful kings such as Hezekiah and Josiah, but Jerusalem is finally destroyed by Babylon and its people taken into exile.\n\nThe last verses report that the exiled king Jehoiachin is released from prison, a small sign that the story is not over."
+          "text": "A chariot of fire and horses of fire come between two men, and Elijah goes up by a whirlwind into heaven. That is where this book begins its work, with the prophet Elisha taking up the story.\n\nThen comes a long decline. The northern kingdom falls to Assyria, and its people are carried away. Judah survives longer, with faithful kings such as Hezekiah and Josiah, but in the end Jerusalem is destroyed by Babylon and its people are taken into exile.\n\nIt would be easy to end there. But the last verses report something small. In Babylon, the exiled king Jehoiachin is released from prison, and he receives “a continual allowance given him from the king”, every day, all the days of his life. It is a small sign that the story is not over."
         },
         {
           "kind": "background",
-          "text": "The fall of Samaria is dated to 722 before Christ and the fall of Jerusalem to 586 or 587. Assyrian and Babylonian records mention several of the same kings and events."
+          "text": "The fall of Samaria, the capital of the northern kingdom, is dated to 722 before Christ, and the fall of Jerusalem to 586 or 587. Assyrian and Babylonian records mention several of the same kings and events that this book tells of."
         },
         {
           "kind": "interpretations",
-          "text": "The book explains the exile as the result of long unfaithfulness, in line with the warnings of Deuteronomy. It also shows that reform and repentance were possible to the very end. Christians read the ending in the light of what follows: the line of David is not extinguished, and the New Testament traces it to Jesus."
+          "text": "The book explains the exile as the result of long unfaithfulness, in line with the warnings of Deuteronomy. It also shows that reform and repentance were possible to the very end.\n\nChristians read the ending in the light of what follows: the line of David is not extinguished, and the New Testament traces it to Jesus."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
