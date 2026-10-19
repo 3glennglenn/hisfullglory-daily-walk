@@ -1,63 +1,268 @@
+/*
+  Design tokens, five blocks in this order (UI-SPEC 3.1). The site copies blocks 1 to 5 and the
+  two media rules below through site/scripts/sync-shared.mjs, so keep each block free of nested braces.
+  1 constants | 2 Cover Light | 3 Cover Lamplight | 4 Marked Light | 5 Marked Lamplight.
+  Blocks 2 to 5 list the same colour tokens in the same order; 2 and 4 also hold the two font tokens.
+  With no attributes at all the page renders Cover Light.
+*/
 :root {
-  font-family:
-    Manrope,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  color: var(--ink);
-  background: var(--bg);
-  font-synthesis: none;
-  line-height: 1.65;
-  font-weight: 400;
-  --bg: #f6f0e7;
-  --ink: #251914;
-  --accent: #b97862;
-  --card: #e6d5c1;
-  --secondary: #b88352;
-  --border: #d8c9b9;
-  --muted: #6d5548;
-  --paper: #fcf9f4;
-  --strong: #854b38;
-  --on-strong: #fff;
-  --success: #456448;
-  --danger: #9b2c24;
-  --on-danger: #ffffff;
-  --shadow-soft: #25191408;
-  --shadow: #25191430;
-  --overlay: #25191460;
-  --highlight-gold: #f1dfac;
-  --highlight-sage: #d9e4d2;
-  --highlight-rose: #efd2ca;
+  --text-large-title: calc(1rem + 17px);
+  --text-display: calc(0.6471rem + 17px);
+  --text-title: 1.1765rem;
+  --text-scripture: 1.1765rem;
+  --text-body: 1rem;
+  --text-footnote: 0.7647rem;
+  --text-numeral: calc(2rem + 44px);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+  --space-9: 64px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+  --elev-float: 0 4px 16px var(--shadow), 0 0 0 1px var(--line);
+  --elev-sheet: 0 -8px 32px var(--shadow);
+  --dur-spine: 360ms;
+  --dur-sheet: 280ms;
+  --dur-segment: 150ms;
+  --dur-notice: 150ms;
+  --ease-spine: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-sheet: cubic-bezier(0.2, 0, 0, 1);
+  --z-bar: 10;
+  --z-notice: 20;
+  --z-sheet: 30;
+  --z-skip: 100;
 }
-:root[data-theme="dark"] {
+:root:not([data-look="marked"]) {
+  color-scheme: light;
+  --bg: #F3F1EE;
+  --surface: #FFFFFF;
+  --surface-2: #ECE7E1;
+  --ink: #251914;
+  --muted: #675A52;
+  --line: #DCD4CC;
+  --link: #8D5C4B;
+  --button: #8D5C4B;
+  --on-button: #FFFFFF;
+  --brand: #B97862;
+  --focus: #8D5C4B;
+  --sig: #603F33;
+  --on-sig: #F6F0E7;
+  --sig-muted: #D9C3B4;
+  --gilt: #E3C08A;
+  --sig-button: #F6F0E7;
+  --on-sig-button: #603F33;
+  --sig-focus: #E3C08A;
+  --ai: #4B5D6E;
+  --on-ai: #FFFFFF;
+  --community: #4A6247;
+  --danger: #9B2C24;
+  --on-danger: #FFFFFF;
+  --success: #456448;
+  --highlight-gold: #F1DFAC;
+  --highlight-sage: #D9E4D2;
+  --highlight-rose: #EFD2CA;
+  --spine-1: #603F33;
+  --spine-2: #6A4538;
+  --spine-3: #4E3329;
+  --spine-ink: #E3C08A;
+  --bar: #FFFFFFEB;
+  --bar-solid: #FFFFFF;
+  --glow: #F0C98700;
+  --overlay: #25191466;
+  --shadow: #2519141F;
+  --theme-color: #F3F1EE;
+  --font-ui: Manrope, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-scripture: Gelasio, Georgia, "Times New Roman", serif;
+}
+:root:not([data-look="marked"])[data-mode="lamplight"] {
   color-scheme: dark;
-  --bg: #181714;
-  --ink: #f6f0e7;
-  --accent: #dca58b;
-  --card: #312a24;
-  --secondary: #d4ae80;
-  --border: #5a4f44;
-  --muted: #c2afa0;
-  --paper: #24211d;
-  --strong: #e0a38a;
-  --on-strong: #251914;
-  --success: #99c49b;
-  --danger: #f2a59b;
-  --on-danger: #251914;
-  --shadow-soft: #00000020;
-  --shadow: #00000060;
-  --overlay: #000000a0;
+  --bg: #1A120E;
+  --surface: #251914;
+  --surface-2: #33251E;
+  --ink: #F6F0E7;
+  --muted: #C2B0A2;
+  --line: #3E2F27;
+  --link: #E2AE96;
+  --button: #B97862;
+  --on-button: #1A120E;
+  --brand: #B97862;
+  --focus: #E2AE96;
+  --sig: #5A3B2F;
+  --on-sig: #F6F0E7;
+  --sig-muted: #DCC7B9;
+  --gilt: #E8C892;
+  --sig-button: #F6F0E7;
+  --on-sig-button: #5A3B2F;
+  --sig-focus: #E8C892;
+  --ai: #A9B8C9;
+  --on-ai: #1A120E;
+  --community: #A9C4A0;
+  --danger: #F2A59B;
+  --on-danger: #1A120E;
+  --success: #99C49B;
   --highlight-gold: #534523;
-  --highlight-sage: #30452e;
-  --highlight-rose: #55362f;
+  --highlight-sage: #30452E;
+  --highlight-rose: #55362F;
+  --spine-1: #5A3B2F;
+  --spine-2: #6A4536;
+  --spine-3: #4A3026;
+  --spine-ink: #E8C892;
+  --bar: #251914EB;
+  --bar-solid: #251914;
+  --glow: #F0C98729;
+  --overlay: #000000A0;
+  --shadow: #00000066;
+  --theme-color: #1A120E;
+}
+:root[data-look="marked"] {
+  color-scheme: light;
+  --bg: #FFFDF9;
+  --surface: #F6F0E7;
+  --surface-2: #F0E8DD;
+  --ink: #251914;
+  --muted: #6B5B52;
+  --line: #E6DCCF;
+  --link: #8D5C4B;
+  --button: #251914;
+  --on-button: #FFFDF9;
+  --brand: #B97862;
+  --focus: #8D5C4B;
+  --sig: #FFFDF9;
+  --on-sig: #251914;
+  --sig-muted: #6B5B52;
+  --gilt: #B97862;
+  --sig-button: #251914;
+  --on-sig-button: #FFFDF9;
+  --sig-focus: #8D5C4B;
+  --ai: #4B5D6E;
+  --on-ai: #FFFFFF;
+  --community: #4A6247;
+  --danger: #9B2C24;
+  --on-danger: #FFFFFF;
+  --success: #456448;
+  --highlight-gold: #F1DFAC;
+  --highlight-sage: #D9E4D2;
+  --highlight-rose: #EFD2CA;
+  --spine-1: #F6F0E7;
+  --spine-2: #F0E8DD;
+  --spine-3: #E6D8C6;
+  --spine-ink: #251914;
+  --bar: #FFFDF9EB;
+  --bar-solid: #FFFDF9;
+  --glow: #F0C98700;
+  --overlay: #25191466;
+  --shadow: #2519141F;
+  --theme-color: #FFFDF9;
+  --font-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-scripture: Literata, Georgia, "Times New Roman", serif;
+}
+:root[data-look="marked"][data-mode="lamplight"] {
+  color-scheme: dark;
+  --bg: #1A120E;
+  --surface: #251914;
+  --surface-2: #33251E;
+  --ink: #F6F0E7;
+  --muted: #C2B0A2;
+  --line: #3E2F27;
+  --link: #E2AE96;
+  --button: #B97862;
+  --on-button: #1A120E;
+  --brand: #B97862;
+  --focus: #E2AE96;
+  --sig: #1A120E;
+  --on-sig: #F6F0E7;
+  --sig-muted: #C2B0A2;
+  --gilt: #B97862;
+  --sig-button: #B97862;
+  --on-sig-button: #1A120E;
+  --sig-focus: #E2AE96;
+  --ai: #A9B8C9;
+  --on-ai: #1A120E;
+  --community: #A9C4A0;
+  --danger: #F2A59B;
+  --on-danger: #1A120E;
+  --success: #99C49B;
+  --highlight-gold: #534523;
+  --highlight-sage: #30452E;
+  --highlight-rose: #55362F;
+  --spine-1: #33251E;
+  --spine-2: #3E2C23;
+  --spine-3: #2C1F19;
+  --spine-ink: #F6F0E7;
+  --bar: #251914EB;
+  --bar-solid: #251914;
+  --glow: #F0C98729;
+  --overlay: #000000A0;
+  --shadow: #00000066;
+  --theme-color: #1A120E;
+}
+/*
+  Increase Contrast: selectors are at least as specific as the block they override and come after it.
+  The two Lamplight selectors list their parts in another order than blocks 3 and 5 on purpose
+  (same specificity), so each block selector appears once in this file.
+*/
+@media (prefers-contrast: more) {
+  :root:not([data-look="marked"]) {
+    --muted: #4E433D;
+    --link: #6E4536;
+    --button: #6E4536;
+    --line: var(--muted);
+    --bar: var(--bar-solid);
+  }
+  :root[data-look="marked"] {
+    --muted: #4E433D;
+    --link: #6E4536;
+    --line: var(--muted);
+    --bar: var(--bar-solid);
+  }
+  :root[data-mode="lamplight"]:not([data-look="marked"]) {
+    --muted: #DDD0C5;
+    --line: var(--muted);
+    --bar: var(--bar-solid);
+  }
+  :root[data-mode="lamplight"][data-look="marked"] {
+    --muted: #DDD0C5;
+    --line: var(--muted);
+    --bar: var(--bar-solid);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root:not([data-look="marked"]),
+  :root[data-look="marked"],
+  :root[data-mode="lamplight"]:not([data-look="marked"]),
+  :root[data-mode="lamplight"][data-look="marked"] {
+    --bar: var(--bar-solid);
+  }
+}
+html {
+  font-size: 106.25%;
+}
+@supports (font: -apple-system-body) {
+  html {
+    font: -apple-system-body;
+  }
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
+  font-family: var(--font-ui);
+  font-synthesis: none;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--bg);
+  font-size: var(--text-body);
+  line-height: 1.47;
 }
 button,
 input,
@@ -76,8 +281,8 @@ button,
 .button {
   min-height: 44px;
   border: 1px solid transparent;
-  background: var(--strong);
-  color: var(--on-strong);
+  background: var(--button);
+  color: var(--on-button);
   padding: 10px 16px;
   border-radius: 12px;
   font-size: 0.87rem;
@@ -99,15 +304,16 @@ button:disabled {
   cursor: default;
 }
 a {
-  color: var(--strong);
+  color: var(--link);
   text-underline-offset: 3px;
 }
 a:focus-visible,
 button:focus-visible,
+summary:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid var(--strong);
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 main:focus {
@@ -121,8 +327,8 @@ main:focus {
   z-index: 20;
   padding: 10px 14px;
   border-radius: 10px;
-  background: var(--strong);
-  color: var(--on-strong);
+  background: var(--button);
+  color: var(--on-button);
 }
 .skip-link:focus {
   top: 12px;
@@ -139,9 +345,9 @@ main:focus {
   align-items: center;
   justify-content: space-between;
   padding: 26px 0 24px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
   margin-bottom: 26px;
-  color: var(--accent);
+  color: var(--brand);
 }
 .brand-name {
   color: var(--ink);
@@ -220,7 +426,7 @@ p {
   display: flex;
   align-items: center;
   gap: 5px;
-  background: var(--card);
+  background: var(--surface-2);
   border-radius: 24px;
   padding: 6px 10px;
   font-size: 0.8rem;
@@ -228,15 +434,15 @@ p {
   margin-top: 5px;
 }
 .card {
-  background: var(--paper);
-  border: 1px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 22px;
   margin-bottom: 18px;
-  box-shadow: 0 2px 4px var(--shadow-soft);
+  box-shadow: 0 2px 4px var(--shadow);
 }
 .verse-card {
-  background: var(--card);
+  background: var(--surface-2);
 }
 blockquote {
   font-family: inherit;
@@ -253,13 +459,13 @@ blockquote {
   display: inline-block;
   padding: 1px 6px;
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 5px;
   font-size: 0.65rem;
   margin-left: 5px;
 }
 .reflection {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
   padding-top: 18px;
   margin-top: 22px;
 }
@@ -333,10 +539,10 @@ small,
   min-height: 50px;
 }
 .complete-button:disabled {
-  background: var(--card);
+  background: var(--surface-2);
   color: var(--ink);
   opacity: 1;
-  border-color: var(--border);
+  border-color: var(--line);
 }
 .continue-card {
   display: flex;
@@ -345,7 +551,7 @@ small,
   width: 100%;
   text-align: left;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--surface);
 }
 .continue-card small {
   display: block;
@@ -369,7 +575,7 @@ small,
   overflow: hidden;
 }
 .product-image {
-  background: var(--card);
+  background: var(--surface-2);
   min-height: 180px;
   display: flex;
   align-items: center;
@@ -432,7 +638,7 @@ small,
   font-size: 0.66rem;
 }
 .book-placeholder {
-  color: var(--secondary);
+  color: var(--muted);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -454,7 +660,7 @@ small,
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background: var(--bg);
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
   padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
   z-index: 5;
 }
@@ -469,7 +675,7 @@ small,
   min-height: 56px;
 }
 .bottom-nav button[aria-current] {
-  background: var(--card);
+  background: var(--surface-2);
   color: var(--ink);
 }
 .install-hint {
@@ -477,7 +683,7 @@ small,
   gap: 8px;
   align-items: flex-start;
   padding: 18px 0;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
   margin-top: 28px;
 }
 .install-hint strong {
@@ -497,7 +703,7 @@ small,
 }
 .text-button {
   background: none;
-  color: var(--strong);
+  color: var(--link);
   padding: 5px 7px;
   text-decoration: underline;
   font-size: 0.75rem;
@@ -505,10 +711,10 @@ small,
 .secondary {
   background: var(--bg);
   color: var(--ink);
-  border-color: var(--border);
+  border-color: var(--line);
 }
 .onboarding {
-  background: var(--card);
+  background: var(--surface-2);
 }
 .onboarding h2 {
   font-family: inherit;
@@ -536,7 +742,7 @@ small,
   padding: 11px 12px;
   min-height: 48px;
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 10px;
   font-size: 0.82rem;
 }
@@ -544,14 +750,14 @@ small,
   width: 18px;
   height: 18px;
   min-height: 18px;
-  accent-color: var(--strong);
+  accent-color: var(--button);
   flex-shrink: 0;
 }
 .plan-choice {
   width: 100%;
   text-align: left;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--surface);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -559,8 +765,8 @@ small,
   padding: 18px;
 }
 .plan-choice.selected {
-  border-color: var(--accent);
-  background: var(--card);
+  border-color: var(--brand);
+  background: var(--surface-2);
 }
 .plan-choice p {
   font-weight: 400;
@@ -586,16 +792,16 @@ small,
   flex: 1;
   background: var(--bg);
   color: var(--ink);
-  border-color: var(--border);
+  border-color: var(--line);
   padding: 10px;
 }
 .day-tabs button[aria-pressed="true"] {
-  background: var(--strong);
-  color: var(--on-strong);
+  background: var(--button);
+  color: var(--on-button);
 }
 .action-note {
   padding: 15px;
-  background: var(--card);
+  background: var(--surface-2);
   border-radius: 12px;
   margin: 16px 0;
 }
@@ -610,21 +816,21 @@ progress {
   height: 7px;
   display: block;
   margin: 16px 0;
-  accent-color: var(--accent);
+  accent-color: var(--brand);
   border: 0;
   border-radius: 6px;
-  background: var(--card);
+  background: var(--surface-2);
 }
 progress::-webkit-progress-bar {
-  background: var(--card);
+  background: var(--surface-2);
   border-radius: 6px;
 }
 progress::-webkit-progress-value {
-  background: var(--accent);
+  background: var(--brand);
   border-radius: 6px;
 }
 .notice {
-  background: var(--card);
+  background: var(--surface-2);
   border-radius: 14px;
   padding: 16px;
   margin-bottom: 20px;
@@ -635,14 +841,14 @@ progress::-webkit-progress-value {
   margin: 5px 0 0;
 }
 .notice.error {
-  border: 1px solid var(--strong);
-  color: var(--strong);
+  border: 1px solid var(--focus);
+  color: var(--link);
 }
 .segments {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4px;
-  background: var(--card);
+  background: var(--surface-2);
   padding: 4px;
   border-radius: 14px;
   margin: 22px 0;
@@ -655,9 +861,9 @@ progress::-webkit-progress-value {
   padding: 10px 5px;
 }
 .segments button[aria-pressed="true"] {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
-  box-shadow: 0 1px 3px var(--shadow-soft);
+  box-shadow: 0 1px 3px var(--shadow);
 }
 .auth-card form button {
   margin: 12px 0;
@@ -679,7 +885,7 @@ progress::-webkit-progress-value {
   height: 7px;
   display: inline-block;
   border-radius: 50%;
-  background: var(--secondary);
+  background: var(--success);
   margin-right: 6px;
 }
 .status-dot.live {
@@ -687,7 +893,7 @@ progress::-webkit-progress-value {
 }
 .scripture-pinned {
   padding: 18px;
-  background: var(--card);
+  background: var(--surface-2);
   border-radius: 14px;
   margin: 15px 0;
 }
@@ -709,7 +915,7 @@ progress::-webkit-progress-value {
   margin: 0 0 18px;
 }
 .avatar {
-  background: var(--card);
+  background: var(--surface-2);
   height: 34px;
   min-width: 34px;
   border-radius: 50%;
@@ -752,7 +958,7 @@ progress::-webkit-progress-value {
   padding: 0;
 }
 .composer {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
   padding-top: 18px;
   margin-top: 12px;
 }
@@ -806,7 +1012,7 @@ progress::-webkit-progress-value {
   width: 18px;
   height: 18px;
   min-height: 18px;
-  accent-color: var(--strong);
+  accent-color: var(--button);
 }
 .empty {
   padding: 24px 12px;
@@ -828,9 +1034,9 @@ progress::-webkit-progress-value {
 dialog {
   max-width: calc(100% - 32px);
   width: 420px;
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 24px;
   box-shadow: 0 12px 40px var(--shadow);
@@ -898,7 +1104,7 @@ dialog:has(> .report-dialog) {
 .report-dialog .report-block {
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
 }
 .report-dialog button[aria-disabled="true"] {
   opacity: 0.65;
@@ -917,13 +1123,13 @@ dialog:has(> .report-dialog) {
 }
 @media (min-width: 481px) {
   .shell {
-    border-left: 1px solid var(--border);
-    border-right: 1px solid var(--border);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
     padding: 0 28px;
   }
   .bottom-nav {
-    border-left: 1px solid var(--border);
-    border-right: 1px solid var(--border);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
   }
 }
 @media (max-width: 360px) {
@@ -983,7 +1189,7 @@ textarea {
   max-width: 100%;
   width: 100%;
   min-width: 0;
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
   border: 1px solid var(--muted);
   border-radius: 10px;
@@ -1014,21 +1220,21 @@ textarea {
   margin: 14px 0;
 }
 .tabs button {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
-  border-color: var(--border);
+  border-color: var(--line);
   text-transform: capitalize;
   flex: 1;
   padding: 10px 8px;
   font-size: 0.78rem;
 }
 button[aria-pressed="true"] {
-  border-color: var(--strong);
-  box-shadow: inset 0 0 0 1px var(--strong);
+  border-color: var(--focus);
+  box-shadow: inset 0 0 0 1px var(--focus);
 }
 .tabs button[aria-pressed="true"],
 .chips button[aria-pressed="true"] {
-  background: var(--card);
+  background: var(--surface-2);
 }
 .quick-grid {
   display: grid;
@@ -1083,7 +1289,7 @@ button[aria-pressed="true"] {
 }
 /* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
 .speaker {
-  color: var(--strong);
+  color: var(--link);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -1092,7 +1298,7 @@ button[aria-pressed="true"] {
 p.speaker {
   margin: 14px 8px 0;
 }
-/* On a highlighted verse --strong drops below 4.5:1 in dark mode, so a label inside it uses ink. */
+/* On a highlighted verse --link drops below 4.5:1 in Light (UI-SPEC 5.4), so a label inside it uses ink. */
 .verse:is(.speaking, .highlight-gold, .highlight-sage, .highlight-rose) .speaker {
   color: var(--ink);
 }
@@ -1103,7 +1309,7 @@ p.speaker {
   margin: 0 8px 8px;
 }
 .verse.selected {
-  outline: 2px solid var(--strong);
+  outline: 2px solid var(--focus);
   outline-offset: 0;
 }
 .highlight-gold {
@@ -1122,7 +1328,7 @@ p.speaker {
   text-align: left;
   background: transparent;
   color: var(--ink);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
   width: 100%;
   font-weight: 400;
   padding: 12px 0;
@@ -1141,7 +1347,7 @@ summary {
   cursor: pointer;
   min-height: 44px;
   padding: 8px 0;
-  color: var(--strong);
+  color: var(--link);
 }
 .modal-backdrop {
   position: fixed;
@@ -1188,7 +1394,7 @@ small {
 }
 
 .circles .entry {overflow-wrap:anywhere;}
-.circles dialog {color:var(--ink);background:var(--paper);border:1px solid var(--border);width:min(440px,calc(100vw - 32px));margin:auto;}
+.circles dialog {color:var(--ink);background:var(--surface);border:1px solid var(--line);width:min(440px,calc(100vw - 32px));margin:auto;}
 .circles dialog::backdrop {background:var(--overlay);}
 
 .circles h1,.circles h2,.circles h3,.circles p {overflow-wrap:anywhere;}
@@ -1197,11 +1403,11 @@ small {
 
 /* AI explanations: a separate, labelled layer, never part of the sourced note. */
 .ai-explanation {border-style:dashed;background:var(--bg);}
-.ai-badge {display:inline-block;vertical-align:middle;margin-left:6px;padding:1px 9px;border:1px solid var(--border);border-radius:999px;font-size:0.68rem;font-weight:600;color:var(--muted);}
+.ai-badge {display:inline-block;vertical-align:middle;margin-left:6px;padding:1px 9px;border:1px solid var(--line);border-radius:999px;font-size:0.68rem;font-weight:600;color:var(--muted);}
 .ai-explanation h4 {margin:16px 0 4px;font-size:0.88rem;}
 .ai-explanation ul {margin:6px 0;padding-left:1.2rem;font-size:0.92rem;}
 .ai-explanation li + li {margin-top:5px;}
-.ai-compare {border-top:1px solid var(--border);margin-top:10px;padding-top:6px;}
+.ai-compare {border-top:1px solid var(--line);margin-top:10px;padding-top:6px;}
 .ai-compare dl {margin:0 0 6px;}
 .ai-compare dt {margin-top:8px;font-size:0.72rem;font-weight:600;color:var(--muted);}
 .ai-compare dd {margin:2px 0 0;font-size:0.92rem;}
@@ -1222,7 +1428,7 @@ small {
   font-weight: 400;
 }
 .story-ref {
-  color: var(--strong);
+  color: var(--link);
   font-weight: 600;
 }
 .story-verse {
@@ -1253,10 +1459,10 @@ small {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--border);
+  background: var(--line);
 }
 .story-dots span.on {
-  background: var(--strong);
+  background: var(--button);
 }
 .context-story details .text-button {
   display: block;
@@ -1285,7 +1491,7 @@ button.danger {
   border-color: var(--danger);
 }
 .secondary.danger {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--danger);
   border-color: var(--danger);
 }
@@ -1348,7 +1554,7 @@ button.danger {
 .code-entry {
   margin-top: 16px;
   padding-top: 8px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
 }
 .code-entry .code-sent {
   margin: 8px 0 0;

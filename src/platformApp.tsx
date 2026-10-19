@@ -108,12 +108,14 @@ function App() {
   useEffect(() => {
     const media = matchMedia("(prefers-color-scheme: dark)");
     const apply = () => {
+      // Until the Appearance screen replaces this setting, the old theme choice drives the mode.
+      // data-look stays as the first paint set it; the colours come from the stylesheet.
       const effective = resolveTheme(state.theme, media.matches);
-      document.documentElement.dataset.theme = effective;
+      const root = document.documentElement;
+      root.dataset.mode = effective === "dark" ? "lamplight" : "light";
       try { localStorage.setItem("hfg-appearance", state.theme); } catch { /* Appearance remains usable. */ }
-      document
-        .querySelector('meta[name="theme-color"]')
-        ?.setAttribute("content", effective === "dark" ? "#181714" : "#F6F0E7");
+      const color = getComputedStyle(root).getPropertyValue("--theme-color").trim();
+      if (color) document.querySelector('meta[name="theme-color"]')?.setAttribute("content", color);
     };
     apply();
     media.addEventListener("change", apply);

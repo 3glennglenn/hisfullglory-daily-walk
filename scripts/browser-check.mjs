@@ -320,8 +320,8 @@ try {
       await go("/settings");
       await page.getByLabel("Theme", { exact: true }).selectOption("dark");
       assert.equal(
-        await page.evaluate(() => document.documentElement.dataset.theme),
-        "dark",
+        await page.evaluate(() => document.documentElement.dataset.mode),
+        "lamplight",
       );
       assert.equal(
         await page.evaluate(() => getComputedStyle(document.body).color),
@@ -329,18 +329,18 @@ try {
       );
       await page.reload();
       assert.equal(
-        await page.evaluate(() => document.documentElement.dataset.theme),
-        "dark",
+        await page.evaluate(() => document.documentElement.dataset.mode),
+        "lamplight",
       );
       await page.getByLabel("Theme", { exact: true }).selectOption("system");
       await page.emulateMedia({ colorScheme: "light" });
       assert.equal(
-        await page.evaluate(() => document.documentElement.dataset.theme),
+        await page.evaluate(() => document.documentElement.dataset.mode),
         "light",
       );
       await page.emulateMedia({ colorScheme: "dark" });
       await page.waitForFunction(
-        () => document.documentElement.dataset.theme === "dark",
+        () => document.documentElement.dataset.mode === "lamplight",
       );
     },
   );
@@ -629,18 +629,46 @@ try {
     assert.match(await page.locator("main").innerText(),/not configured/);
     assert.equal(await page.locator("main > section:first-child article").count(),0);
   });
-  await check("first paint reproduces baseline light flash and resolves system/explicit appearance before React",async()=>{
+  await check("first paint reproduces baseline light flash and sets look, mode and theme-color before React",async()=>{
     const baseline=readFileSync("tests/fixtures/pre-expansion-index.html","utf8");
-    for(const scenario of [{baseline:true,os:"dark",theme:null,expected:null},{os:"light",theme:null,expected:"light"},{os:"dark",theme:null,expected:"dark"},{os:"dark",theme:"light",expected:"light"},{os:"light",theme:"dark",expected:"dark"}]) {
+    const state=theme=>["hfg-daily-walk:v3",JSON.stringify({version:3,theme})];
+    // JavaScript files are aborted, so only index.html's inline script can have set the attributes.
+    const scenarios=[
+      {name:"baseline index.html has no script",baseline:true,os:"dark",look:null,mode:null,color:"#F6F0E7"},
+      {name:"nothing stored, light device",os:"light",look:"cover",mode:"light",color:"#F3F1EE"},
+      {name:"nothing stored, dark device",os:"dark",look:"cover",mode:"lamplight",color:"#1A120E"},
+      {name:"marked look, light device",os:"light",store:[["hfg-look","marked"]],look:"marked",mode:"light",color:"#FFFDF9"},
+      {name:"marked look, dark device",os:"dark",store:[["hfg-look","marked"]],look:"marked",mode:"lamplight",color:"#1A120E"},
+      {name:"unknown look value",os:"light",store:[["hfg-look","sepia"]],look:"cover",mode:"light",color:"#F3F1EE"},
+      {name:"lamplight on, light device",os:"light",store:[["hfg-lamplight","on"]],look:"cover",mode:"lamplight",color:"#1A120E"},
+      {name:"lamplight off, dark device",os:"dark",store:[["hfg-lamplight","off"]],look:"cover",mode:"light",color:"#F3F1EE"},
+      {name:"lamplight auto, dark device",os:"dark",store:[["hfg-lamplight","auto"]],look:"cover",mode:"lamplight",color:"#1A120E"},
+      {name:"old hfg-appearance dark, light device",os:"light",store:[["hfg-appearance","dark"]],look:"cover",mode:"lamplight",color:"#1A120E"},
+      {name:"old hfg-appearance system, dark device",os:"dark",store:[["hfg-appearance","system"]],look:"cover",mode:"lamplight",color:"#1A120E"},
+      {name:"old hfg-theme light, dark device",os:"dark",store:[["hfg-theme","light"]],look:"cover",mode:"light",color:"#F3F1EE"},
+      {name:"saved v3 state with theme dark, light device",os:"light",store:[state("dark")],look:"cover",mode:"lamplight",color:"#1A120E"},
+      {name:"saved v3 state with theme light, dark device",os:"dark",store:[state("light")],look:"cover",mode:"light",color:"#F3F1EE"},
+      {name:"new key wins over the old ones",os:"light",store:[["hfg-lamplight","off"],["hfg-appearance","dark"]],look:"cover",mode:"light",color:"#F3F1EE"},
+      {name:"unreadable saved state, dark device",os:"dark",store:[["hfg-daily-walk:v3","{not json"]],look:"cover",mode:"lamplight",color:"#1A120E"},
+    ];
+    for(const scenario of scenarios) {
       const c=await browser.newContext({colorScheme:scenario.os,serviceWorkers:"block"});const p=await c.newPage();
-      if(scenario.theme)await p.addInitScript(theme=>localStorage.setItem("hfg-daily-walk:v2",JSON.stringify({version:2,theme})),scenario.theme);
+      if(scenario.store)await p.addInitScript(pairs=>{for(const [key,value] of pairs)localStorage.setItem(key,value);},scenario.store);
       await p.route("**/*.js",route=>route.abort());
       if(scenario.baseline) await p.route(base+"/",route=>route.fulfill({contentType:"text/html",body:baseline}));
       await p.goto(base,{waitUntil:"domcontentloaded"});
-      assert.equal(await p.evaluate(()=>document.documentElement.dataset.theme??null),scenario.expected);
-      assert.equal(await p.locator('meta[name="theme-color"]').getAttribute("content"),scenario.expected==="dark"?"#181714":"#F6F0E7");
+      const seen=await p.evaluate(()=>({look:document.documentElement.dataset.look??null,mode:document.documentElement.dataset.mode??null}));
+      assert.deepEqual(seen,{look:scenario.look,mode:scenario.mode},scenario.name);
+      assert.equal(await p.locator('meta[name="theme-color"]').getAttribute("content"),scenario.color,scenario.name+": theme-color");
       assert.equal(await p.locator("#root").innerText(),"");await c.close();
     }
+    // Storage that throws must leave the defaults, not a blank page.
+    const c=await browser.newContext({colorScheme:"dark",serviceWorkers:"block"});const p=await c.newPage();
+    await p.addInitScript(()=>{Storage.prototype.getItem=()=>{throw new Error("blocked");};});
+    await p.route("**/*.js",route=>route.abort());
+    await p.goto(base,{waitUntil:"domcontentloaded"});
+    assert.deepEqual(await p.evaluate(()=>({look:document.documentElement.dataset.look,mode:document.documentElement.dataset.mode})),{look:"cover",mode:"lamplight"},"blocked storage: Cover and Automatic");
+    await c.close();
   });
   await check("actual account boundary isolates guest/A/B drafts and rejects stale Terms after token refresh (controlled SDK)",()=>checkAuthBoundary(browser,base));
   await check("account deletion flow (controlled SDK)",()=>checkProfile(browser,base));
