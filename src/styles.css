@@ -2489,3 +2489,9 @@ dialog.sheet-dialog .sheet-actions button[aria-disabled="true"] {
 html[data-text="large"] .sheet-actions-split {
   flex-direction: column-reverse;
 }
+
+/* ==== Pray (UI-SPEC A10) ==== */
+.screen-lede {
+  margin: 0 0 var(--space-5);
+  color: var(--muted);
+}

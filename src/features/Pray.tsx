@@ -3,9 +3,16 @@ import { usePlatform } from "../platform/store";
 import { prayerTransition, type PrayerStatus } from "../platform/models";
 import { localDate } from "../storage";
 import { ShareForm, Feed } from "../social/Feed";
+import { LargeTitle } from "../ui/Screen";
+import { Segmented } from "../ui/Segmented";
+import { ConfirmDialog } from "../ui/ConfirmDialog";
+import { TextSheet } from "../ui/TextSheet";
 export function Pray() {
   const { state, update } = usePlatform();
-  const [view, setView] = useState("private");
+  const [view, setView] = useState<"private" | "public">("private");
+  // The private prayer a reader is updating, editing or deleting, in the app's own sheet (UI-SPEC A15).
+  const [sheet, setSheet] = useState<{ kind: "update" | "edit" | "delete"; id: string } | null>(null);
+  const target = sheet ? state.prayers.find((p) => p.id === sheet.id) : undefined;
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [filter, setFilter] = useState("all");
@@ -46,23 +53,18 @@ export function Pray() {
     }
   }
   return (
-    <section>
-      <p className="eyebrow">Bring your whole life to God</p>
-      <h1>A life of prayer.</h1>
-      <div className="tabs">
-        <button
-          aria-pressed={view === "private"}
-          onClick={() => setView("private")}
-        >
-          Private prayers
-        </button>
-        <button
-          aria-pressed={view === "public"}
-          onClick={() => setView("public")}
-        >
-          Public prayer & praise
-        </button>
-      </div>
+    <section className="grouped-screen pray">
+      <LargeTitle>Pray</LargeTitle>
+      <p className="screen-lede">Bring your whole life to God</p>
+      <Segmented
+        label="Prayer views"
+        value={view}
+        onChange={setView}
+        options={[
+          { value: "private", label: "Private prayers" },
+          { value: "public", label: "Prayer and praise" },
+        ]}
+      />
       {view === "public" ? (
         <Feed initialKind="prayer" composerType="prayer" />
       ) : (
@@ -175,63 +177,24 @@ export function Pray() {
                   </label>
                   <button
                     className="secondary"
-                    onClick={() => {
-                      const text = window.prompt("A private prayer update");
-                      if (text?.trim())
-                        update((s) => ({
-                          ...s,
-                          prayers: s.prayers.map((x) =>
-                            x.id === p.id
-                              ? {
-                                  ...x,
-                                  updates: [
-                                    ...x.updates,
-                                    {
-                                      date: localDate(),
-                                      body: text.trim().slice(0, 10000),
-                                    },
-                                  ],
-                                }
-                              : x,
-                          ),
-                        }));
-                    }}
+                    onClick={() => setSheet({ kind: "update", id: p.id })}
                   >
                     Add private update
                   </button>
                   <button
                     className="secondary"
-                    onClick={() => {
-                      const text = window.prompt(
-                        "Edit your private prayer",
-                        p.body,
-                      );
-                      if (text?.trim())
-                        update((s) => ({
-                          ...s,
-                          prayers: s.prayers.map((x) =>
-                            x.id === p.id
-                              ? { ...x, body: text.trim().slice(0, 10000) }
-                              : x,
-                          ),
-                        }));
-                    }}
+                    onClick={() => setSheet({ kind: "edit", id: p.id })}
                   >
                     Edit
                   </button>
                   <button
                     className="secondary"
-                    onClick={() => {
-                      if (window.confirm("Delete this private prayer?"))
-                        update((s) => ({
-                          ...s,
-                          prayers: s.prayers.filter((x) => x.id !== p.id),
-                        }));
-                    }}
+                    onClick={() => setSheet({ kind: "delete", id: p.id })}
                   >
                     Delete
                   </button>
                   <button
+                    className="secondary"
                     onClick={() => {
                       setShareType(p.answer ? "testimony" : "prayer");
                       setSharingPrayerId(p.id);
@@ -251,6 +214,65 @@ export function Pray() {
           )}
         </>
       )}
+      {target && sheet?.kind === "update" && (
+        <TextSheet
+          title="A private prayer update"
+          fieldLabel="Your update"
+          draftKey={`prayer-update:${target.id}`}
+          safeLabel="Don't save update"
+          actionLabel="Save update"
+          busyLabel="Saving…"
+          // A write that fails is reported by the app's storage notice; the typed words are kept.
+          onAction={(text) =>
+            update((s) => ({
+              ...s,
+              prayers: s.prayers.map((x) =>
+                x.id === target.id
+                  ? {
+                      ...x,
+                      updates: [...x.updates, { date: localDate(), body: text.trim().slice(0, 10000) }],
+                    }
+                  : x,
+              ),
+            }))
+          }
+          onSafe={() => setSheet(null)}
+        />
+      )}
+      {target && sheet?.kind === "edit" && (
+        <TextSheet
+          title="Edit your private prayer"
+          fieldLabel="Your prayer"
+          initialText={target.body}
+          draftKey={`prayer-edit:${target.id}`}
+          safeLabel="Keep the original"
+          actionLabel="Save changes"
+          busyLabel="Saving…"
+          onAction={(text) =>
+            update((s) => ({
+              ...s,
+              prayers: s.prayers.map((x) =>
+                x.id === target.id ? { ...x, body: text.trim().slice(0, 10000) } : x,
+              ),
+            }))
+          }
+          onSafe={() => setSheet(null)}
+        />
+      )}
+      {target && sheet?.kind === "delete" && (
+        <ConfirmDialog
+          title="Delete this private prayer?"
+          body="It is removed from this device. This cannot be undone."
+          actionLabel="Delete prayer"
+          safeLabel="Keep prayer"
+          destructive
+          onAction={() => {
+            setSheet(null);
+            update((s) => ({ ...s, prayers: s.prayers.filter((x) => x.id !== target.id) }));
+          }}
+          onSafe={() => setSheet(null)}
+        />
+      )}
       {answerId && (
         <div className="card">
           <h2>How did God answer your prayer?</h2>
@@ -261,7 +283,11 @@ export function Pray() {
             onChange={(e) => setAnswer(e.target.value)}
           />
           <div className="actions">
-            <button disabled={!answer.trim()} onClick={() => answered()}>
+            <button
+              disabled={!answer.trim()}
+              className="secondary"
+              onClick={() => answered()}
+            >
               Keep private
             </button>
             <button

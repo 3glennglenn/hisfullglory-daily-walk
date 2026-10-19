@@ -207,6 +207,148 @@ try {
       );
     },
   );
+  await check(
+    "Pray is one quiet screen; updates and edits of a private prayer use a text sheet, deletion a confirmation (UI-SPEC A10, A15, E18)",
+    async () => {
+      const browserDialogs = [];
+      const onDialog = (d) => {
+        browserDialogs.push(d.type());
+        void d.dismiss();
+      };
+      page.on("dialog", onDialog);
+      const prayers = () =>
+        page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")).prayers);
+      try {
+        await go("/pray");
+        assert.equal(await page.locator("main h1").count(), 1);
+        assert.equal(await page.locator("main h1").innerText(), "Pray");
+        const segments = page.getByRole("radiogroup", { name: "Prayer views", exact: true });
+        assert.deepEqual(await segments.getByRole("radio").allInnerTexts(), ["Private prayers", "Prayer and praise"]);
+        assert.equal(await segments.getByRole("radio", { name: "Private prayers" }).getAttribute("aria-checked"), "true");
+        assert.deepEqual(
+          await page.evaluate(() =>
+            [...document.querySelectorAll("main button")]
+              .filter((b) => !b.classList.contains("secondary") && b.getAttribute("role") !== "radio")
+              .map((b) => b.textContent.trim()),
+          ),
+          ["Save private prayer"],
+          "the only filled button on the private view",
+        );
+        const mainText = await page.locator("main").innerText();
+        assert.ok(!/Resources|shop/i.test(mainText), "no Resources or shop link on Pray");
+        assert.equal(await page.locator('main a[href*="shop"]').count(), 0);
+
+        // An update, in a sheet.
+        const update = page.getByRole("dialog", { name: "A private prayer update", exact: true });
+        await page.getByRole("button", { name: "Add private update", exact: true }).click();
+        await update.waitFor();
+        const field = update.getByLabel("Your update", { exact: true });
+        const save = update.getByRole("button", { name: "Save update", exact: true });
+        assert.deepEqual(await update.getByRole("button").allInnerTexts(), ["Don't save update", "Save update"]);
+        assert.equal(await save.isDisabled(), true, "the action waits for words");
+        await field.fill("   ");
+        assert.equal(await save.isDisabled(), true, "spaces are not words");
+        // On a phone the sheet sits on the bottom edge with 28px top corners, at most 90 % of the screen high.
+        // (It slides up for 280ms: measure once it has arrived.)
+        await page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished)));
+        const box = await update.evaluate((d) => {
+          const r = d.getBoundingClientRect();
+          const style = getComputedStyle(d);
+          return { bottom: r.bottom, left: r.left, right: r.right, height: r.height, radius: style.borderTopLeftRadius, bottomRadius: style.borderBottomLeftRadius, screen: innerHeight, width: innerWidth };
+        });
+        assert.equal(Math.round(box.bottom), box.screen, "anchored to the bottom");
+        assert.equal(box.radius, "28px");
+        assert.equal(box.bottomRadius, "0px");
+        assert.ok(box.height <= box.screen * 0.9 + 1);
+        assert.equal(Math.round(box.right - box.left), box.width, "full width on a phone");
+        await field.fill("A first update.");
+        assert.equal(await save.isEnabled(), true);
+        await save.click();
+        await update.waitFor({ state: "detached" });
+        assert.equal((await prayers())[0].updates.at(-1).body, "A first update.");
+        assert.equal(await page.evaluate(() => document.activeElement?.textContent?.trim()), "Add private update", "focus returns");
+
+        // Escape asks nothing and the words are still there when the sheet opens again; the named safe button drops them.
+        await page.getByRole("button", { name: "Add private update", exact: true }).click();
+        await update.waitFor();
+        await field.fill("Half a thought");
+        await page.keyboard.press("Escape");
+        await update.waitFor({ state: "detached" });
+        assert.equal((await prayers())[0].updates.length, 1, "Escape saved nothing");
+        await page.getByRole("button", { name: "Add private update", exact: true }).click();
+        await update.waitFor();
+        assert.equal(await field.inputValue(), "Half a thought", "the words are kept in this session");
+        await update.getByRole("button", { name: "Don't save update", exact: true }).click();
+        await update.waitFor({ state: "detached" });
+        await page.getByRole("button", { name: "Add private update", exact: true }).click();
+        await update.waitFor();
+        assert.equal(await field.inputValue(), "", "the named safe choice lets the words go");
+        // A long text: the field grows to 40 % of the sheet, then scrolls inside itself.
+        await field.fill(Array.from({ length: 80 }, (_, i) => `Line ${i} of a long prayer update`).join("\n"));
+        const grown = await field.evaluate((el) => ({ height: el.getBoundingClientRect().height, scrolls: el.scrollHeight > el.clientHeight + 1, screen: innerHeight }));
+        assert.ok(grown.scrolls, "the field scrolls");
+        assert.ok(grown.height <= grown.screen * 0.9 * 0.4 + 2, "the field stops at 40 % of the sheet: " + grown.height);
+        assert.ok(grown.height >= grown.screen * 0.9 * 0.4 - 40, "and has grown to it: " + grown.height);
+        await field.fill("");
+        // From 600px it is a centred dialog 480px wide.
+        await page.setViewportSize({ width: 700, height: 900 });
+        await page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished)));
+        const wide = await update.evaluate((d) => {
+          const r = d.getBoundingClientRect();
+          return { width: Math.round(r.width), centre: Math.round((r.left + r.right) / 2), top: r.top, bottom: r.bottom, radius: getComputedStyle(d).borderBottomLeftRadius };
+        });
+        await page.setViewportSize({ width: 375, height: 812 });
+        assert.equal(wide.width, 480);
+        assert.ok(Math.abs(wide.centre - 350) <= 1, "centred");
+        assert.ok(wide.top > 0 && wide.bottom < 900, "floating, not on the edge");
+        assert.notEqual(wide.radius, "0px");
+        await page.keyboard.press("Escape");
+        await update.waitFor({ state: "detached" });
+
+        // An edit: the original is kept by name.
+        const edit = page.getByRole("dialog", { name: "Edit your private prayer", exact: true });
+        const original = (await prayers())[0].body;
+        await page.getByRole("button", { name: "Edit", exact: true }).click();
+        await edit.waitFor();
+        assert.equal(await edit.getByLabel("Your prayer", { exact: true }).inputValue(), original, "prefilled");
+        assert.deepEqual(await edit.getByRole("button").allInnerTexts(), ["Keep the original", "Save changes"]);
+        await edit.getByLabel("Your prayer", { exact: true }).fill("Something else entirely.");
+        await edit.getByRole("button", { name: "Keep the original", exact: true }).click();
+        await edit.waitFor({ state: "detached" });
+        assert.equal((await prayers())[0].body, original, "Keep the original changes nothing");
+        await page.getByRole("button", { name: "Edit", exact: true }).click();
+        await edit.waitFor();
+        assert.equal(await edit.getByLabel("Your prayer", { exact: true }).inputValue(), original, "the discarded change does not come back");
+        await edit.getByLabel("Your prayer", { exact: true }).fill("Please guide this ordinary day, and the next.");
+        await edit.getByRole("button", { name: "Save changes", exact: true }).click();
+        await edit.waitFor({ state: "detached" });
+        assert.equal((await prayers())[0].body, "Please guide this ordinary day, and the next.");
+
+        // Deleting asks first; Keep prayer is the safe way out.
+        const del = page.getByRole("dialog", { name: "Delete this private prayer?", exact: true });
+        await page.getByRole("button", { name: "Delete", exact: true }).click();
+        await del.waitFor();
+        assert.deepEqual(await del.getByRole("button").allInnerTexts(), ["Delete prayer", "Keep prayer"]);
+        await del.getByRole("button", { name: "Keep prayer", exact: true }).click();
+        await del.waitFor({ state: "detached" });
+        assert.equal((await prayers()).length, 1);
+        await page.getByRole("button", { name: "Delete", exact: true }).click();
+        await del.waitFor();
+        await page.keyboard.press("Escape");
+        await del.waitFor({ state: "detached" });
+        assert.equal((await prayers()).length, 1, "Escape keeps the prayer");
+        await page.getByRole("button", { name: "Delete", exact: true }).click();
+        await del.waitFor();
+        await del.getByRole("button", { name: "Delete prayer", exact: true }).click();
+        await del.waitFor({ state: "detached" });
+        assert.equal((await prayers()).length, 0);
+        assert.deepEqual(browserDialogs, [], "no browser pop-up appeared");
+      } finally {
+        page.off("dialog", onDialog);
+        await page.setViewportSize({ width: 375, height: 812 });
+      }
+    },
+  );
   await check("typed journal edits persist after refresh", async () => {
     await go("/journal");
     await page.getByRole("button", { name: "New entry", exact: true }).click();
