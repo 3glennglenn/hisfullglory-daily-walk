@@ -39,7 +39,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
 <style>
   .site-header {
     background: var(--bg);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--line);
   }
   /* On a phone the brand and the button share a row; when the text is large the button drops
      below the brand instead of pushing the page sideways (UX-01: reflow at 320px and 200%). */
@@ -108,11 +108,11 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
     text-decoration: none;
   }
   .main-nav a:hover {
-    background: var(--card);
+    background: var(--surface-2);
   }
   .main-nav a[aria-current="page"] {
-    color: var(--strong);
-    box-shadow: inset 0 -2px 0 var(--strong);
+    color: var(--link);
+    box-shadow: inset 0 -2px 0 var(--link);
     border-radius: 0;
   }
   .pending {

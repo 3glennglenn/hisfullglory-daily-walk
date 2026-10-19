@@ -193,7 +193,7 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
   }
   /* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
   .speaker {
-    color: var(--strong);
+    color: var(--link);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -203,7 +203,7 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
     margin: 20px 0 0;
     line-height: 1.5;
   }
-  /* On the highlighted verse --strong drops below 4.5:1 in dark mode, so its label uses ink. */
+  /* On the highlighted verse --link drops below 4.5:1 in dark mode, so its label uses ink. */
   .verse:target .speaker {
     color: var(--ink);
   }
@@ -227,16 +227,16 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
     align-items: center;
     min-height: 44px;
     padding: 0 16px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--line);
     border-radius: 999px;
-    background: var(--paper);
+    background: var(--surface);
     color: var(--ink);
     font-size: 0.92rem;
     font-weight: 600;
     text-decoration: none;
   }
   .jump a:hover {
-    border-color: var(--strong);
+    border-color: var(--focus);
   }
   .checks {
     max-width: 42rem;
@@ -266,7 +266,7 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
   .invite {
     max-width: 42rem;
     margin-top: 18px;
-    background: var(--card);
+    background: var(--surface-2);
   }
   .invite .button {
     margin-top: 10px;
