@@ -40,6 +40,8 @@
   --z-notice: 20;
   --z-sheet: 30;
   --z-skip: 100;
+  /* Height of the Lamplight notice plus its gap while it shows; src/ui/LamplightNotice.tsx sets it on <html>. */
+  --notice-h: 0px;
 }
 :root:not([data-look="marked"]) {
   color-scheme: light;
@@ -257,7 +259,7 @@ html {
    64px is the toolbar plus its gap, the bottom value is the tab bar, its gap and the page's own gap. */
 html {
   scroll-padding-top: calc(64px + env(safe-area-inset-top));
-  scroll-padding-bottom: calc(64px + 12px + 24px + env(safe-area-inset-bottom));
+  scroll-padding-bottom: calc(64px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
 }
 * {
   box-sizing: border-box;
@@ -355,7 +357,7 @@ main:focus {
 }
 /* The floating tab bar is 64px tall and 12px off the edge: the last content scrolls clear of it. */
 main {
-  padding-bottom: calc(64px + 24px + env(safe-area-inset-bottom));
+  padding-bottom: calc(64px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
 }
 h1,
 h2,
@@ -1681,7 +1683,7 @@ button.danger {
     margin-inline: auto;
   }
   main {
-    padding-bottom: var(--space-8);
+    padding-bottom: calc(var(--space-8) + var(--notice-h));
   }
 }
 /* Large text (150 % and up, plan 01 sets data-text on <html>): the bar keeps its single-line labels, adds
@@ -1690,7 +1692,7 @@ html[data-text="large"] .tab {
   padding: 9px 4px;
 }
 html[data-text="large"] main {
-  padding-bottom: calc(83px + 12px + 24px + env(safe-area-inset-bottom));
+  padding-bottom: calc(83px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
 }
 @media (max-width: 359px) {
   html[data-text="large"] .tabbar {
@@ -1702,7 +1704,7 @@ html[data-text="large"] main {
 }
 @media (min-width: 768px) {
   html[data-text="large"] main {
-    padding-bottom: var(--space-8);
+    padding-bottom: calc(var(--space-8) + var(--notice-h));
   }
   html[data-text="large"] .tab {
     padding: var(--space-3) var(--space-4);
@@ -2259,4 +2261,87 @@ html[data-mode="lamplight"] .mini-cover::after {
 }
 .appearance-now:empty {
   margin: 0;
+}
+
+/* ==== Lamplight notice (UI-SPEC 4; src/ui/LamplightNotice.tsx) ====
+   A floating card above the tab bar: 20px from the screen edges, 12px above the bar, --surface with the
+   --elev-float ring (the 1px --line) and a 150ms fade (the global reduced-motion reset removes it). While it
+   shows, main's bottom padding grows by --notice-h so the last content scrolls clear of it. From 768px the
+   tab bar is a sidebar, so the card sits at the bottom of the content column instead. */
+.lamplight-notice {
+  position: fixed;
+  z-index: var(--z-notice);
+  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px);
+  max-width: 456px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--elev-float);
+  animation: lamplight-notice-in var(--dur-notice) ease-out;
+}
+@keyframes lamplight-notice-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+html[data-text="large"] .lamplight-notice {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px);
+}
+.lamplight-notice-icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--brand);
+}
+.lamplight-notice-text {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--ink);
+}
+.lamplight-notice-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.lamplight-notice button {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.lamplight-keep {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--muted);
+}
+.lamplight-plain {
+  background: none;
+  color: var(--link);
+  border: 1px solid transparent;
+}
+@media (min-width: 768px) {
+  .lamplight-notice {
+    left: 280px;
+    right: 0;
+    bottom: max(var(--space-3), env(safe-area-inset-bottom));
+    width: min(680px, calc(100% - 280px - 64px));
+    max-width: none;
+  }
+  html[data-text="large"] .lamplight-notice {
+    bottom: max(var(--space-3), env(safe-area-inset-bottom));
+  }
 }

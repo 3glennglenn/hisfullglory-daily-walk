@@ -13,7 +13,7 @@ import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
 import { currentRoute, navigate } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
-import { AppearanceProvider } from "./platform/AppearanceProvider";
+import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
 import { Home, Walk } from "./features/Home";
 import { Reader } from "./bible/Reader";
@@ -31,6 +31,7 @@ import { TopicHub } from "./social/TopicHub";
 import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
 import { TabBar, tabFor } from "./ui/TabBar";
+import { LamplightNotice, noticeText } from "./ui/LamplightNotice";
 import { LargeTitle, Toolbar } from "./ui/Screen";
 import { products } from "./config";
 import { contentFor } from "./data";
@@ -74,6 +75,7 @@ function RemindersScreen() {
 }
 function App() {
   const { state, notice, update } = usePlatform();
+  const lamplightNotice = useAppearance().notice;
   const [route, setRoute] = useState(currentRoute);
   const [online, setOnline] = useState(navigator.onLine);
   const [date, setDate] = useState(localDate);
@@ -195,6 +197,11 @@ function App() {
             "You’re offline. Downloaded Scripture and your private walk remain available. Community needs a connection."}
         </aside>
       )}
+      {/* Always in the page, empty until the Lamplight notice shows (UI-SPEC 4): text written into a region that
+          already exists is announced; a region inserted together with its text often is not. */}
+      <div role="status" aria-live="polite" id="lamplight-status" className="sr-only">
+        {noticeText(lamplightNotice?.variant)}
+      </div>
       <main id="main" tabIndex={-1}>
         {content}
         {install && !state.local.installDismissed && (
@@ -229,6 +236,7 @@ function App() {
             <small role="status">{installStatus}</small>
           </aside>
         )}
+        <LamplightNotice tab={tabFor(page)} path={location.pathname} />
       </main>
       <TabBar active={tabFor(page)} />
     </div>

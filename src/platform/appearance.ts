@@ -79,6 +79,67 @@ export function writeLamplight(lamp: Lamplight, storage: Writer | undefined = sa
   }
 }
 
+// ---- The Lamplight notice (UI-SPEC 4): the rules, apart from the screen --------------------------------------
+
+/** What is kept about the notice: how often it appeared and whether the reader has answered it. */
+export interface NoticeState {
+  shown: number;
+  done: boolean;
+}
+/** The notice appears at most this many times, answered or not (UI-SPEC 4). */
+export const NOTICE_LIMIT = 3;
+const freshNotice = (): NoticeState => ({ shown: 0, done: false });
+
+/** The stored counters. Anything unreadable, or out of range, reads as the default (T-01.1-13). */
+export function readNotice(storage: Reader | undefined = safeStorage()): NoticeState {
+  try {
+    const raw = storage?.getItem(NOTICE_KEY);
+    if (!raw) return freshNotice();
+    const value = JSON.parse(raw) as Partial<NoticeState> | null;
+    if (
+      value &&
+      typeof value === "object" &&
+      Number.isInteger(value.shown) &&
+      (value.shown as number) >= 0 &&
+      (value.shown as number) <= NOTICE_LIMIT &&
+      typeof value.done === "boolean"
+    )
+      return { shown: value.shown as number, done: value.done };
+  } catch {
+    /* unreadable: the default */
+  }
+  return freshNotice();
+}
+
+export function writeNotice(notice: NoticeState, storage: Writer | undefined = safeStorage()): boolean {
+  try {
+    storage?.setItem(NOTICE_KEY, JSON.stringify({ shown: notice.shown, done: notice.done }));
+    return !!storage;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Lamplight turned on by itself: the setting is Automatic and the device is dark, the reader has not answered
+ * and the notice has appeared fewer than three times. On or Off, which the reader chose, never show it.
+ */
+export function shouldShowNotice(lamplight: Lamplight, deviceDark: boolean, notice: NoticeState): boolean {
+  return lamplight === "auto" && deviceDark && !notice.done && notice.shown < NOTICE_LIMIT;
+}
+
+/** One more showing. Counted once per showing, not per screen. */
+export const recordShown = (notice: NoticeState): NoticeState => ({ ...notice, shown: notice.shown + 1 });
+/** "Keep Lamplight": answered, never shown again. */
+export const keep = (notice: NoticeState): NoticeState => ({ ...notice, done: true });
+/** "Turn off": answered, and the Lamplight setting becomes Off. */
+export const turnOff = (notice: NoticeState): { notice: NoticeState; lamplight: "off" } => ({
+  notice: { ...notice, done: true },
+  lamplight: "off",
+});
+/** Escape inside the notice closes it like Keep but leaves it unanswered (a later automatic switch may show it again). */
+export const escape = (notice: NoticeState): NoticeState => ({ ...notice });
+
 /** The key the app wrote its old theme choice to (UI-SPEC 3.2). It is read once, moved and removed. */
 export const OLD_APPEARANCE_KEY = "hfg-appearance";
 

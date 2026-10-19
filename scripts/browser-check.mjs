@@ -438,6 +438,225 @@ try {
     },
   );
   await check(
+    "Lamplight notice: says why, is announced once without moving focus, offers Keep or Turn off, steps aside, and never shows when the reader chose On or Off",
+    async () => {
+      const sentence = "Lamplight is on, because your device is set to dark.";
+      const turnedOff = "Lamplight is off. You can turn it on in You, Appearance.";
+      // A new context per case: nothing stored unless the case presets it (only when absent, so a reload keeps
+      // what the app wrote). The status region is watched from the first moment it exists.
+      async function withNotice(options, run) {
+        const { store = {}, scheme = "dark", width = 390, path = "/" } = options;
+        const c = await browser.newContext({ viewport: { width, height: 844 }, colorScheme: scheme, serviceWorkers: "block" });
+        const p = await c.newPage();
+        p.setDefaultTimeout(10000);
+        await p.addInitScript((pairs) => {
+          for (const [key, value] of pairs) if (localStorage.getItem(key) === null) localStorage.setItem(key, value);
+          window.__status = [];
+          let last;
+          new MutationObserver(() => {
+            const region = document.getElementById("lamplight-status");
+            if (!region) return;
+            if (region.textContent !== last) {
+              last = region.textContent;
+              window.__status.push(last);
+            }
+          }).observe(document, { childList: true, subtree: true, characterData: true });
+        }, Object.entries(store));
+        try {
+          await p.goto(base + path);
+          await p.locator("main h1").waitFor();
+          await run(p);
+        } finally {
+          await c.close();
+        }
+      }
+      const card = (p) => p.getByRole("region", { name: "Lamplight", exact: true });
+      const noticeKey = (p) => p.evaluate(() => localStorage.getItem("hfg-lamplight-notice"));
+      // Longer than the notice's own start delay, so "never" means never.
+      const settle = (p) => p.waitForTimeout(1000);
+
+      // Shows with the sentence, announced once through the pre-rendered region, focus untouched, 44px buttons.
+      await withNotice({}, async (p) => {
+        const focusBefore = await p.evaluate(() => document.activeElement?.tagName);
+        await card(p).waitFor();
+        assert.equal(await card(p).locator("p").innerText(), sentence);
+        assert.deepEqual(await p.evaluate(() => window.__status), ["", sentence], "the region exists empty first, then holds the sentence once");
+        assert.equal(await p.locator("#lamplight-status").getAttribute("aria-live"), "polite");
+        assert.equal(await p.locator("#lamplight-status").getAttribute("role"), "status");
+        assert.equal(await p.evaluate(() => document.activeElement?.tagName), focusBefore, "focus is not moved");
+        assert.equal(await card(p).evaluate((el) => el.contains(document.activeElement)), false);
+        assert.deepEqual(await card(p).getByRole("button").allInnerTexts(), ["Keep Lamplight", "Turn off"]);
+        for (const button of await card(p).getByRole("button").all())
+          assert.ok((await button.boundingBox()).height >= 43.9, "button is 44px tall");
+        assert.equal(await noticeKey(p), '{"shown":1,"done":false}', "one showing is counted");
+        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight");
+        // Above the tab bar, 20px from the edges, nothing covered, nothing wider than the screen.
+        const geometry = await p.evaluate(() => {
+          const box = (el) => el.getBoundingClientRect();
+          const c = box(document.querySelector(".lamplight-notice"));
+          return {
+            card: { left: c.left, right: c.right, bottom: c.bottom, top: c.top },
+            bar: box(document.querySelector("nav.tabbar")).top,
+            width: innerWidth,
+            scrolls: document.documentElement.scrollWidth > innerWidth,
+            padding: parseFloat(getComputedStyle(document.querySelector("main")).paddingBottom),
+            variable: document.documentElement.style.getPropertyValue("--notice-h"),
+          };
+        });
+        assert.equal(geometry.card.left, 20);
+        assert.equal(geometry.width - geometry.card.right, 20);
+        assert.ok(geometry.card.bottom <= geometry.bar - 11.9, "12px above the tab bar: " + JSON.stringify(geometry));
+        assert.equal(geometry.scrolls, false);
+        assert.match(geometry.variable, /^\d+px$/);
+        // Main's bottom padding grows by the card while it shows, and shrinks back after.
+        await card(p).getByRole("button", { name: "Keep Lamplight" }).click();
+        const after = await p.evaluate(() => parseFloat(getComputedStyle(document.querySelector("main")).paddingBottom));
+        assert.ok(geometry.padding - after >= geometry.card.bottom - geometry.card.top, "padding grew by at least the card's height");
+        assert.equal(await p.evaluate(() => document.documentElement.style.getPropertyValue("--notice-h")), "");
+        assert.deepEqual(await p.evaluate(() => window.__status), ["", sentence, ""], "the region is emptied when the card closes");
+      });
+
+      // Turn off: Light at once, the key written, the second sentence and one button; gone after a reload.
+      await withNotice({}, async (p) => {
+        await card(p).waitFor();
+        await card(p).getByRole("button", { name: "Turn off" }).click();
+        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "light");
+        assert.equal(await p.evaluate(() => localStorage.getItem("hfg-lamplight")), "off");
+        assert.equal(await card(p).locator("p").innerText(), turnedOff);
+        assert.deepEqual(await card(p).getByRole("button").allInnerTexts(), ["Hide notice"]);
+        assert.equal((await p.evaluate(() => window.__status)).at(-1), turnedOff, "the second sentence is announced too");
+        assert.equal(await p.evaluate(() => document.activeElement?.textContent), "Hide notice", "the pressed button's place is taken, focus is not lost");
+        assert.equal(await noticeKey(p), '{"shown":1,"done":true}');
+        await p.reload();
+        await p.locator("main h1").waitFor();
+        await settle(p);
+        assert.equal(await card(p).count(), 0, "no card after a reload");
+      });
+      await withNotice({}, async (p) => {
+        await card(p).waitFor();
+        await card(p).getByRole("button", { name: "Turn off" }).click();
+        await card(p).getByRole("button", { name: "Hide notice" }).click();
+        assert.equal(await card(p).count(), 0);
+        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "light");
+      });
+      // After Turn off the card also leaves on the next navigation.
+      await withNotice({}, async (p) => {
+        await card(p).waitFor();
+        await card(p).getByRole("button", { name: "Turn off" }).click();
+        await card(p).getByRole("button", { name: "Hide notice" }).waitFor();
+        await p.getByRole("link", { name: "Bible", exact: true }).click();
+        await card(p).waitFor({ state: "detached" });
+      });
+
+      // Keep closes, keeps Automatic, and a reload shows nothing.
+      await withNotice({}, async (p) => {
+        await card(p).waitFor();
+        await card(p).getByRole("button", { name: "Keep Lamplight" }).click();
+        assert.equal(await card(p).count(), 0);
+        assert.equal(await noticeKey(p), '{"shown":1,"done":true}');
+        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight", "Lamplight stays on");
+        assert.equal(await p.evaluate(() => localStorage.getItem("hfg-lamplight")), "auto", "the setting stays Automatic");
+        await p.reload();
+        await p.locator("main h1").waitFor();
+        await settle(p);
+        assert.equal(await card(p).count(), 0);
+      });
+
+      // Escape acts only while focus is inside the card, closes it and leaves it unanswered.
+      await withNotice({}, async (p) => {
+        await card(p).waitFor();
+        await p.getByRole("link", { name: "Pray", exact: true }).focus();
+        await p.keyboard.press("Escape");
+        assert.equal(await card(p).count(), 1, "Escape elsewhere does not dismiss the notice");
+        await card(p).getByRole("button", { name: "Keep Lamplight" }).focus();
+        await p.keyboard.press("Escape");
+        assert.equal(await card(p).count(), 0);
+        assert.equal(await noticeKey(p), '{"shown":1,"done":false}', "shown 1, still unanswered");
+        await p.waitForFunction(() => document.activeElement?.closest("nav.tabbar"));
+        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight");
+      });
+      // Unanswered and under three showings, it comes back at the next start.
+      await withNotice({ store: { "hfg-lamplight-notice": '{"shown":2,"done":false}' } }, async (p) => {
+        await card(p).waitFor();
+        assert.equal(await noticeKey(p), '{"shown":3,"done":false}');
+      });
+
+      // Three showings are the most there are; an answer ends it; unreadable values count as none.
+      await withNotice({ store: { "hfg-lamplight-notice": '{"shown":3,"done":false}' } }, async (p) => {
+        await settle(p);
+        assert.equal(await card(p).count(), 0, "after three showings");
+      });
+      await withNotice({ store: { "hfg-lamplight-notice": '{"shown":0,"done":true}' } }, async (p) => {
+        await settle(p);
+        assert.equal(await card(p).count(), 0, "after an answer");
+      });
+      await withNotice({ store: { "hfg-lamplight-notice": "garbage" } }, async (p) => {
+        await card(p).waitFor();
+        assert.equal(await noticeKey(p), '{"shown":1,"done":false}');
+      });
+
+      // Never when the reader chose On or Off, and nothing is written about the notice then.
+      for (const choice of ["on", "off"]) {
+        await withNotice({ store: { "hfg-lamplight": choice } }, async (p) => {
+          await settle(p);
+          assert.equal(await card(p).count(), 0, "Lamplight " + choice);
+          assert.equal(await noticeKey(p), null);
+          assert.deepEqual(await p.evaluate(() => window.__status), [""], "the region stayed empty");
+        });
+      }
+      // Nor on a light device at start.
+      await withNotice({ scheme: "light" }, async (p) => {
+        await settle(p);
+        assert.equal(await card(p).count(), 0);
+        // The device switches to dark while the app is open: the card appears, and closes silently when it turns light.
+        await p.emulateMedia({ colorScheme: "dark" });
+        await card(p).waitFor();
+        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight");
+        assert.equal(await noticeKey(p), '{"shown":1,"done":false}');
+        await p.emulateMedia({ colorScheme: "light" });
+        await card(p).waitFor({ state: "detached" });
+        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "light");
+        assert.equal((await p.evaluate(() => window.__status)).at(-1), "", "the region is empty again");
+      });
+
+      // Ignored: it stays while the reader stays, and goes when another tab is opened (for this session).
+      await withNotice({}, async (p) => {
+        await card(p).waitFor();
+        await p.waitForTimeout(600);
+        assert.equal(await card(p).count(), 1, "no timer takes it away");
+        await p.getByRole("link", { name: "Bible", exact: true }).click();
+        await card(p).waitFor({ state: "detached" });
+        assert.equal(await noticeKey(p), '{"shown":1,"done":false}');
+        await p.getByRole("link", { name: "Today", exact: true }).click();
+        await settle(p);
+        assert.equal(await card(p).count(), 0, "it does not come back during the session");
+      });
+
+      // Large text on a narrow screen: the card stacks, stays above the tab bar and the page does not scroll sideways.
+      await withNotice({ width: 320 }, async (p) => {
+        await card(p).waitFor();
+        await p.evaluate(() => {
+          document.documentElement.style.fontSize = "34px";
+          window.dispatchEvent(new Event("resize"));
+        });
+        const geometry = await p.evaluate(() => {
+          const c = document.querySelector(".lamplight-notice").getBoundingClientRect();
+          return {
+            bottom: c.bottom,
+            left: c.left,
+            right: c.right,
+            bar: document.querySelector("nav.tabbar").getBoundingClientRect().top,
+            scrolls: document.documentElement.scrollWidth > innerWidth,
+            width: innerWidth,
+          };
+        });
+        assert.ok(geometry.bottom <= geometry.bar, "above the tab bar at 200 % text: " + JSON.stringify(geometry));
+        assert.ok(geometry.left >= 0 && geometry.right <= geometry.width);
+        assert.equal(geometry.scrolls, false);
+      });
+    },
+  );
+  await check(
     "five tabs are links with aria-current; no brand header or settings heart; /more lands on /you; You shows its sections",
     async () => {
       await page.setViewportSize({ width: 390, height: 844 });
