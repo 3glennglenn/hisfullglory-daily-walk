@@ -37,6 +37,12 @@ export interface PrivatePrayer {
   updates: { date: string; body: string }[];
   createdAt: string;
 }
+// One finished context check on the reader's shelf (UI-SPEC 12): its slug and the local date it was read to
+// the end. Nothing else is kept; whether it is AI-unreviewed is read from the bundled check by slug.
+export interface ShelfEntry {
+  slug: string;
+  finishedOn: string;
+}
 export interface PlatformState {
   version: 3;
   privateTopics: string[];
@@ -63,6 +69,12 @@ export interface PlatformState {
   devotionalProgress: Record<string, number[]>;
   walkStep: Record<string, number>;
   notifications: Record<string, boolean>;
+  // Added by upgradeV3Fields (plan 01.1-04). lamplight starts from theme and is the source for the one-time
+  // move to the hfg-lamplight key; the reader's live choice is kept in that key, not here.
+  lamplight: "auto" | "on" | "off";
+  shelf: ShelfEntry[];
+  // The chapter the reader was last in, as /bible/{book}/{chapter}, for "Continue reading".
+  lastChapter: string | null;
 }
 export type UpdatePlatform = (
   fn: (state: PlatformState) => PlatformState,

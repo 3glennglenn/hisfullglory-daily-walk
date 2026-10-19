@@ -12,6 +12,7 @@ import {
   DARK_QUERY,
   applyAppearance,
   effectiveMode,
+  migrateAppearance,
   readLamplight,
   readLook,
   watchDevice,
@@ -21,6 +22,7 @@ import {
   type Look,
   type Mode,
 } from "./appearance";
+import { usePlatform } from "./store";
 
 // The reader's look (Cover and story or Marked page) and Lamplight setting (Automatic, On or Off), kept on
 // this device only (UI-SPEC 3.2): two plain keys, never in private state, an account, a cookie, analytics
@@ -40,11 +42,23 @@ export interface AppearanceValue {
 
 const Appearance = createContext<AppearanceValue | null>(null);
 
+// The old hfg-appearance key is moved once per page load, not again when the reader signs in or out.
+let moved = false;
+
 export function AppearanceProvider({ children }: { children: ReactNode }) {
   const [look, setLookState] = useState<Look>(() => readLook());
   const [lamplight, setLamplightState] = useState<Lamplight>(() => readLamplight());
   const [deviceDark, setDeviceDark] = useState(() => matchMedia(DARK_QUERY).matches);
   const mode = effectiveMode(lamplight, deviceDark);
+  const { state } = usePlatform();
+
+  // Once, at start: hfg-appearance (or the loaded state's lamplight) becomes hfg-lamplight (UI-SPEC 3.2).
+  useEffect(() => {
+    if (moved) return;
+    moved = true;
+    migrateAppearance(undefined, state.lamplight);
+    setLamplightState(readLamplight());
+  }, []);
 
   // Before the browser paints, so a change never shows a frame in the old look.
   useLayoutEffect(() => applyAppearance(document.documentElement, look, mode), [look, mode]);

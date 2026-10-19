@@ -396,6 +396,48 @@ try {
     },
   );
   await check(
+    "a v3 state saved before plan 04 loads without a recovery notice, and the old appearance key moves to hfg-lamplight once",
+    async () => {
+      const c = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: "light" });
+      const p = await c.newPage();
+      p.setDefaultTimeout(10000);
+      try {
+        await p.goto(base + "/");
+        await p.locator("main h1").waitFor();
+        // Make the stored state look like one saved before this plan: no lamplight, shelf or lastChapter, theme dark.
+        await p.evaluate(() => {
+          const state = JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));
+          delete state.lamplight;
+          delete state.shelf;
+          delete state.lastChapter;
+          state.theme = "dark";
+          localStorage.setItem("hfg-daily-walk:v3", JSON.stringify(state));
+          localStorage.removeItem("hfg-lamplight");
+          localStorage.setItem("hfg-appearance", "dark");
+        });
+        await p.goto(base + "/settings");
+        await p.locator("main h1").waitFor();
+        await p.waitForFunction(() => localStorage.getItem("hfg-lamplight") === "on");
+        const seen = await p.evaluate(() => ({
+          mode: document.documentElement.dataset.mode,
+          old: localStorage.getItem("hfg-appearance"),
+          recovery: Object.keys(localStorage).filter((key) => key.includes(":recovery:")),
+          text: document.querySelector("main").innerText,
+        }));
+        assert.equal(seen.mode, "lamplight", "the old dark choice still applies");
+        assert.equal(seen.old, null, "the old key is removed");
+        assert.deepEqual(seen.recovery, [], "no recovery copy was written");
+        assert.ok(!/needed recovery|Recover legacy/.test(seen.text), "no recovery notice is shown");
+        // Run again: the choice stays, nothing new appears.
+        await p.reload();
+        await p.locator("main h1").waitFor();
+        assert.equal(await p.evaluate(() => localStorage.getItem("hfg-lamplight")), "on");
+      } finally {
+        await c.close();
+      }
+    },
+  );
+  await check(
     "five tabs are links with aria-current; no brand header or settings heart; /more lands on /you; You shows its sections",
     async () => {
       await page.setViewportSize({ width: 390, height: 844 });

@@ -79,6 +79,34 @@ export function writeLamplight(lamp: Lamplight, storage: Writer | undefined = sa
   }
 }
 
+/** The key the app wrote its old theme choice to (UI-SPEC 3.2). It is read once, moved and removed. */
+export const OLD_APPEARANCE_KEY = "hfg-appearance";
+
+/**
+ * Moves the old appearance choice to hfg-lamplight, once, at start (UI-SPEC 3.2): with no hfg-lamplight,
+ * hfg-appearance "dark" becomes "on", "light" "off" and "system" "auto"; with neither key, the loaded state's
+ * lamplight (itself taken from its old theme) is written. An existing hfg-lamplight is never overwritten. The
+ * old key is removed only after the new one is safely there. A storage that throws changes nothing and
+ * throws nothing here; the app then keeps working from what first paint read.
+ */
+export function migrateAppearance(
+  storage: Pick<Storage, "getItem" | "setItem" | "removeItem"> | undefined = safeStorage(),
+  stateLamplight: Lamplight = "auto",
+): void {
+  try {
+    if (!storage) return;
+    const stored = storage.getItem(LAMPLIGHT_KEY);
+    const old = storage.getItem(OLD_APPEARANCE_KEY);
+    if (stored !== "on" && stored !== "off" && stored !== "auto") {
+      const next = old ? legacyLamplight(old) : stateLamplight === "on" || stateLamplight === "off" ? stateLamplight : "auto";
+      storage.setItem(LAMPLIGHT_KEY, next);
+    }
+    if (old !== null) storage.removeItem(OLD_APPEARANCE_KEY);
+  } catch {
+    /* Blocked or full storage: the choice then lasts for this visit only. */
+  }
+}
+
 export const DARK_QUERY = "(prefers-color-scheme: dark)";
 
 /** The part of a MediaQueryList the app uses, so tests can supply their own. */
