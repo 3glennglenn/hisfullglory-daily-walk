@@ -4,13 +4,13 @@
     {
       "id": "ai:psalms",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Psalms is a collection of 150 songs and prayers. It holds praise, thanksgiving, lament, confession, songs for the king, and reflections on wisdom and on God’s law. The collection is arranged in five books and moves, on the whole, from many laments at the start to pure praise at the end.\n\nWhat marks the Psalms is honesty before God. Joy, fear, anger, guilt and doubt are all spoken to him directly."
+          "text": "“How long, LORD? Will you forget me forever?” A prayer can begin like that, and in the Psalms it does. Four times the poet asks how long, and then, in the same short song, comes the turn: “But I trust in your loving kindness.”\n\nThat honesty runs through the whole book. Psalms is a collection of 150 songs and prayers, and it holds praise, thanksgiving, lament, confession, songs for the king, and reflections on wisdom and on God's law. It is arranged in five books and moves, on the whole, from many laments at the start to pure praise at the end.\n\nJoy, fear, anger, guilt and doubt are all spoken to God directly."
         },
         {
           "kind": "background",
@@ -20,7 +20,8 @@
           "kind": "interpretations",
           "text": "Jews and Christians have prayed the Psalms daily for well over two thousand years. The New Testament quotes them more than any other book and reads many as speaking of Christ, among them Psalms 2, 22 and 110. The psalms that call for judgment on enemies are hard to read. Many understand them as handing vengeance over to God instead of taking it oneself."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:psalms/23",

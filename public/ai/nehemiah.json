@@ -4,23 +4,24 @@
     {
       "id": "ai:nehemiah",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Nehemiah is the cupbearer of the Persian king. Hearing that Jerusalem still lies in ruins, he prays, asks the king for leave, and goes to rebuild the city walls. Despite threats and mockery the work is finished in fifty-two days.\n\nThe second half turns from walls to people. Ezra reads the law aloud, the people confess and renew the covenant, and Nehemiah deals with injustice and neglect."
+          "text": "The king notices that his cupbearer looks sad. “Why is your face sad, since you are not sick?” he asks, and Nehemiah, very much afraid, says what has been weighing on him: the city of his fathers' tombs lies waste. Then comes the question that changes everything, “What is your request?”, and before Nehemiah answers he prays.\n\nHearing that Jerusalem still lay in ruins, he had prayed already. Now he asks the Persian king for leave and goes to rebuild the city walls. When he calls the people together they answer, “Let’s rise up and build.” Despite threats and mockery the work is finished in fifty-two days.\n\nThe second half turns from walls to people. Ezra reads the law aloud, the people confess and renew the covenant, and Nehemiah deals with injustice and neglect."
         },
         {
           "kind": "background",
-          "text": "Nehemiah arrived in Jerusalem in 445 before Christ, under King Artaxerxes I. Much of the book is written in the first person and reads like a memoir. It continues the story of Ezra."
+          "text": "Nehemiah arrived in Jerusalem in 445 before Christ, under King Artaxerxes I. Much of the book is written in the first person and reads like a memoir. It continues the story of Ezra. The book's own account of the scene with the king gives the month as Nisan, in the twentieth year of Artaxerxes, with wine on the table before him."
         },
         {
           "kind": "interpretations",
           "text": "Readers often turn to Nehemiah for its picture of prayer and practical action going together. The book is honest about its ending: in the last chapter the same problems have returned. Many see in that a pointer to the need for a deeper renewal than any reform can give, which the prophets describe as a new heart."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
