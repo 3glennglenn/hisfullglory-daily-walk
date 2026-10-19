@@ -5,6 +5,7 @@ import { backupData } from "../platform/persistence";
 import { goals, type Theme } from "../platform/models";
 import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
 import { GroupedList, Row } from "../ui/List";
+import { LargeTitle, Toolbar } from "../ui/Screen";
 import { supabase } from "../supabase";
 import { config } from "../config";
 // The trust pages, reachable from inside the app: store reviewers look for them here (GATE-02). The site
@@ -89,7 +90,8 @@ export function Settings() {
   }
   return (
     <section className="grouped-screen">
-      <h1 className="large-title">Settings</h1>
+      <Toolbar back="You" to="/you" />
+      <LargeTitle>Settings</LargeTitle>
       <GroupedList title="Daily rhythm">
         <SelectRow
           label="Minutes"
@@ -280,7 +282,8 @@ export function BlockedAuthors() {
 export function Profile() {
   return (
     <section className="grouped-screen">
-      <h1 className="large-title">Account</h1>
+      <Toolbar back="You" to="/you" />
+      <LargeTitle>Account</LargeTitle>
       <AuthPanel />
       <GroupedList title="Account and privacy" plain>
         <div className="group-pad">

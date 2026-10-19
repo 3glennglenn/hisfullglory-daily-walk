@@ -520,6 +520,237 @@ try {
     },
   );
   await check(
+    "tab bar: labels on one line inside the screen at 320/390/768/1280px, a 280px sidebar from 768px, content column at most 680px",
+    async () => {
+      const original = page.viewportSize();
+      const nav = page.getByRole("navigation", { name: "Main navigation" });
+      const measure = () =>
+        page.evaluate(() => {
+          const plain = (b) => ({ left: b.left, right: b.right, top: b.top, bottom: b.bottom, width: b.width, height: b.height });
+          const nav = document.querySelector("nav.tabbar");
+          const bar = nav.getBoundingClientRect();
+          const items = [...nav.querySelectorAll("a")].map((a) => {
+            const label = a.querySelector(".tab-label");
+            const style = getComputedStyle(label);
+            return {
+              text: label.textContent,
+              box: plain(a.getBoundingClientRect()),
+              labelBox: plain(label.getBoundingClientRect()),
+              iconBox: plain(a.querySelector(".tab-icon").getBoundingClientRect()),
+              line: parseFloat(style.lineHeight),
+              size: parseFloat(style.fontSize),
+            };
+          });
+          return {
+            bar: plain(bar),
+            overflows: nav.scrollWidth > nav.clientWidth,
+            items,
+            main: plain(document.querySelector("main").getBoundingClientRect()),
+            width: innerWidth,
+            height: innerHeight,
+            scrollWidth: document.documentElement.scrollWidth,
+          };
+        });
+      for (const width of [320, 390, 768, 1280]) {
+        await page.setViewportSize({ width, height: 812 });
+        for (const path of ["/", "/you", "/settings"]) {
+          await go(path);
+          const m = await measure();
+          const where = `${path} at ${width}px`;
+          assert.deepEqual(m.items.map((i) => i.text), ["Today", "Bible", "Pray", "Community", "You"], where);
+          for (const item of m.items) {
+            assert.ok(item.labelBox.height <= item.line + 0.5, `${where}: "${item.text}" is on one line (${item.labelBox.height} > ${item.line})`);
+            assert.ok(item.box.left >= m.bar.left - 0.5 && item.box.right <= m.bar.right + 0.5, `${where}: "${item.text}" stays inside the bar`);
+            assert.ok(item.box.height >= 44 && item.box.width >= 44, `${where}: "${item.text}" is at least 44px`);
+          }
+          assert.equal(m.overflows, false, `${where}: the bar does not overflow`);
+          assert.ok(m.bar.left >= 0 && m.bar.right <= m.width + 0.5 && m.bar.bottom <= m.height + 0.5, `${where}: the bar is on screen`);
+          assert.ok(m.scrollWidth <= m.width, `${where}: no sideways scroll`);
+          if (width < 768) {
+            assert.equal(Math.round(m.bar.height), 64, `${where}: the capsule is 64px tall`);
+            assert.equal(Math.round(m.bar.left), 12, `${where}: 12px off the left edge`);
+            assert.equal(Math.round(m.width - m.bar.right), 12, `${where}: 12px off the right edge`);
+            assert.equal(Math.round(m.height - m.bar.bottom), 12, `${where}: 12px above the bottom edge`);
+            assert.ok(m.items.every((i) => i.size === m.items[0].size && Math.abs(i.size - 13) < 0.1), `${where}: labels are 13px`);
+            assert.ok(m.items.every((i) => Math.abs(i.iconBox.width - 24) < 0.6), `${where}: icons are 24px`);
+            assert.equal(await page.evaluate(() => getComputedStyle(document.querySelector("nav.tabbar")).borderRadius), "999px");
+            // The last content scrolls clear of the bar.
+            assert.ok((await page.evaluate(() => parseFloat(getComputedStyle(document.querySelector("main")).paddingBottom))) >= 88, `${where}: main pads its bottom`);
+          } else {
+            assert.equal(Math.round(m.bar.width), 280, `${where}: a 280px sidebar`);
+            assert.equal(Math.round(m.bar.left), 0);
+            assert.equal(await nav.getByRole("link").count(), 5, `${where}: five links in the sidebar`);
+            for (let i = 1; i < m.items.length; i++) assert.ok(m.items[i].box.top >= m.items[i - 1].box.bottom - 0.5, `${where}: the items are stacked`);
+            for (const item of m.items) assert.ok(item.iconBox.right <= item.labelBox.left + 0.5, `${where}: "${item.text}" label sits beside its icon`);
+            assert.ok(m.main.left >= 280 && m.main.width <= 680.5, `${where}: the content column is at most 680px, right of the sidebar (${m.main.left}, ${m.main.width})`);
+            const gapLeft = m.main.left - 280;
+            const gapRight = m.width - m.main.right;
+            assert.ok(Math.abs(gapLeft - gapRight) <= 40, `${where}: the column is centred in the rest (${gapLeft} / ${gapRight})`);
+            assert.ok(m.main.width >= Math.min(680, m.width - 280 - 64) - 1, `${where}: the column uses the room it has`);
+          }
+          assert.equal(await nav.locator('a[aria-current="page"]').count(), 1, `${where}: one selected tab`);
+        }
+      }
+      await page.setViewportSize(original);
+    },
+  );
+  await check(
+    "a long press on a tab shows its label at twice the size above it; a short tap navigates; Escape and release dismiss it",
+    async () => {
+      const original = page.viewportSize();
+      await page.setViewportSize({ width: 390, height: 844 });
+      await go("/pray");
+      const nav = page.getByRole("navigation", { name: "Main navigation" });
+      const community = nav.getByRole("link", { name: "Community", exact: true });
+      const box = await community.boundingBox();
+      const labelSize = await community.locator(".tab-label").evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+      assert.equal(await page.getByRole("tooltip").count(), 0, "no popover before a long press");
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      await page.mouse.down();
+      await page.waitForTimeout(700);
+      const tip = page.getByRole("tooltip");
+      await tip.waitFor();
+      assert.equal(await tip.innerText(), "Community");
+      assert.equal(await community.getAttribute("aria-describedby"), await tip.getAttribute("id"), "the tab is described by the popover");
+      const tipBox = await tip.boundingBox();
+      const tipSize = await tip.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+      assert.ok(Math.abs(tipSize - 2 * labelSize) < 0.6, `the label is shown at twice its size (${tipSize} vs ${labelSize})`);
+      assert.ok(tipBox.y + tipBox.height <= box.y, "the popover sits above the tab");
+      assert.ok(tipBox.x >= 0 && tipBox.x + tipBox.width <= 390, "and inside the screen");
+      await page.mouse.up();
+      await tip.waitFor({ state: "detached" });
+      assert.equal(new URL(page.url()).pathname, "/pray", "a long press does not navigate");
+      // Even the first tab, whose centre is near the edge, keeps its popover on screen.
+      const today = nav.getByRole("link", { name: "Today", exact: true });
+      await today.dispatchEvent("contextmenu");
+      await tip.waitFor();
+      assert.equal(await tip.innerText(), "Today");
+      const todayTip = await tip.boundingBox();
+      assert.ok(todayTip.x >= 0 && todayTip.x + todayTip.width <= 390, "the popover of the first tab stays on screen");
+      await page.keyboard.press("Escape");
+      await tip.waitFor({ state: "detached" });
+      assert.equal(new URL(page.url()).pathname, "/pray");
+      // A short tap still navigates, and no popover remains.
+      await community.click();
+      await page.waitForURL("**/community");
+      assert.equal(await page.getByRole("tooltip").count(), 0);
+      await page.setViewportSize(original);
+    },
+  );
+  await check(
+    "text at 200 %: data-text=large, tab labels at most 16px on one line, a bar of at most 83px, the skip link off screen, no route scrolls sideways at 390 and 320px",
+    async () => {
+      const original = page.viewportSize();
+      const routes = [
+        "/",
+        "/bible/psalms/23",
+        "/pray",
+        "/community",
+        "/community/grief",
+        "/my-walk",
+        "/you",
+        "/settings/reminders",
+        "/grow",
+        "/journal",
+        "/give",
+        "/profile",
+        "/settings",
+        "/shop",
+      ];
+      for (const width of [390, 320]) {
+        await page.setViewportSize({ width, height: 812 });
+        for (const path of routes) {
+          await go(path);
+          await page.evaluate(() => {
+            document.documentElement.style.fontSize = "34px";
+            window.dispatchEvent(new Event("resize"));
+          });
+          await page.waitForFunction(() => document.documentElement.dataset.text === "large");
+          const m = await page.evaluate(() => {
+            const nav = document.querySelector("nav.tabbar");
+            const bar = nav.getBoundingClientRect();
+            return {
+              labels: [...nav.querySelectorAll(".tab-label")].map((l) => ({ text: l.textContent, height: l.getBoundingClientRect().height, line: parseFloat(getComputedStyle(l).lineHeight), size: parseFloat(getComputedStyle(l).fontSize) })),
+              icons: [...nav.querySelectorAll(".tab-icon")].map((i) => i.getBoundingClientRect().width),
+              items: [...nav.querySelectorAll("a")].map((a) => a.getBoundingClientRect()).map((b) => ({ left: b.left, right: b.right })),
+              bar: { left: bar.left, right: bar.right, height: bar.height },
+              overflows: nav.scrollWidth > nav.clientWidth,
+              scrollWidth: document.documentElement.scrollWidth,
+              width: innerWidth,
+              skipBottom: document.querySelector(".skip-link").getBoundingClientRect().bottom,
+            };
+          });
+          const where = `${path} at ${width}px, root 34px`;
+          for (const l of m.labels) {
+            assert.ok(l.size <= 16.01, `${where}: "${l.text}" is capped at 16px (${l.size})`);
+            assert.ok(l.height <= l.line + 0.5, `${where}: "${l.text}" stays on one line`);
+          }
+          for (const w of m.icons) assert.ok(w <= 32.01, `${where}: icons are capped at 32px`);
+          assert.ok(m.items.every((i) => i.left >= m.bar.left - 0.5 && i.right <= m.bar.right + 0.5), `${where}: items stay inside the bar`);
+          assert.equal(m.overflows, false, `${where}: the bar does not overflow`);
+          assert.ok(m.bar.height <= 83.5, `${where}: the bar is at most 83px tall (${m.bar.height})`);
+          if (width < 360) assert.ok(m.bar.left <= 0.5 && m.bar.right >= m.width - 0.5, `${where}: below 360px the bar uses the full width`);
+          assert.ok(m.scrollWidth <= m.width, `${where}: no sideways scroll (${m.scrollWidth} > ${m.width})`);
+          assert.ok(m.skipBottom <= 0, `${where}: the skip link is outside the viewport (${m.skipBottom})`);
+        }
+      }
+      await page.setViewportSize(original);
+    },
+  );
+  await check(
+    "safe areas: the top is padded once, the bar rides above the home indicator, the toolbar sticks below the notch, main clears the bar",
+    async () => {
+      const original = page.viewportSize();
+      await page.setViewportSize({ width: 390, height: 844 });
+      const session = await context.newCDPSession(page);
+      try {
+        await session.send("Emulation.setSafeAreaInsetsOverride", { insets: { top: 47, bottom: 34, left: 0, right: 0 } });
+        await go("/settings");
+        const first = await page.evaluate(() => {
+          const top = (selector) => document.querySelector(selector).getBoundingClientRect().top;
+          return {
+            toolbarTop: top(".toolbar"),
+            titleTop: top("main h1"),
+            bar: document.querySelector("nav.tabbar").getBoundingClientRect().bottom,
+            height: innerHeight,
+            mainPad: parseFloat(getComputedStyle(document.querySelector("main")).paddingBottom),
+          };
+        });
+        assert.ok(first.toolbarTop >= 47 - 0.5, `the first bar starts below the notch (${first.toolbarTop})`);
+        assert.ok(first.toolbarTop <= 47 + 0.5, `and is padded once, not twice (${first.toolbarTop})`);
+        assert.ok(first.titleTop >= 47 + 52 - 0.5, "the large title follows the toolbar");
+        assert.equal(Math.round(first.height - first.bar), 34, "the tab bar rides above the home indicator");
+        assert.ok(first.mainPad >= 64 + 24 + 34 - 0.5, `main pads its bottom by the bar, a gap and the indicator (${first.mainPad})`);
+        // Scrolled: the toolbar sticks just below the notch and turns into the floating bar.
+        await page.evaluate(() => window.scrollTo(0, 300));
+        await page.waitForFunction(() => document.querySelector(".toolbar")?.dataset.scrolled === "true");
+        const stuck = await page.evaluate(() => document.querySelector(".toolbar").getBoundingClientRect().top);
+        assert.ok(Math.abs(stuck - 47) <= 0.5, `the toolbar sticks below the notch (${stuck})`);
+        // Every other screen's first element is below the notch too.
+        for (const path of ["/", "/pray", "/community", "/bible/psalms/23"]) {
+          await go(path);
+          const heading = await page.evaluate(() => document.querySelector("main h1").getBoundingClientRect().top);
+          assert.ok(heading >= 47, `${path}: the first heading starts below the notch (${heading})`);
+        }
+        // Landscape: the side safe areas push the content in.
+        await session.send("Emulation.setSafeAreaInsetsOverride", { insets: { top: 0, bottom: 21, left: 44, right: 44 } });
+        await page.setViewportSize({ width: 700, height: 390 });
+        await go("/you");
+        const side = await page.evaluate(() => {
+          const h = document.querySelector("main h1").getBoundingClientRect();
+          const bar = document.querySelector("nav.tabbar").getBoundingClientRect();
+          return { left: h.left, bar: bar.left, barRight: innerWidth - bar.right };
+        });
+        assert.ok(side.left >= 44 - 0.5, `content keeps clear of the left safe area (${side.left})`);
+        assert.ok(side.bar >= 44 - 0.5 && side.barRight >= 44 - 0.5, "so does the tab bar");
+      } finally {
+        await session.send("Emulation.setSafeAreaInsetsOverride", { insets: { top: 0, bottom: 0, left: 0, right: 0 } });
+        await session.detach();
+      }
+      await page.setViewportSize(original);
+    },
+  );
+  await check(
     "unknown routes and unavailable study context stay honest",
     async () => {
       await go("/grow/not-a-journey");

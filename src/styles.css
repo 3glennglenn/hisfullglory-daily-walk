@@ -331,7 +331,9 @@ main:focus {
 .skip-link {
   position: absolute;
   left: 12px;
-  top: -64px;
+  top: 12px;
+  /* Moved by its own height (and a margin), so it stays off-screen at any text size, also at 200 %. */
+  transform: translateY(calc(-100% - 24px));
   z-index: 20;
   padding: 10px 14px;
   border-radius: 10px;
@@ -339,7 +341,8 @@ main:focus {
   color: var(--on-button);
 }
 .skip-link:focus {
-  top: 12px;
+  top: calc(12px + env(safe-area-inset-top));
+  transform: none;
 }
 /* Page shell (UI-SPEC 7.1, 7.5, 7.6): 20px screen margin or the side safe area, whichever is larger; the
    top safe area is padded once here, so the first bar or title of every screen starts below the notch. */
@@ -2007,4 +2010,86 @@ html[data-text="large"] .select-row {
 html[data-text="large"] .select-row select {
   width: 100%;
   max-width: 100%;
+}
+
+/* ==== Toolbar (UI-SPEC 7.1, 7.3, 7.5, 8.2; src/ui/Screen.tsx) ====
+   Sticky below the top safe area, with the strip above it filled by its own ::before, so the translucent
+   bar covers the notch once the page has scrolled. Back is "‹ {parent}"; the optional title is centred. */
+.toolbar {
+  position: sticky;
+  top: env(safe-area-inset-top);
+  z-index: var(--z-bar);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 52px;
+  margin: 0 calc(-1 * max(20px, env(safe-area-inset-right))) 0 calc(-1 * max(20px, env(safe-area-inset-left)));
+  padding: 0 max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
+}
+.toolbar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: env(safe-area-inset-top);
+}
+.toolbar[data-scrolled="true"],
+.toolbar[data-scrolled="true"]::before {
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+}
+.toolbar[data-scrolled="true"] {
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .toolbar[data-scrolled="true"],
+  .toolbar[data-scrolled="true"]::before {
+    background: var(--bar-solid);
+  }
+}
+.toolbar-back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  margin-left: calc(-1 * var(--space-2));
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.toolbar-title {
+  grid-column: 2;
+  margin: 0;
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  letter-spacing: normal;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.toolbar-actions {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  gap: var(--space-2);
+}
+@media (min-width: 768px) {
+  .toolbar {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+/* Large text: the quick links of Today stack instead of sitting two across (UI-SPEC 6.3: horizontal
+   rows stack), so the page never scrolls sideways at 200 %. Plan 06 replaces this grid. */
+html[data-text="large"] .quick-grid {
+  grid-template-columns: 1fr;
 }

@@ -29,6 +29,7 @@ import { TopicHub } from "./social/TopicHub";
 import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
 import { TabBar, tabFor } from "./ui/TabBar";
+import { LargeTitle, Toolbar } from "./ui/Screen";
 import { products } from "./config";
 import { contentFor } from "./data";
 import { localDate } from "./storage";
@@ -63,10 +64,8 @@ interface InstallEvent extends Event {
 function RemindersScreen() {
   return (
     <section className="grouped-screen">
-      <button className="secondary" onClick={() => navigate("/you")}>
-        ‹ You
-      </button>
-      <h1 className="large-title">Daily reminder</h1>
+      <Toolbar back="You" to="/you" />
+      <LargeTitle>Daily reminder</LargeTitle>
       {supabase ? <Reminders /> : <p>Reminders are not available yet.</p>}
     </section>
   );

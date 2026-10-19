@@ -3,6 +3,7 @@ import { usePlatform } from "../platform/store";
 import { useAuth } from "../platform/auth";
 import { supabase } from "../supabase";
 import { GroupedList, Row } from "../ui/List";
+import { LargeTitle } from "../ui/Screen";
 import { dailyReminderOn } from "./Reminders";
 import { LegalLinks } from "./Settings";
 
@@ -40,7 +41,7 @@ export function You() {
   const reminder = state.notifications["Daily Walk"] === true || dailyReminderOn();
   return (
     <section className="grouped-screen">
-      <h1 className="large-title">You</h1>
+      <LargeTitle>You</LargeTitle>
       <GroupedList>
         {session ? (
           <Row title={name || "Account"} detail={name ? "Account" : undefined} href="/profile" chevron />
