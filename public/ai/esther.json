@@ -4,13 +4,13 @@
     {
       "id": "ai:esther",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Esther is set among Jews living in Persia. Esther, an orphan raised by her cousin Mordecai, becomes queen. When the official Haman obtains a decree to destroy all the Jews, Esther risks her life by going to the king uninvited.\n\nThe plot is reversed: Haman falls, the Jews are allowed to defend themselves, and the feast of Purim is founded to remember the rescue."
+          "text": "Mordecai walks into the middle of the city in sackcloth and ashes, wailing loudly and bitterly. A decree has gone out to destroy all the Jews. Word reaches Esther in the palace, and she is the queen, an orphan raised by her cousin Mordecai. She cannot simply walk in and ask the king for help: whoever comes to him uninvited faces death, unless he holds out the golden scepter.\n\nMordecai sends back a question that has been remembered ever since: “for such a time as this”. Esther answers with fasting, and with courage: “if I perish, I perish.”\n\nThe official Haman had obtained the decree. Now the plot is reversed. Haman falls, the Jews are allowed to defend themselves, and the feast of Purim is founded to remember the rescue."
         },
         {
           "kind": "background",
@@ -20,7 +20,8 @@
           "kind": "interpretations",
           "text": "Many read the silence about God as the point of the book: his care is at work in what looks like coincidence. Jews read Esther aloud every year at Purim. How the book relates to Persian history is debated among scholars. Christians read it as a story of God preserving his people when they are powerless, and of courage used for others."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

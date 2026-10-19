@@ -22,6 +22,60 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:2-thessalonians/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul, Silvanus and Timothy write to a church that is being hurt. They begin with thanks, because the Thessalonians’ faith grows exceedingly and their love for one another abounds. The writers boast about them in other assemblies for their perseverance in persecutions and afflictions.\n\nThen the letter speaks of justice. Paul calls their endurance a sign of God’s righteous judgment: God will repay affliction to those who afflict them and give relief to those who suffer, when the Lord Jesus is revealed from heaven with his angels in flaming fire. Those who do not know God and do not obey the Good News will pay the penalty of eternal destruction from the face of the Lord. On that day he is to be glorified in his saints.\n\nThe chapter ends with a prayer that God will count them worthy of their calling and that the name of the Lord Jesus will be glorified in them."
+        },
+        {
+          "kind": "background",
+          "text": "The letter is usually dated shortly after 1 Thessalonians, and its first readers are living under pressure. Many scholars accept Paul as the author, while some doubt it. The passage on judgment is among the hardest in the letter. The text promises relief to the afflicted and does not tell them to take revenge. Christians differ on what eternal destruction means: some read it as everlasting conscious punishment, some as a final end, and some hold other views. See Romans 12 for Paul’s counsel on repaying evil."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-thessalonians/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Someone has been saying that the day of Christ has already come, and the Thessalonians are shaken. Paul asks them not to be quickly troubled, whether by a spirit, a word or a letter claimed to come from him. That day will not come, he says, unless the rebellion comes first and the man of sin is revealed, the son of destruction, who exalts himself against everything called God and sits in the temple of God. Paul reminds them that he told them this while he was with them. Something now holds this figure back until his own season. The Lord will kill the lawless one with the breath of his mouth.\n\nThe passage also speaks of lying wonders and of a powerful delusion sent on those who refused the love of the truth. Then Paul turns to the readers: God chose them from the beginning. They are to “stand firm” in what they were taught, and may the Lord comfort their hearts."
+        },
+        {
+          "kind": "background",
+          "text": "This is one of the most debated chapters in the New Testament, because Paul says he had told them about it already, and the letter keeps only a few lines. Christians have read the man of sin in several ways: as a figure of the first century, as a person still to come, or as a pattern of lawlessness that appears again and again. Who or what restrains him is just as disputed. The letter is usually dated shortly after 1 Thessalonians. See Daniel 7 to 12 and Mark 13 for related imagery."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-thessalonians/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul asks the Thessalonians to pray for him and his companions, that the word of the Lord may spread rapidly and that they may be delivered from unreasonable and evil men. The Lord is faithful and will guard them from the evil one.\n\nThen comes a matter that has to be settled. Some in the church are living in rebellion against the teaching they received. They are not working, and they are busybodies. Paul points to his own example. He did not eat anyone’s bread without paying, but worked night and day so as not to burden them, though he had the right to be supported. The rule he gave them was blunt: “If anyone is not willing to work, don’t let him eat.” Those people are told to work quietly and eat their own bread.\n\nThe discipline has a gentle limit. Do not count such a person as an enemy, but admonish him as a brother. Paul closes with a greeting in his own hand, which he says is the sign in every letter."
+        },
+        {
+          "kind": "background",
+          "text": "Some members of the church had stopped working, and Paul answers with his own record of hard labor. The saying is aimed at those who were unwilling, not at those who could not work. The letter is usually dated shortly after 1 Thessalonians, and many scholars accept Paul as its author, though some doubt it. Closing in his own hand was a way to guard against letters falsely sent in his name, which he mentions in chapter 2. See 1 Thessalonians 4 for the earlier teaching on work."
+        }
+      ]
     }
   ]
 }

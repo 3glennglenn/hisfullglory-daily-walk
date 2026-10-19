@@ -22,6 +22,240 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:hebrews/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The letter begins without a greeting and without a name. It begins with God speaking. God spoke to the fathers through the prophets at many times and in many ways, but at the end of these days he has spoken through his Son, whom he appointed heir of all things and through whom he made the worlds. The Son is “the radiance of his glory,” upholds all things by his word, and after purifying us from sins sat down at the right hand of the Majesty on high.\n\nThe rest of the chapter argues that he is greater than the angels. The writer strings together lines of Scripture: you are my Son, let all the angels of God worship him, your throne, O God, is forever. Angels are winds and flames of fire, but the Son is addressed as God and Lord, who laid the foundation of the earth and remains when it grows old. The chapter ends by calling the angels serving spirits, sent to help those who will inherit salvation."
+        },
+        {
+          "kind": "background",
+          "text": "Hebrews is an anonymous sermon in the form of a letter. Some churches long held it as Paul’s, but many scholars think its author is unknown. It is usually dated to the first century, and some think before AD 70, since it speaks of temple worship in the present tense. Its readers seem to be Jewish Christians under pressure. The quotations in this chapter come from Psalm 2, 2 Samuel 7, Psalm 45, Psalm 102 and Psalm 110. Christians read verse 8 as calling the Son God."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After the grand claim of chapter 1, the writer gives a warning with a gentle edge: pay closer attention to what you have heard, “lest perhaps we drift away.” If the word spoken through angels held firm, how could anyone escape if they neglect so great a salvation?\n\nThen the writer turns to the Psalms and asks what humanity is, that God should think of them. Humanity was made a little lower than the angels and crowned with glory and honor, yet we do not yet see everything under its feet. What we do see is Jesus, made a little lower than the angels for a time, crowned with glory and honor because he suffered death, so that by the grace of God he would taste death for everyone.\n\nHe shared flesh and blood to bring to nothing the one who had the power of death, and to free those who lived in lifelong fear of it. He was made like his brothers, a merciful and faithful high priest, and “he is able to help those who are tempted.”"
+        },
+        {
+          "kind": "background",
+          "text": "The warning in the first verses follows directly from the argument that the Son is greater than the angels. The writer quotes Psalm 8, which asks what a human being is, and reads it as fulfilled in Jesus. Christians have read the passage about the one who had the power of death in different ways, as a defeat of the devil, of death itself, or both. The audience seems to be Jewish Christians facing hardship, and the author is unknown. See Psalm 22 and Isaiah 8 for the other quotations."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The writer asks his readers to look closely at Jesus, the apostle and high priest of their confession. Jesus was faithful to the one who appointed him, as Moses was faithful in all God’s house. But Jesus is counted worthy of more glory, as the builder of a house has more honor than the house. Moses was faithful as a servant, but Christ is faithful as a Son over his house, and “We are his house, if we hold fast our confidence”.\n\nThen the writer turns to Psalm 95 and the story of the wilderness. “Today if you will hear his voice, don’t harden your hearts”. The fathers tested God for forty years even though they saw his works, and God swore that they would not enter his rest. The writer asks who it was that rebelled, and answers that it was all those who came out of Egypt under Moses. They could not enter because of unbelief.\n\nSo the readers are to encourage one another day by day, as long as it is called today, so that none is hardened."
+        },
+        {
+          "kind": "background",
+          "text": "The writer sets Jesus beside Moses, the most honored figure in Israel’s history, to show that Jesus is greater and that his readers should stay faithful. The wilderness story is told in Numbers 14, and the psalm is Psalm 95. Christians differ on what the condition if we hold fast means. Some say it describes the mark of true believers, others that believers can fall away. The author is unknown, and the letter is usually dated to the first century."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The writer keeps pressing on the word rest. The good news was preached to the people in the wilderness as well, but it did not help them because it was not joined with faith. Yet God’s rest still stands open. The seventh day, when God rested from his works, is a sign of it, and the psalm says again through David, long after Joshua, “Today if you will hear his voice”. So a Sabbath rest remains for the people of God, and the readers are urged to make every effort to enter it.\n\nThe word of God, the writer says, is “living and active,” sharper than a two-edged sword, and nothing is hidden from the one to whom we must give account.\n\nThe chapter ends with a gift. We have a great high priest who has passed through the heavens, Jesus the Son of God, who was tempted in every way as we are, yet without sin. So let us come boldly to the throne of grace, to receive mercy and find grace to help in time of need."
+        },
+        {
+          "kind": "background",
+          "text": "The argument builds on Genesis 2, where God rests on the seventh day, on Psalm 95, and on the story of Joshua’s generation entering the land in Joshua. Christians differ on how to read the rest: as salvation received now, as the life to come, or as a Sabbath practice, and often as a mix of these. The author is unknown, and the letter is usually dated to the first century. The mention of Jesus as high priest prepares the chapters that follow."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The writer describes what a high priest is. He is taken from among people and appointed to act for them before God, offering gifts and sacrifices for sins. Because he is surrounded by weakness himself, he can deal gently with the ignorant and those who go astray. No one takes this honor for himself, and he must be called by God, as Aaron was.\n\nChrist did not glorify himself to be made high priest either. God said to him, You are my Son, and in another place, you are a priest forever in the order of Melchizedek. In the days of his flesh he offered prayers and petitions “with strong crying and tears”, and though he was a Son, he learned obedience by what he suffered. Having been made perfect, he became the source of eternal salvation for all who obey him.\n\nThen the writer stops short, and rebukes his readers. There is much to say about Melchizedek, but they have become dull of hearing. They should be teachers, yet they need someone to teach them again, for they “need milk, and not solid food.”"
+        },
+        {
+          "kind": "background",
+          "text": "The author sets out to show that Jesus is a priest of a different kind from Aaron’s line, using Psalm 2 and Psalm 110. Melchizedek appears in Genesis 14 and is taken up fully in the next chapters. The sharp rebuke to the readers shows that this is a pastoral letter to a community in danger of settling for less. The author is unknown, and the letter is usually dated to the first century. Christians have read the line about being made perfect in different ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The writer says it is time to leave the first lessons and press on to maturity. He does not want to lay the foundation again: repentance, faith in God, teaching about washings, laying on of hands, resurrection and judgment.\n\nThen a sobering passage. It is impossible to renew to repentance those who were once enlightened, tasted the heavenly gift, shared in the Holy Spirit, and then fell away, since they crucify the Son of God again and hold him up to shame. A field that drinks the rain and bears a crop is blessed, but one that bears thorns and thistles is near to being cursed.\n\nAt once the writer softens. He is “persuaded of better things” for them. God is not unjust and will not forget their work and love. He wants them to hold on to the end and to imitate those who inherited the promises. God swore by himself to Abraham, and the oath gives a strong encouragement, an anchor for the soul, entering behind the curtain, where Jesus has gone before us as a forerunner and high priest forever."
+        },
+        {
+          "kind": "background",
+          "text": "Verses 4 to 6 are among the most debated in the Bible. Christians read them in several ways. Some think they describe true believers who can lose salvation. Others think they describe people who seemed to belong but never truly did. Others read them as a warning meant to keep believers from falling. The writer’s own next lines show his confidence in his readers. The promise to Abraham is told in Genesis 22. The author is unknown, and the letter is usually dated to the first century."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Melchizedek is a mysterious figure who appears briefly in the Bible, and the writer now makes him the key. He was king of Salem and priest of God Most High, and he met Abraham coming back from battle and blessed him. Abraham gave him a tenth of everything. His name means king of righteousness, and king of Salem means king of peace. He is described without father, mother or genealogy, with neither beginning of days nor end of life, made like the Son of God.\n\nThe writer reasons that the lesser is blessed by the greater, so Melchizedek is greater than Abraham and even than Levi, from whom the priests came. If the Levitical priesthood had been enough, why would another priest be needed? Jesus comes from the tribe of Judah and is a priest by the power of an indestructible life, with an oath: “You are a priest forever, according to the order of Melchizedek.”\n\nBecause he lives forever, he is “able to save to the uttermost” those who draw near to God through him, and he offered himself once for all."
+        },
+        {
+          "kind": "background",
+          "text": "Melchizedek appears in Genesis 14 and in Psalm 110, and the writer builds on these two short passages. The letter speaks of the old law as weak and useless, and these words have been misused to look down on Judaism. The writer is arguing within a Jewish setting about what the priesthood could not finish. Christians differ on how the old and new covenants relate. The author is unknown, and the letter is usually dated to the first century."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Here is the main point, says the writer: we have a high priest who sat down at the right hand of the throne of the Majesty in the heavens, a servant of the true tabernacle that the Lord set up, not man. The priests on earth serve a copy and shadow of heavenly things. That is why Moses was warned to make everything according to the pattern shown to him on the mountain.\n\nBut Jesus has a more excellent ministry, as mediator of a better covenant resting on better promises. If the first had been faultless, no place would have been sought for a second. So the writer quotes the long promise of Jeremiah. The days are coming, says the Lord, when he will make a new covenant with the house of Israel and the house of Judah. “I will put my laws into their mind; I will also write them on their heart.” All will know him, and he will remember their sins no more.\n\nBy calling it new, he has made the first obsolete, and what is old is near to vanishing."
+        },
+        {
+          "kind": "background",
+          "text": "The writer quotes Jeremiah 31 at length. The tabernacle pattern is from Exodus 25. The word obsolete has been misused to claim that God has set Israel aside, and Christians differ on how the new covenant relates to the Jewish people. Many hold that the promise was made to Israel and that Gentiles share in it. The author is unknown, and the letter is usually dated to the first century."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The writer walks his readers through the tent where Israel worshiped. In the first room stood the lampstand, the table and the bread. Behind the second curtain was the Holy of Holies, with the golden altar of incense and the ark of the covenant, which held the jar of manna, Aaron’s rod that budded and the tablets of the covenant. Above it were the cherubim of glory. The priests entered the first room continually, but into the second went only the high priest, once a year, and never without blood.\n\nChrist came as high priest of the good things to come. He did not enter by the blood of goats and calves but by his own blood, once for all, having obtained “eternal redemption.” How much more can the blood of Christ cleanse the conscience?\n\nThe writer recalls how Moses sprinkled the covenant with blood and says that “apart from shedding of blood there is no remission.” Christ appeared once at the end of the ages to put away sin by his sacrifice, and will appear a second time to save those waiting for him."
+        },
+        {
+          "kind": "background",
+          "text": "The writer draws on the tabernacle laws of Leviticus 16 and the covenant ceremony in Exodus 24. The sacrificial language is difficult for many modern readers, and Christians have understood Christ’s death in several ways, with different pictures of how it takes away sin. The author plays on the idea of a will, which takes effect at a death. The author is unknown, and the letter is usually dated to the first century, with some placing it before the temple was destroyed in AD 70."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A priest stands at the altar, and his work is never finished. Day by day he offers the same sacrifices, and the writer says they can never take away sins. Then a different figure enters the story. Christ comes into the world saying he has come to do God's will, and by that will we have been sanctified through the offering of his body once for all. He offered one sacrifice for sins forever, and then he sat down.\n\nFrom that picture comes an invitation: since there is a new and living way into the holy place, draw near with a true heart, hold fast to hope, and keep meeting together to spur one another on to love and good works.\n\nTwo weights follow. One is a stern warning about willful sin. The other is a memory of the readers' own past, when they endured a great struggle with sufferings. The chapter ends with a call to endurance: “we are not of those who shrink back”."
+        },
+        {
+          "kind": "background",
+          "text": "Hebrews reads like a sermon to Christians under pressure, and its author is unknown. Here the long argument about Christ as the great priest reaches its high point, and the writer turns from teaching to urging. The sacrifices of the law are a shadow, and Christ's one offering is the reality. The warnings echo 6:4 to 6, and the call to endure leads straight into the roll call of faith in chapter 11."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "First the definition, then the gallery. “Now faith is assurance of things hoped for, proof of things not seen.” And the writer goes on to show it in people.\n\nAbel, Enoch and Noah come first. Then Abraham, who went out not knowing where he went, and lived in tents in the land of promise because he was looking for a city whose builder is God. Sarah received power to conceive. Isaac, Jacob and Joseph each look ahead. Moses' parents hide their child, and Moses himself chooses to share ill treatment with God's people rather than enjoy the treasures of Egypt. The Red Sea is crossed, Jericho's walls fall, and Rahab is spared.\n\nThen the writer says that time would fail him. Some conquered kingdoms; others were tortured, stoned and homeless. All of them were commended for their faith, and none received the promise. God has provided something better, so that they would not be made perfect apart from us."
+        },
+        {
+          "kind": "background",
+          "text": "The writer is speaking to readers who are tempted to give up, so he gathers the witnesses of their own Scriptures. Nearly every name comes from the Old Testament, from Genesis (see Genesis 4 to 22) through Exodus and Joshua to the prophets and the time of persecution. The chapter answers the call to endure at the end of chapter 10 and opens the way for the race of chapter 12. Many scholars date the letter before the year 70."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Picture a stadium. The stands are full, and the runner on the track is tired. The writer says we are surrounded by “a cloud of witnesses”, the people of chapter 11, so lay aside every weight and run with perseverance, looking to Jesus, who for the joy set before him endured the cross.\n\nThe weariness is real, and the writer names it. Hard times are called discipline, the way a father trains a child, and it seems painful at the time but yields the peaceful fruit of righteousness. Lift up the hands that hang down. Follow peace. Do not be like Esau, who sold his birthright for one meal and later found no place for a change of mind.\n\nThen two mountains. Sinai burned with fire, darkness and trumpet, and the people begged to hear no more. But you have come to Mount Zion, to the city of the living God and to Jesus, the mediator of a new covenant. A kingdom that can't be shaken is received, and the closing word is solemn: “our God is a consuming fire”."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter picks up from the heroes of faith in chapter 11 and applies them to readers who are weary and under pressure. The author is unknown, and the readers seem to be Jewish Christians. The two mountains compare the giving of the law at Sinai (see Exodus 19) with the new covenant. Verses 16 and 17 about Esau are hard, and Christians read them differently, some as a warning to take seriously and some as describing a hardened heart."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The sermon ends the way a good letter does, with small, close things. Let brotherly love continue. Don't forget to show hospitality to strangers, since some have entertained angels without knowing it. Remember those in prison and those ill-treated. Keep marriage in honor. Be free from the love of money, content with what you have, for God has said he will never leave or forsake.\n\nUnder all the practical advice stands one steady line: “Jesus Christ is the same yesterday, today, and forever.” Teachings may drift, but he does not.\n\nThen the writer turns to the picture he has been drawing all along. Jesus suffered outside the gate, so let's go out to him outside the camp, bearing his reproach, for we have no enduring city here. Offer a sacrifice of praise, and do good and share. A prayer for peace follows, and a few last notes: Timothy has been freed, and the Italians send greetings."
+        },
+        {
+          "kind": "background",
+          "text": "This last chapter is a string of short commands, and then a blessing that mentions Jesus as the great shepherd of the sheep, brought back from the dead. Around verses 10 to 13 the writer returns to the sacrifices and the camp of Israel's wilderness (see Leviticus 16). The words The Italians greet you are read two ways: the writer may be in Italy, or may be sending greetings from Italians elsewhere to readers who may be in Italy. Scholars do not agree."
+        }
+      ]
     }
   ]
 }

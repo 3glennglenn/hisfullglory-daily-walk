@@ -4,23 +4,24 @@
     {
       "id": "ai:1-chronicles",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "1 Chronicles retells Israel’s story from Adam to David. The first nine chapters are genealogies that connect the readers to their ancestors. The rest of the book is about David, with most attention on his care for worship: bringing the ark to Jerusalem, organizing priests, Levites and musicians, and preparing for the temple his son will build."
+          "text": "The book begins with a list of names: “Adam, Seth, Enosh”. For nine chapters the names go on, a long family tree that connects the readers to their ancestors. It starts with the first man, and it tells a people who they are before it tells them anything else.\n\nThen the book turns to David, and it dwells on one thing above all: worship. David brings the ark to Jerusalem. He organizes the priests, the Levites and the musicians. In chapter 16 the thanks goes up: “for his loving kindness endures forever”. He prepares for the temple that his son will build.\n\nThe retelling of Israel’s story from Adam to David has a quiet purpose. It tells a small people that their line goes back to the beginning, and that worship has a place in it."
         },
         {
           "kind": "background",
-          "text": "Chronicles was written after the exile, often dated to the fifth or fourth century before Christ, for a community that had returned to a small and poor Judah. Tradition names Ezra as its author. It draws heavily on Samuel and Kings and names other sources as well."
+          "text": "Chronicles was written after the exile, and it is often dated to the fifth or fourth century before Christ. It was written for a community that had returned to a small and poor Judah. Tradition names Ezra as its author. It draws heavily on Samuel and Kings and names other sources as well."
         },
         {
           "kind": "interpretations",
-          "text": "Chronicles differs from Samuel and Kings in what it includes. It leaves out David’s sin with Bathsheba, for example, and adds much about worship. Most readers see this as a deliberate choice of emphasis for a later generation, not an attempt to hide what the earlier books had already told. Its message is that the returned community still belongs to God’s people and still has a calling to worship him."
+          "text": "Chronicles differs from Samuel and Kings in what it includes. It leaves out David’s sin with Bathsheba, for example, and adds much about worship.\n\nMost readers see this as a deliberate choice of emphasis for a later generation, not an attempt to hide what the earlier books had already told. Its message is that the returned community still belongs to God’s people and still has a calling to worship him."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

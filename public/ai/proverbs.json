@@ -4,13 +4,13 @@
     {
       "id": "ai:proverbs",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Proverbs gathers short sayings and longer poems about living wisely. Its starting point is that the fear of the LORD is the beginning of wisdom. It contrasts the wise and the foolish in speech, work, money, friendship, marriage and the raising of children.\n\nIn the opening chapters wisdom is pictured as a woman calling out in the streets. The book ends with a poem in praise of a capable wife."
+          "text": "Two voices call from the high places of a city, and both want the same passers-by. “Wisdom has built her house”, the ninth chapter says. She has set her table and sent out her maidens, and she calls the simple to leave their simple ways. Across the street, a loud and undisciplined woman, Folly, sits at her door and calls the very same crowd.\n\nThat picture captures the whole book. Proverbs gathers short sayings and longer poems about living wisely. Its starting point is that “The fear of the LORD is the beginning of wisdom.” It contrasts the wise and the foolish in speech, work, money, friendship, marriage and the raising of children.\n\nIn the opening chapters wisdom is pictured as a woman calling out in the streets. The book ends with a poem in praise of a capable wife."
         },
         {
           "kind": "background",
@@ -20,7 +20,8 @@
           "kind": "interpretations",
           "text": "A proverb states what is generally true, not a guarantee for every case. Reading the sayings as promises leads to disappointment, and the books of Job and Ecclesiastes show the exceptions. The New Testament speaks of Christ as the wisdom of God, and many Christians read the figure of wisdom in chapter 8 in that light."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

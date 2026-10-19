@@ -1,15 +1,20 @@
-// Checks the topic pages and articles on file, and that only approved ones were built
-// (run `npm run build` first; `npm run check` does both). With SHOW_DRAFTS=1 set for both
-// the build and the tests, drafts count as shown, so their pages can be checked too.
+// Checks the topic pages, articles and context checks on file, and that drafts were not
+// built (run `npm run build` first; `npm run check` does both). Context checks may also be
+// "ai-unreviewed": built, and labelled as not checked by a person. With SHOW_DRAFTS=1 set
+// for both the build and the tests, drafts count as shown, so their pages can be checked too.
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { launchTopics } from "../../src/topics/graph.ts";
 import { library } from "../src/lib/bible.ts";
 import {
+  aiUnreviewedCardLabel,
+  aiUnreviewedLabel,
   arguedHeading,
   checkParts,
   content,
+  editorialNote,
+  featuredChecks,
   parseArticle,
   parseContextCheck,
   parseTopic,
@@ -163,8 +168,74 @@ test("people quoted in “Who has argued over it” are real voices, each with i
   assert.throws(parse({ argued: `${item.argued} Jesus said “never hit back”.` }), /not in the WEB text/);
 });
 
-test("only approved context checks are built, and a built one shows the verse and its text as written", () => {
-  const shown = (item: { review: string }) => item.review === "approved" || showDrafts();
+/** psalm-46-10 as the routine would write it: AI-unreviewed, no approval, the model named. */
+function unreviewed(changes: Record<string, unknown> = {}) {
+  const { approved, ...rest } = raw("context-checks", "psalm-46-10");
+  return { ...rest, review: "ai-unreviewed", model: "Test model", ...changes };
+}
+const parseUnreviewed = (changes: Record<string, unknown>) => () =>
+  parseContextCheck(unreviewed(changes), "psalm-46-10", bible);
+
+test("a context check may be AI-unreviewed, with rules that make up for the missing review", () => {
+  const item = unreviewed();
+  const parsed = parseContextCheck(item, "psalm-46-10", bible);
+  assert.equal(parsed.review, "ai-unreviewed");
+  assert.equal(parsed.model, "Test model");
+  // The approved checks parse as before, without a model.
+  assert.equal("model" in parseContextCheck(raw("context-checks", "psalm-46-10"), "psalm-46-10", bible), false);
+  assert.throws(parseUnreviewed({ approved: "2026-10-16" }), /date of approval/);
+  assert.throws(parseUnreviewed({ drafted: "human" }), /drafted "ai"/);
+  assert.throws(parseUnreviewed({ model: undefined }), /names the model/);
+  assert.throws(parseUnreviewed({ model: "x" }), /3 to 60/);
+  // One source that every voice uses, so only the number of sources is wrong.
+  const spurgeon = item.sources[2];
+  assert.throws(
+    parseUnreviewed({ sources: [spurgeon], voices: item.voices.map((voice: Record<string, unknown>) => ({ ...voice, source: spurgeon })) }),
+    /at least two sources/,
+  );
+  // A voice without an id is shown on its own card, and its source must be listed too.
+  const stranger = { name: "A reader", about: "someone who is quoted here", words: "This verse carried me through a hard year.", source: { title: "A page", url: "https://example.org/page" } };
+  assert.throws(parseUnreviewed({ voices: [...item.voices, stranger] }), /also be in sources/);
+  assert.doesNotThrow(() => parseContextCheck({ ...unreviewed(), review: "approved", approved: "2026-10-16", model: undefined, voices: [...item.voices, stranger] }, "psalm-46-10", bible));
+  // People's words go in voices: no other quotation marks in the text.
+  assert.throws(parseUnreviewed({ story: `${item.story} He called it ‘the quiet’ once.` }), /only quotation marks allowed/);
+  assert.throws(parseUnreviewed({ readings: `${item.readings} People say 'be still' today.` }), /only quotation marks allowed/);
+  assert.throws(parseUnreviewed({ argued: `${item.argued} Spurgeon wrote ‘wait’.` }), /only quotation marks allowed/);
+  assert.throws(parseUnreviewed({ hook: item.hook.replace("But did you know", "But »did you know«") }), /only quotation marks allowed/);
+  assert.doesNotThrow(parseUnreviewed({ readings: `${item.readings} People don't always stop.` }));
+  // A curly quote that never closes would let anything follow it; a single quote inside a WEB quotation is WEB text.
+  assert.throws(parseUnreviewed({ story: `${item.story} He wrote “wait` }), /only quotation marks allowed/);
+  const nested = { book: "john", chapter: 3, start: 7, end: 7 };
+  assert.doesNotThrow(parseUnreviewed({ basis: [...item.basis, nested], around: `${item.around} Elsewhere: “Don’t marvel that I said to you, ‘You must all be born anew.’”` }));
+  // Scripture quotations are still checked against the WEB text, and no other translation is named.
+  assert.throws(parseUnreviewed({ around: `${item.around} It says “stand still and see” elsewhere.` }), /not in the WEB text/);
+  assert.throws(parseUnreviewed({ point: `${item.point} Some read the NIV differently.` }), /not public domain/);
+  // Topic pages and articles cannot be AI-unreviewed.
+  assert.throws(() => parseTopic({ ...raw("topics", "prayer"), review: "ai-unreviewed", approved: undefined }, "prayer", bible), /review/);
+  const article = raw("articles", "how-jesus-taught-prayer");
+  assert.throws(() => parseArticle({ ...article, review: "ai-unreviewed", approved: undefined }, article.slug, bible), /review/);
+});
+
+test("the note under a page says how it was made, and an AI-unreviewed page says nobody checked it", () => {
+  const made = "Scripture quotations are checked against the World English Bible.";
+  assert.equal(editorialNote("approved", "ai"), `Written with the help of an AI model. ${made} Approved by HisFullGlory. Not reviewed by a theological reader.`);
+  assert.equal(editorialNote("approved", "human"), `Written by HisFullGlory. ${made} Approved by HisFullGlory. Not reviewed by a theological reader.`);
+  assert.equal(editorialNote("draft", "ai"), `Written with the help of an AI model. ${made} Not approved yet.`);
+  assert.equal(editorialNote("draft", "human"), `Written by HisFullGlory. ${made} Not approved yet.`);
+  for (const label of [aiUnreviewedLabel, aiUnreviewedCardLabel]) {
+    assert.match(label, /AI model/);
+    assert.match(label, /not checked by a person/i);
+  }
+  const note = editorialNote("ai-unreviewed", "ai");
+  assert.match(note, /AI model/);
+  assert.match(note, /no person has checked/i);
+  for (const line of [aiUnreviewedLabel, aiUnreviewedCardLabel, note]) {
+    assert.ok(!line.includes("—") && !line.includes("!"), line);
+  }
+});
+
+test("drafts are never built; approved and AI-unreviewed context checks are, and the latter say so", () => {
+  const shown = (item: { review: string }) => item.review !== "draft" || showDrafts();
   const { checks } = content();
   for (const item of checks)
     assert.equal(existsSync(page(`/context-checks/${item.slug}`)), shown(item), `/context-checks/${item.slug}`);
@@ -208,10 +279,35 @@ test("only approved context checks are built, and a built one shows the verse an
       assert.ok(at("readings") < at("argued") && at("argued") < at("point"), `${item.slug}: argued follows the readings`);
     }
     assert.equal(text.includes("Draft. Not approved"), item.review === "draft", `${item.slug}: draft label`);
+    // How it was made: a page nobody has checked says so at the top and in its closing note.
+    assert.equal(text.includes(aiUnreviewedLabel), item.review === "ai-unreviewed", `${item.slug}: AI-unreviewed label`);
+    assert.ok(text.includes(editorialNote(item.review, item.drafted)), `${item.slug}: closing note`);
+    assert.equal(html.includes('<meta name="robots" content="noindex"'), item.review === "draft", `${item.slug}: noindex`);
+    if (item.review === "ai-unreviewed") {
+      const at = (needle: string) => html.indexOf(needle);
+      assert.ok(at('role="note"') > -1 && at(aiUnreviewedLabel) < at("<h1"), `${item.slug}: the label stands above the title`);
+    }
     // The chapter page of the verse points to its context check.
     const chapter = readFileSync(page(`/bible/${item.verse.book}/${item.verse.chapter}`), "utf8");
     assert.ok(chapter.includes(`href="/context-checks/${item.slug}"`), `${item.slug}: link on the chapter page`);
   }
+});
+
+test("lists of context checks say which ones no person has checked, and the front door leaves them out", () => {
+  const unchecked = publishedChecks().filter((item) => item.review === "ai-unreviewed");
+  const count = (html: string, needle: string) => html.split(needle).length - 1;
+  if (existsSync(page("/context-checks")))
+    assert.equal(count(readFileSync(page("/context-checks"), "utf8"), aiUnreviewedCardLabel), unchecked.length, "overview");
+  // Every chapter page that lists an AI-unreviewed check shows the label once per such check.
+  for (const item of publishedChecks()) {
+    const { book, chapter } = item.verse;
+    const html = readFileSync(page(`/bible/${book}/${chapter}`), "utf8");
+    const here = unchecked.filter((entry) => entry.verse.book === book && entry.verse.chapter === chapter).length;
+    assert.equal(count(html, aiUnreviewedCardLabel), here, `/bible/${book}/${chapter}`);
+  }
+  const home = readFileSync(page(""), "utf8");
+  for (const item of unchecked) assert.ok(!home.includes(`/context-checks/${item.slug}"`), `${item.slug}: not on the home page`);
+  assert.ok(featuredChecks().every((item) => item.review !== "ai-unreviewed"));
 });
 
 test("context checks, topic pages and articles can be shared, with their own address", () => {

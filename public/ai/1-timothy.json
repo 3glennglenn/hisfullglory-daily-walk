@@ -22,6 +22,114 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:1-timothy/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul writes to Timothy, whom he calls his true child in faith, and gives him a task. Stay at Ephesus and command certain men not to teach a different doctrine or to give their attention to myths and endless genealogies. The goal of the command, Paul says, is love from a pure heart, a good conscience and sincere faith. Some have missed the mark and want to be teachers of the law without understanding it.\n\nPaul says the law is good if it is used lawfully, and he lists those it is aimed at, including murderers, liars, the sexually immoral and slave-traders. Then his voice softens, and he tells his own story. He had been a blasphemer and a persecutor, yet he obtained mercy. His own words are, “Christ Jesus came into the world to save sinners, of whom I am chief.” The chapter closes with praise to the King eternal and a charge to Timothy to hold to faith and a good conscience."
+        },
+        {
+          "kind": "background",
+          "text": "1 Timothy is one of the letters to church leaders, usually called the pastoral letters. Tradition links it to Paul at the end of his life, while many scholars think it was written by a later follower in his name. Either way, it speaks to a church in Ephesus troubled by false teachers. The meaning of some of the Greek terms in the list of sins is debated, and translations differ. See Acts 19 and Acts 20 for Paul in Ephesus."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-timothy/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul begins with prayer. Before anything else, petitions, prayers and thanksgivings are to be made for all people, including kings and those in high places, so that the church may lead a quiet life. This is good in the sight of God our Savior, who desires all people to be saved. There is one God and one mediator between God and humanity, the man Christ Jesus, who gave himself as a ransom for all.\n\nThe chapter then turns to conduct in worship. Men are to pray without anger. Women are to adorn themselves with good works rather than costly display. Then Paul writes that a woman is to learn in quietness, that he does not permit a woman to teach or exercise authority over a man, and he points to Adam and Eve. The last verse, about being saved through childbearing, is among the most puzzling in the letter."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to Timothy in Ephesus, where false teaching is troubling the church. The passage on women is among the most debated in the New Testament, and Christians differ. Some traditions read it as a lasting rule that church teaching and leadership belong to men. Others read it as an answer to a particular situation in Ephesus, and point to women who taught and led elsewhere, such as Priscilla in Acts 18 and the women named in Romans 16. Verse 15 has been read in several ways. Many scholars think the letter was written in Paul’s name by a later follower."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-timothy/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "“This is a faithful saying: someone who seeks to be an overseer desires a good work.” With that, Paul sets out what kind of person should lead a church. The overseer must be without reproach, temperate, sensible, hospitable and good at teaching. He must not be violent or greedy, and he must manage his own household well, for how could someone who cannot do that care for God’s assembly? He must not be a new convert, and he must have a good name with those outside.\n\nThe same care is asked of servants, who are to hold the mystery of the faith in a pure conscience and to be tested first. The chapter says something about the women in verse 11, and Christians read it in two ways: as the wives of these men, or as women who serve in the same office.\n\nPaul says he hopes to come soon, but writes so that Timothy will know how to behave in God’s house, the assembly of the living God. The chapter ends with what looks like a hymn about Christ, revealed in the flesh and received up in glory."
+        },
+        {
+          "kind": "background",
+          "text": "Paul gives Timothy a working list for choosing leaders in a church at Ephesus. Many Christians read the phrase husband of one wife in different ways: as a ban on more than one wife at once, as a call to faithfulness in marriage, or in other ways. Churches also differ on who may hold these offices. Tradition links the letter to Paul, though many scholars think a later follower wrote in his name. See Titus 1 for a similar list and Acts 20 for elders at Ephesus."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-timothy/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul warns that in later times some will fall away from the faith. They will follow deceiving spirits and teachers whose consciences have been burned as with a hot iron. One thing they teach is to forbid marriage and to command abstaining from foods. Paul answers that everything God created is good and is not to be rejected if it is received with thanksgiving, for it is made holy by the word of God and prayer.\n\nHe then turns to Timothy himself. He should refuse godless myths and train himself in godliness, which has value both in this life and in the life to come. He asks him to be an example in speech, conduct, love, faith and purity. “Let no man despise your youth”, he says. Until Paul comes he should give himself to reading, to encouragement and to teaching, and he should not neglect the gift given to him when the elders laid hands on him. Paul closes with a charge to keep a close watch on himself and on his teaching."
+        },
+        {
+          "kind": "background",
+          "text": "Timothy is young and carries a heavy task at Ephesus, and the letter gives him firm backing. The people who forbid marriage and certain foods are not named. Tradition links the letter to Paul, while many scholars think it was written in his name by a later follower. Verse 16 speaks of saving both himself and those who hear, and Christians differ on how salvation is understood in that sentence. See 1 Corinthians 8 and Romans 14 for other passages on food."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-timothy/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul gives Timothy a short lesson in how to treat people in a church. Do not rebuke an older man harshly, but appeal to him as a father. Treat younger men as brothers, older women as mothers and younger women as sisters, in all purity.\n\nThe longest part is about widows. “Honor widows who are widows indeed.” A widow who has children or grandchildren should first be cared for by her own family, and Paul says that someone who does not provide for his own household has denied the faith. A widow with no one to care for her may be put on the church’s list if she is over sixty and known for her good works. Younger widows are urged to marry and manage a household.\n\nElders who lead well are worth double honor, and no charge may be taken against an elder without two or three witnesses. Timothy is told to lay hands hastily on no one, and to “use a little wine for your stomach’s sake”."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter shows a church trying to care for its poorest members. In the ancient world a widow without family often had no income. The hard words about younger widows reflect the concerns of this particular church, and Christians read them in different ways. The instructions on elders and on witnesses echo the rules of Deuteronomy 19. The two sayings in verse 18 are given as Scripture, and one is from Deuteronomy 25. Many scholars think the letter was written in Paul’s name by a later follower, while tradition links it to Paul."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-timothy/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter opens with a hard word about slavery. Bondservants are told to count their masters worthy of honor, so that the name of God and the teaching are not slandered, and those whose masters are believers are not to despise them. The text accepts the institution as it was. It has been misused to defend slavery, and Christians have read it alongside Philemon and Galatians 3 against that use.\n\nThen Paul turns on teachers who think godliness is a way to make money. “But godliness with contentment is great gain.” We brought nothing into the world and can carry nothing out. Those determined to be rich fall into a snare, for “the love of money is a root of all kinds of evil.” Timothy is told to flee these things, to pursue righteousness, faith and love, and to fight the good fight of faith.\n\nPaul ends with a charge to the rich to hope in God rather than in riches, to do good and to share, and with a last plea to Timothy to guard what has been entrusted to him."
+        },
+        {
+          "kind": "background",
+          "text": "Paul closes the letter with warnings about false teaching and about money. The word translated bondservants means slaves, and in the Roman world slavery was common. The text does not call for ending it, and readers have long pressed the question of how far the gospel challenges it. See Philemon and Ephesians 6 for related passages. Tradition links the letter to Paul, while many scholars think a later follower wrote in his name."
+        }
+      ]
     }
   ]
 }

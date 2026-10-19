@@ -4,23 +4,24 @@
     {
       "id": "ai:ezra",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Ezra tells of the return from exile in Babylon. In the first part (chapters 1 to 6) a group goes back to Jerusalem by decree of the Persian king Cyrus and, after long opposition, rebuilds the temple. In the second part (7 to 10) Ezra, a priest and teacher of the law, arrives decades later to teach and to reform the community."
+          "text": "The foundation of the temple has just been laid, and the sound that rises over Jerusalem is two sounds at once. The people sing that the LORD is good, “for his loving kindness endures forever toward Israel”, and shout aloud. But the old men who had seen the first house “wept with a loud voice”. Joy and grief are so mixed that no one can tell them apart.\n\nThat scene sits inside the story of a return. Ezra tells how the Jews come back from exile in Babylon. In the first part (chapters 1 to 6) a group goes back to Jerusalem by decree of the Persian king Cyrus and, after long opposition, rebuilds the temple. In the second part (7 to 10) Ezra, a priest and teacher of the law, arrives decades later to teach the people and to reform the community."
         },
         {
           "kind": "background",
-          "text": "Ezra and Nehemiah were originally one book. Cyrus’ decree is dated to 538 before Christ and the temple was completed about 515. Ezra’s arrival is commonly dated to 458. Parts of the book are written in Aramaic, the language of the Persian administration, and quote official letters."
+          "text": "Ezra and Nehemiah were originally one book, and the story carries on in Nehemiah. Cyrus' decree is dated to 538 before Christ, and the temple was completed about 515. Ezra's arrival is commonly dated to 458. Parts of the book are written in Aramaic, the language of the Persian administration, and they quote official letters."
         },
         {
           "kind": "interpretations",
-          "text": "The book ends with a hard passage: men who had married foreign wives send them away (chapters 9 and 10). Most readers understand this as a measure to protect the faith of a small and fragile community, not a rule about ethnicity, and set it beside Ruth, where a foreign woman is welcomed. The New Testament gives different counsel to believers married to unbelievers in 1 Corinthians 7."
+          "text": "The ending is a hard one. Men who had married foreign wives send them away (chapters 9 and 10). Most readers understand this as a measure to protect the faith of a small and fragile community, not as a rule about ethnicity, and they set it beside the book of Ruth, where a foreign woman is welcomed. The New Testament gives different counsel to believers married to unbelievers, in 1 Corinthians 7. Christians and Jews read the chapters with care for that reason."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

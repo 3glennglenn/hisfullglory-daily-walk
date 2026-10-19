@@ -22,6 +22,78 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:philippians/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul writes from chains, and the letter is full of joy. He thanks God whenever he remembers the Philippians, and prays for them with joy because of their partnership in the Good News from the first day until now. He is sure of one thing: “he who began a good work in you will complete it until the day of Jesus Christ.”\n\nThen he tells them how things stand with him. His imprisonment has turned out to advance the Good News. The whole palace guard knows that he is in chains for Christ, and most of the brothers are bolder. Some preach from envy and strife, others from love. Paul's reaction: “What does it matter?” Christ is proclaimed, and he rejoices.\n\nHe faces death honestly. “For to me to live is Christ, and to die is gain.” He says, “I am hard pressed between the two”, but he thinks he will remain for their progress and joy, and asks them to stand firm in one spirit."
+        },
+        {
+          "kind": "background",
+          "text": "Paul and Timothy write to the church at Philippi, a Roman colony where Paul had worked (see Acts 16). Where Paul was in prison is debated. Many scholars say Rome, which would date the letter to the early 60s, while others suggest Ephesus or Caesarea. Tradition holds that Paul wrote the letter. Compare Philippians 4 for the thanks for their gift."
+        }
+      ]
+    },
+    {
+      "id": "ai:philippians/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul asks the Philippians to make his joy full: to be of one mind, to do nothing from rivalry or conceit, but each to count others better than themselves, and to look to the interests of others. Then he points to the one who showed how. Christ Jesus, though in the form of God, did not consider equality with God a thing to be grasped, but “emptied himself, taking the form of a servant”, and became obedient to the point of death on a cross. Therefore God highly exalted him, so that every knee should bow and every tongue confess that “Jesus Christ is Lord”, to the glory of God the Father.\n\nThe rest of the chapter is close to home. Work out your own salvation with fear and trembling, for “it is God who works in you both to will and to work for his good pleasure”. Shine as lights. Paul then speaks of Timothy, and of Epaphroditus, who was sick nearly to death and whom God spared."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to the church at Philippi from prison. Many scholars think verses 6 to 11 are an early hymn or poem, and they are read in different ways. Christians differ on what emptied himself means and on how to read grasped. The words about every knee echo Isaiah 45. For Timothy compare 1 Corinthians 4:17."
+        }
+      ]
+    },
+    {
+      "id": "ai:philippians/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul says, again, rejoice in the Lord. Then he warns against those who put confidence in the flesh, and lays out his own record to show he could play that game better than anyone. Circumcised on the eighth day, of the tribe of Benjamin, “Hebrew of Hebrews”, a Pharisee, so zealous that he persecuted the assembly, and in the righteousness of the law, found blameless.\n\nBut he counts all that as loss for the sake of knowing Christ. He wants to be found in him, not with a righteousness of his own, but with the one that comes through faith. He wants to know Christ and the power of his resurrection, and even the fellowship of his sufferings.\n\nHe has not arrived, he says. Forgetting what lies behind, “I press on toward the goal for the prize of the high calling of God in Christ Jesus.” He weeps over the enemies of the cross and reminds the Philippians that “our citizenship is in heaven”, from where they wait for a Savior."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes from prison to the church at Philippi, a Roman colony, which may give the talk of citizenship a sharper edge. The warning about dogs and the false circumcision is aimed at people who urged Gentile believers to be circumcised, not at Jews as a people. Paul himself is a Hebrew of Hebrews. The passage has been misused against Jewish people. Compare Galatians 1 and Romans 7."
+        }
+      ]
+    },
+    {
+      "id": "ai:philippians/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul writes tenderly to people he calls his joy and crown. He asks two women, Euodia and Syntyche, who labored with him in the Good News, to think the same way in the Lord, and asks a true partner to help them. Then he gives some of the best-loved lines in the letter. Rejoice in the Lord always. “In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God.” And the peace of God, which surpasses all understanding, will guard their hearts and thoughts in Christ Jesus. He tells them to think on what is true, honorable, just, pure and lovely.\n\nThen he speaks about himself. “I have learned in whatever state I am, to be content in it.” That holds whether he is filled or hungry. “I can do all things through Christ who strengthens me.”\n\nHe thanks them for their gifts, sent through Epaphroditus, and promises that his God will supply every need of theirs."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes from prison to the church at Philippi, a church that had sent him support again and again. The strength of verse 13 is said in the setting of hunger and plenty, and it stands next to his thanks for their gift. The letter mentions the household of Caesar among the saints who send greetings, which fits an imperial city. The text is a pastor's exhortation and does not speak to medical conditions."
+        }
+      ]
     }
   ]
 }

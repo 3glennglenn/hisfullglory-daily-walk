@@ -4,21 +4,112 @@
     {
       "id": "ai:revelation",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Revelation records visions given to John, a prisoner on the island of Patmos. It begins with messages to seven churches. John is then shown the throne of God and a Lamb who was slain, and a series of judgments pictured as seals, trumpets and bowls.\n\nThe visions portray the conflict between God and the powers of evil, shown as a dragon, beasts and the city Babylon. They end with the return of Christ, the final judgment, and a new heaven and a new earth where God lives with his people."
+          "text": "John is on an island called Patmos, a prisoner. It is the Lord’s day, and behind him a loud voice sounds like a trumpet. He turns and sees seven golden lamp stands, and among them one like a son of man, with eyes like a flame of fire. John falls at his feet like a dead man. A hand rests on him, and a voice says, “Don’t be afraid.”\n\nSo begin the visions. First come messages to seven churches. Then John is shown the throne of God and a Lamb who was slain, and a series of judgments pictured as seals, trumpets and bowls. The book sets the conflict between God and the powers of evil before the reader as a dragon, beasts and the city Babylon.\n\nThen the scene changes. Christ returns, the final judgment comes, and John sees a new heaven and a new earth. A voice says that God will dwell with his people, “He will wipe away every tear from their eyes.” And the one on the throne says, “I am making all things new.”"
         },
         {
           "kind": "background",
-          "text": "The book is usually dated to the mid 90s, under the emperor Domitian; some date it to the 60s under Nero. It belongs to a kind of writing that speaks through symbols and numbers, and it draws constantly on the Old Testament."
+          "text": "The book names its writer as John, on Patmos. It is usually dated to the mid 90s, under the emperor Domitian. Some date it to the 60s, under Nero. It belongs to a kind of writing that speaks through symbols and numbers, and it draws constantly on the Old Testament."
         },
         {
           "kind": "interpretations",
-          "text": "Christians read Revelation in four main ways: as mostly about the first century, as a map of church history, as mostly about events still to come, or as a picture of the struggle between good and evil in every age. They also differ on the thousand years of chapter 20. All agree on its core: God and the Lamb win, and the churches are called to stay faithful."
+          "text": "Christians read Revelation in four main ways. Some see it as mostly about the first century. Some take it as a map of church history. Some see it as mostly about events still to come. And some read it as a picture of the struggle between good and evil in every age. They also differ on the thousand years of chapter 20.\n\nAll of them agree on its core: God and the Lamb win, and the churches are called to stay faithful."
+        }
+      ],
+      "voice": "story"
+    },
+    {
+      "id": "ai:revelation/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "An old man is on an island called Patmos, and he says he is there because of God's Word and the testimony of Jesus. On the Lord's day, he is in the Spirit, and behind him he hears a loud voice like a trumpet telling him to write what he sees and to send it to seven assemblies in Asia.\n\nHe turns. He sees seven golden lamp stands, and among them one like a son of man, with hair white as wool, eyes like fire, a voice like many waters, and a face like the sun shining at its brightest. John falls at his feet like a dead man.\n\nA hand is laid on him. “I am the first and the last,” the voice says, and the one who was dead is alive forever and holds the keys of Death and of Hades. He tells John to write what he has seen, what is, and what will happen after."
+        },
+        {
+          "kind": "background",
+          "text": "Revelation is usually dated to the end of the first century, when Christians in Asia were under pressure; tradition links it to the apostle John, while some scholars think it was written by another John. It is written in the style of prophecy and apocalyptic, with many symbols. Christians read it in different ways: some see events of the first century, some a sweep of history, some events still to come, and some a picture that applies in every age."
+        }
+      ]
+    },
+    {
+      "id": "ai:revelation/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Four letters, four towns, and one voice behind them all. Christ speaks to the assembly in Ephesus: I know your toil and perseverance, and you've tested false apostles. But “you left your first love”. Remember where you fell from, repent, do the first works.\n\nTo Smyrna he says he knows their oppression and poverty, though they are rich. Don't be afraid of what you are about to suffer. Be faithful to death and he will give the crown of life.\n\nTo Pergamum he says they hold firmly to his name even where Satan's throne is, and mentions Antipas, his witness, who was killed among them. But some hold the teaching of Balaam and the Nicolaitans.\n\nTo Thyatira he praises their love, faith, service and endurance, but speaks against a woman called Jezebel who leads his servants astray.\n\nEach letter ends the same way: let those who have an ear hear what the Spirit says, and each promises something to the one who overcomes: the tree of life, escape from the second death, hidden manna and a white stone, authority over the nations and the morning star."
+        },
+        {
+          "kind": "background",
+          "text": "These are the first four of seven letters to real congregations in Asia, and each follows a pattern: a title for Christ, what he knows, what he holds against them, a call to hear and a promise. Verse 9 speaks of a synagogue of Satan. That phrase belongs to a conflict between two groups who both claimed the heritage of Israel, and it has been tragically misused against Jews. It is not a judgment on the Jewish people."
+        }
+      ]
+    },
+    {
+      "id": "ai:revelation/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The letters go on. To Sardis: you have a reputation of being alive, but you are dead. Wake up and strengthen what remains. A few there have not defiled their garments, and they will walk with Christ in white.\n\nTo Philadelphia, a small and faithful assembly: I have set before you an open door, which no one can shut. You have a little power, but you kept my word and did not deny my name. Because you kept my command to endure, I will keep you in the hour of testing.\n\nThen the last, to Laodicea, and it is the sharpest. He says they are “neither cold nor hot”, and that he will spit them out of my mouth. You say you are rich and need nothing, yet you are wretched, poor, blind and naked. Those I love, I reprove and chasten.\n\nAnd then the door. “Behold, I stand at the door and knock.” If anyone hears and opens, I will come in and dine with him, and he with me. The one who overcomes will sit with him on his throne."
+        },
+        {
+          "kind": "background",
+          "text": "These are the last three of the seven letters. The phrase synagogue of Satan returns in verse 9, and the note under chapter 2 applies here too: it belongs to a first century conflict and must not be turned against Jewish people today. Christians read the knock at the door in two ways, as a call to a whole assembly that has grown comfortable, and as an invitation to any individual, and both readings are held widely."
+        }
+      ]
+    },
+    {
+      "id": "ai:revelation/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A door stands open in heaven. John hears the same trumpet-like voice that spoke to him before: Come up here, and I will show you what must happen after this. Immediately he is in the Spirit, and there is a throne, and someone sitting on it who looks like jasper and sardius. A rainbow, like an emerald, surrounds the throne.\n\nAround it sit twenty-four elders in white with golden crowns. Lightnings, sounds and thunders come from the throne, and seven lamps of fire burn before it. In front of it lies something like a sea of glass, like crystal.\n\nFour living creatures, full of eyes, stand in the middle of the throne and around it: one like a lion, one like a calf, one with a face like a man, and one like a flying eagle. Each has six wings. They never rest, day or night, saying “Holy, holy, holy is the Lord God, the Almighty”.\n\nAnd whenever they give glory, the elders fall down, throw their crowns before the throne, and worship the one who lives forever, because he created all things."
+        },
+        {
+          "kind": "background",
+          "text": "After the letters to the seven assemblies on earth, the scene moves to heaven, to a throne room where worship goes on. The images draw on Old Testament visions of God's throne, such as Isaiah 6 and Ezekiel 1 and 10. Christians differ about who the twenty-four elders are: some see representatives of the people of God, others angelic beings. The chapter sets the stage for the scroll in chapter 5."
+        }
+      ]
+    },
+    {
+      "id": "ai:revelation/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "In the right hand of the One on the throne lies a scroll, written inside and outside and sealed with seven seals. A mighty angel calls out: who is worthy to open it? No one in heaven or on earth or under the earth is able. And John weeps much.\n\nOne of the elders says to him, Don't weep. The Lion of the tribe of Judah, the Root of David, has overcome, and he can open the scroll. John looks for a lion. What he sees is a Lamb, standing as though it had been slain, in the middle of the throne.\n\nThe Lamb takes the scroll, and heaven erupts. The living creatures and the elders fall down with harps and golden bowls of incense and sing a new song about being bought for God out of every tribe, language, people and nation. Then the voice of many angels, ten thousands of ten thousands, cries out, “Worthy is the Lamb who has been killed”.\n\nAnd last, every created thing joins in, to the One on the throne and to the Lamb."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter turns on a surprise: the Lion that is announced turns out to be a Lamb that has been slain. Christians generally see this as the way Jesus is both king and sacrifice, and connect the Lamb with John 1:29 and Isaiah 53. What the scroll holds is read in several ways, such as God's plan for history or the coming judgments, and the opening of its seals begins in chapter 6."
         }
       ]
     }

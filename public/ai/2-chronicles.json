@@ -4,23 +4,24 @@
     {
       "id": "ai:2-chronicles",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "2 Chronicles begins with Solomon and the building of the temple, then follows the kings of Judah alone until the exile. The northern kingdom is mentioned only where it touches Judah’s story.\n\nAgain and again the book shows that when a king seeks God, humbles himself and prays, God answers and restores. It ends with the decree of Cyrus of Persia that allows the exiles to go home and rebuild the temple."
+          "text": "Solomon has finished praying, and fire comes down from heaven. It consumes the offering, and “the LORD’s glory filled the house.” So this book begins with Solomon and the building of the temple.\n\nIt then follows the kings of Judah alone, until the exile. The northern kingdom is mentioned only where it touches Judah’s story.\n\nAgain and again the book shows the same thing: when a king seeks God, humbles himself and prays, God answers and restores. It ends with a decree from Cyrus of Persia, who allows the exiles to go home and rebuild the temple. He says of any of God’s people, “let him go up”. The last word of the book is an open door, and it points toward home."
         },
         {
           "kind": "background",
-          "text": "The book continues 1 Chronicles and was written after the exile. In the Hebrew Bible, Chronicles stands last, so that the Scriptures end with the invitation to go up to Jerusalem."
+          "text": "The book continues 1 Chronicles and was written after the exile. In the Hebrew Bible, Chronicles stands last among the books, so that the Scriptures end with the invitation to go up to Jerusalem, as the decree of Cyrus does."
         },
         {
           "kind": "interpretations",
-          "text": "The promise of 7:14, that God will hear and heal when his people humble themselves and pray, is often quoted. It was first spoken to Israel about the temple, and Christians differ on how directly to apply it to a modern nation or church. The book’s wider theme is widely shared: it is never too late to turn back to God."
+          "text": "The promise of 7:14, that God will hear and heal when his people “humble themselves, pray, seek my face”, is often quoted. It was first spoken to Israel about the temple, and Christians differ on how directly to apply it to a modern nation or church.\n\nThe book’s wider theme is widely shared: it is never too late to turn back to God."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

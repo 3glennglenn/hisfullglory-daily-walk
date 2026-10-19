@@ -4,23 +4,24 @@
     {
       "id": "ai:1-samuel",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "1 Samuel tells how Israel moved from the time of the judges to its first kings. It begins with the birth and calling of Samuel, the last judge and a prophet. When the people ask for a king, God gives them Saul, who begins well and then fails.\n\nThe second half follows the rise of David: anointed as a boy, victor over Goliath, and for years a fugitive from Saul. The book ends with Saul’s death in battle."
+          "text": "The LORD stood and called, as he had at other times: “Samuel! Samuel!” With that call the book opens a new age. Samuel is the last judge and a prophet, and through him the story moves from the time of the judges toward Israel’s first kings.\n\nThe people ask for a king. The LORD tells Samuel that it is not Samuel they have rejected. God gives them Saul. Saul begins well and then fails.\n\nThe second half of the book belongs to David. He is anointed as a boy, wins the victory over Goliath, and then spends years as a fugitive from Saul. The book ends on a battlefield, with the death of Saul in battle on Mount Gilboa. It is a long road from the voice that called a name to a king who falls."
         },
         {
           "kind": "background",
-          "text": "1 and 2 Samuel were originally one book. The events are usually placed in the eleventh century before Christ. No author is named, and the books seem to draw on several older accounts."
+          "text": "The books of 1 and 2 Samuel were originally one book, and the story you read here goes on in 2 Samuel. The events are usually placed in the eleventh century before Christ. No author is named, and the books seem to draw on several older accounts."
         },
         {
           "kind": "interpretations",
-          "text": "The book looks at kingship from both sides: the request for a king is a rejection of God’s rule, and yet God uses the king he gives. It shows that God looks at the heart and not at outward appearance (16:7). Christians read David as a pattern for the promised king, the Messiah, while noticing that the book is honest about his faults."
+          "text": "The book looks at kingship from both sides. The request for a king is a rejection of God’s rule: “they have rejected me as the king over them”. And yet God uses the king he gives them.\n\nIt also shows that God looks at the heart and not at outward appearance (16:7): “the LORD looks at the heart”. Christians read David as a pattern for the promised king, the Messiah, while noticing that the book is honest about his faults."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

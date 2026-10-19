@@ -1,0 +1,61 @@
+{
+  "slug": "john-3-16",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-10-19",
+  "verse": {
+    "book": "john",
+    "chapter": 3,
+    "start": 16,
+    "end": 16
+  },
+  "hook": "You know “For God so loved the world”. But did you know it was first spoken to one man, at night, who came in secret?",
+  "story": "Long before it was printed on stadium signs, the verse was part of a quiet conversation in the dark. A man named Nicodemus, “a ruler of the Jews”, came to Jesus by night. He was a Pharisee, one of the most careful keepers of the law, and he began with respect: “Rabbi, we know that you are a teacher who has come from God”.\n\nThe night is part of the story. John does not say why Nicodemus came then. Readers have suggested that he wanted to avoid being seen, or that rabbis often studied late into the night, and John also uses night elsewhere for spiritual darkness. What is plain is that a man with a name and a position had questions, and he did not want the whole city to hear them.\n\nHe is not forgotten after that night. John mentions him twice more. In the second place he reminds his fellow leaders that the law requires a man to be heard before he is judged. After the crucifixion, he appears once more with a great weight of myrrh and aloes to bury Jesus. The man who came in the dark came into the light.\n\nThis is the setting of the most quoted sentence in the Bible: a long talk between a teacher of Israel and a Rabbi from Nazareth, and a promise given to a man who was not sure yet.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Wikipedia: John 3:16",
+      "url": "https://en.wikipedia.org/wiki/John_3:16"
+    },
+    {
+      "title": "Wikipedia: Nicodemus",
+      "url": "https://en.wikipedia.org/wiki/Nicodemus"
+    }
+  ],
+  "voices": [
+    {
+      "id": "luther",
+      "name": "Martin Luther",
+      "about": "German reformer of the sixteenth century, as reported on this page",
+      "words": "the gospel in miniature",
+      "source": {
+        "title": "Wikipedia: John 3:16",
+        "url": "https://en.wikipedia.org/wiki/John_3:16"
+      }
+    },
+    {
+      "id": "van-voorst",
+      "name": "Robert E. Van Voorst",
+      "about": "Theologian, on why people write the verse on signs",
+      "words": "They hope that some people will recognise as a Bible reference, look up the verse, and come to faith in Jesus Christ.",
+      "source": {
+        "title": "Wikipedia: John 3:16",
+        "url": "https://en.wikipedia.org/wiki/John_3:16"
+      }
+    }
+  ],
+  "moment": "The conversation begins with a compliment and ends in a mystery. Jesus answers Nicodemus with words that sound strange to him: “unless one is born anew, he can’t see God’s Kingdom.” Nicodemus asks how that can be, and Jesus compares the work of the Spirit to the wind: “you hear its sound, but don’t know where it comes from and where it is going.”\n\nThen Jesus points back to a story Nicodemus knew well: “As Moses lifted up the serpent in the wilderness, even so must the Son of Man be lifted up”. The verse that follows is the answer to how it can be: “For God so loved the world, that he gave his only born Son, that whoever believes in him should not perish, but have eternal life.”",
+  "around": "Right after the verse comes its purpose: “For God didn’t send his Son into the world to judge the world, but that the world should be saved through him.” And the passage ends with an invitation to the one who came by night: “But he who does the truth comes to the light, that his works may be revealed, that they have been done in God.”",
+  "readings": "Most believers have heard this verse as the heart of the good news: God gave what was most precious to him out of love. It is widely memorized in many churches.\n\nSome scholars read the small word so a little differently. They say it points to the way God loved, by giving his Son, more than to how much he loved. Many translations take it as a measure of size, and many readers find that moving too. The two readings do not compete: the giving is the proof of the love.\n\nScholars also discuss whether the world here means all of humanity or the world as it stands against God. John uses the word in both ways, and the sentence holds them together: a world that needs saving is loved anyway.",
+  "argued": "In the sixteenth century Martin Luther is reported to have called this verse [[luther]] Whatever else is disputed, that short phrase is why it is often called the gospel in a single sentence.\n\nIn our own time the verse has gone far beyond church walls. Evangelists write it on signs and walls, and the theologian Robert E. Van Voorst explained why: [[van-voorst]]\n\nIn 2009 the footballer Tim Tebow wrote John 3:16 on his eye black during the BCS National Championship Game, and the verse became the most popular search term for more than a day. A restaurant chain prints it on the bottom of its cups. Not everyone is moved by this kind of display, and some believers think the verse deserves a quiet reading rather than a banner. Others see a door that stays open for anyone who looks up the reference.\n\nBy night in Jerusalem or on a stadium screen, the verse does the same thing: it asks one more person to look it up.",
+  "point": "John 3:16 is not a slogan that fell out of the sky. It is God’s answer to a frightened, honest man at night, and it was meant to bring him into the light.",
+  "basis": [
+    {
+      "book": "john",
+      "chapter": 3,
+      "start": 1,
+      "end": 21
+    }
+  ]
+}

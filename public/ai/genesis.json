@@ -4,13 +4,13 @@
     {
       "id": "ai:genesis",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Genesis is the book of beginnings. Chapters 1 to 11 tell of creation, the first sin, the flood and the tower of Babel. From chapter 12 the story narrows to one family: Abraham and Sarah, Isaac, Jacob and his twelve sons, and Joseph in Egypt.\n\nThe thread through the whole book is God’s promise to Abraham of land, descendants and blessing for all nations. The book ends with the family safe in Egypt and the promise still open."
+          "text": "A man is seventy-five years old, and God tells him to leave. “Leave your country, and your relatives, and your father’s house,” and go to the land that God will show him. He is to go to a land that he has not yet been shown. His name is Abram, and he goes. That moment, in chapter 12, is where the whole book turns.\n\nBefore it, Genesis is the book of beginnings. Chapters 1 to 11 tell of creation, the first sin, the flood and the tower of Babel. From chapter 12 it narrows to one family: Abraham and Sarah, Isaac, Jacob and his twelve sons, and Joseph in Egypt.\n\nThe thread through it all is God’s promise to Abraham of land, descendants and blessing. Its widest reach is the promise that “All the families of the earth will be blessed through you.” The book ends with the family safe in Egypt, and the promise still open."
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "Christians read Genesis as the foundation for the rest of Scripture: God as creator, people made in his image, the entrance of sin, and the promise that the New Testament sees fulfilled in Christ. They differ on how chapters 1 to 11 relate to history and science. Some read them as a plain historical account, some as history told in a highly shaped and symbolic way, and some chiefly as teaching about God and humanity."
+          "text": "Christians read Genesis as the foundation for the rest of Scripture: God as creator, people made in his image, the entrance of sin, and the promise that the New Testament sees fulfilled in Christ.\n\nThey differ on how chapters 1 to 11 relate to history and science. Some read them as a plain historical account. Some read them as history told in a highly shaped and symbolic way. And some read them chiefly as teaching about God and humanity."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:genesis/1",

@@ -22,6 +22,114 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:ephesians/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The letter opens with praise, and it hardly stops for breath. “Blessed be the God and Father of our Lord Jesus Christ,” Paul writes, who has blessed us in Christ with every spiritual blessing. Before the foundation of the world God chose us in him, to be holy and without defect in love, and destined us for adoption as children.\n\nThe praise goes on through redemption, the forgiveness of trespasses, and the mystery of God's will, which is to sum up all things in Christ. Those who heard the word of truth were sealed with the Holy Spirit, who is a pledge of the inheritance.\n\nThen Paul turns to prayer. He gives thanks for them and asks that God give them wisdom and “the eyes of your hearts enlightened”. He wants them to know the hope of his calling and the greatness of the power that raised Christ from the dead and set him above every rule and authority."
+        },
+        {
+          "kind": "background",
+          "text": "The letter names Paul as its writer, and calls itself a letter to the saints at Ephesus. In some early manuscripts the words at Ephesus are missing, and many scholars think it was meant for several churches. Tradition holds that Paul wrote from prison. Many scholars question that Paul wrote it, and many others hold that he did. Christians differ on how to read being chosen and destined; Catholic, Orthodox and Protestant traditions each read it in their own way."
+        }
+      ]
+    },
+    {
+      "id": "ai:ephesians/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul begins with a hard picture: you were dead in transgressions and sins, walking according to the course of this world. Then comes the turn. God, rich in mercy and moved by great love, made us alive together with Christ, even when we were dead through our trespasses.\n\nThe heart of the chapter is verse 8: “by grace you have been saved through faith”, and that not of ourselves. It is the gift of God, not of works, so that no one would boast. And yet people are not left idle: “we are his workmanship”, created for good works that God prepared before.\n\nThen Paul speaks to the Gentiles, who were once far off, strangers to the covenants of promise. Now they are near. Christ is our peace. He “broke down the middle wall of separation”, made the two into one new person, and joins them in one household of God, built on Christ as the chief cornerstone."
+        },
+        {
+          "kind": "background",
+          "text": "Paul, in prison according to tradition, writes to believers whom he addresses mostly as Gentiles. The wall that Christ breaks down is read by some as the barrier in the Jewish temple that kept Gentiles out, and by others as a picture of the law or of hostility. Catholic and Protestant traditions both read verses 8 to 10 and differ on how faith and works relate. The chapter is not against Jews: it speaks of Jews and Gentiles made one."
+        }
+      ]
+    },
+    {
+      "id": "ai:ephesians/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul calls himself a prisoner of Christ Jesus on behalf of the Gentiles, and then he breaks off to tell about a secret. For ages it had been hidden, and now it has been revealed: the Gentiles are fellow heirs, fellow members of the body, and partakers of the promise in Christ Jesus.\n\nHe speaks of himself with surprise. “To me, the very least of all saints, was this grace given,” to preach the unsearchable riches of Christ. He says even the powers in the heavenly places learn of God's manifold wisdom through the assembly.\n\nThen he returns to where he began and kneels. He prays that the Father would strengthen them with power through his Spirit, that Christ would dwell in their hearts through faith, and that they would grasp “what is the width and length and height and depth”, and know the love of Christ, which surpasses knowledge. The chapter ends with a doxology to the one who can do “exceedingly abundantly above all that we ask or think”."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes from prison, according to the letter. Verse 1 begins a prayer that breaks off at once and is only resumed in verse 14, with the long explanation in between. The mystery, that Gentiles share fully in the promise, appears also in Colossians 1:26. Many scholars question that Paul wrote the letter and many others hold that he did."
+        }
+      ]
+    },
+    {
+      "id": "ai:ephesians/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul, the prisoner in the Lord, begs his readers to walk in a way worthy of their calling: with humility, with patience, bearing with one another in love, and eager to keep the unity of the Spirit. Then comes a short creed in the form of a list. “There is one body and one Spirit,” one hope, one Lord, one faith, one baptism, one God and Father of all.\n\nUnity does not mean sameness. Grace is given to each, and Christ gave apostles, prophets, evangelists, shepherds and teachers, to equip the saints for the work of service until all attain maturity. They are meant to grow up, “speaking truth in love”.\n\nThen the chapter turns to the daily. Put away the old way of life and put on the new. Speak the truth with your neighbor. Be angry but do not sin. Let the thief steal no more. Don't grieve the Holy Spirit. And finally, “be kind to one another, tender hearted, forgiving each other”, as God in Christ forgave you."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes from prison, according to the letter, to Gentile believers. Verse 8 quotes Psalm 68, and what it means that Christ descended into the lower parts of the earth is read in different ways: as the coming of Christ to earth, or as a descent to the realm of the dead. Christians differ on whether every office in verse 11 continues today. Compare 1 Corinthians 12."
+        }
+      ]
+    },
+    {
+      "id": "ai:ephesians/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter begins with a short call: “Be therefore imitators of God, as beloved children.” To walk in love, Paul says, is to walk as Christ did, who gave himself up for us. He then warns against sexual immorality, uncleanness and greed, and calls his readers, once darkness, now light in the Lord, to live as children of light. Then he quotes what may be a line from an early song: “Awake, you who sleep, and arise from the dead, and Christ will shine on you.”\n\nBe filled with the Spirit, he says, singing and giving thanks, “subjecting yourselves to one another in the fear of Christ”.\n\nThat sets up the household. Wives are told to be subject to their own husbands. Husbands are told to love their wives as Christ loved the assembly and gave himself up for her. Paul calls the union of husband and wife a great mystery that speaks of Christ and the assembly."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes to believers in the setting of ordinary Roman households. In the Greek, the instruction to wives has no verb of its own and borrows from verse 21, the mutual subjecting. Christians differ on what this means for marriage and for the roles of men and women. Verse 31 quotes Genesis 2. These verses have been misused to excuse harsh treatment of wives, though the text asks of husbands a love that gives itself up. The passage gives no counseling."
+        }
+      ]
+    },
+    {
+      "id": "ai:ephesians/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The household instruction continues. Children are told to obey their parents, and fathers not to provoke their children to wrath, but to nurture them. Then Paul speaks to servants and masters. Servants are told to serve with a whole heart, as to Christ, and masters to give up threatening, since both have the same Master in heaven, and there is no partiality with him.\n\nThen the letter reaches for its last great picture. “Put on the whole armor of God,” Paul says, because “our wrestling is not against flesh and blood,” but against rulers and spiritual forces. He names the pieces one by one: the belt of truth, the breastplate of righteousness, shoes of the Good News of peace, the shield of faith, the helmet of salvation, the sword of the Spirit, which is the word of God. All of it is held together with prayer.\n\nHe asks them to pray for him, an ambassador in chains, and sends Tychicus to tell them how he is."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes from prison, according to the letter. The text speaks to enslaved people and their owners in a world where slavery was normal. It does not directly condemn the institution, and it was misused by those who defended slavery. Many Christians point to its warning to masters, and to Philemon. Verse 2 quotes Exodus 20. The armor echoes Isaiah 59. Compare Colossians 4:7 for Tychicus."
+        }
+      ]
     }
   ]
 }

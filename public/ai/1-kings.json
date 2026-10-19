@@ -4,23 +4,24 @@
     {
       "id": "ai:1-kings",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "1 Kings begins with Solomon. He is given wisdom, builds the temple in Jerusalem and rules in great splendour, but in later life he turns to other gods. After his death the kingdom splits in two: Israel in the north and Judah in the south.\n\nThe rest of the book judges each king by one measure, faithfulness to the LORD. Its last chapters are dominated by the prophet Elijah and his confrontation with King Ahab and the prophets of Baal on Mount Carmel."
+          "text": "A young king is offered anything he asks for. Solomon asks for “an understanding heart”, and God gives him wisdom. He builds the temple in Jerusalem and rules in great splendor.\n\nBut in later life his heart turns. His wives lead him toward other gods, and his heart is not perfect with the LORD, as David’s had been. After his death the kingdom splits in two, Israel in the north and Judah in the south.\n\nFrom here the book judges each king by one measure, faithfulness to the LORD. Its last chapters are dominated by the prophet Elijah and his confrontation with King Ahab and the prophets of Baal on Mount Carmel. Elijah turns to the whole people and asks, “How long will you waver between the two sides?” The text then tells us, “The people didn’t say a word”, and fire from the LORD falls on the offering."
         },
         {
           "kind": "background",
-          "text": "1 and 2 Kings were originally one work. 1 Kings covers roughly 970 to 850 before Christ. The writer refers to royal records he used as sources, and the work was probably completed during the exile in Babylon."
+          "text": "The two books of Kings were originally one work, and 1 Kings covers roughly 970 to 850 before Christ. The writer refers to royal records that he used as sources, and the work was probably completed during the exile in Babylon."
         },
         {
           "kind": "interpretations",
-          "text": "Kings is history told to answer a question: why did the kingdoms fall? Its answer is that kings and people abandoned the covenant, though God kept sending prophets. Elijah becomes a major figure in later hope. The New Testament connects him with John the Baptist, and he appears with Moses at the transfiguration of Jesus."
+          "text": "Kings is history told to answer a question: why did the kingdoms fall? Its answer is that the kings and the people abandoned the covenant, even though God kept sending prophets.\n\nElijah becomes a major figure in later hope. The New Testament connects him with John the Baptist, and he appears with Moses at the transfiguration of Jesus."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

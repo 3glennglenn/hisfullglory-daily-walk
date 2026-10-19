@@ -22,6 +22,24 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:philemon/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul is in chains, and he writes a very short letter about a very personal matter. He greets Philemon, Apphia, Archippus and the assembly that meets in Philemon’s house, and gives thanks for Philemon’s love and faith, which have refreshed the hearts of the believers.\n\nThen comes the request. Paul could command, but for love’s sake he appeals. He is asking about Onesimus, whom he has come to love like a child while in prison. Onesimus was once useless to Philemon but is now useful. Paul is sending him back, as his own heart, and he wants Philemon to receive him not as a slave but as more than a slave, “a beloved brother”. If Onesimus has wronged Philemon or owes him anything, “put that to my account.” Paul writes with his own hand that he will repay it.\n\nHe adds that he is confident Philemon will do even more than he asks, and he asks him to prepare a guest room."
+        },
+        {
+          "kind": "background",
+          "text": "Paul does not say exactly what happened between Onesimus and Philemon. Tradition has long held that Onesimus was a runaway slave, while some scholars suggest other circumstances. The letter does not call for an end to slavery, and it has been misused to defend it. Christians have also read Paul’s plea for a brother rather than a slave as a seed that works against it. See Colossians 4 and Ephesians 6. The letter is usually dated to a time when Paul was in prison, possibly in Rome."
+        }
+      ]
     }
   ]
 }

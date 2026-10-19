@@ -22,6 +22,24 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:3-john/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Three people stand at the center of this small letter. Gaius is the first. The elder loves him in truth, and prays that he may prosper in all things and be healthy, even as his soul prospers. Some brothers have come and told how he walks in truth. “I have no greater joy than this”, the elder says, to hear that his children are walking in truth.\n\nGaius has welcomed brothers who are strangers to him, and the elder asks him to send them on their way in a way worthy of God.\n\nThe second is Diotrephes, who loves to be first. He does not accept what the elder says, accuses him with wicked words, refuses to receive the brothers, and puts out those who would. The elder says he will call attention to what he does if he comes.\n\nThe third is Demetrius, who has a good testimony from everyone. Imitate good, not evil. As in the second letter, the elder would rather speak face to face. The friends greet you."
+        },
+        {
+          "kind": "background",
+          "text": "This is the only one of the three letters of John addressed to a named person. The writer, again called the elder, is linked by tradition to the apostle John. Traveling workers depended on local hospitality, so who welcomed them mattered. The letter gives a small window into church life in the first century: warm friendship, and a leader who wanted control. Compare 2 John, which deals with the same kind of visitors."
+        }
+      ]
     }
   ]
 }

@@ -1,5 +1,9 @@
-// Topic pages and articles are editorial content in site/content/. A file goes online only
-// when the founder has approved it: "review": "approved" (docs/WEBSITE_PLAN.md, section 6).
+// Topic pages, articles and context checks are editorial content in site/content/. A file
+// goes online only when the founder has approved it: "review": "approved"
+// (docs/WEBSITE_PLAN.md, section 6). One exception, decided on 2026-10-16: a context check
+// may also say "review": "ai-unreviewed". A daily routine publishes those without anyone
+// reading them first, so the page says so (docs/CONTEXT_CHECKS_ROUTINE.md). Topic pages and
+// articles cannot use that status.
 // Quotations are checked against the WEB text, as they are for study notes and AI
 // explanations. An invalid file stops the build.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
@@ -7,7 +11,7 @@ import { join } from "node:path";
 import { launchTopics } from "../../../src/topics/graph.ts";
 import { chapterTitle, library, type BibleData } from "./bible.ts";
 
-export type Review = "draft" | "approved";
+export type Review = "draft" | "approved" | "ai-unreviewed";
 export interface PassageRef {
   book: string;
   chapter: number;
@@ -77,14 +81,45 @@ export function passageText(raw: unknown, bible: BibleData, where: string): { re
   };
 }
 
-function editorial(raw: Raw, where: string): Editorial {
-  check(raw.review === "draft" || raw.review === "approved", where, 'review must be "draft" or "approved"');
+function editorial(raw: Raw, where: string, allowUnreviewed = false): Editorial {
+  if (allowUnreviewed)
+    check(
+      raw.review === "draft" || raw.review === "approved" || raw.review === "ai-unreviewed",
+      where,
+      'review must be "draft", "approved" or "ai-unreviewed"',
+    );
+  else check(raw.review === "draft" || raw.review === "approved", where, 'review must be "draft" or "approved"');
   check(raw.drafted === "ai" || raw.drafted === "human", where, 'drafted must be "ai" or "human"');
+  check(raw.review !== "ai-unreviewed" || raw.drafted === "ai", where, 'an AI-unreviewed file must say drafted "ai"');
   const date = (value: unknown) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
   check(date(raw.written), where, "written must be a date");
   // An approved file records the day the founder approved it; a draft has no such date.
   check(date(raw.approved) === (raw.review === "approved"), where, "approved must be the date of approval, and only on an approved file");
-  return { review: raw.review, drafted: raw.drafted, written: raw.written as string };
+  return { review: raw.review as Review, drafted: raw.drafted, written: raw.written as string };
+}
+
+/**
+ * The label at the top of an AI-unreviewed context check, the shorter one on its cards, and
+ * the closing note. Each says both facts: an AI model wrote it, and no person checked it.
+ * Wording settled with the UX copy review of 2026-10-16.
+ */
+export const aiUnreviewedLabel = "Written by an AI model from the sources below. Not checked by a person.";
+export const aiUnreviewedCardLabel = "Written by an AI model. Not checked by a person.";
+const aiUnreviewedNote =
+  "Written by an AI model. Before publishing, an automatic check compared Scripture quotations with the World English Bible and the words of quoted people with their linked sources. No person has checked this page.";
+
+/** How an editorial page says it was made and how far it has been checked. */
+export function editorialNote(review: Review, drafted: "ai" | "human"): string {
+  if (review === "ai-unreviewed") return aiUnreviewedNote;
+  const made =
+    drafted === "ai"
+      ? "Written with the help of an AI model. Scripture quotations are checked against the World English Bible."
+      : "Written by HisFullGlory. Scripture quotations are checked against the World English Bible.";
+  const status =
+    review === "approved"
+      ? "Approved by HisFullGlory. Not reviewed by a theological reader."
+      : "Not approved yet.";
+  return `${made} ${status}`;
 }
 
 export function parseTopic(input: unknown, id: string, bible: BibleData): TopicPage {
@@ -160,6 +195,8 @@ export function parseArticle(input: unknown, slug: string, bible: BibleData): Ar
 /** A well-known verse put back into its surroundings. Everything rests on the text itself. */
 export interface ContextCheck extends Editorial {
   slug: string;
+  /** The AI model that wrote an AI-unreviewed check; required for that status. */
+  model?: string;
   verse: PassageRef;
   /** One or two sentences that open the page, and the line a video can start with. */
   hook: string;
@@ -223,10 +260,19 @@ export const checkParts = [
   ["point", "What the context adds", 80, 1000],
 ] as const;
 
+// Names of translations that are not public domain, as in scripts/ai-chapters.mjs.
+const licensed = /\b(NIV|ESV|NLT|NKJV|NASB|CSB|NRSV|NBV|New International|English Standard|New Living|New King James|The Message)\b/;
+// Quotation marks other than the curly double quotes kept for WEB text. A straight
+// apostrophe only counts when it opens a quotation: after a space or bracket, before a letter.
+const otherQuoteMarks = /[‘‚‛„«»‹›]|(?:^|[\s(\[{])'(?=[A-Za-z])/;
+
 export function parseContextCheck(input: unknown, slug: string, bible: BibleData): ContextCheck {
   const raw = input as Raw;
   const where = `context check ${slug}`;
   check(/^[a-z0-9-]+$/.test(slug) && raw?.slug === slug, where, "the file name and slug must match");
+  const unreviewed = raw?.review === "ai-unreviewed";
+  check(!unreviewed || raw.model !== undefined, where, "an AI-unreviewed check names the model that wrote it");
+  const model = raw.model === undefined ? undefined : text(raw.model, 3, 60, `${where} model`);
   const verse = passageText(raw.verse, bible, `${where} verse`);
   check(Array.isArray(raw.basis) && raw.basis.length > 0, where, "needs the passages around the verse");
   const around = raw.basis.map((entry, index) => passageText(entry, bible, `${where} basis ${index + 1}`));
@@ -275,9 +321,39 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
     check(sources.some((source) => source.url === voice.source.url), `${where} voice ${voice.id}`, "its source must also be in sources");
   }
   for (const id of quoted) check(voices.some((voice) => voice.id === id), `${where} argued`, `[[${id}]] names no voice`);
+  if (unreviewed) {
+    // Nobody reads these before they go online, so they must stand on checks a machine can
+    // make: Scripture quotations match the WEB text (above), the words of people are voices
+    // (the publish command checks them against their pages), and nothing else is quoted.
+    check(sources.length >= 2, where, "an AI-unreviewed check needs at least two sources outside the Bible");
+    for (const voice of voices)
+      check(sources.some((source) => source.url === voice.source.url), `${where} voice ${voice.name}`, "its source must also be in sources");
+    const fields: [string, string][] = [
+      ["hook", raw.hook as string],
+      ["story", raw.story as string],
+      ...checkParts.map(([name]): [string, string] => [name, raw[name] as string]),
+      ...(raw.argued === undefined ? [] : [["argued", raw.argued as string] as [string, string]]),
+      ...voices.flatMap((voice, index): [string, string][] => [
+        [`voice ${index + 1} name`, voice.name],
+        [`voice ${index + 1} about`, voice.about],
+      ]),
+    ];
+    for (const [name, value] of fields) {
+      // What is left once the WEB quotations (already matched against the WEB text, nested
+      // single quotes and all) are taken out.
+      const prose = value.replace(/“[^”]*”/g, "");
+      check(
+        !otherQuoteMarks.test(prose) && !/[“”]/.test(prose),
+        `${where} ${name}`,
+        "the only quotation marks allowed are the curly double quotes around WEB text; put the words of people in voices, where the publish command checks them against their source",
+      );
+      check(!licensed.test(prose), `${where} ${name}`, "names a translation that is not public domain");
+    }
+  }
   return {
     slug,
-    ...editorial(raw, where),
+    ...editorial(raw, where, true),
+    ...(model === undefined ? {} : { model }),
     verse: verse.ref,
     // The hook is also the page description, so it keeps to that length.
     hook: part("hook", 60, 160),
@@ -318,7 +394,7 @@ export function content() {
 
 /** SHOW_DRAFTS=1 builds drafts too, to look at them before approval. Never set it on Vercel. */
 export const showDrafts = () => process.env.SHOW_DRAFTS === "1";
-const online = (item: Editorial) => item.review === "approved" || showDrafts();
+const online = (item: Editorial) => item.review !== "draft" || showDrafts();
 
 /** Topic pages that may be shown, in the order of the launch topics. */
 export const publishedTopics = () =>
@@ -339,6 +415,12 @@ export function publishedChecks(): ContextCheck[] {
     .checks.filter(online)
     .sort((a, b) => place(a) - place(b));
 }
+
+/**
+ * The context checks the home page features: the first three, leaving out those no person
+ * has checked, so the front door does not change when the routine adds one.
+ */
+export const featuredChecks = () => publishedChecks().filter((item) => item.review !== "ai-unreviewed").slice(0, 3);
 
 /** The published context checks for one chapter, for the card on its page. */
 export const checksFor = (book: string, chapter: number) =>

@@ -4,23 +4,24 @@
     {
       "id": "ai:2-samuel",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-18",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "2 Samuel is the story of David as king. He is crowned first over Judah and then over all Israel, takes Jerusalem as his capital and brings the ark there. In chapter 7 God promises him a dynasty that will last.\n\nThe turning point is David’s sin with Bathsheba and the killing of her husband Uriah. The prophet Nathan confronts him, David repents, and the rest of the book follows the damage in his own family, including the revolt of his son Absalom."
+          "text": "“You are the man!” With these words the prophet Nathan stands before David, the king, and the story turns. David answers in a few words: “I have sinned against the LORD.”\n\nBefore that, this book follows David as he rises. He is crowned first over Judah and then over all Israel, takes Jerusalem as his capital and brings the ark there. In chapter 7 God makes him a promise: “Your throne will be established forever.” The promise is that his dynasty will last.\n\nThen comes the turning point, David’s sin with Bathsheba and the killing of her husband Uriah. Nathan confronts him, and David repents. But the rest of the book follows the damage, and it spreads into David’s own family, including the revolt of his son Absalom. The king who received a promise has to live among the wounds he caused."
         },
         {
           "kind": "background",
-          "text": "The book continues 1 Samuel without a break and covers roughly forty years around 1000 before Christ. It is remarkable among ancient royal histories for how frankly it reports the king’s wrongdoing."
+          "text": "The book continues 1 Samuel without a break, and it covers roughly forty years around 1000 before Christ. Among ancient royal histories it is remarkable for how frankly it reports the king’s wrongdoing. The writer does not hide what David did, and tells it as it was."
         },
         {
           "kind": "interpretations",
-          "text": "God’s promise in chapter 7 is the root of the hope for a Messiah, a son of David whose kingdom has no end. The New Testament applies that promise to Jesus. David’s fall and repentance have shaped how Jews and Christians pray; the heading of Psalm 51 links that psalm with this story. Readers today also attend to Bathsheba, whom the text presents as wronged."
+          "text": "God’s promise in chapter 7 is the root of the hope for a Messiah, a son of David whose kingdom has no end. The New Testament applies that promise to Jesus.\n\nDavid’s fall and repentance have shaped how Jews and Christians pray, and the heading of Psalm 51 links that psalm with this story. Readers today also attend to Bathsheba, whom the text presents as wronged."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

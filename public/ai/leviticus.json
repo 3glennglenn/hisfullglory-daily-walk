@@ -4,13 +4,13 @@
     {
       "id": "ai:leviticus",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Leviticus gives instructions for worship and holy living to a people among whom God has come to dwell. It covers the offerings (chapters 1 to 7), the priests (8 to 10), what is clean and unclean (11 to 15), the Day of Atonement (16) and holiness in everyday life (17 to 27).\n\nIts refrain is that the people are to be holy because the LORD is holy. The command to love your neighbor as yourself comes from this book (19:18)."
+          "text": "The tabernacle has just been built at Mount Sinai, and God has come to dwell among his people. Now the question is how a people can live near a holy God. Leviticus is the answer, and it is given in detail.\n\nIt covers the offerings (chapters 1 to 7), the priests (8 to 10), what is clean and unclean (11 to 15), and the Day of Atonement (16). Then comes holiness in everyday life (17 to 27). Chapter 19 begins with the heart of it: “You shall be holy; for I, the LORD your God, am holy.” That holiness reaches into the fields. The edges of the harvest are to be left standing: “You shall leave them for the poor and for the foreigner.”\n\nThe chapter also gives a command that is short and plain: “you shall love your neighbor as yourself.” It comes from this book (19:18), and the refrain of the whole book is the same, that the people are to be holy because the LORD is holy."
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "Christians read the sacrifices as pointing forward to the death of Christ, an argument the letter to the Hebrews works out at length. Most hold that the food and purity laws no longer bind Christians, pointing to passages such as Mark 7 and Acts 10. There is real disagreement about which other commands carry over, and about how to tell. The book’s own center is plain: a holy God makes a way for people to live near him."
+          "text": "Christians read the sacrifices as pointing forward to the death of Christ, an argument the letter to the Hebrews works out at length. Most hold that the food and purity laws no longer bind Christians, pointing to passages such as Mark 7 and Acts 10.\n\nThere is real disagreement about which other commands carry over, and about how to tell. The book’s own center is plain: a holy God makes a way for people to live near him."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

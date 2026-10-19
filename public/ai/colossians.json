@@ -22,6 +22,78 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:colossians/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul and Timothy write to a church that Paul has never seen. They give thanks for the faith and love of the Colossians, whom they know through Epaphras, a faithful servant who taught them. They pray that the Colossians will be filled with the knowledge of God's will and bear fruit in every good work. God has delivered us out of the power of darkness, into the Kingdom of the Son of his love.\n\nThen the letter rises into a great description of Christ. “He is the image of the invisible God, the firstborn of all creation.” All things were created through him and for him, and “in him all things are held together”. He is the head of the body, the assembly, and through him God reconciles all things, making peace through the blood of his cross.\n\nPaul then speaks of his own work, of a mystery now revealed among the Gentiles, “Christ in you, the hope of glory”, and of how he labors and suffers so that everyone may be presented complete in Christ."
+        },
+        {
+          "kind": "background",
+          "text": "The letter names Paul, with Timothy, as its writer, and it was written from prison. Tradition holds that Paul wrote it, and some scholars question that. Colossae lay in a valley of Asia Minor, and Paul says in 2:1 that he had not met them. Christians have long discussed what firstborn means in verse 15. Verse 24 is a hard line, and Christians read it in different ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:colossians/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Paul tells the Colossians how hard he is struggling for them, and for the believers in Laodicea, and for all who have not seen his face. He wants their hearts comforted and knit together in love, because in Christ “all the treasures of wisdom and knowledge are hidden”. He fears that someone might lead them away with persuasive speech, philosophy and empty deceit.\n\nChrist is where the fullness is: “in him all the fullness of the Deity dwells bodily,” and in him the Colossians are made full. They were buried with him in baptism and raised with him through faith, and he made them alive, wiping out the record that stood against them and nailing it to the cross. He stripped the powers of their rule and triumphed over them.\n\nSo they should let no one judge them over food, drink, festivals or Sabbaths, which are a shadow. They should not submit to rules such as “Don’t handle, nor taste, nor touch”, which look like wisdom but are of no value against the indulgence of the flesh."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes from prison to a church he has not met. What the opposing teaching was is not fully known, and scholars have proposed several answers. Christians differ on how the words about Sabbath days apply today, and some hold that Christians should keep a day of rest while others do not. Compare Romans 14 and Galatians 4."
+        }
+      ]
+    },
+    {
+      "id": "ai:colossians/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Here the great claims of the earlier chapters come down to the ground. “If then you were raised together with Christ, seek the things that are above,” where Christ is. The Colossians' life is hidden with Christ in God, and when Christ is revealed, they will be revealed with him in glory.\n\nPaul names what to put away: sexual immorality, evil desire, greed, anger, wrath, slander, lies. They have put off the old person and put on the new one, who is being renewed after the image of the Creator. In that new life, there can't be Greek and Jew, barbarian, Scythian, slave or free. “Christ is all, and in all.”\n\nThen the clothing: “Put on therefore, as God’s chosen ones, holy and beloved, a heart of compassion”, kindness, humility, forgiveness, and above all love. Let the peace of Christ rule, and the word of Christ dwell richly, with singing and thanks.\n\nThe chapter ends with instructions for the household: wives and husbands, children and fathers, servants and masters."
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes from prison to the church at Colossae. The household instructions run parallel to Ephesians 5 and 6. They speak to enslaved people and masters in a world where slavery was normal, and these lines were misused by those who defended slavery. Many Christians point to the line about masters in 4:1, and to Philemon. Christians differ on how to apply what is said to wives and husbands."
+        }
+      ]
+    },
+    {
+      "id": "ai:colossians/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-17",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The letter is nearly done, and it ends with people. Masters are told to give their servants what is just and fair. Then a call to prayer: pray that God will open a door for the word, “for which I am also in bonds”. Paul asks his readers to walk in wisdom toward those outside, and says, “Let your speech always be with grace, seasoned with salt”.\n\nThen come the names. Tychicus, a beloved brother and faithful servant, will tell them everything, and with him comes Onesimus, who is one of them. Aristarchus, Mark the cousin of Barnabas, Jesus who is called Justus, Epaphras who is always striving for them in prayer, “Luke the beloved physician”, and Demas send greetings. Greet the church that meets in the house of Nymphas, and let this letter be read at Laodicea too.\n\nPaul closes with his own hand: “Remember my chains. Grace be with you.”"
+        },
+        {
+          "kind": "background",
+          "text": "Paul writes from prison to the church at Colossae. Onesimus here is the same name as in the letter to Philemon. Paul speaks of a letter from Laodicea, and the text does not say which letter that is; it may be lost. For Laodicea see also Revelation 3 and Colossians 2:1. Tradition holds that Paul wrote the letter, and some scholars question it."
+        }
+      ]
     }
   ]
 }

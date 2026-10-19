@@ -4,13 +4,13 @@
     {
       "id": "ai:job",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Job is a good man who loses his children, his wealth and his health. Three friends come to comfort him and end up arguing that he must have sinned to suffer so much. Job insists he has not, and demands an answer from God.\n\nA younger man, Elihu, adds his view. Then God speaks from the storm, not with an explanation but with questions about the making and running of the world. Job is humbled, God says that Job spoke rightly and the friends did not, and Job is restored."
+          "text": "The storm comes at last. After chapters of grief, argument and silence from heaven, the LORD answers Job “out of the whirlwind”. He does not explain. He asks: “Where were you when I laid the foundations of the earth?”\n\nHow Job got there is the rest of the book. He is a good man who loses his children, his wealth and his health. Three friends come to comfort him and end up arguing that he must have sinned to suffer so much. Job insists he has not, and demands an answer from God.\n\nA younger man, Elihu, adds his view. Then God speaks, not with an explanation but with questions about the making and running of the world. Job is humbled. God says that Job spoke rightly and the friends did not, and Job is restored."
         },
         {
           "kind": "background",
@@ -18,9 +18,10 @@
         },
         {
           "kind": "interpretations",
-          "text": "The book rejects the idea that suffering is always punishment for sin, without offering a full account of why people suffer. Readers differ on what God’s answer means: a rebuke, a comfort, or an invitation to trust a wisdom larger than our own. The accuser in the opening chapters is understood by most Christian tradition as Satan; the Hebrew uses the word as a title. James 5:11 holds up Job as an example of endurance."
+          "text": "The book rejects the idea that suffering is always punishment for sin, without offering a full account of why people suffer. Readers differ on what God's answer means: a rebuke, a comfort, or an invitation to trust a wisdom larger than our own. The accuser in the opening chapters is understood by most Christian tradition as Satan; the Hebrew uses the word as a title. James 5:11 holds up Job as an example of endurance."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
