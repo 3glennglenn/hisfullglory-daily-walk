@@ -2,12 +2,8 @@
 //
 // This file imports nothing, because the site tests and the app's own tests read it too.
 //
-// STATE (2026-10-19): the founder gave his values on 2026-10-19 (his words are in the plan 01-10
-// notes). Two markers are left on purpose:
-//   - lastUpdated: it becomes the date the founder approves the text.
-//   - signInRecords: Supabase's documentation does not state how long it keeps the sign-in audit
-//     log, so the sentence waits for a figure (read it from the dashboard, or turn the log off).
-// `approved` stays false until the founder has read the finished pages on the preview and said so.
+// STATE (2026-10-19): the founder gave his values on 2026-10-19 and approved the finished pages on
+// the preview the same day ("ik ga akkoord met de tekst"). No marker is left.
 //
 // HOW TO FINISH THE PAGES
 //   1. Replace the remaining "[CONFIRM: ...]" markers with the real wording.
@@ -15,8 +11,8 @@
 //      sitemap, and a production build is allowed.
 // Nothing below is a legal fact until the founder has accepted it. Never invent one.
 
-/** False until the founder has approved the final text. See assertReleasable. */
-export const approved = false;
+/** True since 2026-10-19, when the founder approved the final text. See assertReleasable. */
+export const approved = true;
 
 /** False until mail to the support address is known to arrive (GATE-03). While false, no page
  *  prints the address or links to it. True since 2026-10-19: the founder's test mail to
@@ -61,8 +57,8 @@ export const ageLabel = need(
   "I am at least 13 (in the EU or EEA: at least 16, or 13 to 15 with permission from a parent or guardian)",
 );
 
-// P6: the date of the founder's approval. Stays a marker until he approves.
-export const lastUpdated = need("lastUpdated", "[CONFIRM: date]");
+// P6: the date of the founder's approval.
+export const lastUpdated = need("lastUpdated", "October 19, 2026");
 
 // P7, P8: the law and the legal bases. Drafts proposed by Claude on 2026-10-19; the founder accepts
 // or changes them on the preview. "We" is the person named in `entity`.
@@ -98,7 +94,9 @@ export const transfers = need(
 //     supabase.com/docs/guides/telemetry/logs ("Retention depends on your pricing plan")
 //   Supabase sign-in (auth) audit log: its page says it is kept in external log storage and, if the
 //     "Write audit logs to the database" switch is on, in auth.audit_log_entries; it states no
-//     period for either. supabase.com/docs/guides/auth/audit-logs  -> the marker stays.
+//     period for either. supabase.com/docs/guides/auth/audit-logs. Checked on 2026-10-19 with a
+//     read-only count: auth.audit_log_entries holds 0 rows, so the database copy is off. The
+//     sentence therefore says what is known and gives no period.
 //   Supabase backups, Free plan: none. supabase.com/docs/guides/platform/backups ("We
 //     automatically back up all Pro, Team, and Enterprise Plan projects") and supabase.com/pricing
 //     ("Automatic backups": "Not included in free"). Pro would keep 7 days of daily backups.
@@ -111,7 +109,7 @@ export const retention = need(
 );
 export const signInRecords = need(
   "signInRecords",
-  "[CONFIRM: how long Supabase keeps the record of sign-in events; its documentation gives no period]",
+  "Supabase keeps a record of sign-ins in its own log storage. Its documentation does not say for how long. We do not copy that record into our database.",
 );
 export const logRetention = need("logRetention", "Vercel keeps these logs for 1 hour on the plan we use.");
 export const backups = need(
@@ -129,7 +127,7 @@ export const regions = {
     "regions.vercel",
     "Vercel's worldwide network. Pages are delivered from a server near the reader, which can be outside the European Economic Area.",
   ),
-  resend: need("regions.resend", "Ireland, in the European Union. This is the region we set for our sign-in email domain."),
+  resend: need("regions.resend", "Ireland, in the European Union. This is the region we will use for our sign-in email domain."),
 };
 
 // P13, P14: business statements, not facts the code can prove. Proposed by Claude, accepted or
@@ -157,7 +155,7 @@ export const processors: Processor[] = [
   {
     id: "supabase",
     name: "Supabase",
-    does: "Runs our database and the sign-in.",
+    does: "Runs our database and the sign-in. Until our own email sender is ready, it also sends the sign-in email.",
     receives: "Your email address, your display name and what you publish.",
     where: regions.supabase,
   },
@@ -171,7 +169,7 @@ export const processors: Processor[] = [
   {
     id: "resend",
     name: "Resend",
-    does: "Sends your sign-in code by email.",
+    does: "Will send your sign-in code by email from our own address, once that is set up.",
     receives: "Your email address and the email it delivers.",
     where: regions.resend,
   },
