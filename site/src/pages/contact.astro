@@ -1,0 +1,108 @@
+---
+// /contact: one calm place to reach a person, and the published contact information that
+// Apple's guideline 1.2 asks for. The support address is printed only when `supportEmailReady`
+// is true in site/src/data/legal.ts, that is, when mail to it is known to arrive. Until then the
+// page says so and still points to the in-app report and the shop's contact page. Same draft
+// gate as /privacy and /terms; this page has no "On this page" list, so it uses Base directly.
+import DraftBanner from "../components/DraftBanner.astro";
+import { shopUrl } from "../config";
+import {
+  approved,
+  assertReleasable,
+  entity,
+  supportEmail,
+  supportEmailReady,
+} from "../data/legal";
+import Base from "../layouts/Base.astro";
+
+assertReleasable(process.env.VERCEL_ENV);
+
+// A shop address, not a path of this site, so the /pages/ redirect rule is not involved.
+const shopContact = `${shopUrl}/pages/contact`;
+---
+
+<Base
+  title="Contact"
+  description="How to reach HisFullGlory, report a problem or ask about your account."
+  noindex={!approved}
+>
+  <section class="section">
+    <div class="wrap prose contact">
+      {!approved && <DraftBanner />}
+      <h1>Contact us</h1>
+
+      {
+        supportEmailReady ? (
+          <>
+            <h2 id="email">Email us</h2>
+            <p>
+              Write to{" "}
+              <a class="email" href={`mailto:${supportEmail}?subject=HisFullGlory%20support`}>
+                {supportEmail}
+              </a>
+              .
+            </p>
+            <p>
+              Tell us the email address you sign in with and what you need.
+              Never send your sign-in code or any password.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2 id="email">Email contact is being set up</h2>
+            <p>
+              Write to us here as soon as the address is ready. In the meantime,
+              you can report a post inside the app, and questions about an order
+              go to the <a href={shopContact}>shop contact page</a>.
+            </p>
+          </>
+        )
+      }
+
+      <h2 id="something-else">Something else?</h2>
+      <ul>
+        <li>To report a post, open it in the app and choose Report.</li>
+        <li>
+          To delete your account, see <a href="/delete-account">Delete your account</a>.
+        </li>
+        <li>
+          Questions about an order: <a href={shopContact}>shop contact page</a>.
+        </li>
+        <li>
+          If you or someone else may be in danger right now, contact your local
+          emergency services.
+        </li>
+      </ul>
+
+      <h2 id="who-we-are">Who we are</h2>
+      <p>
+        HisFullGlory is run by {entity}. We do not publish a postal address: email is
+        the way to reach us.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Long addresses and URLs wrap instead of pushing the page sideways. */
+  .contact {
+    overflow-wrap: anywhere;
+  }
+  h2 {
+    margin: 48px 0 8px;
+    scroll-margin-top: 16px;
+  }
+  ul {
+    margin: 10px 0 0;
+    padding-left: 1.2rem;
+  }
+  li + li {
+    margin-top: 8px;
+  }
+  .email {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+  }
+</style>

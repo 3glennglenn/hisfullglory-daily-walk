@@ -1,5 +1,8 @@
 import {build} from "esbuild";
 import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+// The version the app asks for is read from the app, so this fixture follows it when it changes.
+const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VERSION = "([^"]+)"/)[1];
 export async function checkTopicComposer(browser,base){
   const result=await build({entryPoints:["tests/fixtures/topic-hub.tsx"],bundle:true,write:false,format:"iife",jsx:"automatic",define:{"process.env.NODE_ENV":'"production"'},plugins:[{
     name:"controlled-topic-sdk",
@@ -10,7 +13,7 @@ export async function checkTopicComposer(browser,base){
         window.topicFixture={publishResolve:null};
         export const supabase={
           auth:{getSession:async()=>({data:{session:{user:{id:'a0000000-0000-4000-8000-000000000001'}}},error:null}),onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}})},
-          from(){const q={select(){return q},eq(){return q},maybeSingle:async()=>({data:{version:'2026-10-07'}}),then(callback){return Promise.resolve({data:[{topic_id:'anxiety'},{topic_id:'grief'}],error:null}).then(callback)}};return q},
+          from(){const q={select(){return q},eq(){return q},maybeSingle:async()=>({data:{version:'${TERMS_VERSION}'}}),then(callback){return Promise.resolve({data:[{topic_id:'anxiety'},{topic_id:'grief'}],error:null}).then(callback)}};return q},
           rpc(name){if(name==='publish_topic_post')return new Promise(resolve=>window.topicFixture.publishResolve=()=>resolve({data:'c0000000-0000-4000-8000-000000000003',error:null}));return Promise.resolve({data:name==='read_topic_discussions'?[post]:null,error:null})}
         };
       `}));

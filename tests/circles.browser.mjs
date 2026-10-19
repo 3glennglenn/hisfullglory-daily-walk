@@ -1,5 +1,8 @@
 import {build} from "esbuild";
 import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+// The version the app asks for is read from the app, so this fixture follows it when it changes.
+const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VERSION = "([^"]+)"/)[1];
 export async function checkCircles(browser,base){
  const result=await build({entryPoints:["tests/fixtures/circles.tsx"],bundle:true,write:false,outfile:".tooling/circles-fixture.js",format:"iife",jsx:"automatic",define:{"process.env.NODE_ENV":'"production"'},plugins:[{
  name:"controlled-circle-sdk",setup(b){
@@ -42,7 +45,7 @@ export async function checkCircles(browser,base){
   if(name==='close_circle')c.closed=true;
   return {data:null,error:null};
  }
- export const supabase={auth:{getSession:async()=>({data:{session:session()},error:null}),onAuthStateChange(fn){listeners.push(fn);return {data:{subscription:{unsubscribe(){listeners=listeners.filter(x=>x!==fn)}}}};}},from(){const q={select(){return q},eq(){return q},maybeSingle:async()=>{termsChecks++;return {data:{version:'2026-10-07'},error:null};}};return q;},rpc(name,args={}){let signal;return {abortSignal(s){signal=s;return this;},then(resolve,reject){if(window.circleFixture.hang)return new Promise(r=>signal?.addEventListener('abort',()=>r({data:null,error:{message:'Aborted'}}),{once:true})).then(resolve,reject);return call(name,args).then(resolve,reject);}};}};
+ export const supabase={auth:{getSession:async()=>({data:{session:session()},error:null}),onAuthStateChange(fn){listeners.push(fn);return {data:{subscription:{unsubscribe(){listeners=listeners.filter(x=>x!==fn)}}}};}},from(){const q={select(){return q},eq(){return q},maybeSingle:async()=>{termsChecks++;return {data:{version:'${TERMS_VERSION}'},error:null};}};return q;},rpc(name,args={}){let signal;return {abortSignal(s){signal=s;return this;},then(resolve,reject){if(window.circleFixture.hang)return new Promise(r=>signal?.addEventListener('abort',()=>r({data:null,error:{message:'Aborted'}}),{once:true})).then(resolve,reject);return call(name,args).then(resolve,reject);}};}};
  `}));
  }}]});
  const c=await browser.newContext({serviceWorkers:"block"});const p=await c.newPage();const errors=[],consoleErrors=[],consoleWarnings=[];p.on("pageerror",e=>errors.push(e.message));p.on("console",m=>{if(m.type()==="error")consoleErrors.push(m.text());if(m.type()==="warning")consoleWarnings.push(m.text());});

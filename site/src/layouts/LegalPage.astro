@@ -1,0 +1,111 @@
+---
+// The frame of /privacy and /terms: Base, the draft gate, one reading column, the "In short"
+// card and a collapsed "On this page" list. /contact has no contents list, so it uses Base
+// directly and repeats the same gate.
+//
+// While `approved` is false (site/src/data/legal.ts) the page carries the draft banner and
+// noindex, and a production build stops here, so unapproved text is never published.
+import DraftBanner from "../components/DraftBanner.astro";
+import { approved, assertReleasable } from "../data/legal";
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  /** The muted line under the heading. */
+  intro: string;
+  /** The page's sections, in order: each becomes a link in "On this page". */
+  sections: { id: string; label: string }[];
+}
+
+assertReleasable(process.env.VERCEL_ENV);
+
+const { title, description, intro, sections } = Astro.props;
+---
+
+<Base title={title} description={description} noindex={!approved}>
+  <section class="section">
+    <div class="wrap prose legal">
+      {!approved && <DraftBanner />}
+      <h1>{title}</h1>
+      <p class="muted intro">{intro}</p>
+
+      <slot name="short" />
+
+      <details class="contents">
+        <summary>On this page</summary>
+        <ul>
+          {
+            sections.map((section) => (
+              <li>
+                <a href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+
+      <slot />
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Long addresses, URLs and email addresses wrap instead of pushing the page sideways. */
+  .legal {
+    overflow-wrap: anywhere;
+  }
+  .intro {
+    margin-top: 16px;
+  }
+  /* The slotted content is written in the pages, so its rules reach it through :global,
+     kept inside this layout's own wrapper. */
+  .legal :global(h2) {
+    margin: 48px 0 8px;
+    scroll-margin-top: 16px;
+  }
+  .legal :global(h3) {
+    margin: 0 0 8px;
+  }
+  .legal :global(ul),
+  .legal :global(ol) {
+    margin: 10px 0 0;
+    padding-left: 1.2rem;
+  }
+  .legal :global(li + li) {
+    margin-top: 8px;
+  }
+  .legal :global(.in-short) {
+    margin-top: 32px;
+    background: var(--card);
+  }
+  .legal :global(.in-short h2) {
+    margin-top: 0;
+  }
+  .legal :global(.in-short ul) {
+    margin-top: 12px;
+  }
+  .contents {
+    margin-top: 24px;
+  }
+  .contents summary {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .contents ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .contents li {
+    margin: 0;
+  }
+  .contents a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+</style>

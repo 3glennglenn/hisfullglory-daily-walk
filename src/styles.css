@@ -1292,3 +1292,92 @@ button.danger {
 .danger-text {
   color: var(--danger);
 }
+/* Account deletion card (UI-SPEC Surface 5): one column inside the app shell, buttons stacked and
+   full width, every line allowed to wrap at 320px and at large text. */
+.delete-account ul {
+  margin: 12px 0;
+  padding-left: 1.25rem;
+}
+.delete-account li {
+  margin: 6px 0;
+}
+.delete-account li,
+.delete-account p {
+  overflow-wrap: anywhere;
+}
+.delete-account h3 {
+  margin-top: 18px;
+}
+.delete-account form button {
+  width: 100%;
+  margin-top: 10px;
+}
+/* The instruction and its hint are text a person must read to act, so Body size, as in the report dialog. */
+.delete-account label {
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+.delete-account .delete-hint {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 0 0 4px;
+}
+.delete-account button[aria-disabled="true"] {
+  opacity: 0.65;
+  cursor: default;
+}
+/* Links to the trust pages (UI-SPEC Surface 6d): a plain list, each link a 44px block, no icons. */
+.legal-links ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.legal-links a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
+/* Sign-in and code entry (UI-SPEC Surface 6b): helper lines are Label size, never the small 0.73rem. */
+.sign-in-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
+.code-entry {
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.code-entry .code-sent {
+  margin: 8px 0 0;
+  overflow-wrap: anywhere;
+}
+.code-entry button {
+  width: 100%;
+  margin-top: 10px;
+}
+/* A link inside a sentence still gets a 44px target: padding adds the height and the negative margin
+   takes it out of the line, so the text does not move. The padding is vertical only and the hidden
+   "(opens in a new tab)" is held inside the link, so a link that ends a line never reaches past the
+   right edge of a narrow screen. */
+.inline-link {
+  position: relative;
+  display: inline-block;
+  padding: 12px 0;
+  margin: -12px 0;
+}
+/* Terms acceptance (UI-SPEC Surface 6c): what a person must read to agree is Body size and ink, the
+   version sits on its own line, and the long label wraps beside the 22px checkbox in its 44px row. */
+.terms-accept {
+  color: var(--ink);
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+.terms-accept .terms-version {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}

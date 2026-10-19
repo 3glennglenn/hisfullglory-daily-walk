@@ -41,25 +41,24 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
     background: var(--bg);
     border-bottom: 1px solid var(--border);
   }
+  /* On a phone the brand and the button share a row; when the text is large the button drops
+     below the brand instead of pushing the page sideways (UX-01: reflow at 320px and 200%). */
   .header-grid {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "brand cta"
-      "nav nav";
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
     column-gap: 16px;
     padding-top: 14px;
   }
   .brand {
-    grid-area: brand;
     display: inline-flex;
     align-items: center;
     gap: 12px;
     min-height: 44px;
+    min-width: 0;
     color: var(--ink);
     text-decoration: none;
-    justify-self: start;
   }
   .brand-text {
     font-size: 1.3rem;
@@ -72,14 +71,12 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    white-space: nowrap;
     color: var(--muted);
   }
-  .cta {
-    grid-area: cta;
-  }
+  /* The navigation takes its own row, edge to edge, and scrolls inside itself when it is wider. */
   .main-nav {
-    grid-area: nav;
+    flex: none;
+    width: calc(100% + 40px);
     overflow-x: auto;
     scrollbar-width: none;
     margin: 6px -20px 0;
@@ -123,15 +120,26 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
   }
   @media (min-width: 52rem) {
     .header-grid {
+      display: grid;
       grid-template-columns: auto 1fr auto;
       grid-template-areas: "brand nav cta";
       padding-block: 14px;
     }
+    .brand {
+      grid-area: brand;
+      justify-self: start;
+    }
+    .cta {
+      grid-area: cta;
+    }
     .brand-text span {
       font-size: 0.58rem;
       letter-spacing: 0.23em;
+      white-space: nowrap;
     }
     .main-nav {
+      grid-area: nav;
+      width: auto;
       margin: 0;
       padding: 0;
       overflow: visible;

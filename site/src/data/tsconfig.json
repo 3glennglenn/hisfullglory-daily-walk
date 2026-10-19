@@ -1,0 +1,12 @@
+{
+  "//": "The app (a different project, installed without the site's packages) imports legal.ts from here. Vite and esbuild read the nearest tsconfig.json of every .ts file they transform, and site/tsconfig.json extends astro/tsconfigs/strict, which only exists where the site's packages are installed. Without this file a clean install of the app fails with: failed to resolve extends astro/tsconfigs/strict. Keep it free of any extends.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
+}
