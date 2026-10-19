@@ -11,11 +11,16 @@ import {
 } from "lucide-react";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-600.css";
+import "@fontsource/gelasio/latin-400.css";
+import "@fontsource/gelasio/latin-400-italic.css";
+import "@fontsource/literata/latin-400.css";
+import "@fontsource/literata/latin-400-italic.css";
 import "./styles.css";
 import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
 import { parseRoute, navigate, resolveTheme } from "./platform/router";
 import { detectCapabilities } from "./platform/capabilities";
+import { watchTextSize } from "./platform/appearance";
 import { supabase } from "./supabase";
 import { Home, Walk } from "./features/Home";
 import { Reader } from "./bible/Reader";
@@ -105,6 +110,8 @@ function App() {
       document.removeEventListener("visibilitychange", refresh);
     };
   }, []);
+  // Sets data-text="large" on <html> while the system text size is 150 % or more (UI-SPEC 6.3).
+  useEffect(() => watchTextSize(document.documentElement), []);
   useEffect(() => {
     const media = matchMedia("(prefers-color-scheme: dark)");
     const apply = () => {

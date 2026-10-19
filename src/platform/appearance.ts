@@ -50,6 +50,27 @@ export function effectiveMode(lamp: Lamplight, deviceDark: boolean): Mode {
   return lamp === "on" || (lamp !== "off" && deviceDark) ? "lamplight" : "light";
 }
 
+/**
+ * Marks <html data-text="large"> while the root font size is 26px or more (about 150 % of the
+ * 17px default, iOS accessibility sizes and above) and removes it otherwise, so layouts can
+ * stack (UI-SPEC 6.3). Re-checks on resize and when the page becomes visible again.
+ * Returns a function that stops watching.
+ */
+export function watchTextSize(root: HTMLElement): () => void {
+  const check = () => {
+    const size = parseFloat(getComputedStyle(root).fontSize);
+    if (size >= 26) root.dataset.text = "large";
+    else delete root.dataset.text;
+  };
+  check();
+  window.addEventListener("resize", check);
+  document.addEventListener("visibilitychange", check);
+  return () => {
+    window.removeEventListener("resize", check);
+    document.removeEventListener("visibilitychange", check);
+  };
+}
+
 function safeStorage(): Storage | undefined {
   try {
     return typeof localStorage === "undefined" ? undefined : localStorage;

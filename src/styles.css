@@ -376,6 +376,9 @@ h3,
 p {
   margin: 0;
 }
+strong {
+  font-weight: 600;
+}
 h1 {
   font-family: inherit;
   font-weight: 400;
@@ -447,7 +450,7 @@ p {
   background: var(--surface-2);
 }
 blockquote {
-  font-family: inherit;
+  font-family: var(--font-scripture);
   font-size: 1.6rem;
   line-height: 1.5;
   margin: 14px 0;
@@ -1274,6 +1277,7 @@ button[aria-pressed="true"] {
 .verse {
   display: block;
   text-align: left;
+  font-family: var(--font-scripture);
   background: transparent;
   color: var(--ink);
   font-size: 1.03rem;
@@ -1285,12 +1289,14 @@ button[aria-pressed="true"] {
   border-radius: 6px;
 }
 .verse sup {
+  font-family: var(--font-ui);
   color: var(--muted);
   font-size: 0.7rem;
   margin-right: 8px;
 }
 /* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
 .speaker {
+  font-family: var(--font-ui);
   color: var(--link);
   font-size: 0.75rem;
   font-weight: 600;
@@ -1435,6 +1441,7 @@ small {
 }
 .story-verse {
   margin: 0 0 8px;
+  font-family: var(--font-scripture);
   font-size: 1.15rem;
   line-height: 1.75;
 }

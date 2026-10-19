@@ -670,6 +670,38 @@ try {
     assert.deepEqual(await p.evaluate(()=>({look:document.documentElement.dataset.look,mode:document.documentElement.dataset.mode})),{look:"cover",mode:"lamplight"},"blocked storage: Cover and Automatic");
     await c.close();
   });
+  await check("bundled faces and text size: fonts come from the app's own origin, only the active look's faces load, body text is 17px and follows the system size",async()=>{
+    const origin=new URL(base).origin;
+    const fontFiles=requests=>requests.filter(url=>/\.woff2?$/.test(new URL(url).pathname));
+    const visit=async(look)=>{
+      // The service worker would precache every face, so it is blocked to see which faces the page itself asks for.
+      const c=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:"block",colorScheme:"light"});const p=await c.newPage();
+      const requests=[];p.on("request",request=>requests.push(request.url()));
+      if(look)await p.addInitScript(look=>localStorage.setItem("hfg-look",look),look);
+      await p.goto(base+"/bible/john/3");await p.locator(".verse").first().waitFor();await p.evaluate(()=>document.fonts.ready);
+      return {c,p,fonts:fontFiles(requests),requests};
+    };
+    const cover=await visit(null);
+    assert.ok(cover.fonts.length>0,"font files were requested");
+    for(const url of cover.requests.filter(url=>/\.(woff2?|ttf|otf)$/.test(new URL(url).pathname)||/fonts\.(googleapis|gstatic)/.test(url)))
+      assert.equal(new URL(url).origin,origin,"font served from the app's own origin: "+url);
+    assert.ok(cover.fonts.some(url=>/gelasio/i.test(url)),"Cover loads Gelasio");
+    assert.ok(!cover.fonts.some(url=>/literata/i.test(url)),"Cover loads no Literata");
+    assert.equal(await cover.p.evaluate(()=>getComputedStyle(document.body).fontSize),"17px");
+    assert.equal(await cover.p.evaluate(()=>document.documentElement.dataset.text??null),null);
+    // A text size of 200 %: the root grows to 34px and the large-text flag follows on resize.
+    await cover.p.evaluate(()=>{document.documentElement.style.fontSize="34px";window.dispatchEvent(new Event("resize"));});
+    assert.equal(await cover.p.evaluate(()=>document.documentElement.dataset.text),"large");
+    await cover.p.evaluate(()=>{document.documentElement.style.fontSize="";window.dispatchEvent(new Event("resize"));});
+    assert.equal(await cover.p.evaluate(()=>document.documentElement.dataset.text??null),null);
+    await cover.c.close();
+    const marked=await visit("marked");
+    assert.ok(marked.fonts.some(url=>/literata/i.test(url)),"Marked loads Literata");
+    assert.ok(!marked.fonts.some(url=>/gelasio/i.test(url)),"Marked loads no Gelasio");
+    for(const url of marked.fonts)assert.equal(new URL(url).origin,origin,"font served from the app's own origin: "+url);
+    assert.equal(await marked.p.evaluate(()=>getComputedStyle(document.documentElement).getPropertyValue("--font-scripture").trim().startsWith("Literata")),true);
+    await marked.c.close();
+  });
   await check("actual account boundary isolates guest/A/B drafts and rejects stale Terms after token refresh (controlled SDK)",()=>checkAuthBoundary(browser,base));
   await check("account deletion flow (controlled SDK)",()=>checkProfile(browser,base));
   await check("topic voting preserves drafts and late publishing cannot erase a new topic draft (controlled SDK)",()=>checkTopicComposer(browser,base));
