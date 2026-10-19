@@ -18,7 +18,7 @@ const links = [
 ---
 
 <div class="share" data-share-url={url} data-share-text={text}>
-  <p class="small muted">Share this page</p>
+  <p class="share-label">Share this page</p>
   <div class="row">
     <button type="button" class="button secondary" data-native hidden>Share…</button>
     {links.map(([label, href]) => (
@@ -28,7 +28,7 @@ const links = [
     ))}
     <button type="button" class="button secondary" data-copy hidden>Copy link</button>
   </div>
-  <p class="small muted" role="status" data-copied></p>
+  <p class="share-label" role="status" data-copied></p>
 </div>
 
 <script>
@@ -58,16 +58,23 @@ const links = [
 
 <style>
   .share {
-    margin-top: 28px;
+    margin-top: var(--space-7);
   }
+  .share-label {
+    margin: 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
+  }
+  /* Buttons and links alike are set in the interface face (button { font: inherit } in global.css). */
   .row {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
   }
   .row .button {
-    min-height: 40px;
+    min-height: 44px;
   }
   [data-copied]:empty {
     display: none;

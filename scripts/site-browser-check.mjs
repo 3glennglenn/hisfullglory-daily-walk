@@ -4,7 +4,7 @@
 // DOM and behaviour checks only; deliberately no screenshots. It uses the root Playwright, which
 // the site's own CI job does not install, so it is a local check and not part of CI.
 import assert from "node:assert/strict";
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const base = process.env.SITE_URL ?? "http://127.0.0.1:4321";
@@ -69,6 +69,18 @@ async function contextCheckPath() {
     if (response.ok) return path;
   }
   throw new Error("no context check page is served by the preview");
+}
+
+/** The page of a published check by review status ("ai-unreviewed" or "approved"), or undefined. */
+async function contextCheckPathBy(review) {
+  const dir = "site/content/context-checks";
+  const names = existsSync(dir) ? readdirSync(dir).filter((n) => n.endsWith(".json")).sort() : [];
+  for (const name of names) {
+    if (JSON.parse(readFileSync(`${dir}/${name}`, "utf8")).review !== review) continue;
+    const path = `/context-checks/${name.replace(/[.]json$/, "")}`;
+    if ((await fetch(base + path)).ok) return path;
+  }
+  return undefined;
 }
 
 try {
@@ -364,6 +376,50 @@ try {
     const cover = await page.locator(".cover").evaluate((el) => el.scrollWidth <= el.clientWidth + 1);
     assert.equal(cover, true, "the cover holds its content");
     await context.close();
+  });
+
+  await check("a context-check page: the AI note is a dashed frame, the share buttons use the interface face, no sideways scroll at 320px and a 34px root", async () => {
+    const aiPath = await contextCheckPathBy("ai-unreviewed");
+    if (aiPath) {
+      const { context, page } = await open(aiPath, { width: 390 });
+      const note = page.locator("p.ai-unreviewed");
+      assert.equal(await note.count(), 1, "the AI note");
+      assert.equal(await note.evaluate((el) => getComputedStyle(el).borderTopStyle), "dashed");
+      assert.ok(parseFloat(await note.evaluate((el) => getComputedStyle(el).fontSize)) >= 17, "the note is Body 17");
+      const noteBox = await note.boundingBox();
+      const h1Box = await page.locator("main h1").boundingBox();
+      assert.ok(noteBox.y < h1Box.y, "the note stands above the title");
+      await context.close();
+    }
+    const approved = await contextCheckPathBy("approved");
+    if (approved) {
+      const { context, page } = await open(approved, { width: 390 });
+      assert.equal(await page.locator("p.ai-unreviewed").count(), 0, "an approved check has no AI note");
+      await context.close();
+    }
+    const { context, page } = await open(checkPath, { width: 390 });
+    const faces = await page.locator(".share .button").evaluateAll((els) => els.map((el) => getComputedStyle(el).fontFamily));
+    assert.ok(faces.length >= 4);
+    for (const face of faces) assert.ok(face.startsWith("Manrope"), `a share button is set in ${face}`);
+    await context.close();
+    for (const width of [390, 320]) {
+      const phone = await open(checkPath, { width, rootPx: 34 });
+      const { scroll, width: client } = await overflow(phone.page);
+      assert.ok(scroll <= client, `${checkPath} at ${width}px and a 34px root scrolls sideways (${scroll} > ${client})`);
+      await phone.context.close();
+    }
+  });
+
+  await check("the context-checks index: the bookcase beside nothing, rows are at least 52px, no sideways scroll", async () => {
+    const { context, page } = await open("/context-checks", { width: 1280 });
+    assert.equal(await page.locator(".bookcase a.spine").count(), 6);
+    for (const row of await page.locator("a.row").all()) assert.ok((await row.boundingBox()).height >= 52);
+    assert.ok((await overflow(page)).scroll <= 1280);
+    await context.close();
+    const phone = await open("/context-checks", { width: 320, rootPx: 34 });
+    const { scroll, width } = await overflow(phone.page);
+    assert.ok(scroll <= width, "no sideways scroll at 320px and a 34px root");
+    await phone.context.close();
   });
 
   await check("the skip link is off-screen until focused, at a 34px root too", async () => {

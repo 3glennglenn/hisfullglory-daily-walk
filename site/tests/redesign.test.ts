@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { site } from "../src/config.ts";
-import { aiUnreviewedCardLabel, featuredChecks } from "../src/lib/content.ts";
+import { aiUnreviewedCardLabel, editorialNote, featuredChecks, publishedChecks } from "../src/lib/content.ts";
 import { splitHook } from "../src/lib/editorial.ts";
 import { sponsorFor, type Sponsor } from "../src/lib/sponsor.ts";
 
@@ -125,4 +125,43 @@ test("a sponsor shows only at its listed place, before its end date, with an htt
   assert.equal(sponsorFor("site-home-end", { ...fixture, url: "http://example.org" }, "2026-12-01"), null, "http is refused");
   for (const place of ["today-end", "story-end", "site-home-end", "site-context-check-end", "pray", "community"] as const)
     assert.equal(sponsorFor(place, null, "2026-12-01"), null, `${place} with no sponsor`);
+});
+
+test("a context-check page says first how far it was checked, tells its story, and ends on the editorial note (W3)", () => {
+  for (const item of publishedChecks()) {
+    const html = read(`/context-checks/${item.slug}`);
+    const main = mainOf(html);
+    const where = item.slug;
+    // The "Context check" eyebrow is gone: the breadcrumb names the section.
+    assert.ok(!textOf(main).includes("Context check "), `${where}: no eyebrow`);
+    if (item.review === "ai-unreviewed") {
+      // The labelled AI note is the first block after the breadcrumb, with its dashed frame and badge.
+      assert.ok(/<\/nav>\s*<p class="ai-unreviewed"[^>]*role="note"/.test(main), `${where}: the AI note comes right after the breadcrumb`);
+      assert.ok(main.includes("ai-badge"), `${where}: the AI badge`);
+    } else assert.ok(!main.includes('class="ai-unreviewed"'), `${where}: an approved check has no AI note`);
+    // One filled app button, and the secondary one is not filled.
+    assert.equal(count(main, /<a[^>]*class="button"[^>]*>/g), 1, `${where}: one filled app button`);
+    assert.ok(main.includes("Study this passage in the app") && main.includes("Read the whole chapter"));
+    // The verse sits on the cover (the signature block), with its WEB line.
+    assert.ok(/class="cover-wrap[^"]*"/.test(main) && main.includes("World English Bible"), `${where}: the verse on the cover`);
+    // The editorial note is the last thing in the page body (no sponsor is set).
+    assert.ok(textOf(main).endsWith(editorialNote(item.review, item.drafted)), `${where}: the editorial note comes last`);
+    assert.ok(!html.includes('data-slot="sponsor"'), `${where}: no sponsor element`);
+    // Voices keep the sourced treatment: figures, not a Scripture face.
+    assert.equal(count(main, 'class="card voice"'), item.voices.filter((voice) => !voice.id).length, `${where}: voice figures`);
+  }
+});
+
+test("the context-checks index lists every published check newest first, the AI ones with their label (W5)", () => {
+  const html = read("/context-checks");
+  const rows = [...html.matchAll(/<a class="row" href="\/context-checks\/([a-z0-9-]+)"[\s\S]*?<\/a>/g)];
+  const expected = featuredChecks();
+  assert.deepEqual(
+    rows.map((row) => row[1]),
+    expected.map((item) => item.slug),
+  );
+  for (const [index, row] of rows.entries())
+    assert.equal(row[0].includes(aiUnreviewedCardLabel), expected[index].review === "ai-unreviewed", `${row[1]}: card label`);
+  assert.ok(html.includes('class="bookcase"'), "the bookcase");
+  assert.ok(textOf(mainOf(html)).startsWith("Context checks Verses many people know by heart"));
 });

@@ -301,8 +301,11 @@ test("lists of context checks say which ones no person has checked", () => {
   // overview and the chapter pages; the home page itself is asserted in redesign.test.ts.
   const unchecked = publishedChecks().filter((item) => item.review === "ai-unreviewed");
   const count = (html: string, needle: string) => html.split(needle).length - 1;
+  // The overview labels every such row, and its bookcase adds one legend line when one of the six
+  // newest spines carries the AI badge (W5).
+  const legend = featuredChecks().slice(0, 6).some((item) => item.review === "ai-unreviewed") ? 1 : 0;
   if (existsSync(page("/context-checks")))
-    assert.equal(count(readFileSync(page("/context-checks"), "utf8"), aiUnreviewedCardLabel), unchecked.length, "overview");
+    assert.equal(count(readFileSync(page("/context-checks"), "utf8"), aiUnreviewedCardLabel), unchecked.length + legend, "overview");
   // Every chapter page that lists an AI-unreviewed check shows the label once per such check.
   for (const item of publishedChecks()) {
     const { book, chapter } = item.verse;
