@@ -226,6 +226,16 @@ test("URL deep links parse, reject malformed paths, and preserve passage tabs", 
   assert.equal(parseRoute("/grow/anxiety").id, "anxiety");
   assert.equal(parseRoute("/bible/romans/8", "?tab=anything").tab, "read");
 });
+test("You replaces More: /you parses, /settings takes only the sub-paths appearance and reminders, /more still parses", () => {
+  assert.deepEqual(parseRoute("/you"), { page: "you", id: undefined, tab: "read" });
+  assert.deepEqual(parseRoute("/settings/reminders"), { page: "settings", id: "reminders", tab: "read" });
+  assert.equal(parseRoute("/settings/appearance").id, "appearance");
+  assert.deepEqual(parseRoute("/settings"), { page: "settings", id: undefined, tab: "read" });
+  for (const path of ["/settings/other", "/settings/reminders/x", "/settings/Reminders", "/settings/..", "/you/x"])
+    assert.equal(parseRoute(path).page, "not-found", path);
+  // The shell replaces "/more" with "/you" through history.replaceState; the router keeps parsing it.
+  assert.equal(parseRoute("/more").page, "more");
+});
 test("theme follows live system changes and capabilities never enable unconfigured services", () => {
   assert.equal(resolveTheme("system", true), "dark");
   assert.equal(resolveTheme("system", false), "light");

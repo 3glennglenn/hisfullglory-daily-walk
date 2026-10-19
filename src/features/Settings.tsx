@@ -4,7 +4,6 @@ import { usePlatform } from "../platform/store";
 import { backupData } from "../platform/persistence";
 import { goals, type Theme } from "../platform/models";
 import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
-import { Reminders } from "./Reminders";
 import { supabase } from "../supabase";
 import { config } from "../config";
 // The trust pages, reachable from inside the app: store reviewers look for them here (GATE-02). The site
@@ -40,6 +39,11 @@ export function Settings() {
   const { state, update, notice, recover, storage } = usePlatform();
   const [status, setStatus] = useState("");
   const [backup, setBackup] = useState(false);
+  // "Privacy and your data" on You opens /settings#privacy: bring that section into view.
+  useEffect(() => {
+    const id = location.hash.slice(1);
+    if (id) document.getElementById(id)?.scrollIntoView();
+  }, []);
   function exportBackup() {
     try {
       const blob = new Blob([backupData(storage)], {
@@ -170,8 +174,7 @@ export function Settings() {
           ))}
         </div>
       </div>
-      <Reminders />
-      <div className="card">
+      <div className="card" id="privacy">
         <h2>Privacy and recovery</h2>
         <p>
           Private journal, prayers, bookmarks and journey progress remain in

@@ -14,7 +14,9 @@ const pages = new Set([
   "bible",
   "pray",
   "community",
+  // "more" stays parseable only so old links keep working: the shell replaces it with "/you" (UI-SPEC 8.2).
   "more",
+  "you",
   "grow",
   "journal",
   "give",
@@ -24,6 +26,8 @@ const pages = new Set([
   "giving-policy",
   "context",
 ]);
+// The only sub-paths of /settings (T-01.1-07); anything else is not found.
+const settingsSubpages = new Set(["appearance", "reminders"]);
 export function parseRoute(path: string, search = ""): Route {
   const parts = path.split("/").filter(Boolean);
   const page = parts[0] ?? "home";
@@ -55,6 +59,11 @@ export function parseRoute(path: string, search = ""): Route {
       return {page:"not-found",tab:"read"};
     return {page:"circles",id:slug,thread,tab:"read"};
   }
+  if (page === "settings" && parts[1] !== undefined) {
+    if (parts.length > 2 || !settingsSubpages.has(parts[1]))
+      return { page: "not-found", tab: "read" };
+    return { page, id: parts[1], tab: "read" };
+  }
   if (parts.length > (["grow", "community", "context"].includes(page) ? 2 : 1))
     return { page: "not-found", tab: "read" };
   if (page === "context" && parts[1] && !/^[a-z0-9-]+$/.test(parts[1]))
@@ -74,6 +83,14 @@ export function navigate(path: string) {
     window.dispatchEvent(new PopStateEvent("popstate"));
     window.scrollTo(0, 0);
   }
+}
+// The route for the address bar. An old "/more" link is replaced by "/you" in place (T-01.1-07: the
+// target is the fixed internal path, never taken from the address), so Back does not return to it.
+export function currentRoute(): Route {
+  const route = parseRoute(location.pathname, location.search);
+  if (route.page !== "more") return route;
+  history.replaceState({}, "", "/you");
+  return parseRoute("/you");
 }
 export function resolveTheme(
   theme: "light" | "dark" | "system",

@@ -345,7 +345,96 @@ try {
     },
   );
   await check(
-    "primary/more routes fit 375/390/768/1280px in both themes with accessible controls",
+    "five tabs are links with aria-current; no brand header or settings heart; /more lands on /you; You shows its sections",
+    async () => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await go("/");
+      const nav = page.getByRole("navigation", { name: "Main navigation" });
+      assert.equal(await nav.count(), 1, "one main navigation");
+      assert.deepEqual(await nav.getByRole("link").allInnerTexts(), ["Today", "Bible", "Pray", "Community", "You"]);
+      assert.equal(await nav.getByRole("button").count(), 0, "tabs are links, not buttons");
+      const hrefs = await nav.getByRole("link").evaluateAll((list) => list.map((a) => a.getAttribute("href")));
+      assert.deepEqual(hrefs, ["/", "/bible", "/pray", "/community", "/you"]);
+      assert.equal(await page.locator("header.brand, .brand-name").count(), 0, "no wordmark-and-slogan header");
+      assert.equal(await page.getByRole("button", { name: "Open settings" }).count(), 0, "no heart button that opens settings");
+      assert.equal(await page.getByText("JESUS AT THE CENTER").count(), 0, "no slogan row");
+      // The selected tab is the only one marked, for the route and for the screens pushed from it.
+      const selected = async () => nav.locator('a[aria-current="page"]').allInnerTexts();
+      for (const [path, tab] of [
+        ["/", "Today"],
+        ["/walk", "Today"],
+        ["/bible/psalms/23", "Bible"],
+        ["/pray", "Pray"],
+        ["/community", "Community"],
+        ["/community/circles", "Community"],
+        ["/you", "You"],
+        ["/profile", "You"],
+        ["/settings", "You"],
+        ["/settings/reminders", "You"],
+        ["/my-walk", "You"],
+        ["/journal", "You"],
+        ["/grow", "You"],
+        ["/give", "You"],
+        ["/shop", "You"],
+      ]) {
+        await go(path);
+        assert.deepEqual(await selected(), [tab], path);
+      }
+      // A tap on a tab navigates without a page load, and the selection follows.
+      await go("/");
+      await nav.getByRole("link", { name: "Bible", exact: true }).click();
+      await page.waitForURL("**/bible");
+      assert.deepEqual(await selected(), ["Bible"]);
+      await nav.getByRole("link", { name: "You", exact: true }).click();
+      await page.waitForURL("**/you");
+      assert.deepEqual(await selected(), ["You"]);
+      // An old /more link is replaced by /you in place, so Back does not return to it.
+      await page.goto(base + "/");
+      await page.goto(base + "/more");
+      await page.locator("main h1").first().waitFor();
+      assert.equal(new URL(page.url()).pathname, "/you");
+      assert.equal(await page.locator("main h1").innerText(), "You");
+      await page.goBack();
+      assert.equal(new URL(page.url()).pathname, "/", "Back from /you returns to where the old link was opened, not to /more");
+      // The sub-path allowlist: anything else is not found.
+      await go("/settings/other");
+      assert.equal(await page.locator("main h1").innerText(), "Page not found");
+      // You: the sections of UI-SPEC A12, in order, and one way to each screen.
+      await go("/you");
+      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Your walk", "Settings", "Give and resources", "About"]);
+      assert.match(await page.locator("main").innerText(), /Sign in\s+Join the community and keep your account safe\./);
+      assert.match(await page.locator("main").innerText(), /Days walked\s+\d+/);
+      assert.match(await page.locator("main").innerText(), /Daily reminder\s+Off/);
+      assert.match(await page.locator("main").innerText(), /Scripture: World English Bible, public domain\./);
+      for (const [name, path] of [
+        ["Sign in", "/profile"],
+        ["My Walk", "/my-walk"],
+        ["Journal", "/journal"],
+        ["Grow", "/grow"],
+        ["Daily rhythm", "/settings"],
+        ["Daily reminder", "/settings/reminders"],
+        ["Privacy and your data", "/settings#privacy"],
+        ["Give", "/give"],
+        ["Resources", "/shop"],
+      ]) {
+        const row = page.getByRole("link", { name: new RegExp("^" + name) }).first();
+        assert.equal(await row.getAttribute("href"), path, name);
+        const box = await row.boundingBox();
+        assert.ok(box && box.height >= 52, name + " row is at least 52px tall");
+      }
+      assert.equal(await page.getByRole("link", { name: /^Privacy policy/ }).count(), 1, "the PR 27 legal links sit under About");
+      // /settings/reminders opens the Reminders screen under a way back to You.
+      await go("/settings/reminders");
+      assert.equal(await page.locator("main h1").innerText(), "Daily reminder");
+      // Privacy and your data is reached from You and scrolls into view.
+      await go("/you");
+      await page.getByRole("link", { name: /^Privacy and your data/ }).click();
+      await page.waitForURL("**/settings#privacy");
+      await page.locator("#privacy").waitFor();
+    },
+  );
+  await check(
+    "primary routes fit 375/390/768/1280px in both themes with accessible controls",
     async () => {
       for (const width of [375, 390, 768, 1280]) {
         await page.setViewportSize({ width, height: 812 });
@@ -359,7 +448,8 @@ try {
             "/community",
             "/community/grief",
             "/my-walk",
-            "/more",
+            "/you",
+            "/settings/reminders",
             "/grow",
             "/journal",
             "/give",
@@ -375,7 +465,7 @@ try {
             assert.equal(
               await page
                 .getByRole("navigation", { name: "Main navigation" })
-                .getByRole("button")
+                .getByRole("link")
                 .count(),
               5,
             );

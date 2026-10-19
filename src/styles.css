@@ -253,6 +253,12 @@ html {
     font: -apple-system-body;
   }
 }
+/* A focused element is never left under the top bar or the floating tab bar (UI-SPEC 14, 2.4.11):
+   64px is the toolbar plus its gap, the bottom value is the tab bar, its gap and the page's own gap. */
+html {
+  scroll-padding-top: calc(64px + env(safe-area-inset-top));
+  scroll-padding-bottom: calc(64px + 12px + 24px + env(safe-area-inset-bottom));
+}
 * {
   box-sizing: border-box;
 }
@@ -335,40 +341,18 @@ main:focus {
 .skip-link:focus {
   top: 12px;
 }
+/* Page shell (UI-SPEC 7.1, 7.5, 7.6): 20px screen margin or the side safe area, whichever is larger; the
+   top safe area is padded once here, so the first bar or title of every screen starts below the notch. */
 .shell {
   max-width: 480px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: env(safe-area-inset-top) max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
   background: var(--bg);
   min-height: 100vh;
 }
-.brand {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 26px 0 24px;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 26px;
-  color: var(--brand);
-}
-.brand-name {
-  color: var(--ink);
-  text-decoration: none;
-  font-family: inherit;
-  font-size: 1.55rem;
-  line-height: 1.1;
-}
-.brand-name span {
-  display: block;
-  font-family: Manrope, system-ui, sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.23em;
-  margin-top: 9px;
-  font-weight: 600;
-  color: var(--muted);
-}
+/* The floating tab bar is 64px tall and 12px off the edge: the last content scrolls clear of it. */
 main {
-  padding-bottom: 106px;
+  padding-bottom: calc(64px + 24px + env(safe-area-inset-bottom));
 }
 h1,
 h2,
@@ -654,34 +638,6 @@ small,
 }
 .compact .book-placeholder span {
   font-size: 0.65rem;
-}
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 480px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background: var(--bg);
-  border-top: 1px solid var(--line);
-  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-  z-index: 5;
-}
-.bottom-nav button {
-  background: none;
-  color: var(--muted);
-  border-radius: 12px;
-  flex-direction: column;
-  font-size: 0.65rem;
-  gap: 4px;
-  padding: 8px 2px;
-  min-height: 56px;
-}
-.bottom-nav button[aria-current] {
-  background: var(--surface-2);
-  color: var(--ink);
 }
 .install-hint {
   display: flex;
@@ -1126,21 +1082,7 @@ dialog:has(> .report-dialog) {
   white-space: nowrap;
   border: 0;
 }
-@media (min-width: 481px) {
-  .shell {
-    border-left: 1px solid var(--line);
-    border-right: 1px solid var(--line);
-    padding: 0 28px;
-  }
-  .bottom-nav {
-    border-left: 1px solid var(--line);
-    border-right: 1px solid var(--line);
-  }
-}
 @media (max-width: 360px) {
-  .shell {
-    padding: 0 14px;
-  }
   .card {
     padding: 18px;
   }
@@ -1165,19 +1107,6 @@ dialog:has(> .report-dialog) {
 }
 
 /* Shared platform primitives: all appearance flows through semantic tokens. */
-.platform-nav {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-.platform-nav button {
-  min-width: 0;
-  padding: 8px 2px;
-  font-size: 0.65rem;
-}
-.platform-nav span {
-  max-width: 100%;
-  overflow-wrap: anywhere;
-}
 .card > button,
 .card > .button {
   margin: 5px 5px 5px 0;
@@ -1387,9 +1316,6 @@ small {
   overflow-wrap: anywhere;
 }
 @media (max-width: 380px) {
-  .shell {
-    padding: 0 16px;
-  }
   .card {
     padding: 18px;
   }
@@ -1595,4 +1521,346 @@ button.danger {
   margin-top: 4px;
   color: var(--muted);
   font-size: 0.85rem;
+}
+
+/* ==== TabBar (UI-SPEC 7.3, 7.6, 8.1; src/ui/TabBar.tsx) ====
+   A floating capsule 12px off the edges on a phone, a 280px sidebar from 768px. Labels never wrap or
+   truncate; they grow with the text size only up to 16px, icons are in em of the label (24px at 13px). */
+.tabbar {
+  position: fixed;
+  z-index: var(--z-bar);
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  max-width: 456px;
+  margin-inline: auto;
+  display: flex;
+  max-height: 83px;
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tabbar {
+    background: var(--bar-solid);
+  }
+}
+.tabbar ul {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 64px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tabbar li {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 44px;
+}
+.tab {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 9px 8px;
+  border-radius: var(--radius-pill);
+  color: var(--muted);
+  font-size: min(var(--text-footnote), 16px);
+  font-weight: 600;
+  line-height: 1.38;
+  text-decoration: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.tab:focus-visible {
+  outline-offset: -3px;
+}
+.tab-icon {
+  flex: none;
+  width: 1.8462em;
+  height: 1.8462em;
+  max-width: 32px;
+  max-height: 32px;
+}
+.tab-label {
+  white-space: nowrap;
+}
+.tab[aria-current="page"] {
+  color: var(--link);
+}
+.tab[aria-current="page"] .tab-icon {
+  color: var(--brand);
+}
+/* Long press: the tab's name at twice its size, above the bar (UI-SPEC 14, 1.4.4). */
+.tab-tip {
+  position: absolute;
+  bottom: calc(100% + var(--space-3));
+  left: 0;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--bar-solid);
+  color: var(--ink);
+  box-shadow: var(--elev-float);
+  font-size: min(calc(var(--text-footnote) * 2), 13vw);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .tabbar {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 280px;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    display: block;
+    padding: calc(var(--space-6) + env(safe-area-inset-top)) var(--space-3) var(--space-6)
+      max(var(--space-3), env(safe-area-inset-left));
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-right: 1px solid var(--line);
+  }
+  .tabbar ul {
+    flex-direction: column;
+    gap: var(--space-1);
+    min-height: 0;
+  }
+  .tabbar li {
+    min-width: 0;
+  }
+  .tab {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: var(--space-3);
+    min-height: 48px;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--text-body);
+  }
+  .tab-icon {
+    width: 24px;
+    height: 24px;
+  }
+  /* --brand over --surface-2 would be below 3:1 in Cover Light, so the selected row sits on --bg. */
+  .tab[aria-current="page"] {
+    background: var(--bg);
+  }
+  .tab-tip {
+    bottom: auto;
+    top: 0;
+    transform: translateY(-100%);
+  }
+  .shell {
+    max-width: none;
+    margin: 0;
+    padding-left: calc(280px + max(32px, env(safe-area-inset-left)));
+    padding-right: max(32px, env(safe-area-inset-right));
+  }
+  .shell > main,
+  .shell > .notice {
+    max-width: 680px;
+    margin-inline: auto;
+  }
+  main {
+    padding-bottom: var(--space-8);
+  }
+}
+/* Large text (150 % and up, plan 01 sets data-text on <html>): the bar keeps its single-line labels, adds
+   the room the larger label needs and stays at most 83px tall; below 360px it drops its side insets. */
+html[data-text="large"] .tab {
+  padding: 9px 4px;
+}
+html[data-text="large"] main {
+  padding-bottom: calc(83px + 12px + 24px + env(safe-area-inset-bottom));
+}
+@media (max-width: 359px) {
+  html[data-text="large"] .tabbar {
+    left: 0;
+    right: 0;
+    max-width: none;
+    border-radius: var(--radius-lg);
+  }
+}
+@media (min-width: 768px) {
+  html[data-text="large"] main {
+    padding-bottom: var(--space-8);
+  }
+  html[data-text="large"] .tab {
+    padding: var(--space-3) var(--space-4);
+  }
+}
+
+/* ==== Large title (UI-SPEC 6.2) ==== */
+.large-title {
+  margin: var(--space-2) 0 var(--space-4);
+  font-size: var(--text-large-title);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+
+/* ==== GroupedList and Row (UI-SPEC 7.1, A12; src/ui/List.tsx) ==== */
+.group {
+  margin: 0 0 var(--space-6);
+}
+.group-title {
+  margin: 0 var(--space-5) var(--space-2);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+.group-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.group-pad {
+  padding: var(--space-4) var(--space-5);
+}
+.group-list > li {
+  position: relative;
+}
+.group-list > li + li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--space-5);
+  right: 0;
+  height: 1px;
+  background: var(--line);
+}
+.list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  text-align: left;
+  text-decoration: none;
+}
+a.list-row:active,
+button.list-row:active {
+  background: var(--bg);
+}
+.list-row:focus-visible {
+  outline-offset: -3px;
+}
+.list-row-text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.list-row-title {
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.list-row-detail {
+  font-size: var(--text-footnote);
+  font-weight: 400;
+  line-height: 1.38;
+  color: var(--muted);
+}
+.list-row-value {
+  flex: 0 1 auto;
+  min-width: 0;
+  color: var(--muted);
+  font-size: var(--text-body);
+  font-weight: 400;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.list-row-chevron {
+  flex: none;
+  color: var(--muted);
+}
+/* Large text: a row's value wraps under its title (UI-SPEC A12). */
+html[data-text="large"] .list-row {
+  flex-wrap: wrap;
+}
+html[data-text="large"] .list-row-value {
+  flex-basis: 100%;
+  text-align: left;
+}
+
+/* ==== You (UI-SPEC A12) ==== */
+.you-footer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin: var(--space-6) var(--space-5) 0;
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.you-footer img {
+  flex: none;
+}
+.you-footer p {
+  margin: 0;
+  font-size: var(--text-footnote);
+}
+/* The links of the About group are rows too (PR #27 markup, restyled). */
+.group .legal-links ul {
+  margin: 0;
+}
+.group .legal-links li {
+  position: relative;
+}
+.group .legal-links li + li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--space-5);
+  right: 0;
+  height: 1px;
+  background: var(--line);
+}
+.group .legal-links a {
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.group .legal-links a[target="_blank"]::after {
+  content: "\2197" / "";
+  flex: none;
+  color: var(--muted);
+}
+.group .legal-links a:focus-visible {
+  outline-offset: -3px;
 }

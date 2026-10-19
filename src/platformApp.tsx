@@ -2,13 +2,6 @@ import { Circles } from "./social/Circles";
 import { PrivateProfileBoundary } from "./platform/PrivateProfile";
 import { Component, useEffect, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  BookOpen,
-  Heart,
-  Home as HomeIcon,
-  MessageCircle,
-  Menu,
-} from "lucide-react";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-600.css";
 import "@fontsource/gelasio/latin-400.css";
@@ -18,8 +11,7 @@ import "@fontsource/literata/latin-400-italic.css";
 import "./styles.css";
 import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
-import { parseRoute, navigate, resolveTheme } from "./platform/router";
-import { detectCapabilities } from "./platform/capabilities";
+import { currentRoute, navigate, resolveTheme } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
 import { supabase } from "./supabase";
 import { Home, Walk } from "./features/Home";
@@ -29,11 +21,14 @@ import { Grow } from "./features/Grow";
 import { ContextCheck } from "./context/ContextCheck";
 import { JournalLibrary } from "./features/Journal";
 import { Settings, Profile } from "./features/Settings";
+import { You } from "./features/You";
+import { Reminders } from "./features/Reminders";
 import { Give, GivingPolicy } from "./giving/Give";
 import { Community } from "./community";
 import { TopicHub } from "./social/TopicHub";
 import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
+import { TabBar, tabFor } from "./ui/TabBar";
 import { products } from "./config";
 import { contentFor } from "./data";
 import { localDate } from "./storage";
@@ -64,30 +59,29 @@ interface InstallEvent extends Event {
   prompt(): Promise<void>;
   userChoice: Promise<{ outcome: string }>;
 }
-const menu = [
-  ["context", "Context checks", "Verses you know, back in their story"],
-  ["my-walk", "My Walk", "Your private focus, prayer and progress"],
-  ["grow", "Grow", "Journeys for the season you’re in"],
-  ["journal", "Journal", "A private place for reflection"],
-  ["give", "Give", "External causes and reviewed support"],
-  ["shop", "Shop", "Bibles from HisFullGlory"],
-  ["profile", "Profile", "Your community account"],
-  ["settings", "Settings", "Your rhythm, theme and privacy"],
-];
+// /settings/reminders: the existing Reminders card on its own screen, reached from You.
+function RemindersScreen() {
+  return (
+    <section className="grouped-screen">
+      <button className="secondary" onClick={() => navigate("/you")}>
+        ‹ You
+      </button>
+      <h1 className="large-title">Daily reminder</h1>
+      {supabase ? <Reminders /> : <p>Reminders are not available yet.</p>}
+    </section>
+  );
+}
 function App() {
   const { state, notice, update } = usePlatform();
-  const [route, setRoute] = useState(() =>
-    parseRoute(location.pathname, location.search),
-  );
+  const [route, setRoute] = useState(currentRoute);
   const [online, setOnline] = useState(navigator.onLine);
   const [date, setDate] = useState(localDate);
   const [install, setInstall] = useState<InstallEvent | null>(null);
   const [installStatus, setInstallStatus] = useState("");
-  const capabilities = detectCapabilities(!!supabase);
   useEffect(() => {
     track("app_opened");
     const refresh = () => {
-      setRoute(parseRoute(location.pathname, location.search));
+      setRoute(currentRoute());
       setDate(localDate());
     };
     const connectivity = () => setOnline(navigator.onLine);
@@ -161,11 +155,15 @@ function App() {
     case "giving-policy":
       content = <GivingPolicy />;
       break;
+    case "you":
+      content = <You />;
+      break;
     case "profile":
       content = <Profile />;
       break;
     case "settings":
-      content = <Settings />;
+      // "/settings/appearance" shows Settings until the Appearance screen exists.
+      content = route.id === "reminders" ? <RemindersScreen /> : <Settings />;
       break;
     case "circles":
       content = <Circles key={route.id ?? "discovery"} slug={route.id} thread={route.thread}/>;
@@ -193,30 +191,6 @@ function App() {
         </section>
       );
       break;
-    case "more":
-      content = (
-        <section>
-          <h1>Make room for more.</h1>
-          {menu.map(([path, title, copy]) => (
-            <button
-              className="card entry"
-              key={path}
-              onClick={() => navigate("/" + path)}
-            >
-              <strong>{title}</strong>
-              <span>{copy}</span>
-            </button>
-          ))}
-          <small>
-            Available now: full WEB, local private writing, external giving
-            {capabilities.community
-              ? ", connected community"
-              : ". Community backend is not configured"}
-            .
-          </small>
-        </section>
-      );
-      break;
     default:
       content = (
         <div className="card">
@@ -225,42 +199,11 @@ function App() {
         </div>
       );
   }
-  const active = page === "circles" ? "community" : ["home", "walk"].includes(page)
-    ? "home"
-    : ["bible", "pray", "community"].includes(page)
-      ? page
-      : "more";
-  const nav = [
-    { path: "home", label: "Home", Icon: HomeIcon },
-    { path: "bible", label: "Bible", Icon: BookOpen },
-    { path: "pray", label: "Pray", Icon: Heart },
-    { path: "community", label: "Community", Icon: MessageCircle },
-    { path: "more", label: "More", Icon: Menu },
-  ];
   return (
     <div className="shell">
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <header className="brand">
-        <a
-          href="/"
-          className="brand-name"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate("/");
-          }}
-        >
-          HisFullGlory<span>JESUS AT THE CENTER</span>
-        </a>
-        <button
-          className="icon-button"
-          aria-label="Open settings"
-          onClick={() => navigate("/settings")}
-        >
-          <Heart size={22} />
-        </button>
-      </header>
       {(!online || notice) && (
         <aside className="notice" role="status">
           {notice ||
@@ -302,19 +245,7 @@ function App() {
           </aside>
         )}
       </main>
-      <nav className="bottom-nav platform-nav" aria-label="Main navigation">
-        {nav.map(({ path, label, Icon }) => (
-          <button
-            key={path}
-            aria-current={active === path ? "page" : undefined}
-            className={active === path ? "active" : ""}
-            onClick={() => navigate(path === "home" ? "/" : "/" + path)}
-          >
-            <Icon size={20} />
-            <span>{label}</span>
-          </button>
-        ))}
-      </nav>
+      <TabBar active={tabFor(page)} />
     </div>
   );
 }
