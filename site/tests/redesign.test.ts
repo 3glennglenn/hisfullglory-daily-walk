@@ -7,7 +7,16 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { site } from "../src/config.ts";
-import { aiUnreviewedCardLabel, editorialNote, featuredChecks, publishedChecks } from "../src/lib/content.ts";
+import { approved } from "../src/data/legal.ts";
+import { aiFor } from "../src/lib/ai.ts";
+import { library } from "../src/lib/bible.ts";
+import {
+  aiUnreviewedCardLabel,
+  editorialNote,
+  featuredChecks,
+  publishedChecks,
+  publishedTopics,
+} from "../src/lib/content.ts";
 import { splitHook } from "../src/lib/editorial.ts";
 import { sponsorFor, type Sponsor } from "../src/lib/sponsor.ts";
 
@@ -164,4 +173,86 @@ test("the context-checks index lists every published check newest first, the AI 
     assert.equal(row[0].includes(aiUnreviewedCardLabel), expected[index].review === "ai-unreviewed", `${row[1]}: card label`);
   assert.ok(html.includes('class="bookcase"'), "the bookcase");
   assert.ok(textOf(mainOf(html)).startsWith("Context checks Verses many people know by heart"));
+});
+
+// Plan 13: the chapter page, the topic and legal pages, the privacy storage list.
+const { bible, ai } = library();
+
+test("a chapter page keeps the layers in order, with one filled app button and v-anchors (W2)", () => {
+  const html = read("/bible/john/3");
+  const main = mainOf(html);
+  const explanation = aiFor(ai, "john", 3);
+  const checks = publishedChecks().filter((item) => item.verse.book === "john" && item.verse.chapter === 3);
+  const layers = [...main.matchAll(/data-layer="([a-z]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(layers, [
+    "scripture",
+    "sourced",
+    ...(explanation ? ["ai"] : []),
+    "voices",
+    ...(checks.length ? ["editorial"] : []),
+  ]);
+  assert.ok(textOf(main).includes("Around John 3"), "the Around heading");
+  assert.equal(count(main, /<a[^>]*class="button"[^>]*>/g), 1, "one filled app button");
+  assert.ok(textOf(main).includes("Read John 3 in the app"));
+  assert.ok(main.includes('id="v1"') && main.includes('id="v16"'), "the verse anchors");
+  // The chapter row at the top and at the bottom; John 3 has both neighbours.
+  assert.equal(count(main, 'aria-label="Chapters"'), 1);
+  assert.equal(count(main, 'aria-label="Chapters, end of page"'), 1);
+  assert.equal(count(main, 'href="/bible/john/2"'), 2 + 0, "John 2 is linked from both rows");
+  assert.equal(count(main, 'href="/bible/john/4"'), 2, "John 4 is linked from both rows");
+  // The ends of the Bible have no dead control.
+  assert.ok(!mainOf(read("/bible/genesis/1")).includes("‹"), "no previous on Genesis 1");
+  assert.ok(!mainOf(read("/bible/revelation/22")).includes("›"), "no next on Revelation 22");
+  // The WEB line closes the page.
+  assert.ok(textOf(main).endsWith("World English Bible. Public-domain source and edition notes"));
+  assert.ok(!html.includes('data-slot="sponsor"'));
+});
+
+test("a chapter that holds an AI-written context check shows its label and badge (D-06)", () => {
+  const unchecked = publishedChecks().filter((item) => item.review === "ai-unreviewed");
+  assert.ok(unchecked.length > 0, "the content folder holds an AI-unreviewed check");
+  for (const item of unchecked) {
+    const main = mainOf(read(`/bible/${item.verse.book}/${item.verse.chapter}`));
+    const row = main.match(new RegExp(`<a class="row" href="/context-checks/${item.slug}"[\\s\\S]*?</a>`))?.[0] ?? "";
+    assert.ok(row, `${item.slug}: a row on its chapter page`);
+    assert.ok(textOf(row).includes(aiUnreviewedCardLabel), `${item.slug}: the card label`);
+    assert.ok(row.includes("ai-badge"), `${item.slug}: the badge`);
+  }
+});
+
+test("every chapter page has its previous and next chapter, except at the ends of the Bible", () => {
+  const sample = [bible.books[42], bible.books[18], bible.books[65]];
+  for (const book of sample)
+    for (const chapter of book.chapters.slice(0, 3)) {
+      const main = mainOf(read(`/bible/${book.slug}/${chapter.number}`));
+      assert.equal(count(main, "<nav class=\"pager"), 2, `${book.slug} ${chapter.number}: two chapter rows`);
+    }
+});
+
+test("a topic page shows the care notice before the passages (W4)", () => {
+  for (const topic of publishedTopics()) {
+    const main = mainOf(read(`/topics/${topic.id}`));
+    if (topic.care) {
+      assert.ok(main.includes('class="care"'), `${topic.id}: care notice`);
+      assert.ok(main.indexOf('class="care"') < main.indexOf('class="passages"'), `${topic.id}: the notice comes first`);
+      assert.ok(textOf(main).includes(topic.care));
+    }
+    assert.equal(count(main, /<ol class="passages"[\s\S]*?<\/ol>/g), 1);
+  }
+});
+
+test("the legal pages keep their gate: approved means no draft banner and no noindex (W6)", () => {
+  for (const address of ["/privacy", "/terms", "/contact", "/delete-account"]) {
+    const html = read(address);
+    assert.equal(html.includes('class="draft"'), !approved, `${address}: draft banner`);
+    assert.equal(html.includes('<meta name="robots" content="noindex"'), !approved, `${address}: noindex`);
+  }
+});
+
+test("the privacy page lists the new on-device keys and the shelf, and no longer the old two (UI-SPEC 16)", () => {
+  const text = textOf(mainOf(read("/privacy")));
+  for (const key of ["hfg-look", "hfg-lamplight", "hfg-lamplight-notice"]) assert.ok(text.includes(key), key);
+  assert.ok(text.includes("the older keys hfg-theme and hfg-appearance are read once and then removed") || text.includes("older keys hfg-theme and hfg-appearance are read once and then removed"));
+  assert.ok(!mainOf(read("/privacy")).includes("<strong>hfg-theme</strong>"), "hfg-theme is not a listed key any more");
+  assert.ok(text.includes("your shelf of the context checks you have read to the end"), "the shelf is among the private data");
 });

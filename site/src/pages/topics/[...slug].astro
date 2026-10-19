@@ -46,12 +46,12 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
           {topic.review === "draft" && <DraftBanner />}
           <h1>{topic.label}</h1>
           <p class="lede">{topic.intro}</p>
-          {topic.care && <p class="card care">{topic.care}</p>}
+          {topic.care && <p class="care">{topic.care}</p>}
 
           <h2>Passages to start with</h2>
           <ol class="passages">
             {topic.passages.map((passage) => (
-              <li class="card">
+              <li>
                 <h3>
                   <a href={refHref(passage)}>{refLabel(passage)}</a>
                 </h3>
@@ -62,7 +62,7 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
               </li>
             ))}
           </ol>
-          <p class="small muted">
+          <p class="foot">
             Each passage opens in the World English Bible on this site. The
             reason beside it quotes the passage itself.
           </p>
@@ -88,12 +88,12 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
               All topics
             </a>
           </div>
-          <p class="small muted">
+          <p class="foot">
             The conversation is in the HisFullGlory app, a beta web app that
             opens in your browser.
           </p>
 
-          <div class="card circles">
+          <div class="circles">
             <h2>Talk it through in a Circle</h2>
             <p>
               A Circle is a small group in the app that walks through one
@@ -126,7 +126,7 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
           </p>
           <ul class="grid list">
             {topics.map((entry) => (
-              <li class="card">
+              <li class="tile">
                 <h2>
                   <a href={`/topics/${entry.id}`}>{entry.label}</a>
                 </h2>
@@ -141,26 +141,39 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
 }
 
 <style>
+  /* A topic page reads in one 34em column of Body 17/27 (UI-SPEC W4). */
+  .prose {
+    max-width: 34em;
+  }
   .lede {
-    margin-top: 16px;
+    margin-top: var(--space-4);
+    font-size: var(--text-title);
+    line-height: 1.5;
+    color: var(--muted);
   }
   h2 {
-    margin: 40px 0 12px;
+    margin: var(--space-8) 0 var(--space-3);
   }
+  /* The care notice stands before the passages: a block on --surface in Body 17. */
   .care {
-    margin-top: 24px;
-    background: var(--surface-2);
-    font-size: 0.95rem;
+    margin: var(--space-6) 0 0;
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
   }
   .circles {
-    margin-top: 32px;
-    background: var(--surface-2);
+    margin-top: var(--space-7);
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
   }
   .circles h2 {
-    margin: 0 0 6px;
+    margin: 0 0 var(--space-2);
   }
   .circles .button {
-    margin-top: 10px;
+    margin-top: var(--space-3);
   }
   .passages,
   .list {
@@ -168,14 +181,28 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
     margin: 0;
     padding: 0;
   }
-  .passages .card + .card {
-    margin-top: 12px;
+  /* Passages as rows: the reference in Body 17/600 --link, the reason in Body 17. */
+  .passages {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+  }
+  .passages li {
+    padding: var(--space-3) var(--space-5);
+  }
+  .passages li + li {
+    border-top: 1px solid var(--line);
   }
   .passages h3 {
-    font-size: 1.05rem;
+    margin: 0;
+    font-size: var(--text-body);
+  }
+  .passages h3 a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
   .passages p {
-    margin-bottom: 0;
+    margin: 0;
   }
   .passages .more a {
     display: inline-flex;
@@ -183,12 +210,24 @@ const articles = topic ? publishedArticles().filter((article) => article.topic =
     min-height: 44px;
     font-weight: 600;
   }
+  .foot {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
+  }
   .list {
-    margin-top: 32px;
+    margin-top: var(--space-7);
+  }
+  .tile {
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
   }
   .list h2 {
     margin: 0;
-    font-size: 1.15rem;
+    font-size: var(--text-title);
   }
   .list p {
     margin-bottom: 0;

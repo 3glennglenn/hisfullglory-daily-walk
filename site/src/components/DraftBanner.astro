@@ -8,13 +8,16 @@
 </p>
 
 <style>
+  /* A block on --surface-2 with ink text (UI-SPEC W6); the dashed edge keeps it from reading as a note. */
   .draft {
     display: inline-block;
-    margin: 0 0 16px;
-    padding: 6px 14px;
-    border: 1px dashed var(--link);
-    border-radius: 999px;
-    font-size: 0.86rem;
-    color: var(--link);
+    margin: 0 0 var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    background: var(--surface-2);
+    border: 1px dashed var(--muted);
+    border-radius: var(--radius-md);
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--ink);
   }
 </style>
