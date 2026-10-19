@@ -22,6 +22,96 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:1-peter/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Peter writes to strangers. They are scattered across Pontus, Galatia, Cappadocia, Asia and Bithynia, living as foreigners, and he begins with blessing God for his great mercy, which has caused us to be born again to “a living hope” through the resurrection of Jesus Christ. An inheritance waits for them, incorruptible and undefiled, reserved in heaven.\n\nHe does not pretend their lives are easy. They have been grieved in various trials, and he compares their faith to gold tested by fire, more precious than gold that perishes. Though they have not seen Jesus, they love him, and they rejoice with joy that is unspeakable and full of glory.\n\nThen comes the call to live in a way that fits this hope. Prepare your minds for action. Be holy, because God is holy. You were redeemed not with silver or gold but with the precious blood of Christ, a lamb without blemish. Love one another fervently from the heart. People are like grass, but “the Lord’s word endures forever”."
+        },
+        {
+          "kind": "background",
+          "text": "Tradition links this letter to the apostle Peter, though some scholars think it was written in his name; the letter itself names him in its first words. It is often dated to the 60s of the first century, though opinions vary. The readers are probably mostly non-Jewish believers living as a minority in a number of provinces of what is now Turkey. The words about being foreigners and exiles run through the whole letter. Verse 16 quotes the call to holiness found in Leviticus 11 and 19."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-peter/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Newborn babies know what they want. Peter picks up the picture: long for the pure spiritual milk, if you have tasted that the Lord is gracious. And then he changes the image completely. Come to Christ, the living stone, rejected by people but chosen and precious to God, and you also, as “living stones”, are built into a spiritual house.\n\nWhat follows is a string of names for a people who were once strangers. “a royal priesthood”, a holy nation, a people for God's own possession. In the past they were not a people, but now they are, and they have obtained mercy.\n\nThen Peter asks how to live as foreigners and pilgrims. Keep good behavior among the nations, so that they may see your good works. Honor the king. Live as free people, yet as servants of God. Servants are told to be in subjection to their masters, even to harsh ones, and are pointed to Christ, who suffered, left an example, and committed himself to the One who judges righteously."
+        },
+        {
+          "kind": "background",
+          "text": "The letter is written to Christians who are being spoken against by their neighbors. Verses 18 to 25 address household servants, many of whom were slaves in the Roman world. The text does not condemn slavery itself, and in later centuries it was misused to defend it; today almost all churches reject that use. The stone passages draw on Isaiah 28, Psalm 118 and Exodus 19. Jesus also used the rejected stone in Matthew 21."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-peter/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The household comes first. Peter speaks to wives, saying they may win a husband without a word by their pure behavior, and he points to a beauty of the heart, a gentle and quiet spirit that is very precious in God's sight. He then speaks to husbands, asking them to live with their wives according to knowledge and to honor them as joint heirs of the grace of life. Christians have read these verses in different ways, and the text has sometimes been misused to excuse mistreatment.\n\nThen he widens out to everyone: be like-minded, compassionate, humble. Do not repay evil for evil. If you suffer for doing right, you are blessed.\n\nAt the center is a line for anyone who is questioned about their faith. “Always be ready to give an answer to everyone who asks you”, with humility and a good conscience. Christ suffered once for sins, the righteous for the unrighteous, to bring us to God. Then comes a hard passage about spirits in prison and the days of Noah, and baptism as an answer of a good conscience toward God."
+        },
+        {
+          "kind": "background",
+          "text": "Peter writes to believers who are being spoken against as evildoers. The advice to wives and husbands is placed inside that setting, with a focus on gentleness and honor. Verses 19 to 20 are among the hardest in the New Testament. Christians have read the spirits in prison as the people of Noah's day, as fallen angels from Genesis 6, or as a picture of Christ's work among the dead. The flood story is in Genesis 6 to 8."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-peter/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A fire is coming, and Peter wants his readers to be ready for it. Don't be astonished at the fiery trial, he says, as though something strange has happened to you. If you share Christ's sufferings, rejoice, because the Spirit of glory and of God rests on you.\n\nBefore that comes a short portrait of a changed life. The readers once spent time doing what the Gentiles want to do, and now their old friends think it strange that they don't run with them, and speak evil of them. They will give an account to the One who is ready to judge the living and the dead.\n\nIn between lies advice for the time that is left. The end of all things is near, so be of sound mind. Above all, be earnest in love, “for love covers a multitude of sins”. Each person has a gift to use in serving others.\n\nIf one suffers for being a Christian, let him not be ashamed but glorify God. Suffer for doing right, not for doing wrong, and entrust your souls to a faithful Creator."
+        },
+        {
+          "kind": "background",
+          "text": "The letter keeps returning to the pressure that ordinary believers felt from neighbors and from the surrounding culture. Verse 6, about the Good News preached to the dead, is read in several ways, and Christians differ on it. Some link it to those who heard the message while alive and have since died. The question in verse 18 quotes Proverbs 11:31, in the form it takes in the Greek Old Testament."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-peter/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The letter closes with a call to shepherds, and the one who gives it describes himself as a fellow elder and a witness of the sufferings of Christ. Shepherd the flock of God, he says, not under compulsion but willingly, not for dishonest gain, not lording it over those entrusted to you but being examples. When the chief Shepherd is revealed, they will receive a crown of glory that doesn't fade.\n\nThen to everyone: clothe yourselves with humility. Humble yourselves under the mighty hand of God so that he may lift you up in due time, “casting all your worries on him, because he cares for you”.\n\nPeter does not leave the danger unnamed. Be sober and watchful. Your adversary, the devil, walks around like a roaring lion, seeking whom he may devour. Stand firm in your faith, knowing that your brothers in the world are going through the same sufferings. After you have suffered a little while, the God of all grace will perfect, establish, strengthen and settle you.\n\nGreetings end it: Silvanus helped write it, she who is in Babylon sends greetings, and so does Mark, my son."
+        },
+        {
+          "kind": "background",
+          "text": "The letter ends with a word to its leaders, then to everyone, then with greetings. Many scholars think Babylon here is a way of speaking about Rome, and tradition links Peter with that city, but the text does not say so directly. Silvanus is often identified with the Silas of Acts 15 to 18. Mark is usually identified with John Mark, linked by tradition to the second Gospel. Psalm 22 also uses the picture of a roaring lion."
+        }
+      ]
     }
   ]
 }

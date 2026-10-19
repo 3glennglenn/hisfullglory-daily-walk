@@ -22,6 +22,24 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:2-john/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A short note with a warm start. The elder writes to the chosen lady and her children, whom he loves in truth, and not he only but all who know the truth. Some take the lady to be a woman and her household, others a congregation.\n\nHis joy is plain: he has found some of her children walking in truth. And his request is small but large. Let us love one another. This is love, that we walk according to his commandments, and that is the commandment you heard from the beginning.\n\nThen a warning. Many deceivers have gone out into the world, those who do not confess that Jesus Christ came in the flesh. Watch yourselves. Anyone who does not remain in the teaching of Christ does not have God.\n\nVerses 10 and 11 tell the readers not to receive such a person into the house. Read in their setting, they concern traveling teachers who spread this teaching, not a general rule of hostility.\n\nThe elder has more to say but hopes to come and speak “face to face”."
+        },
+        {
+          "kind": "background",
+          "text": "The writer calls himself only the elder. Tradition links this note to the apostle John, and its language and themes are close to those of 1 John, so many scholars think the same person or circle wrote them. In the first Christian centuries, traveling teachers depended on the hospitality of local believers, and that is the setting for the warning in verses 10 and 11."
+        }
+      ]
     }
   ]
 }

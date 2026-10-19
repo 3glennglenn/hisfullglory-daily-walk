@@ -184,6 +184,78 @@
           "text": "The writer draws on the tabernacle laws of Leviticus 16 and the covenant ceremony in Exodus 24. The sacrificial language is difficult for many modern readers, and Christians have understood Christ’s death in several ways, with different pictures of how it takes away sin. The author plays on the idea of a will, which takes effect at a death. The author is unknown, and the letter is usually dated to the first century, with some placing it before the temple was destroyed in AD 70."
         }
       ]
+    },
+    {
+      "id": "ai:hebrews/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A priest stands at the altar, and his work is never finished. Day by day he offers the same sacrifices, and the writer says they can never take away sins. Then a different figure enters the story. Christ comes into the world saying he has come to do God's will, and by that will we have been sanctified through the offering of his body once for all. He offered one sacrifice for sins forever, and then he sat down.\n\nFrom that picture comes an invitation: since there is a new and living way into the holy place, draw near with a true heart, hold fast to hope, and keep meeting together to spur one another on to love and good works.\n\nTwo weights follow. One is a stern warning about willful sin. The other is a memory of the readers' own past, when they endured a great struggle with sufferings. The chapter ends with a call to endurance: “we are not of those who shrink back”."
+        },
+        {
+          "kind": "background",
+          "text": "Hebrews reads like a sermon to Christians under pressure, and its author is unknown. Here the long argument about Christ as the great priest reaches its high point, and the writer turns from teaching to urging. The sacrifices of the law are a shadow, and Christ's one offering is the reality. The warnings echo 6:4 to 6, and the call to endure leads straight into the roll call of faith in chapter 11."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "First the definition, then the gallery. “Now faith is assurance of things hoped for, proof of things not seen.” And the writer goes on to show it in people.\n\nAbel, Enoch and Noah come first. Then Abraham, who went out not knowing where he went, and lived in tents in the land of promise because he was looking for a city whose builder is God. Sarah received power to conceive. Isaac, Jacob and Joseph each look ahead. Moses' parents hide their child, and Moses himself chooses to share ill treatment with God's people rather than enjoy the treasures of Egypt. The Red Sea is crossed, Jericho's walls fall, and Rahab is spared.\n\nThen the writer says that time would fail him. Some conquered kingdoms; others were tortured, stoned and homeless. All of them were commended for their faith, and none received the promise. God has provided something better, so that they would not be made perfect apart from us."
+        },
+        {
+          "kind": "background",
+          "text": "The writer is speaking to readers who are tempted to give up, so he gathers the witnesses of their own Scriptures. Nearly every name comes from the Old Testament, from Genesis (see Genesis 4 to 22) through Exodus and Joshua to the prophets and the time of persecution. The chapter answers the call to endure at the end of chapter 10 and opens the way for the race of chapter 12. Many scholars date the letter before the year 70."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Picture a stadium. The stands are full, and the runner on the track is tired. The writer says we are surrounded by “a cloud of witnesses”, the people of chapter 11, so lay aside every weight and run with perseverance, looking to Jesus, who for the joy set before him endured the cross.\n\nThe weariness is real, and the writer names it. Hard times are called discipline, the way a father trains a child, and it seems painful at the time but yields the peaceful fruit of righteousness. Lift up the hands that hang down. Follow peace. Do not be like Esau, who sold his birthright for one meal and later found no place for a change of mind.\n\nThen two mountains. Sinai burned with fire, darkness and trumpet, and the people begged to hear no more. But you have come to Mount Zion, to the city of the living God and to Jesus, the mediator of a new covenant. A kingdom that can't be shaken is received, and the closing word is solemn: “our God is a consuming fire”."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter picks up from the heroes of faith in chapter 11 and applies them to readers who are weary and under pressure. The author is unknown, and the readers seem to be Jewish Christians. The two mountains compare the giving of the law at Sinai (see Exodus 19) with the new covenant. Verses 16 and 17 about Esau are hard, and Christians read them differently, some as a warning to take seriously and some as describing a hardened heart."
+        }
+      ]
+    },
+    {
+      "id": "ai:hebrews/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The sermon ends the way a good letter does, with small, close things. Let brotherly love continue. Don't forget to show hospitality to strangers, since some have entertained angels without knowing it. Remember those in prison and those ill-treated. Keep marriage in honor. Be free from the love of money, content with what you have, for God has said he will never leave or forsake.\n\nUnder all the practical advice stands one steady line: “Jesus Christ is the same yesterday, today, and forever.” Teachings may drift, but he does not.\n\nThen the writer turns to the picture he has been drawing all along. Jesus suffered outside the gate, so let's go out to him outside the camp, bearing his reproach, for we have no enduring city here. Offer a sacrifice of praise, and do good and share. A prayer for peace follows, and a few last notes: Timothy has been freed, and the Italians send greetings."
+        },
+        {
+          "kind": "background",
+          "text": "This last chapter is a string of short commands, and then a blessing that mentions Jesus as the great shepherd of the sheep, brought back from the dead. Around verses 10 to 13 the writer returns to the sacrifices and the camp of Israel's wilderness (see Leviticus 16). The words The Italians greet you are read two ways: the writer may be in Italy, or may be sending greetings from Italians elsewhere to readers who may be in Italy. Scholars do not agree."
+        }
+      ]
     }
   ]
 }

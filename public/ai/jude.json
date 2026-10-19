@@ -22,6 +22,24 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:jude/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jude meant to write about something happy. He was very eager, he says, to write about our common salvation. But something forced his hand. Certain men have crept in secretly, ungodly people who turn the grace of God into indecency and deny our only Master and Lord. So he writes instead to urge the readers to “contend earnestly for the faith which was once for all delivered to the saints”.\n\nTo show how serious it is, he reaches back through history. People saved out of Egypt who later did not believe were destroyed. Angels who left their dwelling are kept in everlasting bonds for judgment. Sodom and Gomorrah stand as an example. Then come sharp images for the intruders: hidden reefs, clouds without water, trees without fruit, wandering stars.\n\nBut the end is about the others. Beloved, build yourselves up in your most holy faith, pray in the Holy Spirit, and keep yourselves in God's love. Have compassion on some, save others, snatching them from the fire. And the last words are a doxology to the God who is able to keep them from stumbling."
+        },
+        {
+          "kind": "background",
+          "text": "The writer is Jude, the brother of James, and tradition links him to a brother of Jesus; the date is debated. Many scholars think verses 14 and 15 draw on 1 Enoch, a Jewish writing that most Christian traditions do not include in their Bibles. The warnings are about teachers inside the community, and the strong language there should not be read as a verdict on any people. Parts of Jude closely match 2 Peter 2."
+        }
+      ]
     }
   ]
 }

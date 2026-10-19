@@ -22,6 +22,96 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:1-john/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The letter begins with a hand. The writer says: that which we have heard, that which we have seen with our eyes, that which our hands touched, concerning the Word of life. This is no rumor. The life was revealed, they saw it, and they now declare it so that others may share the same fellowship, a fellowship with the Father and with his Son, Jesus Christ. They write so that their joy may be fulfilled.\n\nThe message is simple. “God is light, and in him is no darkness at all.” So anyone who says he has fellowship with God and keeps walking in darkness lies. But if we walk in the light, as he is in the light, we have fellowship with one another, and the blood of Jesus his Son cleanses us from all sin.\n\nThe chapter closes with an honest turn. If we say we have no sin, we deceive ourselves. If we confess our sins, God is faithful and righteous to forgive us and to cleanse us from all unrighteousness. To say we have not sinned makes him a liar."
+        },
+        {
+          "kind": "background",
+          "text": "The letter carries no name and no greeting, and its first lines echo the opening of John's Gospel. Tradition links it to the apostle John, and many scholars think it came from the same circle as the Gospel. It is usually dated to the end of the first century. The readers are Christians, and the letter seems to address a split in their community. Light and darkness are also major themes in John 1 and John 3."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-john/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Little children, I'm writing so that you may not sin. That is how the chapter begins, and in the same breath comes the comfort: if anyone sins, we have a Counselor with the Father, Jesus Christ, the righteous, and he is the atoning sacrifice for our sins, and not for ours only but for the whole world.\n\nThe writer then asks how anyone knows God. By keeping his commandments, and above all by love. It is an old commandment and a new one, because the darkness is passing away and the true light already shines. Whoever says he is in the light but hates his brother is still in darkness.\n\nNext he speaks to children, fathers and young men, naming what each of them knows or has overcome. Then a warning: “Don’t love the world or the things that are in the world”. The world is passing away, but the one who does God's will remains forever.\n\nThe last section is about those who left. Many antichrists have arisen, and they went out from us. But you have an anointing from the Holy One. Remain in him."
+        },
+        {
+          "kind": "background",
+          "text": "The community behind this letter had been divided, and some had left. The writer calls them antichrists because they denied that Jesus is the Christ. Christians have read the term in different ways over the years, and this passage is among the earliest places where it appears. The world here does not mean creation, which God made, but a way of life set against God. The commandment to love echoes John 13."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-john/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "“See how great a love the Father has given to us, that we should be called children of God!” The writer says it as if stopping in wonder. Now we are children of God, and what we will be has not yet been revealed, but when he is revealed we will be like him, for we will see him just as he is.\n\nThen the letter turns firm. Sin is lawlessness. The Son of God was revealed to take away sins, and to destroy the works of the devil. Whoever is born of God does not go on sinning. Christians read these verses in different ways; many take them to describe a settled practice of sin, since chapter 1 says that anyone who claims to have no sin deceives himself.\n\nThe center of the chapter is love. Cain murdered his brother, but we have passed out of death into life because we love. Christ laid down his life for us, so we ought to lay down our lives for the brothers. Let's love not in word only but in deed and truth."
+        },
+        {
+          "kind": "background",
+          "text": "The writer is explaining how to tell who truly belongs to God, and he points to love and to righteousness. The reference to Cain is to Genesis 4. The chapter speaks about God's children and the devil's children in strong terms, and it is aimed at behavior within the community, not at a nation or a race. Verse 20 is a comfort: God is greater than our hearts and knows all things."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-john/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Not every voice that speaks in God's name is from God. Beloved, the writer says, test the spirits, because many false prophets have gone out into the world. The test is this: every spirit that confesses that Jesus Christ has come in the flesh is of God. You are of God, little children, and greater is he who is in you than he who is in the world.\n\nThen the letter slows down, almost as if it were setting something precious on the table. Let's love one another, for love is of God. Anyone who loves has been born of God and knows God. Anyone who does not love does not know God, because “God is love”.\n\nHow was it shown? God sent his only Son into the world so that we might live through him. Love is not that we loved God, but that he loved us and sent his Son as the atoning sacrifice for our sins. No one has seen God, but if we love one another, God remains in us.\n\n“perfect love casts out fear”. We love him because he first loved us."
+        },
+        {
+          "kind": "background",
+          "text": "Many scholars think the people who left the community had denied the real humanity of Jesus, which is why the writer insists that he came in the flesh. The letter was written for a community in turmoil, and these words aim to help them tell true teaching from false. The word translated atoning sacrifice appears also in 1 John 2:2, and Christians have understood the meaning of the cross in several ways. Compare John 3 and John 15."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-john/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "This chapter is a letter of assurance. Whoever believes that Jesus is the Christ has been born of God, and whoever loves the Father loves the child born of him. To love God is to keep his commandments, and they are not grievous. “This is the victory that has overcome the world: your faith.”\n\nThe writer then points to Jesus Christ, who came by water and blood, and says that the Spirit testifies, because the Spirit is the truth. Christians read the water and blood in several ways. And the testimony is this: God gave us eternal life, and this life is in his Son.\n\nWhy did he write it? So that those who believe in the name of the Son of God may know they have eternal life. If we ask anything according to his will, he listens to us.\n\nThere is a hard sentence about sin that leads to death, which Christians have read in different ways. The last word is short and sharp: Little children, keep yourselves from idols."
+        },
+        {
+          "kind": "background",
+          "text": "This final chapter pulls the earlier themes together: faith, love, obedience and the confidence of eternal life. It is often seen as the letter's purpose statement in verse 13. The phrase sin leading to death in verse 16 is debated among Christians, and nobody is certain what the writer had in mind. Some think of a final, settled rejection of Christ, others of particular grave acts, and the text does not say. The reference to idols fits a community under pressure to compromise."
+        }
+      ]
     }
   ]
 }

@@ -22,6 +22,96 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:james/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "James does not start with a warm up. He starts with trials. “Count it all joy,” he says to the twelve tribes scattered abroad, when you fall into various temptations, because the testing of your faith produces endurance. If anyone lacks wisdom, ask God, who gives to all liberally and without reproach.\n\nThe chapter keeps turning like that, from the pressure to the person. A believer in humble circumstances and a rich one are both like grass in the heat; both will fade. Blessed is the one who endures, for he will receive the crown of life. And when temptation comes, do not say that God is tempting you. Desire conceives and gives birth to sin, while every good gift and every perfect gift comes from above.\n\nThen the practical heart of the book: be “swift to hear, slow to speak, and slow to anger”. Be doers of the word and not only hearers, like a man who looks in a mirror and forgets. Pure religion is to visit the fatherless and widows in their affliction, and to keep oneself unstained by the world."
+        },
+        {
+          "kind": "background",
+          "text": "James is a short, direct letter to Jewish Christians living outside the land of Israel. Tradition identifies its author as James, the brother of Jesus and a leader of the church in Jerusalem (see Acts 15). Many scholars accept this, and some think it was written later in his name. The dating is debated. It is often compared to the wisdom writings of the Old Testament, such as Proverbs, and to the teaching of Jesus in the Sermon on the Mount."
+        }
+      ]
+    },
+    {
+      "id": "ai:james/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Two men walk into the same gathering. One wears a gold ring and fine clothing. The other is poor, in filthy clothes. Someone tells the first to sit in a good place, and tells the second to stand over there. James stops the scene and asks one question: haven't you shown partiality? God chose the poor of this world to be rich in faith, and yet they have been dishonored. To love your neighbor as yourself is the royal law, and partiality breaks it.\n\nThen James asks a second question that has echoed through Christian history. What good is it if someone says he has faith but no works? If a brother or sister has no clothes or daily food, and you only say Go in peace, what good is that? Faith without works is dead.\n\nHe gives his examples: Abraham offering Isaac, and Rahab receiving the messengers. For as the body apart from the spirit is dead, so “faith apart from works is dead”."
+        },
+        {
+          "kind": "background",
+          "text": "James writes to believers who were treating the rich and the poor differently inside their own gathering. The second half of the chapter is often read next to Paul's teaching that a person is justified by faith, found in Romans 3 to 4 and Galatians 2. Christians have read the two together in different ways. Many say James is describing the kind of faith that is alive and Paul the way a person is put right with God, and they see no contradiction. Others feel the tension more sharply."
+        }
+      ]
+    },
+    {
+      "id": "ai:james/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A bit in a horse's mouth is small. A rudder on a great ship is small, yet it turns the whole vessel wherever the pilot desires. James holds those two pictures up and then says what he means: the tongue is a little member that boasts great things.\n\nHis next picture is a fire. A small spark can set a huge forest ablaze, and “the tongue is a fire.” Every kind of animal, bird and sea creature has been tamed by people, but nobody can tame the tongue. With it we bless God, and with the same mouth we curse people made in God's image. A spring does not send out fresh and bitter water from the same opening.\n\nThen James asks who is wise, and answers by pointing at conduct. Bitter jealousy and selfish ambition lead to confusion. But the wisdom from above is first pure, then peaceful, gentle, reasonable and full of mercy. The fruit of righteousness is sown in peace by those who make peace."
+        },
+        {
+          "kind": "background",
+          "text": "James has just talked about faith that acts, and now he talks about speech, one of the most common actions of all. The chapter opens with a note to would-be teachers, who will receive heavier judgment, and it closes with the contrast between two kinds of wisdom. The word Gehenna in verse 6 is the word Jesus used for the place of judgment, and it was a name taken from a valley outside Jerusalem. Jesus also spoke about words in Matthew 12."
+        }
+      ]
+    },
+    {
+      "id": "ai:james/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Where do fights come from? James asks it plainly, and answers just as plainly: they come from the desires that war inside you. You want and don't have. You fight and make war. You don't have because you don't ask, and when you ask you ask with wrong motives.\n\nHe uses sharp words about friendship with the world, which he calls hostility toward God, and then pivots to grace: God resists the proud but gives grace to the humble. So submit to God. Resist the devil, and he will flee. “Draw near to God, and he will draw near to you.” Cleanse your hands, purify your hearts, and humble yourselves, and he will exalt you.\n\nThe chapter closes with two warnings about the way people talk and plan. Do not speak against one another, because only one is lawgiver and judge. And do not plan next year's profit as if the future were yours, for you are “a vapor that appears for a little time and then vanishes away”. Instead, say, If the Lord wills."
+        },
+        {
+          "kind": "background",
+          "text": "James is still writing to a community that has quarrels, jealousy and pride in it. The sharp language of verses 4 to 9 is meant to wake them up, not to condemn a group of outsiders. The proverb about the proud and the humble is drawn from Proverbs 3. The last verses speak to merchants who plan trips and profits, which fits the scattered Jewish communities James is addressing. The final line about knowing to do good and not doing it sums up the book."
+        }
+      ]
+    },
+    {
+      "id": "ai:james/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "James ends with the voices of people who have not been heard. The wages of the laborers who mowed the fields, kept back by fraud, cry out, and the cries have entered the ears of the Lord of Armies. He speaks sternly to the rich who have lived in luxury while their gold and silver corrode.\n\nThen he turns to the patient. Wait like the farmer who waits for the early and late rain. Don't grumble against one another. Take the prophets as an example of suffering and perseverance, and remember Job, and how the Lord is full of compassion and mercy.\n\nThe last section is about prayer. Is any suffering? Let him pray. Is any cheerful? Let him sing. If someone is sick, call for the elders, who pray and anoint with oil in the name of the Lord. “Confess your sins to one another and pray for one another”. Elijah was a man with a nature like ours, and he prayed, and it did not rain for three years and six months. The letter ends with turning a wanderer back."
+        },
+        {
+          "kind": "background",
+          "text": "This last chapter moves from a warning about wealth to patience and then to prayer. Christians have understood the anointing of the sick in different ways: Catholic and Orthodox churches have a sacrament based on it, while many Protestant churches practice prayer with anointing or simply prayer. The text promises forgiveness and healing in the context of prayer, and it does not give medical advice. The story of Elijah is in 1 Kings 17 and 18."
+        }
+      ]
     }
   ]
 }

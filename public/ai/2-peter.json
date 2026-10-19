@@ -22,6 +22,60 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:2-peter/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A man who knows his time is short writes to remind. Simon Peter greets those who have obtained a faith as precious as his own, and then lists what has been given to them: all things that pertain to life and godliness, through the knowledge of the one who called us, and precious promises, so that through them we may become “partakers of the divine nature”.\n\nBecause of that, he says, add. In your faith, supply moral excellence; in moral excellence, knowledge; then self-control, perseverance, godliness, brotherly affection, and love. A person who lacks these is blind, seeing only what is near and forgetting the cleansing from old sins.\n\nPeter writes because the putting off of his tent is coming swiftly, and he wants them to remember after he is gone.\n\nThe final section is about what stands behind the message. They did not follow cleverly invented stories. He and others saw Christ's majesty and heard the voice from heaven on the holy mountain. And no prophecy of Scripture came by the will of man, but holy men spoke, moved by the Holy Spirit."
+        },
+        {
+          "kind": "background",
+          "text": "The author names himself as Simon Peter, and the letter refers to a coming departure. Many scholars doubt that Peter wrote it and think it was written in his name; others hold that he did, and tradition has long linked it to him. Its date is debated. The scene on the holy mountain is the transfiguration, told in Matthew 17, Mark 9 and Luke 9. The phrase about divine nature has been read differently in Eastern and Western Christian traditions."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-peter/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A warning with a long memory. Peter says there were false prophets among the people in the past, and there will be false teachers among you now. They will quietly bring in destructive ideas, many will follow their immoral ways, and in their greed they will exploit the believers with false words.\n\nTo show that judgment is not new, he walks through the past. God did not spare the angels who sinned. He did not spare the ancient world, but kept Noah, a preacher of righteousness, with seven others. He turned Sodom and Gomorrah to ashes as an example, yet he rescued righteous Lot, who was tormented day after day by the lawless deeds he saw. The Lord knows how to deliver the godly and to keep the unrighteous under punishment.\n\nThen the portrait gets sharp. These teachers are “wells without water”, promising freedom while they are slaves of corruption. They followed the way of Balaam, whose madness was stopped by a speechless donkey speaking with a human voice. And for those who knew the way of righteousness and turned back, the last state is worse than the first."
+        },
+        {
+          "kind": "background",
+          "text": "The language of this chapter is some of the harshest in the New Testament, and it is aimed at teachers inside the community who exploited others, not at a people or a group of outsiders. Its examples come from Genesis 6 to 19 and Numbers 22 to 24. Much of it closely parallels the letter of Jude, and many scholars think one writer used the other. How these verses relate to the question of losing faith is debated, and Christians read it in several ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-peter/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-19",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Where is the promise of his coming? That is the question some will ask, and Peter writes this second letter to prepare the readers for it. In the last days, he says, mockers will come, walking after their own desires, saying that all things continue as they were from the beginning of creation.\n\nPeter answers by pointing backward. The heavens and earth were formed by the word of God, and the world of that time was flooded and perished. By the same word the present heavens and earth are stored up for fire.\n\nThen he speaks about time itself. “one day is with the Lord as a thousand years”, and a thousand years as one day. The Lord is patient, not wishing that anyone should perish, but that all should come to repentance. The day of the Lord will come like a thief.\n\nSo how should we live? In holy living and godliness, looking for new heavens and a new earth in which righteousness dwells. Peter notes that some things in Paul's letters are hard to understand, and ends with a call to grow in grace."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter answers people who doubted that Christ would return, since time had passed. Christians read the language of fire and the dissolving of the elements in different ways: some as the destruction of the present creation and its replacement, and some as a purifying renewal of it. The flood is in Genesis 6 to 8. The remark that Paul's letters were already treated as Scripture is noted by many scholars. The authorship question is explained under chapter 1."
+        }
+      ]
     }
   ]
 }
