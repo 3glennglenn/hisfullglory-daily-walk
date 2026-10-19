@@ -9,10 +9,7 @@ import { shopUrl } from "../config";
 import {
   approved,
   assertReleasable,
-  businessAddress,
   entity,
-  registration,
-  responseTarget,
   supportEmail,
   supportEmailReady,
 } from "../data/legal";
@@ -22,8 +19,6 @@ assertReleasable(process.env.VERCEL_ENV);
 
 // A shop address, not a path of this site, so the /pages/ redirect rule is not involved.
 const shopContact = `${shopUrl}/pages/contact`;
-// "We read every message." is shown only once the founder has confirmed a response target.
-const targetConfirmed = !responseTarget.includes("[CONFIRM");
 ---
 
 <Base
@@ -35,7 +30,6 @@ const targetConfirmed = !responseTarget.includes("[CONFIRM");
     <div class="wrap prose contact">
       {!approved && <DraftBanner />}
       <h1>Contact us</h1>
-      {targetConfirmed && <p class="muted">We read every message.</p>}
 
       {
         supportEmailReady ? (
@@ -52,7 +46,6 @@ const targetConfirmed = !responseTarget.includes("[CONFIRM");
               Tell us the email address you sign in with and what you need.
               Never send your sign-in code or any password.
             </p>
-            <p>We aim to reply within {responseTarget}.</p>
           </>
         ) : (
           <>
@@ -83,7 +76,8 @@ const targetConfirmed = !responseTarget.includes("[CONFIRM");
 
       <h2 id="who-we-are">Who we are</h2>
       <p>
-        HisFullGlory is run by {entity}, registration number {registration}, {businessAddress}.
+        HisFullGlory is run by {entity}. We do not publish a postal address: email is
+        the way to reach us.
       </p>
     </div>
   </section>
@@ -97,9 +91,6 @@ const targetConfirmed = !responseTarget.includes("[CONFIRM");
   h2 {
     margin: 48px 0 8px;
     scroll-margin-top: 16px;
-  }
-  .muted {
-    margin-top: 16px;
   }
   ul {
     margin: 10px 0 0;

@@ -6,14 +6,13 @@
 // site/src/data/legal.ts; the page is a noindex draft until `approved` is true there.
 import LegalPage from "../layouts/LegalPage.astro";
 import {
-  businessAddress,
+  ageNoAccount,
+  ageRule,
   entity,
+  entityName,
   governingLaw,
   lastUpdated,
-  minimumAge,
   postLicence,
-  registration,
-  responseTarget,
   termsVersion,
 } from "../data/legal";
 
@@ -49,14 +48,15 @@ const sections = [
 
   <h2 id="who-we-are">Who we are</h2>
   <p>
-    HisFullGlory is run by {entity}, registration number {registration}, {businessAddress}.
+    HisFullGlory is run by {entity}. In these terms, “HisFullGlory”, “we” and
+    “us” mean {entityName}.
   </p>
 
   <h2 id="who-can-use">Who can use HisFullGlory</h2>
   <p>
-    You must be {minimumAge} or older to create an account. Reading the Bible,
-    the Daily Walk and your private journal do not need an account.
+    {ageNoAccount}
   </p>
+  <p>{ageRule}</p>
 
   <h2 id="your-account">Your account</h2>
   <p>
@@ -84,8 +84,8 @@ const sections = [
   <p>
     Anyone signed in can report a post. When two different people report the
     same post, it is hidden from other readers until a person has reviewed it.
-    The reviewer can restore it, keep it hidden or remove it. We aim to respond
-    within {responseTarget}. We never tell the author who reported.
+    The reviewer can restore it, keep it hidden or remove it. We never tell the
+    author who reported.
   </p>
 
   <h2 id="scripture">Scripture, explanations and community voices</h2>

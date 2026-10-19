@@ -11,8 +11,9 @@ import { gatedLegalPages } from "../src/lib/pages.ts";
 
 const { approved, assertReleasable, supportEmail, supportEmailReady, termsVersion } = legal;
 const legalPages = ["/privacy", "/terms", "/contact", "/delete-account"];
-/** The pages that state facts the founder still has to confirm. /delete-account states none. */
-const pagesWithFacts = ["/privacy", "/terms", "/contact"];
+/** The pages that print the approval date (`lastUpdated`), the one value that stays a marker until the founder approves.
+ *  /contact and /delete-account print no open fact. */
+const pagesWithFacts = ["/privacy", "/terms"];
 
 /** Where a site address lives in the build: "/privacy" is dist/privacy/index.html. */
 const builtFile = (address: string) => `dist${address.replace(/\/$/, "")}/index.html`;
@@ -164,6 +165,22 @@ test("legal page copy follows the copy rules", () => {
     assert.ok(!/download (the|our) app/i.test(text), `${address}: the app is a web app`);
     assert.ok(!text.includes("!"), `${address}: no exclamation marks`);
   }
+});
+
+test("one age rule: the terms and the privacy policy print it, and the app label starts the same way", () => {
+  const squash = (text: string) => text.replace(/\s+/g, " ").trim();
+  for (const address of ["/terms", "/privacy"]) {
+    const text = squash(textOf(read(address)));
+    assert.ok(text.includes(legal.ageNoAccount), `${address}: reading and the journal need no account`);
+    assert.ok(text.includes(legal.ageRule), `${address}: the age rule`);
+  }
+  // The short label in the app names the same ages as the full rule.
+  for (const part of ["at least 13", "at least 16", "13 to 15", "permission from a parent or guardian"]) {
+    assert.ok(legal.ageRule.includes(part), `ageRule says "${part}"`);
+    assert.ok(legal.ageLabel.includes(part), `ageLabel says "${part}"`);
+  }
+  const app = readFileSync("../src/platform/auth.tsx", "utf8");
+  assert.ok(/\{ageLabel\}\. I accept the/.test(app), "the app's terms label starts with ageLabel");
 });
 
 test("the terms repeat the community rules of the app and the Scripture sentences of the About page", () => {

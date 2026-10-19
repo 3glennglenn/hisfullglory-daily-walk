@@ -2,24 +2,26 @@
 //
 // This file imports nothing, because the site tests and the app's own tests read it too.
 //
-// HOW THE FOUNDER FINISHES THE PAGES
-//   1. Replace each "[CONFIRM: ...]" marker below with the real wording. Two kinds:
-//      - a fact dropped into a sentence (entity, registration, businessAddress, minimumAge,
-//        responseTarget, lastUpdated, regions): write only the words, for example "16".
-//      - a whole passage (governingLaw, rights, supervisoryAuthority, legalBasis, transfers,
-//        retention, backups, logRetention, noSale, postLicence): write the full sentence or
-//        sentences.
-//   2. Set supportEmailReady to true only when mail sent to the support address reaches a person.
-//   3. Set approved to true. The pages then lose their draft banner and noindex, join the
+// STATE (2026-10-19): the founder gave his values on 2026-10-19 (his words are in the plan 01-10
+// notes). Two markers are left on purpose:
+//   - lastUpdated: it becomes the date the founder approves the text.
+//   - signInRecords: Supabase's documentation does not state how long it keeps the sign-in audit
+//     log, so the sentence waits for a figure (read it from the dashboard, or turn the log off).
+// `approved` stays false until the founder has read the finished pages on the preview and said so.
+//
+// HOW TO FINISH THE PAGES
+//   1. Replace the remaining "[CONFIRM: ...]" markers with the real wording.
+//   2. Set approved to true. The pages then lose their draft banner and noindex, join the
 //      sitemap, and a production build is allowed.
-// Nothing below is a legal fact until the founder has replaced its marker. Never invent one.
+// Nothing below is a legal fact until the founder has accepted it. Never invent one.
 
 /** False until the founder has approved the final text. See assertReleasable. */
 export const approved = false;
 
 /** False until mail to the support address is known to arrive (GATE-03). While false, no page
- *  prints the address or links to it. */
-export const supportEmailReady = false;
+ *  prints the address or links to it. True since 2026-10-19: the founder's test mail to
+ *  support@hisfullglory.com arrived ("de test mail is binnen"). */
+export const supportEmailReady = true;
 export const supportEmail = "support@hisfullglory.com";
 
 /** Must equal TERMS_VERSION in src/platform/auth.tsx (site/tests/legal.test.ts checks it). */
@@ -32,42 +34,111 @@ function need(name: string, value: string): string {
   return value;
 }
 
-// Who we are (P1 to P3).
-export const entity = need("entity", "[CONFIRM: legal entity name]");
-export const registration = need("registration", "[CONFIRM: registration number]");
-export const businessAddress = need("businessAddress", "[CONFIRM: business address]");
+// Who we are (P1 to P3). The founder, 2026-10-19: no company and no KvK registration yet, so the
+// service is run by a private person ("you can use my full name Glennysan Read"). No registration
+// number and no postal address are published; contact is by email. Update `entity` when a company
+// is registered, and add the registration number and address then.
+export const entityName = need("entityName", "Glennysan Read");
+export const entity = need("entity", `${entityName}, a private person in the Netherlands`);
 
-// P4: proposed 16 (the Dutch age of digital consent). The terms, the privacy policy, the
-// acceptance line in the app and the store questionnaires must all say the same.
-export const minimumAge = need("minimumAge", "[CONFIRM: minimum age, proposed 16]");
+// P4: the age rule. The founder wants the widest reach the law allows: no limit for reading, 13 for
+// an account, 16 in the EU/EEA (or 13 to 15 with a parent's or guardian's permission). The terms,
+// the privacy policy, the acceptance label in the app and docs/APP_STORES.md use these words.
+// This is the founder's decision, not legal advice.
+/** What needs no account. */
+export const ageNoAccount = need(
+  "ageNoAccount",
+  "Reading the Bible, the Daily Walk and your private journal do not need an account and have no age limit.",
+);
+/** The rule for an account and the community (terms and privacy policy). */
+export const ageRule = need(
+  "ageRule",
+  "To create an account and take part in the community you must be at least 13. In the EU or EEA (the European Union plus Iceland, Liechtenstein and Norway) you must be at least 16, or 13 to 15 with permission from a parent or guardian.",
+);
+/** The same rule as the start of the checkbox sentence in the app ("<label>. I accept the ..."). */
+export const ageLabel = need(
+  "ageLabel",
+  "I am at least 13 (in the EU or EEA: at least 16, or 13 to 15 with permission from a parent or guardian)",
+);
 
-// P5, P6.
-export const responseTarget = need("responseTarget", "[CONFIRM: support response target]");
+// P6: the date of the founder's approval. Stays a marker until he approves.
 export const lastUpdated = need("lastUpdated", "[CONFIRM: date]");
 
-// P7, P8: the law and the legal bases.
-export const governingLaw = need("governingLaw", "[CONFIRM: governing law and courts]");
-export const rights = need("rights", "[CONFIRM: rights wording]");
-export const supervisoryAuthority = need("supervisoryAuthority", "[CONFIRM: supervisory authority wording]");
-export const legalBasis = need("legalBasis", "[CONFIRM: legal basis wording]");
-export const transfers = need("transfers", "[CONFIRM: international transfer wording]");
+// P7, P8: the law and the legal bases. Drafts proposed by Claude on 2026-10-19; the founder accepts
+// or changes them on the preview. "We" is the person named in `entity`.
+export const governingLaw = need(
+  "governingLaw",
+  "These terms are governed by Dutch law. A dispute goes to the competent court in the Netherlands.",
+);
+export const rights = need(
+  "rights",
+  `You can ask us for a copy of your data, to correct it or to delete it. You can delete your account yourself in the app. For anything else, ${supportEmailReady ? `write to ${supportEmail}` : "use the contact page"}.`,
+);
+export const supervisoryAuthority = need(
+  "supervisoryAuthority",
+  "If you think we handle your personal data wrongly, you can complain to the Dutch Data Protection Authority (Autoriteit Persoonsgegevens).",
+);
+export const legalBasis = need(
+  "legalBasis",
+  "We use your email address to give you an account and to sign you in, because we cannot offer the service without it. We keep what you publish because you asked us to publish it. We keep reports and review records to keep the community safe.",
+);
+export const transfers = need(
+  "transfers",
+  "If one of the companies named above handles data outside the European Economic Area, it does so under the safeguards the law requires, such as the European Commission's standard contractual clauses.",
+);
 
 // P9: how long things are kept. Deleting an account removes the server data at once (migration
-// 007); how long sign-in records, server logs and backups last is not known from the code.
-export const retention = need("retention", "[CONFIRM: retention periods for sign-in records and server logs]");
-export const logRetention = need("logRetention", "[CONFIRM: log retention]");
-export const backups = need("backups", "[CONFIRM: backup wording]");
+// 007). The figures below come from the providers' own pages, read on 2026-10-19, for the plans we
+// use today (Supabase Free, Vercel Hobby). Update them if a plan changes (the founder plans Vercel
+// Pro around mid-November 2026: runtime logs are then kept 1 day). The addresses are written
+// without the scheme on purpose: tests/third-parties.test.ts treats every address with a scheme
+// as a contact the app makes.
+//   Supabase API and database logs, Free plan: 1 day.
+//     supabase.com/pricing ("Platform Security and Compliance", "Log retention (API & Database)": 1 day for Free)
+//     supabase.com/docs/guides/telemetry/logs ("Retention depends on your pricing plan")
+//   Supabase sign-in (auth) audit log: its page says it is kept in external log storage and, if the
+//     "Write audit logs to the database" switch is on, in auth.audit_log_entries; it states no
+//     period for either. supabase.com/docs/guides/auth/audit-logs  -> the marker stays.
+//   Supabase backups, Free plan: none. supabase.com/docs/guides/platform/backups ("We
+//     automatically back up all Pro, Team, and Enterprise Plan projects") and supabase.com/pricing
+//     ("Automatic backups": "Not included in free"). Pro would keep 7 days of daily backups.
+//   Vercel runtime (request) logs, Hobby plan: 1 hour.
+//     vercel.com/docs/runtime-logs ("Hobby 1 hour of logs") and vercel.com/docs/limits
+//     ("Runtime logs are stored for 1 hour on Hobby, 1 day on Pro, and for 3 days on Enterprise")
+export const retention = need(
+  "retention",
+  "Supabase keeps the logs of our API and database for 1 day on the plan we use.",
+);
+export const signInRecords = need(
+  "signInRecords",
+  "[CONFIRM: how long Supabase keeps the record of sign-in events; its documentation gives no period]",
+);
+export const logRetention = need("logRetention", "Vercel keeps these logs for 1 hour on the plan we use.");
+export const backups = need(
+  "backups",
+  "Supabase does not make automatic backups of projects on its free plan, which is the plan we use today, so Supabase's backup service holds no copy of your data.",
+);
 
-// P10: read from the Supabase, Vercel and Resend dashboards by the founder, never guessed.
+// P10: Supabase read from the project by the orchestrator on 2026-10-16 (fccwqguqhnbayuowmamy is
+// in eu-west-1, Ireland). Vercel serves the static pages from its worldwide network. Resend: the
+// founder will create the sending domain in the EU (Ireland) region; confirm it is done before he
+// approves the text.
 export const regions = {
-  supabase: need("regions.supabase", "[CONFIRM: hosting region of Supabase]"),
-  vercel: need("regions.vercel", "[CONFIRM: hosting region of Vercel]"),
-  resend: need("regions.resend", "[CONFIRM: hosting region of Resend]"),
+  supabase: need("regions.supabase", "Ireland, in the European Union."),
+  vercel: need(
+    "regions.vercel",
+    "Vercel's worldwide network. Pages are delivered from a server near the reader, which can be outside the European Economic Area.",
+  ),
+  resend: need("regions.resend", "Ireland, in the European Union. This is the region we set for our sign-in email domain."),
 };
 
-// P13, P14: business statements, not facts the code can prove.
-export const noSale = need("noSale", '[CONFIRM: "We do not sell your data."]');
-export const postLicence = need("postLicence", "[CONFIRM: licence to posts]");
+// P13, P14: business statements, not facts the code can prove. Proposed by Claude, accepted or
+// changed by the founder on the preview.
+export const noSale = need("noSale", "We do not sell your data.");
+export const postLicence = need(
+  "postLicence",
+  "You keep ownership of what you post. By publishing it you give HisFullGlory permission to show it in the app to the people you chose, for as long as it is online. When you delete a post, that permission ends.",
+);
 
 export type Processor = {
   id: string;

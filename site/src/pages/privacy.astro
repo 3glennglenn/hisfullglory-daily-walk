@@ -6,17 +6,18 @@
 // a noindex draft until `approved` is true there.
 import LegalPage from "../layouts/LegalPage.astro";
 import {
+  ageNoAccount,
+  ageRule,
   backups,
-  businessAddress,
   entity,
+  entityName,
   lastUpdated,
   legalBasis,
-  minimumAge,
   noSale,
   processors,
-  registration,
   retention,
   rights,
+  signInRecords,
   supervisoryAuthority,
   transfers,
 } from "../data/legal";
@@ -84,7 +85,7 @@ const storage = [
 
   <h2 id="who-we-are">Who we are</h2>
   <p>
-    HisFullGlory is run by {entity}, registration number {registration}, {businessAddress}.
+    HisFullGlory is run by {entity}. In this policy, “we” and “us” mean {entityName}.
     You can reach us on the <a href="/contact">contact page</a>.
   </p>
 
@@ -208,6 +209,7 @@ const storage = [
     account in the app also removes what that account saved on that device.
   </p>
   <p>{retention}</p>
+  <p>{signInRecords}</p>
   <p>{backups}</p>
 
   <h2 id="legal-basis">Legal basis and transfers</h2>
@@ -229,8 +231,12 @@ const storage = [
 
   <h2 id="age">Age</h2>
   <p>
-    HisFullGlory is for people aged {minimumAge} and over. If you think a child
-    has made an account, <a href="/contact">contact us</a> and we will delete it.
+    HisFullGlory is not made for children. {ageNoAccount}
+  </p>
+  <p>{ageRule}</p>
+  <p>
+    If you think someone who is too young has made an account,
+    <a href="/contact">contact us</a> and we will delete it.
   </p>
 
   <h2 id="changes">Changes</h2>
