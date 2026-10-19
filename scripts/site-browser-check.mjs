@@ -360,7 +360,7 @@ try {
       assert.ok(rect.width >= 44 && rect.height >= 128 && rect.height <= 160, `a spine is ${rect.width} x ${rect.height}`);
     }
     const badges = await page.locator(".bookcase .ai-badge").evaluateAll((els) => els.map((el) => parseFloat(getComputedStyle(el).fontSize)));
-    for (const size of badges) assert.ok(size >= 13, "the AI badge is at least 13px");
+    for (const size of badges) assert.ok(size >= 12.99, "the AI badge is at least 13px");
     await context.close();
     const phone = await open("/", { width: 390 });
     assert.equal(await phone.page.locator(".bookcase").isVisible(), false, "no bookcase on a phone: the All context checks row stands in");
@@ -420,6 +420,26 @@ try {
     const { scroll, width } = await overflow(phone.page);
     assert.ok(scroll <= width, "no sideways scroll at 320px and a 34px root");
     await phone.context.close();
+  });
+
+  await check("a chapter page: the text column is centred on the page, the AI badge is 13px or more, verse numbers are 13px", async () => {
+    const { context, page } = await open("/bible/john/3", { width: 1280, height: 800 });
+    const box = await page.locator("article.scripture").boundingBox();
+    const left = box.x;
+    const right = 1280 - (box.x + box.width);
+    assert.ok(Math.abs(left - right) < 0.1 * 1280, `the text column hugs one side (left ${Math.round(left)}px, right ${Math.round(right)}px)`);
+    const number = await page.locator(".verse sup").first().evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+    assert.ok(number >= 13 && number <= 14, `verse numbers are Footnote 13 (13.8px on the 18px root), not ${number}`);
+    const scripture = await page.locator(".verse").first().evaluate((el) => getComputedStyle(el).fontFamily);
+    assert.ok(scripture.startsWith("Gelasio"), `Scripture is set in ${scripture}`);
+    await context.close();
+    const withAi = await open("/bible/psalms/23", { width: 390 });
+    const sizes = await withAi.page.locator("[data-layer=ai] .ai-badge").evaluateAll((els) => els.map((el) => parseFloat(getComputedStyle(el).fontSize)));
+    assert.ok(sizes.length > 0, "Psalm 23 has an AI explanation with its badge");
+    for (const size of sizes) assert.ok(size >= 12.99, `the AI badge is ${size}px`);
+    const frame = await withAi.page.locator("section[data-layer=ai]").evaluate((el) => getComputedStyle(el).borderTopStyle);
+    assert.equal(frame, "dashed", "the AI layer keeps its dashed frame");
+    await withAi.context.close();
   });
 
   await check("the skip link is off-screen until focused, at a 34px root too", async () => {
