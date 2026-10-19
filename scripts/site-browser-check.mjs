@@ -304,9 +304,7 @@ try {
   });
 
   await check("at a 34px root (200%) the header, the open menu and the footer do not overflow at 390 and 320px", async () => {
-    // The home page's cards still overflow at this size (plan 12 redoes them; deferred-items.md),
-    // so the header and the footer are checked element by element, and the whole page on pages
-    // whose body is not a card grid.
+    // The header and the footer are checked element by element, and then the whole page.
     const beyond = (page) =>
       page.evaluate(() => {
         const client = document.documentElement.clientWidth;
@@ -321,12 +319,51 @@ try {
         assert.deepEqual(await beyond(page), [], `${path} at ${width}px: header or footer reaches past the screen`);
         await page.locator("header summary").click();
         assert.deepEqual(await beyond(page), [], `${path} at ${width}px: the open menu reaches past the screen`);
-        if (path !== "/") {
-          const { scroll, width: client } = await overflow(page);
-          assert.ok(scroll <= client, `${path} at ${width}px and a 34px root scrolls sideways (${scroll} > ${client})`);
-        }
+        const { scroll, width: client } = await overflow(page);
+        assert.ok(scroll <= client, `${path} at ${width}px and a 34px root scrolls sideways (${scroll} > ${client})`);
         await context.close();
       }
+  });
+
+  await check("home on a phone: the body's Open the app starts below the first screen, and is the only filled one (W1)", async () => {
+    const { context, page } = await open("/", { width: 390 });
+    const filled = page.locator("main a.button", { hasText: "Open the app" });
+    assert.equal(await filled.count(), 1, "one filled Open the app in the body");
+    const box = await filled.boundingBox();
+    const scrollY = await page.evaluate(() => window.scrollY);
+    assert.ok(box.y + scrollY >= 844, `the button starts at ${Math.round(box.y + scrollY)}px, inside the first 844px screen`);
+    assert.equal(await page.locator("header a:visible", { hasText: "Open the app" }).count(), 0, "none in the bar at 390px");
+    await context.close();
+  });
+
+  await check("home at 1280px: the bookcase stands beside the cover, six spines, the AI one marked", async () => {
+    const { context, page } = await open("/", { width: 1280, height: 800 });
+    const cover = await page.locator(".cover").boundingBox();
+    const bookcase = await page.locator(".bookcase").boundingBox();
+    assert.ok(bookcase.x >= cover.x + cover.width, "the bookcase is to the right of the cover");
+    assert.ok(bookcase.y < cover.y + cover.height, "and beside it, not below it");
+    assert.equal(await page.locator(".bookcase a.spine").count(), 6);
+    for (const spine of await page.locator(".bookcase a.spine").all()) {
+      const rect = await spine.boundingBox();
+      assert.ok(rect.width >= 44 && rect.height >= 128 && rect.height <= 160, `a spine is ${rect.width} x ${rect.height}`);
+    }
+    const badges = await page.locator(".bookcase .ai-badge").evaluateAll((els) => els.map((el) => parseFloat(getComputedStyle(el).fontSize)));
+    for (const size of badges) assert.ok(size >= 13, "the AI badge is at least 13px");
+    await context.close();
+    const phone = await open("/", { width: 390 });
+    assert.equal(await phone.page.locator(".bookcase").isVisible(), false, "no bookcase on a phone: the All context checks row stands in");
+    await phone.context.close();
+  });
+
+  await check("home at 320px and a 34px root: no sideways scroll, and the h1 is not clipped", async () => {
+    const { context, page } = await open("/", { width: 320, rootPx: 34 });
+    const { scroll, width } = await overflow(page);
+    assert.ok(scroll <= width, `scrolls sideways (${scroll} > ${width})`);
+    const clipped = await page.locator("h1").evaluate((el) => el.scrollWidth > el.clientWidth + 1 || el.getBoundingClientRect().right > document.documentElement.clientWidth);
+    assert.equal(clipped, false, "the h1 fits");
+    const cover = await page.locator(".cover").evaluate((el) => el.scrollWidth <= el.clientWidth + 1);
+    assert.equal(cover, true, "the cover holds its content");
+    await context.close();
   });
 
   await check("the skip link is off-screen until focused, at a 34px root too", async () => {
