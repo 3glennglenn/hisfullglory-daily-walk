@@ -39,6 +39,21 @@ with a daily reminder as a notification.
 | Store listing: icon, screenshots, texts, age rating, privacy forms | To do. |
 | Two-account test of the live app (sign-in, posting, private Circles) | Waiting for the founder. |
 
+## Age and audience (founder's decision, 2026-10-19)
+
+The founder wants the widest reach the law allows. Reading the Bible, the Daily Walk and the
+private journal need no account and have no age limit. To create an account and take part in
+the community a person must be at least 13; in the EU or EEA at least 16, or 13 to 15 with
+permission from a parent or guardian. The same words are in the terms of use and the privacy
+policy (`ageRule` in `site/src/data/legal.ts`) and, shortened, in the app's terms checkbox
+(`ageLabel`); `site/tests/legal.test.ts` keeps them together.
+
+For the store questionnaires: target audience 13 and older. The app is not designed for
+children, so the store family programmes (Apple Kids category, Google Play Families) do not
+apply, and the answers about children must say so. This is the founder's decision, not legal
+advice, and it is not an age rating: the stores' content-rating questionnaires still have to
+be filled in at listing time.
+
 ## Account deletion: what it removes
 
 Deleting the auth user removes every row that references it: all foreign keys to
