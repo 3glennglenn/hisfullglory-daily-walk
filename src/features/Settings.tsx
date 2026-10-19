@@ -6,6 +6,7 @@ import { goals } from "../platform/models";
 import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle, Toolbar } from "../ui/Screen";
+import { ConfirmDialog } from "../ui/ConfirmDialog";
 import { supabase } from "../supabase";
 import { config } from "../config";
 // The trust pages, reachable from inside the app: store reviewers look for them here (GATE-02). The site
@@ -66,6 +67,7 @@ export function Settings() {
   const { state, update, notice, recover, storage } = usePlatform();
   const [status, setStatus] = useState("");
   const [backup, setBackup] = useState(false);
+  const [confirmRecover, setConfirmRecover] = useState(false);
   // "Privacy and your data" on You opens /settings#privacy: bring that section into view.
   useEffect(() => {
     const id = location.hash.slice(1);
@@ -171,16 +173,9 @@ export function Settings() {
             <button
               className="secondary"
               disabled={!backup}
-              onClick={() => {
-                if (
-                  window.confirm(
-                    "Preserve current v3 under a recovery key, then recover available v2/v1 data in this profile? If no readable legacy data exists, this starts fresh.",
-                  )
-                )
-                  recover();
-              }}
+              onClick={() => setConfirmRecover(true)}
             >
-              Recover legacy / start fresh…
+              Recover older data
             </button>
           </li>
         )}
@@ -195,6 +190,19 @@ export function Settings() {
       <GroupedList title="About and legal" plain>
         <LegalLinks />
       </GroupedList>
+      {confirmRecover && (
+        <ConfirmDialog
+          title="Recover older data?"
+          body="We keep a copy of your current data, then bring back anything an older version of the app saved on this device. If there is nothing older, you start fresh."
+          actionLabel="Recover older data"
+          safeLabel="Keep things as they are"
+          onAction={() => {
+            setConfirmRecover(false);
+            recover();
+          }}
+          onSafe={() => setConfirmRecover(false)}
+        />
+      )}
     </section>
   );
 }

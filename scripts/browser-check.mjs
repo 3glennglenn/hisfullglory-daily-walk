@@ -226,6 +226,132 @@ try {
     assert.equal(await page.locator("button.entry").count(), 1);
   });
   await check(
+    "deleting a journal entry asks in the app's own dialog: Keep entry, Escape and the backdrop keep it, Delete entry removes it, focus comes back (UI-SPEC A15)",
+    async () => {
+      const browserDialogs = [];
+      const onDialog = (d) => {
+        browserDialogs.push(d.type());
+        void d.dismiss();
+      };
+      page.on("dialog", onDialog);
+      const entries = () =>
+        page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")).entries.map((e) => e.title));
+      const dialog = page.getByRole("dialog", { name: "Delete this private entry?", exact: true });
+      const trigger = page.getByRole("button", { name: "Delete entry", exact: true });
+      const focusedText = () => page.evaluate(() => document.activeElement?.textContent?.trim());
+      try {
+        await go("/journal");
+        await page.getByRole("button", { name: "New entry", exact: true }).click();
+        await page.getByLabel("Title", { exact: true }).fill("Entry for the dialog check");
+        await trigger.click();
+        await dialog.waitFor();
+        assert.equal(
+          await dialog.getByText("It is removed from this device. This cannot be undone.", { exact: true }).count(),
+          1,
+        );
+        assert.deepEqual(await dialog.getByRole("button").allInnerTexts(), ["Delete entry", "Keep entry"]);
+        assert.equal(await dialog.getByRole("button", { name: "Cancel" }).count(), 0, "no button says only Cancel");
+        assert.equal(await focusedText(), "Delete entry", "focus moves into the dialog, onto the action first");
+        assert.ok(await page.evaluate(() => document.activeElement.closest("dialog") !== null));
+        // The safe choice by name.
+        await dialog.getByRole("button", { name: "Keep entry", exact: true }).click();
+        await dialog.waitFor({ state: "detached" });
+        assert.ok((await entries()).includes("Entry for the dialog check"), "Keep entry keeps the entry");
+        assert.equal(
+          await page.evaluate(() => document.activeElement.closest("article") !== null && document.activeElement.textContent.trim()),
+          "Delete entry",
+          "focus returns to the control that opened the dialog",
+        );
+        // Escape is the safe choice.
+        await trigger.click();
+        await dialog.waitFor();
+        await page.keyboard.press("Escape");
+        await dialog.waitFor({ state: "detached" });
+        assert.ok((await entries()).includes("Entry for the dialog check"), "Escape keeps the entry");
+        assert.equal(await focusedText(), "Delete entry");
+        // So is a tap on the dimmed page behind it.
+        await trigger.click();
+        await dialog.waitFor();
+        await page.mouse.click(4, 4);
+        await dialog.waitFor({ state: "detached" });
+        assert.ok((await entries()).includes("Entry for the dialog check"), "the backdrop keeps the entry");
+        // The action removes it; the control that opened the dialog is gone, so focus goes to the page's main region.
+        await trigger.click();
+        await dialog.waitFor();
+        await dialog.getByRole("button", { name: "Delete entry", exact: true }).click();
+        await dialog.waitFor({ state: "detached" });
+        assert.ok(!(await entries()).includes("Entry for the dialog check"), "Delete entry removes the entry");
+        assert.equal(await page.evaluate(() => document.activeElement?.id), "main");
+        assert.deepEqual(browserDialogs, [], "no browser pop-up appeared");
+      } finally {
+        page.off("dialog", onDialog);
+      }
+    },
+  );
+  await check(
+    "Recover older data asks in the app's own dialog; Escape and Keep things as they are leave the data alone",
+    async () => {
+      const c = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: "light", acceptDownloads: true });
+      // The first load of this profile finds a stored state it cannot read, which is what offers the recovery.
+      await c.addInitScript(() => {
+        if (!sessionStorage.getItem("seeded")) {
+          localStorage.setItem("hfg-daily-walk:v3", "not json");
+          sessionStorage.setItem("seeded", "1");
+        }
+      });
+      const p = await c.newPage();
+      p.setDefaultTimeout(10000);
+      const browserDialogs = [];
+      p.on("dialog", (d) => {
+        browserDialogs.push(d.type());
+        void d.dismiss();
+      });
+      try {
+        await p.goto(base + "/settings");
+        await p.locator("main h1").waitFor();
+        const trigger = p.getByRole("button", { name: "Recover older data", exact: true });
+        assert.equal(await p.getByRole("button", { name: /Recover legacy/ }).count(), 0, "the old button name is gone");
+        assert.equal(await trigger.isDisabled(), true, "recovery waits for the backup");
+        await p.getByRole("button", { name: "Export private backup", exact: true }).click();
+        await p.waitForFunction(() => {
+          const b = [...document.querySelectorAll("button")].find((x) => x.textContent.trim() === "Recover older data");
+          return b && !b.disabled;
+        });
+        const dialog = p.getByRole("dialog", { name: "Recover older data?", exact: true });
+        await trigger.click();
+        await dialog.waitFor();
+        assert.equal(
+          await dialog.locator("p").innerText(),
+          "We keep a copy of your current data, then bring back anything an older version of the app saved on this device. If there is nothing older, you start fresh.",
+        );
+        assert.deepEqual(await dialog.getByRole("button").allInnerTexts(), ["Recover older data", "Keep things as they are"]);
+        assert.ok(!/v3|v2|v1/.test(await dialog.innerText()), "no version numbers in the dialog");
+        await p.keyboard.press("Escape");
+        await dialog.waitFor({ state: "detached" });
+        assert.equal(await p.evaluate(() => localStorage.getItem("hfg-daily-walk:v3")), "not json", "Escape recovers nothing");
+        assert.equal(
+          await p.evaluate(() => document.activeElement?.textContent?.trim()),
+          "Recover older data",
+          "focus returns to the control that opened the dialog",
+        );
+        await trigger.click();
+        await dialog.waitFor();
+        await dialog.getByRole("button", { name: "Keep things as they are", exact: true }).click();
+        await dialog.waitFor({ state: "detached" });
+        assert.equal(await p.evaluate(() => localStorage.getItem("hfg-daily-walk:v3")), "not json", "Keep things as they are recovers nothing");
+        await trigger.click();
+        await dialog.waitFor();
+        await dialog.getByRole("button", { name: "Recover older data", exact: true }).click();
+        await dialog.waitFor({ state: "detached" });
+        await p.waitForFunction(() => localStorage.getItem("hfg-daily-walk:v3") !== "not json");
+        assert.equal(await p.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")).version), 3);
+        assert.deepEqual(browserDialogs, [], "no browser pop-up appeared");
+      } finally {
+        await c.close();
+      }
+    },
+  );
+  await check(
     "all 15 topic journeys are browsable and progress is saved",
     async () => {
       await go("/grow");

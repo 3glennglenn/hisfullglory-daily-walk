@@ -13,6 +13,7 @@ import { SafetyControls } from "../social/safety";
 import { navigate } from "../platform/router";
 import { track } from "../analytics";
 import { Dialog } from "../platform/Dialog";
+import { ConfirmDialog } from "../ui/ConfirmDialog";
 const causes = curatedCharityCatalog.list();
 const empty = {
   title: "",
@@ -90,6 +91,8 @@ export function Give() {
   const [draftId, setDraftId] = useState<string | null>(null);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+  // The request a reader asked to close or delete, until they answer in the app's own dialog.
+  const [confirming, setConfirming] = useState<{ id: string; remove: boolean } | null>(null);
   const loadVersion = useRef(0);
   const currentUser = useRef(session?.user.id);
   currentUser.current = session?.user.id;
@@ -182,13 +185,7 @@ export function Give() {
     await load();
   }
   async function close(id: string, remove = false) {
-    if (
-      !supabase ||
-      !window.confirm(
-        remove ? "Delete this request?" : "Close this support request?",
-      )
-    )
-      return;
+    if (!supabase) return;
     const { error } = await supabase.rpc("close_support_request", {
       request_id: id,
       remove_request: remove,
@@ -529,13 +526,13 @@ export function Give() {
                     )}
                     <button
                       className="secondary"
-                      onClick={() => void close(r.id)}
+                      onClick={() => setConfirming({ id: r.id, remove: false })}
                     >
                       Close
                     </button>
                     <button
                       className="secondary"
-                      onClick={() => void close(r.id, true)}
+                      onClick={() => setConfirming({ id: r.id, remove: true })}
                     >
                       Delete my request
                     </button>
@@ -547,6 +544,21 @@ export function Give() {
         </>
       )}
       <p role="status">{status}</p>
+      {confirming && (
+        <ConfirmDialog
+          title={confirming.remove ? "Delete this request?" : "Close this support request?"}
+          actionLabel={confirming.remove ? "Delete request" : "Close request"}
+          safeLabel={confirming.remove ? "Keep request" : "Keep it open"}
+          destructive={confirming.remove}
+          busyLabel={confirming.remove ? "Deleting…" : "Closing…"}
+          onAction={async () => {
+            // The outcome, good or bad, is the screen's own status line below.
+            await close(confirming.id, confirming.remove);
+            setConfirming(null);
+          }}
+          onSafe={() => setConfirming(null)}
+        />
+      )}
       {outbound && (
         <Dialog onClose={() => setOutbound(null)} labelledBy="outbound-title">
           <h2 id="outbound-title">

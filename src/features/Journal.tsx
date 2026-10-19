@@ -4,6 +4,7 @@ import type { JournalEntry, JournalType } from "../platform/models";
 import { localDate } from "../storage";
 import { navigate } from "../platform/router";
 import { ShareForm } from "../social/Feed";
+import { ConfirmDialog } from "../ui/ConfirmDialog";
 export interface JournalRepository {
   list(): JournalEntry[];
   save(entry: JournalEntry): boolean;
@@ -24,6 +25,7 @@ export function JournalLibrary() {
   const [selected, setSelected] = useState<string | null>(null);
   const [sharing, setSharing] = useState<string | null>(null);
   const [status, setStatus] = useState("");
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const entry = state.entries.find((e) => e.id === selected);
   const shared = state.entries.find((e) => e.id === sharing);
   const repository: JournalRepository = {
@@ -150,16 +152,7 @@ export function JournalLibrary() {
             <button className="secondary" onClick={() => setSelected(null)}>
               Close
             </button>
-            <button
-              className="secondary"
-              onClick={() => {
-                if (
-                  window.confirm("Delete this private entry?") &&
-                  repository.remove(entry.id)
-                )
-                  setSelected(null);
-              }}
-            >
+            <button className="secondary" onClick={() => setConfirmDelete(true)}>
               Delete entry
             </button>
             <button onClick={() => setSharing(entry.id)}>
@@ -168,6 +161,21 @@ export function JournalLibrary() {
           </div>
           <small role="status">{status}</small>
         </article>
+      )}
+      {entry && confirmDelete && (
+        <ConfirmDialog
+          title="Delete this private entry?"
+          body="It is removed from this device. This cannot be undone."
+          actionLabel="Delete entry"
+          safeLabel="Keep entry"
+          destructive
+          onAction={() => {
+            setConfirmDelete(false);
+            // A write that fails is reported by the app's storage notice; the entry stays.
+            if (repository.remove(entry.id)) setSelected(null);
+          }}
+          onSafe={() => setConfirmDelete(false)}
+        />
       )}
       {shared && (
         <>
