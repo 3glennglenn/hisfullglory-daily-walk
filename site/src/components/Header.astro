@@ -1,5 +1,9 @@
 ---
-import BrandMark from "./BrandMark.astro";
+// Header (UI-SPEC 8.3): the logo and the name, no tagline. From 768px the six links and a quiet
+// "Open the app"; on a phone the quiet button and a Menu disclosure (<details>, so it works
+// without JavaScript) that lists the six links as 48px rows. Where the name, the button and the
+// Menu no longer fit on one row (below 440px, measured: 137 + 142 + 93px plus gaps and margins),
+// "Open the app" moves into the menu as its first row. Nothing scrolls sideways.
 import { appUrl, mainNav, site } from "../config";
 
 const path = Astro.url.pathname;
@@ -7,12 +11,11 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
 ---
 
 <header class="site-header">
-  <div class="wrap header-grid">
+  <div class="wrap header-bar">
     <a class="brand" href="/" aria-label={`${site.name} home`}>
-      <BrandMark />
-      <span class="brand-text">{site.name}<span>{site.tagline}</span></span>
+      <img src="/icon.svg" alt="" width="32" height="32" />
+      <span class="brand-name">{site.name}</span>
     </a>
-    <a class="button cta" href={appUrl}>Open the app</a>
     <nav class="main-nav" aria-label="Main">
       <ul>
         {
@@ -33,61 +36,82 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
         }
       </ul>
     </nav>
+    <a class="button secondary cta" href={appUrl}>Open the app</a>
+    <details class="menu">
+      <summary>
+        <span>Menu</span>
+        <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M3 5.5h14M3 10h14M3 14.5h14"></path>
+        </svg>
+      </summary>
+      <nav class="menu-panel" aria-label="Main menu">
+        <ul>
+          <li class="menu-app">
+            <a href={appUrl}>Open the app</a>
+          </li>
+          {
+            mainNav.map((item) => (
+              <li>
+                {item.ready ? (
+                  <a
+                    href={item.href}
+                    aria-current={isCurrent(item.href) ? "page" : undefined}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <span class="pending">{item.label}</span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </details>
   </div>
 </header>
 
 <style>
   .site-header {
+    position: relative;
     background: var(--bg);
     border-bottom: 1px solid var(--line);
   }
-  /* On a phone the brand and the button share a row; when the text is large the button drops
-     below the brand instead of pushing the page sideways (UX-01: reflow at 320px and 200%). */
-  .header-grid {
+  /* If the text is very large the bar wraps onto a second row instead of pushing the page
+     sideways (reflow at 320px and 200%). */
+  .header-bar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    column-gap: 16px;
-    padding-top: 14px;
+    column-gap: var(--space-2);
+    row-gap: var(--space-1);
+    padding-block: var(--space-2);
   }
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--space-2);
     min-height: 44px;
     min-width: 0;
     color: var(--ink);
     text-decoration: none;
   }
-  .brand-text {
-    font-size: 1.3rem;
-    line-height: 1.1;
-  }
-  .brand-text span {
-    display: block;
-    margin-top: 6px;
-    font-size: 0.54rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  /* The navigation takes its own row, edge to edge, and scrolls inside itself when it is wider. */
-  .main-nav {
+  .brand img {
     flex: none;
-    width: calc(100% + 40px);
-    overflow-x: auto;
-    scrollbar-width: none;
-    margin: 6px -20px 0;
-    padding: 0 8px;
+    width: 32px;
+    height: 32px;
   }
-  .main-nav::-webkit-scrollbar {
+  .brand-name {
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .main-nav {
     display: none;
   }
   ul {
     display: flex;
-    gap: 4px;
+    gap: var(--space-1);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -97,9 +121,9 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-    padding: 0 12px;
-    border-radius: 10px;
-    font-size: 0.95rem;
+    padding: 0 var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-body);
     white-space: nowrap;
   }
   .main-nav a {
@@ -111,19 +135,104 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
     background: var(--surface-2);
   }
   .main-nav a[aria-current="page"] {
-    color: var(--link);
-    box-shadow: inset 0 -2px 0 var(--link);
+    box-shadow: inset 0 -2px 0 var(--brand);
     border-radius: 0;
   }
   .pending {
     color: var(--muted);
   }
-  @media (min-width: 52rem) {
-    .header-grid {
+  .cta {
+    margin-inline-start: auto;
+    padding-inline: var(--space-3);
+  }
+
+  /* The phone menu. The panel is as wide as the header and sits under the bar. */
+  .menu summary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-height: 44px;
+    padding: 0 var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    font-size: var(--text-body);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+  .menu summary::-webkit-details-marker {
+    display: none;
+  }
+  .menu summary svg path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  .menu[open] summary {
+    background: var(--surface-2);
+  }
+  .menu-panel {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    z-index: var(--z-bar);
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 8px 16px var(--shadow);
+  }
+  .menu-panel ul {
+    display: block;
+  }
+  .menu-panel li {
+    border-top: 1px solid var(--line);
+  }
+  .menu-panel li:first-child {
+    border-top: 0;
+  }
+  .menu-panel a,
+  .menu-panel .pending {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: var(--space-2) max(20px, env(safe-area-inset-left));
+    color: var(--ink);
+    font-size: var(--text-body);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .menu-panel .pending {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .menu-panel a[aria-current="page"] {
+    box-shadow: inset 3px 0 0 var(--brand);
+  }
+  .menu-app {
+    display: none;
+  }
+  @media (max-width: 439px) {
+    .cta {
+      display: none;
+    }
+    .menu {
+      margin-inline-start: auto;
+    }
+    .menu-app {
+      display: block;
+    }
+  }
+  /* From 768px the links are in the bar. They share one row with the name and the button from
+     1024px; between 768px and 1023px they take a row of their own, so nothing overflows. */
+  @media (min-width: 768px) {
+    .header-bar {
       display: grid;
-      grid-template-columns: auto 1fr auto;
-      grid-template-areas: "brand nav cta";
-      padding-block: 14px;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "brand cta"
+        "nav nav";
+      column-gap: var(--space-4);
+      padding-block: var(--space-3) var(--space-2);
     }
     .brand {
       grid-area: brand;
@@ -132,20 +241,27 @@ const isCurrent = (href: string) => path === href || path.startsWith(href + "/")
     .cta {
       grid-area: cta;
     }
-    .brand-text span {
-      font-size: 0.58rem;
-      letter-spacing: 0.23em;
-      white-space: nowrap;
-    }
     .main-nav {
+      display: block;
       grid-area: nav;
-      width: auto;
-      margin: 0;
-      padding: 0;
-      overflow: visible;
     }
-    ul {
+    .main-nav ul {
+      flex-wrap: wrap;
+      margin-inline: calc(-1 * var(--space-3));
+    }
+    .menu {
+      display: none;
+    }
+  }
+  @media (min-width: 1024px) {
+    .header-bar {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: "brand nav cta";
+      padding-block: var(--space-3);
+    }
+    .main-nav ul {
       justify-content: center;
+      margin-inline: 0;
     }
   }
 </style>

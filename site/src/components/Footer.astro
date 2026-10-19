@@ -1,4 +1,6 @@
 ---
+// Footer (UI-SPEC 8.3): the name, "Jesus at the Center" (the tagline's one place on the site),
+// the positioning line, the footer links, the Appearance group, the WEB line and the copyright.
 import { footerNav, site } from "../config";
 import ThemeSwitch from "./ThemeSwitch.astro";
 
@@ -9,6 +11,7 @@ const year = new Date().getFullYear();
   <div class="wrap footer-grid">
     <div>
       <p class="footer-name">{site.name}</p>
+      <p class="tagline">{site.tagline}</p>
       <p class="muted">{site.positioning}</p>
     </div>
     <nav aria-label="Footer">
@@ -41,26 +44,33 @@ const year = new Date().getFullYear();
   .site-footer {
     border-top: 1px solid var(--line);
     background: var(--surface);
-    padding-block: 36px 28px;
-    margin-top: 40px;
+    padding-block: var(--space-7) var(--space-6);
+    margin-top: var(--space-7);
   }
   .footer-grid {
     display: grid;
-    gap: 20px;
+    gap: var(--space-5);
   }
   .footer-name {
-    font-size: 1.2rem;
-    margin-bottom: 0;
+    font-size: var(--text-body);
+    font-weight: 600;
+    margin: 0;
+  }
+  .tagline {
+    margin: 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
   }
   .footer-grid .muted {
-    margin-top: 4px;
+    margin-top: var(--space-2);
   }
   ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px 8px;
+    gap: var(--space-1) var(--space-2);
     list-style: none;
-    margin: 0 0 0 -10px;
+    margin: 0 0 0 calc(-1 * var(--space-3));
     padding: 0;
   }
   a,
@@ -68,8 +78,8 @@ const year = new Date().getFullYear();
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-    padding: 0 10px;
-    font-size: 0.95rem;
+    padding: 0 var(--space-3);
+    font-size: var(--text-body);
   }
   a {
     color: var(--ink);
@@ -78,16 +88,17 @@ const year = new Date().getFullYear();
     color: var(--muted);
   }
   .footer-small {
-    margin-top: 24px;
-    padding-top: 18px;
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
     border-top: 1px solid var(--line);
-    font-size: 0.82rem;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
     color: var(--muted);
   }
   .footer-small p {
-    margin: 4px 0;
+    margin: var(--space-1) 0;
   }
-  @media (min-width: 52rem) {
+  @media (min-width: 768px) {
     .footer-grid {
       grid-template-columns: 1fr auto;
       align-items: start;
