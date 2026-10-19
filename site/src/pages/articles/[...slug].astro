@@ -62,7 +62,7 @@ const topic = article && publishedTopics().find((entry) => entry.id === article.
 
           <div class="card sources" data-layer="sourced">
             <h2>Why we say this</h2>
-            <p class="small muted">
+            <p class="foot">
               This page rests on these passages, quoted from the World English
               Bible:
             </p>
@@ -73,7 +73,7 @@ const topic = article && publishedTopics().find((entry) => entry.id === article.
                 </li>
               ))}
             </ul>
-            <p class="small muted">Other sources:</p>
+            <p class="foot">Other sources:</p>
             <ul>
               {article.sources.map((source) => (
                 <li>
@@ -155,16 +155,22 @@ const topic = article && publishedTopics().find((entry) => entry.id === article.
     list-style: none;
     margin-top: 32px;
     padding: 0;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
   }
   .list li + li {
     margin-top: 0;
   }
   .list h2 {
     margin: 0 0 8px;
-    font-size: 1.15rem;
+    font-size: var(--text-title);
   }
   .list p {
     margin-bottom: 0;
+  }
+  .foot {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
   }
 </style>

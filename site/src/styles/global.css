@@ -50,6 +50,12 @@ h3,
 p {
   margin: 0;
 }
+/* A long word (a book name at 200% text) breaks instead of running past the screen. */
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+}
 h1 {
   font-weight: 600;
   font-size: var(--text-large-title);
@@ -104,7 +110,7 @@ summary:focus-visible {
   margin: 0 0 12px;
 }
 .lede {
-  font-size: 1.15rem;
+  font-size: var(--text-title);
   color: var(--muted);
   max-width: 36rem;
 }
@@ -112,7 +118,7 @@ summary:focus-visible {
   color: var(--muted);
 }
 .small {
-  font-size: 0.86rem;
+  font-size: var(--text-footnote);
 }
 
 .button {
@@ -150,14 +156,13 @@ summary:focus-visible {
 .card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 22px;
-  box-shadow: 0 2px 4px var(--shadow);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
 }
 .grid {
   display: grid;
   gap: 18px;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
 }
 
 /* Off-screen until focused, at any text size (it moves by its own height). */

@@ -83,6 +83,17 @@ async function contextCheckPathBy(review) {
   return undefined;
 }
 
+/** The first topic page the site serves, or undefined. */
+async function topicPath() {
+  const dir = "site/content/topics";
+  const names = existsSync(dir) ? readdirSync(dir).filter((n) => n.endsWith(".json")).sort() : [];
+  for (const name of names) {
+    const path = `/topics/${name.replace(/[.]json$/, "")}`;
+    if ((await fetch(base + path)).ok) return path;
+  }
+  return undefined;
+}
+
 try {
   const checkPath = await contextCheckPath();
   const pages = ["/", "/bible/john/3", checkPath, "/privacy"];
@@ -440,6 +451,30 @@ try {
     const frame = await withAi.page.locator("section[data-layer=ai]").evaluate((el) => getComputedStyle(el).borderTopStyle);
     assert.equal(frame, "dashed", "the AI layer keeps its dashed frame");
     await withAi.context.close();
+  });
+
+  await check("200% sweep: at a 34px root on 390 and 320px nothing scrolls sideways, no heading is clipped, controls are 44px or taller", async () => {
+    const topic = await topicPath();
+    const sweep = ["/", "/bible/john/3", checkPath, ...(topic ? [topic] : []), "/privacy", "/about", "/context-checks", "/bible", "/bible/john", "/beta", "/resources"];
+    for (const width of [390, 320])
+      for (const path of sweep) {
+        const { context, page } = await open(path, { width, rootPx: 34 });
+        const { scroll, width: client } = await overflow(page);
+        assert.ok(scroll <= client, `${path} at ${width}px and a 34px root scrolls sideways (${scroll} > ${client})`);
+        const clipped = await page.evaluate(() =>
+          [...document.querySelectorAll("main h1, main h2, main h3")]
+            .filter((el) => el.scrollWidth > el.clientWidth + 1 || el.getBoundingClientRect().right > document.documentElement.clientWidth + 1)
+            .map((el) => el.textContent.trim().slice(0, 40)),
+        );
+        assert.deepEqual(clipped, [], `${path} at ${width}px: clipped headings`);
+        const small = await page.evaluate(() =>
+          [...document.querySelectorAll("main a.button, main button, main summary")]
+            .filter((el) => el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height < 43.5)
+            .map((el) => el.textContent.trim().slice(0, 40)),
+        );
+        assert.deepEqual(small, [], `${path} at ${width}px: controls under 44px`);
+        await context.close();
+      }
   });
 
   await check("the skip link is off-screen until focused, at a 34px root too", async () => {

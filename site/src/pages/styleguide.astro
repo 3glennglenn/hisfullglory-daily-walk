@@ -1,7 +1,68 @@
 ---
-// Internal reference page for the house style. Not linked in the navigation and not indexed.
+// Internal reference page for the house style (UI-SPEC W7). Not linked in the navigation and not
+// indexed. It shows the four colour blocks side by side (Cover Light, Cover Lamplight, Marked Light,
+// Marked Lamplight), each with its swatches and the main contrast pairs of UI-SPEC 5.4, computed
+// here at build time from the hex values the app's stylesheet gives (tokens.generated.json), and the
+// type scale: five sizes and the Marked numeral.
 import Base from "../layouts/Base.astro";
 import tokens from "../styles/tokens.generated.json";
+
+const blocks = [
+  { key: "coverLight", name: "Cover Light" },
+  { key: "coverLamplight", name: "Cover Lamplight" },
+  { key: "markedLight", name: "Marked Light" },
+  { key: "markedLamplight", name: "Marked Lamplight" },
+] as const;
+
+type Row = (typeof tokens)[number];
+const valueOf = (block: (typeof blocks)[number]["key"], name: string) =>
+  (tokens.find((row: Row) => row.name === name) as Row)[block];
+
+/** WCAG 2.1 relative luminance of a #RRGGBB colour (an 8-digit colour is read without its alpha). */
+function luminance(hex: string) {
+  const channel = (at: number) => {
+    const value = parseInt(hex.slice(at, at + 2), 16) / 255;
+    return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  };
+  return 0.2126 * channel(1) + 0.7152 * channel(3) + 0.0722 * channel(5);
+}
+function contrast(a: string, b: string) {
+  const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (light + 0.05) / (dark + 0.05);
+}
+
+// The main pairs of UI-SPEC 5.4: text needs 4.5, graphics and large text 3.
+const pairs = [
+  { label: "ink on bg", fg: "--ink", bg: "--bg", need: 4.5 },
+  { label: "ink on surface", fg: "--ink", bg: "--surface", need: 4.5 },
+  { label: "muted on bg", fg: "--muted", bg: "--bg", need: 4.5 },
+  { label: "muted on surface", fg: "--muted", bg: "--surface", need: 4.5 },
+  { label: "link on bg", fg: "--link", bg: "--bg", need: 4.5 },
+  { label: "link on surface", fg: "--link", bg: "--surface", need: 4.5 },
+  { label: "on-button on button", fg: "--on-button", bg: "--button", need: 4.5 },
+  { label: "brand on bg (graphics)", fg: "--brand", bg: "--bg", need: 3 },
+  { label: "focus on bg (ring)", fg: "--focus", bg: "--bg", need: 3 },
+  { label: "on-sig on sig (the hook)", fg: "--on-sig", bg: "--sig", need: 4.5 },
+  { label: "sig-muted on sig", fg: "--sig-muted", bg: "--sig", need: 4.5 },
+  { label: "on-sig-button on sig-button", fg: "--on-sig-button", bg: "--sig-button", need: 4.5 },
+  { label: "ai on surface", fg: "--ai", bg: "--surface", need: 4.5 },
+  { label: "on-ai on ai (badge)", fg: "--on-ai", bg: "--ai", need: 4.5 },
+  { label: "community on surface", fg: "--community", bg: "--surface", need: 4.5 },
+];
+
+const swatchNames = [
+  "--bg", "--surface", "--surface-2", "--ink", "--muted", "--line", "--link", "--button", "--brand",
+  "--sig", "--on-sig", "--gilt", "--ai", "--community", "--danger", "--success",
+];
+
+// The type scale (UI-SPEC 6.2): five sizes, two weights.
+const scale = [
+  { token: "--text-large-title", role: "Large Title: page titles", px: 34, weight: 600 },
+  { token: "--text-display", role: "Display: the hook, chapter heading", px: 28, weight: 400, scripture: true },
+  { token: "--text-title", role: "Title: section headings, Scripture", px: 20, weight: 600 },
+  { token: "--text-body", role: "Body: text, buttons, rows", px: 17, weight: 400 },
+  { token: "--text-footnote", role: "Footnote: labels, metadata, badges", px: 13, weight: 400 },
+];
 ---
 
 <Base title="Style guide" noindex>
@@ -16,34 +77,64 @@ import tokens from "../styles/tokens.generated.json";
 
       <h2>Colours</h2>
       <p class="muted">
-        Each swatch shows the token for the theme your device is using now.
+        The four blocks side by side: two themes, Cover and story and Marked page, each in Light and
+        in Lamplight. Contrast is computed from the hex values; the need is 4.5 for text and 3 for
+        graphics.
       </p>
-      <ul class="swatches">
+      <div class="blocks">
         {
-          tokens.map((token) => (
-            <li>
-              <span class="chip" style={`background: var(${token.name})`} />
-              <code>{token.name}</code>
-              <span class="muted small">
-                Cover {token.coverLight} · {token.coverLamplight} · Marked {token.markedLight} · {token.markedLamplight}
-              </span>
-            </li>
+          blocks.map((block) => (
+            <section class="panel" style={`background: ${valueOf(block.key, "--bg")}; color: ${valueOf(block.key, "--ink")}`} aria-labelledby={`panel-${block.key}`}>
+              <h3 id={`panel-${block.key}`}>{block.name}</h3>
+              <ul class="swatches">
+                {
+                  swatchNames.map((name) => (
+                    <li>
+                      <span class="chip" style={`background: ${valueOf(block.key, name)}`} />
+                      <code>{name}</code>
+                      <span class="hex">{valueOf(block.key, name)}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+              <h4>Contrast</h4>
+              <ul class="pairs">
+                {
+                  pairs.map((pair) => {
+                    const ratio = contrast(valueOf(block.key, pair.fg), valueOf(block.key, pair.bg));
+                    return (
+                      <li>
+                        <span class="sample" style={`background: ${valueOf(block.key, pair.bg)}; color: ${valueOf(block.key, pair.fg)}`} aria-hidden="true">Aa</span>
+                        <span>{pair.label}</span>
+                        <span class="ratio">
+                          {ratio.toFixed(2)}:1, {ratio >= pair.need ? "passes" : "below"} {pair.need}
+                        </span>
+                      </li>
+                    );
+                  })
+                }
+              </ul>
+            </section>
           ))
         }
-      </ul>
+      </div>
 
       <h2>Type</h2>
-      <div class="card type">
-        <p class="eyebrow">Eyebrow label</p>
-        <h1>Heading one</h1>
-        <h2>Heading two</h2>
-        <h3>Heading three</h3>
-        <p class="lede">Lede: one or two sentences that open a page.</p>
-        <p>
-          Body text is set in Manrope at a comfortable reading size. Links look
-          like <a href="/styleguide">this link</a>.
+      <p class="muted">Five sizes at the default text size. Scripture is 20px, the Title size, in the Scripture face.</p>
+      <div class="type">
+        {
+          scale.map((step, index) => (
+            <p class={`step step-${index + 1}`}>
+              <span class="role">{step.px}px, {step.role}</span>
+              The quick brown fox jumps over the lazy dog
+            </p>
+          ))
+        }
+        <p class="numeral-sample">
+          <span class="role">The Marked chapter numeral, an ornament and not a text size</span>
+          3
         </p>
-        <p class="muted small">Small muted text for notes and labels.</p>
+        <p>Links look like <a href="/styleguide">this link</a>.</p>
       </div>
 
       <h2>Buttons</h2>
@@ -64,7 +155,7 @@ import tokens from "../styles/tokens.generated.json";
         </div>
         <div class="card">
           <h3>Card title</h3>
-          <p>Borders and soft shadows come from the same tokens as the app.</p>
+          <p>Borders come from the same tokens as the app; the page itself casts no shadows.</p>
         </div>
       </div>
     </div>
@@ -73,36 +164,113 @@ import tokens from "../styles/tokens.generated.json";
 
 <style>
   h2 {
-    margin: 48px 0 12px;
+    margin: var(--space-8) 0 var(--space-3);
   }
   .lede {
-    margin-top: 16px;
+    margin-top: var(--space-4);
   }
-  .swatches {
+  .blocks {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  }
+  .panel {
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+  .panel h3 {
+    margin: 0 0 var(--space-3);
+  }
+  .panel h4 {
+    margin: var(--space-5) 0 var(--space-2);
+    font-size: var(--text-body);
+  }
+  .swatches,
+  .pairs {
     list-style: none;
-    margin: 16px 0 0;
+    margin: 0;
     padding: 0;
     display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: var(--space-2);
   }
   .swatches li {
     display: grid;
-    grid-template-columns: 44px 1fr;
-    column-gap: 12px;
+    grid-template-columns: 28px 1fr;
+    column-gap: var(--space-3);
     align-items: center;
   }
   .chip {
     grid-row: span 2;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-xs);
+    border: 1px solid currentColor;
   }
   code {
-    font-size: 0.9rem;
+    font-size: var(--text-footnote);
   }
-  .type > * + * {
-    margin-top: 12px;
+  .hex,
+  .ratio {
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    opacity: 0.85;
+  }
+  .pairs li {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    column-gap: var(--space-3);
+    align-items: center;
+  }
+  .sample {
+    grid-row: span 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    border: 1px solid currentColor;
+    border-radius: var(--radius-xs);
+    font-size: var(--text-footnote);
+    font-weight: 600;
+  }
+  .type {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .type p {
+    margin: 0;
+  }
+  /* One rule per step of the scale; each names its token. */
+  .step-1 {
+    font-size: var(--text-large-title);
+    font-weight: 600;
+  }
+  .step-2 {
+    font-family: var(--font-scripture);
+    font-size: var(--text-display);
+  }
+  .step-3 {
+    font-size: var(--text-title);
+    font-weight: 600;
+  }
+  .step-4 {
+    font-size: var(--text-body);
+  }
+  .step-5 {
+    font-size: var(--text-footnote);
+  }
+  .numeral-sample {
+    font-family: var(--font-scripture);
+    font-size: var(--text-numeral);
+    color: var(--brand);
+    line-height: 1;
+  }
+  .role {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: var(--text-footnote);
+    font-weight: 400;
+    color: var(--muted);
   }
 </style>

@@ -4,7 +4,8 @@
 // Expectations about "the newest check" are computed here from the content folder with the
 // site's own functions, never from a hard-coded slug: the daily routine adds checks to main.
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import test from "node:test";
 import { site } from "../src/config.ts";
 import { approved } from "../src/data/legal.ts";
@@ -255,4 +256,53 @@ test("the privacy page lists the new on-device keys and the shelf, and no longer
   assert.ok(text.includes("the older keys hfg-theme and hfg-appearance are read once and then removed") || text.includes("older keys hfg-theme and hfg-appearance are read once and then removed"));
   assert.ok(!mainOf(read("/privacy")).includes("<strong>hfg-theme</strong>"), "hfg-theme is not a listed key any more");
   assert.ok(text.includes("your shelf of the context checks you have read to the end"), "the shelf is among the private data");
+});
+
+// Plan 13, task 3: the style guide and the site's design gates (UI-SPEC 15, items 4 and 9).
+test("the style guide shows the four colour blocks with their contrast pairs and the type scale (W7)", () => {
+  const html = read("/styleguide");
+  const words = textOf(mainOf(html));
+  for (const name of ["Cover Light", "Cover Lamplight", "Marked Light", "Marked Lamplight"]) assert.ok(words.includes(name), name);
+  assert.equal(count(html, 'class="panel"'), 4, "four colour panels");
+  assert.ok(words.includes("ink on bg") && words.includes("on-sig on sig (the hook)"), "the contrast pairs");
+  // Every pair printed passes its need in all four blocks (the same numbers tests/tokens-contrast.test.ts proves in the app).
+  assert.equal(count(words, "below"), 0, "no pair is below its need");
+  for (const size of ["34px", "28px", "20px", "17px", "13px"]) assert.ok(words.includes(size), `${size} in the scale`);
+  assert.ok(html.includes('content="noindex"'), "not indexed");
+});
+
+/** Every .astro and .css file under site/src, as [path, text]. */
+function sources(dir = "src"): [string, string][] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) return sources(path);
+    return /[.](astro|css)$/.test(entry.name) ? [[path.replaceAll("\\", "/"), readFileSync(path, "utf8")] as [string, string]] : [];
+  });
+}
+
+test("no text is set in uppercase anywhere in the site's styles (UI-SPEC 15, item 9)", () => {
+  for (const [path, text] of sources()) assert.ok(!/text-transform:\s*uppercase/.test(text), `${path} sets uppercase text`);
+});
+
+test("every font size in the site's styles is a type token or follows its parent (UI-SPEC 6.2, 15 item 9)", () => {
+  const allowed = [
+    /^var\(--text-[a-z-]+\)$/,
+    /^var\(\$\{[^}]+\}\)$/, // the style guide's samples name their token in a template
+    /^(inherit|1em|100%)$/,
+  ];
+  // Two recorded exceptions: the page root (the 17px/18px root every size scales from) and the home
+  // hook at 1024px (2.2222rem = 40px at the 18px root, UI-SPEC W1).
+  const exceptions: [string, RegExp][] = [
+    ["src/styles/global.css", /^(106[.]25|112[.]5)%$/],
+    ["src/components/Cover.astro", /^2[.]2222rem$/],
+  ];
+  const found: string[] = [];
+  for (const [path, text] of sources())
+    for (const [, raw] of text.matchAll(/font-size:\s*([^;}"]+)/g)) {
+      const value = raw.trim();
+      if (allowed.some((rule) => rule.test(value))) continue;
+      if (exceptions.some(([file, rule]) => file === path && rule.test(value))) continue;
+      found.push(`${path}: font-size: ${value}`);
+    }
+  assert.deepEqual(found, [], "off-scale font sizes");
 });

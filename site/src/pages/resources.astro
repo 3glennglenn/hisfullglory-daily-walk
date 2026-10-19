@@ -69,7 +69,7 @@ import Base from "../layouts/Base.astro";
     list-style: none;
     margin: 32px 0 0;
     padding: 0;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
   }
   .list .card {
     display: flex;
@@ -87,7 +87,7 @@ import Base from "../layouts/Base.astro";
     background: var(--bg);
   }
   .list h2 {
-    font-size: 1.15rem;
+    font-size: var(--text-title);
   }
   .list .button {
     margin-top: auto;
