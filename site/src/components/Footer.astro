@@ -1,5 +1,6 @@
 ---
 import { footerNav, site } from "../config";
+import ThemeSwitch from "./ThemeSwitch.astro";
 
 const year = new Date().getFullYear();
 ---
@@ -27,13 +28,7 @@ const year = new Date().getFullYear();
     </nav>
   </div>
   <div class="wrap footer-small">
-    <!-- Shown by the script below; without JavaScript the page follows the device. -->
-    <div class="theme" role="group" aria-label="Color theme" hidden>
-      <span>Theme</span>
-      <button type="button" data-theme-choice="auto" aria-pressed="true">Auto</button>
-      <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
-      <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
-    </div>
+    <ThemeSwitch />
     <p>
       Scripture quotations are from the World English Bible (WEB), which is in
       the public domain.
@@ -41,35 +36,6 @@ const year = new Date().getFullYear();
     <p>&copy; {year} {site.name}</p>
   </div>
 </footer>
-
-<script is:inline>
-  // Light, Dark or Auto (follow the device). The choice is kept on this device only.
-  (function () {
-    var root = document.documentElement;
-    var group = document.querySelector(".theme");
-    var buttons = document.querySelectorAll("[data-theme-choice]");
-    function show() {
-      var current = root.dataset.theme || "auto";
-      buttons.forEach(function (button) {
-        button.setAttribute("aria-pressed", String(button.dataset.themeChoice === current));
-      });
-    }
-    buttons.forEach(function (button) {
-      button.addEventListener("click", function () {
-        var choice = button.dataset.themeChoice;
-        if (choice === "auto") delete root.dataset.theme;
-        else root.dataset.theme = choice;
-        try {
-          if (choice === "auto") localStorage.removeItem("hfg-theme");
-          else localStorage.setItem("hfg-theme", choice);
-        } catch (error) {}
-        show();
-      });
-    });
-    show();
-    if (group) group.hidden = false;
-  })();
-</script>
 
 <style>
   .site-footer {
@@ -120,31 +86,6 @@ const year = new Date().getFullYear();
   }
   .footer-small p {
     margin: 4px 0;
-  }
-  .theme {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-  .theme[hidden] {
-    display: none;
-  }
-  .theme button {
-    min-height: 44px;
-    min-width: 64px;
-    padding: 0 14px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: var(--bg);
-    color: var(--ink);
-    font: inherit;
-    cursor: pointer;
-  }
-  .theme button[aria-pressed="true"] {
-    border-color: var(--strong);
-    font-weight: 600;
   }
   @media (min-width: 52rem) {
     .footer-grid {

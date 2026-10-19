@@ -27,16 +27,7 @@ const shareImage = new URL("/og.png", Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="theme-color"
-      content="#F6F0E7"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#181714"
-      media="(prefers-color-scheme: dark)"
-    />
+    <meta name="theme-color" content="#F3F1EE" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     {
@@ -62,12 +53,28 @@ const shareImage = new URL("/og.png", Astro.site);
       )
     }
     <script is:inline>
-      // A reader's own choice of Light or Dark (the switch in the footer) wins over the
-      // device setting. Applied here, before the page is drawn, so it does not flash.
-      try {
-        var theme = localStorage.getItem("hfg-theme");
-        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
-      } catch (error) {}
+      /* First paint (UI-SPEC 3.3). Same keys, order and theme-color pairs as index.html of the
+         app, so the site and the app open in the same look. It runs before the stylesheet
+         paints; the reader's choice from the footer switch is applied here, without a flash.
+         The old keys are only read here; ThemeSwitch writes hfg-lamplight and removes them. */
+      (() => {
+        const legacy = () => {
+          let old = localStorage.getItem("hfg-appearance") || localStorage.getItem("hfg-theme");
+          if (!old) old = JSON.parse(localStorage.getItem("hfg-daily-walk:v3") || "null")?.theme;
+          return old === "dark" ? "on" : old === "light" ? "off" : "auto";
+        };
+        let look = "cover", lamp = "auto";
+        try {
+          look = localStorage.getItem("hfg-look") === "marked" ? "marked" : "cover";
+          lamp = localStorage.getItem("hfg-lamplight") || legacy();
+        } catch { /* storage blocked or unreadable JSON: defaults */ }
+        const dark = lamp === "on" || (lamp !== "off" && matchMedia("(prefers-color-scheme: dark)").matches);
+        const root = document.documentElement;
+        root.dataset.look = look;
+        root.dataset.mode = dark ? "lamplight" : "light";
+        const color = { cover: ["#F3F1EE", "#1A120E"], marked: ["#FFFDF9", "#1A120E"] }[look][dark ? 1 : 0];
+        document.querySelector("meta[name=theme-color]")?.setAttribute("content", color);
+      })();
     </script>
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

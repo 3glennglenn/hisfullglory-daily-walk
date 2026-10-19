@@ -86,15 +86,8 @@ test("every resource shows its picture from the shop, with a description", () =>
   }
 });
 
-test("every page offers Auto, Light and Dark, and applies a saved choice before it is drawn", () => {
-  for (const file of pages) {
-    const html = readFileSync(file, "utf8");
-    for (const choice of ["auto", "light", "dark"])
-      assert.ok(html.includes(`data-theme-choice="${choice}"`), `${file}: ${choice}`);
-    const saved = html.indexOf('localStorage.getItem("hfg-theme")');
-    assert.ok(saved > 0 && saved < html.indexOf("</head>"), `${file}: saved theme is read in the head`);
-  }
-});
+// The theme and Lamplight switch in the footer, and the saved choice applied before the page is
+// drawn, are tested in theme.test.ts.
 
 // Old shop addresses on hisfullglory.com must keep working after the domain move: ads,
 // search results and order emails point at them (docs/WEBSITE_PLAN.md, section 7).
