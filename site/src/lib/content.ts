@@ -10,8 +10,21 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { launchTopics } from "../../../src/topics/graph.ts";
 import { chapterTitle, library, type BibleData } from "./bible.ts";
+import {
+  aiUnreviewedCardLabel,
+  aiUnreviewedLabel,
+  editorialNote,
+  newestFirst,
+  publicationDate,
+  splitHook,
+  type Review,
+} from "./editorial.ts";
 
-export type Review = "draft" | "approved" | "ai-unreviewed";
+// The label words and the newest-check rule live in editorial.ts, which has no Node imports,
+// so the app can use the same sentences (phase 01.1, D-06). Every existing import from here
+// keeps working.
+export { aiUnreviewedCardLabel, aiUnreviewedLabel, editorialNote, publicationDate, splitHook };
+export type { Review };
 export interface PassageRef {
   book: string;
   chapter: number;
@@ -26,6 +39,8 @@ interface Editorial {
   /** Who wrote the first version. Shown on the page, so a reader knows. */
   drafted: "ai" | "human";
   written: string;
+  /** The day the founder approved it; only an approved file has one. */
+  approved?: string;
 }
 export interface TopicPage extends Editorial {
   id: string;
@@ -95,31 +110,12 @@ function editorial(raw: Raw, where: string, allowUnreviewed = false): Editorial 
   check(date(raw.written), where, "written must be a date");
   // An approved file records the day the founder approved it; a draft has no such date.
   check(date(raw.approved) === (raw.review === "approved"), where, "approved must be the date of approval, and only on an approved file");
-  return { review: raw.review as Review, drafted: raw.drafted, written: raw.written as string };
-}
-
-/**
- * The label at the top of an AI-unreviewed context check, the shorter one on its cards, and
- * the closing note. Each says both facts: an AI model wrote it, and no person checked it.
- * Wording settled with the UX copy review of 2026-10-16.
- */
-export const aiUnreviewedLabel = "Written by an AI model from the sources below. Not checked by a person.";
-export const aiUnreviewedCardLabel = "Written by an AI model. Not checked by a person.";
-const aiUnreviewedNote =
-  "Written by an AI model. Before publishing, an automatic check compared Scripture quotations with the World English Bible and the words of quoted people with their linked sources. No person has checked this page.";
-
-/** How an editorial page says it was made and how far it has been checked. */
-export function editorialNote(review: Review, drafted: "ai" | "human"): string {
-  if (review === "ai-unreviewed") return aiUnreviewedNote;
-  const made =
-    drafted === "ai"
-      ? "Written with the help of an AI model. Scripture quotations are checked against the World English Bible."
-      : "Written by HisFullGlory. Scripture quotations are checked against the World English Bible.";
-  const status =
-    review === "approved"
-      ? "Approved by HisFullGlory. Not reviewed by a theological reader."
-      : "Not approved yet.";
-  return `${made} ${status}`;
+  return {
+    review: raw.review as Review,
+    drafted: raw.drafted,
+    written: raw.written as string,
+    ...(raw.review === "approved" ? { approved: raw.approved as string } : {}),
+  };
 }
 
 export function parseTopic(input: unknown, id: string, bible: BibleData): TopicPage {
@@ -417,10 +413,14 @@ export function publishedChecks(): ContextCheck[] {
 }
 
 /**
- * The context checks the home page features: the first three, leaving out those no person
- * has checked, so the front door does not change when the routine adds one.
+ * The published context checks, newest first, AI-unreviewed ones included (founder decision
+ * D-06, 2026-10-19: "Ja, elke dag de nieuwste"; this replaced the earlier rule that the front
+ * door shows approved checks only). The home page opens with the first and stands a bookcase
+ * of the first six beside it. A check that no person has checked always carries its label
+ * (aiUnreviewedCardLabel) wherever it appears. Order: later publication date (approved date,
+ * or written date for an AI-unreviewed check), then later written date, then slug A to Z.
  */
-export const featuredChecks = () => publishedChecks().filter((item) => item.review !== "ai-unreviewed").slice(0, 3);
+export const featuredChecks = () => [...publishedChecks()].sort(newestFirst);
 
 /** The published context checks for one chapter, for the card on its page. */
 export const checksFor = (book: string, chapter: number) =>

@@ -36,8 +36,10 @@ const promises = [
 // A card opens the topic page on this site once that page is approved, and the topic in
 // the app until then.
 // Three context checks on the home page; the section is left out until one is approved.
-// Checks that no person has checked stay off the front door (featuredChecks).
-const checks = featuredChecks();
+// Until the home page is rebuilt around the newest check (plan 01.1-12), the old card list
+// keeps leaving out checks no person has checked: it has no label for them. featuredChecks
+// now returns every published check, newest first (D-06).
+const checks = featuredChecks().filter((item) => item.review !== "ai-unreviewed").slice(0, 3);
 const onSite = new Set(publishedTopics().map((topic) => topic.id));
 const topicHref = (id: string) =>
   onSite.has(id) ? `/topics/${id}` : `${appUrl}/community/${id}`;
