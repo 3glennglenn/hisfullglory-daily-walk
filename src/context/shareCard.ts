@@ -4,8 +4,8 @@
 import { checkUrl, refLabel, type AppContextCheck } from "./checks";
 
 const size = { width: 1080, height: 1350 };
-// The app's light palette (src/styles.css), so the card looks the same in every theme.
-const colors = { bg: "#f6f0e7", ink: "#251914", strong: "#854b38", muted: "#6d5548", card: "#e6d5c1" };
+// Cover Light of src/styles.css (--bg, --surface, --ink, --muted, --link), so the card looks the same in every look and mode.
+const colors = { bg: "#F3F1EE", surface: "#FFFFFF", ink: "#251914", muted: "#675A52", link: "#8D5C4B" };
 const font = (weight: number, px: number) => `${weight} ${px}px Manrope, system-ui, -apple-system, "Segoe UI", sans-serif`;
 
 function wrap(ctx: CanvasRenderingContext2D, value: string, width: number): string[] {
@@ -47,7 +47,7 @@ export async function drawShareCard(check: AppContextCheck): Promise<Blob> {
   ctx.font = font(600, 44);
   ctx.textBaseline = "middle";
   ctx.fillText("HisFullGlory", margin + (icon ? 112 : 0), margin + 44);
-  ctx.fillStyle = colors.strong;
+  ctx.fillStyle = colors.link;
   ctx.font = font(600, 30);
   ctx.textBaseline = "alphabetic";
   ctx.fillText("CONTEXT CHECK", margin, margin + 196);
@@ -61,11 +61,14 @@ export async function drawShareCard(check: AppContextCheck): Promise<Blob> {
   }
   ctx.fillStyle = colors.ink;
   lines.forEach((line, i) => ctx.fillText(line, margin, margin + 300 + i * px * 1.3));
-  ctx.fillStyle = colors.strong;
+  ctx.fillStyle = colors.link;
   ctx.font = font(600, 48);
   ctx.fillText(refLabel(check.verse), margin, size.height - margin - 120);
-  ctx.fillStyle = colors.card;
+  // A hairline above the address: the muted colour at a third of its strength.
+  ctx.globalAlpha = 0.35;
+  ctx.fillStyle = colors.muted;
   ctx.fillRect(margin, size.height - margin - 80, size.width - margin * 2, 2);
+  ctx.globalAlpha = 1;
   ctx.fillStyle = colors.muted;
   ctx.font = font(400, 32);
   ctx.fillText(checkUrl(check).replace("https://", ""), margin, size.height - margin - 20);

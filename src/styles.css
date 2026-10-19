@@ -123,6 +123,8 @@
   --shadow: #00000066;
   --theme-color: #1A120E;
 }
+/* Marked Light: the translucent bar is white, not the page's cream. With the cream the selected tab
+   icon over ink-coloured content is 2.98:1 and needs 3 (UI-SPEC 5.4 prints 3.03 for it). */
 :root[data-look="marked"] {
   color-scheme: light;
   --bg: #FFFDF9;
@@ -156,7 +158,7 @@
   --spine-2: #F0E8DD;
   --spine-3: #E6D8C6;
   --spine-ink: #251914;
-  --bar: #FFFDF9EB;
+  --bar: #FFFFFFEB;
   --bar-solid: #FFFDF9;
   --glow: #F0C98700;
   --overlay: #25191466;

@@ -63,7 +63,7 @@ a {
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--strong);
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 
