@@ -15,7 +15,7 @@ import { config } from "../config";
 import { CodeEntry, SignInNote, SiteLink, codeSendFailed, codeSentStatus } from "./CodeEntry";
 // Marker text until the founder confirms the age; the production build refuses to ship it
 // (vite.config.ts), so the app never shows a placeholder to the public.
-import { minimumAge } from "../../site/src/data/legal.ts";
+import { ageLabel } from "../../site/src/data/legal.ts";
 import { postError } from "../social/blockedLanguage";
 export const TERMS_VERSION = "2026-10-07";
 const Auth = createContext<{
@@ -212,7 +212,7 @@ export function AuthPanel() {
                 onChange={(e) => setChecked(e.target.checked)}
               />
               <span>
-                I am {minimumAge} or older. I accept the{" "}
+                {ageLabel}. I accept the{" "}
                 <SiteLink path="/terms">Terms of use</SiteLink> and the community rules, and I have read the{" "}
                 <SiteLink path="/privacy">Privacy policy</SiteLink>.{" "}
                 I understand that reports are reviewed by a person.{" "}

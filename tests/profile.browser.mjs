@@ -10,6 +10,8 @@ const css=readFileSync("src/styles.css","utf8");
 // delete_my_account call that resolves, fails or hangs on demand (window.profileTest.rpcMode).
 // The version the app asks for is read from the app, so this fixture follows it when it changes.
 const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VERSION = "([^"]+)"/)[1];
+// The age sentence the app imports from legal.ts, so this test follows the wording instead of copying it.
+const AGE_LABEL=JSON.parse(`"${readFileSync("site/src/data/legal.ts","utf8").match(/export const ageLabel = need\(\s*"ageLabel",\s*"((?:[^"\\]|\\.)*)"/)[1]}"`);
 
 // Besides deletion, the SDK answers the sign-in calls (signInWithOtp, verifyOtp) and the terms
 // acceptance (accept_community_terms), each resolving, failing or hanging on demand through
@@ -493,7 +495,7 @@ async function termsAcceptance(browser,base) {
   try {
     const label=p.locator("label.check");
     const text=withoutHint(await words(label));
-    assert.equal(text,`I am [CONFIRM: minimum age, proposed 16] or older. I accept the Terms of use and the community rules, and I have read the Privacy policy. I understand that reports are reviewed by a person. Version ${TERMS_VERSION}.`);
+    assert.equal(text,`${AGE_LABEL}. I accept the Terms of use and the community rules, and I have read the Privacy policy. I understand that reports are reviewed by a person. Version ${TERMS_VERSION}.`);
     assert.equal(await label.locator(".terms-version").evaluate(el=>getComputedStyle(el).display),"block","the version has its own line");
     for(const [name,href] of [["Terms of use","https://hisfullglory.com/terms"],["Privacy policy","https://hisfullglory.com/privacy"]]) {
       const a=label.getByRole("link",{name:name+" (opens in a new tab)",exact:true});
