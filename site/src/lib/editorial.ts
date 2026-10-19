@@ -68,3 +68,17 @@ export function splitHook(hook: string): { first: string; second?: string } {
   if (at < 0) return { first: hook };
   return { first: hook.slice(0, at + 1), second: hook.slice(at + 2) };
 }
+
+/**
+ * How tall a context check's spine stands on a shelf (UI-SPEC section 2): 128 to 160px in
+ * steps of 8, from a stable hash of the slug, so the same check is the same height on the
+ * app's shelf and on the site's bookcase, and always has been.
+ */
+export function spineHeight(slug: string): number {
+  let hash = 2166136261;
+  for (let i = 0; i < slug.length; i++) {
+    hash ^= slug.charCodeAt(i);
+    hash = Math.imul(hash, 16777619) >>> 0;
+  }
+  return 128 + (hash % 5) * 8;
+}

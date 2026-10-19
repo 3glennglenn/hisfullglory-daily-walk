@@ -1,0 +1,279 @@
+---
+// The signature block of the site (UI-SPEC section 2, A1 and W1/W3): the same cover as the app's
+// Today. Same markup for both looks; only the CSS differs by data-look.
+//   Cover and story: a leather block (--sig) with a gilt rule 8px inside its edge and four small
+//     gilt corner ornaments, the way gold tooling sits on a binding.
+//   Marked page: no box. The passage sits on the page beside a satin ribbon (--brand).
+//   Lamplight (either look): one soft lamp glow behind the block, never on it.
+// mode "hook": the day's hook (its first part is the page's h1), the label when no person checked
+//   the story, and "Read the story".  mode "verse": the verse itself, on a context-check page.
+import AiBadge from "./AiBadge.astro";
+import { aiUnreviewedCardLabel, refLabel, splitHook, verses, type ContextCheck } from "../lib/content";
+
+interface Props {
+  item: ContextCheck;
+  mode?: "hook" | "verse";
+}
+
+const { item, mode = "hook" } = Astro.props;
+const label = refLabel(item.verse);
+const { first, second } = splitHook(item.hook);
+const unchecked = item.review === "ai-unreviewed";
+---
+
+<section
+  class:list={["cover-wrap", `is-${mode}`]}
+  aria-labelledby={mode === "hook" ? "cover-title" : undefined}
+  aria-label={mode === "verse" ? `${label}, the verse` : undefined}
+>
+  <div class="cover" data-mode={mode}>
+    <span class="ribbon" aria-hidden="true"></span>
+    <svg class="orn tl" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M11 1A10 10 0 0 1 1 11" fill="none" stroke="currentColor" stroke-width="1"></path><circle cx="1" cy="1" r="1" fill="currentColor"></circle></svg>
+    <svg class="orn tr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M11 1A10 10 0 0 1 1 11" fill="none" stroke="currentColor" stroke-width="1"></path><circle cx="1" cy="1" r="1" fill="currentColor"></circle></svg>
+    <svg class="orn br" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M11 1A10 10 0 0 1 1 11" fill="none" stroke="currentColor" stroke-width="1"></path><circle cx="1" cy="1" r="1" fill="currentColor"></circle></svg>
+    <svg class="orn bl" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M11 1A10 10 0 0 1 1 11" fill="none" stroke="currentColor" stroke-width="1"></path><circle cx="1" cy="1" r="1" fill="currentColor"></circle></svg>
+    {
+      mode === "hook" ? (
+        <>
+          <p class="ref">{label}</p>
+          <h1 id="cover-title" class="hook">{first}</h1>
+          {second && <p class="hook-2">{second}</p>}
+          {
+            unchecked && (
+              <p class="ai-row">
+                <AiBadge />
+                <span>{aiUnreviewedCardLabel}</span>
+              </p>
+            )
+          }
+          <a class="cover-button" href={`/context-checks/${item.slug}`} aria-label={`Read the story: ${label}`}>
+            Read the story
+          </a>
+        </>
+      ) : (
+        <>
+          <blockquote class="scripture" data-layer="scripture">
+            {
+              verses(item.verse).map((verse) => (
+                <p>
+                  <sup>{verse.number}</sup>{" "}
+                  {verse.text}
+                </p>
+              ))
+            }
+          </blockquote>
+          <p class="wow">{label}, World English Bible</p>
+        </>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .cover-wrap {
+    position: relative;
+    isolation: isolate;
+  }
+  /* The lamp glow (Lamplight only; the token is transparent in Light): behind the block. */
+  .cover-wrap::before {
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--space-8)) calc(-1 * var(--space-4));
+    z-index: -1;
+    background: radial-gradient(60% 50% at 50% 40%, var(--glow), transparent 70%);
+    pointer-events: none;
+  }
+  .cover {
+    position: relative;
+    padding: clamp(16px, 5vw, 24px);
+    border-radius: var(--radius-xl);
+    background: var(--sig);
+    color: var(--on-sig);
+  }
+  .cover > :where(p, h1, blockquote, a) {
+    position: relative;
+  }
+  /* Element selector only, so the classes below can set their own margins. */
+  p {
+    margin: 0;
+  }
+  /* Gilt rule, 8px inside the edge (radius 28 minus 8). */
+  .cover::before {
+    content: "";
+    position: absolute;
+    inset: var(--space-2);
+    border: 1px solid var(--gilt);
+    border-radius: calc(var(--radius-xl) - var(--space-2));
+    pointer-events: none;
+  }
+  .orn {
+    position: absolute;
+    color: var(--gilt);
+  }
+  .tl {
+    top: var(--space-3);
+    left: var(--space-3);
+  }
+  .tr {
+    top: var(--space-3);
+    right: var(--space-3);
+    transform: rotate(90deg);
+  }
+  .br {
+    bottom: var(--space-3);
+    right: var(--space-3);
+    transform: rotate(180deg);
+  }
+  .bl {
+    bottom: var(--space-3);
+    left: var(--space-3);
+    transform: rotate(270deg);
+  }
+  .ribbon {
+    display: none;
+  }
+  .ref {
+    padding-top: var(--space-2);
+    font-family: var(--font-scripture);
+    font-style: italic;
+    color: var(--gilt);
+  }
+  .hook {
+    margin-top: var(--space-4);
+    font-family: var(--font-scripture);
+    font-size: var(--text-display);
+    font-weight: 400;
+    line-height: 1.29;
+    color: var(--on-sig);
+  }
+  .hook-2 {
+    margin-top: var(--space-4);
+    color: var(--sig-muted);
+  }
+  .ai-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    color: var(--on-sig);
+  }
+  .cover-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    margin-top: var(--space-6);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-md);
+    background: var(--sig-button);
+    color: var(--on-sig-button);
+    font-weight: 600;
+    line-height: 1.45;
+    text-align: center;
+    text-decoration: none;
+  }
+  .cover-button:hover {
+    filter: brightness(0.96);
+  }
+  .cover a:focus-visible {
+    outline-color: var(--sig-focus);
+  }
+
+  /* Verse mode: the verse in Scripture 20 on the cover, with its source line. */
+  .scripture {
+    margin: 0;
+    padding-block: var(--space-2);
+    font-size: var(--text-scripture);
+    line-height: 1.7;
+    color: var(--on-sig);
+  }
+  .scripture p + p {
+    margin-top: var(--space-3);
+  }
+  .scripture sup {
+    position: relative;
+    top: -0.3em;
+    vertical-align: baseline;
+    font-family: var(--font-ui);
+    font-size: var(--text-footnote);
+    font-weight: 600;
+    color: var(--gilt);
+  }
+  .wow {
+    margin-top: var(--space-3);
+    padding-bottom: var(--space-2);
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--sig-muted);
+  }
+
+  @media (min-width: 1024px) {
+    .cover {
+      border-radius: 32px;
+    }
+    .cover::before {
+      border-radius: 24px;
+    }
+    .hook {
+      font-size: 2.2222rem;
+      line-height: 1.2;
+    }
+  }
+
+  /* Marked page: the passage on the page, no box, no gilt, a ribbon instead. */
+  :global(:root[data-look="marked"]) .cover {
+    padding-inline: 0;
+    background: transparent;
+    border-radius: 0;
+    color: var(--ink);
+  }
+  :global(:root[data-look="marked"]) .cover::before,
+  :global(:root[data-look="marked"]) .orn {
+    display: none;
+  }
+  :global(:root[data-look="marked"]) .ribbon {
+    display: block;
+    position: absolute;
+    top: calc(-1 * var(--space-7));
+    right: 28px;
+    width: 10px;
+    height: 168px;
+    background: var(--brand);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+  }
+  :global(:root[data-look="marked"]) .ref {
+    padding-top: 0;
+    font-family: var(--font-ui);
+    font-style: normal;
+    font-weight: 600;
+    color: var(--link);
+  }
+  :global(:root[data-look="marked"]) .hook {
+    color: var(--ink);
+  }
+  :global(:root[data-look="marked"]) .hook-2 {
+    color: var(--muted);
+  }
+  :global(:root[data-look="marked"]) .ai-row {
+    color: var(--ai);
+  }
+  :global(:root[data-look="marked"]) .cover-button {
+    background: var(--sig-button);
+    color: var(--on-sig-button);
+  }
+  :global(:root[data-look="marked"]) .scripture {
+    color: var(--ink);
+  }
+  :global(:root[data-look="marked"]) .scripture sup {
+    color: var(--link);
+  }
+  :global(:root[data-look="marked"]) .wow {
+    color: var(--muted);
+  }
+  /* The first lines keep clear of the ribbon (right 28px + 10px wide + 14px of air). */
+  :global(:root[data-look="marked"]) .ref,
+  :global(:root[data-look="marked"]) .hook,
+  :global(:root[data-look="marked"]) .scripture {
+    padding-right: 52px;
+  }
+</style>

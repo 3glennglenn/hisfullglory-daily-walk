@@ -1,12 +1,12 @@
 ---
-// Home, following docs/WEBSITE_PLAN.md, section 4.1.
+// Home, following docs/WEBSITE_PLAN.md, section 4.1. The newest published context check opens it
+// on the cover, AI-written ones included and labelled (UI-SPEC W1, founder decision D-06).
 import { launchTopics } from "../../../src/topics/graph.ts";
-import { appUrl, mainNav } from "../config";
+import { appUrl } from "../config";
 import { appFeatures } from "../data/app";
+import Cover from "../components/Cover.astro";
 import Base from "../layouts/Base.astro";
 import { featuredChecks, publishedTopics, refLabel } from "../lib/content";
-
-const ready =(href: string) => mainNav.some((item) => item.href === href && item.ready);
 
 const steps = [
   { title: "Read", text: "Open any chapter of the Bible in the World English Bible." },
@@ -35,61 +35,34 @@ const promises = [
 
 // A card opens the topic page on this site once that page is approved, and the topic in
 // the app until then.
-// Three context checks on the home page; the section is left out until one is approved.
-// Until the home page is rebuilt around the newest check (plan 01.1-12), the old card list
-// keeps leaving out checks no person has checked: it has no label for them. featuredChecks
-// now returns every published check, newest first (D-06).
-const checks = featuredChecks().filter((item) => item.review !== "ai-unreviewed").slice(0, 3);
+// The newest published check leads the page, AI-written ones included (D-06); with none
+// published the page keeps its opening h1 and lede, without a cover.
+const newest = featuredChecks()[0];
 const onSite = new Set(publishedTopics().map((topic) => topic.id));
 const topicHref = (id: string) =>
   onSite.has(id) ? `/topics/${id}` : `${appUrl}/community/${id}`;
 ---
 
 <Base>
-  <section class="section">
-    <div class="wrap">
-      <h1>Study the Bible together.</h1>
-      <p class="lede">
-        Read Scripture, understand its context, and talk it through with others.
-      </p>
-      <div class="actions">
-        <a class="button" href={appUrl}>Open the app</a>
-        {
-          ready("/bible") && (
-            <a class="button secondary" href="/bible">
-              Explore the Bible
-            </a>
-          )
-        }
-      </div>
-      <p class="muted small note">
-        The HisFullGlory app is a beta web app. It opens in your browser.
-      </p>
-    </div>
-  </section>
-
   {
-    checks.length > 0 && (
-      <section class="section follow">
+    newest ? (
+      <section class="hero">
+        <div class="wrap hero-cover">
+          <Cover item={newest} />
+          <a class="row-link" href="/context-checks">
+            All context checks
+          </a>
+        </div>
+      </section>
+    ) : (
+      <section class="section">
         <div class="wrap">
-          <h2>You know the verse. Do you know where it stands?</h2>
-          <p class="muted">
-            Context checks put well-known verses back into their surroundings.
+          <h1>Study the Bible together.</h1>
+          <p class="lede">
+            Read Scripture, understand its context, and talk it through with others.
           </p>
-          <ul class="grid plain checks">
-            {checks.map((item) => (
-              <li class="card">
-                <h3>
-                  <a href={`/context-checks/${item.slug}`}>{refLabel(item.verse)}</a>
-                </h3>
-                <p>{item.hook}</p>
-              </li>
-            ))}
-          </ul>
           <div class="actions">
-            <a class="button secondary" href="/context-checks">
-              All context checks
-            </a>
+            <a class="button" href={appUrl}>Open the app</a>
           </div>
         </div>
       </section>
@@ -184,6 +157,25 @@ const topicHref = (id: string) =>
 </Base>
 
 <style>
+  .hero {
+    padding-block: 32px 0;
+  }
+  .hero-cover {
+    max-width: 40rem;
+  }
+  .row-link {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    margin-top: var(--space-4);
+    padding: var(--space-3) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    color: var(--link);
+    font-weight: 600;
+    text-decoration: none;
+  }
   h1 {
     max-width: 14ch;
   }
