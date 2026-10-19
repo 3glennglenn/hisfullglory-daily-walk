@@ -576,7 +576,7 @@ async function groupedStructure(browser,base) {
   try {
     const p=settings.page;
     assert.equal(await p.locator("h1").innerText(),"Settings");
-    assert.deepEqual(await p.locator("main h2").allInnerTexts(),["Daily rhythm","Appearance","Privacy and your data","Blocked authors","About and legal"],"Settings sections, About and legal last");
+    assert.deepEqual(await p.locator("main h2").allInnerTexts(),["Daily rhythm","Privacy and your data","Blocked authors","About and legal"],"Settings sections (Appearance has its own screen), About and legal last");
     // The long paragraph, the browser-storage sentence and the cloud-sync sentence left Settings (the Privacy policy says it).
     for(const gone of [/remain in\s+browser storage/,/Browser storage\s+is unencrypted/,/No encrypted cloud sync/,/Profile page/])
       assert.equal(await p.getByText(gone).count(),0,String(gone)+" is gone from Settings");
@@ -585,7 +585,7 @@ async function groupedStructure(browser,base) {
     assert.equal(await line.getAttribute("target"),"_blank");
     assert.match(await line.getAttribute("rel"),/(^|\s)noopener(\s|$)/);
     assert.equal(await p.locator("section#privacy h2").innerText(),"Privacy and your data");
-    for(const label of ["Minutes","Time","Faith journey","Theme"]) {
+    for(const label of ["Minutes","Time","Faith journey"]) {
       const select=p.getByLabel(label,{exact:true});
       assert.equal(await select.count(),1,label+" is one labelled select");
       assert.ok((await select.boundingBox()).height>=48,label+" select is 48px tall");

@@ -2,7 +2,7 @@ import { TopicPreferences } from "../topics/Preferences";
 import { useEffect, useState } from "react";
 import { usePlatform } from "../platform/store";
 import { backupData } from "../platform/persistence";
-import { goals, type Theme } from "../platform/models";
+import { goals } from "../platform/models";
 import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle, Toolbar } from "../ui/Screen";
@@ -163,18 +163,6 @@ export function Settings() {
         </li>
       </GroupedList>
       <TopicPreferences selected={state.privateTopics} onChange={privateTopics => update(s => ({...s,privateTopics}))} />
-      {/* Until the Appearance screen of plan 04 replaces it. */}
-      <GroupedList
-        title="Appearance"
-        note="System follows your device, including changes while this app is open."
-      >
-        <SelectRow
-          label="Theme"
-          value={state.theme}
-          options={["system", "light", "dark"]}
-          onChange={(v) => update((s) => ({ ...s, theme: v as Theme }))}
-        />
-      </GroupedList>
       <GroupedList title="Privacy and your data" id="privacy" note={<span role="status">{status}</span>}>
         <Row title="Export private backup" onClick={exportBackup} />
         {notice && (

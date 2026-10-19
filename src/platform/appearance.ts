@@ -12,6 +12,10 @@ export type Look = "cover" | "marked";
 export type Lamplight = "auto" | "on" | "off";
 export type Mode = "light" | "lamplight";
 
+/** The words the reader sees for each look and Lamplight setting (UI-SPEC 9.1: "theme", "Lamplight"). */
+export const LOOK_NAMES: Record<Look, string> = { cover: "Cover and story", marked: "Marked page" };
+export const LAMPLIGHT_NAMES: Record<Lamplight, string> = { auto: "Automatic", on: "On", off: "Off" };
+
 type Reader = Pick<Storage, "getItem">;
 
 /** Anything but the literal "marked" is the default look. */
@@ -48,6 +52,58 @@ export function readLamplight(storage: Reader | undefined = safeStorage()): Lamp
 /** Light or Lamplight for a Lamplight setting and the device's current appearance. */
 export function effectiveMode(lamp: Lamplight, deviceDark: boolean): Mode {
   return lamp === "on" || (lamp !== "off" && deviceDark) ? "lamplight" : "light";
+}
+
+type Writer = Pick<Storage, "setItem">;
+
+/**
+ * Remembers the look on this device. A storage that cannot be written keeps the choice for this
+ * visit only (UI-SPEC 3.2): the caller still applies it, nothing is shown to the reader.
+ */
+export function writeLook(look: Look, storage: Writer | undefined = safeStorage()): boolean {
+  try {
+    storage?.setItem(LOOK_KEY, look);
+    return !!storage;
+  } catch {
+    return false;
+  }
+}
+
+/** Remembers the Lamplight setting on this device; same rule as writeLook. */
+export function writeLamplight(lamp: Lamplight, storage: Writer | undefined = safeStorage()): boolean {
+  try {
+    storage?.setItem(LAMPLIGHT_KEY, lamp);
+    return !!storage;
+  } catch {
+    return false;
+  }
+}
+
+export const DARK_QUERY = "(prefers-color-scheme: dark)";
+
+/** The part of a MediaQueryList the app uses, so tests can supply their own. */
+export interface DeviceMedia {
+  readonly matches: boolean;
+  addEventListener(type: "change", listener: (event: { matches: boolean }) => void): void;
+  removeEventListener(type: "change", listener: (event: { matches: boolean }) => void): void;
+}
+
+/** Calls onChange with the device's new appearance whenever it switches. Returns a stop function. */
+export function watchDevice(media: DeviceMedia, onChange: (dark: boolean) => void): () => void {
+  const listener = (event: { matches: boolean }) => onChange(event.matches);
+  media.addEventListener("change", listener);
+  return () => media.removeEventListener("change", listener);
+}
+
+/**
+ * Puts the look and mode on <html> at once (no cross-fade) and the browser's theme-color on the
+ * colour the active block names (UI-SPEC 3.3). Browser only.
+ */
+export function applyAppearance(root: HTMLElement, look: Look, mode: Mode): void {
+  root.dataset.look = look;
+  root.dataset.mode = mode;
+  const color = getComputedStyle(root).getPropertyValue("--theme-color").trim();
+  if (color) document.querySelector('meta[name="theme-color"]')?.setAttribute("content", color);
 }
 
 /**

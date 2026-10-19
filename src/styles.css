@@ -2093,3 +2093,170 @@ html[data-text="large"] .select-row select {
 html[data-text="large"] .quick-grid {
   grid-template-columns: 1fr;
 }
+
+/* ==== Segmented (UI-SPEC 3.4, 7.4; src/ui/Segmented.tsx) ====
+   A radiogroup on a --surface-2 track. The chosen option is raised on --surface and drawn with a 2px
+   --focus edge, so the choice is clear without relying on a shade of grey. Selection changes over 150ms
+   (the global reduced-motion reset removes it). In large text the options become a vertical list of rows. */
+.segmented {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+.segmented [role="radio"] {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  transition:
+    background-color var(--dur-segment) ease,
+    box-shadow var(--dur-segment) ease;
+}
+.segmented [role="radio"][aria-checked="true"] {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--focus);
+  font-weight: 600;
+}
+html[data-text="large"] .segmented {
+  grid-auto-flow: row;
+}
+html[data-text="large"] .segmented [role="radio"] {
+  justify-content: flex-start;
+  min-height: 52px;
+  text-align: left;
+}
+
+/* ==== Appearance (UI-SPEC A13; src/features/Appearance.tsx) ====
+   Two theme tiles side by side (stacked when two do not fit, and in large text), each with a small drawing
+   of Today in that look and the name below. The drawings show both looks in the current mode, so they
+   carry their own few colours (the values of the two looks' blocks) instead of the active look's tokens. */
+.look-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(152px, 100%), 1fr));
+  gap: var(--space-3);
+}
+html[data-text="large"] .look-tiles {
+  grid-template-columns: 1fr;
+}
+.look-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: var(--space-3);
+  min-height: 176px;
+  padding: var(--space-3);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: left;
+}
+.look-tile[aria-checked="true"] {
+  border-color: var(--focus);
+}
+.look-tile-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 24px;
+  overflow-wrap: anywhere;
+}
+.look-check {
+  flex: none;
+}
+.look-check circle {
+  fill: var(--focus);
+}
+.look-check path {
+  stroke: var(--surface);
+}
+.look-mini {
+  position: relative;
+  display: block;
+  flex: 1;
+  min-height: 96px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: #F3F1EE;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.look-mini[data-look-mini="marked"] {
+  background: #FFFDF9;
+}
+html[data-mode="lamplight"] .look-mini {
+  background: #1A120E;
+}
+.mini-cover {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  height: 46px;
+  border-radius: 8px;
+  background: #603F33;
+}
+.mini-cover::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid #E3C08A;
+  border-radius: 5px;
+}
+html[data-mode="lamplight"] .mini-cover {
+  background: #5A3B2F;
+}
+html[data-mode="lamplight"] .mini-cover::after {
+  border-color: #E8C892;
+}
+.mini-ribbon {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  width: 8px;
+  height: 52px;
+  background: var(--brand);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 6px), 0 100%);
+}
+.mini-bar {
+  position: absolute;
+  left: 10px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--muted);
+  opacity: 0.45;
+}
+[data-look-mini="cover"] .mini-bar:nth-child(2) { top: 66px; width: 78%; }
+[data-look-mini="cover"] .mini-bar:nth-child(3) { top: 77px; width: 62%; }
+[data-look-mini="cover"] .mini-bar:nth-child(4) { top: 88px; width: 70%; }
+[data-look-mini="marked"] .mini-bar:nth-child(2) { top: 20px; width: 56%; }
+[data-look-mini="marked"] .mini-bar:nth-child(3) { top: 32px; width: 48%; }
+[data-look-mini="marked"] .mini-bar:nth-child(4) { top: 44px; width: 52%; }
+.appearance-hint,
+.appearance-now {
+  margin: var(--space-3) var(--space-5) 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.appearance-hint {
+  color: var(--muted);
+}
+.appearance-now {
+  color: var(--ink);
+}
+.appearance-now:empty {
+  margin: 0;
+}

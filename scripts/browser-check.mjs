@@ -315,33 +315,84 @@ try {
     },
   );
   await check(
-    "dark/light/system themes persist and respond to OS appearance",
+    "You, Appearance: theme and Lamplight apply at once, survive a reload, and Automatic follows the device",
     async () => {
+      // The row on You names the current choice; Settings no longer has a Theme select.
+      await go("/you");
+      const row = page.getByRole("link", { name: /^Appearance/ });
+      assert.equal(await row.locator(".list-row-value").innerText(), "Cover and story, Automatic");
+      assert.equal(await row.getAttribute("href"), "/settings/appearance");
       await go("/settings");
-      await page.getByLabel("Theme", { exact: true }).selectOption("dark");
-      assert.equal(
-        await page.evaluate(() => document.documentElement.dataset.mode),
-        "lamplight",
+      assert.equal(await page.getByLabel("Theme", { exact: true }).count(), 0, "no Theme select in Settings");
+      await go("/settings/appearance");
+      assert.equal(await page.locator("main h1").innerText(), "Appearance");
+      const themes = page.getByRole("radiogroup", { name: "Theme", exact: true });
+      const lamplight = page.getByRole("radiogroup", { name: "Lamplight", exact: true });
+      assert.deepEqual(await themes.getByRole("radio").allInnerTexts(), ["Cover and story", "Marked page"]);
+      assert.deepEqual(await lamplight.getByRole("radio").allInnerTexts(), ["Automatic", "On", "Off"]);
+      assert.equal(await themes.getByRole("radio", { name: "Cover and story" }).getAttribute("aria-checked"), "true");
+      assert.equal(await lamplight.getByRole("radio", { name: "Automatic" }).getAttribute("aria-checked"), "true");
+      assert.equal(await page.getByRole("button", { name: /save/i }).count(), 0, "no Save button");
+      assert.ok(
+        await page
+          .getByText("Lamplight dims the page to warm browns for reading at night. Automatic follows your device.", { exact: true })
+          .isVisible(),
       );
-      assert.equal(
-        await page.evaluate(() => getComputedStyle(document.body).color),
-        "rgb(246, 240, 231)",
-      );
+      // The tiles are at least 152 x 176 and the segments 44px tall.
+      for (const tile of await themes.getByRole("radio").all()) {
+        const box = await tile.boundingBox();
+        assert.ok(box.width >= 152 && box.height >= 176, "tile size " + JSON.stringify(box));
+      }
+      for (const segment of await lamplight.getByRole("radio").all())
+        assert.ok((await segment.boundingBox()).height >= 43.9, "segment is 44px tall");
+      // Choosing applies at once, with no Save.
+      await themes.getByRole("radio", { name: "Marked page" }).click();
+      await lamplight.getByRole("radio", { name: "On", exact: true }).click();
+      const seen = () =>
+        page.evaluate(() => ({
+          look: document.documentElement.dataset.look,
+          mode: document.documentElement.dataset.mode,
+          color: getComputedStyle(document.body).color,
+          background: getComputedStyle(document.body).backgroundColor,
+          stored: [localStorage.getItem("hfg-look"), localStorage.getItem("hfg-lamplight")],
+          themeColor: document.querySelector('meta[name="theme-color"]').getAttribute("content"),
+        }));
+      const marked = { look: "marked", mode: "lamplight", color: "rgb(246, 240, 231)", background: "rgb(26, 18, 14)", stored: ["marked", "on"], themeColor: "#1A120E" };
+      assert.deepEqual(await seen(), marked, "Marked page and Lamplight On apply at once");
+      assert.equal(await themes.getByRole("radio", { name: "Marked page" }).getAttribute("aria-checked"), "true");
       await page.reload();
-      assert.equal(
-        await page.evaluate(() => document.documentElement.dataset.mode),
-        "lamplight",
+      await page.locator("main h1").waitFor();
+      assert.deepEqual(await seen(), marked, "both choices survive a reload");
+      assert.equal(await lamplight.getByRole("radio", { name: "On", exact: true }).getAttribute("aria-checked"), "true");
+      // The old key is not written any more.
+      assert.equal(await page.evaluate(() => localStorage.getItem("hfg-appearance")), null);
+      // Arrow keys move the choice within a group, and only the chosen option is in the Tab order.
+      await lamplight.getByRole("radio", { name: "On", exact: true }).focus();
+      await page.keyboard.press("ArrowRight");
+      assert.equal(await lamplight.getByRole("radio", { name: "Off", exact: true }).getAttribute("aria-checked"), "true");
+      assert.equal(await page.evaluate(() => document.activeElement.textContent), "Off");
+      assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
+      assert.deepEqual(
+        await lamplight.getByRole("radio").evaluateAll((list) => list.map((r) => r.tabIndex)),
+        [-1, -1, 0],
       );
-      await page.getByLabel("Theme", { exact: true }).selectOption("system");
+      // Automatic follows the device while the app is open, and says what it does now.
+      await themes.getByRole("radio", { name: "Cover and story" }).click();
+      await lamplight.getByRole("radio", { name: "Automatic" }).click();
       await page.emulateMedia({ colorScheme: "light" });
-      assert.equal(
-        await page.evaluate(() => document.documentElement.dataset.mode),
-        "light",
-      );
+      assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
+      assert.equal(await page.getByRole("status").filter({ hasText: "Off now" }).innerText(), "Off now, because your device is set to light.");
       await page.emulateMedia({ colorScheme: "dark" });
-      await page.waitForFunction(
-        () => document.documentElement.dataset.mode === "lamplight",
-      );
+      await page.waitForFunction(() => document.documentElement.dataset.mode === "lamplight");
+      assert.equal(await page.getByRole("status").filter({ hasText: "On now" }).innerText(), "On now, because your device is set to dark.");
+      assert.equal(await page.evaluate(() => document.documentElement.dataset.look), "cover");
+      // On and Off say nothing about the device.
+      await lamplight.getByRole("radio", { name: "Off", exact: true }).click();
+      assert.equal(await page.locator("p.appearance-now").innerText(), "");
+      // Back to the state the other checks expect: Cover and story, Automatic, a light device.
+      await lamplight.getByRole("radio", { name: "Automatic" }).click();
+      await page.emulateMedia({ colorScheme: "light" });
+      await page.waitForFunction(() => document.documentElement.dataset.mode === "light");
     },
   );
   await check(
@@ -450,9 +501,9 @@ try {
     async () => {
       for (const width of [375, 390, 768, 1280]) {
         await page.setViewportSize({ width, height: 812 });
-        for (const theme of ["light", "dark"]) {
-          await go("/settings");
-          await page.getByLabel("Theme", { exact: true }).selectOption(theme);
+        for (const [theme, lamplightKey] of [["light", "off"], ["dark", "on"]]) {
+          // The next page load reads the key at first paint (UI-SPEC 3.3).
+          await page.evaluate((value) => localStorage.setItem("hfg-lamplight", value), lamplightKey);
           for (const path of [
             "/",
             "/bible/psalms/23",

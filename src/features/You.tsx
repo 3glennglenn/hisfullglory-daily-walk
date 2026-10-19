@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePlatform } from "../platform/store";
+import { LAMPLIGHT_NAMES, LOOK_NAMES } from "../platform/appearance";
+import { useAppearance } from "../platform/AppearanceProvider";
 import { useAuth } from "../platform/auth";
 import { supabase } from "../supabase";
 import { GroupedList, Row } from "../ui/List";
@@ -37,6 +39,7 @@ function useDisplayName(userId: string | undefined) {
 export function You() {
   const { session } = useAuth();
   const { state } = usePlatform();
+  const { look, lamplight } = useAppearance();
   const name = useDisplayName(session?.user.id);
   const reminder = state.notifications["Daily Walk"] === true || dailyReminderOn();
   return (
@@ -56,6 +59,12 @@ export function You() {
         <Row title="Grow" href="/grow" chevron />
       </GroupedList>
       <GroupedList title="Settings">
+        <Row
+          title="Appearance"
+          value={`${LOOK_NAMES[look]}, ${LAMPLIGHT_NAMES[lamplight]}`}
+          href="/settings/appearance"
+          chevron
+        />
         <Row
           title="Daily rhythm"
           value={`${state.preferences.minutes} minutes, ${state.preferences.time}`}

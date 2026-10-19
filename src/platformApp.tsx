@@ -11,8 +11,9 @@ import "@fontsource/literata/latin-400-italic.css";
 import "./styles.css";
 import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
-import { currentRoute, navigate, resolveTheme } from "./platform/router";
+import { currentRoute, navigate } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
+import { AppearanceProvider } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
 import { Home, Walk } from "./features/Home";
 import { Reader } from "./bible/Reader";
@@ -22,6 +23,7 @@ import { ContextCheck } from "./context/ContextCheck";
 import { JournalLibrary } from "./features/Journal";
 import { Settings, Profile } from "./features/Settings";
 import { You } from "./features/You";
+import { Appearance } from "./features/Appearance";
 import { Reminders } from "./features/Reminders";
 import { Give, GivingPolicy } from "./giving/Give";
 import { Community } from "./community";
@@ -105,22 +107,6 @@ function App() {
   }, []);
   // Sets data-text="large" on <html> while the system text size is 150 % or more (UI-SPEC 6.3).
   useEffect(() => watchTextSize(document.documentElement), []);
-  useEffect(() => {
-    const media = matchMedia("(prefers-color-scheme: dark)");
-    const apply = () => {
-      // Until the Appearance screen replaces this setting, the old theme choice drives the mode.
-      // data-look stays as the first paint set it; the colours come from the stylesheet.
-      const effective = resolveTheme(state.theme, media.matches);
-      const root = document.documentElement;
-      root.dataset.mode = effective === "dark" ? "lamplight" : "light";
-      try { localStorage.setItem("hfg-appearance", state.theme); } catch { /* Appearance remains usable. */ }
-      const color = getComputedStyle(root).getPropertyValue("--theme-color").trim();
-      if (color) document.querySelector('meta[name="theme-color"]')?.setAttribute("content", color);
-    };
-    apply();
-    media.addEventListener("change", apply);
-    return () => media.removeEventListener("change", apply);
-  }, [state.theme]);
   const page = route.page;
   let content: ReactNode;
   switch (page) {
@@ -161,8 +147,8 @@ function App() {
       content = <Profile />;
       break;
     case "settings":
-      // "/settings/appearance" shows Settings until the Appearance screen exists.
-      content = route.id === "reminders" ? <RemindersScreen /> : <Settings />;
+      content =
+        route.id === "reminders" ? <RemindersScreen /> : route.id === "appearance" ? <Appearance /> : <Settings />;
       break;
     case "circles":
       content = <Circles key={route.id ?? "discovery"} slug={route.id} thread={route.thread}/>;
@@ -250,6 +236,6 @@ function App() {
 }
 createRoot(document.getElementById("root")!).render(
   <ErrorBoundary>
-    <AuthProvider><PrivateProfileBoundary><App/></PrivateProfileBoundary></AuthProvider>
+    <AuthProvider><PrivateProfileBoundary><AppearanceProvider><App/></AppearanceProvider></PrivateProfileBoundary></AuthProvider>
   </ErrorBoundary>,
 );
