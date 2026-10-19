@@ -423,6 +423,18 @@ try {
         assert.ok(box && box.height >= 52, name + " row is at least 52px tall");
       }
       assert.equal(await page.getByRole("link", { name: /^Privacy policy/ }).count(), 1, "the PR 27 legal links sit under About");
+      // Account and Settings are named for what they are, with the sections of UI-SPEC A12.
+      await go("/profile");
+      assert.equal(await page.locator("main h1").innerText(), "Account");
+      assert.ok((await page.locator("main h2").allInnerTexts()).includes("Account and privacy"));
+      assert.equal(await page.getByText("daily walks completed").count(), 0, "the stats card left Account");
+      await go("/settings");
+      assert.equal(await page.locator("main h1").innerText(), "Settings");
+      const settingsSections = await page.locator("main h2").allInnerTexts();
+      for (const name of ["Daily rhythm", "Privacy and your data", "About and legal"]) assert.ok(settingsSections.includes(name), name);
+      assert.equal(await page.getByText("Your rhythm, your settings.").count(), 0);
+      assert.equal(await page.getByText(/Browser storage\s+is unencrypted/).count(), 0, "the long privacy paragraph is gone");
+      assert.equal(await page.getByText("Your journal, prayers and reading progress stay on this device.").count(), 1);
       // /settings/reminders opens the Reminders screen under a way back to You.
       await go("/settings/reminders");
       assert.equal(await page.locator("main h1").innerText(), "Daily reminder");

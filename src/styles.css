@@ -1856,11 +1856,155 @@ html[data-text="large"] .list-row-value {
   font-weight: 600;
   text-decoration: none;
 }
-.group .legal-links a[target="_blank"]::after {
+.group a[target="_blank"]::after {
   content: "\2197" / "";
   flex: none;
   color: var(--muted);
 }
 .group .legal-links a:focus-visible {
   outline-offset: -3px;
+}
+
+/* ==== Account, Settings and the other grouped screens (UI-SPEC A12, A14) ====
+   PR #27's sign-in, code entry, terms acceptance, legal links and deletion card keep their words and their
+   class names; they are restyled here. :where() keeps this scope at the lowest specificity, so a component
+   class (.list-row, .secondary.danger, .terms-accept ...) always wins over it. */
+:where(.grouped-screen) .card {
+  margin: 0 0 var(--space-6);
+  padding: var(--space-5);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: none;
+}
+:where(.grouped-screen) .card > h2 {
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+:where(.grouped-screen) p {
+  margin: var(--space-3) 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  overflow-wrap: anywhere;
+}
+:where(.grouped-screen) p:empty {
+  margin: 0;
+}
+:where(.grouped-screen) small {
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  overflow-wrap: anywhere;
+}
+/* Fields: 48px, radius 10, a 1px --muted edge (3:1), the label above in Footnote 13/600. */
+:where(.grouped-screen) label {
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+:where(.grouped-screen) input:not([type="checkbox"]),
+:where(.grouped-screen) select,
+:where(.grouped-screen) textarea {
+  min-height: 48px;
+  padding: 11px 12px;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--text-body);
+}
+:where(.grouped-screen) .check {
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+}
+:where(.grouped-screen) button,
+:where(.grouped-screen) .button {
+  min-height: 48px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+:where(.grouped-screen) .secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--muted);
+}
+/* One filled button per step: the form's own button, and the code step's "Sign in with code". */
+.grouped-screen .card form > button,
+.grouped-screen .card > button:not(.secondary) {
+  width: 100%;
+  margin: var(--space-4) 0 0;
+}
+.grouped-screen .card:has(.code-entry) > form:not(.code-entry) > button {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.grouped-screen .sign-in-note,
+.grouped-screen .delete-account label,
+.grouped-screen .delete-account .delete-hint {
+  font-size: var(--text-body);
+}
+.grouped-screen .terms-accept .terms-version {
+  font-size: var(--text-footnote);
+}
+/* "Sign out" is AuthPanel's own secondary button; here it is a plain --link row under the details. */
+.grouped-screen .card:not(.delete-account) > button.secondary {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 52px;
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  color: var(--link);
+}
+/* Rows with a native select (Settings), a block of free content, and a sentence under a group. */
+.select-row {
+  margin: 0;
+  cursor: pointer;
+}
+.select-row select {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: 60%;
+  background: var(--bg);
+}
+.list-row-block {
+  padding: var(--space-3) var(--space-5) var(--space-4);
+}
+.list-row-block > p {
+  margin: 0 0 var(--space-2);
+}
+.list-row-block .chips {
+  margin: var(--space-2) 0 0;
+}
+.list-row-quiet .list-row-title {
+  color: var(--link);
+  font-weight: 400;
+}
+.group-note {
+  margin: var(--space-2) var(--space-5) 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.group-note:has(> [role="status"]:empty) {
+  margin: 0;
+}
+html[data-text="large"] .select-row {
+  flex-direction: column;
+  align-items: stretch;
+}
+html[data-text="large"] .select-row select {
+  width: 100%;
+  max-width: 100%;
 }
