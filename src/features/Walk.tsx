@@ -161,7 +161,8 @@ export function Walk() {
 
 // The walk finish (A6): the days walked, counted from every completed date and never reset, with no run length and no
 // calendar of empty days; tomorrow's passage named; today's context check while it is unread; the reminder row reading
-// what the reader chose (reminders are never turned on from here); the rhythm questions once, after the first walk.
+// what the reader chose (reminders are never turned on from here). The rhythm questions are asked once, on the first open
+// of the app (Welcome.tsx), no longer after the first walk; Settings and You keep their "Daily rhythm" entries.
 function WalkFinish({ date }: { date: string }) {
   const { state } = usePlatform();
   const today = contentFor(date);
@@ -206,7 +207,6 @@ function WalkFinish({ date }: { date: string }) {
           />
         )}
         <Row href="/settings/reminders" chevron title="Daily reminder" value={reminderOn ? "On" : "Off"} />
-        {days === 1 && <Row href="/settings" chevron title="Choose your daily rhythm" />}
       </GroupedList>
       <button type="button" className="flow-button" onClick={() => navigate("/")}>
         Back to Today

@@ -17,6 +17,7 @@ import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider
 import { supabase } from "./supabase";
 import { Walk } from "./features/Walk";
 import { Today } from "./features/Today";
+import { Welcome } from "./features/Welcome";
 import { YourShelf } from "./features/Shelf";
 import { Reader } from "./bible/Reader";
 import { Pray } from "./features/Pray";
@@ -83,6 +84,10 @@ function App() {
   const { state, notice, update } = usePlatform();
   const lamplightNotice = useAppearance().notice;
   const [route, setRoute] = useState(currentRoute);
+  // The welcome questionnaire takes over once, when the app opens on Today ("/") and has never been answered. A deep link
+  // (a chapter, a context check from the website or a share) is never held back: the choice is made at the start, so a
+  // reader who came in through a link meets the questionnaire the first time the app opens on Today.
+  const [welcomeOpen, setWelcomeOpen] = useState(() => !state.local.onboarded && currentRoute().page === "home");
   const [online, setOnline] = useState(navigator.onLine);
   const [date, setDate] = useState(localDate);
   const [install, setInstall] = useState<InstallEvent | null>(null);
@@ -118,14 +123,15 @@ function App() {
   const page = route.page;
   // The story and Today's walk are full-screen flows (UI-SPEC A5, A7, 8.1): the tab bar is covered while one is open
   // and "‹ Today" is the way out. A slug that names no published check is the error state, which keeps the tab bar.
-  const flow = page === "walk" || (page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id));
+  const welcome = welcomeOpen && page === "home";
+  const flow = welcome || page === "walk" || (page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id));
   let content: ReactNode;
   switch (page) {
     case "my-walk":
       content = <MyWalk />;
       break;
     case "home":
-      content = <Today key={date} />;
+      content = welcome ? <Welcome onDone={() => setWelcomeOpen(false)} /> : <Today key={date} />;
       break;
     case "walk":
       content = <Walk key={date} />;

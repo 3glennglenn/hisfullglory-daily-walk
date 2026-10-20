@@ -4577,3 +4577,50 @@ html[data-text="large"] .around-capsule {
   line-height: 1.38;
   color: var(--muted);
 }
+
+/* ==== Plan 16: the welcome questionnaire, once (src/features/Welcome.tsx) ====
+   Five screens in the walk's flow: the step indicator, a Large Title, the choices, one filled button, Back from step
+   2 and "Skip for now" under them. The tab bar is covered (the shell is data-flow). Nothing moves. */
+.welcome-flow .step-indicator {
+  margin-top: var(--space-4);
+}
+.welcome-kicker {
+  margin: 0 0 var(--space-1);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--link);
+}
+.welcome-title {
+  margin: 0 0 var(--space-4);
+}
+.welcome-title:focus {
+  outline: none;
+}
+.welcome-flow .flow-part > p:not([class]) {
+  color: var(--ink);
+}
+.welcome-flow .flow-part > .group {
+  margin-bottom: var(--space-5);
+}
+.welcome-flow .flow-part > details.card {
+  margin: 0 0 var(--space-5);
+}
+.welcome-flow .chips {
+  margin: var(--space-4) 0;
+}
+/* "Skip for now": a plain link-coloured button, 44px tall, centred under the two flow buttons. */
+.welcome-skip {
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  margin: var(--space-2) 0 0;
+  background: none;
+  color: var(--link);
+  border-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.welcome-skip:hover {
+  filter: none;
+}

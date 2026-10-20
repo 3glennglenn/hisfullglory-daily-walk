@@ -81,7 +81,7 @@ export async function checkWalkFinish(browser, base, published) {
       assert.equal(await page.locator(".walk-finish-ref").innerText(), today.reference);
       assert.equal(await page.locator(".walk-finish-ref").evaluate((el) => getComputedStyle(el).fontWeight), "600");
 
-      // The one list: days walked, tomorrow, today's context check, the reminder, the rhythm.
+      // The one list: days walked, tomorrow, today's context check, the reminder.
       const rows = page.locator(".group-list > li");
       const first = rows.nth(0);
       assert.equal(await first.locator(".row-with-icon").innerText(), "1 day walked", "one day is singular");
@@ -100,9 +100,9 @@ export async function checkWalkFinish(browser, base, published) {
       const reminder = page.locator('.group-list a[href="/settings/reminders"]');
       assert.equal(await reminder.locator(".list-row-title").innerText(), "Daily reminder");
       assert.equal(await reminder.locator(".list-row-value").innerText(), "Off", "reminders are off until the reader turns them on");
-      const rhythm = page.locator('.group-list a[href="/settings"]');
-      assert.equal(await rhythm.locator(".list-row-title").innerText(), "Choose your daily rhythm", "offered once, after the first walk");
-      assert.equal(await rows.count(), 5);
+      // The rhythm questions are asked once, on the first open of the app (tests/welcome.browser.mjs), not after the first walk.
+      assert.equal(await page.getByText("Choose your daily rhythm").count(), 0, "no rhythm row after the first walk");
+      assert.equal(await rows.count(), 4);
       assert.deepEqual(await filledButtons(page), ["Back to Today"], "one filled button");
 
       // No guilt, no streak, no motion.
@@ -144,7 +144,7 @@ export async function checkWalkFinish(browser, base, published) {
       await page.getByRole("button", { name: "Finish today's walk", exact: true }).click();
       await page.getByRole("heading", { name: "Walk complete", exact: true }).waitFor();
       assert.equal(await page.locator(".row-with-icon").innerText(), "2 days walked");
-      assert.equal(await page.getByText("Choose your daily rhythm").count(), 0, "the rhythm row is offered once");
+      assert.equal(await page.getByText("Choose your daily rhythm").count(), 0, "the rhythm row is gone");
       assert.equal(await page.getByText("Today's context check").count(), 0, "no check row when none is unread");
       assert.equal(await page.locator('.group-list a[href="/settings/reminders"] .list-row-value').innerText(), "On", "On when the reader turned it on");
       assert.equal(await page.locator(".group-list > li").count(), 3);
