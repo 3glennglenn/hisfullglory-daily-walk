@@ -1,6 +1,11 @@
 // The website's own file decides whether the support address may be shown, so the app and the
 // site cannot disagree (GATE-03). The .ts extension lets Node's test runner resolve it too.
 import { supportEmailReady } from "../site/src/data/legal.ts";
+// The sponsor slot (founder decision of 2026-10-19, D-13): the shape and the rule live in the website's own file,
+// so the app and the site cannot disagree about when a sponsor shows.
+import { sponsorFor, type Sponsor, type SponsorPlace } from "../site/src/lib/sponsor.ts";
+
+export { sponsorFor, type Sponsor, type SponsorPlace };
 
 export const config = {
   supportEmail: "support@hisfullglory.com",
@@ -10,6 +15,10 @@ export const config = {
   siteUrl: "https://hisfullglory.com",
   // The shop moved to its own subdomain on 2026-10-13; hisfullglory.com is the website.
   storeUrl: "https://shop.hisfullglory.com",
+  // The sponsor slot is built for later and empty at launch: no sponsor, no house message, nothing in its place
+  // (founder, 2026-10-19). A sponsor appears only once one is set here with the places it may show at; its host
+  // must also be listed in outboundHosts (site/src/data/legal.ts), which tests/third-parties.test.ts enforces.
+  sponsor: null as Sponsor | null,
   // The public half of the Web Push key pair. Public by design; the private half is in
   // Supabase Vault (supabase/migrations/011_push_schedule.sql).
   pushPublicKey: "BI2X1QZC6n3ww4Sihf2xfYgsOOfb8DYfIp9Jurf_u7b6n1_QKQQYWQJce8eni3oxN5R1Jy5FsV1f12qVlud9SSg",

@@ -11,6 +11,7 @@ import { AiBadge } from "../ui/Badges";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle } from "../ui/Screen";
 import { MiniShelf } from "../ui/Shelf";
+import { SponsorRow } from "../ui/SponsorRow";
 
 const parts = (date: string) => date.split("-").map(Number) as [number, number, number];
 
@@ -122,6 +123,8 @@ export function Today() {
           }
         />
       </GroupedList>
+      {/* The sponsor slot: nothing is rendered while no sponsor is set (D-13). */}
+      <SponsorRow place="today-end" />
     </section>
   );
 }

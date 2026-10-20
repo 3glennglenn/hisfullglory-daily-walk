@@ -2851,3 +2851,25 @@ html[data-text="large"] .cover {
 html[data-text="large"] .today .list-row-leading {
   flex-basis: 100%;
 }
+
+/* ==== Sponsor row (UI-SPEC 13, D-13; src/ui/SponsorRow.tsx) ====
+   Rendered only when a sponsor is set (none at launch). The same look at every place; no glow, no image. */
+.sponsor {
+  margin: 0 0 var(--space-6);
+}
+.sponsor-label {
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+.sponsor-line {
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  color: var(--muted);
+}
+.sponsor .group-note {
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}

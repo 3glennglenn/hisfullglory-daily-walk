@@ -115,6 +115,9 @@ export async function checkToday(browser, base, published) {
     assert.equal(await shelfRow(page).locator(".list-row-detail").innerText(), "Nothing on it yet");
     assert.equal(await page.locator(".mini-spine").count(), 0, "an empty shelf draws no spines");
     assert.equal(await page.locator(".row-ai").count(), 0, "no AI line on an empty shelf");
+    // The sponsor slot is built and empty (D-13): not an element, not a word, at the end of Today.
+    assert.equal(await page.locator('[data-slot="sponsor"]').count(), 0, "no sponsor slot on Today");
+    assert.equal(await page.locator("main").getByText(/sponsor/i).count(), 0, "no word Sponsor on Today");
     assert.equal(await page.locator("main h2:not(.sr-only)").count(), 0, "no group headings: one quiet list");
     // The block reads as one section named by its hidden heading; the list follows it.
     const order = await page.evaluate(() => {
@@ -403,3 +406,47 @@ export async function checkTodayFixture(browser, base) {
   }
   console.log("Today fixture checks passed");
 }
+
+// ---- Today at twice the text size ------------------------------------------------------------------------------
+// The root grows to 34px and a resize tells the app (UI-SPEC 6.3). The longest hook among the published checks is
+// found at run time and made Today's by marking every newer check finished on an earlier day.
+export async function checkTodayLargeText(browser, base, published) {
+  const longest = [...published].sort((a, b) => b.hook.length - a.hook.length)[0];
+  const newer = published.slice(0, published.indexOf(longest)).map((c) => ({ slug: c.slug, finishedOn: "2026-01-02" }));
+  for (const width of [390, 320]) {
+    await withToday(browser, base, { width, height: 640, wanted: { shelf: newer } }, async (page) => {
+      assert.equal(await page.locator(".cover-ref").innerText(), refLabel(longest.verse), "the longest hook is Today's");
+      await page.evaluate(() => {
+        document.documentElement.style.fontSize = "34px";
+        window.dispatchEvent(new Event("resize"));
+      });
+      await page.waitForFunction(() => document.documentElement.dataset.text === "large");
+      const where = "at " + width + "px, root 34px";
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, "no horizontal scroll " + where);
+      assert.equal(await page.locator(".cover").evaluate((el) => el.scrollWidth === el.clientWidth), true, "the hook is not clipped " + where);
+      assert.equal(await page.locator(".cover").evaluate((el) => getComputedStyle(el).paddingTop), "16px", "16px padding in large-text mode " + where);
+      const labels = await page.locator(".tab-label").evaluateAll((list) =>
+        list.map((l) => ({ text: l.textContent, height: l.getBoundingClientRect().height, line: parseFloat(getComputedStyle(l).lineHeight) })),
+      );
+      assert.equal(labels.length, 5);
+      for (const label of labels) assert.ok(label.height <= label.line * 1.2, label.text + " stays on one line " + where + ": " + JSON.stringify(label));
+      // The button can be reached: brought into view, it sits above the tab bar.
+      await page.locator(".cover-button").focus();
+      await page.waitForTimeout(150);
+      const reach = await page.evaluate(() => ({
+        button: document.querySelector(".cover-button").getBoundingClientRect().bottom,
+        bar: document.querySelector("nav.tabbar").getBoundingClientRect().top,
+      }));
+      assert.ok(reach.button <= reach.bar, "the cover button is above the tab bar " + where + ": " + JSON.stringify(reach));
+      // The page can be scrolled to its end: the last row ends above the bar, too.
+      await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+      await page.waitForTimeout(100);
+      const end = await page.evaluate(() => ({
+        last: [...document.querySelectorAll(".today .list-row")].at(-1).getBoundingClientRect().bottom,
+        bar: document.querySelector("nav.tabbar").getBoundingClientRect().top,
+      }));
+      assert.ok(end.last <= end.bar, "the last row is above the tab bar " + where + ": " + JSON.stringify(end));
+    });
+  }
+}
+

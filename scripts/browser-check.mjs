@@ -8,7 +8,8 @@ import {readdirSync,readFileSync} from "node:fs";
 // Node strips the types, so the app's own rules decide which context check Today should open with (Node 24, local and CI).
 import {aiUnreviewedCardLabel,publishedChecks,refLabel,splitHook,todaysCheck} from "../src/context/checks.ts";
 import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
-import {checkToday,checkTodayFixture} from "../tests/today.browser.mjs";
+import {checkToday,checkTodayFixture,checkTodayLargeText} from "../tests/today.browser.mjs";
+import {checkSponsor} from "../tests/sponsor.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -149,6 +150,8 @@ try {
   );
   await check("Today: its states, the walk and shelf rows, and what each look draws (UI-SPEC A1)", () => checkToday(browser, base, published));
   await check("Today on controlled content: no published check, an AI-written newest check, files the app cannot read", () => checkTodayFixture(browser, base));
+  await check("Today at 200 % text on 390 and 320px: no sideways scroll, nothing clipped, the button and the last row above the tab bar, tab labels on one line", () => checkTodayLargeText(browser, base, published));
+  await check("sponsor slot: nothing at any of the six places while no sponsor is set; a fixture sponsor shows only where it is listed, as a sponsored link without a query string", () => checkSponsor(browser, base));
   await check(
     "complete daily walk saves private reflection and idempotent completion",
     async () => {
