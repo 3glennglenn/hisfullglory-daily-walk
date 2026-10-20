@@ -4,23 +4,24 @@
     {
       "id": "ai:hosea",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Hosea is told to marry a woman who will be unfaithful to him, and his marriage becomes a picture of God and Israel. The book moves between accusation and tenderness: Israel has chased other gods and trusted foreign powers, and yet God cannot give his people up.\n\nIt ends with a call to return and a promise of healing."
+          "text": "God tells Hosea to take a wife who will not be faithful to him, and from that moment the prophet’s own home becomes a picture of God and Israel. The book moves between accusation and tenderness. Israel has chased other gods and trusted foreign powers, and it has been told so. Yet God cannot give his people up.\n\nIn chapter 11 God speaks like a parent: “When Israel was a child, then I loved him,” and “I taught Ephraim to walk.” Then comes the cry that gives the book its heart: “How can I give you up, Ephraim?” It ends with a call to return and a promise of healing."
         },
         {
           "kind": "background",
-          "text": "Hosea prophesied in the northern kingdom of Israel in the eighth century before Christ, in its last prosperous and then chaotic decades before Assyria destroyed it."
+          "text": "Hosea prophesied in the northern kingdom of Israel in the eighth century before Christ, in its last prosperous and then chaotic decades before Assyria destroyed it. He spoke to a land that still seemed secure and was close to its end."
         },
         {
           "kind": "interpretations",
           "text": "Readers have asked whether the marriage was a real one or a parable; most take it as real. The book’s picture of God as a husband wronged and as a parent teaching a child to walk (chapter 11) is among the most moving in the prophets. Jesus twice quotes its line that God desires mercy and not sacrifice, and Matthew applies 11:1 to Jesus’ childhood."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

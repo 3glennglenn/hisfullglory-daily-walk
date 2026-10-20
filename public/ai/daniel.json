@@ -4,13 +4,13 @@
     {
       "id": "ai:daniel",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "The first half of Daniel (chapters 1 to 6) tells of Daniel and his friends as exiles serving at foreign courts: the blazing furnace, the writing on the wall, the lions’ den. In each story they stay faithful under pressure and God proves to be above every king.\n\nThe second half (7 to 12) records visions of empires rising and falling, of one like a son of man receiving an everlasting kingdom, and of the dead being raised."
+          "text": "A young man is carried off to a foreign court, and the question the book asks is whether he will stay faithful. The first half of Daniel (chapters 1 to 6) tells of Daniel and his friends as exiles serving at foreign courts. In the blazing furnace they tell the king, “our God whom we serve is able to deliver us”, and add, “But if not,” they still will not bow. At the lions’ den the king himself says to Daniel, “Your God whom you serve continually, he will deliver you.” In each story they stay faithful under pressure, and God proves to be above every king.\n\nThe second half (7 to 12) records visions of empires rising and falling, of one like a son of man receiving an everlasting kingdom, and of the dead being raised."
         },
         {
           "kind": "background",
@@ -20,7 +20,8 @@
           "kind": "interpretations",
           "text": "Jesus’ title for himself, the Son of Man, draws on chapter 7. Christians agree that the visions declare God’s rule over history. They differ widely on the details: which empires are meant, how to count the seventy weeks of chapter 9, and how much refers to the time of Antiochus, to the first coming of Christ or to the end."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

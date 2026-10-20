@@ -4,23 +4,24 @@
     {
       "id": "ai:jeremiah",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jeremiah prophesied in Judah’s last decades, up to and beyond the destruction of Jerusalem. He calls the people to turn back to God, warns that the temple will not protect them, and is opposed by kings, priests and other prophets. The book includes his own anguished prayers.\n\nIn the middle of the warnings stands a promise: God will make a new covenant and write his law on his people’s hearts (31:31 to 34)."
+          "text": "Before Jeremiah can speak, God has already spoken of him: “Before I formed you in the womb, I knew you.” That is how the book tells his calling, and the calling is heavy. He prophesied in Judah’s last decades, up to and beyond the destruction of Jerusalem. He calls the people to turn back to God, and he warns that the temple will not protect them. Kings, priests and other prophets oppose him. The book lets us hear his own anguished prayers, so that we see not only the message but the man who had to carry it.\n\nIn the middle of the warnings stands a promise. God says he will make “a new covenant”, and of his law he says, “I will write it in their heart” (31:31 to 34)."
         },
         {
           "kind": "background",
-          "text": "Jeremiah’s ministry ran from about 627 to after 586 before Christ. His scribe Baruch wrote down his words. The book is not in time order, and the ancient Greek version is shorter and arranged differently from the Hebrew."
+          "text": "Jeremiah’s ministry ran from about 627 to after 586 before Christ. His scribe Baruch wrote down his words. The book is not in time order, so a reader should expect to move back and forth across those years. The ancient Greek version is shorter than the Hebrew and arranged differently, and it shows that the book itself was handed down with care."
         },
         {
           "kind": "interpretations",
           "text": "The promise of a new covenant is taken up at the Last Supper and quoted in full in Hebrews 8. Jeremiah 29:11 is one of the most quoted verses in the Bible. In its setting it is addressed to a whole people in exile and comes with the news that they will stay there for seventy years, which guards against reading it as a promise of quick relief."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
