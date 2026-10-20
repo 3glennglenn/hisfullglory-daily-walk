@@ -1201,29 +1201,6 @@ button[aria-pressed="true"] {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
-.scripture-reader {
-  padding: 16px;
-}
-.verse {
-  display: block;
-  text-align: left;
-  font-family: var(--font-scripture);
-  background: transparent;
-  color: var(--ink);
-  font-size: 1.03rem;
-  line-height: 1.85;
-  font-weight: 400;
-  width: 100%;
-  margin: 0 !important;
-  padding: 8px;
-  border-radius: 6px;
-}
-.verse sup {
-  font-family: var(--font-ui);
-  color: var(--muted);
-  font-size: 0.7rem;
-  margin-right: 8px;
-}
 /* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
 .speaker {
   font-family: var(--font-ui);
@@ -1246,10 +1223,6 @@ p.speaker {
   line-height: 1.5;
   margin: 0 8px 8px;
 }
-.verse.selected {
-  outline: 2px solid var(--focus);
-  outline-offset: 0;
-}
 .highlight-gold {
   background: var(--highlight-gold);
 }
@@ -1258,22 +1231,6 @@ p.speaker {
 }
 .highlight-rose {
   background: var(--highlight-rose);
-}
-.search-result {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  background: transparent;
-  color: var(--ink);
-  border-bottom: 1px solid var(--line);
-  width: 100%;
-  font-weight: 400;
-  padding: 12px 0;
-  border-radius: 0;
-}
-.search-result span {
-  font-size: 0.84rem;
 }
 .safety {
   margin-top: 5px;
@@ -1331,16 +1288,6 @@ small {
 
 .circles article a {display:block;min-height:44px;padding:8px 0;overflow-wrap:anywhere;}
 
-/* AI explanations: a separate, labelled layer, never part of the sourced note. */
-.ai-explanation {border-style:dashed;background:var(--bg);}
-.ai-badge {display:inline-block;vertical-align:middle;margin-left:6px;padding:1px 9px;border:1px solid var(--line);border-radius:999px;font-size:0.68rem;font-weight:600;color:var(--muted);}
-.ai-explanation h4 {margin:16px 0 4px;font-size:0.88rem;}
-.ai-explanation ul {margin:6px 0;padding-left:1.2rem;font-size:0.92rem;}
-.ai-explanation li + li {margin-top:5px;}
-.ai-compare {border-top:1px solid var(--line);margin-top:10px;padding-top:6px;}
-.ai-compare dl {margin:0 0 6px;}
-.ai-compare dt {margin-top:8px;font-size:0.72rem;font-weight:600;color:var(--muted);}
-.ai-compare dd {margin:2px 0 0;font-size:0.92rem;}
 /* The story and the walk are full-screen flows (plans 07 and 08); their styles are in the last sections of this file. */
 .muted {
   color: var(--muted);
@@ -2530,8 +2477,7 @@ html[data-text="large"] .segmented-scroll [role="radio"] {
   box-sizing: border-box;
   min-height: 20px;
   margin: 0;
-  /* The older rule for the reader's AI heading (.ai-badge near "AI explanations") gives a 1px border, 1px of
-     vertical padding and a left margin; without these resets the badge measured 24px instead of 20px. */
+  /* Explicit 0 so no rule from a parent (an h3 heading, a row) can widen the badge past its 20px. */
   padding: 0 var(--space-2);
   border: 0;
   border-radius: var(--radius-xs);
@@ -2542,7 +2488,7 @@ html[data-text="large"] .segmented-scroll [role="radio"] {
   line-height: 20px;
   vertical-align: baseline;
 }
-/* The reader's heading "AI explanation [AI]" keeps the gap the older rule gave it. */
+/* The reader's heading "AI explanation [AI]" keeps a gap before the badge. */
 h3 > .ai-badge {
   margin-left: var(--space-2);
   vertical-align: middle;
@@ -3502,4 +3448,1177 @@ html[data-text="large"] .shelf-boards .spine-ai-text {
 }
 .walk-finish .group {
   margin-bottom: var(--space-5);
+}
+
+/* ==== The reader (UI-SPEC 2, 6.3, 7.5, A2, A3; plan 01.1-09; src/bible/*) ====
+   Scripture first: a sticky 52px toolbar, the small book title, the chapter heading and verse 1 within about
+   190px of the top. The verses are text; their numbers are 13px/600 buttons whose hit areas are drawn with
+   ::after (Cover: 44 x 44 in a 24px hanging margin, a block per verse with a 12px gap; Marked: 44px wide by one
+   line box, running text). Same markup in both looks; only these rules differ. Written by the reader track
+   of phase 01.1, appended so that the other track's sections above stay untouched. */
+
+/* -- Toolbar -- */
+.reader {
+  padding-bottom: var(--space-4);
+}
+.reader-toolbar {
+  position: sticky;
+  top: env(safe-area-inset-top);
+  z-index: var(--z-bar);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 52px;
+  margin: 0 calc(-1 * max(20px, env(safe-area-inset-right))) 0 calc(-1 * max(20px, env(safe-area-inset-left)));
+  padding: 0 max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
+}
+/* The strip above the toolbar, so the translucent bar also covers the notch once the page has scrolled. */
+.reader-toolbar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: env(safe-area-inset-top);
+}
+.reader-toolbar[data-scrolled="true"],
+.reader-toolbar[data-scrolled="true"]::before {
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+}
+.reader-toolbar[data-scrolled="true"] {
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .reader-toolbar[data-scrolled="true"],
+  .reader-toolbar[data-scrolled="true"]::before {
+    background: var(--bar-solid);
+  }
+}
+.reader-toolbar .rt-button,
+.tool-button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.rt-slot {
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+.reader-toolbar .rt-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.rt-title svg {
+  flex: none;
+  color: var(--link);
+}
+.rt-title-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* The width budget (A3): 430px and wider shows Books, previous, title, next, Search and Listen; 360 to 429px
+   shows Books, previous, title, next and More; under 360px, and at every width in large-text mode, previous,
+   title, next and More. A hidden control is out of the accessibility tree, so nothing is read twice. */
+.reader-toolbar .rt-books,
+.reader-toolbar .rt-search,
+.reader-toolbar .rt-listen {
+  display: none;
+}
+@media (min-width: 360px) {
+  .reader-toolbar .rt-books {
+    display: inline-flex;
+  }
+}
+@media (min-width: 430px) {
+  .reader-toolbar .rt-search,
+  .reader-toolbar .rt-listen {
+    display: inline-flex;
+  }
+  .reader-toolbar .rt-more {
+    display: none;
+  }
+}
+html[data-text="large"] .reader-toolbar .rt-books,
+html[data-text="large"] .reader-toolbar .rt-search,
+html[data-text="large"] .reader-toolbar .rt-listen {
+  display: none;
+}
+html[data-text="large"] .reader-toolbar .rt-more {
+  display: inline-flex;
+}
+@media (min-width: 768px) {
+  .reader-toolbar {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* -- Heading -- */
+.reader-head {
+  margin: var(--space-3) 0 var(--space-5);
+}
+.reader-book {
+  margin: 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.reader-heading {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-scripture);
+  font-size: var(--text-display);
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+/* Cover and story: the 32 x 2 section rule under the heading. */
+.reader-heading::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 2px;
+  margin-top: var(--space-3);
+  background: var(--brand);
+}
+/* Marked page: the heading is read by assistive technology and shown as the printed numeral. */
+:root[data-look="marked"] .reader-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+:root[data-look="marked"] .reader-heading::after {
+  content: none;
+}
+.reader-status {
+  margin: var(--space-5) 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.reader-retry {
+  min-height: 48px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+
+/* -- The verses -- */
+.chapter-text {
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.7;
+  color: var(--ink);
+}
+.chapter-text .verse {
+  cursor: pointer;
+}
+.verse-lead {
+  white-space: nowrap;
+}
+.verse-num {
+  font-family: var(--font-ui);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--link);
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: 0;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+}
+.verse-num:hover {
+  filter: none;
+}
+.verse-num::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+.verse-mark {
+  flex: none;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 3px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+.verse.highlight-gold {
+  background: var(--highlight-gold);
+}
+.verse.highlight-sage {
+  background: var(--highlight-sage);
+}
+.verse.highlight-rose {
+  background: var(--highlight-rose);
+}
+/* The verse whose sheet is open, or that a link pointed at: --highlight-gold at 50 %, laid over any
+   highlight the reader chose so both stay visible. */
+.verse.selected {
+  background-image: linear-gradient(color-mix(in srgb, var(--highlight-gold) 50%, transparent), color-mix(in srgb, var(--highlight-gold) 50%, transparent));
+}
+.verse.speaking {
+  background: var(--highlight-gold);
+}
+/* On a highlighted verse --link falls short in Light (UI-SPEC 5.4), so its number uses --ink; in Lamplight the
+   link colour passes and stays. */
+:root[data-mode="light"] .verse:is(.highlight-gold, .highlight-sage, .highlight-rose, .selected, .speaking) .verse-num {
+  color: var(--ink);
+}
+
+/* Cover and story: a block per verse, the number hanging in a 24px margin, a 12px gap between verses. */
+:root:not([data-look="marked"]) .chapter-opening {
+  display: none;
+}
+:root:not([data-look="marked"]) .verse {
+  display: block;
+  position: relative;
+  margin: 0 -4px var(--space-3);
+  padding: 0 4px 0 28px;
+  border-radius: var(--radius-xs);
+}
+:root:not([data-look="marked"]) .verse-num {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: calc(var(--text-scripture) * 1.7);
+}
+:root:not([data-look="marked"]) .wide-numbers .verse {
+  padding-left: 36px;
+}
+:root:not([data-look="marked"]) .wide-numbers .verse-num {
+  width: 32px;
+}
+
+/* Marked page: running text, the numbers raised 0.3em, a 44px-wide hit area one line box tall, and the printed
+   chapter numeral with its ribbon floated over the first three lines. */
+:root[data-look="marked"] .verse {
+  display: inline;
+  border-radius: var(--radius-xs);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+:root[data-look="marked"] .verse-num {
+  position: relative;
+  display: inline-block;
+  top: calc(var(--text-scripture) * -0.3);
+  margin-right: 0.25em;
+  vertical-align: baseline;
+  line-height: 1;
+}
+:root[data-look="marked"] .verse-num::after {
+  width: 44px;
+  height: calc(var(--text-scripture) * 1.7);
+  top: calc(50% + var(--text-scripture) * 0.3);
+}
+:root[data-look="marked"] .chapter-opening {
+  float: left;
+  display: flex;
+  gap: var(--space-2);
+  height: calc(var(--text-scripture) * 1.7 * 3);
+  margin: 0 var(--space-3) 0 0;
+}
+.chapter-numeral {
+  font-family: var(--font-scripture);
+  font-size: var(--text-numeral);
+  font-weight: 400;
+  line-height: calc(var(--text-scripture) * 1.7 * 2);
+  color: var(--brand);
+}
+/* The ribbon: 10px wide, forked tail, 72px long at the default size. */
+.chapter-ribbon {
+  flex: none;
+  align-self: flex-start;
+  width: 10px;
+  height: 72px;
+  background: var(--brand);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+}
+.chapter-text .speaker-note {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-ui);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.chapter-text .speaker {
+  font-size: var(--text-footnote);
+  letter-spacing: normal;
+}
+.chapter-text p.speaker {
+  display: block;
+  margin: var(--space-3) 0 0;
+}
+
+/* Under reduced motion a sheet appears with a 150ms change of opacity instead of sliding (UI-SPEC 7.4). The
+   global reset above removes animations with !important; this rule is more specific and wins. */
+@media (prefers-reduced-motion: reduce) {
+  dialog.sheet-dialog[open] {
+    animation: sheet-fade 150ms linear !important;
+  }
+}
+
+/* -- The library, /bible (A2) and the passage picker -- */
+.library-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.library-head .large-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.library-head .tool-button {
+  margin-top: var(--space-2);
+}
+.picker .segmented {
+  margin: 0 0 var(--space-4);
+}
+.picker-books {
+  margin-bottom: 0;
+}
+.picker-books .list-row[aria-expanded] {
+  min-height: 52px;
+}
+/* The chapter grid: 52 x 52 buttons, 6 to a row from 390px, 5 below that (A2). */
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 52px);
+  justify-content: space-between;
+  gap: var(--space-2) 0;
+  padding: var(--space-1) var(--space-2) var(--space-4);
+}
+@media (max-width: 389px) {
+  .chapter-grid {
+    grid-template-columns: repeat(5, 52px);
+  }
+}
+@media (max-width: 359px) {
+  .chapter-grid {
+    padding-inline: 0;
+  }
+}
+html[data-text="large"] .chapter-grid {
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: var(--space-2);
+  justify-content: stretch;
+}
+.chapter-cell {
+  width: 100%;
+  min-width: 52px;
+  height: 52px;
+  min-height: 52px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.chapter-cell[aria-current="true"] {
+  box-shadow: inset 0 0 0 2px var(--focus);
+}
+html[data-text="large"] .chapter-cell {
+  width: auto;
+}
+
+/* -- Sheets that hold content: the picker, search, More, and in plan 10 the verse and chapter sheets -- */
+dialog.reader-sheet[open] {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+dialog.reader-sheet-medium {
+  height: auto;
+  max-height: 50dvh;
+}
+dialog.reader-sheet-large {
+  height: 90dvh;
+  max-height: 90dvh;
+}
+@media (min-width: 600px) {
+  dialog.reader-sheet-medium {
+    max-height: 70dvh;
+  }
+}
+/* The old dialog rules (dialog button, dialog li, dialog ul) made every button full width with a top margin
+   and every list item 13px; a content sheet resets them and gives its own full-width rows back. */
+dialog.reader-sheet button {
+  width: auto;
+  margin: 0;
+}
+dialog.reader-sheet ul {
+  padding-left: 0;
+}
+dialog.reader-sheet li {
+  margin: 0;
+  font-size: inherit;
+}
+dialog.reader-sheet .list-row,
+dialog.reader-sheet .search-hit,
+dialog.reader-sheet .chapter-cell {
+  width: 100%;
+}
+dialog.reader-sheet .chapter-cell {
+  width: 100%;
+}
+html[data-text="large"] dialog.reader-sheet .chapter-cell {
+  width: auto;
+}
+.sheet-head {
+  flex: none;
+  padding: var(--space-2) max(var(--space-5), env(safe-area-inset-right)) 0 max(var(--space-5), env(safe-area-inset-left));
+  touch-action: none;
+}
+.sheet-grabber {
+  display: block;
+  width: 36px;
+  height: 5px;
+  margin: 0 auto var(--space-1);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--muted) 55%, transparent);
+}
+.sheet-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 52px;
+}
+.sheet-bar .sheet-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sheet-bar .sheet-title.sr-only {
+  flex: none;
+}
+.sheet-title:focus {
+  outline: none;
+}
+.sheet-title:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+.sheet-close,
+.sheet-back {
+  flex: none;
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.sheet-back {
+  margin-left: calc(-1 * var(--space-2));
+  text-align: left;
+}
+.sheet-back + .sheet-close,
+.sheet-bar .sheet-title.sr-only + .sheet-close {
+  margin-left: auto;
+}
+.sheet-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 max(var(--space-5), env(safe-area-inset-right)) calc(var(--space-5) + env(safe-area-inset-bottom))
+    max(var(--space-5), env(safe-area-inset-left));
+}
+/* Lists inside a sheet sit on the page colour, so they read as grouped rows on the sheet's own surface. */
+.sheet-body .group-list {
+  background: var(--bg);
+}
+.sheet-body .group {
+  margin-bottom: var(--space-4);
+}
+.sheet-body-text {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+
+/* -- Search sheet -- */
+.search-form .sheet-label {
+  margin-top: var(--space-2);
+}
+.search-line {
+  display: flex;
+  gap: var(--space-2);
+}
+.search-line input {
+  flex: 1 1 auto;
+  min-height: 48px;
+  padding: 11px 12px;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.search-line button {
+  flex: none;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+dialog.sheet-dialog .search-form p.sheet-hint {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.search-status {
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.search-status:empty {
+  display: none;
+}
+.search-results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  overflow: hidden;
+}
+.search-results li + li {
+  border-top: 1px solid var(--line);
+}
+.search-hit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font-weight: 400;
+  text-align: left;
+}
+.search-hit-ref {
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.search-hit-text {
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+
+/* -- The end of the chapter (A3): 48px below the last verse -- */
+.chapter-end {
+  margin-top: var(--space-8);
+}
+.end-of {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* The one filled button of the page. */
+.chapter-end .end-next {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--button);
+  color: var(--on-button);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.end-pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 var(--space-6);
+}
+.chapter-end .end-plain,
+.chapter-end .end-link {
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: left;
+}
+.chapter-end .end-plain {
+  margin-left: calc(-1 * var(--space-2));
+}
+.chapter-end .end-link {
+  margin: 0 0 var(--space-5) calc(-1 * var(--space-2));
+}
+/* Mark as read: a secondary toggle, an outline and no fill, so Next stays the page's one filled button. */
+.chapter-end .end-toggle {
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.chapter-end .end-toggle[aria-pressed="true"] {
+  border-color: var(--focus);
+  box-shadow: inset 0 0 0 1px var(--focus);
+}
+.chapter-end .end-toggle svg {
+  color: var(--success);
+}
+.end-title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.end-questions {
+  margin: 0 0 var(--space-3);
+  padding-left: var(--space-6);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.end-questions li {
+  margin: 0 0 var(--space-2);
+  padding-left: var(--space-1);
+}
+.chapter-end .group {
+  margin-top: var(--space-4);
+}
+/* Whose text this is: stays at the end of every chapter. */
+.web-line {
+  margin: var(--space-6) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.web-line a {
+  display: inline;
+  min-height: 0;
+}
+html[data-text="large"] .end-pair {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* -- Listen as a mini player (A3): floats above the tab bar, never over the text's last lines -- */
+.reader[data-listening] {
+  padding-bottom: calc(var(--space-9) + var(--space-3));
+}
+.mini-player {
+  position: fixed;
+  z-index: var(--z-bar);
+  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px + var(--notice-h));
+  max-width: 456px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 56px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .mini-player {
+    background: var(--bar-solid);
+  }
+}
+html[data-text="large"] .mini-player {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px + var(--notice-h));
+}
+.mini-player .mini-button {
+  flex: none;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.mini-verse {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+@media (min-width: 768px) {
+  .mini-player {
+    left: 280px;
+    right: 0;
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+    width: min(456px, calc(100% - 280px - 64px));
+    max-width: none;
+  }
+  html[data-text="large"] .mini-player {
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+  }
+}
+
+/* ==== The verse sheet and the chapter sheet (UI-SPEC A4, plan 01.1-10; src/bible/VerseSheet.tsx) ==== */
+
+/* -- The five actions: an icon above a Footnote label that may wrap to two centred lines, 64px tall at least -- */
+.verse-actions {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-1);
+  margin: var(--space-2) 0 var(--space-3);
+}
+.verse-actions .verse-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-1);
+  min-height: 64px;
+  padding: var(--space-2) 2px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  text-align: center;
+}
+.verse-action span {
+  overflow-wrap: anywhere;
+}
+.verse-actions .verse-action[aria-pressed="true"] {
+  border: 0;
+  box-shadow: none;
+}
+.verse-action[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+html[data-text="large"] .verse-actions {
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+}
+/* The inline choice of a highlight colour: four 44px swatches with their names. */
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+}
+.swatches .swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 64px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+}
+.swatches .swatch[aria-checked="true"] {
+  border: 0;
+  box-shadow: none;
+}
+.swatch-dot {
+  position: relative;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+}
+.swatch-gold .swatch-dot {
+  background: var(--highlight-gold);
+}
+.swatch-sage .swatch-dot {
+  background: var(--highlight-sage);
+}
+.swatch-rose .swatch-dot {
+  background: var(--highlight-rose);
+}
+/* None: an empty circle struck through. */
+.swatch-none .swatch-dot::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--muted);
+  transform: translateX(-50%) rotate(45deg);
+}
+.swatch[aria-checked="true"] .swatch-dot {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);
+}
+.swatches .swatch:focus-visible {
+  outline-offset: 2px;
+}
+.sheet-status {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.sheet-status:empty {
+  display: none;
+}
+/* A focus ring on a chapter button or a row inside a rounded, clipped list stays inside it. */
+.chapter-cell:focus-visible,
+.search-hit:focus-visible {
+  outline-offset: -3px;
+}
+
+/* -- The layers around a verse (UI-SPEC 5.3, A4): apart by words, icon, frame and colour, never by colour alone -- */
+.layer-row {
+  align-items: flex-start;
+}
+.layer-row .layer-row-icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--muted);
+}
+.layer-row .layer-row-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+.layer-row-ai .layer-row-icon,
+.layer-row-ai .list-row-title {
+  color: var(--ai);
+}
+.layer-row-community .layer-row-icon,
+.layer-row-community .list-row-title {
+  color: var(--community);
+}
+/* The words that say how a layer was checked, or what it is: 13px/600 in a --muted outline, radius 6. */
+.review-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-xs);
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 18px;
+}
+.layer-retry {
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+
+.layer {
+  margin: var(--space-2) 0 var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-ui);
+}
+.layer-sourced {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+.layer-ai {
+  border: 1.5px dashed var(--ai);
+  border-radius: var(--radius-md);
+}
+.layer-community {
+  border: 0;
+  border-left: 3px solid var(--community);
+  border-radius: var(--radius-lg);
+}
+.layer-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+.layer-icon {
+  flex: none;
+}
+.layer-title {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.layer-title:focus {
+  outline: none;
+}
+.layer-title:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+.layer-ai .layer-icon,
+.layer-ai .layer-title {
+  color: var(--ai);
+}
+.layer-community .layer-icon,
+.layer-community .layer-title {
+  color: var(--community);
+}
+.layer-note {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--ai);
+}
+.layer .layer-body {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.layer .layer-muted {
+  color: var(--muted);
+}
+.layer .layer-meta {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.layer-section {
+  margin-top: var(--space-5);
+}
+.layer .layer-subtitle {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.layer .layer-list {
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-5);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.layer .layer-list li {
+  margin: 0 0 var(--space-2);
+}
+.layer .layer-link {
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  margin-left: calc(-1 * var(--space-2));
+  border: 0;
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  text-align: left;
+}
+.layer .layer-details {
+  margin-top: var(--space-4);
+}
+.layer .layer-details summary {
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+/* The comparison of translations: the WEB is Scripture and wears the Scripture face; the other
+   public-domain renderings and the explanation do not. */
+.ai-compare {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+.ai-compare dl {
+  margin: 0;
+}
+.ai-compare dt {
+  margin-top: var(--space-3);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+.ai-compare dd {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.ai-compare dd.ai-web {
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.7;
+}
+/* A sheet over a sheet in Lamplight (a report or a confirmation opened from the community page) draws on
+   --surface-2, so it stands apart from the sheet under it (UI-SPEC 7.3). */
+:root[data-mode="lamplight"] dialog.reader-sheet dialog.sheet-dialog {
+  background: var(--surface-2);
+}
+/* The community page: the feed's own cards sit flat inside the layer. */
+.layer-community .card {
+  background: none;
+  border: 0;
+  padding: var(--space-3) 0 0;
+  box-shadow: none;
+}
+
+/* -- The "Around {chapter}" capsule (UI-SPEC A3, 6.3): 44px, --bar, a pill, floating 12px above the tab bar and
+   above the Lamplight notice's space while that shows (--notice-h). Listen's mini player replaces it. In large text
+   it becomes a full-width button above the tab bar. -- */
+.around-capsule {
+  position: fixed;
+  z-index: var(--z-bar);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px + var(--notice-h));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  max-width: calc(100vw - 40px);
+  padding: 0 var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+  box-shadow: var(--elev-float);
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  white-space: nowrap;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .around-capsule {
+    background: var(--bar-solid);
+  }
+}
+html[data-text="large"] .around-capsule {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px + var(--notice-h));
+  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
+  max-width: none;
+  transform: none;
+  border-radius: var(--radius-md);
+  white-space: normal;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  /* The tab bar is a sidebar from here: the capsule sits at the bottom of the content column. */
+  .around-capsule {
+    left: calc(280px + (100% - 280px) / 2);
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+  }
+  html[data-text="large"] .around-capsule {
+    left: calc(280px + max(32px, env(safe-area-inset-left)));
+    right: max(32px, env(safe-area-inset-right));
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+  }
+}
+/* The page makes room for it, and a focused element is never left under it (2.4.11). */
+.reader {
+  padding-bottom: calc(var(--space-9) + var(--space-2));
+}
+:root:has(.around-capsule) {
+  scroll-padding-bottom: calc(64px + 12px + 44px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
 }

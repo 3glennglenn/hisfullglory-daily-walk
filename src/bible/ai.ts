@@ -106,17 +106,41 @@ export function blocks(prose: string): ({ list: string[] } | { paragraph: string
   });
 }
 
-const aiCache = new Map<string, Promise<AiExplanation[]>>();
-/** Loads a book's AI explanations; a missing, offline or invalid file yields [] (no AI block). */
-export function loadAiExplanations(book: string, bible: BibleData, fetcher: typeof fetch = (...a) => fetch(...a)): Promise<AiExplanation[]> {
-  if (!/^[a-z0-9-]+$/.test(book)) return Promise.resolve([]);
+/** What loading a book's AI file came to: records, no file for this book, or a failure worth another try. */
+export type AiStatus = { state: "ready"; records: AiExplanation[] } | { state: "none" } | { state: "failed" };
+
+const aiCache = new Map<string, Promise<AiStatus>>();
+/**
+ * Loads a book's AI explanations and says how it went (UI-SPEC A16): "ready" with the records; "none" when the book
+ * has no file (a 404 or any other answer that is not a server fault), the answer is not JSON, or the file is invalid
+ * (nothing partial is ever shown); "failed" when the request could not be made (offline) or the server answered with a
+ * fault. A success is kept for the session. A failure is not: the next call asks again, once per call.
+ */
+export function loadAiStatus(book: string, bible: BibleData, fetcher: typeof fetch = (...a) => fetch(...a)): Promise<AiStatus> {
+  if (!/^[a-z0-9-]+$/.test(book)) return Promise.resolve({ state: "none" });
   let pending = aiCache.get(book);
   if (!pending) {
     pending = fetcher(`/ai/${book}.json`)
-      .then(async (r) => (r.ok && (r.headers.get("content-type") ?? "").includes("json") ? parseAiFile(await r.json(), book, bible) : []))
-      .catch(() => { aiCache.delete(book); return []; });
+      .then(async (r): Promise<AiStatus> => {
+        if (r.status >= 500) return { state: "failed" };
+        if (!r.ok || !(r.headers.get("content-type") ?? "").includes("json")) return { state: "none" };
+        try {
+          return { state: "ready", records: parseAiFile(await r.json(), book, bible) };
+        } catch {
+          return { state: "none" };
+        }
+      })
+      .catch((): AiStatus => ({ state: "failed" }))
+      .then((status) => {
+        if (status.state === "failed") aiCache.delete(book);
+        return status;
+      });
     aiCache.set(book, pending);
   }
   return pending;
+}
+/** Loads a book's AI explanations; a missing, offline or invalid file yields [] (no AI block). */
+export function loadAiExplanations(book: string, bible: BibleData, fetcher: typeof fetch = (...a) => fetch(...a)): Promise<AiExplanation[]> {
+  return loadAiStatus(book, bible, fetcher).then((status) => (status.state === "ready" ? status.records : []));
 }
 export function clearAiCache() { aiCache.clear(); }

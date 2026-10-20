@@ -14,6 +14,7 @@ import {checkStoryFlow} from "../tests/story.browser.mjs";
 import {checkShelfScreen} from "../tests/shelf.browser.mjs";
 import {checkContextList,checkStoryEnd} from "../tests/storyend.browser.mjs";
 import {checkWalkFinish} from "../tests/walk.browser.mjs";
+import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen,checkVerseSheet,checkLayers,checkLayersCommunity,checkChapterSheet,checkCommunityLink} from "../tests/reader.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -199,82 +200,53 @@ try {
   );
   await check("walk finish: days walked counted and never reset, tomorrow named, today's context check while unread, reminders Off unless turned on, no guilt words; old stored steps; Back keeps the step; 200 % text (UI-SPEC A5, A6, D-11)", () => checkWalkFinish(browser, base, published));
   await check(
-    "deep-linked WEB chapter, selection, bookmark, search and history work",
+    "deep-linked WEB chapter: the linked verse is selected; the old ?tab= addresses still open the context layers",
     async () => {
       await go("/bible/romans/8/28");
-      await page
-        .getByRole("heading", { name: "Romans 8:28", exact: true })
-        .waitFor();
-      assert.ok(
-        (await page.locator("#verse-28").innerText()).includes(
-          "all things work together",
-        ),
-      );
-      await page
-        .getByRole("button", { name: "Bookmark / save", exact: true })
-        .click();
-      await page.getByLabel("Highlight").selectOption("sage");
-      await page.reload();
-      await page.locator("#verse-28").waitFor();
-      assert.equal(await page.getByLabel("Highlight").inputValue(), "sage");
-      assert.equal(
-        await page
-          .getByRole("button", { name: "Remove bookmark", exact: true })
-          .count(),
-        1,
-      );
-      await page.getByRole("button", { name: "context", exact: true }).click();
-      assert.equal(new URL(page.url()).searchParams.get("tab"), "context");
+      await page.getByRole("heading", { level: 1, name: "Romans 8", exact: true }).waitFor();
+      assert.ok((await page.locator("#verse-28").innerText()).includes("all things work together"));
+      assert.equal(await page.locator("#verse-28.selected").count(), 1, "the linked verse is selected");
+      // The view buttons are gone; the old address opens the verse's sheet at Context (plan 10).
+      await page.goto(base + "/bible/romans/8/28?tab=context");
+      const sheet = page.getByRole("dialog", { name: "Romans 8:28" });
+      await sheet.waitFor();
       // Romans 8 has a sourced chapter note (no verse note for 8:28) and an AI explanation.
-      const sourced = page.locator('article[data-layer="sourced"]');
-      await sourced
-        .getByRole("heading", { name: "Chapter context", exact: true })
-        .waitFor();
+      const sourced = sheet.locator('article[data-layer="sourced"]');
+      await sourced.getByRole("heading", { name: "Context", exact: true }).waitFor();
       const sourcedText = await sourced.textContent();
       assert.match(sourcedText, /Verse 28 belongs with verses 29–30/);
-      assert.match(
-        sourcedText,
-        /No note for this verse yet, so this shows the wider chapter context\./,
-      );
+      assert.match(sourcedText, /No note for this verse yet, so this shows the wider chapter context\./);
       assert.doesNotMatch(sourcedText, /\bAI\b/, "sourced note stays free of AI text");
       await sourced.getByText("Why we say this", { exact: true }).click();
       assert.equal(
-        await sourced
-          .getByRole("link", { name: "Primary source", exact: true })
-          .getAttribute("href"),
+        await sourced.getByRole("link", { name: "Primary source", exact: true }).getAttribute("href"),
         "https://ebible.org/engwebp/ROM08.htm",
       );
-      const ai = page.locator('article[data-layer="ai"]');
-      await ai.getByRole("heading", { name: /^AI explanation/ }).waitFor();
-      assert.match(
-        await ai.locator(".eyebrow").textContent(),
-        /^Romans 8 · Written by an AI model · /,
-      );
-      await ai
-        .getByRole("heading", { name: "What this chapter says", exact: true })
-        .waitFor();
       assert.equal(await sourced.locator("[data-layer]").count(), 0);
+      // The AI explanation is its own page in the same sheet, after the context page.
+      await sheet.getByRole("button", { name: "Back to Romans 8:28", exact: true }).click();
+      await sheet.locator('[data-layer-row="ai"]').filter({ hasNotText: "Loading…" }).click();
+      const ai = sheet.locator('article[data-layer="ai"]');
+      await ai.getByRole("heading", { name: /^AI explanation/ }).waitFor();
+      assert.equal(await ai.locator(".layer-note").textContent(), "Written by an AI model. Not reviewed by a theological reader.");
+      await ai.getByRole("heading", { name: "What this chapter says", exact: true }).waitFor();
       assert.deepEqual(
-        await page
-          .locator("main [data-layer]")
-          .evaluateAll((nodes) => nodes.map((n) => n.dataset.layer)),
-        ["sourced", "ai"],
-        "AI explanation is a separate card after the sourced note",
+        await sheet.locator("[data-layer]").evaluateAll((nodes) => nodes.map((n) => n.dataset.layer)),
+        ["ai"],
+        "one layer on a page: AI explanation never shares a page with the sourced note",
       );
-      await page.goBack();
-      await page.locator("#verse-28").waitFor();
-      await page
-        .getByRole("searchbox", { name: "Search WEB text" })
-        .fill("For God so loved");
-      await page.getByRole("button", { name: "Search", exact: true }).click();
-      await page.getByRole("button", { name: /John 3:16/ }).click();
-      await page
-        .getByRole("heading", { name: "John 3:16", exact: true })
-        .waitFor();
-      await page.reload();
-      await page.locator("#verse-16").waitFor();
     },
   );
+  await check("the reader puts Scripture first: sticky toolbar, verses as text with one Tab stop, a heading per look (UI-SPEC A3)", () => checkReaderText(browser, base));
+  await check("the Bible library: context checks first, saved passages, testaments, books, chapter grids, Continue reading, the download states (UI-SPEC A2, A16)", () => checkLibrary(browser, base));
+  await check("the title opens the picker, search sits behind More or an icon, sheets keep focus and swipe (UI-SPEC A3, A4)", () => checkReaderSheets(browser, base));
+  await check("the end of the chapter: one filled Next, Mark as read, questions to carry, topics, the WEB line (UI-SPEC A3)", () => checkChapterEnd(browser, base));
+  await check("Listen plays in a mini player above the tab bar, the spoken verse is gold, Stop gives focus back (UI-SPEC A3)", () => checkListen(browser, base));
+  await check("a verse opens one sheet: highlight, save, journal, copy and share; a tap or a number opens it, a selection or a long press does not (UI-SPEC A4)", () => checkVerseSheet(browser, base));
+  await check("the layers around a verse: Context, AI explanation, Community in a fixed order, each apart by words, icon, frame and colour; loading, none and failure say so (UI-SPEC 5.3, A4, A16)", () => checkLayers(browser, base));
+  await check("the Community layer on a controlled service: its row, its page, its words offline (UI-SPEC A4, A16)", () => checkLayersCommunity(browser, base));
+  await check("the chapter sheet and its capsule: above the tab bar and the Lamplight notice, the old ?tab= links land in the right place, no unavailable feature is announced (UI-SPEC A3, A4, 8.2)", () => checkChapterSheet(browser, base));
+  await check("?tab=community opens the chapter sheet at Community on a controlled service", () => checkCommunityLink(browser, base));
   await check(
     "private prayer lifecycle creates an answered journal without automatic publishing",
     async () => {
@@ -1169,6 +1141,8 @@ try {
                   .filter(
                     (n) =>
                       n.getClientRects().length &&
+                      // A verse number draws its 44px target with ::after (measured in tests/reader.browser.mjs).
+                      !n.classList.contains("verse-num") &&
                       (n.getBoundingClientRect().height < 43.9 ||
                         !(
                           n.labels?.length ||
@@ -1437,17 +1411,19 @@ try {
       await go("/unknown");
       assert.match(await page.locator("main").innerText(), /not found/i);
       await go("/bible/genesis/1?tab=context");
-      // Genesis has no sourced note yet; only the labelled AI explanation is shown.
-      const sourced = page.locator('article[data-layer="sourced"]');
-      await sourced
-        .getByRole("heading", { name: "Context", exact: true })
-        .waitFor();
+      // Genesis has no sourced note yet; only the labelled AI explanation is behind its own row.
+      const sheet = page.getByRole("dialog", { name: "Around Genesis 1" });
+      await sheet.waitFor();
+      const sourced = sheet.locator('article[data-layer="sourced"]');
+      await sourced.getByRole("heading", { name: "Context", exact: true }).waitFor();
       assert.match(
         await sourced.textContent(),
         /Context for this book is being written\..*A note appears here only once it names its sources\./s,
       );
       assert.equal(await sourced.locator("details, a").count(), 0);
-      const ai = page.locator('article[data-layer="ai"]');
+      await sheet.getByRole("button", { name: "Back to Around Genesis 1", exact: true }).click();
+      await sheet.locator('[data-layer-row="ai"]').filter({ hasNotText: "Loading…" }).click();
+      const ai = sheet.locator('article[data-layer="ai"]');
       await ai.getByRole("heading", { name: /^AI explanation/ }).waitFor();
       assert.match(
         await ai.textContent(),
@@ -1558,9 +1534,10 @@ try {
       route.fulfill({ status: 503, body: "Unavailable" }),
     );
     await p.goto(base + "/bible/romans/8/28");
-    await p.getByRole("button", { name: "Try again" }).waitFor();
+    await p.getByRole("button", { name: "Try downloading again" }).waitFor();
+    assert.equal(await p.getByText("The Bible could not be opened. Check your connection and try again.").count(), 1);
     await p.unroute("**/bible/web.json");
-    await p.getByRole("button", { name: "Try again" }).click();
+    await p.getByRole("button", { name: "Try downloading again" }).click();
     await p.locator("#verse-28").waitFor();
     await c.close();
   });

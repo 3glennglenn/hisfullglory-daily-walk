@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Dialog } from "../platform/Dialog";
-import { isPromise, useReturnFocus } from "./sheet";
+import { isPromise, useReturnFocus } from "./dialogFocus";
 
 // A confirmation in the app's own words (UI-SPEC A15, D-10), in place of the browser's confirm().
 // Both choices are named by what they do. The action comes first, filled (--danger when it destroys

@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
-import { parseAiFile, loadAiExplanations, clearAiCache, aiFor, blocks, publicDomainTranslations } from "../src/bible/ai.ts";
+import { parseAiFile, loadAiExplanations, loadAiStatus, clearAiCache, aiFor, blocks, publicDomainTranslations } from "../src/bible/ai.ts";
 import type { BibleData } from "../src/bible/provider.ts";
 
 const bible = JSON.parse(readFileSync("public/bible/web.json", "utf8")) as BibleData;
@@ -94,6 +94,60 @@ test("AI loading shows nothing on missing, non-JSON, invalid or offline files", 
   clearAiCache();
   const ok = await loadAiExplanations("psalms", bible, () => response(200, read("psalms.json")));
   assert.ok(ok.some((r) => r.id === "ai:psalms/23"));
+});
+
+test("loadAiStatus says ready, none or failed, and a failure is asked again (UI-SPEC A16)", async () => {
+  const response = (status: number, body: unknown, type = "application/json") =>
+    Promise.resolve(new Response(typeof body === "string" ? body : JSON.stringify(body), { status, headers: { "content-type": type } }));
+  // ready: a valid file, with its records.
+  clearAiCache();
+  const ready = await loadAiStatus("psalms", bible, () => response(200, read("psalms.json")));
+  assert.equal(ready.state, "ready");
+  assert.ok(ready.state === "ready" && ready.records.some((r) => r.id === "ai:psalms/23"));
+  // none: no file, an answer that is not JSON, an invalid file, a file for another book, a slug that is not a book.
+  clearAiCache();
+  assert.deepEqual(await loadAiStatus("genesis", bible, () => response(404, "")), { state: "none" });
+  clearAiCache();
+  assert.deepEqual(await loadAiStatus("genesis", bible, () => response(200, "<!doctype html>", "text/html")), { state: "none" });
+  clearAiCache();
+  assert.deepEqual(await loadAiStatus("genesis", bible, () => response(200, { book: "genesis", records: [{ scope: "chapter", chapter: 1 }] })), { state: "none" }, "an invalid file shows nothing partial");
+  clearAiCache();
+  assert.deepEqual(await loadAiStatus("genesis", bible, () => response(200, { book: "exodus", records: [] })), { state: "none" });
+  assert.deepEqual(await loadAiStatus("../etc", bible, () => { throw new Error("must not fetch"); }), { state: "none" });
+  // failed: the request cannot be made (offline), or the server is at fault.
+  clearAiCache();
+  assert.deepEqual(await loadAiStatus("genesis", bible, () => Promise.reject(new Error("offline"))), { state: "failed" });
+  clearAiCache();
+  assert.deepEqual(await loadAiStatus("genesis", bible, () => response(503, "Unavailable", "text/plain")), { state: "failed" });
+  // A failure is not kept: the next call asks again (one request per call), and a success is then kept.
+  clearAiCache();
+  let requests = 0;
+  const flaky = () => {
+    requests++;
+    return requests === 1 ? Promise.reject(new Error("offline")) : response(200, read("psalms.json"));
+  };
+  assert.deepEqual(await loadAiStatus("psalms", bible, flaky), { state: "failed" });
+  assert.equal((await loadAiStatus("psalms", bible, flaky)).state, "ready");
+  assert.equal((await loadAiStatus("psalms", bible, flaky)).state, "ready");
+  assert.equal(requests, 2, "the success is kept, the failure was asked again once");
+  // Presses of "Load again" while a request is under way share it instead of piling up.
+  clearAiCache();
+  let inFlight = 0;
+  const slow = () => {
+    inFlight++;
+    return new Promise<Response>((resolve) => setTimeout(() => resolve(new Response("", { status: 404 })), 20));
+  };
+  await Promise.all([loadAiStatus("genesis", bible, slow), loadAiStatus("genesis", bible, slow), loadAiStatus("genesis", bible, slow)]);
+  assert.equal(inFlight, 1);
+});
+
+test("loadAiExplanations keeps its contract on top of loadAiStatus", async () => {
+  clearAiCache();
+  const none = await loadAiExplanations("genesis", bible, () => Promise.reject(new Error("offline")));
+  assert.deepEqual(none, []);
+  clearAiCache();
+  const ok = await loadAiExplanations("psalms", bible, () => Promise.resolve(new Response(JSON.stringify(read("psalms.json")), { status: 200, headers: { "content-type": "application/json" } })));
+  assert.ok(ok.length > 0);
 });
 
 test("explanation text splits into paragraphs and simple lists", () => {

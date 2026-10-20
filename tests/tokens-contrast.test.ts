@@ -324,6 +324,16 @@ test("a label on a highlighted verse uses ink, because the link colour falls sho
   );
 });
 
+test("a verse number on a highlighted verse uses ink in Light only, because --link falls short on gold, sage and rose there (UI-SPEC 5.4)", () => {
+  // The rule is scoped to data-mode="light" and names every highlight and the verse that is selected or being read.
+  const rule = /:root\[data-mode="light"\] \.verse:is\(([^)]*)\) \.verse-num \{\n  color: var\(--ink\);\n\}/.exec(appCss);
+  assert.ok(rule, "src/styles.css has the Light rule for verse numbers on highlighted verses");
+  for (const state of [".highlight-gold", ".highlight-sage", ".highlight-rose", ".selected", ".speaking"])
+    assert.ok(rule[1].split(",").map((s) => s.trim()).includes(state), `${state} is covered`);
+  // Lamplight keeps --link (4.78, 5.32 and 5.48:1 on the three highlights): no Lamplight rule recolours the number.
+  assert.doesNotMatch(appCss, /data-mode="lamplight"\][^{]*\.verse[^{]*\.verse-num/);
+});
+
 // --- Increase Contrast and reduced transparency --------------------------------------------------
 
 /** The whole at-rule starting at `header`, with its nested rules. */
