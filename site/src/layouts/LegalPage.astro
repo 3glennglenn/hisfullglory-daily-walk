@@ -51,47 +51,55 @@ const { title, description, intro, sections } = Astro.props;
 </Base>
 
 <style>
+  /* Restyle only (UI-SPEC W6): the large title, Title 20 headings and Body 17/27 in a 34em column.
+     No sentence, structure or approval gate changes here. */
   /* Long addresses, URLs and email addresses wrap instead of pushing the page sideways. */
   .legal {
+    max-width: 34em;
     overflow-wrap: anywhere;
   }
   .intro {
-    margin-top: 16px;
+    margin-top: var(--space-4);
   }
   /* The slotted content is written in the pages, so its rules reach it through :global,
      kept inside this layout's own wrapper. */
   .legal :global(h2) {
-    margin: 48px 0 8px;
-    scroll-margin-top: 16px;
+    margin: var(--space-8) 0 var(--space-2);
+    scroll-margin-top: var(--space-4);
   }
   .legal :global(h3) {
-    margin: 0 0 8px;
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-body);
   }
   .legal :global(ul),
   .legal :global(ol) {
-    margin: 10px 0 0;
-    padding-left: 1.2rem;
+    margin: var(--space-3) 0 0;
+    padding-left: 1.2em;
   }
   .legal :global(li + li) {
-    margin-top: 8px;
+    margin-top: var(--space-2);
   }
+  /* The "In short" card: --surface with a 1px --line edge. */
   .legal :global(.in-short) {
-    margin-top: 32px;
-    background: var(--surface-2);
+    margin-top: var(--space-7);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: none;
   }
   .legal :global(.in-short h2) {
     margin-top: 0;
   }
   .legal :global(.in-short ul) {
-    margin-top: 12px;
+    margin-top: var(--space-3);
   }
   .contents {
-    margin-top: 24px;
+    margin-top: var(--space-6);
   }
   .contents summary {
     display: flex;
     align-items: center;
     min-height: 44px;
+    color: var(--link);
     font-weight: 600;
     cursor: pointer;
   }

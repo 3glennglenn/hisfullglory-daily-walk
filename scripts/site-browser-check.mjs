@@ -4,7 +4,7 @@
 // DOM and behaviour checks only; deliberately no screenshots. It uses the root Playwright, which
 // the site's own CI job does not install, so it is a local check and not part of CI.
 import assert from "node:assert/strict";
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const base = process.env.SITE_URL ?? "http://127.0.0.1:4321";
@@ -69,6 +69,29 @@ async function contextCheckPath() {
     if (response.ok) return path;
   }
   throw new Error("no context check page is served by the preview");
+}
+
+/** The page of a published check by review status ("ai-unreviewed" or "approved"), or undefined. */
+async function contextCheckPathBy(review) {
+  const dir = "site/content/context-checks";
+  const names = existsSync(dir) ? readdirSync(dir).filter((n) => n.endsWith(".json")).sort() : [];
+  for (const name of names) {
+    if (JSON.parse(readFileSync(`${dir}/${name}`, "utf8")).review !== review) continue;
+    const path = `/context-checks/${name.replace(/[.]json$/, "")}`;
+    if ((await fetch(base + path)).ok) return path;
+  }
+  return undefined;
+}
+
+/** The first topic page the site serves, or undefined. */
+async function topicPath() {
+  const dir = "site/content/topics";
+  const names = existsSync(dir) ? readdirSync(dir).filter((n) => n.endsWith(".json")).sort() : [];
+  for (const name of names) {
+    const path = `/topics/${name.replace(/[.]json$/, "")}`;
+    if ((await fetch(base + path)).ok) return path;
+  }
+  return undefined;
 }
 
 try {
@@ -304,9 +327,7 @@ try {
   });
 
   await check("at a 34px root (200%) the header, the open menu and the footer do not overflow at 390 and 320px", async () => {
-    // The home page's cards still overflow at this size (plan 12 redoes them; deferred-items.md),
-    // so the header and the footer are checked element by element, and the whole page on pages
-    // whose body is not a card grid.
+    // The header and the footer are checked element by element, and then the whole page.
     const beyond = (page) =>
       page.evaluate(() => {
         const client = document.documentElement.clientWidth;
@@ -321,10 +342,137 @@ try {
         assert.deepEqual(await beyond(page), [], `${path} at ${width}px: header or footer reaches past the screen`);
         await page.locator("header summary").click();
         assert.deepEqual(await beyond(page), [], `${path} at ${width}px: the open menu reaches past the screen`);
-        if (path !== "/") {
-          const { scroll, width: client } = await overflow(page);
-          assert.ok(scroll <= client, `${path} at ${width}px and a 34px root scrolls sideways (${scroll} > ${client})`);
-        }
+        const { scroll, width: client } = await overflow(page);
+        assert.ok(scroll <= client, `${path} at ${width}px and a 34px root scrolls sideways (${scroll} > ${client})`);
+        await context.close();
+      }
+  });
+
+  await check("home on a phone: the body's Open the app starts below the first screen, and is the only filled one (W1)", async () => {
+    const { context, page } = await open("/", { width: 390 });
+    const filled = page.locator("main a.button", { hasText: "Open the app" });
+    assert.equal(await filled.count(), 1, "one filled Open the app in the body");
+    const box = await filled.boundingBox();
+    const scrollY = await page.evaluate(() => window.scrollY);
+    assert.ok(box.y + scrollY >= 844, `the button starts at ${Math.round(box.y + scrollY)}px, inside the first 844px screen`);
+    assert.equal(await page.locator("header a:visible", { hasText: "Open the app" }).count(), 0, "none in the bar at 390px");
+    await context.close();
+  });
+
+  await check("home at 1280px: the bookcase stands beside the cover, six spines, the AI one marked", async () => {
+    const { context, page } = await open("/", { width: 1280, height: 800 });
+    const cover = await page.locator(".cover").boundingBox();
+    const bookcase = await page.locator(".bookcase").boundingBox();
+    assert.ok(bookcase.x >= cover.x + cover.width, "the bookcase is to the right of the cover");
+    assert.ok(bookcase.y < cover.y + cover.height, "and beside it, not below it");
+    assert.equal(await page.locator(".bookcase a.spine").count(), 6);
+    for (const spine of await page.locator(".bookcase a.spine").all()) {
+      const rect = await spine.boundingBox();
+      assert.ok(rect.width >= 44 && rect.height >= 128 && rect.height <= 160, `a spine is ${rect.width} x ${rect.height}`);
+    }
+    const badges = await page.locator(".bookcase .ai-badge").evaluateAll((els) => els.map((el) => parseFloat(getComputedStyle(el).fontSize)));
+    for (const size of badges) assert.ok(size >= 12.99, "the AI badge is at least 13px");
+    await context.close();
+    const phone = await open("/", { width: 390 });
+    assert.equal(await phone.page.locator(".bookcase").isVisible(), false, "no bookcase on a phone: the All context checks row stands in");
+    await phone.context.close();
+  });
+
+  await check("home at 320px and a 34px root: no sideways scroll, and the h1 is not clipped", async () => {
+    const { context, page } = await open("/", { width: 320, rootPx: 34 });
+    const { scroll, width } = await overflow(page);
+    assert.ok(scroll <= width, `scrolls sideways (${scroll} > ${width})`);
+    const clipped = await page.locator("h1").evaluate((el) => el.scrollWidth > el.clientWidth + 1 || el.getBoundingClientRect().right > document.documentElement.clientWidth);
+    assert.equal(clipped, false, "the h1 fits");
+    const cover = await page.locator(".cover").evaluate((el) => el.scrollWidth <= el.clientWidth + 1);
+    assert.equal(cover, true, "the cover holds its content");
+    await context.close();
+  });
+
+  await check("a context-check page: the AI note is a dashed frame, the share buttons use the interface face, no sideways scroll at 320px and a 34px root", async () => {
+    const aiPath = await contextCheckPathBy("ai-unreviewed");
+    if (aiPath) {
+      const { context, page } = await open(aiPath, { width: 390 });
+      const note = page.locator("p.ai-unreviewed");
+      assert.equal(await note.count(), 1, "the AI note");
+      assert.equal(await note.evaluate((el) => getComputedStyle(el).borderTopStyle), "dashed");
+      assert.ok(parseFloat(await note.evaluate((el) => getComputedStyle(el).fontSize)) >= 17, "the note is Body 17");
+      const noteBox = await note.boundingBox();
+      const h1Box = await page.locator("main h1").boundingBox();
+      assert.ok(noteBox.y < h1Box.y, "the note stands above the title");
+      await context.close();
+    }
+    const approved = await contextCheckPathBy("approved");
+    if (approved) {
+      const { context, page } = await open(approved, { width: 390 });
+      assert.equal(await page.locator("p.ai-unreviewed").count(), 0, "an approved check has no AI note");
+      await context.close();
+    }
+    const { context, page } = await open(checkPath, { width: 390 });
+    const faces = await page.locator(".share .button").evaluateAll((els) => els.map((el) => getComputedStyle(el).fontFamily));
+    assert.ok(faces.length >= 4);
+    for (const face of faces) assert.ok(face.startsWith("Manrope"), `a share button is set in ${face}`);
+    await context.close();
+    for (const width of [390, 320]) {
+      const phone = await open(checkPath, { width, rootPx: 34 });
+      const { scroll, width: client } = await overflow(phone.page);
+      assert.ok(scroll <= client, `${checkPath} at ${width}px and a 34px root scrolls sideways (${scroll} > ${client})`);
+      await phone.context.close();
+    }
+  });
+
+  await check("the context-checks index: the bookcase beside nothing, rows are at least 52px, no sideways scroll", async () => {
+    const { context, page } = await open("/context-checks", { width: 1280 });
+    assert.equal(await page.locator(".bookcase a.spine").count(), 6);
+    for (const row of await page.locator("a.row").all()) assert.ok((await row.boundingBox()).height >= 52);
+    assert.ok((await overflow(page)).scroll <= 1280);
+    await context.close();
+    const phone = await open("/context-checks", { width: 320, rootPx: 34 });
+    const { scroll, width } = await overflow(phone.page);
+    assert.ok(scroll <= width, "no sideways scroll at 320px and a 34px root");
+    await phone.context.close();
+  });
+
+  await check("a chapter page: the text column is centred on the page, the AI badge is 13px or more, verse numbers are 13px", async () => {
+    const { context, page } = await open("/bible/john/3", { width: 1280, height: 800 });
+    const box = await page.locator("article.scripture").boundingBox();
+    const left = box.x;
+    const right = 1280 - (box.x + box.width);
+    assert.ok(Math.abs(left - right) < 0.1 * 1280, `the text column hugs one side (left ${Math.round(left)}px, right ${Math.round(right)}px)`);
+    const number = await page.locator(".verse sup").first().evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+    assert.ok(number >= 13 && number <= 14, `verse numbers are Footnote 13 (13.8px on the 18px root), not ${number}`);
+    const scripture = await page.locator(".verse").first().evaluate((el) => getComputedStyle(el).fontFamily);
+    assert.ok(scripture.startsWith("Gelasio"), `Scripture is set in ${scripture}`);
+    await context.close();
+    const withAi = await open("/bible/psalms/23", { width: 390 });
+    const sizes = await withAi.page.locator("[data-layer=ai] .ai-badge").evaluateAll((els) => els.map((el) => parseFloat(getComputedStyle(el).fontSize)));
+    assert.ok(sizes.length > 0, "Psalm 23 has an AI explanation with its badge");
+    for (const size of sizes) assert.ok(size >= 12.99, `the AI badge is ${size}px`);
+    const frame = await withAi.page.locator("section[data-layer=ai]").evaluate((el) => getComputedStyle(el).borderTopStyle);
+    assert.equal(frame, "dashed", "the AI layer keeps its dashed frame");
+    await withAi.context.close();
+  });
+
+  await check("200% sweep: at a 34px root on 390 and 320px nothing scrolls sideways, no heading is clipped, controls are 44px or taller", async () => {
+    const topic = await topicPath();
+    const sweep = ["/", "/bible/john/3", checkPath, ...(topic ? [topic] : []), "/privacy", "/about", "/context-checks", "/bible", "/bible/john", "/beta", "/resources"];
+    for (const width of [390, 320])
+      for (const path of sweep) {
+        const { context, page } = await open(path, { width, rootPx: 34 });
+        const { scroll, width: client } = await overflow(page);
+        assert.ok(scroll <= client, `${path} at ${width}px and a 34px root scrolls sideways (${scroll} > ${client})`);
+        const clipped = await page.evaluate(() =>
+          [...document.querySelectorAll("main h1, main h2, main h3")]
+            .filter((el) => el.scrollWidth > el.clientWidth + 1 || el.getBoundingClientRect().right > document.documentElement.clientWidth + 1)
+            .map((el) => el.textContent.trim().slice(0, 40)),
+        );
+        assert.deepEqual(clipped, [], `${path} at ${width}px: clipped headings`);
+        const small = await page.evaluate(() =>
+          [...document.querySelectorAll("main a.button, main button, main summary")]
+            .filter((el) => el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height < 43.5)
+            .map((el) => el.textContent.trim().slice(0, 40)),
+        );
+        assert.deepEqual(small, [], `${path} at ${width}px: controls under 44px`);
         await context.close();
       }
   });

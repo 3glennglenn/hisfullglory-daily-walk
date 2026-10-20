@@ -1,6 +1,8 @@
 ---
 // The AI layer: always its own block, always labelled, never inside the sourced note.
 // Shows a chapter's own explanation, or the explanation of the book as a whole.
+// The AI treatment of UI-SPEC 5.3: a block on --surface with a 1.5px dashed --ai frame, the sparkle
+// icon, the heading "AI explanation" with the "AI" badge, its label in --ai, the interface face.
 import { shopUrl } from "../config";
 import {
   blocks,
@@ -9,13 +11,18 @@ import {
   type AiExplanation,
 } from "../lib/ai";
 import type { BibleBook } from "../lib/bible";
+import AiBadge from "./AiBadge.astro";
 
 interface Props {
   explanation: AiExplanation;
   book: BibleBook;
+  /** The level of the block's heading: 2 on a page of its own, 3 inside "Around ...". */
+  level?: 2 | 3;
 }
 
-const { explanation, book } = Astro.props;
+const { explanation, book, level = 2 } = Astro.props;
+const Heading = `h${level}` as "h2" | "h3";
+const Sub = `h${level + 1}` as "h3" | "h4";
 const verses = explanation.chapter ? book.chapters[explanation.chapter - 1].verses : [];
 const subject =
   explanation.scope === "book"
@@ -34,10 +41,16 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
 });
 ---
 
-<section class="card ai" data-layer="ai">
-  <h2>AI explanation <span class="pill">AI</span></h2>
-  <p class="eyebrow">{label}</p>
-  <p class="small muted">
+<section class="ai" data-layer="ai">
+  <Heading>
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
+    </svg>
+    <span>AI explanation</span>
+    <AiBadge />
+  </Heading>
+  <p class="label">{label}</p>
+  <p class="foot">
     This explanation was written by an AI model to help you get started. It
     names no sources and can contain mistakes. Scripture comes first, and
     context with sources is shown separately on this page.
@@ -46,7 +59,7 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
   {
     explanation.sections.map((section) => (
       <>
-        <h3>{sectionTitles[explanation.scope][section.kind]}</h3>
+        <Sub>{sectionTitles[explanation.scope][section.kind]}</Sub>
         {blocks(section.text).map((block) =>
           "list" in block ? (
             <ul>
@@ -65,8 +78,8 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
   {
     explanation.translations.length > 0 && (
       <>
-        <h3>How translations differ</h3>
-        <p class="small muted">
+        <Sub>How translations differ</Sub>
+        <p class="foot">
           Compared with public-domain translations only.
         </p>
         {explanation.translations.map((entry) => (
@@ -93,13 +106,13 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
 
   <details>
     <summary>About this explanation</summary>
-    <p class="small muted">
+    <p class="foot">
       Written by {explanation.model}, an AI model, on {written}. It draws on
       the WEB text and general knowledge and was not checked against sources
       by a person. Every quotation from Scripture is checked automatically
       against the WEB text.
     </p>
-    <p class="small">
+    <p class="foot">
       <a href={`${shopUrl}/pages/contact`}>Report a mistake</a>
     </p>
   </details>
@@ -107,37 +120,60 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
 
 <style>
   .ai {
-    max-width: 42rem;
-    border-style: dashed;
-    background: var(--bg);
+    max-width: 34em;
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface);
+    border: 1.5px dashed var(--ai);
+    border-radius: var(--radius-md);
   }
-  .pill {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 6px;
-    padding: 2px 10px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
+  .ai > :global(h2),
+  .ai > :global(h3) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    color: var(--ai);
+  }
+  .icon {
+    flex: none;
+    width: 1.15em;
+    height: 1.15em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .label {
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--ai);
+  }
+  .foot {
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
     color: var(--muted);
   }
-  .eyebrow {
-    margin-top: 6px;
+  .ai > :global(h3),
+  .ai > :global(h4) {
+    margin-top: var(--space-5);
   }
-  h3 {
-    margin-top: 22px;
+  .ai > :global(h4) {
+    font-size: var(--text-body);
   }
   ul {
-    margin: 8px 0;
-    padding-left: 1.2rem;
+    margin: var(--space-2) 0;
+    padding-left: 1.2em;
   }
   li + li {
-    margin-top: 6px;
+    margin-top: var(--space-2);
   }
   .compare {
-    margin-top: 14px;
-    padding-top: 12px;
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
     border-top: 1px solid var(--line);
   }
   .ref {
@@ -150,11 +186,11 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
     font-weight: 600;
   }
   dl {
-    margin: 0 0 8px;
+    margin: 0 0 var(--space-2);
   }
   dt {
-    margin-top: 8px;
-    font-size: 0.78rem;
+    margin-top: var(--space-2);
+    font-size: var(--text-footnote);
     font-weight: 600;
     color: var(--muted);
   }
@@ -162,13 +198,14 @@ const written = new Date(`${explanation.written}T00:00:00Z`).toLocaleDateString(
     margin: 2px 0 0;
   }
   details {
-    margin-top: 16px;
+    margin-top: var(--space-4);
     border-top: 1px solid var(--line);
   }
   summary {
     min-height: 44px;
     display: flex;
     align-items: center;
+    color: var(--link);
     font-weight: 600;
     cursor: pointer;
   }

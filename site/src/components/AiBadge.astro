@@ -1,0 +1,25 @@
+---
+// The "AI" badge (UI-SPEC 5.3, D-06): 13px/600, --on-ai on --ai, 20px tall. It always sits next to
+// words that carry the meaning ("Written by an AI model. Not checked by a person."), so it is
+// hidden from screen readers rather than read twice; the colour only repeats the words.
+---
+
+<span class="ai-badge" aria-hidden="true">AI</span>
+
+<style>
+  .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    min-height: 20px;
+    padding-inline: var(--space-2);
+    border-radius: var(--radius-xs);
+    background: var(--ai);
+    color: var(--on-ai);
+    font-size: var(--text-footnote);
+    font-weight: 600;
+    line-height: 20px;
+    vertical-align: middle;
+  }
+</style>

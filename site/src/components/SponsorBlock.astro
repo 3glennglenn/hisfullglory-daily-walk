@@ -1,0 +1,68 @@
+---
+// The sponsor slot (founder decision 2026-10-19, D-13, UI-SPEC section 13): built for later and
+// empty at launch. While `site.sponsor` is null, or the place is not listed on the sponsor, this
+// renders nothing at all: no wrapper, no heading, no space, no word "Sponsor". There are no house
+// messages. When a sponsor is set (design only) it is a plain block with the word "Sponsor", the
+// name, the line and a link that carries nothing about the reader.
+import { site } from "../config";
+import { sponsorFor, type SponsorPlace } from "../lib/sponsor";
+
+interface Props {
+  place: SponsorPlace;
+}
+
+const { place } = Astro.props;
+// The site is built ahead of time, so the end date is checked when the site is built.
+const today = new Date().toISOString().slice(0, 10);
+const sponsor = sponsorFor(place, site.sponsor, today);
+---
+
+{
+  sponsor && (
+    <aside class="wrap" data-slot="sponsor" aria-label="Sponsor">
+      <div class="sponsor">
+        <p class="label">Sponsor</p>
+        <p class="name">
+          <a href={sponsor.url} rel="sponsored noopener" target="_blank">
+            {sponsor.name}
+          </a>
+        </p>
+        <p class="line">{sponsor.line}</p>
+        <p class="privacy">Sponsors do not receive anything about you.</p>
+      </div>
+    </aside>
+  )
+}
+
+<style>
+  .sponsor {
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    max-width: 34em;
+  }
+  /* The wrapper (page grid width) exists only when a sponsor shows; it adds the space above. */
+  aside {
+    padding-top: var(--space-7);
+  }
+  .sponsor p {
+    margin: 0;
+  }
+  .label {
+    font-size: var(--text-footnote);
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .name {
+    font-weight: 600;
+  }
+  .line {
+    color: var(--muted);
+  }
+  .privacy {
+    margin-top: var(--space-2);
+    font-size: var(--text-footnote);
+    color: var(--muted);
+  }
+</style>

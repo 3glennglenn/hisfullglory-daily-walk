@@ -1,20 +1,29 @@
 ---
 // The label at the top of a context check that an AI model wrote and no person has checked
-// (review "ai-unreviewed", src/lib/content.ts). The words carry the meaning, not the colour.
+// (review "ai-unreviewed", src/lib/content.ts). The words carry the meaning, not the colour:
+// UI-SPEC W3 and 5.3 draw it as a labelled block, a dashed --ai frame with the "AI" badge and
+// the unchanged sentence in Body 17 --ink (the most important sentence on the page, so not muted).
 import { aiUnreviewedLabel } from "../lib/content";
+import AiBadge from "./AiBadge.astro";
 ---
 
-<p class="ai-unreviewed" role="note">{aiUnreviewedLabel}</p>
+<p class="ai-unreviewed" role="note">
+  <AiBadge />
+  <span>{aiUnreviewedLabel}</span>
+</p>
 
 <style>
   .ai-unreviewed {
-    display: inline-block;
-    margin: 0 0 16px;
-    padding: 8px 14px;
-    border: 1px solid var(--link);
-    /* Not the full pill of the draft banner: this text wraps to several lines on a phone. */
-    border-radius: 12px;
-    font-size: 0.86rem;
-    color: var(--link);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface);
+    border: 1.5px dashed var(--ai);
+    border-radius: var(--radius-md);
+    font-size: var(--text-body);
+    line-height: 1.47;
+    color: var(--ink);
   }
 </style>
