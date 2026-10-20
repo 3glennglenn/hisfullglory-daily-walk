@@ -435,9 +435,6 @@ p {
   margin-bottom: 18px;
   box-shadow: 0 2px 4px var(--shadow);
 }
-.verse-card {
-  background: var(--surface-2);
-}
 blockquote {
   font-family: var(--font-scripture);
   font-size: 1.6rem;
@@ -1179,11 +1176,6 @@ button[aria-pressed="true"] {
 .chips button[aria-pressed="true"] {
   background: var(--surface-2);
 }
-.quick-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
 .entry {
   display: flex;
   flex-direction: column;
@@ -1326,9 +1318,6 @@ small {
   .card {
     padding: 18px;
   }
-  .quick-grid {
-    grid-template-columns: 1fr;
-  }
   h1 {
     font-size: 1.9rem;
   }
@@ -1355,10 +1344,6 @@ small {
 /* Context check of the day: one part of the story per screen. */
 .muted {
   color: var(--muted);
-}
-.context-today h2 {
-  font-size: 1.25rem;
-  line-height: 1.35;
 }
 .story-slide {
   min-height: 52vh;
@@ -2092,11 +2077,6 @@ html[data-text="large"] .select-row select {
     padding-inline: 0;
   }
 }
-/* Large text: the quick links of Today stack instead of sitting two across (UI-SPEC 6.3: horizontal
-   rows stack), so the page never scrolls sideways at 200 %. Plan 06 replaces this grid. */
-html[data-text="large"] .quick-grid {
-  grid-template-columns: 1fr;
-}
 
 /* ==== Segmented (UI-SPEC 3.4, 7.4; src/ui/Segmented.tsx) ====
    A radiogroup on a --surface-2 track. The chosen option is raised on --surface and drawn with a 2px
@@ -2572,4 +2552,106 @@ html[data-text="large"] .segmented-scroll [role="radio"] {
 }
 .group-disclosure > :not(summary) {
   padding: 0 var(--space-5) var(--space-5);
+}
+
+/* ==== Today and the cover (UI-SPEC 2, A1; src/features/Today.tsx, src/ui/Cover.tsx, src/ui/Badges.tsx) ====
+   Structure and type of the signature block; the drawing of each look (gilt rule and ornaments, ribbon, lamp
+   glow) follows in the next section. Only tokens: the two looks and the two modes change the colours. */
+.today-date {
+  margin: calc(-1 * var(--space-2)) 0 var(--space-5);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* The "AI" badge: 13px/600, --on-ai on --ai, 20px tall, radius 6. The words next to it carry the meaning. */
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  min-height: 20px;
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-xs);
+  background: var(--ai);
+  color: var(--on-ai);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 20px;
+}
+.cover-wrap {
+  position: relative;
+  isolation: isolate;
+  margin: 0 0 var(--space-6);
+}
+.cover {
+  position: relative;
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--sig);
+  color: var(--on-sig);
+}
+html[data-text="large"] .cover {
+  padding: var(--space-4);
+}
+.cover p {
+  margin: 0;
+}
+.cover-ref {
+  font-family: var(--font-scripture);
+  font-style: italic;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--gilt);
+}
+.cover .cover-display {
+  margin-top: var(--space-4);
+  font-family: var(--font-scripture);
+  font-size: var(--text-display);
+  font-weight: 400;
+  line-height: 1.29;
+  color: var(--on-sig);
+  overflow-wrap: anywhere;
+}
+.cover .cover-body {
+  margin-top: var(--space-4);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--sig-muted);
+  overflow-wrap: anywhere;
+}
+.cover .cover-ai {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--on-sig);
+}
+.cover .cover-ai .ai-badge {
+  margin-top: 2px;
+}
+/* The one filled button of the screen (UI-SPEC 5.2): --sig-button on the block, 48px, Body 17/600. */
+.cover .cover-button {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  margin-top: var(--space-6);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--sig-button);
+  color: var(--on-sig-button);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+}
+.cover .cover-button:focus-visible {
+  outline-color: var(--sig-focus);
+}
+/* Drawn in the next section; the spans exist in every look so the markup is the same. */
+.cover-ribbon,
+.cover-orn {
+  display: none;
 }

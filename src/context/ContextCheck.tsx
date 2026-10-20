@@ -3,14 +3,15 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { webProvider } from "../bible/provider";
 import { navigate } from "../platform/router";
+import { usePlatform } from "../platform/store";
 import { localDate } from "../storage";
 import {
-  checkOfTheDay,
   checkUrl,
-  madeHow,
+  editorialNote,
   paragraphs,
   refLabel,
   storyStatuses,
+  todaysCheck,
   withVoices,
   type AppContextCheck,
 } from "./checks";
@@ -53,7 +54,9 @@ function VerseText({ check }: { check: AppContextCheck }) {
 }
 
 export function ContextCheck({ slug }: { slug?: string }) {
-  const check = slug ? contextChecks.find((c) => c.slug === slug) : checkOfTheDay(contextChecks, localDate());
+  const { state } = usePlatform();
+  // Until the list of context checks arrives, /context without a slug opens Today’s check.
+  const check = slug ? contextChecks.find((c) => c.slug === slug) : todaysCheck(contextChecks, state.shelf, localDate())?.check;
   const [index, setIndex] = useState(0);
   const [status, setStatus] = useState("");
   const touch = useRef<number | null>(null);
@@ -160,7 +163,7 @@ export function ContextCheck({ slug }: { slug?: string }) {
           Next
         </button>
       </nav>
-      <small className="muted">{madeHow}</small>
+      <small className="muted">{editorialNote(check.review, check.drafted)}</small>
       <details className="card">
         <summary>More context checks</summary>
         {contextChecks.map((c) => (
@@ -170,18 +173,5 @@ export function ContextCheck({ slug }: { slug?: string }) {
         ))}
       </details>
     </section>
-  );
-}
-
-/** The card on Home: today's opening line and the way in. */
-export function ContextOfTheDayCard() {
-  const check = checkOfTheDay(contextChecks, localDate());
-  if (!check) return null;
-  return (
-    <article className="card context-today">
-      <p className="eyebrow">Context check of the day · {refLabel(check.verse)}</p>
-      <h2>{check.hook}</h2>
-      <button onClick={() => navigate("/context")}>Read the story</button>
-    </article>
   );
 }

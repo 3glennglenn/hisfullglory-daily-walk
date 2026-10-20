@@ -4,11 +4,16 @@ import {checkDialogs} from "../tests/dialogs.browser.mjs";
 // Run against npm run preview. DOM/behavior checks only; deliberately no screenshots.
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
-import {readFileSync} from "node:fs";
+import {readdirSync,readFileSync} from "node:fs";
+// Node strips the types, so the app's own rules decide which context check Today should open with (Node 24, local and CI).
+import {aiUnreviewedCardLabel,publishedChecks,refLabel,splitHook,todaysCheck} from "../src/context/checks.ts";
 import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
+// Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
+const contentDir = "site/content/context-checks";
+const published = publishedChecks(readdirSync(contentDir).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(contentDir + "/" + f, "utf8"))));
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.BROWSER_CHANNEL
@@ -42,9 +47,83 @@ async function go(path) {
 try {
   await go("/");
   await check(
-    "guest onboarding saves up to three goals and chosen rhythm",
+    "Today opens with the newest context check, AI-written ones included and labelled (D-05, D-06)",
     async () => {
-      await page.getByRole("button", { name: "Continue", exact: true }).click();
+      // The expected check is computed from the content folder at run time: the daily routine adds a file every day.
+      const expected = todaysCheck(published, [], "2026-10-20")?.check;
+      assert.ok(expected, "at least one context check is published");
+      assert.equal(await page.locator("main h1").count(), 1, "one h1");
+      assert.equal(await page.locator("main h1").innerText(), "Today");
+      assert.match(
+        await page.locator(".today-date").innerText(),
+        /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), [A-Z][a-z]+ \d{1,2}$/,
+        "the date line in English",
+      );
+      const cover = page.getByRole("region", { name: "Today's context check", exact: true });
+      assert.equal(await cover.count(), 1, "the cover is one section named by its hidden heading");
+      assert.equal(await cover.locator("h2.sr-only").innerText(), "Today's context check");
+      assert.equal(await cover.locator(".cover-ref").innerText(), refLabel(expected.verse));
+      const { first, second } = splitHook(expected.hook);
+      assert.equal(await cover.locator(".cover-display").innerText(), first, "the hook's first part is the Display line");
+      if (second) assert.equal(await cover.locator(".cover-body").innerText(), second, "the second part is the Body line");
+      else assert.equal(await cover.locator(".cover-body").count(), 0);
+      assert.equal(await cover.locator("h1, h2:not(.sr-only), h3").count(), 0, "no other heading inside the cover: the hook is a paragraph");
+      // The label row is there exactly when no person checked the check.
+      const aiRows = await cover.locator(".cover-ai").count();
+      assert.equal(aiRows, expected.review === "ai-unreviewed" ? 1 : 0, "AI row iff AI-unreviewed");
+      if (expected.review === "ai-unreviewed") {
+        assert.equal(await cover.locator(".cover-ai").innerText(), "AI\n" + aiUnreviewedCardLabel, "badge and label in words");
+        assert.equal(await cover.locator(".cover-ai .ai-badge").getAttribute("aria-hidden"), "true");
+        assert.equal(await cover.locator(".cover-ai").evaluate((el) => parseFloat(getComputedStyle(el).fontSize)), 17, "the label is Body 17");
+        // The label comes before the button.
+        const order = await cover.evaluate((el) => {
+          const ai = el.querySelector(".cover-ai"), button = el.querySelector("button");
+          return !!(ai.compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING);
+        });
+        assert.ok(order, "the label row is before the button");
+      }
+      // One filled button on the screen, named with the reference, leading to the story.
+      const filled = await page.locator("main button").evaluateAll(
+        (list) => list.filter((b) => getComputedStyle(b).backgroundColor !== "rgba(0, 0, 0, 0)").map((b) => b.getAttribute("aria-label") ?? b.textContent),
+      );
+      assert.deepEqual(filled, ["Read the story: " + refLabel(expected.verse)], "exactly one filled button in main");
+      assert.equal(await cover.getByRole("button").innerText(), "Read the story");
+      // The old Home furniture is gone.
+      for (const gone of ["Walk with Jesus", "Welcome to your daily walk", "A gentle rhythm", "Read Scripture", "Bring a prayer", "Reflect privately"])
+        assert.equal(await page.getByText(gone).count(), 0, gone + " is gone from Today");
+      await cover.getByRole("button").click();
+      await page.waitForURL("**/context/" + expected.slug);
+      await page.goBack();
+      await page.locator("main h1", { hasText: "Today" }).waitFor();
+
+      // A reader who finished every check newer than the newest AI-written one on earlier days sees that one, labelled.
+      const ai = published.find((c) => c.review === "ai-unreviewed");
+      if (ai) {
+        const newer = published.slice(0, published.indexOf(ai)).map((c) => ({ slug: c.slug, finishedOn: "2026-01-02" }));
+        await page.evaluate((shelf) => {
+          const state = JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));
+          state.shelf = shelf;
+          localStorage.setItem("hfg-daily-walk:v3", JSON.stringify(state));
+        }, newer);
+        await page.reload();
+        await page.locator("main h1").waitFor();
+        const forced = page.getByRole("region", { name: "Today's context check", exact: true });
+        assert.equal(await forced.locator(".cover-ref").innerText(), refLabel(ai.verse), "Today shows the AI-written check");
+        assert.equal(await forced.locator(".cover-ai").innerText(), "AI\n" + aiUnreviewedCardLabel, "with its label");
+        await page.evaluate(() => {
+          const state = JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));
+          state.shelf = [];
+          localStorage.setItem("hfg-daily-walk:v3", JSON.stringify(state));
+        });
+        await page.reload();
+        await page.locator("main h1").waitFor();
+      }
+    },
+  );
+  await check(
+    "Settings, Daily rhythm saves up to three goals, the journey and the minutes (onboarding left Today)",
+    async () => {
+      await go("/settings");
       for (const goal of ["Prayer", "Peace", "Consistency"])
         await page.getByRole("button", { name: goal, exact: true }).click();
       assert.equal(
@@ -52,21 +131,19 @@ try {
           .getByRole("button", { name: "Understand the Bible", exact: true })
           .isDisabled(),
         true,
+        "a fourth goal is not allowed",
       );
-      await page.getByRole("button", { name: "Continue", exact: true }).click();
-      await page.getByLabel("Your journey").selectOption("Growing in faith");
-      await page.getByRole("button", { name: "Continue", exact: true }).click();
-      await page.getByLabel("Minutes each day").selectOption("10");
-      await page.getByRole("button", { name: "Continue", exact: true }).click();
-      await page
-        .getByRole("button", { name: "Begin my walk", exact: true })
-        .click();
+      await page.getByLabel("Faith journey", { exact: true }).selectOption("Growing in faith");
+      await page.getByLabel("Minutes", { exact: true }).selectOption("10");
+      await page.reload();
+      await page.locator("main h1").waitFor();
       const saved = await page.evaluate(() =>
         JSON.parse(localStorage.getItem("hfg-daily-walk:v3")),
       );
-      assert.equal(saved.local.onboarded, true);
       assert.equal(saved.preferences.goals.length, 3);
+      assert.equal(saved.preferences.journey, "Growing in faith");
       assert.equal(saved.preferences.minutes, 10);
+      assert.equal(await page.getByLabel("Minutes", { exact: true }).inputValue(), "10");
     },
   );
   await check(
@@ -518,9 +595,8 @@ try {
         "true",
         "direct refresh resumes the next unfinished day",
       );
-      await go("/");
-      await page.getByRole("button", { name: /Continue your journey/ }).click();
-      assert.equal(new URL(page.url()).pathname, "/grow/anxiety");
+      // The in-progress journey is reached from You, Grow (Today no longer carries a quick link to it).
+      await go("/grow/anxiety");
       assert.equal(
         await page
           .getByRole("button", { name: "Day 2", exact: true })

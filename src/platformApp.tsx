@@ -15,7 +15,8 @@ import { currentRoute, navigate } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
 import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
-import { Home, Walk } from "./features/Home";
+import { Walk } from "./features/Home";
+import { Today } from "./features/Today";
 import { Reader } from "./bible/Reader";
 import { Pray } from "./features/Pray";
 import { Grow } from "./features/Grow";
@@ -116,7 +117,7 @@ function App() {
       content = <MyWalk />;
       break;
     case "home":
-      content = <Home key={date} />;
+      content = <Today key={date} />;
       break;
     case "walk":
       content = <Walk key={date} />;
