@@ -29,7 +29,7 @@ in the app → Daily Walk, reflection, community → (optional) a study resource
 | `hisfullglory.com` | New static site (this plan) | The site, since 2026-10-13 |
 | `shop.hisfullglory.com` | Shopify, store and checkout only | The shop, since 2026-10-13 |
 | `app.hisfullglory.com` | The app (unchanged) | Live |
-| `www.hisfullglory.com` | Redirect to the site | Still ends up in the shop |
+| `www.hisfullglory.com` | Redirect to the site | Redirects to the site (308, path kept), since 2026-10-20 |
 
 ## 3. Architecture
 
@@ -128,9 +128,6 @@ Vercel (`216.198.79.1`) and its AAAA record is removed, because Vercel has no IP
 and a leftover AAAA record keeps sending visitors to Shopify.
 
 Still open from this section:
-- `www.hisfullglory.com` is a Shopify subdomain and ends up in the shop. To send it to the
-  site: remove the `www` subdomain in Shopify, add a CNAME for `www` to the value Vercel
-  shows for it, and keep the 308 redirect to `hisfullglory.com` that Vercel already has.
 - Step 5 has not been checked, and no real order has been placed on the new shop address.
 - Shopify's records live for 24 hours. A browser that was sent to the shop during that time
   may remember the redirect for longer; a private window shows the real state.
