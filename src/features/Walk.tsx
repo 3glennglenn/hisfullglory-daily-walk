@@ -1,12 +1,18 @@
 import { useEffect, useRef } from "react";
+import { Check } from "lucide-react";
 import { navigate } from "../platform/router";
 import { usePlatform } from "../platform/store";
 import { contentFor } from "../data";
-import { completeDate, dateNumber, localDate } from "../storage";
+import { completeDate, localDate, nextDate } from "../storage";
 import { track } from "../analytics";
+import { aiUnreviewedCardLabel, refLabel, todaysCheck } from "../context/checks";
+import { contextChecks } from "../context/data";
+import { AiBadge } from "../ui/Badges";
+import { GroupedList, Row } from "../ui/List";
 import { Toolbar } from "../ui/Screen";
 import { StepIndicator } from "../ui/StepIndicator";
 import { Journal } from "./LegacyWalk";
+import { dailyReminderOn } from "./Reminders";
 
 // Today's walk (UI-SPEC A5, A6, D-11): a full-screen flow of six steps that ends on the Prayer step, then a finish
 // screen that is a reason to come back and never a reproach. The tab bar is covered while it is open; "‹ Today" is the
@@ -14,9 +20,6 @@ import { Journal } from "./LegacyWalk";
 // the finish screen, so progress stored before this screen existed resumes where it was.
 export const dailyPassage = (reference: string) =>
   `/bible/psalms/${reference.includes("121") ? 121 : 23}/${reference.split(":")[1]}`;
-
-/** The day after a local date ("YYYY-MM-DD"). */
-export const nextDate = (date: string) => new Date((dateNumber(date) + 1) * 86400000).toISOString().slice(0, 10);
 
 const labels = ["Scripture", "Context", "Devotional", "Reflection", "Journal", "Prayer"] as const;
 
@@ -156,13 +159,55 @@ export function Walk() {
   );
 }
 
-// The finish screen (A6) is built in the second task of plan 08; until then it says the walk is complete and leads back to Today.
+// The walk finish (A6): the days walked, counted from every completed date and never reset, with no run length and no
+// calendar of empty days; tomorrow's passage named; today's context check while it is unread; the reminder row reading
+// what the reader chose (reminders are never turned on from here); the rhythm questions once, after the first walk.
 function WalkFinish({ date }: { date: string }) {
-  void date;
+  const { state } = usePlatform();
+  const today = contentFor(date);
+  const tomorrow = contentFor(nextDate(date));
+  const days = state.local.completedDates.length;
+  const found = todaysCheck(contextChecks, state.shelf, date);
+  const unread = found?.state === "unread" ? found.check : null;
+  const reminderOn = state.notifications["Daily Walk"] === true || dailyReminderOn();
   return (
     <section className="flow walk-flow walk-finish">
       <Toolbar back="Today" to="/" title="Today's walk" />
       <h2 className="walk-complete">Walk complete</h2>
+      <blockquote className="walk-finish-verse">{today.quote}</blockquote>
+      <p className="walk-finish-ref">{today.reference}</p>
+      <GroupedList>
+        <Row
+          title={
+            <span className="row-with-icon">
+              <Check className="row-success" aria-hidden="true" focusable="false" size={18} strokeWidth={2.5} />
+              {days === 1 ? "1 day walked" : `${days} days walked`}
+            </span>
+          }
+          detail={<span className="row-detail-body">A day away is an invitation to begin again. There is no penalty.</span>}
+        />
+        <Row title={`Tomorrow: ${tomorrow.reference}`} detail="Ready in the morning" />
+        {unread && (
+          <Row
+            href={`/context/${unread.slug}`}
+            chevron
+            title="Today's context check"
+            detail={
+              <>
+                <span className="row-line">{refLabel(unread.verse)}</span>
+                {unread.review === "ai-unreviewed" && (
+                  <span className="row-line row-ai">
+                    <AiBadge />
+                    <span>{aiUnreviewedCardLabel}</span>
+                  </span>
+                )}
+              </>
+            }
+          />
+        )}
+        <Row href="/settings/reminders" chevron title="Daily reminder" value={reminderOn ? "On" : "Off"} />
+        {days === 1 && <Row href="/settings" chevron title="Choose your daily rhythm" />}
+      </GroupedList>
       <button type="button" className="flow-button" onClick={() => navigate("/")}>
         Back to Today
       </button>

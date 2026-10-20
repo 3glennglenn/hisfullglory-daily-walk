@@ -13,6 +13,7 @@ import {checkSponsor} from "../tests/sponsor.browser.mjs";
 import {checkStoryFlow} from "../tests/story.browser.mjs";
 import {checkShelfScreen} from "../tests/shelf.browser.mjs";
 import {checkContextList,checkStoryEnd} from "../tests/storyend.browser.mjs";
+import {checkWalkFinish} from "../tests/walk.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -196,6 +197,7 @@ try {
       assert.equal(again.local.completedDates.length, 1, "completion stays idempotent");
     },
   );
+  await check("walk finish: days walked counted and never reset, tomorrow named, today's context check while unread, reminders Off unless turned on, no guilt words; old stored steps; Back keeps the step; 200 % text (UI-SPEC A5, A6, D-11)", () => checkWalkFinish(browser, base, published));
   await check(
     "deep-linked WEB chapter, selection, bookmark, search and history work",
     async () => {

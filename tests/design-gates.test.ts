@@ -97,3 +97,52 @@ test("no browser pop-ups: src never calls confirm, prompt or alert, bare or on w
   const hits = files.flatMap((file) => popupCalls(readFileSync(file, "utf8")).map((call) => `${file}: ${call}`));
   assert.deepEqual(hits, [], "browser pop-ups left in src: use ConfirmDialog or TextSheet instead");
 });
+
+// ---- Plan 08: no guilt in the app's words (UI-SPEC 9.1, D-11) ---------------------------------------------------------
+// The glossary never says that a day was "missed" and never speaks of a "streak": a day away shows nothing, and the
+// walk counts days walked. The gate reads what a person can read in a .tsx file under src, a string literal or JSX
+// text, and leaves comments, identifiers and the .ts data files alone. The two words are built from their parts so
+// that this file does not contain them.
+const GUILT_WORDS = new RegExp(`\\b(?:${["mis", "sed"].join("")}|${["str", "eak"].join("")}s?)\\b`, "i");
+const STRING_LITERAL = /"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'|`(?:[^`\\]|\\.)*`/g;
+// Text between tags, or between a tag and an expression: `>Walk complete<`, `>{n} days walked<`, `}. Tomorrow<`.
+const JSX_TEXT = /[>}]([^<>{}\n]+)(?=[<{])/g;
+
+function readableText(source: string): string[] {
+  const code = source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:"'`\\])\/\/.*$/gm, "$1");
+  return [...code.matchAll(STRING_LITERAL)].map((m) => m[0]).concat([...code.matchAll(JSX_TEXT)].map((m) => m[1]));
+}
+
+test("the guilt-words gate sees strings and JSX text and leaves comments and identifiers alone", () => {
+  const missed = ["mis", "sed"].join("");
+  const streak = ["str", "eak"].join("");
+  for (const bad of [
+    `const line = "A ${missed} day is a loss";`,
+    `<p>You have a ${streak} of 3 days</p>`,
+    `<p>{n} day ${streak}s</p>`,
+    "const t = `Keep your " + streak + " alive`;",
+    `<span>You ${missed.toUpperCase()} yesterday</span>`,
+  ])
+    assert.ok(readableText(bad).some((text) => GUILT_WORDS.test(text)), `should be found: ${bad}`);
+  for (const fine of [
+    `// A ${missed} day is an invitation (a comment)`,
+    `/* ${streak} of days */`,
+    `const ${streak} = 3;`,
+    `<p>A day away is an invitation to begin again. There is no penalty.</p>`,
+    `const word = "mistreated";`,
+    `<p>{n} days walked</p>`,
+  ])
+    assert.ok(!readableText(fine).some((text) => GUILT_WORDS.test(text)), `should be left alone: ${fine}`);
+});
+
+test("no .tsx file under src says a day was missed or speaks of a streak (UI-SPEC 9.1, D-11)", () => {
+  const files = filesUnder("src").filter((file) => file.endsWith(".tsx"));
+  assert.ok(files.length > 30, `scanned ${files.length} files`);
+  const hits = files.flatMap((file) =>
+    readableText(readFileSync(file, "utf8"))
+      .filter((text) => GUILT_WORDS.test(text))
+      .map((text) => `${file}: ${text.slice(0, 80)}`),
+  );
+  assert.deepEqual(hits, [], "words of guilt in the app's interface: say nothing about a day away, count days walked");
+});
+

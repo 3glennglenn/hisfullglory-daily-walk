@@ -3476,3 +3476,30 @@ html[data-text="large"] .shelf-boards .spine-ai-text {
   font-size: var(--text-footnote);
   line-height: 1.38;
 }
+
+/* ==== Plan 08: the walk finish (UI-SPEC A6, D-11; src/features/Walk.tsx) ====
+   Display title, the day's verse in italic Scripture, its reference, one list, one filled button. No motion. */
+.walk-finish-verse {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.walk-finish-ref {
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  color: var(--link);
+}
+/* The sentence about a day away is Body 17 in the list, not the Footnote of a row's detail. */
+.list-row-detail .row-detail-body {
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.walk-finish .group {
+  margin-bottom: var(--space-5);
+}

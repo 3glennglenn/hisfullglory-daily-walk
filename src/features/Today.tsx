@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { navigate } from "../platform/router";
 import { usePlatform } from "../platform/store";
 import { contentFor } from "../data";
-import { localDate } from "../storage";
+import { localDate, nextDate } from "../storage";
 import { refLabel, todaysCheck } from "../context/checks";
 import { contextChecks } from "../context/data";
 import { countLabel, monthDay, shelfSummary } from "../context/shelf";
@@ -12,7 +12,6 @@ import { GroupedList, Row } from "../ui/List";
 import { LargeTitle } from "../ui/Screen";
 import { MiniShelf } from "../ui/Shelf";
 import { SponsorRow } from "../ui/SponsorRow";
-import { nextDate } from "./Walk";
 
 const parts = (date: string) => date.split("-").map(Number) as [number, number, number];
 
