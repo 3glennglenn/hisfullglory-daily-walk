@@ -1,0 +1,59 @@
+{
+  "slug": "proverbs-3-5-6",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-10-20",
+  "verse": {
+    "book": "proverbs",
+    "chapter": 3,
+    "start": 5,
+    "end": 6
+  },
+  "hook": "You know this verse from a wall or a card. But did you know it is a teacher's lesson that begins with the words “My son”?",
+  "story": "Before this verse hangs on a wall, it stands in a lesson. Proverbs 3 begins with a teacher speaking to a young listener: “My son, don’t forget my teaching, but let your heart keep my commandments,”\n\nThe opening chapters of Proverbs are built like that. One reference work says the instruction is addressed to a son, and that a much broader audience was intended. It says the book itself aims to impart wisdom to men, especially the simple. So the call to trust the LORD is not a slogan thrown at a crowd. It is one step in a long conversation about how to live well.\n\nScholars disagree about when that conversation was written down. The same reference work says some date this first section quite late, and it names one scholar who thinks it came after the exile and another who thinks it is older than the seventh century B.C. Wikipedia says the section was probably the last part of the book to be composed, in the Persian or Hellenistic periods. Either way, the lesson was kept and handed on.\n\nThen comes the turn in the middle of the lesson: “Trust in the LORD with all your heart, and don’t lean on your own understanding.” Two verses later the teacher says it again in other words: “Don’t be wise in your own eyes.”",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Wikipedia: Book of Proverbs",
+      "url": "https://en.wikipedia.org/wiki/Book_of_Proverbs"
+    },
+    {
+      "title": "Encyclopedia of the Bible: Book of Proverbs (BibleGateway)",
+      "url": "https://www.biblegateway.com/resources/encyclopedia-of-the-bible/Book-Proverbs"
+    },
+    {
+      "title": "NIV Application Commentary sample: Proverbs 3:5-6 (BibleGateway)",
+      "url": "https://www.biblegateway.com/resources/nivac-sample/Prov.3.5-Prov.3.6"
+    },
+    {
+      "title": "Matthew Henry, Commentary on the Whole Bible, Proverbs III (Christian Classics Ethereal Library)",
+      "url": "https://www.ccel.org/h/henry/mhc2/MHC20003.HTM"
+    }
+  ],
+  "voices": [
+    {
+      "id": "henry",
+      "name": "Matthew Henry",
+      "about": "English minister, in his Commentary on the Whole Bible (1710), on this verse",
+      "words": "Those who know themselves cannot but find their own understanding to be a broken reed, which, if they lean to, will certainly fail them.",
+      "source": {
+        "title": "Matthew Henry, Commentary on the Whole Bible, Proverbs III (Christian Classics Ethereal Library)",
+        "url": "https://www.ccel.org/h/henry/mhc2/MHC20003.HTM"
+      }
+    }
+  ],
+  "moment": "The speaker is a teacher and the listener is a young person he calls a son. He has just asked that kindness and truth be bound around the neck and written “on the tablet of your heart”. The two verses that follow turn to where to put one's trust, and what to do on every road.\n\nThe promise attached is modest in its picture: “he will make your paths straight.” The Hebrew word for straight, one commentary says, describes travel made safe by clearing and leveling the road.",
+  "around": "Verse 4 names the result of a life shaped by kindness and truth: “So you will find favor, and good understanding in the sight of God and man.” Verse 7 repeats the warning of verse 5 in new words: “Don’t be wise in your own eyes. Fear the LORD, and depart from evil.”",
+  "readings": "Many readers take these verses as a promise of direction for personal choices, such as a job or a marriage.\n\nOne modern commentary reads the two verses more narrowly. It says they speak more about guidance in ethical behavior than about particular choices such as career or mate, and it calls leaning on one's own understanding more like being wise in one's own eyes. The same commentary adds that this trust is not a blind trust that suspends critical judgment.\n\nThe two readings are not far apart. Both ask a person to hold their own judgment loosely and to bring the road to God first.",
+  "argued": "Matthew Henry, writing in 1710, heard in verse 5 a warning to people who think they can steer their own affairs without God. His words: [[henry]]\n\nHe treats prayer as the way to follow verse 6, and he adds a promise of his own: those who put themselves under divine guidance have the benefit of it. A modern commentary on the same verses stresses ethics more than future plans. They are two ways of reading one line, from an English minister of 1710 and from a present-day commentary.",
+  "point": "These verses come from a teacher's lesson to a young listener. They ask for trust in the LORD instead of leaning on one's own understanding, and they promise a level road.",
+  "basis": [
+    {
+      "book": "proverbs",
+      "chapter": 3,
+      "start": 1,
+      "end": 8
+    }
+  ]
+}
