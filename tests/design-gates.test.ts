@@ -291,3 +291,10 @@ test("rule files match the redesign", () => {
   assert.ok(flat("CLAUDE.md").includes("Written by an AI model. Not checked by a person."));
   assert.ok(flat("docs/CONTEXT_CHECKS_ROUTINE.md").includes("not whether it is shown"));
 });
+
+test("the app build needs nothing from the site's own packages (Vercel and the App job install the root only)", () => {
+  // site/tsconfig.json extends a file of the astro package, which only the site's install has. Vite reads the closest
+  // tsconfig.json of every .ts file the app imports from site/src, so vite.config.ts must hand esbuild its options.
+  assert.match(readFileSync("site/tsconfig.json", "utf8"), /astro\/tsconfigs/);
+  assert.match(readFileSync("vite.config.ts", "utf8"), /esbuild:\s*\{\s*tsconfigRaw:\s*JSON\.stringify\(/);
+});
