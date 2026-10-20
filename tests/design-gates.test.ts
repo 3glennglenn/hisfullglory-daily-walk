@@ -146,3 +146,123 @@ test("no .tsx file under src says a day was missed or speaks of a streak (UI-SPE
   assert.deepEqual(hits, [], "words of guilt in the app's interface: say nothing about a day away, count days walked");
 });
 
+
+// ---- Plan 11: one type scale, no uppercase, no bare button names (UI-SPEC 6.2, 15 item 9) ----------------------------
+const appCss = readFileSync(join("src", "styles.css"), "utf8");
+/** The declarations of a stylesheet with their selector, in order. Comments are kept out of the selector. */
+function declarations(css: string): { selector: string; property: string; value: string; comment: string }[] {
+  const found: { selector: string; property: string; value: string; comment: string }[] = [];
+  let comment = "";
+  const stripped = css.replace(/\/\*([\s\S]*?)\*\//g, (_all, text: string) => `\u0000${text.replace(/\u0000/g, "")}\u0001`);
+  for (const rule of stripped.matchAll(/([^{}]*)\{([^{}]*)\}/g)) {
+    const selectorText = rule[1].replace(/\u0000[\s\S]*?\u0001/g, (c) => {
+      comment = c;
+      return "";
+    });
+    const selector = selectorText.trim().replace(/\s+/g, " ");
+    for (const decl of rule[2].replace(/\u0000[\s\S]*?\u0001/g, (c) => {
+      comment += c;
+      return "";
+    }).split(";")) {
+      const [property, ...rest] = decl.split(":");
+      if (rest.length) found.push({ selector, property: property.trim(), value: rest.join(":").trim(), comment });
+    }
+  }
+  return found;
+}
+
+test("block 1 of src/styles.css holds the six type tokens and the numeral with the CSS values of UI-SPEC 6.2", () => {
+  const block = appCss.slice(0, appCss.indexOf("}"));
+  const expected: Record<string, string> = {
+    "--text-large-title": "calc(1rem + 17px)",
+    "--text-display": "calc(0.6471rem + 17px)",
+    "--text-title": "1.1765rem",
+    "--text-scripture": "1.1765rem",
+    "--text-body": "1rem",
+    "--text-footnote": "0.7647rem",
+    "--text-numeral": "calc(2rem + 44px)",
+  };
+  for (const [name, value] of Object.entries(expected))
+    assert.ok(block.includes(`${name}: ${value};`), `${name} is ${value}`);
+});
+
+test("every font-size in src/styles.css is a type token, inherit, 1em or 100 % (the one root rule is the platform's text size)", () => {
+  const sizes = declarations(appCss).filter((d) => d.property === "font-size");
+  assert.ok(sizes.length > 150, `scanned ${sizes.length} font-size declarations`);
+  const bad = sizes.filter(
+    (d) =>
+      !/^var\(--text-(large-title|display|title|scripture|body|footnote|numeral)\)$/.test(d.value) &&
+      !["inherit", "1em", "100%"].includes(d.value) &&
+      // html { font-size: 106.25% } makes 1rem the platform's Body size (UI-SPEC 6.2); it is the root of the scale, not a step.
+      !(d.selector === "html" && d.value === "106.25%") &&
+      // The tab labels grow with the text size up to 16px, and the long-press tip shows a label at twice its size
+      // (UI-SPEC 6.3, 14): both are made of the Footnote token, capped.
+      !(d.selector === ".tab" && d.value === "min(var(--text-footnote), 16px)") &&
+      !(d.selector === ".tab-tip" && d.value === "min(calc(var(--text-footnote) * 2), 13vw)"),
+  );
+  assert.deepEqual(bad.map((d) => `${d.selector}: ${d.value}`), [], "font sizes that are not one of the six steps");
+});
+
+test("nothing in the app or the site is set below 13px: no rem, em or px font-size under 0.7647rem", () => {
+  const files = shipped.filter((file) => /\.(css|astro|html)$/.test(file));
+  const hits: string[] = [];
+  for (const file of files) {
+    for (const m of readFileSync(file, "utf8").matchAll(/font-size:\s*([0-9.]+)(rem|em|px)\b/g)) {
+      const px = m[2] === "px" ? Number(m[1]) : Number(m[1]) * 17;
+      if (px < 12.99) hits.push(`${file}: ${m[0]}`);
+    }
+  }
+  assert.deepEqual(hits, []);
+});
+
+test("no uppercase text transform in the app's or the site's CSS (UI-SPEC 2 Removed accessories)", () => {
+  const files = shipped.filter((file) => /\.(css|astro|html)$/.test(file));
+  const hits = files.filter((file) => /text-transform:\s*uppercase/i.test(readFileSync(file, "utf8")));
+  assert.deepEqual(hits, []);
+});
+
+test("letter-spacing in src/styles.css is normal, 0, or sits under a comment that names an ornament", () => {
+  const spaced = declarations(appCss).filter(
+    (d) => d.property === "letter-spacing" && !["normal", "0", "0em"].includes(d.value),
+  );
+  const bad = spaced.filter((d) => !/ornament/i.test(d.comment));
+  assert.deepEqual(bad.map((d) => `${d.selector}: ${d.value}`), []);
+});
+
+// No visible button is named only "Cancel", "OK", "Done" or "Close" (UI-SPEC 15.9): a button with that word on it
+// carries an aria-label that names its object ("Close entry", "Close Romans 8:28"), and a dialog's safe choice says what it keeps.
+const BARE_NAME = /^(Cancel|OK|Done|Close)$/;
+function bareButtons(source: string): string[] {
+  const code = source.replace(/\/\*[\s\S]*?\*\//g, "");
+  const found: string[] = [];
+  for (const m of code.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)) {
+    const text = m[2].replace(/<[^>]*>/g, "").replace(/\{["'`]([^"'`]*)["'`]\}/g, "$1").trim();
+    if (BARE_NAME.test(text) && !/aria-label\s*=/.test(m[1])) found.push(text);
+  }
+  for (const m of code.matchAll(/(?:safeLabel|actionLabel|label)\s*[=:]\s*["'](Cancel|OK|Done|Close)["']/g)) found.push(m[1]);
+  return found;
+}
+
+test("the bare-label detector sees a button named only Cancel and leaves a named one alone", () => {
+  assert.deepEqual(bareButtons("<button className=\"secondary\" onClick={x}>Cancel</button>"), ["Cancel"]);
+  assert.deepEqual(bareButtons("<button>\n  Close\n</button>"), ["Close"]);
+  assert.deepEqual(bareButtons("<ConfirmDialog safeLabel=\"Done\" />"), ["Done"]);
+  assert.deepEqual(bareButtons("<button aria-label=\"Close entry\">Close</button>"), []);
+  assert.deepEqual(bareButtons("<button>Close request</button>"), []);
+});
+
+test("no .tsx file under src has a button named only Cancel, OK, Done or Close", () => {
+  const files = filesUnder("src").filter((file) => file.endsWith(".tsx"));
+  const hits = files.flatMap((file) => bareButtons(readFileSync(file, "utf8")).map((name) => `${file}: ${name}`));
+  assert.deepEqual(hits, []);
+});
+
+test("the crash screen says what UI-SPEC 9.2 says, and the install offer keeps one plain and one secondary button", () => {
+  const source = readFileSync(join("src", "platformApp.tsx"), "utf8");
+  assert.ok(source.includes("A moment to begin again"));
+  assert.ok(source.includes("Your saved data remains on this device."));
+  assert.match(source, /Reload the app/);
+  assert.doesNotMatch(source, />\s*Reload\s*</);
+  assert.match(source, /className="secondary"\s+onClick=\{async/);
+  assert.match(source, /className="text-button"\s+onClick=\{\(\) =>\s+update/);
+});

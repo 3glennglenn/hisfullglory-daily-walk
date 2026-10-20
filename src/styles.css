@@ -295,7 +295,7 @@ button,
   color: var(--on-button);
   padding: 10px 16px;
   border-radius: 12px;
-  font-size: 0.87rem;
+  font-size: var(--text-body);
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -370,38 +370,29 @@ strong {
 }
 h1 {
   font-family: inherit;
-  font-weight: 400;
-  line-height: 1.17;
-  font-size: 2.15rem;
-  letter-spacing: -0.035em;
+  font-weight: 600;
+  line-height: 1.2;
+  font-size: var(--text-large-title);
   margin: 8px 0 12px;
 }
 h2 {
-  font-size: 1.08rem;
+  font-size: var(--text-title);
   font-weight: 600;
   line-height: 1.4;
 }
 h3 {
-  font-size: 0.88rem;
+  font-size: var(--text-body);
+  font-weight: 600;
   line-height: 1.5;
   margin: 18px 0 5px;
 }
 p {
   margin: 10px 0;
-  font-size: 0.92rem;
-}
-.eyebrow {
-  font-size: 0.65rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 600;
-  margin: 0 0 8px;
-}
-.intro {
+  font-size: var(--text-body);
+}.intro {
   color: var(--muted);
   margin: 0 0 24px;
-  font-size: 0.89rem;
+  font-size: var(--text-body);
 }
 .section-head,
 .row {
@@ -415,19 +406,7 @@ p {
 }
 .section-head > div {
   min-width: 0;
-}
-.streak {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--surface-2);
-  border-radius: 24px;
-  padding: 6px 10px;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  margin-top: 5px;
-}
-.card {
+}.card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 20px;
@@ -437,13 +416,13 @@ p {
 }
 blockquote {
   font-family: var(--font-scripture);
-  font-size: 1.6rem;
+  font-size: var(--text-display);
   line-height: 1.5;
   margin: 14px 0;
   overflow-wrap: anywhere;
 }
 .verse-reference {
-  font-size: 0.8rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
 }
 .verse-reference span {
@@ -452,7 +431,7 @@ blockquote {
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: 5px;
-  font-size: 0.65rem;
+  font-size: var(--text-footnote);
   margin-left: 5px;
 }
 .reflection {
@@ -461,13 +440,13 @@ blockquote {
   margin-top: 22px;
 }
 .reflection h2 {
-  font-size: 0.85rem;
+  font-size: var(--text-body);
 }
 .reflection p {
   margin-bottom: 0;
 }
 .journal-card label {
-  font-size: 0.87rem;
+  font-size: var(--text-body);
   margin: 12px 0;
 }
 .journal-card .row:last-child {
@@ -475,14 +454,14 @@ blockquote {
   gap: 8px;
 }
 .journal-card .row:last-child small {
-  font-size: 0.61rem;
+  font-size: var(--text-footnote);
 }
 .journal-card .row:last-child small:last-child {
   text-align: right;
 }
 label {
   display: block;
-  font-size: 0.85rem;
+  font-size: var(--text-footnote);
   font-weight: 600;
   margin: 9px 0 6px;
 }
@@ -496,7 +475,7 @@ select {
   border-radius: 10px;
   padding: 11px 12px;
   min-height: 44px;
-  font-size: 16px;
+  font-size: var(--text-body);
 }
 textarea {
   display: block;
@@ -516,7 +495,7 @@ select:disabled {
 }
 small,
 .helper {
-  font-size: 0.73rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
 }
 .helper {
@@ -524,44 +503,7 @@ small,
 }
 .center {
   text-align: center;
-}
-.complete-button {
-  width: 100%;
-  min-height: 50px;
-}
-.complete-button:disabled {
-  background: var(--surface-2);
-  color: var(--ink);
-  opacity: 1;
-  border-color: var(--line);
-}
-.continue-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  text-align: left;
-  color: var(--ink);
-  background: var(--surface);
-}
-.continue-card small {
-  display: block;
-  margin-top: 8px;
-}
-.deeper {
-  margin-top: 28px;
-}
-.deeper > p:nth-child(2) {
-  font-size: 0.82rem;
-  color: var(--muted);
-  margin: 0 0 12px;
-}
-.product-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-.product-card {
+}.product-card {
   padding: 0;
   overflow: hidden;
 }
@@ -584,10 +526,10 @@ small,
   padding: 20px;
 }
 .product-copy h2 {
-  font-size: 1rem;
+  font-size: var(--text-body);
 }
 .product-copy p {
-  font-size: 0.82rem;
+  font-size: var(--text-body);
   color: var(--muted);
 }
 .product-copy small {
@@ -596,7 +538,7 @@ small,
 }
 .product-copy .button {
   width: 100%;
-  font-size: 0.75rem;
+  font-size: var(--text-body);
 }
 .product-card.compact {
   display: flex;
@@ -616,17 +558,17 @@ small,
   min-width: 0;
 }
 .compact h2 {
-  font-size: 0.84rem;
+  font-size: var(--text-body);
 }
 .compact .product-copy p {
-  font-size: 0.73rem;
+  font-size: var(--text-footnote);
 }
 .compact .product-copy small {
-  font-size: 0.65rem;
+  font-size: var(--text-footnote);
 }
 .compact .button {
   padding: 9px 7px;
-  font-size: 0.66rem;
+  font-size: var(--text-footnote);
 }
 .book-placeholder {
   color: var(--muted);
@@ -639,25 +581,8 @@ small,
   min-height: 100px;
 }
 .compact .book-placeholder span {
-  font-size: 0.65rem;
-}
-.install-hint {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  padding: 18px 0;
-  border-top: 1px solid var(--line);
-  margin-top: 28px;
-}
-.install-hint strong {
-  font-size: 0.82rem;
-}
-.install-hint p {
-  font-size: 0.75rem;
-  color: var(--muted);
-  margin-bottom: 0;
-}
-.icon-button {
+  font-size: var(--text-footnote);
+}.icon-button {
   background: none;
   color: var(--muted);
   padding: 10px;
@@ -669,54 +594,13 @@ small,
   color: var(--link);
   padding: 5px 7px;
   text-decoration: underline;
-  font-size: 0.75rem;
+  font-size: var(--text-body);
 }
 .secondary {
   background: var(--bg);
   color: var(--ink);
   border-color: var(--line);
-}
-.onboarding {
-  background: var(--surface-2);
-}
-.onboarding h2 {
-  font-family: inherit;
-  font-weight: 400;
-  font-size: 1.65rem;
-  line-height: 1.25;
-}
-.onboarding .text-button {
-  display: block;
-  margin-top: 8px;
-}
-.onboarding fieldset {
-  border: 0;
-  margin: 18px 0;
-  padding: 0;
-}
-.onboarding legend {
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-.goal-option {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 11px 12px;
-  min-height: 48px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  font-size: 0.82rem;
-}
-.goal-option input {
-  width: 18px;
-  height: 18px;
-  min-height: 18px;
-  accent-color: var(--button);
-  flex-shrink: 0;
-}
-.plan-choice {
+}.plan-choice {
   width: 100%;
   text-align: left;
   color: var(--ink);
@@ -733,12 +617,12 @@ small,
 }
 .plan-choice p {
   font-weight: 400;
-  font-size: 0.79rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
   margin: 6px 0;
 }
 .plan-detail blockquote {
-  font-size: 1.35rem;
+  font-size: var(--text-scripture);
 }
 .plan-detail > button {
   width: 100%;
@@ -821,7 +705,7 @@ progress::-webkit-progress-value {
 .segments button {
   background: none;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: var(--text-footnote);
   gap: 5px;
   padding: 10px 5px;
 }
@@ -841,7 +725,7 @@ progress::-webkit-progress-value {
   margin: 20px 0;
 }
 .room-heading p {
-  font-size: 0.8rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
   margin: 5px 0;
 }
@@ -863,7 +747,7 @@ progress::-webkit-progress-value {
   margin: 15px 0;
 }
 .scripture-pinned blockquote {
-  font-size: 1.2rem;
+  font-size: var(--text-scripture);
 }
 .message-feed {
   max-height: 440px;
@@ -884,7 +768,7 @@ progress::-webkit-progress-value {
   height: 34px;
   min-width: 34px;
   border-radius: 50%;
-  font-size: 0.65rem;
+  font-size: var(--text-footnote);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -896,10 +780,10 @@ progress::-webkit-progress-value {
   flex: 1;
 }
 .message strong {
-  font-size: 0.78rem;
+  font-size: var(--text-footnote);
 }
 .message p {
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   margin: 4px 0;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -909,7 +793,7 @@ progress::-webkit-progress-value {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  font-size: 0.62rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
 }
 .message-meta a {
@@ -919,7 +803,7 @@ progress::-webkit-progress-value {
 }
 .message-meta .text-button {
   min-height: 44px;
-  font-size: 0.62rem;
+  font-size: var(--text-footnote);
   padding: 0;
 }
 .composer {
@@ -928,21 +812,16 @@ progress::-webkit-progress-value {
   margin-top: 12px;
 }
 .composer label {
-  font-size: 0.79rem;
+  font-size: var(--text-footnote);
 }
 .composer .row small {
-  font-size: 0.7rem;
-}
-.prayer-card .eyebrow {
-  font-size: 0.6rem;
-  margin: 0;
-}
-.prayer-card .row:first-child {
+  font-size: var(--text-footnote);
+}.prayer-card .row:first-child {
   flex-wrap: wrap;
   gap: 4px;
 }
 .prayer-card .row small {
-  font-size: 0.61rem;
+  font-size: var(--text-footnote);
 }
 .user-body {
   white-space: pre-wrap;
@@ -954,10 +833,10 @@ progress::-webkit-progress-value {
   flex-wrap: wrap;
 }
 .prayer-actions button {
-  font-size: 0.72rem;
+  font-size: var(--text-footnote);
 }
 .prayer-actions a {
-  font-size: 0.7rem;
+  font-size: var(--text-footnote);
   min-height: 44px;
   display: flex;
   align-items: center;
@@ -965,7 +844,7 @@ progress::-webkit-progress-value {
 .compact-select {
   width: auto;
   max-width: 150px;
-  font-size: 0.75rem;
+  font-size: var(--text-body);
 }
 .check-label {
   display: flex;
@@ -983,20 +862,8 @@ progress::-webkit-progress-value {
   padding: 24px 12px;
   color: var(--muted);
   text-align: center;
-  font-size: 0.85rem;
-}
-.app-footer {
-  font-family: inherit;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin: 22px 0 8px;
-}
-.app-footer small {
-  font-family: Manrope, system-ui, sans-serif;
-  font-size: 0.6rem;
-}
-dialog {
+  font-size: var(--text-body);
+}dialog {
   max-width: calc(100% - 32px);
   width: 420px;
   background: var(--surface);
@@ -1011,7 +878,7 @@ dialog::backdrop {
 }
 dialog p,
 dialog li {
-  font-size: 0.83rem;
+  font-size: var(--text-body);
 }
 dialog ul {
   padding-left: 20px;
@@ -1096,14 +963,7 @@ dialog button {
   }
   .product-card {
     padding: 0;
-  }
-  .segments button {
-    font-size: 0.68rem;
-  }
-  h1 {
-    font-size: 1.9rem;
-  }
-}
+  }}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1121,7 +981,7 @@ dialog button {
 }
 label {
   display: block;
-  font-size: 0.84rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
   margin: 12px 0;
 }
@@ -1167,7 +1027,7 @@ textarea {
   border-color: var(--line);
   flex: 1;
   padding: 10px 8px;
-  font-size: 0.78rem;
+  font-size: var(--text-footnote);
 }
 button[aria-pressed="true"] {
   border-color: var(--focus);
@@ -1176,29 +1036,7 @@ button[aria-pressed="true"] {
 .tabs button[aria-pressed="true"],
 .chips button[aria-pressed="true"] {
   background: var(--surface-2);
-}
-.entry {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: left;
-  width: 100%;
-  color: var(--ink);
-  font-weight: 400;
-}
-.entry strong {
-  font-size: 1rem;
-}
-.entry span {
-  font-size: 0.85rem;
-  line-height: 1.65;
-}
-.entry strong,
-.entry span {
-  margin-bottom: 8px;
-}
-.preserve {
+}.preserve {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
@@ -1206,9 +1044,8 @@ button[aria-pressed="true"] {
 .speaker {
   font-family: var(--font-ui);
   color: var(--link);
-  font-size: 0.75rem;
+  font-size: var(--text-footnote);
   font-weight: 600;
-  letter-spacing: 0.06em;
   user-select: none;
 }
 p.speaker {
@@ -1220,7 +1057,7 @@ p.speaker {
 }
 .speaker-note {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   line-height: 1.5;
   margin: 0 8px 8px;
 }
@@ -1242,18 +1079,7 @@ summary {
   min-height: 44px;
   padding: 8px 0;
   color: var(--link);
-}
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: var(--overlay);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.dialog {
+}.dialog {
   max-width: 440px;
   max-height: 90dvh;
   overflow-y: auto;
@@ -1275,14 +1101,7 @@ small {
 @media (max-width: 380px) {
   .card {
     padding: 18px;
-  }
-  h1 {
-    font-size: 1.9rem;
-  }
-}
-
-.circles .entry {overflow-wrap:anywhere;}
-.circles dialog::backdrop {background:var(--overlay);}
+  }}.circles dialog::backdrop {background:var(--overlay);}
 
 .circles h1,.circles h2,.circles h3,.circles p {overflow-wrap:anywhere;}
 
@@ -1353,11 +1172,11 @@ button.danger {
 /* The instruction and its hint are text a person must read to act, so Body size, as in the report dialog. */
 .delete-account label {
   color: var(--ink);
-  font-size: 0.92rem;
+  font-size: var(--text-body);
 }
 .delete-account .delete-hint {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: var(--text-body);
   margin: 0 0 4px;
 }
 .delete-account button[aria-disabled="true"] {
@@ -1379,7 +1198,7 @@ button.danger {
 /* Sign-in and code entry (UI-SPEC Surface 6b): helper lines are Label size, never the small 0.73rem. */
 .sign-in-note {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   margin: 10px 0;
   overflow-wrap: anywhere;
 }
@@ -1410,14 +1229,14 @@ button.danger {
    version sits on its own line, and the long label wraps beside the 22px checkbox in its 44px row. */
 .terms-accept {
   color: var(--ink);
-  font-size: 0.92rem;
+  font-size: var(--text-body);
   overflow-wrap: anywhere;
 }
 .terms-accept .terms-version {
   display: block;
   margin-top: 4px;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--text-footnote);
 }
 
 /* ==== TabBar (UI-SPEC 7.3, 7.6, 8.1; src/ui/TabBar.tsx) ====

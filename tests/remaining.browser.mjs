@@ -193,3 +193,144 @@ export async function checkSurfaces(browser, base) {
     assert.ok(!/"Reload"\)|>Reload</.test(js) , "the old bare Reload button is gone");
   }
 }
+
+// Task 3: the 200 % text sweep over every route of the app (UI-SPEC 15 item 4, audit Critical 2), and the bare-label
+// check on the same routes. At a 34px root (twice the text) on a 390 and a 320px phone:
+//  - the page does not scroll sideways and no heading, paragraph or button is cut off;
+//  - every visible button, list link, field and select is at least 44px tall;
+//  - the tab labels stay on one line;
+//  - the first heading (and, on Today, the reader, a story, the shelf and You, the main content) starts in the first screen;
+//  - no visible button is named only Cancel, OK, Done or Close.
+const BARE = ["Cancel", "OK", "Done", "Close"];
+
+/** Measures the page as it is now. Everything that needs a person's judgement is returned as a list of findings. */
+async function measure(page, firstContent) {
+  return page.evaluate(
+    ({ firstContent, BARE }) => {
+      const findings = [];
+      const name = (el) => (el.getAttribute("aria-label") ?? el.textContent ?? "").trim().replace(/\s+/g, " ").slice(0, 50);
+      const visible = (el) => {
+        const r = el.getBoundingClientRect();
+        const cs = getComputedStyle(el);
+        return r.width > 0 && r.height > 0 && cs.visibility !== "hidden" && cs.display !== "none" && !el.closest("[hidden], [inert]");
+      };
+      const scroller = (el) => {
+        for (let p = el; p && p !== document.body; p = p.parentElement) {
+          const o = getComputedStyle(p).overflowX;
+          if (o === "auto" || o === "scroll" || o === "hidden") return true;
+        }
+        return false;
+      };
+      if (document.documentElement.scrollWidth > innerWidth) findings.push("scrolls sideways: " + document.documentElement.scrollWidth + " > " + innerWidth);
+      // Controls: 44px tall. Checkboxes and radios are drawn small inside a 44px label row; verse numbers draw their hit area with ::after.
+      const controls = document.querySelectorAll(
+        'button, a.list-row, li a, input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]), select, textarea, summary, .tabbar a',
+      );
+      for (const el of controls) {
+        if (!visible(el) || el.closest(".sr-only, .skip-link")) continue;
+        if (el.matches(".verse-num, .verse-num *")) continue;
+        const r = el.getBoundingClientRect();
+        if (r.height < 43.5) findings.push("control under 44px (" + Math.round(r.height) + "): " + el.tagName.toLowerCase() + " " + name(el));
+      }
+      // Text that does not fit its box.
+      for (const el of document.querySelectorAll("main h1, main h2, main h3, main p, main button, main summary")) {
+        // A verse number is a drawn numeral in the hanging margin; its 44px hit area is an ::after (A3), and the reader's own check measures it.
+        if (!visible(el) || scroller(el) || el.closest(".sr-only") || el.matches(".verse-num")) continue;
+        if (el.scrollWidth > el.clientWidth + 1) findings.push("clipped: " + el.tagName.toLowerCase() + " " + name(el));
+        const r = el.getBoundingClientRect();
+        if (r.right > innerWidth + 1 || r.left < -1) findings.push("outside the screen: " + el.tagName.toLowerCase() + " " + name(el));
+      }
+      // Tab labels on one line.
+      for (const label of document.querySelectorAll(".tab-label")) {
+        const r = label.getBoundingClientRect();
+        const line = parseFloat(getComputedStyle(label).lineHeight) || parseFloat(getComputedStyle(label).fontSize) * 1.4;
+        if (r.height > line * 1.5) findings.push("tab label wraps: " + name(label));
+      }
+      // The first screen holds the title and the primary content.
+      const h1 = document.querySelector("main h1");
+      if (!h1) findings.push("no h1");
+      else if (h1.getBoundingClientRect().top >= innerHeight) findings.push("h1 starts below the first screen");
+      if (firstContent) {
+        const el = [...document.querySelectorAll(firstContent)].find(visible);
+        if (!el) findings.push("primary content not found: " + firstContent);
+        else if (el.getBoundingClientRect().top >= innerHeight) findings.push("primary content starts below the first screen: " + firstContent + " at " + Math.round(el.getBoundingClientRect().top));
+      }
+      // No bare button name.
+      for (const b of document.querySelectorAll("button, [role=button]")) {
+        if (visible(b) && BARE.includes(name(b))) findings.push("bare button name: " + name(b));
+      }
+      return findings;
+    },
+    { firstContent, BARE },
+  );
+}
+
+export async function checkTextSweep(browser, base, published) {
+  const newest = published[0];
+  assert.ok(newest, "a published context check");
+  const routes = [
+    ["/", ".cover"],
+    ["/walk", null],
+    ["/bible", null],
+    ["/bible/john/3", ".reader-heading"],
+    ["/context/" + newest.slug, ".cover, .flow-part"],
+    ["/context", null],
+    ["/shelf", ".shelf-boards li"],
+    ["/pray", null],
+    ["/community", null],
+    ["/community/circles", null],
+    ["/you", ".list-row"],
+    ["/profile", null],
+    ["/settings", null],
+    ["/settings/appearance", null],
+    ["/settings/reminders", null],
+    ["/my-walk", null],
+    ["/journal", null],
+    ["/grow", null],
+    ["/grow/anxiety", null],
+    ["/give", null],
+    ["/giving-policy", null],
+    ["/shop", null],
+    ["/no-such-page", null],
+  ];
+  const report = [];
+  for (const [width, height] of [
+    [390, 844],
+    [320, 568],
+  ]) {
+    const context = await browser.newContext({ viewport: { width, height }, serviceWorkers: "block", timezoneId: "Europe/Amsterdam", colorScheme: "light" });
+    const page = await context.newPage();
+    const problems = [];
+    page.on("pageerror", (e) => problems.push(e.message));
+    try {
+      await page.goto(base + "/");
+      await page.locator("main h1").first().waitFor();
+      // A shelf with a few real checks, so the shelf and Today show their filled states.
+      await page.evaluate(
+        ({ key, shelf }) => {
+          const state = JSON.parse(localStorage.getItem(key));
+          state.shelf = shelf;
+          localStorage.setItem(key, JSON.stringify(state));
+        },
+        { key: "hfg-daily-walk:v3", shelf: published.slice(0, 4).map((c, i) => ({ slug: c.slug, finishedOn: "2026-03-0" + (i + 1) })) },
+      );
+      for (const [path, firstContent] of routes) {
+        await page.goto(base + path);
+        await page.locator("main h1").first().waitFor();
+        await page.evaluate(() => {
+          document.documentElement.style.fontSize = "34px";
+          window.dispatchEvent(new Event("resize"));
+        });
+        await page.waitForFunction(() => document.documentElement.dataset.text === "large");
+        // The reader fetches the Bible before it draws the chapter; wait for the content the route is judged by.
+        if (firstContent) await page.locator(firstContent).first().waitFor({ state: "attached" });
+        await page.waitForTimeout(150);
+        for (const finding of await measure(page, firstContent)) report.push(`${path} at ${width}px: ${finding}`);
+      }
+      assert.deepEqual(problems, [], "no page errors during the sweep");
+    } finally {
+      await context.close();
+    }
+  }
+  assert.deepEqual(report, [], "the 200 % sweep found problems:\n" + report.join("\n"));
+}

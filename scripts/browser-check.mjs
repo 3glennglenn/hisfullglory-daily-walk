@@ -17,7 +17,7 @@ import {checkWalkFinish} from "../tests/walk.browser.mjs";
 import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen,checkVerseSheet,checkLayers,checkLayersCommunity,checkChapterSheet,checkCommunityLink} from "../tests/reader.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
-import {checkPushedScreens,checkSurfaces} from "../tests/remaining.browser.mjs";
+import {checkPushedScreens,checkSurfaces,checkTextSweep} from "../tests/remaining.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 // Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
 const contentDir = "site/content/context-checks";
@@ -1772,6 +1772,7 @@ try {
   await check("dialogs that replaced browser pop-ups: public contributions, public prayer updates, support requests (controlled SDK)",()=>checkDialogs(browser,base));
   await check("Journal, My Walk and Grow are pushed screens of You: Back to You, one large title, no eyebrow, no uppercase text (UI-SPEC D-10, A12)",()=>checkPushedScreens(browser,base));
   await check("Give and its policy, Resources, Circles, the not-found and crash screens and the install offer: shared primitives, one filled button, the words of A16 (UI-SPEC A12, A16, 9.3)",()=>checkSurfaces(browser,base));
+  await check("200 % text sweep over every app route at 390 and 320px: no sideways scroll, nothing clipped, controls 44px, tab labels on one line, the first screen holds the title and content, no bare Cancel, OK, Done or Close button (UI-SPEC 15.4, 15.9)",()=>checkTextSweep(browser,base,published));
   assert.deepEqual(errors, []);
   assert.deepEqual(consoleErrors, [], "no unexpected main-page console errors");
   assert.deepEqual(consoleWarnings, [], "no unexpected main-page console warnings");
