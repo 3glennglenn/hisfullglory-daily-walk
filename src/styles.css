@@ -1201,29 +1201,6 @@ button[aria-pressed="true"] {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
-.scripture-reader {
-  padding: 16px;
-}
-.verse {
-  display: block;
-  text-align: left;
-  font-family: var(--font-scripture);
-  background: transparent;
-  color: var(--ink);
-  font-size: 1.03rem;
-  line-height: 1.85;
-  font-weight: 400;
-  width: 100%;
-  margin: 0 !important;
-  padding: 8px;
-  border-radius: 6px;
-}
-.verse sup {
-  font-family: var(--font-ui);
-  color: var(--muted);
-  font-size: 0.7rem;
-  margin-right: 8px;
-}
 /* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
 .speaker {
   font-family: var(--font-ui);
@@ -1246,10 +1223,6 @@ p.speaker {
   line-height: 1.5;
   margin: 0 8px 8px;
 }
-.verse.selected {
-  outline: 2px solid var(--focus);
-  outline-offset: 0;
-}
 .highlight-gold {
   background: var(--highlight-gold);
 }
@@ -1258,22 +1231,6 @@ p.speaker {
 }
 .highlight-rose {
   background: var(--highlight-rose);
-}
-.search-result {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  background: transparent;
-  color: var(--ink);
-  border-bottom: 1px solid var(--line);
-  width: 100%;
-  font-weight: 400;
-  padding: 12px 0;
-  border-radius: 0;
-}
-.search-result span {
-  font-size: 0.84rem;
 }
 .safety {
   margin-top: 5px;
@@ -2872,4 +2829,356 @@ html[data-text="large"] .today .list-row-leading {
 .sponsor .group-note {
   font-size: var(--text-footnote);
   line-height: 1.38;
+}
+
+/* ==== The reader (UI-SPEC 2, 6.3, 7.5, A2, A3; plan 01.1-09; src/bible/*) ====
+   Scripture first: a sticky 52px toolbar, the small book title, the chapter heading and verse 1 within about
+   190px of the top. The verses are text; their numbers are 13px/600 buttons whose hit areas are drawn with
+   ::after (Cover: 44 x 44 in a 24px hanging margin, a block per verse with a 12px gap; Marked: 44px wide by one
+   line box, running text). Same markup in both looks; only these rules differ. Written by the reader track
+   of phase 01.1, appended so that the other track's sections above stay untouched. */
+
+/* -- Toolbar -- */
+.reader {
+  padding-bottom: var(--space-4);
+}
+.reader-toolbar {
+  position: sticky;
+  top: env(safe-area-inset-top);
+  z-index: var(--z-bar);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 52px;
+  margin: 0 calc(-1 * max(20px, env(safe-area-inset-right))) 0 calc(-1 * max(20px, env(safe-area-inset-left)));
+  padding: 0 max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
+}
+/* The strip above the toolbar, so the translucent bar also covers the notch once the page has scrolled. */
+.reader-toolbar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: env(safe-area-inset-top);
+}
+.reader-toolbar[data-scrolled="true"],
+.reader-toolbar[data-scrolled="true"]::before {
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+}
+.reader-toolbar[data-scrolled="true"] {
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .reader-toolbar[data-scrolled="true"],
+  .reader-toolbar[data-scrolled="true"]::before {
+    background: var(--bar-solid);
+  }
+}
+.reader-toolbar .rt-button,
+.tool-button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.rt-slot {
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+.reader-toolbar .rt-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.rt-title svg {
+  flex: none;
+  color: var(--link);
+}
+.rt-title-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* The width budget (A3): 430px and wider shows Books, previous, title, next, Search and Listen; 360 to 429px
+   shows Books, previous, title, next and More; under 360px, and at every width in large-text mode, previous,
+   title, next and More. A hidden control is out of the accessibility tree, so nothing is read twice. */
+.reader-toolbar .rt-books,
+.reader-toolbar .rt-search,
+.reader-toolbar .rt-listen {
+  display: none;
+}
+@media (min-width: 360px) {
+  .reader-toolbar .rt-books {
+    display: inline-flex;
+  }
+}
+@media (min-width: 430px) {
+  .reader-toolbar .rt-search,
+  .reader-toolbar .rt-listen {
+    display: inline-flex;
+  }
+  .reader-toolbar .rt-more {
+    display: none;
+  }
+}
+html[data-text="large"] .reader-toolbar .rt-books,
+html[data-text="large"] .reader-toolbar .rt-search,
+html[data-text="large"] .reader-toolbar .rt-listen {
+  display: none;
+}
+html[data-text="large"] .reader-toolbar .rt-more {
+  display: inline-flex;
+}
+@media (min-width: 768px) {
+  .reader-toolbar {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* -- Heading -- */
+.reader-head {
+  margin: var(--space-3) 0 var(--space-5);
+}
+.reader-book {
+  margin: 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.reader-heading {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-scripture);
+  font-size: var(--text-display);
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+/* Cover and story: the 32 x 2 section rule under the heading. */
+.reader-heading::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 2px;
+  margin-top: var(--space-3);
+  background: var(--brand);
+}
+/* Marked page: the heading is read by assistive technology and shown as the printed numeral. */
+:root[data-look="marked"] .reader-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+:root[data-look="marked"] .reader-heading::after {
+  content: none;
+}
+.reader-status {
+  margin: var(--space-5) 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.reader-retry {
+  min-height: 48px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+
+/* -- The verses -- */
+.chapter-text {
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.7;
+  color: var(--ink);
+}
+.chapter-text .verse {
+  cursor: pointer;
+}
+.verse-lead {
+  white-space: nowrap;
+}
+.verse-num {
+  font-family: var(--font-ui);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--link);
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: 0;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+}
+.verse-num:hover {
+  filter: none;
+}
+.verse-num::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+.verse-mark {
+  flex: none;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 3px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+.verse.highlight-gold {
+  background: var(--highlight-gold);
+}
+.verse.highlight-sage {
+  background: var(--highlight-sage);
+}
+.verse.highlight-rose {
+  background: var(--highlight-rose);
+}
+/* The verse whose sheet is open, or that a link pointed at: --highlight-gold at 50 %, laid over any
+   highlight the reader chose so both stay visible. */
+.verse.selected {
+  background-image: linear-gradient(color-mix(in srgb, var(--highlight-gold) 50%, transparent), color-mix(in srgb, var(--highlight-gold) 50%, transparent));
+}
+.verse.speaking {
+  background: var(--highlight-gold);
+}
+/* On a highlighted verse --link falls short in Light (UI-SPEC 5.4), so its number uses --ink; in Lamplight the
+   link colour passes and stays. */
+:root[data-mode="light"] .verse:is(.highlight-gold, .highlight-sage, .highlight-rose, .selected, .speaking) .verse-num {
+  color: var(--ink);
+}
+
+/* Cover and story: a block per verse, the number hanging in a 24px margin, a 12px gap between verses. */
+:root:not([data-look="marked"]) .chapter-opening {
+  display: none;
+}
+:root:not([data-look="marked"]) .verse {
+  display: block;
+  position: relative;
+  margin: 0 -4px var(--space-3);
+  padding: 0 4px 0 28px;
+  border-radius: var(--radius-xs);
+}
+:root:not([data-look="marked"]) .verse-num {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: calc(var(--text-scripture) * 1.7);
+}
+:root:not([data-look="marked"]) .wide-numbers .verse {
+  padding-left: 36px;
+}
+:root:not([data-look="marked"]) .wide-numbers .verse-num {
+  width: 32px;
+}
+
+/* Marked page: running text, the numbers raised 0.3em, a 44px-wide hit area one line box tall, and the printed
+   chapter numeral with its ribbon floated over the first three lines. */
+:root[data-look="marked"] .verse {
+  display: inline;
+  border-radius: var(--radius-xs);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+:root[data-look="marked"] .verse-num {
+  position: relative;
+  display: inline-block;
+  top: calc(var(--text-scripture) * -0.3);
+  margin-right: 0.25em;
+  vertical-align: baseline;
+  line-height: 1;
+}
+:root[data-look="marked"] .verse-num::after {
+  width: 44px;
+  height: calc(var(--text-scripture) * 1.7);
+  top: calc(50% + var(--text-scripture) * 0.3);
+}
+:root[data-look="marked"] .chapter-opening {
+  float: left;
+  display: flex;
+  gap: var(--space-2);
+  height: calc(var(--text-scripture) * 1.7 * 3);
+  margin: 0 var(--space-3) 0 0;
+}
+.chapter-numeral {
+  font-family: var(--font-scripture);
+  font-size: var(--text-numeral);
+  font-weight: 400;
+  line-height: calc(var(--text-scripture) * 1.7 * 2);
+  color: var(--brand);
+}
+/* The ribbon: 10px wide, forked tail, 72px long at the default size. */
+.chapter-ribbon {
+  flex: none;
+  align-self: flex-start;
+  width: 10px;
+  height: 72px;
+  background: var(--brand);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+}
+.chapter-text .speaker-note {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-ui);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.chapter-text .speaker {
+  font-size: var(--text-footnote);
+  letter-spacing: normal;
+}
+.chapter-text p.speaker {
+  display: block;
+  margin: var(--space-3) 0 0;
+}
+
+/* Under reduced motion a sheet appears with a 150ms change of opacity instead of sliding (UI-SPEC 7.4). The
+   global reset above removes animations with !important; this rule is more specific and wins. */
+@media (prefers-reduced-motion: reduce) {
+  dialog.sheet-dialog[open] {
+    animation: sheet-fade 150ms linear !important;
+  }
 }

@@ -10,6 +10,7 @@ import {aiUnreviewedCardLabel,publishedChecks,refLabel,splitHook,todaysCheck} fr
 import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
 import {checkToday,checkTodayFixture,checkTodayLargeText} from "../tests/today.browser.mjs";
 import {checkSponsor} from "../tests/sponsor.browser.mjs";
+import {checkReaderText} from "../tests/reader.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -182,82 +183,45 @@ try {
     },
   );
   await check(
-    "deep-linked WEB chapter, selection, bookmark, search and history work",
+    "deep-linked WEB chapter: the linked verse is selected, bookmark and highlight survive a reload, the old ?tab= addresses still open the context layers",
     async () => {
       await go("/bible/romans/8/28");
-      await page
-        .getByRole("heading", { name: "Romans 8:28", exact: true })
-        .waitFor();
-      assert.ok(
-        (await page.locator("#verse-28").innerText()).includes(
-          "all things work together",
-        ),
-      );
-      await page
-        .getByRole("button", { name: "Bookmark / save", exact: true })
-        .click();
+      await page.getByRole("heading", { level: 1, name: "Romans 8", exact: true }).waitFor();
+      assert.ok((await page.locator("#verse-28").innerText()).includes("all things work together"));
+      assert.equal(await page.locator("#verse-28.selected").count(), 1, "the linked verse is selected");
+      await page.getByRole("button", { name: "Bookmark / save", exact: true }).click();
       await page.getByLabel("Highlight").selectOption("sage");
       await page.reload();
       await page.locator("#verse-28").waitFor();
       assert.equal(await page.getByLabel("Highlight").inputValue(), "sage");
-      assert.equal(
-        await page
-          .getByRole("button", { name: "Remove bookmark", exact: true })
-          .count(),
-        1,
-      );
-      await page.getByRole("button", { name: "context", exact: true }).click();
-      assert.equal(new URL(page.url()).searchParams.get("tab"), "context");
+      assert.equal(await page.getByRole("button", { name: "Remove bookmark", exact: true }).count(), 1);
+      // The view buttons are gone; the old addresses still reach the layers (plan 10 moves them into sheets).
+      await page.goto(base + "/bible/romans/8/28?tab=context");
       // Romans 8 has a sourced chapter note (no verse note for 8:28) and an AI explanation.
       const sourced = page.locator('article[data-layer="sourced"]');
-      await sourced
-        .getByRole("heading", { name: "Chapter context", exact: true })
-        .waitFor();
+      await sourced.getByRole("heading", { name: "Chapter context", exact: true }).waitFor();
       const sourcedText = await sourced.textContent();
       assert.match(sourcedText, /Verse 28 belongs with verses 29–30/);
-      assert.match(
-        sourcedText,
-        /No note for this verse yet, so this shows the wider chapter context\./,
-      );
+      assert.match(sourcedText, /No note for this verse yet, so this shows the wider chapter context\./);
       assert.doesNotMatch(sourcedText, /\bAI\b/, "sourced note stays free of AI text");
       await sourced.getByText("Why we say this", { exact: true }).click();
       assert.equal(
-        await sourced
-          .getByRole("link", { name: "Primary source", exact: true })
-          .getAttribute("href"),
+        await sourced.getByRole("link", { name: "Primary source", exact: true }).getAttribute("href"),
         "https://ebible.org/engwebp/ROM08.htm",
       );
       const ai = page.locator('article[data-layer="ai"]');
       await ai.getByRole("heading", { name: /^AI explanation/ }).waitFor();
-      assert.match(
-        await ai.locator(".eyebrow").textContent(),
-        /^Romans 8 · Written by an AI model · /,
-      );
-      await ai
-        .getByRole("heading", { name: "What this chapter says", exact: true })
-        .waitFor();
+      assert.match(await ai.locator(".eyebrow").textContent(), /^Romans 8 · Written by an AI model · /);
+      await ai.getByRole("heading", { name: "What this chapter says", exact: true }).waitFor();
       assert.equal(await sourced.locator("[data-layer]").count(), 0);
       assert.deepEqual(
-        await page
-          .locator("main [data-layer]")
-          .evaluateAll((nodes) => nodes.map((n) => n.dataset.layer)),
+        await page.locator("main [data-layer]").evaluateAll((nodes) => nodes.map((n) => n.dataset.layer)),
         ["sourced", "ai"],
         "AI explanation is a separate card after the sourced note",
       );
-      await page.goBack();
-      await page.locator("#verse-28").waitFor();
-      await page
-        .getByRole("searchbox", { name: "Search WEB text" })
-        .fill("For God so loved");
-      await page.getByRole("button", { name: "Search", exact: true }).click();
-      await page.getByRole("button", { name: /John 3:16/ }).click();
-      await page
-        .getByRole("heading", { name: "John 3:16", exact: true })
-        .waitFor();
-      await page.reload();
-      await page.locator("#verse-16").waitFor();
     },
   );
+  await check("the reader puts Scripture first: sticky toolbar, verses as text with one Tab stop, a heading per look (UI-SPEC A3)", () => checkReaderText(browser, base));
   await check(
     "private prayer lifecycle creates an answered journal without automatic publishing",
     async () => {
@@ -1153,6 +1117,8 @@ try {
                   .filter(
                     (n) =>
                       n.getClientRects().length &&
+                      // A verse number draws its 44px target with ::after (measured in tests/reader.browser.mjs).
+                      !n.classList.contains("verse-num") &&
                       (n.getBoundingClientRect().height < 43.9 ||
                         !(
                           n.labels?.length ||
@@ -1542,9 +1508,10 @@ try {
       route.fulfill({ status: 503, body: "Unavailable" }),
     );
     await p.goto(base + "/bible/romans/8/28");
-    await p.getByRole("button", { name: "Try again" }).waitFor();
+    await p.getByRole("button", { name: "Try downloading again" }).waitFor();
+    assert.equal(await p.getByText("The Bible could not be opened. Check your connection and try again.").count(), 1);
     await p.unroute("**/bible/web.json");
-    await p.getByRole("button", { name: "Try again" }).click();
+    await p.getByRole("button", { name: "Try downloading again" }).click();
     await p.locator("#verse-28").waitFor();
     await c.close();
   });
