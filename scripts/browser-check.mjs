@@ -17,6 +17,7 @@ import {checkWalkFinish} from "../tests/walk.browser.mjs";
 import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen,checkVerseSheet,checkLayers,checkLayersCommunity,checkChapterSheet,checkCommunityLink} from "../tests/reader.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
+import {checkPushedScreens} from "../tests/remaining.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 // Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
 const contentDir = "site/content/context-checks";
@@ -430,15 +431,15 @@ try {
     await page
       .getByLabel("Your words", { exact: true })
       .fill("A private observation.");
-    await page.getByRole("button", { name: "Close", exact: true }).click();
+    await page.getByRole("button", { name: "Close entry", exact: true }).click();
     await page.reload();
     await page
-      .getByRole("button", { name: /study note.*A study note/s })
+      .getByRole("button", { name: /A study note.*study note/s })
       .waitFor();
     await page
       .getByRole("searchbox", { name: "Search private journal" })
       .fill("private observation");
-    assert.equal(await page.locator("button.entry").count(), 1);
+    assert.equal(await page.locator("main ul.group-list button.list-row").count(), 1);
   });
   await check(
     "deleting a journal entry asks in the app's own dialog: Keep entry, Escape and the backdrop keep it, Delete entry removes it, focus comes back (UI-SPEC A15)",
@@ -570,7 +571,7 @@ try {
     "all 15 topic journeys are browsable and progress is saved",
     async () => {
       await go("/grow");
-      assert.equal(await page.locator("button.entry").count(), 15);
+      assert.equal(await page.locator("main ul.group-list button.list-row").count(), 15);
       await page
         .getByRole("button", { name: /Walking with God through anxiety/ })
         .click();
@@ -1769,6 +1770,7 @@ try {
   await check("Circles public/private lifecycle, roles, privacy, errors and responsive UI (controlled SDK)",()=>checkCircles(browser,base));
   await check("report dialog states, focus and sizes (controlled SDK)",()=>checkSafety(browser,base));
   await check("dialogs that replaced browser pop-ups: public contributions, public prayer updates, support requests (controlled SDK)",()=>checkDialogs(browser,base));
+  await check("Journal, My Walk and Grow are pushed screens of You: Back to You, one large title, no eyebrow, no uppercase text (UI-SPEC D-10, A12)",()=>checkPushedScreens(browser,base));
   assert.deepEqual(errors, []);
   assert.deepEqual(consoleErrors, [], "no unexpected main-page console errors");
   assert.deepEqual(consoleWarnings, [], "no unexpected main-page console warnings");

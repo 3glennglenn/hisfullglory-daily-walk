@@ -107,7 +107,6 @@ export function Plans({
   };
   return (
     <section aria-labelledby="plans-title">
-      <p className="eyebrow">Small steps. Lasting roots.</p>
       <h2 id="plans-title">Your next five days.</h2>
       <p className="intro">
         Choose one gentle journey. Every completed day stays here for you to
@@ -134,7 +133,7 @@ export function Plans({
         ))}
       </div>
       <article className="card plan-detail">
-        <p className="eyebrow">{plan.title}</p>
+        <p className="screen-meta">{plan.title}</p>
         <div className="row">
           <h2>
             {done.length === 5
@@ -176,7 +175,7 @@ export function Plans({
             </button>
           ))}
         </div>
-        <p className="eyebrow">Day {dayIndex + 1}</p>
+        <p className="screen-meta">Day {dayIndex + 1}</p>
         <h2>{current.title}</h2>
         <blockquote>{current.scripture.quote}</blockquote>
         <p className="verse-reference">

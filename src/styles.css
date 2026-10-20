@@ -4622,3 +4622,94 @@ html[data-text="large"] .around-capsule {
 :root:has(.around-capsule) {
   scroll-padding-bottom: calc(64px + 12px + 44px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
 }
+
+/* ==== Plan 11: the remaining screens on the shared primitives (UI-SPEC D-10, 6.2, A12; Journal, My Walk, Grow, Give, Circles, Resources, chat) ====
+   Pushed screens of You use .grouped-screen with a Toolbar and a Large Title. These few classes cover what the
+   grouped list does not: a muted information line under the title (it replaced the uppercase eyebrow), a
+   full-width screen action, two-line row details, a pair of fields, and stacked actions. */
+.screen-meta {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+.grouped-screen .screen-action {
+  display: flex;
+  width: 100%;
+  margin: 0 0 var(--space-6);
+}
+.row-line {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.field-pair {
+  display: grid;
+  gap: var(--space-3);
+}
+.field-pair > * {
+  margin: 0;
+}
+.grouped-screen .actions {
+  flex-direction: column;
+  align-items: stretch;
+  margin: var(--space-4) 0 0;
+}
+.grouped-screen .actions > button,
+.grouped-screen .actions > a {
+  width: 100%;
+  margin: 0;
+}
+.grouped-screen .day-picker {
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: var(--space-4) 0;
+}
+.grouped-screen .day-picker button {
+  flex: 1 1 5.5rem;
+}
+.group-disclosure > :not(summary) {
+  overflow-wrap: anywhere;
+}
+.group-disclosure article + article {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+.group-disclosure article h3 {
+  margin: var(--space-3) 0 var(--space-1);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.group-disclosure > button {
+  display: flex;
+  width: 100%;
+  margin-top: var(--space-3);
+}
+/* The older Daily Walk plans, inside the disclosure at the end of Grow: choices and the open day sit on the
+   disclosure's own surface instead of a card each. */
+.group-disclosure .plan-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+.group-disclosure .card {
+  margin: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  box-shadow: none;
+}
+.group-disclosure .card.plan-detail {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+}
+.group-disclosure .plan-choice.selected {
+  border-color: var(--focus);
+}
+.group > .screen-lede {
+  margin: 0 var(--space-5) var(--space-3);
+}
