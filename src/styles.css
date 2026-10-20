@@ -3448,3 +3448,178 @@ dialog.sheet-dialog .search-form p.sheet-hint {
   line-height: 1.38;
   color: var(--muted);
 }
+
+/* -- The end of the chapter (A3): 48px below the last verse -- */
+.chapter-end {
+  margin-top: var(--space-8);
+}
+.end-of {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* The one filled button of the page. */
+.chapter-end .end-next {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--button);
+  color: var(--on-button);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.end-pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 var(--space-6);
+}
+.chapter-end .end-plain,
+.chapter-end .end-link {
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: left;
+}
+.chapter-end .end-plain {
+  margin-left: calc(-1 * var(--space-2));
+}
+.chapter-end .end-link {
+  margin: 0 0 var(--space-5) calc(-1 * var(--space-2));
+}
+/* Mark as read: a secondary toggle, an outline and no fill, so Next stays the page's one filled button. */
+.chapter-end .end-toggle {
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.chapter-end .end-toggle[aria-pressed="true"] {
+  border-color: var(--focus);
+  box-shadow: inset 0 0 0 1px var(--focus);
+}
+.chapter-end .end-toggle svg {
+  color: var(--success);
+}
+.end-title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.end-questions {
+  margin: 0 0 var(--space-3);
+  padding-left: var(--space-6);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.end-questions li {
+  margin: 0 0 var(--space-2);
+  padding-left: var(--space-1);
+}
+.chapter-end .group {
+  margin-top: var(--space-4);
+}
+/* Whose text this is: stays at the end of every chapter. */
+.web-line {
+  margin: var(--space-6) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.web-line a {
+  display: inline;
+  min-height: 0;
+}
+html[data-text="large"] .end-pair {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* -- Listen as a mini player (A3): floats above the tab bar, never over the text's last lines -- */
+.reader[data-listening] {
+  padding-bottom: calc(var(--space-9) + var(--space-3));
+}
+.mini-player {
+  position: fixed;
+  z-index: var(--z-bar);
+  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px + var(--notice-h));
+  max-width: 456px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 56px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .mini-player {
+    background: var(--bar-solid);
+  }
+}
+html[data-text="large"] .mini-player {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px + var(--notice-h));
+}
+.mini-player .mini-button {
+  flex: none;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.mini-verse {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+@media (min-width: 768px) {
+  .mini-player {
+    left: 280px;
+    right: 0;
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+    width: min(456px, calc(100% - 280px - 64px));
+    max-width: none;
+  }
+  html[data-text="large"] .mini-player {
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+  }
+}

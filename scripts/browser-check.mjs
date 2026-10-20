@@ -10,7 +10,7 @@ import {aiUnreviewedCardLabel,publishedChecks,refLabel,splitHook,todaysCheck} fr
 import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
 import {checkToday,checkTodayFixture,checkTodayLargeText} from "../tests/today.browser.mjs";
 import {checkSponsor} from "../tests/sponsor.browser.mjs";
-import {checkReaderText,checkLibrary,checkReaderSheets} from "../tests/reader.browser.mjs";
+import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen} from "../tests/reader.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -224,6 +224,8 @@ try {
   await check("the reader puts Scripture first: sticky toolbar, verses as text with one Tab stop, a heading per look (UI-SPEC A3)", () => checkReaderText(browser, base));
   await check("the Bible library: context checks first, saved passages, testaments, books, chapter grids, Continue reading, the download states (UI-SPEC A2, A16)", () => checkLibrary(browser, base));
   await check("the title opens the picker, search sits behind More or an icon, sheets keep focus and swipe (UI-SPEC A3, A4)", () => checkReaderSheets(browser, base));
+  await check("the end of the chapter: one filled Next, Mark as read, questions to carry, topics, the WEB line (UI-SPEC A3)", () => checkChapterEnd(browser, base));
+  await check("Listen plays in a mini player above the tab bar, the spoken verse is gold, Stop gives focus back (UI-SPEC A3)", () => checkListen(browser, base));
   await check(
     "private prayer lifecycle creates an answered journal without automatic publishing",
     async () => {

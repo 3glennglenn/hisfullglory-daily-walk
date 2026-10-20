@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { Book, Search } from "lucide-react";
-import { Listen } from "./Listen";
+import { Book, Headphones, Search } from "lucide-react";
+import { ListenBar, useListen } from "./Listen";
+import { ChapterEnd } from "./ChapterEnd";
 import { ChapterText } from "./ChapterText";
 import { ReaderToolbar } from "./ReaderToolbar";
 import { Library, SearchSheet, BIBLE_ERROR } from "./Library";
@@ -96,6 +97,8 @@ export function Reader({ route }: { route: Route }) {
     if (valid && route.verse) document.getElementById(`verse-${route.verse}`)?.scrollIntoView({ block: "center" });
   }, [valid, route.book, route.chapter, route.verse]);
 
+  const chapterReference = book && chapter ? `${book.name} ${chapter.number}` : "";
+  const listening = useListen(chapterReference, chapter, setSpeaking);
   const studyRecords = book && study.book === book.slug ? [...knowledgeRecords, ...study.records] : knowledgeRecords;
   // Verses that carry a verse-scope note: the margin mark and ", has notes" in the number's name.
   const notes = useMemo(
@@ -138,8 +141,8 @@ export function Reader({ route }: { route: Route }) {
   const source = passagePath(book.slug, chapter.number, selected);
   const verse = chapter.verses.find((v) => v.number === selected);
   const reference = `${book.name} ${chapter.number}${selected ? `:${selected}` : ""}`;
-  const chapterReference = `${book.name} ${chapter.number}`;
   const { previous, next } = adjacentChapters(data, book.slug, chapter.number);
+  const read = state.reading.includes(chapterPath!);
   const note = knowledgeFor(book.slug, chapter.number, selected, studyRecords);
   const aiNote = ai.book === book.slug ? aiFor(ai.records, book.slug, chapter.number) : undefined;
   const tab = route.tab;
@@ -168,20 +171,21 @@ export function Reader({ route }: { route: Route }) {
       navigate("/journal");
   }
   return (
-    <section className="reader">
+    <section className="reader" data-listening={listening.state !== "idle" ? "true" : undefined}>
       <ReaderToolbar
         reference={chapterReference}
         previous={previous && { label: `Previous chapter: ${previous.reference}`, path: passagePath(previous.book, previous.chapter) }}
         next={next && { label: `Next chapter: ${next.reference}`, path: passagePath(next.book, next.chapter) }}
         onTitle={() => setSheet("picker")}
         onSearch={() => setSheet("search")}
+        onListen={listening.supported && listening.state === "idle" ? listening.start : undefined}
+        listenName={`Listen to ${chapterReference}`}
         onMore={openMore}
       />
       <header className="reader-head">
         <p className="reader-book">{bookTitle(book)}</p>
         <h1 className="reader-heading">{chapterReference}</h1>
       </header>
-      <Listen reference={chapterReference} chapter={chapter} onVerse={setSpeaking} />
       <ChapterText
         key={`${book.slug}/${chapter.number}`}
         book={book}
@@ -192,14 +196,6 @@ export function Reader({ route }: { route: Route }) {
         notes={notes}
         onOpen={chooseVerse}
       />
-      <p className="web-line">
-        <small>
-          World English Bible.{" "}
-          <a href="https://ebible.org/engwebp/copyright.htm" target="_blank" rel="noopener noreferrer">
-            Public-domain source and edition notes
-          </a>
-        </small>
-      </p>
       {selected !== undefined && (
         <div className="card">
           <h2>Selected passage</h2>
@@ -272,29 +268,20 @@ export function Reader({ route }: { route: Route }) {
           <small role="status">{status}</small>
         </div>
       )}
-      <button
-        type="button"
-        aria-pressed={state.reading.includes(passagePath(book.slug, chapter.number))}
-        onClick={() =>
+      <ChapterEnd
+        chapter={chapterReference}
+        previous={previous && { reference: previous.reference, path: passagePath(previous.book, previous.chapter) }}
+        next={next && { reference: next.reference, path: passagePath(next.book, next.chapter) }}
+        read={read}
+        onToggleRead={() =>
           update((s) => ({
             ...s,
-            reading: [...new Set([...s.reading, passagePath(book.slug, chapter.number)])],
+            reading: read ? s.reading.filter((p) => p !== chapterPath) : [...new Set([...s.reading, chapterPath!])],
           }))
         }
-      >
-        {state.reading.includes(passagePath(book.slug, chapter.number)) ? "Read · revisit anytime" : "Mark chapter read"}
-      </button>
-      <details className="card">
-        <summary>Related topics for reflection</summary>
-        <p>Editorial links, not verified interpretations or evidence of what other readers have experienced.</p>
-        {topicGraph
-          .filter((t) => t.passages.includes(passagePath(book.slug, chapter.number)))
-          .map((t) => (
-            <button className="text-button" key={t.id} onClick={() => navigate("/community/" + t.id)}>
-              {t.label}
-            </button>
-          ))}
-      </details>
+        onNote={() => journal("study note")}
+        topics={topicGraph.filter((t) => t.passages.includes(chapterPath!)).map((t) => ({ id: t.id, label: t.label }))}
+      />
       {tab === "context" ? (
         <>
           <article className="card" data-layer="sourced">
@@ -396,6 +383,12 @@ export function Reader({ route }: { route: Route }) {
       ) : tab === "community" ? (
         <Feed source={source} />
       ) : null}
+      <ListenBar
+        reference={chapterReference}
+        listening={listening}
+        verse={speaking}
+        onStopped={() => setTimeout(() => (shown(".rt-listen") ?? shown(".rt-more"))?.focus(), 0)}
+      />
       {sheet === "picker" && (
         <Sheet title="Choose a passage" detent="large" returnFocus={() => shown(".rt-title")} onClose={() => setSheet(null)}>
           <PassagePicker
@@ -439,6 +432,18 @@ export function Reader({ route }: { route: Route }) {
               chevron
               onClick={() => setSheet("search")}
             />
+            {listening.supported && listening.state === "idle" && (
+              <Row
+                leading={<Headphones size={22} aria-hidden="true" focusable="false" />}
+                title={`Listen to ${chapterReference}`}
+                detail="Read aloud by your device’s own voice."
+                chevron
+                onClick={() => {
+                  setSheet(null);
+                  listening.start();
+                }}
+              />
+            )}
           </GroupedList>
         </Sheet>
       )}

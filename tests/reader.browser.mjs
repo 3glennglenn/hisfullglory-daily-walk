@@ -473,3 +473,217 @@ export async function checkReaderSheets(browser, base) {
     await ctx.context.close();
   }
 }
+
+// ---------------------------------------------------------------------------------------------------------------
+// The end of the chapter and Listen as a mini player.
+
+const filledIn = (locator) =>
+  locator.evaluateAll((root) =>
+    [...root[0].querySelectorAll("button")].filter((b) => getComputedStyle(b).backgroundColor !== "rgba(0, 0, 0, 0)").map((b) => b.textContent.trim()),
+  );
+
+/** A speech engine the test controls: it records what would be spoken and lets the test say which verse is being read. */
+const speechStub = () => {
+  const spoken = [];
+  window.__spoken = spoken;
+  window.__paused = false;
+  class Utterance {
+    constructor(text) {
+      this.text = text;
+    }
+  }
+  Object.defineProperty(window, "SpeechSynthesisUtterance", { value: Utterance, configurable: true });
+  Object.defineProperty(window, "speechSynthesis", {
+    value: {
+      speak: (u) => spoken.push(u),
+      cancel: () => {
+        spoken.length = 0;
+      },
+      pause: () => {
+        window.__paused = true;
+      },
+      resume: () => {
+        window.__paused = false;
+      },
+      getVoices: () => [],
+    },
+    configurable: true,
+  });
+};
+
+export async function checkChapterEnd(browser, base) {
+  const ctx = await open(browser);
+  try {
+    const { page } = ctx;
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-36").waitFor();
+    const end = page.locator(".chapter-end");
+    await end.scrollIntoViewIfNeeded();
+    assert.equal(await end.locator(".end-of").innerText(), "End of John 3");
+    // 48px under the last verse.
+    const gap = await page.evaluate(() => Math.round(document.querySelector(".chapter-end").getBoundingClientRect().top - document.querySelector("#verse-36").getBoundingClientRect().bottom));
+    assert.ok(gap >= 48 && gap < 80, `about 48px below the last verse (${gap})`);
+    // One filled button, "Next: John 4"; the rest are plain or outlined.
+    assert.deepEqual(await filledIn(end), ["Next: John 4"], "exactly one filled button in the end block");
+    assert.equal(await end.getByRole("button", { name: "Previous: John 2", exact: true }).textContent(), "‹ John 2");
+    assert.equal(await end.getByRole("heading", { name: "Questions to carry", exact: true }).count(), 1);
+    assert.deepEqual(await end.locator(".end-questions li").allInnerTexts(), [
+      "What do you observe in these verses?",
+      "What changes when you read the whole chapter?",
+      "What question would you bring to a trusted pastor or study group?",
+    ]);
+    assert.equal(await end.getByRole("button", { name: "Write a private study note", exact: true }).count(), 1);
+    assert.equal(await end.getByText("Topics that use this chapter").count(), 0, "John 3 has no topics");
+    // The WEB line and its source link stay at the end (T-01.1-31).
+    assert.equal(await end.locator(".web-line").evaluate((el) => el.textContent.startsWith("World English Bible (WEB), public domain.")), true);
+    assert.equal(await end.locator(".web-line a").getAttribute("href"), "https://ebible.org/engwebp/copyright.htm");
+    assert.equal(await page.getByText("Scripture · Public domain · WEB").count(), 0, "the old eyebrow is gone");
+    // Mark as read: a toggle with aria-pressed that writes the reading list.
+    const mark = end.getByRole("button", { name: "Mark as read", exact: true });
+    assert.equal(await mark.getAttribute("aria-pressed"), "false");
+    await mark.click();
+    assert.equal(await mark.getAttribute("aria-pressed"), "true");
+    const reading = () => page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")).reading);
+    assert.deepEqual(await reading(), ["/bible/john/3"], "the chapter is in the reading list");
+    await page.reload();
+    await page.locator(".chapter-end").waitFor();
+    assert.equal(await page.getByRole("button", { name: "Mark as read", exact: true }).getAttribute("aria-pressed"), "true", "still read after a reload");
+    await page.getByRole("button", { name: "Mark as read", exact: true }).click();
+    assert.deepEqual(await reading(), [], "pressing again takes it off the list");
+    // The private study note: an entry for this chapter in the journal.
+    await page.getByRole("button", { name: "Write a private study note", exact: true }).click();
+    await page.waitForURL("**/journal");
+    const entry = await page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")).entries[0]);
+    assert.deepEqual([entry.type, entry.title, entry.source], ["study note", "John 3", "/bible/john/3"]);
+    // Next opens John 4; Revelation 22 has no Next; Genesis 1 has no previous.
+    await goto(page, base, "/bible/john/3");
+    await page.getByRole("button", { name: "Next: John 4", exact: true }).click();
+    await page.waitForURL("**/bible/john/4");
+    assert.equal(await page.locator("main h1").innerText(), "John 4");
+    await goto(page, base, "/bible/revelation/22");
+    await page.locator(".chapter-end").waitFor();
+    assert.equal(await page.getByRole("button", { name: /^Next:/ }).count(), 0, "no Next on Revelation 22");
+    assert.deepEqual(await filledIn(page.locator(".chapter-end")), [], "no filled button there either");
+    await goto(page, base, "/bible/genesis/1");
+    await page.locator(".chapter-end").waitFor();
+    assert.equal(await page.getByRole("button", { name: /^Previous:/ }).count(), 0, "no previous button on Genesis 1");
+    assert.equal(await page.getByRole("button", { name: "Next: Genesis 2", exact: true }).count(), 1);
+    // Topics that use the chapter: rows, as before in the related-topics card.
+    await goto(page, base, "/bible/psalms/23");
+    const topics = page.locator(".chapter-end .group");
+    await topics.waitFor();
+    assert.equal(await topics.locator("h2").innerText(), "Topics that use this chapter");
+    assert.ok((await topics.getByRole("link").allInnerTexts()).includes("Grief"));
+    await topics.getByRole("link", { name: "Grief", exact: true }).click();
+    await page.waitForURL("**/community/grief");
+    // 200 % text: the pair of plain buttons stacks and nothing scrolls sideways.
+    await goto(page, base, "/bible/john/3");
+    await page.evaluate(() => {
+      document.documentElement.style.fontSize = "34px";
+      window.dispatchEvent(new Event("resize"));
+    });
+    await page.waitForFunction(() => document.documentElement.dataset.text === "large");
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.deepEqual(ctx.problems, []);
+  } finally {
+    await ctx.context.close();
+  }
+}
+
+export async function checkListen(browser, base) {
+  // 430px: Listen is in the toolbar. The bar is above the tab bar, the spoken verse is gold, Stop gives focus back.
+  const wide = await open(browser, { width: 430, height: 800 });
+  try {
+    const { page, context } = wide;
+    await context.addInitScript(speechStub);
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-1").waitFor();
+    assert.equal(await page.locator(".mini-player").count(), 0, "no player before it is started");
+    const start = page.getByRole("button", { name: "Listen to John 3", exact: true });
+    assert.equal(await start.count(), 1, "the toolbar's Listen button is named after the chapter");
+    await start.click();
+    const bar = page.locator(".mini-player");
+    await bar.waitFor();
+    assert.equal(await page.evaluate(() => window.__spoken.length), 37, "the reference, then each of the 36 verses");
+    assert.equal(await page.evaluate(() => window.__spoken[0].text), "John 3.");
+    assert.deepEqual(await bar.getByRole("button").allInnerTexts(), ["Pause", "Stop"]);
+    assert.equal(await page.evaluate(() => document.activeElement?.textContent?.trim()), "Pause", "focus moves into the bar");
+    // The bar floats above the tab bar and never covers the end of the page's text: the page pads for it.
+    const geometry = await page.evaluate(() => ({ bar: document.querySelector(".mini-player").getBoundingClientRect().bottom, tab: document.querySelector("nav.tabbar").getBoundingClientRect().top }));
+    assert.ok(geometry.bar <= geometry.tab, `the bar is above the tab bar (${geometry.bar} <= ${geometry.tab})`);
+    // The verse being read is named and keeps the gold highlight.
+    await page.evaluate(() => window.__spoken[2].onstart());
+    assert.equal(await bar.locator(".mini-verse").innerText(), "Verse 2");
+    await page.locator("#verse-2.speaking").waitFor();
+    const gold = await page.evaluate(() => {
+      const probe = document.createElement("i");
+      probe.style.backgroundColor = "var(--highlight-gold)";
+      document.body.append(probe);
+      const value = getComputedStyle(probe).backgroundColor;
+      probe.remove();
+      return value;
+    });
+    assert.equal(await page.locator("#verse-2").evaluate((el) => getComputedStyle(el).backgroundColor), gold, "the spoken verse is --highlight-gold");
+    await page.evaluate(() => window.__spoken[3].onstart());
+    assert.equal(await page.locator(".verse.speaking").count(), 1, "one verse at a time");
+    // Pause and Resume.
+    await bar.getByRole("button", { name: "Pause", exact: true }).click();
+    assert.equal(await page.evaluate(() => window.__paused), true);
+    await bar.getByRole("button", { name: "Resume", exact: true }).click();
+    assert.equal(await page.evaluate(() => window.__paused), false);
+    // The toolbar's Listen button is not offered twice while the player is up.
+    assert.equal(await page.getByRole("button", { name: "Listen to John 3", exact: true }).count(), 0);
+    await bar.getByRole("button", { name: "Stop", exact: true }).click();
+    await bar.waitFor({ state: "detached" });
+    assert.equal(await page.locator(".verse.speaking").count(), 0, "no verse stays highlighted");
+    assert.equal(await page.evaluate(() => window.__spoken.length), 0, "speech is cancelled");
+    await page.waitForFunction(() => document.activeElement?.getAttribute("aria-label") === "Listen to John 3", undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the Listen button"));
+    // Leaving the chapter stops it too.
+    await page.getByRole("button", { name: "Listen to John 3", exact: true }).click();
+    await bar.waitFor();
+    await page.getByRole("button", { name: "Next chapter: John 4", exact: true }).click();
+    await page.waitForURL("**/bible/john/4");
+    await bar.waitFor({ state: "detached" });
+    assert.deepEqual(wide.problems, []);
+  } finally {
+    await wide.context.close();
+  }
+  // 390px: Listen is in More, with the sentence about the device's own voice.
+  const narrow = await open(browser);
+  try {
+    const { page, context } = narrow;
+    await context.addInitScript(speechStub);
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-1").waitFor();
+    assert.equal(await page.getByRole("button", { name: "Listen to John 3", exact: true }).count(), 0, "Listen is not in the 390px toolbar");
+    await page.getByRole("button", { name: "More options", exact: true }).click();
+    const more = page.getByRole("dialog", { name: "More options" });
+    const row = more.getByRole("button", { name: /^Listen to John 3/ });
+    assert.match(await row.innerText(), /Read aloud by your device’s own voice\./);
+    await row.click();
+    await page.getByRole("dialog").waitFor({ state: "detached" });
+    await page.locator(".mini-player").waitFor();
+    assert.deepEqual(await page.locator(".mini-player").getByRole("button").allInnerTexts(), ["Pause", "Stop"]);
+    await page.locator(".mini-player").getByRole("button", { name: "Stop", exact: true }).click();
+    await page.locator(".mini-player").waitFor({ state: "detached" });
+    await page.waitForFunction(() => document.activeElement?.classList.contains("rt-more"), undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to More"));
+    assert.deepEqual(narrow.problems, []);
+  } finally {
+    await narrow.context.close();
+  }
+  // No speech in the browser, no control (as before).
+  const silent = await open(browser, { width: 430, height: 800 });
+  try {
+    const { page, context } = silent;
+    await context.addInitScript(() => {
+      delete window.speechSynthesis;
+      delete window.SpeechSynthesisUtterance;
+    });
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-1").waitFor();
+    assert.equal(await page.getByRole("button", { name: /^Listen/ }).count(), 0, "no Listen control without speech");
+    assert.deepEqual(silent.problems, []);
+  } finally {
+    await silent.context.close();
+  }
+}
