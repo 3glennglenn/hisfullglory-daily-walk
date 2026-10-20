@@ -1,59 +1,117 @@
-export interface Cause {
+import { catalogEntries } from "./catalogData.ts";
+
+// The pages of the Give screen, in the order the reader meets them. The first page holds the options where
+// independent evaluators expect a gift to do the most good across different needs (founder, 2026-10-20).
+export const givingPages = [
+  {
+    id: "most-effective",
+    title: "Most effective",
+    intro: "Six places where independent evaluators expect a gift to do the most good, across different needs.",
+  },
+  {
+    id: "poverty-hunger",
+    title: "Poverty and hunger",
+    intro: "Cash, farming, fortified food and treatment for malnourished children.",
+  },
+  {
+    id: "health-research",
+    title: "Health, medicine and research",
+    intro: "Malaria, neglected diseases, sight, childbirth injuries and research into new programmes.",
+  },
+  {
+    id: "children-protection",
+    title: "Children and protection",
+    intro: "Vaccines, vitamins, school meals and protection from trafficking.",
+  },
+  {
+    id: "animals",
+    title: "Animals",
+    intro: "Charities recommended by Animal Charity Evaluators for reducing the suffering of farmed and wild animals.",
+  },
+  {
+    id: "christian",
+    title: "Christian charities",
+    intro:
+      "Christian organisations serving people in need. Charity Navigator and ECFA check their finances and accountability, not how much good each gift does.",
+  },
+] as const;
+export type GivingPageId = (typeof givingPages)[number]["id"];
+export type GivingPage = { id: GivingPageId; title: string; intro: string };
+
+export type Evaluator =
+  | "GiveWell"
+  | "The Life You Can Save"
+  | "Happier Lives Institute"
+  | "Animal Charity Evaluators"
+  | "Charity Navigator"
+  | "ECFA";
+
+/** One charity as written in catalogData.ts. */
+export interface CauseEntry {
   id: string;
   title: string;
-  category: string;
+  page: GivingPageId;
   description: string;
   donationUrl: string;
+  /** Set when several charities share one checkout (secure.givewell.org): the name the donor picks there. */
+  checkoutChoice?: string;
   sourceUrl: string;
+  /** The evaluator's own words, as found on the source page. */
+  evidence: string;
+  evaluator: Evaluator;
+  christian: boolean;
   verifiedOn: string;
-  checkoutChoice: string;
+  /** Where gifts are tax-deductible or processed, as the charity says it. */
+  countriesNote?: string;
 }
-export const causes: Cause[] = [
-  [
-    "top-charities",
-    "GiveWell Top Charities Fund",
-    "Flexible giving",
-    "Let GiveWell allocate your gift among its recommended charities as funding opportunities change.",
-    "Top Charities Fund",
-  ],
-  [
-    "malaria-consortium",
-    "Malaria Consortium",
-    "Malaria prevention",
-    "Supports seasonal preventive malaria medicine for children in eligible regions.",
-    "Malaria Consortium",
-  ],
-  [
-    "against-malaria",
-    "Against Malaria Foundation",
-    "Malaria prevention",
-    "Supports distribution of insecticide-treated bed nets to reduce malaria exposure.",
-    "Against Malaria Foundation",
-  ],
-  [
-    "helen-keller",
-    "Helen Keller Intl",
-    "Child nutrition",
-    "Supports vitamin A supplementation programs for children.",
-    "Helen Keller Intl",
-  ],
-  [
-    "new-incentives",
-    "New Incentives",
-    "Child immunization",
-    "Supports incentives that help families access routine childhood vaccinations.",
-    "New Incentives",
-  ],
-].map(([id, title, category, description, checkoutChoice]) => ({
-  id,
-  title,
-  category,
-  description,
-  checkoutChoice,
-  donationUrl: "https://secure.givewell.org/",
-  sourceUrl: "https://www.givewell.org/charities/top-charities",
-  verifiedOn: "2026-10-07",
+
+/** A charity as the app reads it: the entry plus its page's title as `category`. */
+export interface Cause extends CauseEntry {
+  category: string;
+}
+
+const pageTitles = new Map<string, string>(givingPages.map((p) => [p.id, p.title]));
+
+export const causes: Cause[] = catalogEntries.map((entry) => ({
+  ...entry,
+  category: pageTitles.get(entry.page) ?? entry.page,
 }));
+
+/** The pages with their charities, in page order, each charity in the order of catalogData.ts. */
+export function causesByPage(list: readonly Cause[] = causes): (GivingPage & { causes: Cause[] })[] {
+  return givingPages.map((page) => ({
+    id: page.id,
+    title: page.title,
+    intro: page.intro,
+    causes: list.filter((c) => c.page === page.id),
+  }));
+}
+
+/**
+ * The short line that says why a charity is listed, from the evaluator that backs it. Happier Lives
+ * Institute and Charity Navigator say more in their own words, so those two read the evidence.
+ */
+export function whyListed(cause: Pick<Cause, "evaluator" | "evidence">): string {
+  switch (cause.evaluator) {
+    case "GiveWell":
+      return "Recommended by GiveWell";
+    case "The Life You Can Save":
+      return "Recommended by The Life You Can Save";
+    case "Animal Charity Evaluators":
+      return "Recommended by Animal Charity Evaluators";
+    case "Happier Lives Institute":
+      return /promising/i.test(cause.evidence)
+        ? "Promising charity, Happier Lives Institute"
+        : "Top charity, Happier Lives Institute";
+    case "Charity Navigator": {
+      const score = /(\d{1,3})%/.exec(cause.evidence)?.[1];
+      return score ? `Charity Navigator: Four-Star, ${score}%` : "Charity Navigator: Four-Star";
+    }
+    case "ECFA":
+      return "ECFA accredited";
+  }
+}
+
 export const supportCategories = [
   "Medical & care",
   "Basic needs",
