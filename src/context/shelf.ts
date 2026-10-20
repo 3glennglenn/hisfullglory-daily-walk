@@ -38,3 +38,21 @@ export const miniSpineHeight = (slug: string): number => 24 + (spineHeight(slug)
 /** "Nothing on it yet", "1 context check read", "9 context checks read". */
 export const countLabel = (count: number): string =>
   count === 0 ? "Nothing on it yet" : `${count} context ${count === 1 ? "check" : "checks"} read`;
+
+/** "October 19": a local day written the way the shelf says when a check was read, in English. */
+export function monthDay(date: string): string {
+  const [year, month, day] = date.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", { month: "long", day: "numeric" });
+}
+
+/**
+ * The reference a spine shows for a check that is no longer published (UI-SPEC 12): the shelf kept only its slug,
+ * and a slug is the verse ("1-corinthians-10-13", "psalm-46-10", "john-8-31-32"). A slug that does not read like
+ * that gives "Context check", so a spine is never blank.
+ */
+export function slugReference(slug: string): string {
+  const match = /^(.+?)-(\d+)-(\d+)(?:-(\d+))?$/.exec(slug);
+  if (!match) return "Context check";
+  const book = match[1].split("-").map((word) => word[0].toUpperCase() + word.slice(1)).join(" ");
+  return `${book} ${match[2]}:${match[3]}${match[4] ? `-${match[4]}` : ""}`;
+}

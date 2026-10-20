@@ -362,3 +362,14 @@ test("external fundraiser allowlist rejects host tricks, payment instructions an
     assert.equal("raised" in cause, false);
   }
 });
+
+// ---- Plan 07: the shelf and the context checks list are routes (UI-SPEC 8.2) ----------------------------------
+test("/shelf is a route of its own with nothing under it; /context is the list, /context/<slug> the story", () => {
+  assert.equal(parseRoute("/shelf").page, "shelf");
+  assert.equal(parseRoute("/shelf/anything").page, "not-found");
+  assert.equal(parseRoute("/context").page, "context");
+  assert.equal(parseRoute("/context", "?unpublished=1").page, "context", "the unpublished marker is a fixed flag, not a slug");
+  assert.equal(parseRoute("/context/john-3-16").id, "john-3-16");
+  assert.equal(parseRoute("/context/Bad Slug").page, "not-found");
+  assert.equal(parseRoute("/context/john-3-16/extra").page, "not-found");
+});

@@ -54,6 +54,7 @@ export function You() {
       </GroupedList>
       <GroupedList title="Your walk">
         <Row title="Days walked" value={state.local.completedDates.length} />
+        <Row title="Your shelf" value={`${state.shelf.length} read`} href="/shelf" chevron />
         <Row title="My Walk" href="/my-walk" chevron />
         <Row title="Journal" href="/journal" chevron />
         <Row title="Grow" href="/grow" chevron />

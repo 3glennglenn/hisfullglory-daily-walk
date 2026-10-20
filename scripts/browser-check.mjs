@@ -11,6 +11,7 @@ import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
 import {checkToday,checkTodayFixture,checkTodayLargeText} from "../tests/today.browser.mjs";
 import {checkSponsor} from "../tests/sponsor.browser.mjs";
 import {checkStoryFlow} from "../tests/story.browser.mjs";
+import {checkShelfScreen} from "../tests/shelf.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -154,6 +155,7 @@ try {
   await check("Today at 200 % text on 390 and 320px: no sideways scroll, nothing clipped, the button and the last row above the tab bar, tab labels on one line", () => checkTodayLargeText(browser, base, published));
   await check("sponsor slot: nothing at any of the six places while no sponsor is set; a fixture sponsor shows only where it is listed, as a sponsored link without a query string", () => checkSponsor(browser, base));
   await check("context-check story: a full-screen flow with named steps that puts a finished story on the shelf once, and says so only when it was saved (UI-SPEC A7)", () => checkStoryFlow(browser, base, published));
+  await check("Your shelf: spines on boards (7 at 390px), AI badges and legend, tomorrow place, empty and large-text states, Back and the You row (UI-SPEC A9)", () => checkShelfScreen(browser, base, published));
   await check(
     "complete daily walk saves private reflection and idempotent completion",
     async () => {

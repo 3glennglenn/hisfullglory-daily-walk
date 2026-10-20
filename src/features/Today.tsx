@@ -5,7 +5,7 @@ import { contentFor } from "../data";
 import { dateNumber, localDate } from "../storage";
 import { refLabel, todaysCheck } from "../context/checks";
 import { contextChecks } from "../context/data";
-import { countLabel, shelfSummary } from "../context/shelf";
+import { countLabel, monthDay, shelfSummary } from "../context/shelf";
 import { Cover, CoverAiRow, CoverHook } from "../ui/Cover";
 import { AiBadge } from "../ui/Badges";
 import { GroupedList, Row } from "../ui/List";
@@ -19,12 +19,6 @@ const parts = (date: string) => date.split("-").map(Number) as [number, number, 
 function dateLine(date: string): string {
   const [year, month, day] = parts(date);
   return new Date(year, month - 1, day).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
-}
-
-/** "October 19": the day a check was finished, in English. */
-function monthDay(date: string): string {
-  const [year, month, day] = parts(date);
-  return new Date(year, month - 1, day).toLocaleDateString("en-US", { month: "long", day: "numeric" });
 }
 
 const nextDate = (date: string) => new Date((dateNumber(date) + 1) * 86400000).toISOString().slice(0, 10);

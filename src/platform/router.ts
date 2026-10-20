@@ -25,6 +25,7 @@ const pages = new Set([
   "settings",
   "giving-policy",
   "context",
+  "shelf",
 ]);
 // The only sub-paths of /settings (T-01.1-07); anything else is not found.
 const settingsSubpages = new Set(["appearance", "reminders"]);
@@ -75,11 +76,18 @@ export function parseRoute(path: string, search = ""): Route {
   }
   return { page, id: parts[1], tab: "read" };
 }
+/** The path of the screen the reader came from inside the app, or "" when this entry was opened directly. */
+export const cameFrom = (): string => {
+  const from = (history.state as { from?: unknown } | null)?.from;
+  return typeof from === "string" && from.startsWith("/") ? from : "";
+};
 export const passagePath = (book: string, chapter: number, verse?: number) =>
   `/bible/${book}/${chapter}${verse ? `/${verse}` : ""}`;
 export function navigate(path: string) {
   if (window.location.pathname + window.location.search !== path) {
-    history.pushState({}, "", path);
+    // The screen the reader came from is kept with the history entry, so a screen reached from two places (Your
+    // shelf, from Today or from You) can name the right one on its Back button, also after a reload.
+    history.pushState({ from: window.location.pathname }, "", path);
     window.dispatchEvent(new PopStateEvent("popstate"));
     window.scrollTo(0, 0);
   }

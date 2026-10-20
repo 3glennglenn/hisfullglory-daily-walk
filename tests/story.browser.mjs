@@ -4,16 +4,16 @@ import { editorialNote, refLabel } from "../src/context/checks.ts";
 // The context-check story, the context checks list and Your shelf in a real browser (plan 07, UI-SPEC A7, A8, A9,
 // A16). Every case runs in a fresh context so the reader's private state starts empty; "which check is newest" is
 // computed from the content folder at run time (`published`, newest first), never a hard-coded slug.
-const STORAGE = "hfg-daily-walk:v3";
+export const STORAGE = "hfg-daily-walk:v3";
 
-const readState = (page) => page.evaluate((key) => JSON.parse(localStorage.getItem(key)), STORAGE);
-const localToday = (page) =>
+export const readState = (page) => page.evaluate((key) => JSON.parse(localStorage.getItem(key)), STORAGE);
+export const localToday = (page) =>
   page.evaluate(() => {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   });
 /** The computed colour of a design token, read through a probe element. */
-const colour = (page, token) =>
+export const colour = (page, token) =>
   page.evaluate((name) => {
     const probe = document.createElement("i");
     probe.style.color = `var(${name})`;
@@ -24,7 +24,7 @@ const colour = (page, token) =>
   }, token);
 
 /** A fresh context and page; the page's errors and console warnings are collected and must stay empty. */
-async function open(browser, base, path, { width = 390, height = 844, look, lamplight, reducedMotion } = {}) {
+export async function open(browser, base, path, { width = 390, height = 844, look, lamplight, reducedMotion } = {}) {
   const context = await browser.newContext({
     viewport: { width, height },
     timezoneId: "Europe/Amsterdam",

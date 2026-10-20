@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { countLabel, finishCheck, miniSpineHeight, shelfHeading, shelfSummary, spineHeight } from "../src/context/shelf.ts";
+import { countLabel, finishCheck, miniSpineHeight, monthDay, shelfHeading, shelfSummary, slugReference, spineHeight } from "../src/context/shelf.ts";
 import { freshPlatform, savePlatform, V3_KEY } from "../src/platform/persistence.ts";
 import type { ShelfEntry } from "../src/platform/models.ts";
 import type { AppContextCheck } from "../src/context/checks.ts";
@@ -109,4 +109,14 @@ test("finishing through the real save path: one entry with today's date, again a
   assert.equal(shelfHeading(false, saved), null);
   // Blocked storage (a migration that could not be saved) refuses too.
   assert.equal(savePlatform(storage, attempt, true), false);
+});
+
+test("slugReference reads a verse out of a slug, and monthDay says the day in English", () => {
+  assert.equal(slugReference("john-3-16"), "John 3:16");
+  assert.equal(slugReference("1-corinthians-10-13"), "1 Corinthians 10:13");
+  assert.equal(slugReference("psalm-46-10"), "Psalm 46:10");
+  assert.equal(slugReference("john-8-31-32"), "John 8:31-32");
+  assert.equal(slugReference("not-a-verse"), "Context check");
+  assert.equal(monthDay("2026-10-19"), "October 19");
+  assert.equal(monthDay("2026-03-04"), "March 4");
 });

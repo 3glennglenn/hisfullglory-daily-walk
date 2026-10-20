@@ -17,6 +17,7 @@ import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider
 import { supabase } from "./supabase";
 import { Walk } from "./features/Home";
 import { Today } from "./features/Today";
+import { YourShelf } from "./features/Shelf";
 import { Reader } from "./bible/Reader";
 import { Pray } from "./features/Pray";
 import { Grow } from "./features/Grow";
@@ -125,6 +126,9 @@ function App() {
       break;
     case "walk":
       content = <Walk key={date} />;
+      break;
+    case "shelf":
+      content = <YourShelf />;
       break;
     case "bible":
       content = <Reader route={route} />;

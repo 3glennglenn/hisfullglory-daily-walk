@@ -2527,14 +2527,25 @@ html[data-text="large"] .segmented-scroll [role="radio"] {
   align-items: center;
   justify-content: center;
   flex: none;
+  box-sizing: border-box;
   min-height: 20px;
-  padding-inline: var(--space-2);
+  margin: 0;
+  /* The older rule for the reader's AI heading (.ai-badge near "AI explanations") gives a 1px border, 1px of
+     vertical padding and a left margin; without these resets the badge measured 24px instead of 20px. */
+  padding: 0 var(--space-2);
+  border: 0;
   border-radius: var(--radius-xs);
   background: var(--ai);
   color: var(--on-ai);
   font-size: var(--text-footnote);
   font-weight: 600;
   line-height: 20px;
+  vertical-align: baseline;
+}
+/* The reader's heading "AI explanation [AI]" keeps the gap the older rule gave it. */
+h3 > .ai-badge {
+  margin-left: var(--space-2);
+  vertical-align: middle;
 }
 .cover-wrap {
   position: relative;
@@ -3027,4 +3038,283 @@ html[data-text="large"] .step-label {
   border-radius: var(--radius-md);
   background: none;
   color: var(--link);
+}
+
+/* ==== Plan 07: Your shelf, spines on boards (UI-SPEC 2, A9; src/ui/Shelf.tsx, src/features/Shelf.tsx) ====
+   A spine is 44px wide and 128 to 160px tall (--spine-h, set per check), standing on a 4px board; spines touch,
+   oldest to newest from the left, and wrap onto more boards. Cover and story: leather with two gilt bands 10px
+   from the top and the bottom. Marked page: a cream paper slip with a ribbon tab across its top. The reference
+   stands vertically, in the Scripture face, and wraps into a second column when it is long. */
+.shelf-count {
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.shelf-empty {
+  margin: 0 0 var(--space-5);
+}
+.shelf-empty h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.shelf-empty p {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.shelf-boards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-4) 0;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+.shelf-item {
+  flex: none;
+  width: 44px;
+}
+.shelf-item::after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: var(--line);
+}
+.spine {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 44px;
+  height: var(--spine-h, 144px);
+  padding: 14px 4px;
+  border-radius: 2px 2px 0 0;
+  background: var(--spine-1);
+  color: var(--spine-ink);
+  text-decoration: none;
+}
+.spine-2 {
+  background: var(--spine-2);
+}
+.spine-3 {
+  background: var(--spine-3);
+}
+.spine-with-ai {
+  padding-bottom: 30px;
+}
+a.spine:focus-visible {
+  outline-offset: 2px;
+}
+.spine-ref {
+  max-height: 100%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-scripture);
+  font-size: var(--text-footnote);
+  line-height: 1.2;
+  text-align: center;
+}
+.spine-date,
+.spine-ai-text {
+  display: none;
+}
+/* The AI badge at the foot of a spine written by an AI model: horizontal, 20px tall, 4px from the bottom. */
+.spine-ai {
+  position: absolute;
+  z-index: 1;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+:root:not([data-look="marked"]) .spine::before,
+:root:not([data-look="marked"]) .spine::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gilt);
+}
+:root:not([data-look="marked"]) .spine::before {
+  top: 10px;
+}
+:root:not([data-look="marked"]) .spine::after {
+  bottom: 10px;
+}
+:root[data-look="marked"] .spine {
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+:root[data-look="marked"] .spine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--brand);
+}
+/* Tomorrow's place: an empty dashed outline. Its label is for the eye; the sentence under the shelf carries the meaning. */
+:root .shelf-boards .spine-tomorrow {
+  background: transparent;
+  border: 1px dashed var(--muted);
+  color: var(--muted);
+  box-shadow: none;
+}
+:root .shelf-boards .spine-tomorrow::before,
+:root .shelf-boards .spine-tomorrow::after {
+  content: none;
+}
+.spine-tomorrow .spine-ref {
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+.shelf-tomorrow-line {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.shelf-legend {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--ai);
+}
+.shelf-legend .ai-badge {
+  margin-top: -1px;
+}
+/* Large text (150 % and up) and screens under 320px: the spines become a plain list, with the same links. */
+html[data-text="large"] .shelf-boards {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+html[data-text="large"] .shelf-boards .shelf-item {
+  width: auto;
+}
+html[data-text="large"] .shelf-boards .shelf-item + .shelf-item {
+  border-top: 1px solid var(--line);
+}
+html[data-text="large"] .shelf-boards .shelf-item::after,
+html[data-text="large"] .shelf-boards .shelf-tomorrow,
+html[data-text="large"] .shelf-boards .spine::before,
+html[data-text="large"] .shelf-boards .spine::after {
+  display: none;
+  content: none;
+}
+html[data-text="large"] .shelf-boards .spine {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--ink);
+}
+html[data-text="large"] .shelf-boards .spine-ref {
+  max-height: none;
+  writing-mode: horizontal-tb;
+  transform: none;
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: left;
+}
+html[data-text="large"] .shelf-boards .spine-date {
+  display: block;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+html[data-text="large"] .shelf-boards .spine-ai {
+  position: static;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+html[data-text="large"] .shelf-boards .spine-ai-text {
+  display: inline;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--ai);
+}
+@media (max-width: 319px) {
+  :root .shelf-boards {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  :root .shelf-boards .shelf-item {
+    width: auto;
+  }
+  :root .shelf-boards .shelf-item + .shelf-item {
+    border-top: 1px solid var(--line);
+  }
+  :root .shelf-boards .shelf-item::after,
+  :root .shelf-boards .shelf-tomorrow,
+  :root .shelf-boards .spine::before,
+  :root .shelf-boards .spine::after {
+    display: none;
+    content: none;
+  }
+  :root .shelf-boards .spine {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    min-height: 52px;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--ink);
+  }
+  :root .shelf-boards .spine-ref {
+    max-height: none;
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-family: var(--font-ui);
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: 1.47;
+    text-align: left;
+  }
+  :root .shelf-boards .spine-date {
+    display: block;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
+  }
+  :root .shelf-boards .spine-ai {
+    position: static;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  :root .shelf-boards .spine-ai-text {
+    display: inline;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--ai);
+  }
 }
