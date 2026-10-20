@@ -4577,3 +4577,177 @@ html[data-text="large"] .around-capsule {
   line-height: 1.38;
   color: var(--muted);
 }
+
+/* ==== Plan 16: the welcome questionnaire, once (src/features/Welcome.tsx) ====
+   Five screens in the walk's flow: the step indicator, a Large Title, the choices, one filled button, Back from step
+   2 and "Skip for now" under them. The tab bar is covered (the shell is data-flow). Nothing moves. */
+.welcome-flow .step-indicator {
+  margin-top: var(--space-4);
+}
+.welcome-kicker {
+  margin: 0 0 var(--space-1);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--link);
+}
+.welcome-title {
+  margin: 0 0 var(--space-4);
+}
+.welcome-title:focus {
+  outline: none;
+}
+.welcome-flow .flow-part > p:not([class]) {
+  color: var(--ink);
+}
+.welcome-flow .flow-part > .group {
+  margin-bottom: var(--space-5);
+}
+.welcome-flow .flow-part > details.card {
+  margin: 0 0 var(--space-5);
+}
+.welcome-flow .chips {
+  margin: var(--space-4) 0;
+}
+/* "Skip for now": a plain link-coloured button, 44px tall, centred under the two flow buttons. */
+.welcome-skip {
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  margin: var(--space-2) 0 0;
+  background: none;
+  color: var(--link);
+  border-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.welcome-skip:hover {
+  filter: none;
+}
+
+/* ==== Plan 16: Lamplight is direction B's room (founder, 2026-10-20; sketches/direction-b) ====
+   Only while data-mode="lamplight", in both looks. The light modes are untouched. The cover is no longer a leather
+   block: no slab, no gilt rule, no corner ornaments, no ribbon. The words sit on the night page inside one soft pool of
+   lamp light (the glow fades to nothing, so it never shows an edge), the reference small in --link, the hook in the
+   serif in --ink, and "Read the story" is the filled salmon pill. Above it Today draws a sky: one star for every day
+   walked (src/ui/StarField.tsx), and a line under it that says the same in words. Nothing moves on Today. */
+:root[data-mode="lamplight"] .cover-wrap::before {
+  inset: calc(-1 * var(--space-8)) calc(-1 * var(--space-4)) calc(-1 * var(--space-6));
+  background: radial-gradient(closest-side, rgb(240 201 135 / 0.17), transparent);
+}
+:root[data-mode="lamplight"] .cover-wrap .cover {
+  padding: var(--space-2) 0 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+}
+:root[data-mode="lamplight"] .cover::before,
+:root[data-mode="lamplight"] .cover .cover-orn,
+:root[data-mode="lamplight"] .cover .cover-ribbon {
+  display: none;
+  content: none;
+}
+:root[data-mode="lamplight"] .today .large-title,
+:root[data-mode="lamplight"] .today .today-date {
+  padding-right: 0;
+}
+:root[data-mode="lamplight"] .cover .cover-ref {
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--link);
+}
+:root[data-mode="lamplight"] .cover .cover-display,
+:root[data-mode="lamplight"] .cover .cover-verse {
+  color: var(--ink);
+}
+:root[data-mode="lamplight"] .cover .cover-body,
+:root[data-mode="lamplight"] .cover .cover-hint,
+:root[data-mode="lamplight"] .cover .cover-status {
+  color: var(--muted);
+}
+:root[data-mode="lamplight"] .cover .cover-status svg {
+  color: var(--success);
+}
+:root[data-mode="lamplight"] .cover .cover-button {
+  min-height: 52px;
+  border-radius: var(--radius-pill);
+  background: var(--button);
+  color: var(--on-button);
+}
+:root[data-mode="lamplight"] .cover .cover-button-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--muted);
+}
+:root[data-mode="lamplight"] .cover .cover-button:focus-visible {
+  outline-color: var(--focus);
+}
+:root[data-mode="lamplight"] .story-flow .cover-wrap .cover {
+  padding-right: 0;
+}
+/* The sky: drawn in Lamplight only (the light modes keep their quiet page). Stars are placed by the dates, never a grid. */
+.sky,
+.sky-caption {
+  display: none;
+}
+:root[data-mode="lamplight"] .sky {
+  display: block;
+  position: relative;
+  height: 118px;
+  margin: var(--space-3) 0 0;
+}
+:root[data-mode="lamplight"] .sky-finish {
+  height: 150px;
+  margin-bottom: var(--space-2);
+}
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #f0c987;
+  box-shadow: 0 0 6px 1px rgb(240 201 135 / 0.35);
+  transform: translate(-50%, -50%) scale(1.4);
+}
+/* Today's place: an empty ring until the walk is done; then a small star like the others. */
+.star.star-today {
+  width: 13px;
+  height: 13px;
+  background: none;
+  box-shadow: inset 0 0 0 1.5px #f0c987;
+  transform: translate(-50%, -50%);
+}
+.star.star-walked {
+  width: 4px;
+  height: 4px;
+  background: #f0c987;
+  box-shadow: 0 0 6px 1px rgb(240 201 135 / 0.35);
+  transform: translate(-50%, -50%) scale(1.4);
+}
+/* The finish screen: today's star lit, with one soft glow that fades in over 600 ms. */
+.star.star-lit {
+  background: #f0c987;
+  box-shadow: 0 0 0 6px rgb(240 201 135 / 0.18), 0 0 22px 8px rgb(240 201 135 / 0.35);
+  animation: star-lit-in 600ms ease-out both;
+}
+@keyframes star-lit-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .star.star-lit {
+    animation: none;
+  }
+}
+:root[data-mode="lamplight"] .sky-caption {
+  display: block;
+  margin: var(--space-1) 0 var(--space-5);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}

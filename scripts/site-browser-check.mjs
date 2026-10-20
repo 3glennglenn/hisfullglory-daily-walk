@@ -477,6 +477,92 @@ try {
       }
   });
 
+  await check("Lamplight (direction B, plan 16): the home cover has no slab, a lamp glow and the salmon pill; from 900px the hero is one centred column with the bookcase below it; check cards are raised cards; the verse cover has no slab; the light modes keep their block", async () => {
+    const lamplight = { "hfg-look": "cover", "hfg-lamplight": "on" };
+    const style = (locator, property, pseudo) => locator.evaluate((el, [p, ps]) => getComputedStyle(el, ps)[p], [property, pseudo]);
+    for (const width of [390, 1280]) {
+      const { context, page } = await open("/", { width, height: 900, colorScheme: "dark", seed: lamplight });
+      const where = `home at ${width}px`;
+      const cover = page.locator(".hero-cover .cover");
+      assert.equal(await style(cover, "backgroundColor"), "rgba(0, 0, 0, 0)", `${where}: no leather slab`);
+      for (const part of [".orn", ".ribbon"])
+        for (const el of await cover.locator(part).all()) assert.equal(await style(el, "display"), "none", `${where}: ${part} is not drawn`);
+      assert.equal(await style(cover, "display", "::before"), "none", `${where}: no gilt rule`);
+      const glow = await style(page.locator(".hero-cover .cover-wrap"), "backgroundImage", "::before");
+      assert.match(glow, /radial-gradient\(closest-side/, `${where}: a radial pool of light`);
+      assert.match(glow, /rgba\(240, 201, 135, 0\.17\)/, `${where}: B's glow`);
+      const pill = page.locator(".hero-cover .cover-button");
+      assert.equal(await style(pill, "backgroundColor"), "rgb(185, 120, 98)", `${where}: the pill is #B97862`);
+      assert.equal(await style(pill, "color"), "rgb(26, 18, 14)", `${where}: the pill text is #1A120E`);
+      assert.ok(parseFloat(await style(pill, "borderTopLeftRadius")) >= 24, `${where}: a pill`);
+      assert.ok((await pill.boundingBox()).height >= 48, `${where}: 48px or more`);
+      assert.equal(await style(page.locator(".hero-cover .ref"), "color"), "rgb(226, 174, 150)", `${where}: the reference is #E2AE96`);
+      const coverBox = await page.locator(".hero-cover").boundingBox();
+      if (width === 1280) {
+        const caseBox = await page.locator(".hero-case").boundingBox();
+        assert.ok(caseBox.y > coverBox.y + coverBox.height - 1, "the bookcase stands below the hero, not beside it");
+        const mid = coverBox.x + coverBox.width / 2;
+        assert.ok(Math.abs(mid - 640) <= 4, `the hero is centred (${mid})`);
+        const text = await page.locator(".hero-cover .cover").evaluate((el) => ({ max: el.getBoundingClientRect().width, size: parseFloat(getComputedStyle(document.documentElement).fontSize) }));
+        assert.ok(text.max <= 34.5 * text.size, `the text column is about 34rem at most (${text.max}px)`);
+        assert.equal(await style(cover, "textAlign"), "center");
+        assert.ok((await pill.boundingBox()).width < 520, "the pill is as wide as its words on a desktop");
+      } else {
+        assert.equal(await page.locator(".hero-case").isVisible(), false, "a phone stays one column, with no bookcase");
+        assert.ok(Math.abs((await pill.boundingBox()).width - (await cover.boundingBox()).width) <= 1, "full width on a phone");
+      }
+      const { scroll, width: client } = await overflow(page);
+      assert.ok(scroll <= client, `${where}: no sideways scroll`);
+      await context.close();
+    }
+    // 200 % text in Lamplight: nothing scrolls sideways and no heading is clipped on the pages that changed.
+    for (const width of [390, 320])
+      for (const path of ["/", "/context-checks", "/bible/john/3", checkPath]) {
+        const { context, page } = await open(path, { width, colorScheme: "dark", seed: lamplight, rootPx: 34 });
+        const { scroll, width: client } = await overflow(page);
+        assert.ok(scroll <= client, `${path} in Lamplight at ${width}px, 34px root scrolls sideways (${scroll} > ${client})`);
+        const clipped = await page.locator("h1").evaluateAll((list) => list.filter((el) => el.scrollWidth > el.clientWidth + 1).length);
+        assert.equal(clipped, 0, `${path}: no clipped h1`);
+        await context.close();
+      }
+    // The light modes keep the leather block and the two columns.
+    {
+      const { context, page } = await open("/", { width: 1280, height: 900, seed: { "hfg-look": "cover", "hfg-lamplight": "off" } });
+      assert.notEqual(await style(page.locator(".hero-cover .cover"), "backgroundColor"), "rgba(0, 0, 0, 0)", "Cover Light keeps its block");
+      const coverBox = await page.locator(".hero-cover").boundingBox();
+      const caseBox = await page.locator(".hero-case").boundingBox();
+      assert.ok(caseBox.x > coverBox.x + coverBox.width - 1, "Cover Light keeps the bookcase beside the cover");
+      await context.close();
+    }
+    // Check cards: the overview and a chapter page.
+    for (const [path, rows] of [["/context-checks", ".list .row"], ["/bible/john/3", ".checks .row"]]) {
+      const { context, page } = await open(path, { width: 390, colorScheme: "dark", seed: lamplight });
+      const row = page.locator(rows).first();
+      if ((await row.count()) === 0) {
+        await context.close();
+        continue;
+      }
+      assert.equal(await style(row, "backgroundColor"), "rgb(37, 25, 20)", `${path}: the raised card #251914`);
+      assert.ok(parseFloat(await style(row, "borderTopLeftRadius")) >= 20, `${path}: the radius of the design system`);
+      assert.equal(await style(row.locator(".row-ref"), "fontStyle"), "italic", `${path}: the reference is italic`);
+      assert.equal(await style(row.locator(".row-ref"), "color"), "rgb(226, 174, 150)", `${path}: in --link`);
+      assert.match(await style(row.locator(".row-ref"), "fontFamily"), /Gelasio/, `${path}: in the serif`);
+      assert.equal(await style(row.locator(".row-hook"), "color"), "rgb(246, 240, 231)", `${path}: the hook is cream`);
+      assert.equal(await style(row.locator(".row-text"), "content", "::after"), '"Read the story"', `${path}: "Read the story" as a salmon link`);
+      assert.equal(await style(row.locator(".row-text"), "color", "::after"), "rgb(226, 174, 150)");
+      assert.ok((await row.boundingBox()).height >= 52, `${path}: 52px or taller`);
+      await context.close();
+    }
+    // The verse cover on a check page: no slab, the same glow.
+    {
+      const { context, page } = await open(checkPath, { width: 390, colorScheme: "dark", seed: lamplight });
+      const verse = page.locator(".cover-wrap.is-verse .cover");
+      assert.equal(await style(verse, "backgroundColor"), "rgba(0, 0, 0, 0)", "the verse cover has no slab");
+      assert.match(await style(page.locator(".cover-wrap.is-verse"), "backgroundImage", "::before"), /rgba\(240, 201, 135, 0\.17\)/, "and the lamp glow");
+      await context.close();
+    }
+  });
+
   await check("the skip link is off-screen until focused, at a 34px root too", async () => {
     const { context, page } = await open("/", { width: 390, rootPx: 34 });
     const skip = page.locator("a.skip-link");

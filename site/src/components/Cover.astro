@@ -4,7 +4,11 @@
 //   Cover and story: a leather block (--sig) with a gilt rule 8px inside its edge and four small
 //     gilt corner ornaments, the way gold tooling sits on a binding.
 //   Marked page: no box. The passage sits on the page beside a satin ribbon (--brand).
-//   Lamplight (either look): one soft lamp glow behind the block, never on it.
+//   Lamplight (either look, direction B, plan 16): no block. No leather, no gilt rule, no corner ornaments, no
+//     ribbon. The words sit on the night page inside one soft pool of lamp light that fades to nothing (never an
+//     edge): the reference small in --link, the hook in the serif in --ink, and "Read the story" is the filled salmon
+//     pill (--button on --on-button), full width on a phone. From 900px the home hero is centred (index.astro).
+//     The ornament and ribbon elements stay in the markup; the CSS leaves them out.
 // mode "hook": the day's hook (its first part is the page's h1), the label when no person checked
 //   the story, and "Read the story".  mode "verse": the verse itself, on a context-check page.
 import AiBadge from "./AiBadge.astro";
@@ -275,5 +279,66 @@ const unchecked = item.review === "ai-unreviewed";
   :global(:root[data-look="marked"]) .hook,
   :global(:root[data-look="marked"]) .scripture {
     padding-right: 52px;
+  }
+
+  /* Lamplight, both looks (direction B, plan 16): no slab, one pool of lamp light, the salmon pill. Last in the file,
+     so it wins over the two looks above where the specificity is equal. The light modes are untouched. */
+  :global(:root[data-mode="lamplight"]) .cover-wrap::before {
+    background: radial-gradient(closest-side, rgb(240 201 135 / 0.17), transparent);
+  }
+  :global(:root[data-mode="lamplight"]) .cover {
+    padding: var(--space-2) 0 0;
+    background: transparent;
+    border-radius: 0;
+    color: var(--ink);
+  }
+  :global(:root[data-mode="lamplight"]) .cover::before,
+  :global(:root[data-mode="lamplight"]) .orn,
+  :global(:root[data-mode="lamplight"]) .ribbon {
+    display: none;
+  }
+  :global(:root[data-mode="lamplight"]) .ref {
+    padding: 0;
+    font-family: var(--font-ui);
+    font-style: normal;
+    font-size: var(--text-footnote);
+    font-weight: 600;
+    line-height: 1.38;
+    color: var(--link);
+  }
+  :global(:root[data-mode="lamplight"]) .hook,
+  :global(:root[data-mode="lamplight"]) .scripture {
+    padding-right: 0;
+    color: var(--ink);
+  }
+  :global(:root[data-mode="lamplight"]) .hook-2,
+  :global(:root[data-mode="lamplight"]) .wow {
+    color: var(--muted);
+  }
+  :global(:root[data-mode="lamplight"]) .scripture sup {
+    color: var(--link);
+  }
+  :global(:root[data-mode="lamplight"]) .cover-button {
+    min-height: 52px;
+    border-radius: var(--radius-pill);
+    background: var(--button);
+    color: var(--on-button);
+  }
+  :global(:root[data-mode="lamplight"]) .cover a:focus-visible {
+    outline-color: var(--focus);
+  }
+  /* From 900px the home hero is one centred column like B's desktop hero: the text at most about 34rem, the pill
+     as wide as its words instead of the full width. */
+  @media (min-width: 900px) {
+    :global(:root[data-mode="lamplight"] .hero-cover) .cover {
+      text-align: center;
+    }
+    :global(:root[data-mode="lamplight"] .hero-cover) .ai-row {
+      justify-content: center;
+    }
+    :global(:root[data-mode="lamplight"] .hero-cover) .cover-button {
+      display: inline-flex;
+      padding-inline: var(--space-8);
+    }
   }
 </style>

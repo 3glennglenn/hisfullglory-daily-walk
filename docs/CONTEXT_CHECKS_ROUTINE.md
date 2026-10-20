@@ -25,20 +25,17 @@ Nothing else is changed. The run stops without writing anything when a safeguard
 
 ## 3. Safeguards
 
-The label says it plainly. At the top of the page: "Written by an AI model from the
-sources below. Not checked by a person." On list cards (the overview and the chapter page of
-the verse): "Written by an AI model. Not checked by a person." At the bottom: "Written by an
-AI model. Before publishing, an automatic check compared Scripture quotations with the World
-English Bible and the words of quoted people with their linked sources. No person has
-checked this page." Today in the app and the site home show the newest published context
-check, AI-unreviewed ones included, always with the label "Written by an AI model. Not
-checked by a person." (founder, 2026-10-19).
+The label says plainly that the context is written by AI, never the Bible. At the top of
+the page: "Context written by AI, from the sources below. The Bible text is the World English Bible." On list cards (the overview and the chapter page of
+the verse): "Context written by AI, from named sources." At the bottom: "This context was written by an AI model to help you see the verse in its setting. The Bible text is the World English Bible. Before publishing, an automatic check made sure every source below opens and every quotation matches its source. It can contain mistakes. If a source says otherwise, tell us." Today in the app and the site home show the newest published context
+check, AI-unreviewed ones included, always with the label "Context written by AI, from named sources." (founder, 2026-10-19;
+the words were changed on 2026-10-20, when he asked to take "not checked by a person" out).
 
 | | Safeguard | Where it is enforced |
 | --- | --- | --- |
 | S1 | A real person is only quoted if the exact words stand on the page their source links to. | CLI, at publish time: `checkSources` fetches each source and looks for each voice's words (quote marks, dashes, case and whitespace are ignored; an ellipsis is not a match). The build allows no other quotation marks than the curly double quotes for WEB text in an AI-unreviewed check, so people's words can only appear as voices. |
 | S2 | Every source exists online and opens. | CLI, at publish time: HTTP 200 after redirects and a text page (HTML or plain text), otherwise a "could not reach" failure, never a silent pass. The build requires at least two sources, so a run without network access cannot publish. |
-| S3 | The page says it was written by an AI model and not checked by a person. | Build (`site/src/lib/content.ts`): review `ai-unreviewed` needs drafted `ai`, a named model, no approved date. Topic pages and articles cannot use the status. Built-page tests check the label, the card labels and the closing note. |
+| S3 | The page says the context was written by AI, names its sources and says it can contain mistakes. | Build (`site/src/lib/content.ts`): review `ai-unreviewed` needs drafted `ai`, a named model, no approved date. Topic pages and articles cannot use the status. Built-page tests check the label, the card labels and the closing note. |
 | S4 | Bible quotations are World English Bible only and match the verse text. | Build: every curly quotation must occur in the WEB text of the verse or its `basis` passages. No licensed translation may be named. |
 | S5 | The decision is recorded. | This page, `CLAUDE.md` and `site/README.md`. |
 

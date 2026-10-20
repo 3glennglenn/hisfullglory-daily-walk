@@ -288,7 +288,8 @@ test("rule files match the redesign", () => {
     assert.ok(text.includes("AI-unreviewed ones included"), file + " lacks the D-06 sentence");
     assert.ok(!text.includes(old) && !text.includes(oldSite), file + " still says only approved checks are shown");
   }
-  assert.ok(flat("CLAUDE.md").includes("Written by an AI model. Not checked by a person."));
+  assert.ok(flat("CLAUDE.md").includes("Context written by AI, from named sources."));
+  assert.ok(!flat("CLAUDE.md").includes("Not checked by a person"), "the old label is gone from CLAUDE.md (D-06 amended 2026-10-20)");
   assert.ok(flat("docs/CONTEXT_CHECKS_ROUTINE.md").includes("not whether it is shown"));
 });
 

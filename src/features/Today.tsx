@@ -12,6 +12,8 @@ import { GroupedList, Row } from "../ui/List";
 import { LargeTitle } from "../ui/Screen";
 import { MiniShelf } from "../ui/Shelf";
 import { SponsorRow } from "../ui/SponsorRow";
+import { StarField } from "../ui/StarField";
+import { skyLine } from "../ui/stars";
 
 const parts = (date: string) => date.split("-").map(Number) as [number, number, number];
 
@@ -24,6 +26,7 @@ function dateLine(date: string): string {
 // Today (UI-SPEC A1): one focus, the day's context check, the newest one the reader has not finished on an
 // earlier day, written by an AI model or not (D-05, D-06). Under it one quiet list: Today's walk and Your shelf
 // (D-07, D-11). The bundled checks come from ../context/data, which a browser fixture replaces with its own list.
+// In Lamplight (direction B, plan 16) a sky of stars, one for each day walked, stands above the cover and a line says how many.
 export function Today() {
   const checks = contextChecks;
   const { state } = usePlatform();
@@ -61,6 +64,9 @@ export function Today() {
     <section className="today">
       <LargeTitle>Today</LargeTitle>
       <p className="today-date">{dateLine(date)}</p>
+      {/* Lamplight only (the CSS leaves both out in the light modes): a star for every day walked, and the same in words. */}
+      <StarField walked={state.local.completedDates} today={date} />
+      <p className="sky-caption">{skyLine(state.local.completedDates.length)}</p>
       {found ? (
         <Cover heading="Today's context check" reference={refLabel(found.check.verse)}>
           <CoverHook hook={found.check.hook} />
@@ -108,7 +114,7 @@ export function Today() {
               {ai > 0 && (
                 <span className="row-line row-ai">
                   <AiBadge />
-                  <span>{ai} written by an AI model, not checked by a person.</span>
+                  <span>{ai} with context written by AI.</span>
                 </span>
               )}
             </>

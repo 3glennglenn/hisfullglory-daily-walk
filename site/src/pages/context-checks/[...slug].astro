@@ -1,7 +1,7 @@
 ---
 // /context-checks and /context-checks/<slug>: a well-known verse put back into its
-// surroundings. Neither exists until at least one check is published (approved, or written by
-// an AI model and not checked by a person, which the page says; src/lib/content.ts).
+// surroundings. Neither exists until at least one check is published (approved, or with
+// context written by an AI model, which the page says; src/lib/content.ts).
 // Phase 01.1 (UI-SPEC W3, W5; founder decisions D-06, D-13): a page says first how far it was
 // checked (the labelled AI note), then tells its story calmly, with one way into the app.
 import AiBadge from "../../components/AiBadge.astro";
@@ -372,5 +372,59 @@ const newestFirst = featuredChecks();
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+
+  /* Lamplight (direction B, plan 16): each check is one of B's raised cards: the raised surface, the radius of the design
+     system, the reference in the italic serif in --link, the hook in --ink and "Read the story" as a salmon text link. The
+     whole card is still the one link, so its name is what it was; the words "Read the story" are drawn by the CSS. */
+  :global(:root[data-mode="lamplight"]) .list {
+    display: grid;
+    gap: var(--space-3);
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+  :global(:root[data-mode="lamplight"]) .list li + li {
+    border-top: 0;
+  }
+  :global(:root[data-mode="lamplight"]) .list .row {
+    align-items: flex-start;
+    padding: var(--space-5);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+  }
+  :global(:root[data-mode="lamplight"]) .list .row:hover {
+    background: var(--surface-2);
+  }
+  :global(:root[data-mode="lamplight"]) .list .row:focus-visible {
+    outline-offset: 3px;
+  }
+  :global(:root[data-mode="lamplight"]) .list .row-ref {
+    font-family: var(--font-scripture);
+    font-style: italic;
+    font-size: var(--text-title);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--link);
+  }
+  :global(:root[data-mode="lamplight"]) .list .row-hook {
+    color: var(--ink);
+  }
+  :global(:root[data-mode="lamplight"]) .list .row-text::after {
+    content: "Read the story";
+    margin-top: var(--space-1);
+    font-weight: 600;
+    color: var(--link);
+  }
+  :global(:root[data-mode="lamplight"]) .list .row svg {
+    display: none;
+  }
+  /* On a wide screen the overview's cards stand in columns, as in B. */
+  @media (min-width: 900px) {
+    :global(:root[data-mode="lamplight"]) .list {
+      max-width: none;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    }
   }
 </style>

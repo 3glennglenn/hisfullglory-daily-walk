@@ -10,6 +10,9 @@ import {aiUnreviewedCardLabel,publishedChecks,refLabel,splitHook,todaysCheck} fr
 import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
 import {checkToday,checkTodayFixture,checkTodayLargeText} from "../tests/today.browser.mjs";
 import {checkSponsor} from "../tests/sponsor.browser.mjs";
+import {checkWelcome} from "../tests/welcome.browser.mjs";
+import {checkLamplight} from "../tests/lamplight.browser.mjs";
+import {freshPlatform} from "../src/platform/persistence.ts";
 import {checkStoryFlow} from "../tests/story.browser.mjs";
 import {checkShelfScreen} from "../tests/shelf.browser.mjs";
 import {checkContextList,checkStoryEnd} from "../tests/storyend.browser.mjs";
@@ -28,6 +31,25 @@ const browser = await chromium.launch({
     ? { channel: process.env.BROWSER_CHANNEL }
     : {}),
 });
+// Every fresh context starts as a reader who already answered the welcome questionnaire (plan 16): it would otherwise
+// take over "/" on the first open. tests/welcome.browser.mjs opens its own contexts without it (newContextFirstRun).
+const answered = freshPlatform();
+answered.local.onboarded = true;
+const ANSWERED = JSON.stringify(answered);
+const newContextFirstRun = browser.newContext.bind(browser);
+browser.newContextFirstRun = newContextFirstRun;
+browser.newContext = async (options) => {
+  const fresh = await newContextFirstRun(options);
+  await fresh.addInitScript((value) => {
+    try {
+      if (!["hfg-daily-walk:v1", "hfg-daily-walk:v2", "hfg-daily-walk:v3"].some((key) => localStorage.getItem(key) !== null))
+        localStorage.setItem("hfg-daily-walk:v3", value);
+    } catch {
+      // Storage that throws is one of the cases under test; leave it as it is.
+    }
+  }, ANSWERED);
+  return fresh;
+};
 const context = await browser.newContext({
   viewport: { width: 375, height: 812 },
   timezoneId: "Europe/Amsterdam",
@@ -154,6 +176,8 @@ try {
       assert.equal(await page.getByLabel("Minutes", { exact: true }).inputValue(), "10");
     },
   );
+  await check("welcome questionnaire: once, on the first open of the app, five screens with Back and Skip for now, saved choices, never again, no hold on a deep link, both looks and modes, 200 % text", () => checkWelcome(browser, base));
+  await check("Lamplight is direction B's room: no leather slab, one pool of lamp light, the salmon pill, a sky with a star for each day walked and its line, the walk finish with today's star lit, the light modes unchanged, 200 % text", () => checkLamplight(browser, base));
   await check("Today: its states, the walk and shelf rows, and what each look draws (UI-SPEC A1)", () => checkToday(browser, base, published));
   await check("Today on controlled content: no published check, an AI-written newest check, files the app cannot read", () => checkTodayFixture(browser, base));
   await check("Today at 200 % text on 390 and 320px: no sideways scroll, nothing clipped, the button and the last row above the tab bar, tab labels on one line", () => checkTodayLargeText(browser, base, published));
@@ -1440,7 +1464,7 @@ try {
   await check(
     "v1 browser migration avoids onboarding and preserves the private journal",
     async () => {
-      const migrated = await browser.newContext();
+      const migrated = await browser.newContextFirstRun();
       const p = await migrated.newPage();
       await p.addInitScript(() => {
         if (!localStorage.getItem("hfg-daily-walk:v1"))
@@ -1489,7 +1513,7 @@ try {
     "full/unavailable/corrupt storage displays a recoverable state",
     async () => {
       for (const mode of ["full", "unavailable", "corrupt"]) {
-        const c = await browser.newContext();
+        const c = await browser.newContextFirstRun();
         const p = await c.newPage();
         await p.addInitScript((mode) => {
           if (mode === "corrupt")

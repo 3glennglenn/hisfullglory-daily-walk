@@ -474,3 +474,60 @@ test("the stylesheet uses only token names that exist", () => {
   const unknown = [...used].filter((name) => !defined.has(name));
   assert.deepEqual(unknown, [], "var() names without a definition");
 });
+
+// Plan 16 (founder, 2026-10-20): Lamplight takes direction B's treatment in both looks, so the pairs B draws are proven
+// here in both Lamplight blocks: the salmon pill (--on-button on --button), the reference line (--link on the night page
+// and on the raised card), the hook (--ink) and the second hook line and the sky's line (--muted) on the night page, the
+// AI label (--ai) on the night page and the raised card.
+test("Lamplight (direction B): the pill, the reference, the hook and the AI label are readable on the night page and on the raised card", () => {
+  for (const key of ["coverLamplight", "markedLamplight"] as Key[]) {
+    const block = blocks[key];
+    const need = (spec: [string, string], at: number) => {
+      const value = ratio(token(block, spec[0]), token(block, spec[1]));
+      assert.ok(value >= at, `${labels[key]}: ${spec[0]} on ${spec[1]} is ${value.toFixed(2)}:1, needs ${at}:1`);
+    };
+    need(["--on-button", "--button"], 4.5);
+    need(["--link", "--bg"], 4.5);
+    need(["--link", "--surface"], 4.5);
+    need(["--ink", "--bg"], 4.5);
+    need(["--ink", "--surface"], 4.5);
+    need(["--muted", "--bg"], 4.5);
+    need(["--muted", "--surface"], 4.5);
+    need(["--ai", "--bg"], 4.5);
+    need(["--ai", "--surface"], 4.5);
+    need(["--focus", "--bg"], 3);
+  }
+  // The three pairs of the plan, by their hex values: #1A120E on #B97862, #E2AE96 on #1A120E and on #251914.
+  assert.ok(ratio("#1A120E", "#B97862") >= 4.5, "the pill text");
+  assert.ok(ratio("#E2AE96", "#1A120E") >= 4.5, "the reference on the night page");
+  assert.ok(ratio("#E2AE96", "#251914") >= 4.5, "the reference on the raised card");
+  assert.ok(ratio("#F0C987", "#1A120E") >= 3, "a star is a graphic: 3:1 on the night page");
+});
+
+test("Lamplight (direction B): both Lamplight modes draw the cover without a slab, in both looks, and the light modes keep it", () => {
+  const lamp = (css: string) => {
+    const at = css.indexOf("Plan 16: Lamplight is direction B's room");
+    return css.slice(css.indexOf("*/", at) + 2);
+  };
+  const css = lamp(appCss);
+  assert.ok(css.length > 100, "the Lamplight section of src/styles.css is there");
+  // Every rule of the section is under data-mode="lamplight" (the star field's own classes are drawn only there),
+  // so no light mode can change.
+  const rules = [...css.matchAll(/^([^\s@/}][^{]*)\{/gm)].map(([, selector]) => selector.trim());
+  for (const selector of rules) {
+    if (/^(from|to)$/.test(selector)) continue;
+    assert.ok(
+      selector.split(",").every((part) => part.includes('[data-mode="lamplight"]') || /^\.(sky|sky-caption|star)(\.[\w-]+)?$/.test(part.trim())),
+      `${selector} touches only Lamplight or the star field`,
+    );
+  }
+  assert.match(css, /:root\[data-mode="lamplight"\] \.cover-wrap \.cover \{[^}]*background: transparent/);
+  assert.match(css, /\.cover::before,[^{]*\.cover-orn,[^{]*\.cover-ribbon \{[^}]*display: none/);
+  assert.match(css, /radial-gradient\(closest-side, rgb\(240 201 135 \/ 0\.17\), transparent\)/);
+  assert.match(css, /:root\[data-mode="lamplight"\] \.cover \.cover-button \{[^}]*background: var\(--button\);[^}]*color: var\(--on-button\)/);
+  // The sky is not drawn in the light modes.
+  assert.match(css, /\.sky,\s*\.sky-caption \{\s*display: none;/);
+  const site = readFileSync("site/src/components/Cover.astro", "utf8").replace(/\r\n/g, "\n");
+  assert.match(site, /:global\(:root\[data-mode="lamplight"\]\) \.cover \{[^}]*background: transparent/);
+  assert.match(site, /radial-gradient\(closest-side, rgb\(240 201 135 \/ 0\.17\), transparent\)/);
+});

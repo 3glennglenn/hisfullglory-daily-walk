@@ -416,7 +416,7 @@ export function publishedChecks(): ContextCheck[] {
  * The published context checks, newest first, AI-unreviewed ones included (founder decision
  * D-06, 2026-10-19: "Ja, elke dag de nieuwste"; this replaced the earlier rule that the front
  * door shows approved checks only). The home page opens with the first and stands a bookcase
- * of the first six beside it. A check that no person has checked always carries its label
+ * of the first six beside it. A check whose context an AI model wrote always carries its label
  * (aiUnreviewedCardLabel) wherever it appears. Order: later publication date (approved date,
  * or written date for an AI-unreviewed check), then later written date, then slug A to Z.
  */

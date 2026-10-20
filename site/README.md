@@ -88,9 +88,7 @@ read them.
 Since 2026-10-16 a daily routine also writes context checks and publishes them without
 anyone reading them first (the founder's decision: "a and b and i don't have to review them";
 context checks only). Such a file says `"review": "ai-unreviewed"`, names the
-`model`, has no `approved` date and needs at least two `sources`. Its page says "Written by
-an AI model from the sources below. Not checked by a person." at the top and in a note at
-the bottom, and its cards say "Written by an AI model. Not checked by a person." The home
+`model`, has no `approved` date and needs at least two `sources`. Its page says "Context written by AI, from the sources below. The Bible text is the World English Bible." at the top and a note at the bottom ("This context was written by an AI model to help you see the verse in its setting. The Bible text is the World English Bible. Before publishing, an automatic check made sure every source below opens and every quotation matches its source. It can contain mistakes. If a source says otherwise, tell us."), and its cards say "Context written by AI, from named sources." The home
 page and Today in the app show the newest published check, AI-unreviewed ones included,
 always with that label (founder, 2026-10-19). The build rejects any quotation mark in such a
 file other than the curly double quotes around WEB text, so the words of people can only
@@ -133,8 +131,8 @@ stops the build.
 
 - A file is built only when it says `"review": "approved"`, with the date in `"approved"`.
   Only the founder approves; a new file starts as `"draft"`. The one exception is a context
-  check with `"review": "ai-unreviewed"` (see above), which the build labels as not checked
-  by a person. `/topics` and `/articles`, their navigation items and the
+  check with `"review": "ai-unreviewed"` (see above), which the build labels as context
+  written by AI. `/topics` and `/articles`, their navigation items and the
   sitemap entries appear with the first approved file of each kind.
 - Curly double quotes are reserved for words from the WEB text. In a topic file every
   passage reason must quote its own passage. In an article every quotation must occur in

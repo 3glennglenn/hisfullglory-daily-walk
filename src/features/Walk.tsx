@@ -10,6 +10,7 @@ import { contextChecks } from "../context/data";
 import { AiBadge } from "../ui/Badges";
 import { GroupedList, Row } from "../ui/List";
 import { Toolbar } from "../ui/Screen";
+import { StarField } from "../ui/StarField";
 import { StepIndicator } from "../ui/StepIndicator";
 import { Journal } from "./LegacyWalk";
 import { dailyReminderOn } from "./Reminders";
@@ -161,7 +162,8 @@ export function Walk() {
 
 // The walk finish (A6): the days walked, counted from every completed date and never reset, with no run length and no
 // calendar of empty days; tomorrow's passage named; today's context check while it is unread; the reminder row reading
-// what the reader chose (reminders are never turned on from here); the rhythm questions once, after the first walk.
+// what the reader chose (reminders are never turned on from here). The rhythm questions are asked once, on the first open
+// of the app (Welcome.tsx), no longer after the first walk; Settings and You keep their "Daily rhythm" entries.
 function WalkFinish({ date }: { date: string }) {
   const { state } = usePlatform();
   const today = contentFor(date);
@@ -173,6 +175,8 @@ function WalkFinish({ date }: { date: string }) {
   return (
     <section className="flow walk-flow walk-finish">
       <Toolbar back="Today" to="/" title="Today's walk" />
+      {/* Lamplight only: the sky with today's star lit and one soft glow (a 600 ms fade-in; none under Reduce Motion). */}
+      <StarField walked={state.local.completedDates} today={date} finish />
       <h2 className="walk-complete">Walk complete</h2>
       <blockquote className="walk-finish-verse">{today.quote}</blockquote>
       <p className="walk-finish-ref">{today.reference}</p>
@@ -206,7 +210,6 @@ function WalkFinish({ date }: { date: string }) {
           />
         )}
         <Row href="/settings/reminders" chevron title="Daily reminder" value={reminderOn ? "On" : "Off"} />
-        {days === 1 && <Row href="/settings" chevron title="Choose your daily rhythm" />}
       </GroupedList>
       <button type="button" className="flow-button" onClick={() => navigate("/")}>
         Back to Today

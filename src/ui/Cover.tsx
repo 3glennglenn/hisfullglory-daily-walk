@@ -6,7 +6,10 @@ import { AiBadge } from "./Badges";
 // the marked page. One DOM for both looks: only the CSS differs by data-look.
 //   Cover and story: a leather block (--sig) with a gilt rule 8px inside its edge and four corner ornaments.
 //   Marked page: no box, a satin ribbon (--brand) beside the passage.
-//   Lamplight (either look): a soft lamp glow behind the block, never on it.
+//   Lamplight (either look, direction B, plan 16): no block at all. No leather, no gilt rule, no corner ornaments, no
+//     ribbon: the words sit on the night page inside one soft pool of lamp light that fades to nothing (never an edge),
+//     the reference small in --link, the hook in the serif in --ink, and the one filled button is the salmon pill
+//     (--button on --on-button). The spans below stay in the markup and the CSS leaves them out.
 // The decoration (ribbon and ornaments) is aria-hidden; the words carry the meaning. The section is named by a
 // visually hidden h2, so heading navigation finds it; the screen's only h1 stays the screen's title.
 export function Cover({ heading, reference, children }: { heading: string; reference: string; children: ReactNode }) {

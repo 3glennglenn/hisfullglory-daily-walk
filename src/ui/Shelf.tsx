@@ -13,7 +13,7 @@ import { openInApp } from "./internalLink";
 // same for both looks. Whether a check was written by an AI model that no person checked is looked up by slug in
 // the bundled checks, never stored with the shelf. The AI badge and the words next to it say so; the colour does not.
 
-const AI_SUFFIX = ", written by an AI model, not checked by a person";
+const AI_SUFFIX = ", context written by AI";
 
 /** The words a spine is announced with: "John 3:16, read October 19", plus what a reader must be told. */
 export function spineName(reference: string, finishedOn: string, ai: boolean, published: boolean): string {
