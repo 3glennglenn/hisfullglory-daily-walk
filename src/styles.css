@@ -3623,3 +3623,120 @@ html[data-text="large"] .mini-player {
     bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
   }
 }
+
+/* ==== The verse sheet and the chapter sheet (UI-SPEC A4, plan 01.1-10; src/bible/VerseSheet.tsx) ==== */
+
+/* -- The five actions: an icon above a Footnote label that may wrap to two centred lines, 64px tall at least -- */
+.verse-actions {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-1);
+  margin: var(--space-2) 0 var(--space-3);
+}
+.verse-actions .verse-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-1);
+  min-height: 64px;
+  padding: var(--space-2) 2px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  text-align: center;
+}
+.verse-action span {
+  overflow-wrap: anywhere;
+}
+.verse-actions .verse-action[aria-pressed="true"] {
+  border: 0;
+  box-shadow: none;
+}
+.verse-action[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+html[data-text="large"] .verse-actions {
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+}
+/* The inline choice of a highlight colour: four 44px swatches with their names. */
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+}
+.swatches .swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 64px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+}
+.swatches .swatch[aria-checked="true"] {
+  border: 0;
+  box-shadow: none;
+}
+.swatch-dot {
+  position: relative;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+}
+.swatch-gold .swatch-dot {
+  background: var(--highlight-gold);
+}
+.swatch-sage .swatch-dot {
+  background: var(--highlight-sage);
+}
+.swatch-rose .swatch-dot {
+  background: var(--highlight-rose);
+}
+/* None: an empty circle struck through. */
+.swatch-none .swatch-dot::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--muted);
+  transform: translateX(-50%) rotate(45deg);
+}
+.swatch[aria-checked="true"] .swatch-dot {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);
+}
+.swatches .swatch:focus-visible {
+  outline-offset: 2px;
+}
+.sheet-status {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.sheet-status:empty {
+  display: none;
+}
+/* A focus ring on a chapter button or a row inside a rounded, clipped list stays inside it. */
+.chapter-cell:focus-visible,
+.search-hit:focus-visible {
+  outline-offset: -3px;
+}

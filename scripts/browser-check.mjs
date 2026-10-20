@@ -10,7 +10,7 @@ import {aiUnreviewedCardLabel,publishedChecks,refLabel,splitHook,todaysCheck} fr
 import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
 import {checkToday,checkTodayFixture,checkTodayLargeText} from "../tests/today.browser.mjs";
 import {checkSponsor} from "../tests/sponsor.browser.mjs";
-import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen} from "../tests/reader.browser.mjs";
+import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen,checkVerseSheet} from "../tests/reader.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -183,18 +183,12 @@ try {
     },
   );
   await check(
-    "deep-linked WEB chapter: the linked verse is selected, bookmark and highlight survive a reload, the old ?tab= addresses still open the context layers",
+    "deep-linked WEB chapter: the linked verse is selected; the old ?tab= addresses still open the context layers",
     async () => {
       await go("/bible/romans/8/28");
       await page.getByRole("heading", { level: 1, name: "Romans 8", exact: true }).waitFor();
       assert.ok((await page.locator("#verse-28").innerText()).includes("all things work together"));
       assert.equal(await page.locator("#verse-28.selected").count(), 1, "the linked verse is selected");
-      await page.getByRole("button", { name: "Bookmark / save", exact: true }).click();
-      await page.getByLabel("Highlight").selectOption("sage");
-      await page.reload();
-      await page.locator("#verse-28").waitFor();
-      assert.equal(await page.getByLabel("Highlight").inputValue(), "sage");
-      assert.equal(await page.getByRole("button", { name: "Remove bookmark", exact: true }).count(), 1);
       // The view buttons are gone; the old addresses still reach the layers (plan 10 moves them into sheets).
       await page.goto(base + "/bible/romans/8/28?tab=context");
       // Romans 8 has a sourced chapter note (no verse note for 8:28) and an AI explanation.
@@ -226,6 +220,7 @@ try {
   await check("the title opens the picker, search sits behind More or an icon, sheets keep focus and swipe (UI-SPEC A3, A4)", () => checkReaderSheets(browser, base));
   await check("the end of the chapter: one filled Next, Mark as read, questions to carry, topics, the WEB line (UI-SPEC A3)", () => checkChapterEnd(browser, base));
   await check("Listen plays in a mini player above the tab bar, the spoken verse is gold, Stop gives focus back (UI-SPEC A3)", () => checkListen(browser, base));
+  await check("a verse opens one sheet: highlight, save, journal, copy and share; a tap or a number opens it, a selection or a long press does not (UI-SPEC A4)", () => checkVerseSheet(browser, base));
   await check(
     "private prayer lifecycle creates an answered journal without automatic publishing",
     async () => {

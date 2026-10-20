@@ -687,3 +687,142 @@ export async function checkListen(browser, base) {
     await silent.context.close();
   }
 }
+
+// ---------------------------------------------------------------------------------------------------------------
+// The verse sheet: actions (Task 1 of plan 10).
+
+const stored = (page) => page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")));
+
+/** Tap a verse, act on it in one sheet, come back where you were. */
+export async function checkVerseSheet(browser, base) {
+  const ctx = await open(browser, { extra: { permissions: ["clipboard-read", "clipboard-write"] } });
+  try {
+    const { page, context } = ctx;
+    // No system share sheet: Share verse copies the link instead.
+    await context.addInitScript(() => Object.defineProperty(navigator, "share", { value: undefined, configurable: true }));
+    await goto(page, base, "/bible/romans/8/28");
+    await page.locator("#verse-28").waitFor();
+    // A link to a verse selects it (the gold tint) without opening anything.
+    assert.equal(await page.locator("#verse-28.selected").count(), 1);
+    assert.equal(await page.getByRole("dialog").count(), 0, "no sheet opens by itself");
+    assert.equal(await page.getByText("Selected passage").count(), 0, "the old actions card is gone");
+    // Activating the number opens one sheet titled with the reference; focus on the title; Close names it.
+    await page.locator("#verse-28 .verse-num").click();
+    const sheet = page.getByRole("dialog", { name: "Romans 8:28" });
+    await sheet.waitFor();
+    assert.equal(await page.evaluate(() => document.activeElement?.tagName + ":" + document.activeElement?.textContent), "H2:Romans 8:28", "focus is on the title");
+    assert.equal(await sheet.getByRole("button", { name: "Close Romans 8:28", exact: true }).innerText(), "Close");
+    assert.equal(await page.locator("#verse-28.selected").count(), 1, "the verse is tinted while its sheet is open");
+    assert.equal(new URL(page.url()).pathname, "/bible/romans/8/28", "the address follows the verse");
+    // The five actions, at least 64px tall, an icon of 24px above a 13px label.
+    const actions = await sheet.locator(".verse-action").evaluateAll((els) =>
+      els.map((el) => ({ label: el.textContent.trim(), h: el.getBoundingClientRect().height, icon: el.querySelector("svg").getBoundingClientRect().width, size: Math.round(parseFloat(getComputedStyle(el.querySelector("span")).fontSize)), weight: getComputedStyle(el.querySelector("span")).fontWeight })),
+    );
+    assert.deepEqual(actions.map((a) => a.label), ["Highlight", "Save verse", "Add to journal", "Copy verse", "Share verse"]);
+    assert.ok(actions.every((a) => a.h >= 64 && a.icon === 24 && a.size === 13 && a.weight === "600"), JSON.stringify(actions));
+    // Save verse: becomes Saved, aria-pressed, a bookmark is stored.
+    const save = sheet.getByRole("button", { name: "Save verse", exact: true });
+    assert.equal(await save.getAttribute("aria-pressed"), "false");
+    await save.click();
+    const saved = sheet.getByRole("button", { name: "Saved", exact: true });
+    assert.equal(await saved.getAttribute("aria-pressed"), "true");
+    assert.ok((await stored(page)).bookmarks.includes("/bible/romans/8/28"));
+    // Highlight: a radiogroup of four named 44px swatches; Sage is stored and kept after a reload.
+    await sheet.getByRole("button", { name: "Highlight", exact: true }).click();
+    const group = sheet.getByRole("radiogroup", { name: "Highlight colour" });
+    assert.deepEqual(await group.getByRole("radio").evaluateAll((els) => els.map((el) => el.textContent.trim())), ["Gold", "Sage", "Rose", "None"]);
+    assert.ok((await group.locator(".swatch-dot").evaluateAll((els) => els.map((el) => el.getBoundingClientRect().width))).every((w) => w === 44));
+    assert.equal(await group.getByRole("radio", { name: "None" }).getAttribute("aria-checked"), "true");
+    await group.getByRole("radio", { name: "Sage" }).click();
+    assert.equal((await stored(page)).highlights["/bible/romans/8/28"], "sage");
+    await page.keyboard.press("ArrowRight");
+    assert.equal((await stored(page)).highlights["/bible/romans/8/28"], "rose", "arrow keys move the choice");
+    await group.getByRole("radio", { name: "Sage" }).click();
+    // Copy verse and Share verse (without the system share sheet) say what they did.
+    await sheet.getByRole("button", { name: "Copy verse", exact: true }).click();
+    await sheet.getByText("Copied.", { exact: true }).waitFor();
+    const text = await page.evaluate(async () => {
+      const bible = await (await fetch("/bible/web.json")).json();
+      return bible.books.find((b) => b.slug === "romans").chapters[7].verses.find((v) => v.number === 28).text;
+    });
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), `${text} Romans 8:28 (WEB)`, "the verse, its reference and (WEB)");
+    await page.evaluate(() => navigator.clipboard.writeText("nothing"));
+    await sheet.getByRole("button", { name: "Share verse", exact: true }).click();
+    await sheet.getByText("Passage link copied.", { exact: true }).waitFor();
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), new URL(page.url()).origin + "/bible/romans/8/28");
+    // Escape closes, focus is on the verse number, the choice is over (the address is the chapter's).
+    await page.keyboard.press("Escape");
+    await sheet.waitFor({ state: "detached" });
+    await page.waitForFunction(() => document.activeElement?.classList.contains("verse-num") && document.activeElement.closest("[data-verse]").dataset.verse === "28", undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the verse number"));
+    assert.equal(await page.locator(".verse.selected").count(), 0);
+    assert.equal(new URL(page.url()).pathname, "/bible/romans/8");
+    // The highlight survives a reload; the number of a highlighted verse is ink in Light.
+    await page.reload();
+    await page.locator("#verse-28.highlight-sage").waitFor();
+    const colours = await page.evaluate(() => {
+      const probe = document.createElement("i");
+      probe.style.color = "var(--ink)";
+      document.body.append(probe);
+      const ink = getComputedStyle(probe).color;
+      probe.remove();
+      return { ink, number: getComputedStyle(document.querySelector("#verse-28 .verse-num")).color, other: getComputedStyle(document.querySelector("#verse-27 .verse-num")).color };
+    });
+    assert.equal(colours.number, colours.ink, "a highlighted verse's number is --ink in Light");
+    assert.notEqual(colours.other, colours.ink, "other numbers stay --link");
+    // A tap on the text of a verse opens its sheet.
+    await page.locator("#verse-27 .verse-text").click();
+    await page.getByRole("dialog", { name: "Romans 8:27" }).waitFor();
+    await page.keyboard.press("Escape");
+    await page.getByRole("dialog").waitFor({ state: "detached" });
+    // Not a tap: a press of 500ms or more is a long press (native selection and copy)...
+    const at = await page.locator("#verse-25 .verse-text").evaluate((el) => {
+      el.scrollIntoView({ block: "center" });
+      const b = el.getBoundingClientRect();
+      return { x: b.left + 40, y: b.top + 12 };
+    });
+    await page.mouse.move(at.x, at.y);
+    await page.mouse.down();
+    await page.waitForTimeout(650);
+    await page.mouse.up();
+    assert.equal(await page.getByRole("dialog").count(), 0, "a long press opens nothing");
+    // ...and neither is a click that ends a text selection.
+    await page.evaluate(() => {
+      const range = document.createRange();
+      range.selectNodeContents(document.querySelector("#verse-26 .verse-text"));
+      const selection = getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    });
+    await page.locator("#verse-24 .verse-text").click();
+    assert.equal(await page.getByRole("dialog").count(), 0, "a click with a text selection opens nothing");
+    await page.locator("#verse-24 .verse-text").click();
+    await page.getByRole("dialog", { name: "Romans 8:24" }).waitFor();
+    // Add to journal: the private composer with the reference.
+    await page.getByRole("button", { name: "Add to journal", exact: true }).click();
+    await page.waitForURL("**/journal");
+    const entry = (await stored(page)).entries[0];
+    assert.deepEqual([entry.type, entry.title, entry.source], ["Bible passage", "Romans 8:24", "/bible/romans/8/24"]);
+    assert.deepEqual(ctx.problems, []);
+  } finally {
+    await ctx.context.close();
+  }
+  // The native share sheet, where there is one, gets the passage and its link.
+  const sharing = await open(browser);
+  try {
+    const { page, context } = sharing;
+    await context.addInitScript(() => {
+      window.__shared = [];
+      navigator.share = async (data) => {
+        window.__shared.push(data);
+      };
+    });
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-16 .verse-num").click();
+    await page.getByRole("button", { name: "Share verse", exact: true }).click();
+    const shared = await page.evaluate(() => window.__shared[0]);
+    assert.deepEqual([shared.title, shared.text, new URL(shared.url).pathname], ["John 3:16", "John 3:16 (WEB)", "/bible/john/3/16"]);
+    assert.deepEqual(sharing.problems, []);
+  } finally {
+    await sharing.context.close();
+  }
+}

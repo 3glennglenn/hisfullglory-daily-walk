@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Book, Headphones, Search } from "lucide-react";
 import { ListenBar, useListen } from "./Listen";
 import { ChapterEnd } from "./ChapterEnd";
+import { VerseSheet } from "./VerseSheet";
 import { ChapterText } from "./ChapterText";
 import { ReaderToolbar } from "./ReaderToolbar";
 import { Library, SearchSheet, BIBLE_ERROR } from "./Library";
@@ -37,10 +38,11 @@ export function Reader({ route }: { route: Route }) {
   const [data, setData] = useState<BibleData | null>(null);
   const [failed, setFailed] = useState(false);
   const [selected, setSelected] = useState<number | undefined>(route.verse);
-  const [status, setStatus] = useState("");
   // One sheet at a time: the passage picker, search, or the overflow menu of the toolbar.
   const [sheet, setSheet] = useState<null | "picker" | "search" | "more">(null);
   const [narrow, setNarrow] = useState(false);
+  // The verse whose sheet is open (UI-SPEC A4); opening one closes any other sheet.
+  const [layers, setLayers] = useState<null | { verse: number }>(null);
   const [speaking, setSpeaking] = useState<number | undefined>();
   const studyBook = route.book ?? "psalms";
   const [study, setStudy] = useState<{ book: string; records: KnowledgeRecord[] }>({ book: "", records: [] });
@@ -79,7 +81,7 @@ export function Reader({ route }: { route: Route }) {
   }, []);
   useEffect(() => {
     setSelected(route.verse);
-    setStatus("");
+    setLayers(null);
   }, [route.book, route.chapter, route.verse]);
 
   const book = data?.books.find((b) => b.slug === (route.book ?? "psalms"));
@@ -139,7 +141,6 @@ export function Reader({ route }: { route: Route }) {
     );
 
   const source = passagePath(book.slug, chapter.number, selected);
-  const verse = chapter.verses.find((v) => v.number === selected);
   const reference = `${book.name} ${chapter.number}${selected ? `:${selected}` : ""}`;
   const { previous, next } = adjacentChapters(data, book.slug, chapter.number);
   const read = state.reading.includes(chapterPath!);
@@ -149,9 +150,22 @@ export function Reader({ route }: { route: Route }) {
 
   // The address follows the chosen verse, but choosing one is not a page change: it must not scroll to the
   // top or add a history entry.
-  function chooseVerse(n: number) {
+  function openVerse(n: number) {
+    setSheet(null);
     setSelected(n);
     history.replaceState({}, "", passagePath(book!.slug, chapter!.number, n));
+    setLayers({ verse: n });
+    // The sheet covers the lower half of the screen: a verse that would sit under it is brought up above it.
+    requestAnimationFrame(() => {
+      const box = document.getElementById(`verse-${n}`)?.getBoundingClientRect();
+      if (box && box.bottom > window.innerHeight * 0.45) window.scrollBy({ top: box.top - window.innerHeight * 0.2 });
+    });
+  }
+  // Closing the sheet ends the choice: the tint goes and the address is the chapter's again.
+  function closeLayers() {
+    setLayers(null);
+    setSelected(undefined);
+    history.replaceState({}, "", passagePath(book!.slug, chapter!.number));
   }
   // Under 360px, and in large-text mode, Books is not in the toolbar and moves into More.
   function openMore() {
@@ -194,80 +208,8 @@ export function Reader({ route }: { route: Route }) {
         selected={selected}
         speaking={speaking}
         notes={notes}
-        onOpen={chooseVerse}
+        onOpen={openVerse}
       />
-      {selected !== undefined && (
-        <div className="card">
-          <h2>Selected passage</h2>
-          <div className="actions">
-            <button
-              className="secondary"
-              onClick={() =>
-                update((s) => ({
-                  ...s,
-                  bookmarks: s.bookmarks.includes(source)
-                    ? s.bookmarks.filter((p) => p !== source)
-                    : [...s.bookmarks, source],
-                }))
-              }
-            >
-              {state.bookmarks.includes(source) ? "Remove bookmark" : "Bookmark / save"}
-            </button>
-            <label>
-              Highlight
-              <select
-                value={state.highlights[source] ?? "none"}
-                onChange={(e) =>
-                  update((s) => {
-                    const h = { ...s.highlights };
-                    if (e.target.value === "none") delete h[source];
-                    else h[source] = e.target.value;
-                    return { ...s, highlights: h };
-                  })
-                }
-              >
-                {["none", "gold", "sage", "rose"].map((c) => (
-                  <option key={c}>{c}</option>
-                ))}
-              </select>
-            </label>
-            <button className="secondary" onClick={() => journal("Bible passage")}>
-              Journal privately
-            </button>
-            <button
-              className="secondary"
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(`${verse?.text ?? ""} — ${reference} (WEB)`);
-                  setStatus("Copied.");
-                } catch {
-                  setStatus("Copy unavailable in this browser.");
-                }
-              }}
-            >
-              Copy Scripture
-            </button>
-            <button
-              className="secondary"
-              onClick={async () => {
-                try {
-                  const share = { title: reference, text: `${reference} (WEB)`, url: window.location.origin + source };
-                  if (navigator.share) await navigator.share(share);
-                  else {
-                    await navigator.clipboard.writeText(share.url);
-                    setStatus("Passage link copied.");
-                  }
-                } catch {
-                  setStatus("Share canceled or unavailable.");
-                }
-              }}
-            >
-              Share passage link
-            </button>
-          </div>
-          <small role="status">{status}</small>
-        </div>
-      )}
       <ChapterEnd
         chapter={chapterReference}
         previous={previous && { reference: previous.reference, path: passagePath(previous.book, previous.chapter) }}
@@ -383,6 +325,16 @@ export function Reader({ route }: { route: Route }) {
       ) : tab === "community" ? (
         <Feed source={source} />
       ) : null}
+      {layers && (
+        <VerseSheet
+          key={layers.verse}
+          book={book}
+          chapter={chapter}
+          verse={layers.verse}
+          returnFocus={() => document.querySelector<HTMLElement>(`#verse-${layers.verse} .verse-num`)}
+          onClose={closeLayers}
+        />
+      )}
       <ListenBar
         reference={chapterReference}
         listening={listening}
