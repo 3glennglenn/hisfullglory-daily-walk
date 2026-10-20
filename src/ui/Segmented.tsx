@@ -1,9 +1,11 @@
-import { useRef, type KeyboardEvent } from "react";
+import { useEffect, useRef, type KeyboardEvent } from "react";
 
 // A small set of mutually exclusive choices (UI-SPEC 3.4, A13): a radiogroup of radio buttons on a
 // --surface-2 track, the chosen one raised on --surface. One option is in the Tab order (the chosen
 // one); the arrow keys move the choice, as in a native radio group. In large-text mode the stylesheet
-// lays the options out as a vertical list of radio rows.
+// lays the options out as a vertical list of radio rows. With `scroll` the options stay in one row that
+// scrolls sideways and never wraps (Community's five sections, UI-SPEC A11), also in large text, and the
+// chosen option is brought into view.
 export interface SegmentedOption<T extends string> {
   value: T;
   label: string;
@@ -27,6 +29,7 @@ export function Segmented<T extends string>({
   labelledBy,
   value,
   options,
+  scroll = false,
   onChange,
 }: {
   /** The group's accessible name, when no visible heading names it. */
@@ -35,9 +38,19 @@ export function Segmented<T extends string>({
   labelledBy?: string;
   value: T;
   options: readonly SegmentedOption<T>[];
+  /** One row that scrolls sideways instead of sharing the width. */
+  scroll?: boolean;
   onChange: (value: T) => void;
 }) {
   const group = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const row = group.current;
+    if (!scroll || !row) return;
+    const chosen = row.querySelector<HTMLElement>('[aria-checked="true"]');
+    if (!chosen) return;
+    // Scroll the row itself, never the page: the chosen option ends up centred where the row has room.
+    row.scrollLeft = chosen.offsetLeft - (row.clientWidth - chosen.offsetWidth) / 2;
+  }, [scroll, value]);
   const values = options.map((o) => o.value);
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     const next = radioKeyTarget(event.key, values, value);
@@ -50,7 +63,7 @@ export function Segmented<T extends string>({
   return (
     <div
       ref={group}
-      className="segmented"
+      className={scroll ? "segmented segmented-scroll" : "segmented"}
       role="radiogroup"
       aria-label={label}
       aria-labelledby={labelledBy}

@@ -4,6 +4,8 @@ import { useAuth, AuthPanel } from "../platform/auth";
 import { postError } from "./blockedLanguage";
 import { navigate } from "../platform/router";
 import { SafetyControls, type TargetKind } from "./safety";
+import { ConfirmDialog } from "../ui/ConfirmDialog";
+import { TextSheet } from "../ui/TextSheet";
 export interface Post {
   origin_kind: TargetKind;
   id: string;
@@ -136,6 +138,10 @@ export function Feed({
   const [more, setMore] = useState(false);
   const [kind, setKind] = useState(initialKind);
   const [revision, setRevision] = useState(0);
+  // A public contribution waiting for a reader's answer to "Delete this public contribution?", and a public
+  // prayer waiting for the words that go with its new state: both in the app's own dialogs (UI-SPEC A15).
+  const [deleting, setDeleting] = useState<{ id: string; origin: TargetKind } | null>(null);
+  const [updating, setUpdating] = useState<{ id: string; status: string } | null>(null);
   const sequence = useRef(0);
   useEffect(() => {
     const changed = () => setRevision((r) => r + 1);
@@ -173,8 +179,7 @@ export function Feed({
     void load();
   }, [source, kind, session?.user.id, revision]);
   async function remove(id: string, origin: TargetKind) {
-    if (!supabase || !window.confirm("Delete this public contribution?"))
-      return;
+    if (!supabase) return;
     const { error } =
       origin === "post"
         ? await supabase.rpc("delete_community_post", { post_id: id })
@@ -194,22 +199,16 @@ export function Feed({
     if (error) setError("Sign in to react.");
     else setRevision((r) => r + 1);
   }
-  async function updatePrayer(id: string, status: string) {
-    const answer =
-      status === "Answered"
-        ? window.prompt(
-            "How did God answer your prayer? This update will be public.",
-          )
-        : window.prompt("Add a public prayer update (optional).");
-    if (answer === null) return;
-    if (!supabase) return;
+  async function updatePrayer(id: string, status: string, answer: string) {
+    if (!supabase) return false;
     const { error } = await supabase.rpc("update_public_prayer", {
       post_id: id,
       new_status: status,
-      update_body: answer ?? "",
+      update_body: answer,
     });
     if (error) setError("Prayer update could not be saved.");
     else setRevision((r) => r + 1);
+    return !error;
   }
   return (
     <section>
@@ -239,13 +238,15 @@ export function Feed({
         </div>
       ) : (
         <>
+          <p role="alert">{error}</p>
           <p role="status">
-            {error ||
-              (busy
+            {error
+              ? ""
+              : busy
                 ? "Loading…"
                 : posts.length
                   ? ""
-                  : "No contributions here yet.")}
+                  : "No contributions here yet."}
           </p>
           {posts.map((p) => (
             <article className="card" key={p.id}>
@@ -289,7 +290,7 @@ export function Feed({
                 <div className="actions">
                   <button
                     className="text-button"
-                    onClick={() => void remove(p.id, p.origin_kind)}
+                    onClick={() => setDeleting({ id: p.id, origin: p.origin_kind })}
                   >
                     Delete my contribution
                   </button>
@@ -298,9 +299,7 @@ export function Feed({
                       Prayer state
                       <select
                         value={p.prayer_status ?? "Active"}
-                        onChange={(e) =>
-                          void updatePrayer(p.id, e.target.value)
-                        }
+                        onChange={(e) => setUpdating({ id: p.id, status: e.target.value })}
                       >
                         {["Active", "Waiting", "Answered", "Archived"].map(
                           (s) => (
@@ -329,6 +328,38 @@ export function Feed({
             </button>
           )}
         </>
+      )}
+      {deleting && (
+        <ConfirmDialog
+          title="Delete this public contribution?"
+          body="It is removed for everyone. This cannot be undone."
+          actionLabel="Delete contribution"
+          safeLabel="Keep contribution"
+          destructive
+          busyLabel="Deleting…"
+          onAction={async () => {
+            // A failure is the "Deletion failed." line of this screen.
+            await remove(deleting.id, deleting.origin);
+            setDeleting(null);
+          }}
+          onSafe={() => setDeleting(null)}
+        />
+      )}
+      {updating && (
+        <TextSheet
+          title={updating.status === "Answered" ? "How did God answer your prayer?" : "Add a public prayer update"}
+          fieldLabel="Your update"
+          hint={updating.status === "Answered" ? "This update will be public." : "Optional. This update will be public."}
+          draftKey={`public-prayer:${updating.id}:${updating.status}`}
+          // The server keeps a public update to 1,000 characters.
+          maxLength={1000}
+          optional={updating.status !== "Answered"}
+          safeLabel="Don't share update"
+          actionLabel="Share update"
+          busyLabel="Saving…"
+          onAction={(text) => updatePrayer(updating.id, updating.status, text)}
+          onSafe={() => setUpdating(null)}
+        />
       )}
     </section>
   );

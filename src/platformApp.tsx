@@ -159,7 +159,7 @@ function App() {
       content = (
         <>
           <TopicHub id={route.id} thread={route.thread} />
-          <details className="card">
+          <details className="group-disclosure">
             <summary>Live chat and the original prayer wall</summary>
             <Community verse={contentFor(date)} online={online} />
           </details>

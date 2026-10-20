@@ -1024,18 +1024,13 @@ dialog button {
   width: 100%;
   margin-top: 10px;
 }
-/* Report dialog (UI-SPEC Surface 4): text a person must read to act is Body size, not the
-   dialog's 0.83rem; the dialog itself scrolls (.dialog) so both buttons stay reachable. */
-/* .dialog (max-width 440px) outranks dialog's own max-width, so on a 320px screen the 420px
-   dialog ran off both edges; this keeps a 16px margin on each side. */
-dialog:has(> .report-dialog) {
-  width: min(420px, calc(100vw - 32px));
-  max-width: calc(100vw - 32px);
-}
+/* Report dialog (UI-SPEC Surface 4, A14): text a person must read to act is Body size, not the dialog's
+   0.83rem; the dialog is a sheet (.sheet-dialog, below) that scrolls inside 90dvh so both buttons stay
+   reachable, and from 600px a centred 480px dialog. */
 .report-dialog p,
 .report-dialog li,
 .report-dialog label {
-  font-size: 0.92rem;
+  font-size: var(--text-body);
 }
 .report-dialog fieldset {
   border: 0;
@@ -1045,13 +1040,19 @@ dialog:has(> .report-dialog) {
 }
 .report-dialog legend {
   padding: 0;
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   font-weight: 600;
 }
+/* Reason rows are 52px tall with a 22px radio (A14). */
 .report-dialog .report-reason {
+  min-height: 52px;
+  align-items: center;
   margin: 0 0 8px;
   color: var(--ink);
   overflow-wrap: anywhere;
+}
+.report-dialog .report-reason input {
+  margin-top: 0;
 }
 .report-dialog .report-reason-label {
   display: block;
@@ -1059,12 +1060,15 @@ dialog:has(> .report-dialog) {
 }
 .report-dialog .report-hint {
   display: block;
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   font-weight: 400;
   color: var(--muted);
 }
+.report-dialog .report-reason .report-hint {
+  font-size: var(--text-footnote);
+}
 .report-dialog .report-label {
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   font-weight: 600;
 }
 .report-dialog .report-block {
@@ -1282,9 +1286,7 @@ p.speaker {
 .safety {
   margin-top: 5px;
 }
-.safety .card {
-  padding: 12px;
-}
+/* The only card inside .safety is the report dialog, whose padding is now the sheet's (.sheet-dialog). */
 summary {
   cursor: pointer;
   min-height: 44px;
@@ -2490,8 +2492,84 @@ html[data-text="large"] .sheet-actions-split {
   flex-direction: column-reverse;
 }
 
-/* ==== Pray (UI-SPEC A10) ==== */
+/* ==== Pray and Community (UI-SPEC A10, A11; src/features/Pray.tsx, src/social/TopicHub.tsx) ==== */
+.pray > .segmented,
+.community > .segmented {
+  margin: 0 0 var(--space-6);
+}
+.community > .community-intro {
+  margin: 0 0 var(--space-6);
+  color: var(--muted);
+}
+/* The five sub-tabs of Community: one row that scrolls sideways and never wraps. The edge shadows show only
+   on the side that has more to scroll to (the two covers are attached to the content and hide them). */
+.segmented-scroll {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  background:
+    linear-gradient(to right, var(--surface-2), var(--surface-2)) left center / 16px 100% no-repeat local,
+    linear-gradient(to left, var(--surface-2), var(--surface-2)) right center / 16px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, var(--shadow), transparent) left center / 14px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, var(--shadow), transparent) right center / 14px 100% no-repeat scroll,
+    var(--surface-2);
+}
+.segmented-scroll::-webkit-scrollbar {
+  display: none;
+}
+.segmented-scroll [role="radio"] {
+  flex: none;
+  white-space: nowrap;
+}
+html[data-text="large"] .segmented-scroll {
+  display: flex;
+}
+html[data-text="large"] .segmented-scroll [role="radio"] {
+  min-height: 44px;
+  text-align: center;
+}
 .screen-lede {
   margin: 0 0 var(--space-5);
   color: var(--muted);
+}
+/* A disclosure that reads as the last row of a grouped list (the original chat and prayer wall). */
+.group-disclosure {
+  margin: 0 0 var(--space-6);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.group-disclosure > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  cursor: pointer;
+  list-style: none;
+}
+.group-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.group-disclosure > summary::after {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 9px;
+  margin-right: 5px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(-45deg);
+}
+.group-disclosure[open] > summary::after {
+  transform: rotate(45deg);
+}
+.group-disclosure > :not(summary) {
+  padding: 0 var(--space-5) var(--space-5);
 }

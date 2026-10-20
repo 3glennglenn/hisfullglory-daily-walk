@@ -242,7 +242,7 @@ function ReportDialog({
   const left = noteLimit - note.length;
   const gone = failure === "gone";
   return (
-    <Dialog onClose={close} labelledBy={titleId}>
+    <Dialog onClose={close} labelledBy={titleId} className="sheet-dialog">
       <div className="report-dialog" ref={wrap}>
         {signedOut ? (
           <>

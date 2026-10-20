@@ -48,3 +48,52 @@ test("the static browser colour and the install colours are Cover Light (the def
   assert.match(config, /theme_color: "#F3F1EE"/);
   assert.match(config, /background_color: "#F3F1EE"/);
 });
+
+// UI-SPEC A15, D-10: every question the app asks is its own dialog or sheet (src/ui/ConfirmDialog.tsx,
+// src/ui/TextSheet.tsx); a browser pop-up looks broken in the store build. The gate finds a call of the
+// browser's confirm, prompt or alert, bare or on window, and leaves a method of another object alone
+// (the install prompt of the BeforeInstallPromptEvent is `install.prompt()`, and its type declares `prompt()`).
+const POPUP_CALL =
+  /(?<![\w$./])(?:confirm|prompt|alert)\s*\(|\b(?:window|globalThis|self|top|parent)\s*\.\s*(?:confirm|prompt|alert)\s*\(/g;
+// An interface or type member such as `prompt(): Promise<void>;` declares a method, it calls nothing.
+const MEMBER_SIGNATURE = /^[ \t]*(?:confirm|prompt|alert)\s*\([^)]*\)\s*:/gm;
+
+function popupCalls(source: string): string[] {
+  const code = source
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|[^:"'`\\])\/\/.*$/gm, "$1")
+    .replace(MEMBER_SIGNATURE, "");
+  return [...code.matchAll(POPUP_CALL)].map((m) => m[0]);
+}
+
+test("no browser pop-ups: the detector sees bare and window calls and leaves other objects' methods alone", () => {
+  for (const call of [
+    'if (confirm("Delete?")) go();',
+    'window.confirm("Delete?")',
+    'const text = window.prompt("A private prayer update");',
+    'window . alert ("Saved")',
+    'globalThis.alert("x")',
+    'x ? alert(1) : 0',
+  ])
+    assert.ok(popupCalls(call).length > 0, `should be found: ${call}`);
+  for (const fine of [
+    "await install.prompt();",
+    "  prompt(): Promise<void>;",
+    "showAlert(message)",
+    "props.confirm(1)",
+    "this.alert()",
+    "onConfirm(id)",
+    "// window.confirm(\"old\")",
+    "/* prompt(x) */",
+    'const link = "https://example.com/confirm(1)";',
+    "const confirmed = true;",
+  ])
+    assert.deepEqual(popupCalls(fine), [], `should be left alone: ${fine}`);
+});
+
+test("no browser pop-ups: src never calls confirm, prompt or alert, bare or on window (UI-SPEC A15, D-10)", () => {
+  const files = filesUnder("src").filter((file) => /\.(ts|tsx|js|mjs)$/.test(file));
+  assert.ok(files.length > 50, `scanned ${files.length} files`);
+  const hits = files.flatMap((file) => popupCalls(readFileSync(file, "utf8")).map((call) => `${file}: ${call}`));
+  assert.deepEqual(hits, [], "browser pop-ups left in src: use ConfirmDialog or TextSheet instead");
+});
