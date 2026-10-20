@@ -6,6 +6,8 @@ import { navigate } from "../platform/router";
 import { findTopic, launchTopics } from "../topics/graph";
 import { safeSourceUrl } from "./sources";
 import { SafetyControls } from "./safety";
+import { Row } from "../ui/List";
+import { LargeTitle, Toolbar } from "../ui/Screen";
 import { circleRpc, type Circle, type CircleMember, type CirclePost, type CircleReport, type CircleRpcName } from "./circlesApi";
 
 export function Circles({ slug, thread }: { slug?: string; thread?: string }) {
@@ -135,9 +137,10 @@ export function Circles({ slug, thread }: { slug?: string; thread?: string }) {
     finally { if (request === sequence.current) setBusy(false); }
   }
   function confirmAction(text: string, run: () => void) { confirmation.current = run;setConfirmText(text);dialog.current?.showModal(); }
+  const shownCircles = circles.filter(c => (c.name + " " + c.description).toLowerCase().includes(query.toLowerCase()));
   const review = (m: CircleMember, review_action: string) => confirmAction(`${review_action} ${m.display_name}?`, () => void action("review_circle_member", { selected_circle: circle?.id, membership_id: m.id, review_action }));
-  return <section className="circles"><button className="text-button" onClick={() => navigate(slug ? "/community/circles" : "/community")}>{slug ? "← Circles" : "← Community"}</button>
-    <h1>{circle?.name ?? "Circles"}</h1><p>Walk together around Scripture and shared encouragement. Members' experiences and votes are not Biblical authority or verified expertise.</p>
+  return <section className="circles grouped-screen"><Toolbar back={slug ? "Circles" : "Community"} to={slug ? "/community/circles" : "/community"} />
+    <LargeTitle>{circle?.name ?? "Circles"}</LargeTitle><p className="screen-lede">Walk together around Scripture and shared encouragement. Members' experiences and votes are not Biblical authority or verified expertise.</p>
     {!configured ? <p>Live Circles are not configured. No sample memberships or discussions are shown.</p> : <>
       <p role="status">{status || (busy ? "Loading…" : "")}</p><button className="secondary" disabled={busy} onClick={() => void load()}>Refresh Circles</button>
       {!session && <p>Sign in from <button className="text-button" onClick={() => navigate("/profile")}>Profile</button> to discover private Circles or join. Public discussions can be read without signing in.</p>}
@@ -147,7 +150,7 @@ export function Circles({ slug, thread }: { slug?: string; thread?: string }) {
         <label>Find in this page<input type="search" value={query} onChange={e => setQuery(e.target.value)} /></label>
         <label className="check"><input type="checkbox" checked={ownOnly} disabled={!session} onChange={e => setOwnOnly(e.target.checked)} />My active Circles</label>
         {!busy && loaded && !circles.length && <p>No Circles match. There is no seeded activity.</p>}
-        {circles.filter(c => (c.name + " " + c.description).toLowerCase().includes(query.toLowerCase())).map(c => <button className="card entry" key={c.id} onClick={() => navigate("/community/circles/" + c.slug)}><strong>{c.name}</strong><span>{c.privacy === "private" ? "Private · application required" : "Public · join to contribute"} {c.topic_id && "· " + findTopic(c.topic_id)?.label}</span><span>{c.description}</span></button>)}
+        {shownCircles.length > 0 && <div className="group"><ul className="group-list">{shownCircles.map(c => <Row key={c.id} title={c.name} detail={<><span className="row-line">{c.privacy === "private" ? "Private · application required" : "Public · join to contribute"} {c.topic_id && "· " + findTopic(c.topic_id)?.label}</span><span className="row-line">{c.description}</span></>} chevron onClick={() => navigate("/community/circles/" + c.slug)} />)}</ul></div>}
         <button disabled={!session || !accepted || busy} onClick={() => {setCreating(!creating);setEditing(false);}}>Create a Circle</button>
       </> : circle ? <>
         <p className="preserve">{circle.description}</p><p>{circle.privacy === "private" ? "Private discussions · active members only" : "Public discussions · visible to everyone"} {circle.topic_id && "· " + findTopic(circle.topic_id)?.label}</p>
@@ -191,10 +194,10 @@ export function Circles({ slug, thread }: { slug?: string; thread?: string }) {
       {(creating || editing) && <form className="card" onSubmit={e => {e.preventDefault();void action(editing ? "edit_circle" : "create_circle", editing ? { selected_circle: circle?.id, circle_name: name, circle_description: description, question } : { circle_slug: newSlug, circle_name: name, circle_description: description, circle_privacy: privacy, selected_topic: topic || null, question }, () => {setCreating(false);setEditing(false);if (!editing) navigate("/community/circles/" + newSlug);});}}>
         <h2>{editing ? "Edit Circle details" : "Create a Circle"}</h2><label>Circle name<input required minLength={3} maxLength={80} value={name} onChange={e => setName(e.target.value)} /></label><label>Description<textarea required minLength={10} maxLength={1000} value={description} onChange={e => setDescription(e.target.value)} /></label>
         {!editing && <><label>URL slug · immutable<input required pattern="[a-z][a-z0-9\-]{2,59}" minLength={3} maxLength={60} value={newSlug} onChange={e => setNewSlug(e.target.value)} /></label><label>Privacy · immutable<select value={privacy} onChange={e => setPrivacy(e.target.value)}><option value="public">Public · everyone can read</option><option value="private">Private · application and approval</option></select></label><p>Optional topic uses the topic filter above. Names and descriptions are discoverable; do not put private information here.</p></>}
-        <label>Application question · optional, discoverable<textarea maxLength={300} value={question} onChange={e => setQuestion(e.target.value)} /></label><button disabled={busy || !accepted}>{editing ? "Save Circle details" : "Create Circle"}</button><button type="button" className="secondary" onClick={() => {setEditing(false);setCreating(false);}}>Cancel</button>
+        <label>Application question · optional, discoverable<textarea maxLength={300} value={question} onChange={e => setQuestion(e.target.value)} /></label><button disabled={busy || !accepted}>{editing ? "Save Circle details" : "Create Circle"}</button><button type="button" className="secondary" onClick={() => {setEditing(false);setCreating(false);}}>{editing ? "Keep the details as they are" : "Don't create a Circle"}</button>
       </form>}
       {more && <button disabled={busy} onClick={() => void load(true)}>Load more {slug ? "discussions" : "Circles"}</button>}
     </>}
-    <dialog ref={dialog} className="card dialog" aria-labelledby="circle-confirm-title" onClose={() => {confirmation.current = null;}}><h2 id="circle-confirm-title">Confirm Circle action</h2><p>{confirmText}</p><div className="actions"><button autoFocus className="secondary" onClick={() => dialog.current?.close()}>Cancel</button><button onClick={() => {const run = confirmation.current;confirmation.current = null;dialog.current?.close();run?.();}}>Confirm</button></div></dialog>
+    <dialog ref={dialog} className="card dialog sheet-dialog confirm-dialog" aria-labelledby="circle-confirm-title" onClose={() => {confirmation.current = null;}}><h2 id="circle-confirm-title" className="sheet-title">Confirm Circle action</h2><p className="sheet-body">{confirmText}</p><div className="sheet-actions"><button autoFocus className="secondary" onClick={() => dialog.current?.close()}>Keep things as they are</button><button onClick={() => {const run = confirmation.current;confirmation.current = null;dialog.current?.close();run?.();}}>Confirm</button></div></dialog>
   </section>;
 }

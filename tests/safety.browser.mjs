@@ -8,7 +8,7 @@ const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VE
 const NOTE="PRIVATE NOTE 7391 do not log";
 const REASON_LABELS=["Harassment or threats","Hate","Sexual content","Dangerous advice","Scam","Private information","Spam","Something else"];
 export async function checkSafety(browser,base){
-  const result=await build({entryPoints:["tests/fixtures/safety.tsx"],bundle:true,write:false,outfile:".tooling/safety-fixture.js",format:"iife",jsx:"automatic",define:{"process.env.NODE_ENV":'"production"'},plugins:[{
+  const result=await build({entryPoints:["tests/fixtures/safety.tsx"],bundle:true,write:false,outfile:".tooling/safety-fixture.js",format:"iife",jsx:"automatic",loader:{".svg":"dataurl"},define:{"process.env.NODE_ENV":'"production"'},plugins:[{
     name:"controlled-safety-sdk",
     setup(b){
       b.onResolve({filter:/^\.\.\/supabase$/},()=>({path:"sdk",namespace:"fixture"}));
@@ -56,7 +56,9 @@ export async function checkSafety(browser,base){
   const fixture=(fn,arg)=>p.evaluate(fn,arg);
   const trigger=()=>p.getByRole("button",{name:/^Report this/});
   const dialog=()=>p.getByRole("dialog");
-  const open=async()=>{await trigger().click();await dialog().waitFor();};
+  // The dialog is a sheet that slides up for 280ms: every measurement waits until it has arrived.
+  const settled=()=>p.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished)));
+  const open=async()=>{await trigger().click();await dialog().waitFor();await settled();};
   const reset=async()=>{
     if(await dialog().count())await p.keyboard.press("Escape");
     await fixture(()=>{const f=window.safetyFixture;f.mode="ok";f.message="";f.pending=null;f.calls.length=0;f.changed=0;f.blocksChanged=0;});
@@ -306,6 +308,48 @@ export async function checkSafety(browser,base){
       assert.ok(buttons[1].top>=buttons[0].bottom-0.5,"the two buttons do not overlap");
       const textarea=await p.locator("dialog textarea").evaluate(el=>el.getBoundingClientRect().height);
       assert.ok(textarea>=44);
+      await p.setViewportSize({width:375,height:812});
+    });
+
+    await check("the report dialog is a bottom sheet on phones and a centred 480px dialog from 600px; rows are 52px with 22px radios (UI-SPEC A14)",async()=>{
+      await reset();
+      for(const [width,height] of [[375,812],[320,568]]){
+        await p.setViewportSize({width,height});
+        await open();
+        const sheet=await dialog().evaluate(d=>{const r=d.getBoundingClientRect(),s=getComputedStyle(d);return {top:r.top,bottom:r.bottom,left:r.left,right:r.right,height:r.height,topRadius:s.borderTopLeftRadius,topRightRadius:s.borderTopRightRadius,bottomRadius:s.borderBottomLeftRadius,paddingBottom:parseFloat(s.paddingBottom),overflowY:s.overflowY};});
+        assert.equal(Math.round(sheet.bottom),height,width+": anchored to the bottom edge");
+        assert.equal(Math.round(sheet.left),0,width+": starts at the left edge");
+        assert.equal(Math.round(sheet.right-sheet.left),width,width+": full width");
+        assert.equal(sheet.topRadius,"28px");assert.equal(sheet.topRightRadius,"28px");assert.equal(sheet.bottomRadius,"0px");
+        assert.ok(sheet.height<=height*0.9+1,width+": at most 90dvh, was "+sheet.height);
+        assert.ok(sheet.paddingBottom>=20,"padding under the last control");
+        assert.equal(sheet.overflowY,"auto","it scrolls inside");
+        const rows=await p.locator("dialog label.report-reason").evaluateAll(list=>list.map(l=>l.getBoundingClientRect().height));
+        for(const h of rows)assert.ok(h>=52,"reason row height "+h);
+        const radios=await p.locator("dialog input[type=radio]").evaluateAll(list=>list.map(i=>{const r=i.getBoundingClientRect();return [r.width,r.height];}));
+        for(const [w,h] of radios){assert.equal(w,22);assert.equal(h,22);}
+        await reset();
+      }
+      // 320 x 568: scrolled to the end, both buttons are inside the sheet and the screen, and at least 44px tall.
+      await p.setViewportSize({width:320,height:568});
+      await open();
+      const reach=await dialog().evaluate(d=>{
+        d.scrollTop=d.scrollHeight;
+        const box=d.getBoundingClientRect();
+        return {scrolls:d.scrollHeight>d.clientHeight,buttons:[...d.querySelectorAll("button")].map(b=>{const r=b.getBoundingClientRect();return {name:b.textContent.trim(),height:r.height,inside:r.top>=box.top&&r.bottom<=box.bottom&&r.bottom<=innerHeight};})};
+      });
+      assert.ok(reach.scrolls,"the sheet scrolls inside itself");
+      assert.deepEqual(reach.buttons.map(b=>b.name),["Send report","Don't send report"]);
+      for(const b of reach.buttons){assert.ok(b.height>=44,b.name+" height "+b.height);assert.ok(b.inside,b.name+" reachable");}
+      await reset();
+      await p.setViewportSize({width:700,height:900});
+      await open();
+      const wide=await dialog().evaluate(d=>{const r=d.getBoundingClientRect();return {width:Math.round(r.width),centre:Math.round((r.left+r.right)/2),top:r.top,bottom:r.bottom,radius:getComputedStyle(d).borderBottomLeftRadius};});
+      assert.equal(wide.width,480);
+      assert.ok(Math.abs(wide.centre-350)<=1,"centred");
+      assert.ok(wide.top>0&&wide.bottom<900,"floats clear of the edges");
+      assert.notEqual(wide.radius,"0px");
+      await reset();
       await p.setViewportSize({width:375,height:812});
     });
 

@@ -36,6 +36,10 @@ export function dateNumber(date: string): number {
   const [year, month, day] = date.split("-").map(Number);
   return Math.floor(Date.UTC(year, month - 1, day) / 86400000);
 }
+/** The day after a local date ("YYYY-MM-DD"). */
+export function nextDate(date: string): string {
+  return new Date((dateNumber(date) + 1) * 86400000).toISOString().slice(0, 10);
+}
 export function validDate(value: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
   const normalized = new Date(dateNumber(value) * 86400000)

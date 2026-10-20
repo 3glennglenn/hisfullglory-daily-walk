@@ -2,11 +2,17 @@
 // /context-checks and /context-checks/<slug>: a well-known verse put back into its
 // surroundings. Neither exists until at least one check is published (approved, or written by
 // an AI model and not checked by a person, which the page says; src/lib/content.ts).
+// Phase 01.1 (UI-SPEC W3, W5; founder decisions D-06, D-13): a page says first how far it was
+// checked (the labelled AI note), then tells its story calmly, with one way into the app.
+import AiBadge from "../../components/AiBadge.astro";
 import AiUnreviewedNote from "../../components/AiUnreviewedNote.astro";
+import Bookcase from "../../components/Bookcase.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import Cover from "../../components/Cover.astro";
 import DraftBanner from "../../components/DraftBanner.astro";
 import EditorialNote from "../../components/EditorialNote.astro";
 import ShareLinks from "../../components/ShareLinks.astro";
+import SponsorBlock from "../../components/SponsorBlock.astro";
 import { appUrl, shopUrl } from "../../config";
 import Base from "../../layouts/Base.astro";
 import { blocks } from "../../lib/ai";
@@ -14,11 +20,12 @@ import {
   aiUnreviewedCardLabel,
   arguedHeading,
   checkParts,
+  featuredChecks,
   publishedChecks,
   refHref,
   refLabel,
+  splitHook,
   storyStatuses,
-  verses,
   withVoices,
   type ContextCheck,
 } from "../../lib/content";
@@ -41,6 +48,8 @@ const { checks, item } = Astro.props;
 const label = item && refLabel(item.verse);
 // Voices quoted inside "Who has argued over it" are not repeated as cards.
 const cards = item?.voices.filter((voice) => !voice.id) ?? [];
+// The index lists every published check, newest first (D-06).
+const newestFirst = featuredChecks();
 ---
 
 {
@@ -51,20 +60,12 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
           <Breadcrumb trail={[{ label: "Context checks", href: "/context-checks" }]} current={label!} />
           {item.review === "draft" && <DraftBanner />}
           {item.review === "ai-unreviewed" && <AiUnreviewedNote />}
-          <p class="eyebrow">Context check</p>
           <h1>{label} in context</h1>
           <p class="lede">{item.hook}</p>
 
-          <blockquote class="card verse" data-layer="scripture">
-            {verses(item.verse).map((verse) => (
-              <p>
-                <sup>{verse.number}</sup>
-                {" "}
-                {verse.text}
-              </p>
-            ))}
-            <p class="small muted">{label}, World English Bible</p>
-          </blockquote>
+          <div class="verse-block">
+            <Cover item={item} mode="verse" />
+          </div>
 
           <section class="story" data-story={item.storyStatus}>
             <h2>The story around it</h2>
@@ -79,7 +80,7 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
                 <p>{block.paragraph}</p>
               ),
             )}
-            <p class="small muted status">{storyStatuses[item.storyStatus]}</p>
+            <p class="status">{storyStatuses[item.storyStatus]}</p>
           </section>
 
           {
@@ -89,7 +90,7 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
                 {cards.map((voice) => (
                   <figure class="card voice">
                     <blockquote>{voice.words}</blockquote>
-                    <figcaption class="small muted">
+                    <figcaption>
                       {voice.name}, {voice.about}.{" "}
                       <a href={voice.source.url} rel="noopener">
                         Source
@@ -128,7 +129,7 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
                         )}
                       </p>
                     ))}
-                    <p class="small muted status">{storyStatuses.history}</p>
+                    <p class="status">{storyStatuses.history}</p>
                   </section>
                 )}
               </>
@@ -137,7 +138,7 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
 
           <div class="card sources" data-layer="sourced">
             <h2>Why we say this</h2>
-            <p class="small muted">Bible passages this page rests on, in the World English Bible:</p>
+            <p class="note-line">Bible passages this page rests on, in the World English Bible:</p>
             <ul>
               {item.basis.map((ref) => (
                 <li>
@@ -147,7 +148,7 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
             </ul>
             {item.sources.length > 0 && (
               <>
-                <p class="small muted">Sources outside the Bible:</p>
+                <p class="note-line">Sources outside the Bible:</p>
                 <ul>
                   {item.sources.map((source) => (
                     <li>
@@ -159,7 +160,7 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
                 </ul>
               </>
             )}
-            <p class="small muted dispute">
+            <p class="note-line dispute">
               Do you know a source that says otherwise, or adds to this?{" "}
               <a href={`${shopUrl}/pages/contact`}>Send it to us</a> and we will
               look at it.
@@ -180,6 +181,7 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
           <EditorialNote review={item.review} drafted={item.drafted} />
         </div>
       </section>
+      <SponsorBlock place="site-context-check-end" />
     </Base>
   ) : (
     <Base
@@ -187,21 +189,34 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
       description="Well-known Bible verses put back where they stand: who is speaking, to whom, and what is said around them."
       noindex={checks.some((entry) => entry.review === "draft")}
     >
-      <section class="section">
+      <section class="section index">
         <div class="wrap">
           <h1>Context checks</h1>
           <p class="lede">
             Verses many people know by heart, put back where they stand: who
             is speaking, to whom, and what is said around them.
           </p>
-          <ul class="grid list">
-            {checks.map((entry) => (
-              <li class="card">
-                <h2>
-                  <a href={`/context-checks/${entry.slug}`}>{refLabel(entry.verse)}</a>
-                </h2>
-                <p>{entry.hook}</p>
-                {entry.review === "ai-unreviewed" && <p class="small muted">{aiUnreviewedCardLabel}</p>}
+          <div class="case">
+            <Bookcase checks={newestFirst} />
+          </div>
+          <ul class="list">
+            {newestFirst.map((entry) => (
+              <li>
+                <a class="row" href={`/context-checks/${entry.slug}`}>
+                  <span class="row-text">
+                    <span class="row-ref">{refLabel(entry.verse)}</span>
+                    <span class="row-hook">{splitHook(entry.hook).first}</span>
+                    {entry.review === "ai-unreviewed" && (
+                      <span class="row-ai">
+                        <AiBadge />
+                        <span>{aiUnreviewedCardLabel}</span>
+                      </span>
+                    )}
+                  </span>
+                  <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+                    <path d="m7.5 4 6 6-6 6"></path>
+                  </svg>
+                </a>
               </li>
             ))}
           </ul>
@@ -212,57 +227,53 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
 }
 
 <style>
-  .eyebrow {
-    margin-bottom: 4px;
+  /* A context-check page reads in one 34em column of Body 17/27 (UI-SPEC 6.2, W3). */
+  .prose {
+    max-width: 34em;
   }
   .lede {
-    margin-top: 16px;
-  }
-  .verse {
-    margin: 28px 0 0;
-    font-size: 1.12rem;
-    line-height: 1.8;
-  }
-  .verse p {
-    margin: 0;
-  }
-  .verse p + p {
-    margin-top: 10px;
-  }
-  .verse sup {
-    font-size: 0.7em;
-    font-weight: 600;
+    margin-top: var(--space-4);
+    font-size: var(--text-title);
+    line-height: 1.5;
     color: var(--muted);
   }
-  .story {
-    margin-top: 32px;
+  .verse-block {
+    margin-top: var(--space-6);
   }
-  .story h2 {
-    margin-bottom: 8px;
+  .story,
+  .voices,
+  .part {
+    margin-top: var(--space-7);
   }
-  .story .status {
-    margin-top: 12px;
-    padding-left: 12px;
-    border-left: 3px solid var(--border);
-  }
-  .dispute {
-    margin-top: 14px;
-  }
-  .voices {
-    margin-top: 32px;
+  .story h2,
+  .part h2 {
+    margin-bottom: var(--space-2);
   }
   .voices h2 {
-    margin-bottom: 12px;
+    margin-bottom: var(--space-3);
   }
+  .status {
+    margin: var(--space-3) 0 0;
+    padding-left: var(--space-3);
+    border-left: 3px solid var(--line);
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
+  }
+  /* Voices are sourced quotations: the sourced treatment (a block on --surface, 1px --line), in
+     the interface face, never the Scripture face. */
   .voice {
     margin: 0;
+    padding: var(--space-4) var(--space-5);
+    box-shadow: none;
   }
   .voice + .voice {
-    margin-top: 12px;
+    margin-top: var(--space-3);
   }
   .voice blockquote {
-    margin: 0 0 10px;
-    font-size: 1.1rem;
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-ui);
+    font-size: var(--text-body);
     line-height: 1.6;
   }
   .voice blockquote::before {
@@ -271,44 +282,95 @@ const cards = item?.voices.filter((voice) => !voice.id) ?? [];
   .voice blockquote::after {
     content: "\201D";
   }
-  .part {
-    margin-top: 32px;
-  }
-  .part h2 {
-    margin-bottom: 8px;
+  .voice figcaption,
+  .note-line {
+    margin: 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
   }
   .argued q {
     quotes: "\201C" "\201D" "\2018" "\2019";
   }
-  .argued .status {
-    margin-top: 12px;
-    padding-left: 12px;
-    border-left: 3px solid var(--border);
-  }
   .sources {
-    margin-top: 40px;
+    margin-top: var(--space-8);
+    padding: var(--space-4) var(--space-5);
+    box-shadow: none;
   }
   .sources h2 {
-    margin-bottom: 8px;
+    margin-bottom: var(--space-2);
   }
   .sources ul {
-    margin: 10px 0 0;
-    padding-left: 1.2rem;
+    margin: var(--space-3) 0 0;
+    padding-left: 1.2em;
   }
   .sources li + li {
-    margin-top: 8px;
+    margin-top: var(--space-2);
+  }
+  .dispute {
+    margin-top: var(--space-4);
+  }
+
+  /* The index: the bookcase, then the list as rows (UI-SPEC W5, A8). */
+  .index .lede {
+    max-width: 34em;
+  }
+  .case {
+    margin-top: var(--space-6);
   }
   .list {
-    list-style: none;
-    margin: 32px 0 0;
+    max-width: 40rem;
+    margin: var(--space-7) 0 0;
     padding: 0;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    list-style: none;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
-  .list h2 {
-    margin: 0 0 8px;
-    font-size: 1.15rem;
+  .list li + li {
+    border-top: 1px solid var(--line);
   }
-  .list p {
-    margin-bottom: 0;
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 52px;
+    padding: var(--space-3) var(--space-5);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .row:hover {
+    background: var(--surface-2);
+  }
+  /* The list clips its corners, so the focus ring goes inside the row. */
+  .row:focus-visible {
+    outline-offset: -3px;
+  }
+  .row-text {
+    display: grid;
+    gap: var(--space-1);
+  }
+  .row-ref {
+    font-weight: 600;
+  }
+  .row-hook {
+    color: var(--muted);
+  }
+  .row-ai {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--ai);
+  }
+  .row svg {
+    flex: none;
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 </style>

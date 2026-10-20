@@ -47,9 +47,12 @@ in the app → Daily Walk, reflection, community → (optional) a study resource
     page, never inside it. A pilot of five chapters exists.
 - No user-generated content on the site in v1. Circles, prayers, journals, private topics
   and anything sensitive never appear on the site, now or later.
-- Design: same tokens as the app (`src/styles.css`: warm cream background, Manrope, Light
-  and Dark). Brand mark: the cream and gold cross. Mobile-first, 44px touch targets, visible
-  focus, reduced motion.
+- Design: same tokens as the app (`src/styles.css`, five blocks synced by `scripts/sync-shared.mjs`):
+  two themes, Cover and story (default) and Marked page, each with Light and Lamplight modes
+  that follow the device unless the visitor changes them with the switch in the footer.
+  Manrope (Cover) and the system font (Marked) for interface text, Gelasio and Literata for
+  Scripture, all bundled. Brand mark: the cream and gold cross. Mobile-first, 44px touch
+  targets, visible focus, reduced motion.
 
 ## 4. Pages (v1)
 
@@ -82,6 +85,12 @@ written." Never generate notes at build time.
 5. Start here: the 8 launch topics as cards.
 6. Resources: a quiet strip linking to `/resources`.
 7. Beta invitation and footer (About, Privacy, Terms, Contact, Shop).
+
+Since the calm redesign (phase 01.1) the home opens on the newest published context check
+(`featuredChecks()` in `site/src/lib/content.ts`, AI-unreviewed ones included and always
+labelled), with a bookcase of the six newest beside it from 1024px, then the sentence about
+the app with the one filled "Open the app", the four layers, and the launch topics. The list
+above is the earlier home.
 
 ## 5. Copy rules
 

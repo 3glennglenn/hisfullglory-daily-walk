@@ -4,7 +4,7 @@ import {readFileSync} from "node:fs";
 // The version the app asks for is read from the app, so this fixture follows it when it changes.
 const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VERSION = "([^"]+)"/)[1];
 export async function checkCircles(browser,base){
- const result=await build({entryPoints:["tests/fixtures/circles.tsx"],bundle:true,write:false,outfile:".tooling/circles-fixture.js",format:"iife",jsx:"automatic",define:{"process.env.NODE_ENV":'"production"'},plugins:[{
+ const result=await build({entryPoints:["tests/fixtures/circles.tsx"],bundle:true,write:false,outfile:".tooling/circles-fixture.js",format:"iife",jsx:"automatic",loader:{".svg":"dataurl"},define:{"process.env.NODE_ENV":'"production"'},plugins:[{
  name:"controlled-circle-sdk",setup(b){
  b.onResolve({filter:/^\.\.\/supabase$/},()=>({path:"sdk",namespace:"fixture"}));
  b.onLoad({filter:/.*/,namespace:"fixture"},()=>({loader:"js",contents:`
@@ -94,7 +94,7 @@ export async function checkCircles(browser,base){
    await signIn('other');await p.getByText('Your membership was removed.',{exact:false}).waitFor();assert.ok(!(await p.locator('section').innerText()).includes('PRIVATE UI FIXTURE SECRET'));
   });
   await check('leave confirmation focuses Cancel, Escape cancels, confirmed leave persists in SDK state',async()=>{
-   await open('public-walk');await p.getByRole('button',{name:'Leave Circle',exact:true}).click();assert.equal(await p.locator(':focus').innerText(),'Cancel');await p.keyboard.press('Escape');assert.equal(await p.getByRole('dialog').count(),0);assert.equal(await p.locator(':focus').innerText(),'Leave Circle');await p.getByRole('button',{name:'Leave Circle',exact:true}).click();await confirm();await p.getByRole('button',{name:'Join Circle',exact:true}).waitFor();
+   await open('public-walk');await p.getByRole('button',{name:'Leave Circle',exact:true}).click();assert.equal(await p.locator(':focus').innerText(),'Keep things as they are');await p.keyboard.press('Escape');assert.equal(await p.getByRole('dialog').count(),0);assert.equal(await p.locator(':focus').innerText(),'Leave Circle');await p.getByRole('button',{name:'Leave Circle',exact:true}).click();await confirm();await p.getByRole('button',{name:'Join Circle',exact:true}).waitFor();
   });
   await check('account switching/offline clears private content and never persists it',async()=>{
    await signIn('owner');await open('private-walk');await p.getByText('PRIVATE UI FIXTURE SECRET',{exact:true}).waitFor();await c.setOffline(true);await p.getByText('Offline.',{exact:false}).waitFor();assert.ok(!(await p.locator('section').innerText()).includes('PRIVATE UI FIXTURE SECRET'));assert.ok(!await p.evaluate(()=>JSON.stringify({...localStorage}).includes('PRIVATE UI FIXTURE')));await c.setOffline(false);await p.getByText('PRIVATE UI FIXTURE SECRET',{exact:true}).waitFor();await signIn('other');await p.getByText('Your membership was removed.',{exact:false}).waitFor();assert.ok(!(await p.locator('section').innerText()).includes('PRIVATE UI FIXTURE SECRET'));
@@ -133,9 +133,9 @@ export async function checkCircles(browser,base){
    bootstrap=await p.evaluate(()=>{const f=window.circleFixture;return {actor:f.actor,count:f.count,circles:f.circles,memberships:f.memberships,posts:f.posts,reports:f.reports};});
    await p.reload();await p.getByText('Circle unavailable.',{exact:false}).waitFor();assert.ok(!(await p.locator('section').innerText()).includes('PRIVATE UI FIXTURE SECRET'));
   });
-  await check('320/360/390/430/768/1280px, both themes: long names, composer and labels fit',async()=>{
+  await check('320/360/390/430/768/1280px, both modes: long names, composer and labels fit',async()=>{
    await signIn('owner');await open('public-walk');await p.evaluate(()=>{window.circleFixture.circles[0].name='L'.repeat(80);window.circleFixture.circles[0].description='D'.repeat(1000);});await p.getByRole('button',{name:'Refresh Circles',exact:true}).click();await p.getByRole('heading',{name:'L'.repeat(80),exact:true}).waitFor();
-   for(const width of [320,360,390,430,768,1280])for(const theme of ['light','dark']){await p.setViewportSize({width,height:900});await p.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),theme+' overflow at '+width);assert.equal(await p.locator('section h1').count(),1);assert.ok(await p.locator('form textarea').first().isVisible());assert.ok(await p.getByRole('button',{name:'Publish to Circle',exact:true}).evaluate(el=>el.getBoundingClientRect().height>=44));}
+   for(const width of [320,360,390,430,768,1280])for(const theme of ['light','lamplight']){await p.setViewportSize({width,height:900});await p.evaluate(theme=>document.documentElement.dataset.mode=theme,theme);assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),theme+' overflow at '+width);assert.equal(await p.locator('section h1').count(),1);assert.ok(await p.locator('form textarea').first().isVisible());assert.ok(await p.getByRole('button',{name:'Publish to Circle',exact:true}).evaluate(el=>el.getBoundingClientRect().height>=44));}
   });
   assert.deepEqual(errors,[]);assert.deepEqual(consoleErrors,[]);assert.deepEqual(consoleWarnings,[]);console.log(checks+' Circle SDK/browser boundary checks passed; synthetic fixtures only, no hosted claims.');
  } catch(error) {throw new Error(error.message+"\nSynthetic fixture DOM: "+await p.locator("body").innerText());} finally {await c.close();}

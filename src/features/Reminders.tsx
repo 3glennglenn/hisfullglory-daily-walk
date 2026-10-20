@@ -28,6 +28,8 @@ function writeSaved(value: Saved | null) {
   }
 }
 
+// True when a daily reminder was saved on this device (the You screen shows it as "On").
+export const dailyReminderOn = () => readSaved()?.daily === true;
 export const pushSupported = () =>
   typeof window !== "undefined" && "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
 export const onHomeScreen = () =>
@@ -168,7 +170,7 @@ export function Reminders() {
           </button>
         </div>
       )}
-      <small>A notification never shows what you or anyone else wrote. A missed day is fine; the reminder simply comes again tomorrow.</small>
+      <small>A notification never shows what you or anyone else wrote. A day away is fine; the reminder simply comes again tomorrow.</small>
       <p role="status">{status}</p>
     </section>
   );

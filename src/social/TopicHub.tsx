@@ -8,6 +8,12 @@ import { findTopic, launchTopics, topicGraph } from "../topics/graph";
 import { SafetyControls } from "./safety";
 import { Feed, postTypes } from "./Feed";
 import { safeSourceUrl } from "./sources";
+import { LargeTitle } from "../ui/Screen";
+import { GroupedList, Row } from "../ui/List";
+import { Segmented } from "../ui/Segmented";
+import { ConfirmDialog } from "../ui/ConfirmDialog";
+const communityTabs = ["Topics", "Following", "Saved", "Testimonies", "Community feed"] as const;
+type CommunityTab = (typeof communityTabs)[number];
 interface Discussion {
   id:string; display_name:string; body:string; post_type:string; created_at:string;
   is_owner:boolean; score:number; upvotes:number; voted:boolean; helped:number;
@@ -16,7 +22,8 @@ interface Discussion {
 export function TopicHub({id,thread}: {id?:string;thread?:string}) {
   const {state,update}=usePlatform();
   const {session,accepted}=useAuth();
-  const [tab,setTab]=useState("Topics");
+  const [tab,setTab]=useState<CommunityTab>("Topics");
+  const [deleting,setDeleting]=useState<string|null>(null);
   const [query,setQuery]=useState("");
   const [sorting,setSorting]=useState("newest");
   const [posts,setPosts]=useState<Discussion[]>([]);
@@ -77,16 +84,26 @@ export function TopicHub({id,thread}: {id?:string;thread?:string}) {
     setStatus("Saved.");setRevision(n=>n+1);return true;
   }
   if(id && !topic) return <section><h1>Topic not found</h1><button onClick={()=>navigate("/community")}>Browse topics</button></section>;
-  if(!topic) return <section><h1>Walk together.</h1><p>Scripture, practical help and encouragement. Community experience and reputation are not verified expertise.</p>
-    <button className="secondary" onClick={()=>navigate("/community/circles")}>Circles · walk together</button>
-    <div className="tabs">{["Topics","Following","Saved","Testimonies","Community feed"].map(t=><button key={t} aria-pressed={tab===t} onClick={()=>setTab(t)}>{t}</button>)}</div>
-    {tab==="Saved"?<><p>Private links on this device. Opening a saved thread rechecks its visibility; removed or blocked content is unavailable.</p>{state.savedDiscussions.filter(id=>state.savedDiscussionTopics[id]).map(id=><button className="card entry" key={id} onClick={()=>navigate("/community/"+state.savedDiscussionTopics[id]+"?thread="+id)}>Saved discussion · {findTopic(state.savedDiscussionTopics[id])?.label}</button>)}{!state.savedDiscussions.length&&<p>No saved discussions yet.</p>}</>:tab==="Community feed"?<Feed/>:tab==="Testimonies"?<Feed initialKind="testimony"/>:<>
-      <label>Search topics<input type="search" value={query} onChange={e=>setQuery(e.target.value)}/></label>
-      {tab==="Following" && <p>Topics you chose to follow in this private local profile. Following does not publish membership.</p>}
-      {(tab==="Following"?topicGraph:launchTopics).filter(t=>(tab!=="Following"||state.followedTopics.includes(t.id))&&t.label.toLowerCase().includes(query.toLowerCase())).map(t=><button className="card entry" key={t.id} onClick={()=>navigate("/community/"+t.id)}><strong>{t.label}</strong><span>Scripture · practical encouragement · discussions</span></button>)}
-      {tab==="Following"&&!state.followedTopics.length&&<p>No followed topics yet.</p>}
-    </>}
-  </section>;
+  if(!topic) {
+    const saved=state.savedDiscussions.filter(id=>state.savedDiscussionTopics[id]);
+    const topics=(tab==="Following"?topicGraph:launchTopics).filter(t=>(tab!=="Following"||state.followedTopics.includes(t.id))&&t.label.toLowerCase().includes(query.toLowerCase()));
+    return <section className="grouped-screen community">
+      <LargeTitle>Community</LargeTitle>
+      <p className="community-intro">Scripture, practical help and encouragement. Community experience and reputation are not verified expertise.</p>
+      <GroupedList><Row title="Circles" href="/community/circles" chevron/></GroupedList>
+      <Segmented scroll label="Community sections" value={tab} onChange={setTab} options={communityTabs.map(t=>({value:t,label:t}))}/>
+      {tab==="Saved"?<>
+        <p>Private links on this device. Opening a saved thread rechecks its visibility; removed or blocked content is unavailable.</p>
+        {!!saved.length&&<GroupedList>{saved.map(id=><Row key={id} title={"Saved discussion · "+findTopic(state.savedDiscussionTopics[id])?.label} href={"/community/"+state.savedDiscussionTopics[id]+"?thread="+id} chevron/>)}</GroupedList>}
+        {!state.savedDiscussions.length&&<p>No saved discussions yet.</p>}
+      </>:tab==="Community feed"?<Feed/>:tab==="Testimonies"?<Feed initialKind="testimony"/>:<>
+        <label>Search topics<input type="search" value={query} onChange={e=>setQuery(e.target.value)}/></label>
+        {tab==="Following" && <p>Topics you chose to follow in this private local profile. Following does not publish membership.</p>}
+        {!!topics.length&&<GroupedList>{topics.map(t=><Row key={t.id} title={t.label} href={"/community/"+t.id} chevron/>)}</GroupedList>}
+        {tab==="Following"&&!state.followedTopics.length&&<p>No followed topics yet.</p>}
+      </>}
+    </section>;
+  }
   const member=memberships.includes(topic.id);
   return <section><button className="text-button" onClick={()=>navigate("/community")}>← Topics</button><h1>{topic.label}</h1>
     <p>Share only what you want public. If you are in immediate danger, contact local emergency services or someone who can help you reach safety. Community advice does not replace appropriate professional or pastoral support.</p>
@@ -103,8 +120,14 @@ export function TopicHub({id,thread}: {id?:string;thread?:string}) {
         <div className="actions"><button className="secondary" disabled={busy||!session||p.is_owner} aria-pressed={p.voted} onClick={()=>void action("set_contribution_vote",{contribution_id:p.id,voting:!p.voted})}>{p.voted?"Remove upvote":"Upvote"} · {p.upvotes}</button><button className="secondary" disabled={busy||!session||p.is_owner} onClick={()=>void action("react_community_post",{post_id:p.id,reaction_name:"helped"})}>This helped me · {p.helped}</button>
           {!thread&&<button onClick={()=>navigate("/community/"+topic.id+"?thread="+p.id)}>Open discussion · {p.replies} replies</button>}
           {(!thread||p.id===thread)&&<button className="secondary" aria-pressed={state.savedDiscussions.includes(p.id)} onClick={()=>update(s=>({...s,savedDiscussions:s.savedDiscussions.includes(p.id)?s.savedDiscussions.filter(id=>id!==p.id):[...s.savedDiscussions,p.id],savedDiscussionTopics:{...s.savedDiscussionTopics,[p.id]:topic.id}}))}>{state.savedDiscussions.includes(p.id)?"Unsave discussion":"Save discussion privately"}</button>}
-          {p.is_owner&&<button className="secondary" disabled={busy} onClick={()=>{if(confirm("Delete this public contribution?"))void action("delete_community_post",{post_id:p.id});}}>Delete my contribution</button>}
+          {p.is_owner&&<button className="secondary" disabled={busy} onClick={()=>setDeleting(p.id)}>Delete my contribution</button>}
         </div><SafetyControls id={p.id} kind="post" onChange={()=>setRevision(n=>n+1)}/></article>)}
+      {deleting&&<ConfirmDialog title="Delete this public contribution?" body="It is removed for everyone. This cannot be undone." actionLabel="Delete contribution" safeLabel="Keep contribution" destructive busyLabel="Deleting…" onAction={async()=>{
+        // Not while a load is running: action() would do nothing and the dialog would close as if it had.
+        if(busy) return;
+        await action("delete_community_post",{post_id:deleting});
+        setDeleting(null);
+      }} onSafe={()=>setDeleting(null)}/>}
       {more&&<button disabled={busy} onClick={()=>void load(true)}>Load more discussions</button>}
       {!session||!accepted?<p>Sign in and accept current rules in Profile before joining or posting.</p>:!member?<p>Join this community explicitly to publish.</p>:thread&&!root?<p>Replies are unavailable for this thread.</p>:<form className="card" onSubmit={e=>{e.preventDefault();if(sourceUrl&&!safeSourceUrl(sourceUrl)||!!sourceTitle!==!!sourceUrl){setStatus("Provide both a title and a safe HTTPS source URL, or leave both empty.");return;}void action("publish_topic_post",{post_body:body.trim(),post_kind:kind,selected_topic:topic.id,reply_to:thread??null,source_items:sourceUrl?[{title:sourceTitle.trim(),url:sourceUrl}]:[],anonymous}).then(saved=>{if(saved){setBody("");setSourceTitle("");setSourceUrl("");}});}}>
         <h2>{thread?"Reply publicly":"Start a discussion"}</h2><label>Contribution type<select value={kind} onChange={e=>setKind(e.target.value)}>{["question","advice","scripture","resource",...postTypes].map(t=><option key={t}>{t}</option>)}</select></label>

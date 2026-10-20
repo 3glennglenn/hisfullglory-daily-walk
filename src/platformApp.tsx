@@ -2,35 +2,43 @@ import { Circles } from "./social/Circles";
 import { PrivateProfileBoundary } from "./platform/PrivateProfile";
 import { Component, useEffect, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  BookOpen,
-  Heart,
-  Home as HomeIcon,
-  MessageCircle,
-  Menu,
-} from "lucide-react";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-600.css";
+import "@fontsource/gelasio/latin-400.css";
+import "@fontsource/gelasio/latin-400-italic.css";
+import "@fontsource/literata/latin-400.css";
+import "@fontsource/literata/latin-400-italic.css";
 import "./styles.css";
 import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
-import { parseRoute, navigate, resolveTheme } from "./platform/router";
-import { detectCapabilities } from "./platform/capabilities";
+import { currentRoute, navigate } from "./platform/router";
+import { watchTextSize } from "./platform/appearance";
+import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
-import { Home, Walk } from "./features/Home";
+import { Walk } from "./features/Walk";
+import { Today } from "./features/Today";
+import { YourShelf } from "./features/Shelf";
 import { Reader } from "./bible/Reader";
 import { Pray } from "./features/Pray";
 import { Grow } from "./features/Grow";
 import { ContextCheck } from "./context/ContextCheck";
+import { ContextChecks } from "./context/ContextChecks";
 import { JournalLibrary } from "./features/Journal";
 import { Settings, Profile } from "./features/Settings";
+import { You } from "./features/You";
+import { Appearance } from "./features/Appearance";
+import { Reminders } from "./features/Reminders";
 import { Give, GivingPolicy } from "./giving/Give";
 import { Community } from "./community";
 import { TopicHub } from "./social/TopicHub";
 import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
+import { TabBar, tabFor } from "./ui/TabBar";
+import { LamplightNotice, noticeText } from "./ui/LamplightNotice";
+import { LargeTitle, Toolbar } from "./ui/Screen";
 import { products } from "./config";
 import { contentFor } from "./data";
+import { contextChecks } from "./context/data";
 import { localDate } from "./storage";
 import { track } from "./analytics";
 class ErrorBoundary extends Component<
@@ -44,11 +52,13 @@ class ErrorBoundary extends Component<
   render() {
     return this.state.failed ? (
       <main className="shell">
-        <div className="card">
-          <h1>A moment to begin again</h1>
-          <p>Your saved data remains on this device.</p>
-          <button onClick={() => window.location.reload()}>Reload</button>
-        </div>
+        <section className="grouped-screen crash-screen">
+          <LargeTitle>A moment to begin again</LargeTitle>
+          <p className="screen-lede">Your saved data remains on this device.</p>
+          <button className="screen-action" onClick={() => window.location.reload()}>
+            Reload the app
+          </button>
+        </section>
       </main>
     ) : (
       this.props.children
@@ -59,30 +69,28 @@ interface InstallEvent extends Event {
   prompt(): Promise<void>;
   userChoice: Promise<{ outcome: string }>;
 }
-const menu = [
-  ["context", "Context checks", "Verses you know, back in their story"],
-  ["my-walk", "My Walk", "Your private focus, prayer and progress"],
-  ["grow", "Grow", "Journeys for the season you’re in"],
-  ["journal", "Journal", "A private place for reflection"],
-  ["give", "Give", "External causes and reviewed support"],
-  ["shop", "Shop", "Bibles from HisFullGlory"],
-  ["profile", "Profile", "Your community account"],
-  ["settings", "Settings", "Your rhythm, theme and privacy"],
-];
+// /settings/reminders: the existing Reminders card on its own screen, reached from You.
+function RemindersScreen() {
+  return (
+    <section className="grouped-screen">
+      <Toolbar back="You" to="/you" />
+      <LargeTitle>Daily reminder</LargeTitle>
+      {supabase ? <Reminders /> : <p>Reminders are not available yet.</p>}
+    </section>
+  );
+}
 function App() {
   const { state, notice, update } = usePlatform();
-  const [route, setRoute] = useState(() =>
-    parseRoute(location.pathname, location.search),
-  );
+  const lamplightNotice = useAppearance().notice;
+  const [route, setRoute] = useState(currentRoute);
   const [online, setOnline] = useState(navigator.onLine);
   const [date, setDate] = useState(localDate);
   const [install, setInstall] = useState<InstallEvent | null>(null);
   const [installStatus, setInstallStatus] = useState("");
-  const capabilities = detectCapabilities(!!supabase);
   useEffect(() => {
     track("app_opened");
     const refresh = () => {
-      setRoute(parseRoute(location.pathname, location.search));
+      setRoute(currentRoute());
       setDate(localDate());
     };
     const connectivity = () => setOnline(navigator.onLine);
@@ -105,31 +113,25 @@ function App() {
       document.removeEventListener("visibilitychange", refresh);
     };
   }, []);
-  useEffect(() => {
-    const media = matchMedia("(prefers-color-scheme: dark)");
-    const apply = () => {
-      const effective = resolveTheme(state.theme, media.matches);
-      document.documentElement.dataset.theme = effective;
-      try { localStorage.setItem("hfg-appearance", state.theme); } catch { /* Appearance remains usable. */ }
-      document
-        .querySelector('meta[name="theme-color"]')
-        ?.setAttribute("content", effective === "dark" ? "#181714" : "#F6F0E7");
-    };
-    apply();
-    media.addEventListener("change", apply);
-    return () => media.removeEventListener("change", apply);
-  }, [state.theme]);
+  // Sets data-text="large" on <html> while the system text size is 150 % or more (UI-SPEC 6.3).
+  useEffect(() => watchTextSize(document.documentElement), []);
   const page = route.page;
+  // The story and Today's walk are full-screen flows (UI-SPEC A5, A7, 8.1): the tab bar is covered while one is open
+  // and "‹ Today" is the way out. A slug that names no published check is the error state, which keeps the tab bar.
+  const flow = page === "walk" || (page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id));
   let content: ReactNode;
   switch (page) {
     case "my-walk":
       content = <MyWalk />;
       break;
     case "home":
-      content = <Home key={date} />;
+      content = <Today key={date} />;
       break;
     case "walk":
       content = <Walk key={date} />;
+      break;
+    case "shelf":
+      content = <YourShelf />;
       break;
     case "bible":
       content = <Reader route={route} />;
@@ -138,7 +140,7 @@ function App() {
       content = <Pray />;
       break;
     case "context":
-      content = <ContextCheck key={route.id ?? "today"} slug={route.id} />;
+      content = route.id ? <ContextCheck key={route.id} slug={route.id} /> : <ContextChecks />;
       break;
     case "grow":
       content = <Grow id={route.id} />;
@@ -152,11 +154,15 @@ function App() {
     case "giving-policy":
       content = <GivingPolicy />;
       break;
+    case "you":
+      content = <You />;
+      break;
     case "profile":
       content = <Profile />;
       break;
     case "settings":
-      content = <Settings />;
+      content =
+        route.id === "reminders" ? <RemindersScreen /> : route.id === "appearance" ? <Appearance /> : <Settings />;
       break;
     case "circles":
       content = <Circles key={route.id ?? "discovery"} slug={route.id} thread={route.thread}/>;
@@ -165,7 +171,7 @@ function App() {
       content = (
         <>
           <TopicHub id={route.id} thread={route.thread} />
-          <details className="card">
+          <details className="group-disclosure">
             <summary>Live chat and the original prayer wall</summary>
             <Community verse={contentFor(date)} online={online} />
           </details>
@@ -174,97 +180,50 @@ function App() {
       break;
     case "shop":
       content = (
-        <section>
-          <p className="eyebrow">Find a Bible for your journey</p>
-          <h1>Rooted in the Word.</h1>
-          <p>Current price, stock and checkout are shown by the store.</p>
+        <section className="grouped-screen">
+          <Toolbar back="You" to="/you" />
+          <LargeTitle>Rooted in the Word.</LargeTitle>
+          <p className="screen-lede">Current price, stock and checkout are shown by the store.</p>
           {products.map((p) => (
             <ProductCard key={p.handle} product={p} />
           ))}
         </section>
       );
       break;
-    case "more":
-      content = (
-        <section>
-          <h1>Make room for more.</h1>
-          {menu.map(([path, title, copy]) => (
-            <button
-              className="card entry"
-              key={path}
-              onClick={() => navigate("/" + path)}
-            >
-              <strong>{title}</strong>
-              <span>{copy}</span>
-            </button>
-          ))}
-          <small>
-            Available now: full WEB, local private writing, external giving
-            {capabilities.community
-              ? ", connected community"
-              : ". Community backend is not configured"}
-            .
-          </small>
-        </section>
-      );
-      break;
     default:
       content = (
-        <div className="card">
-          <h1>Page not found</h1>
-          <button onClick={() => navigate("/")}>Go home</button>
-        </div>
+        <section className="grouped-screen">
+          <LargeTitle>Page not found</LargeTitle>
+          <button className="screen-action" onClick={() => navigate("/")}>
+            Back to Today
+          </button>
+        </section>
       );
   }
-  const active = page === "circles" ? "community" : ["home", "walk"].includes(page)
-    ? "home"
-    : ["bible", "pray", "community"].includes(page)
-      ? page
-      : "more";
-  const nav = [
-    { path: "home", label: "Home", Icon: HomeIcon },
-    { path: "bible", label: "Bible", Icon: BookOpen },
-    { path: "pray", label: "Pray", Icon: Heart },
-    { path: "community", label: "Community", Icon: MessageCircle },
-    { path: "more", label: "More", Icon: Menu },
-  ];
   return (
-    <div className="shell">
+    <div className="shell" data-flow={flow ? "true" : undefined}>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <header className="brand">
-        <a
-          href="/"
-          className="brand-name"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate("/");
-          }}
-        >
-          HisFullGlory<span>JESUS AT THE CENTER</span>
-        </a>
-        <button
-          className="icon-button"
-          aria-label="Open settings"
-          onClick={() => navigate("/settings")}
-        >
-          <Heart size={22} />
-        </button>
-      </header>
       {(!online || notice) && (
         <aside className="notice" role="status">
           {notice ||
             "You’re offline. Downloaded Scripture and your private walk remain available. Community needs a connection."}
         </aside>
       )}
+      {/* Always in the page, empty until the Lamplight notice shows (UI-SPEC 4): text written into a region that
+          already exists is announced; a region inserted together with its text often is not. */}
+      <div role="status" aria-live="polite" id="lamplight-status" className="sr-only">
+        {noticeText(lamplightNotice?.variant)}
+      </div>
       <main id="main" tabIndex={-1}>
         {content}
         {install && !state.local.installDismissed && (
-          <aside className="card">
+          <aside className="install-offer">
             <h2>Keep your daily walk close</h2>
             <p>Install for a home-screen shortcut.</p>
             <button
+              className="secondary"
               onClick={async () => {
                 await install.prompt();
                 const choice = await install.userChoice;
@@ -279,7 +238,7 @@ function App() {
               Install app
             </button>
             <button
-              className="secondary"
+              className="text-button"
               onClick={() =>
                 update((s) => ({
                   ...s,
@@ -292,25 +251,14 @@ function App() {
             <small role="status">{installStatus}</small>
           </aside>
         )}
+        <LamplightNotice tab={tabFor(page)} path={location.pathname} />
       </main>
-      <nav className="bottom-nav platform-nav" aria-label="Main navigation">
-        {nav.map(({ path, label, Icon }) => (
-          <button
-            key={path}
-            aria-current={active === path ? "page" : undefined}
-            className={active === path ? "active" : ""}
-            onClick={() => navigate(path === "home" ? "/" : "/" + path)}
-          >
-            <Icon size={20} />
-            <span>{label}</span>
-          </button>
-        ))}
-      </nav>
+      {!flow && <TabBar active={tabFor(page)} />}
     </div>
   );
 }
 createRoot(document.getElementById("root")!).render(
   <ErrorBoundary>
-    <AuthProvider><PrivateProfileBoundary><App/></PrivateProfileBoundary></AuthProvider>
+    <AuthProvider><PrivateProfileBoundary><AppearanceProvider><App/></AppearanceProvider></PrivateProfileBoundary></AuthProvider>
   </ErrorBoundary>,
 );

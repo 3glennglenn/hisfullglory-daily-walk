@@ -36,8 +36,15 @@ const sections = [
 ];
 
 const storage = [
-  { name: "hfg-theme", use: "Your choice of Light, Dark or Auto on the website." },
-  { name: "hfg-appearance", use: "The same choice in the app." },
+  { name: "hfg-look", use: "Your choice of theme, Cover and story or Marked page, in the app and on the website." },
+  {
+    name: "hfg-lamplight",
+    use: "Your Lamplight setting, Automatic, On or Off. The older keys hfg-theme and hfg-appearance are read once and then removed.",
+  },
+  {
+    name: "hfg-lamplight-notice",
+    use: "Whether the app already told you that Lamplight turned on by itself, so it does not keep telling you.",
+  },
   { name: "hfg-reminder", use: "Your reminder settings, so the form remembers them on this device." },
   {
     name: "hfg-daily-walk:v1, v2 and v3",
@@ -92,7 +99,8 @@ const storage = [
   <h2 id="on-your-device">What stays on your device</h2>
   <p>
     Your journal entries, private prayers and answers, struggles, preferences,
-    the topics you follow, and your reading and Daily Walk progress.
+    the topics you follow, your reading and Daily Walk progress, and your
+    shelf of the context checks you have read to the end.
   </p>
   <p>
     They are saved in your browser or app storage on this device. Signing in
@@ -259,20 +267,20 @@ const storage = [
 <style>
   .processors {
     display: grid;
-    gap: 16px;
-    margin-top: 16px;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
   }
   dl {
     margin: 0;
   }
   dt {
-    font-size: 0.86rem;
+    font-size: var(--text-footnote);
     font-weight: 600;
     line-height: 1.5;
     color: var(--muted);
   }
   dd {
-    margin: 0 0 12px;
+    margin: 0 0 var(--space-3);
   }
   dd:last-child {
     margin-bottom: 0;

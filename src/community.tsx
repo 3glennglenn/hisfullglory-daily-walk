@@ -316,7 +316,6 @@ export function Community({
       {!accepted && <AuthPanel />}
       <div className="section-head">
         <div>
-          <p className="eyebrow">Walk together</p>
           <h2 id="community-title">Community</h2>
         </div>
         <button
@@ -765,7 +764,7 @@ function Chat({
       </div>
       {room?.slug === "todays-scripture" && (
         <aside className="scripture-pinned">
-          <p className="eyebrow">Today’s conversation · system card</p>
+          <p className="screen-meta">Today’s conversation · system card</p>
           <blockquote>{verse.quote}</blockquote>
           <small>{verse.reference} · WEB</small>
           <p>{verse.question}</p>
@@ -1097,7 +1096,7 @@ function PrayerWall({
       {posts.map((p) => (
         <article className="card prayer-card" key={p.id}>
           <div className="row">
-            <span className="eyebrow">
+            <span className="post-kind">
               {p.post_type === "prayer" ? "Prayer request" : "Testimony"}
             </span>
             <small>{supabase ? timestamp(p.created_at) : "Example post"}</small>

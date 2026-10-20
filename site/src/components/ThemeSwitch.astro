@@ -1,0 +1,177 @@
+---
+// The reader's own choice of theme (Cover and story, Marked page) and of Lamplight (the dark
+// appearance), kept on this device only (UI-SPEC 3.4, W8). Used once, in the footer.
+---
+
+<!-- Shown by the script below; without JavaScript the group stays hidden and the page follows
+     the device through the fallback in tokens.generated.css. -->
+<section class="appearance" aria-labelledby="appearance-heading" data-appearance hidden>
+  <h2 id="appearance-heading">Appearance</h2>
+  <div class="group" role="group" aria-labelledby="theme-label">
+    <p class="group-label" id="theme-label">Theme</p>
+    <div class="pills">
+      <button type="button" data-look-choice="cover" aria-pressed="true">Cover and story</button>
+      <button type="button" data-look-choice="marked" aria-pressed="false">Marked page</button>
+    </div>
+  </div>
+  <div class="group" role="group" aria-labelledby="lamplight-label">
+    <p class="group-label" id="lamplight-label">Lamplight</p>
+    <div class="pills">
+      <button type="button" data-lamplight-choice="auto" aria-pressed="true">Automatic</button>
+      <button type="button" data-lamplight-choice="on" aria-pressed="false">On</button>
+      <button type="button" data-lamplight-choice="off" aria-pressed="false">Off</button>
+    </div>
+  </div>
+  <p class="effect" role="status" data-lamplight-status></p>
+</section>
+
+<script is:inline>
+  /* Theme and Lamplight switch. hfg-look is cover or marked; hfg-lamplight is auto, on or off.
+     Only those values change anything; every other value, and a blocked or unreadable storage,
+     falls back to Cover and Automatic, and a choice then lasts for the visit only. */
+  (function () {
+    var section = document.querySelector("[data-appearance]");
+    if (!section) return;
+    var root = document.documentElement;
+    var query = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : { matches: false };
+    function read(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (error) {
+        return null;
+      }
+    }
+    function write(key, value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (error) {}
+    }
+    function remove(key) {
+      try {
+        localStorage.removeItem(key);
+      } catch (error) {}
+    }
+
+    /* A visitor's earlier Light or Dark choice (hfg-theme) is carried over once. */
+    var old = read("hfg-theme");
+    if (old !== null) {
+      if (read("hfg-lamplight") === null && (old === "dark" || old === "light"))
+        write("hfg-lamplight", old === "dark" ? "on" : "off");
+      remove("hfg-theme");
+    }
+
+    var look = read("hfg-look") === "marked" ? "marked" : "cover";
+    var stored = read("hfg-lamplight");
+    var lamplight = stored === "on" || stored === "off" ? stored : "auto";
+    var colors = { cover: ["#F3F1EE", "#1A120E"], marked: ["#FFFDF9", "#1A120E"] };
+
+    function dark() {
+      return lamplight === "on" || (lamplight === "auto" && query.matches);
+    }
+    function apply() {
+      root.dataset.look = look;
+      root.dataset.mode = dark() ? "lamplight" : "light";
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) {
+        var computed = getComputedStyle(root).getPropertyValue("--theme-color").trim();
+        meta.setAttribute("content", computed || colors[look][dark() ? 1 : 0]);
+      }
+    }
+    function show() {
+      section.querySelectorAll("[data-look-choice]").forEach(function (button) {
+        button.setAttribute("aria-pressed", String(button.dataset.lookChoice === look));
+      });
+      section.querySelectorAll("[data-lamplight-choice]").forEach(function (button) {
+        button.setAttribute("aria-pressed", String(button.dataset.lamplightChoice === lamplight));
+      });
+      var status = section.querySelector("[data-lamplight-status]");
+      status.textContent =
+        lamplight !== "auto"
+          ? ""
+          : dark()
+            ? "On now, because your device is set to dark."
+            : "Off now, because your device is set to light.";
+    }
+
+    section.querySelectorAll("[data-look-choice]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        look = button.dataset.lookChoice === "marked" ? "marked" : "cover";
+        write("hfg-look", look);
+        apply();
+        show();
+      });
+    });
+    section.querySelectorAll("[data-lamplight-choice]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var choice = button.dataset.lamplightChoice;
+        lamplight = choice === "on" || choice === "off" ? choice : "auto";
+        write("hfg-lamplight", lamplight);
+        apply();
+        show();
+      });
+    });
+    /* While Automatic, the page follows the device when its appearance changes. */
+    function follow() {
+      if (lamplight !== "auto") return;
+      apply();
+      show();
+    }
+    if (query.addEventListener) query.addEventListener("change", follow);
+    else if (query.addListener) query.addListener(follow);
+
+    apply();
+    show();
+    section.hidden = false;
+  })();
+</script>
+
+<style>
+  .appearance {
+    display: grid;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+  .appearance[hidden] {
+    display: none;
+  }
+  h2 {
+    font-size: var(--text-body);
+    line-height: 1.47;
+    margin: 0;
+  }
+  .group-label {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-footnote);
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .pills button {
+    min-height: 44px;
+    min-width: 64px;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--muted);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-size: var(--text-body);
+    cursor: pointer;
+  }
+  .pills button[aria-pressed="true"] {
+    border-color: var(--focus);
+    box-shadow: inset 0 0 0 1px var(--focus);
+    background: var(--surface-2);
+    font-weight: 600;
+  }
+  .effect {
+    margin: 0;
+    min-height: 1.47em;
+    font-size: var(--text-footnote);
+    color: var(--muted);
+  }
+</style>

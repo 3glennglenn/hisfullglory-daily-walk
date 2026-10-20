@@ -226,6 +226,16 @@ test("URL deep links parse, reject malformed paths, and preserve passage tabs", 
   assert.equal(parseRoute("/grow/anxiety").id, "anxiety");
   assert.equal(parseRoute("/bible/romans/8", "?tab=anything").tab, "read");
 });
+test("You replaces More: /you parses, /settings takes only the sub-paths appearance and reminders, /more still parses", () => {
+  assert.deepEqual(parseRoute("/you"), { page: "you", id: undefined, tab: "read" });
+  assert.deepEqual(parseRoute("/settings/reminders"), { page: "settings", id: "reminders", tab: "read" });
+  assert.equal(parseRoute("/settings/appearance").id, "appearance");
+  assert.deepEqual(parseRoute("/settings"), { page: "settings", id: undefined, tab: "read" });
+  for (const path of ["/settings/other", "/settings/reminders/x", "/settings/Reminders", "/settings/..", "/you/x"])
+    assert.equal(parseRoute(path).page, "not-found", path);
+  // The shell replaces "/more" with "/you" through history.replaceState; the router keeps parsing it.
+  assert.equal(parseRoute("/more").page, "more");
+});
 test("theme follows live system changes and capabilities never enable unconfigured services", () => {
   assert.equal(resolveTheme("system", true), "dark");
   assert.equal(resolveTheme("system", false), "light");
@@ -351,4 +361,28 @@ test("external fundraiser allowlist rejects host tricks, payment instructions an
     assert.equal(cause.donationUrl, "https://secure.givewell.org/");
     assert.equal("raised" in cause, false);
   }
+});
+
+// ---- Plan 07: the shelf and the context checks list are routes (UI-SPEC 8.2) ----------------------------------
+test("/shelf is a route of its own with nothing under it; /context is the list, /context/<slug> the story", () => {
+  assert.equal(parseRoute("/shelf").page, "shelf");
+  assert.equal(parseRoute("/shelf/anything").page, "not-found");
+  assert.equal(parseRoute("/context").page, "context");
+  assert.equal(parseRoute("/context", "?unpublished=1").page, "context", "the unpublished marker is a fixed flag, not a slug");
+  assert.equal(parseRoute("/context/john-3-16").id, "john-3-16");
+  assert.equal(parseRoute("/context/Bad Slug").page, "not-found");
+  assert.equal(parseRoute("/context/john-3-16/extra").page, "not-found");
+});
+
+test("the four ?tab= values of a reader address still parse, so old links keep working (UI-SPEC 8.2)", () => {
+  for (const tab of ["read", "context", "study", "community"]) {
+    assert.equal(parseRoute("/bible/romans/8", "?tab=" + tab).tab, tab, tab);
+    assert.equal(parseRoute("/bible/romans/8/28", "?tab=" + tab).tab, tab, tab + " with a verse");
+    assert.equal(parseRoute("/bible/romans/8/28", "?tab=" + tab).verse, 28);
+  }
+  // No tab, or one nobody knows, is the plain reader.
+  assert.equal(parseRoute("/bible/romans/8").tab, "read");
+  assert.equal(parseRoute("/bible/romans/8", "?tab=chat").tab, "read");
+  // The library has no tab.
+  assert.equal(parseRoute("/bible", "?tab=context").tab, "read");
 });

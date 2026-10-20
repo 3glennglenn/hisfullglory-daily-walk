@@ -12,20 +12,22 @@ const paths = [
     {title:"Remember without pressure", path:"/journal", prompt:"Record a memory or a hope, if you wish."}]},
 ];
 const challengeId = "seven-days-in-scripture";
+// Paths and challenges (plan 11): a section title, the sentence, and each path or challenge as a disclosure row.
+// The words are the earlier ones; only the cards and the uppercase look are gone.
 export function Journeys() {
   const {state,update}=usePlatform();
   const joined=state.joinedChallenges.includes(challengeId);
   const complete=state.challengeProgress[challengeId]??[];
-  return <section className="card"><h2>Spiritual paths and challenges</h2>
-    <p>Optional editorial practices, saved privately in this profile. Completion records your choice; it does not measure faith or spiritual maturity.</p>
-    {paths.map(path=><details key={path.id}><summary>{path.title} · {state.pathProgress[path.id]?.length??0}/3 steps</summary>
+  return <section className="group" aria-labelledby="journeys-title"><h2 className="group-title" id="journeys-title">Spiritual paths and challenges</h2>
+    <p className="screen-lede">Optional editorial practices, saved privately in this profile. Completion records your choice; it does not measure faith or spiritual maturity.</p>
+    {paths.map(path=><details className="group-disclosure" key={path.id}><summary>{path.title} · {state.pathProgress[path.id]?.length??0}/3 steps</summary>
       {path.steps.map((step,index)=><article key={step.title}><h3>{step.title}</h3><p>{step.prompt}</p><div className="actions">
         <button className="secondary" onClick={()=>navigate(step.path)}>Open practice</button>
         <button disabled={state.pathProgress[path.id]?.includes(index)} onClick={()=>update(s=>({...s,pathProgress:{...s.pathProgress,[path.id]:[...new Set([...(s.pathProgress[path.id]??[]),index])]}}))}>{state.pathProgress[path.id]?.includes(index)?"Step complete":"Mark step complete"}</button>
       </div></article>)}
       <button className="secondary" onClick={()=>navigate("/community/"+path.topic)}>Explore related community</button>
     </details>)}
-    <details><summary>Seven days in Scripture · {complete.length}/7 practices</summary>
+    <details className="group-disclosure"><summary>Seven days in Scripture · {complete.length}/7 practices</summary>
       <p>Revisit three selected WEB chapters at your pace. This is a local personal challenge with no public leaderboard or promised reward. Leaving preserves your progress.</p>
       <button onClick={()=>update(s=>({...s,joinedChallenges:joined?s.joinedChallenges.filter(id=>id!==challengeId):[...s.joinedChallenges,challengeId]}))}>{joined?"Leave challenge":"Join challenge privately"}</button>
       {joined&&Array.from({length:7},(_,day)=><article key={day}><h3>Day {day+1}</h3><p>Read, pray, and notice one phrase you want to remember.</p><div className="actions">

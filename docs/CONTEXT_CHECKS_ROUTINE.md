@@ -30,7 +30,9 @@ sources below. Not checked by a person." On list cards (the overview and the cha
 the verse): "Written by an AI model. Not checked by a person." At the bottom: "Written by an
 AI model. Before publishing, an automatic check compared Scripture quotations with the World
 English Bible and the words of quoted people with their linked sources. No person has
-checked this page." The home page and the app keep showing approved checks only.
+checked this page." Today in the app and the site home show the newest published context
+check, AI-unreviewed ones included, always with the label "Written by an AI model. Not
+checked by a person." (founder, 2026-10-19).
 
 | | Safeguard | Where it is enforced |
 | --- | --- | --- |
@@ -62,9 +64,10 @@ otherwise.
 Take one down: delete the file, or set `"review": "draft"`, through a pull request.
 
 Approve one: set `"review": "approved"` and `"approved": "<date>"`, and add its slug to the
-list of approved checks in `tests/context-routine.test.ts` in the same change. The home page
-and the app then show it. That test fails if a check says "approved" without being on the
-list, so the routine cannot approve its own work.
+list of approved checks in `tests/context-routine.test.ts` in the same change. That test fails
+if a check says "approved" without being on the list, so the routine cannot approve its own
+work. Approving a check changes its label and closing note, not whether it is shown: Today in
+the app and the site home show the newest published check either way (D-06).
 
 ## 6. The command line
 

@@ -7,6 +7,7 @@ import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { launchTopics } from "../../src/topics/graph.ts";
 import { library } from "../src/lib/bible.ts";
+import { newestFirst, publicationDate, splitHook } from "../src/lib/editorial.ts";
 import {
   aiUnreviewedCardLabel,
   aiUnreviewedLabel,
@@ -293,11 +294,18 @@ test("drafts are never built; approved and AI-unreviewed context checks are, and
   }
 });
 
-test("lists of context checks say which ones no person has checked, and the front door leaves them out", () => {
+test("lists of context checks say which ones no person has checked", () => {
+  // The founder decided on 2026-10-19 (D-06, "Ja, elke dag de nieuwste") that the front door
+  // shows the newest check, AI-unreviewed ones included, always labelled. This replaces the
+  // earlier assertion that the front door leaves them out. The label is asserted here on the
+  // overview and the chapter pages; the home page itself is asserted in redesign.test.ts.
   const unchecked = publishedChecks().filter((item) => item.review === "ai-unreviewed");
   const count = (html: string, needle: string) => html.split(needle).length - 1;
+  // The overview labels every such row, and its bookcase adds one legend line when one of the six
+  // newest spines carries the AI badge (W5).
+  const legend = featuredChecks().slice(0, 6).some((item) => item.review === "ai-unreviewed") ? 1 : 0;
   if (existsSync(page("/context-checks")))
-    assert.equal(count(readFileSync(page("/context-checks"), "utf8"), aiUnreviewedCardLabel), unchecked.length, "overview");
+    assert.equal(count(readFileSync(page("/context-checks"), "utf8"), aiUnreviewedCardLabel), unchecked.length + legend, "overview");
   // Every chapter page that lists an AI-unreviewed check shows the label once per such check.
   for (const item of publishedChecks()) {
     const { book, chapter } = item.verse;
@@ -305,9 +313,71 @@ test("lists of context checks say which ones no person has checked, and the fron
     const here = unchecked.filter((entry) => entry.verse.book === book && entry.verse.chapter === chapter).length;
     assert.equal(count(html, aiUnreviewedCardLabel), here, `/bible/${book}/${chapter}`);
   }
-  const home = readFileSync(page(""), "utf8");
-  for (const item of unchecked) assert.ok(!home.includes(`/context-checks/${item.slug}"`), `${item.slug}: not on the home page`);
-  assert.ok(featuredChecks().every((item) => item.review !== "ai-unreviewed"));
+});
+
+test("the front door features the published checks newest first, AI-unreviewed ones included (D-06)", () => {
+  const featured = featuredChecks();
+  const published = publishedChecks();
+  assert.equal(featured.length, published.length, "every published check is featured");
+  for (const item of published.filter((entry) => entry.review === "ai-unreviewed"))
+    assert.ok(featured.some((entry) => entry.slug === item.slug), `${item.slug}: AI-unreviewed checks lead the front door too`);
+  for (let i = 1; i < featured.length; i++)
+    assert.ok(newestFirst(featured[i - 1], featured[i]) < 0, `${featured[i - 1].slug} before ${featured[i].slug}`);
+  const newest = featured[0];
+  assert.ok(
+    published.every((item) => publicationDate(item) <= publicationDate(newest)),
+    "nothing on file is published later than the first",
+  );
+  // An approved check keeps the date of approval; an AI-unreviewed one never has one.
+  for (const item of content().checks)
+    assert.equal(item.approved !== undefined, item.review === "approved", `${item.slug}: approved date`);
+});
+
+test("the newest-check rule: approved date for approved checks, written date for AI-unreviewed ones", () => {
+  const check = (slug: string, review: "approved" | "ai-unreviewed", written: string, approved?: string) => ({
+    slug,
+    review,
+    written,
+    ...(approved === undefined ? {} : { approved }),
+  });
+  assert.equal(publicationDate(check("a", "approved", "2026-10-01", "2026-10-14")), "2026-10-14");
+  assert.equal(publicationDate(check("a", "ai-unreviewed", "2026-10-19")), "2026-10-19");
+  const sorted = [
+    check("b", "approved", "2026-10-13", "2026-10-14"),
+    check("c", "ai-unreviewed", "2026-10-19"),
+    check("a", "ai-unreviewed", "2026-10-14"),
+    check("d", "approved", "2026-10-12", "2026-10-14"),
+    check("e", "approved", "2026-10-13", "2026-10-14"),
+  ].sort(newestFirst);
+  // Newest publication date first; the same date goes to the later written date, then the slug.
+  assert.deepEqual(
+    sorted.map((item) => item.slug),
+    ["c", "a", "b", "e", "d"],
+  );
+});
+
+test("a hook is split where its turn is, and a hook without a turn stays whole", () => {
+  assert.deepEqual(splitHook("You know “Be still”. But did you know it is spoken over raging nations?"), {
+    first: "You know “Be still”.",
+    second: "But did you know it is spoken over raging nations?",
+  });
+  assert.deepEqual(splitHook("A hook with no turn in it."), { first: "A hook with no turn in it." });
+  for (const item of content().checks) {
+    const { first, second } = splitHook(item.hook);
+    assert.equal(second === undefined ? first : `${first} ${second}`, item.hook, `${item.slug}: nothing lost`);
+  }
+});
+
+test("the shared label words are free of Node imports and say what they said before", () => {
+  const source = readFileSync("src/lib/editorial.ts", "utf8");
+  assert.ok(!/from\s+["']node:/.test(source) && !/require\(/.test(source), "the app imports this file, so it needs no Node");
+  assert.equal(aiUnreviewedLabel, "Written by an AI model from the sources below. Not checked by a person.");
+  assert.equal(aiUnreviewedCardLabel, "Written by an AI model. Not checked by a person.");
+  assert.ok(editorialNote("ai-unreviewed", "ai").endsWith("No person has checked this page."));
+  assert.equal(
+    editorialNote("approved", "human"),
+    "Written by HisFullGlory. Scripture quotations are checked against the World English Bible. Approved by HisFullGlory. Not reviewed by a theological reader.",
+  );
 });
 
 test("context checks, topic pages and articles can be shared, with their own address", () => {

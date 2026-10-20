@@ -10,9 +10,11 @@ import {
 import { supabase } from "../supabase";
 import { AuthPanel, useAuth } from "../platform/auth";
 import { SafetyControls } from "../social/safety";
-import { navigate } from "../platform/router";
 import { track } from "../analytics";
 import { Dialog } from "../platform/Dialog";
+import { ConfirmDialog } from "../ui/ConfirmDialog";
+import { GroupedList, Row } from "../ui/List";
+import { LargeTitle, Toolbar } from "../ui/Screen";
 const causes = curatedCharityCatalog.list();
 const empty = {
   title: "",
@@ -28,8 +30,11 @@ const empty = {
 };
 export function GivingPolicy() {
   return (
-    <section className="card">
-      <h1>Giving with care.</h1>
+    <section className="grouped-screen">
+      <Toolbar back="Give" to="/give" />
+      <LargeTitle>Giving with care.</LargeTitle>
+      <GroupedList plain>
+        <div className="group-pad">
       <p>
         HisFullGlory helps you discover causes and reviewed personal requests.
         Donations happen on an external provider’s site. We do not collect
@@ -62,15 +67,15 @@ export function GivingPolicy() {
         recurring gifts and platform receipts are unavailable.
       </p>
       <a
+        className="inline-link"
         href="https://www.gofundme.com/c/how-it-works"
         target="_blank"
         rel="noopener noreferrer"
       >
         GoFundMe’s official process
       </a>
-      <button className="secondary" onClick={() => navigate("/give")}>
-        Back to Give
-      </button>
+        </div>
+      </GroupedList>
     </section>
   );
 }
@@ -90,6 +95,8 @@ export function Give() {
   const [draftId, setDraftId] = useState<string | null>(null);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+  // The request a reader asked to close or delete, until they answer in the app's own dialog.
+  const [confirming, setConfirming] = useState<{ id: string; remove: boolean } | null>(null);
   const loadVersion = useRef(0);
   const currentUser = useRef(session?.user.id);
   currentUser.current = session?.user.id;
@@ -182,13 +189,7 @@ export function Give() {
     await load();
   }
   async function close(id: string, remove = false) {
-    if (
-      !supabase ||
-      !window.confirm(
-        remove ? "Delete this request?" : "Close this support request?",
-      )
-    )
-      return;
+    if (!supabase) return;
     const { error } = await supabase.rpc("close_support_request", {
       request_id: id,
       remove_request: remove,
@@ -198,19 +199,16 @@ export function Give() {
   }
   const cause = causes.find((c) => c.id === detail);
   return (
-    <section>
-      <p className="eyebrow">Love made practical</p>
-      <h1>Give with intention.</h1>
-      <p>
+    <section className="grouped-screen">
+      <Toolbar back="You" to="/you" />
+      <LargeTitle>Give with intention.</LargeTitle>
+      <p className="screen-lede">
         Explore independently evaluated, high-impact giving options or reviewed
         requests from people. All giving stays with the external provider.
       </p>
-      <button
-        className="text-button"
-        onClick={() => navigate("/giving-policy")}
-      >
-        Read the giving policy
-      </button>
+      <GroupedList>
+        <Row title="Read the giving policy" href="/giving-policy" chevron />
+      </GroupedList>
       <div className="tabs">
         {[
           ["causes", "Causes"],
@@ -529,13 +527,14 @@ export function Give() {
                     )}
                     <button
                       className="secondary"
-                      onClick={() => void close(r.id)}
+                      aria-label={`Close request: ${r.title}`}
+                      onClick={() => setConfirming({ id: r.id, remove: false })}
                     >
                       Close
                     </button>
                     <button
                       className="secondary"
-                      onClick={() => void close(r.id, true)}
+                      onClick={() => setConfirming({ id: r.id, remove: true })}
                     >
                       Delete my request
                     </button>
@@ -547,6 +546,21 @@ export function Give() {
         </>
       )}
       <p role="status">{status}</p>
+      {confirming && (
+        <ConfirmDialog
+          title={confirming.remove ? "Delete this request?" : "Close this support request?"}
+          actionLabel={confirming.remove ? "Delete request" : "Close request"}
+          safeLabel={confirming.remove ? "Keep request" : "Keep it open"}
+          destructive={confirming.remove}
+          busyLabel={confirming.remove ? "Deleting…" : "Closing…"}
+          onAction={async () => {
+            // The outcome, good or bad, is the screen's own status line below.
+            await close(confirming.id, confirming.remove);
+            setConfirming(null);
+          }}
+          onSafe={() => setConfirming(null)}
+        />
+      )}
       {outbound && (
         <Dialog onClose={() => setOutbound(null)} labelledBy="outbound-title">
           <h2 id="outbound-title">

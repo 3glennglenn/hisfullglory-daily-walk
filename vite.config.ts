@@ -9,6 +9,12 @@ import { assertReleasable } from "./site/src/data/legal.ts";
 assertReleasable((globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env?.VERCEL_ENV);
 
 export default defineConfig({
+  // The app imports a few files from site/src (legal.ts, editorial.ts, sponsor.ts). Vite would look up the
+  // closest tsconfig.json for each of them, and site/tsconfig.json extends astro/tsconfigs/strict, which exists
+  // only where the site's own packages are installed. The app is built from the root install alone (Vercel, the
+  // App job on GitHub), so that lookup fails there. A tsconfigRaw string skips the lookup; these are the
+  // compiler options of the root tsconfig.json that change how esbuild writes the files.
+  esbuild: { tsconfigRaw: JSON.stringify({ compilerOptions: { target: "ES2022", jsx: "react-jsx" } }) },
   plugins: [
     react(),
     VitePWA({
@@ -27,8 +33,8 @@ export default defineConfig({
         start_url: "/",
         scope: "/",
         display: "standalone",
-        theme_color: "#F6F0E7",
-        background_color: "#F6F0E7",
+        theme_color: "#F3F1EE",
+        background_color: "#F3F1EE",
         icons: [
           {
             src: "/icon-192.png",

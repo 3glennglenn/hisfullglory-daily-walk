@@ -4,6 +4,9 @@ import type { JournalEntry, JournalType } from "../platform/models";
 import { localDate } from "../storage";
 import { navigate } from "../platform/router";
 import { ShareForm } from "../social/Feed";
+import { ConfirmDialog } from "../ui/ConfirmDialog";
+import { GroupedList, Row } from "../ui/List";
+import { LargeTitle, Toolbar } from "../ui/Screen";
 export interface JournalRepository {
   list(): JournalEntry[];
   save(entry: JournalEntry): boolean;
@@ -24,6 +27,7 @@ export function JournalLibrary() {
   const [selected, setSelected] = useState<string | null>(null);
   const [sharing, setSharing] = useState<string | null>(null);
   const [status, setStatus] = useState("");
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const entry = state.entries.find((e) => e.id === selected);
   const shared = state.entries.find((e) => e.id === sharing);
   const repository: JournalRepository = {
@@ -61,34 +65,46 @@ export function JournalLibrary() {
     if (update((s) => ({ ...s, entries: [e, ...s.entries] })))
       setSelected(e.id);
   }
+  const shownEntries = repository
+    .list()
+    .filter(
+      (e) =>
+        (type === "all" || e.type === type) &&
+        `${e.title} ${e.body}`.toLowerCase().includes(query.toLowerCase()),
+    )
+    .sort((a, b) => b.date.localeCompare(a.date));
   return (
-    <section>
-      <p className="eyebrow">A private place to listen</p>
-      <h1>Your journal.</h1>
-      <p>
+    <section className="grouped-screen">
+      <Toolbar back="You" to="/you" />
+      <LargeTitle>Your journal.</LargeTitle>
+      <p className="screen-lede">
         Saved only on this device. Cloud encryption and sync are not configured.
         Export a backup before clearing browser data.
       </p>
-      <button onClick={add}>New entry</button>
-      <div className="row">
-        <input
-          type="search"
-          aria-label="Search private journal"
-          placeholder="Search your entries"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <select
-          aria-label="Filter journal type"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        >
-          <option value="all">All entries</option>
-          {journalTypes.map((t) => (
-            <option key={t}>{t}</option>
-          ))}
-        </select>
-      </div>
+      <button className="screen-action" onClick={add}>
+        New entry
+      </button>
+      <GroupedList plain>
+        <div className="group-pad field-pair">
+          <input
+            type="search"
+            aria-label="Search private journal"
+            placeholder="Search your entries"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <select
+            aria-label="Filter journal type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+          >
+            <option value="all">All entries</option>
+            {journalTypes.map((t) => (
+              <option key={t}>{t}</option>
+            ))}
+          </select>
+        </div>
+      </GroupedList>
       {entry && (
         <article className="card">
           <h2>Edit private entry</h2>
@@ -147,19 +163,10 @@ export function JournalLibrary() {
             </button>
           )}
           <div className="actions">
-            <button className="secondary" onClick={() => setSelected(null)}>
+            <button className="secondary" aria-label="Close entry" onClick={() => setSelected(null)}>
               Close
             </button>
-            <button
-              className="secondary"
-              onClick={() => {
-                if (
-                  window.confirm("Delete this private entry?") &&
-                  repository.remove(entry.id)
-                )
-                  setSelected(null);
-              }}
-            >
+            <button className="secondary" onClick={() => setConfirmDelete(true)}>
               Delete entry
             </button>
             <button onClick={() => setSharing(entry.id)}>
@@ -168,6 +175,21 @@ export function JournalLibrary() {
           </div>
           <small role="status">{status}</small>
         </article>
+      )}
+      {entry && confirmDelete && (
+        <ConfirmDialog
+          title="Delete this private entry?"
+          body="It is removed from this device. This cannot be undone."
+          actionLabel="Delete entry"
+          safeLabel="Keep entry"
+          destructive
+          onAction={() => {
+            setConfirmDelete(false);
+            // A write that fails is reported by the app's storage notice; the entry stays.
+            if (repository.remove(entry.id)) setSelected(null);
+          }}
+          onSafe={() => setConfirmDelete(false)}
+        />
       )}
       {shared && (
         <>
@@ -181,27 +203,26 @@ export function JournalLibrary() {
           </button>
         </>
       )}
-      {repository
-        .list()
-        .filter(
-          (e) =>
-            (type === "all" || e.type === type) &&
-            `${e.title} ${e.body}`.toLowerCase().includes(query.toLowerCase()),
-        )
-        .sort((a, b) => b.date.localeCompare(a.date))
-        .map((e) => (
-          <button
-            className="card entry"
-            key={e.id}
-            onClick={() => setSelected(e.id)}
-          >
-            <span className="eyebrow">
-              {e.type} · {e.date}
-            </span>
-            <strong>{e.title || "Untitled reflection"}</strong>
-            <span>{e.body.slice(0, 140) || "Start writing…"}</span>
-          </button>
-        ))}
+      {shownEntries.length > 0 && (
+        <GroupedList>
+          {shownEntries.map((e) => (
+            <Row
+              key={e.id}
+              title={e.title || "Untitled reflection"}
+              detail={
+                <>
+                  <span className="row-line">
+                    {e.type} · {e.date}
+                  </span>
+                  <span className="row-line">{e.body.slice(0, 140) || "Start writing…"}</span>
+                </>
+              }
+              chevron
+              onClick={() => setSelected(e.id)}
+            />
+          ))}
+        </GroupedList>
+      )}
       {!state.entries.length && (
         <div className="card">
           <h2>Begin with one honest sentence</h2>

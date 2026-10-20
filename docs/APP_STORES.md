@@ -68,3 +68,11 @@ and checks all of this.
 
 Open: whether an owner's Circle should pass to its longest-standing moderator or member
 instead of closing. That needs a change to the v1 rule that owners are immutable.
+
+## Phase 2 notes from the calm redesign (phase 01.1)
+
+- The native status bar follows `data-mode` (light content on Lamplight), not only the device setting.
+- Decide whether the native splash follows a dark device (`#1A120E`), to avoid a light flash before Lamplight draws.
+- Check the iOS accessibility text sizes AX1 to AX5 on a device. The web checks cover a 34px root (200 %), not the larger Apple sizes.
+- The store screenshot set (six screens in Cover and story, 1320 x 2868 and 1080 x 2400, real content only) is in the phase folder, `.planning/phases/01.1-calm-redesign-of-app-and-website-apple-hig/screens/store/`. Retake it on the capture day, because Today shows whatever context check is newest then.
+- Android Back does not close a sheet yet; check it in the store build.

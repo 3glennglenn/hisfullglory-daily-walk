@@ -1,9 +1,16 @@
 ---
+// A chapter page (UI-SPEC W2): the app's reader without its per-verse sheet. Breadcrumb, the heading
+// of the reader's look, the verses as text with raised numbers and v{n} anchors, a chapter row at
+// the top and the bottom, "Around {chapter}" with the sourced note, the AI explanation and a link
+// to the community in the fixed layer order of UI-SPEC 5.3, the chapter's context checks (AI-written
+// ones labelled, D-06), one filled "Read {chapter} in the app" and the WEB line, all in one centred
+// column on the page grid.
+import AiBadge from "../../../components/AiBadge.astro";
+import AiExplanation from "../../../components/AiExplanation.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
 import ContextNote from "../../../components/ContextNote.astro";
 import { appUrl } from "../../../config";
 import Base from "../../../layouts/Base.astro";
-import AiExplanation from "../../../components/AiExplanation.astro";
 import {
   aiExplanation,
   chapterNote,
@@ -14,7 +21,7 @@ import {
   speakerParts,
   type BibleBook,
 } from "../../../lib/bible";
-import { aiUnreviewedCardLabel, checksFor, refLabel } from "../../../lib/content";
+import { aiUnreviewedCardLabel, checksFor, refLabel, splitHook } from "../../../lib/content";
 
 type Step = { label: string; href: string };
 
@@ -60,223 +67,446 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
 >
   <section class="section">
     <div class="wrap">
-      <Breadcrumb
-        trail={[
-          { label: "Bible", href: "/bible" },
-          { label: book.name, href: `/bible/${book.slug}` },
-        ]}
-        current={`Chapter ${number}`}
-      />
-      <h1>{title}</h1>
-      <p class="muted">World English Bible</p>
-      <nav class="jump" aria-label="On this page">
-        <a href="#context">Context</a>
-        {ai && <a href="#ai">AI explanation</a>}
-      </nav>
+      <div class="column">
+        <Breadcrumb
+          trail={[
+            { label: "Bible", href: "/bible" },
+            { label: book.name, href: `/bible/${book.slug}` },
+          ]}
+          current={title}
+        />
+        <nav class="pager" aria-label="Chapters">
+          {
+            previous ? (
+              <a class="plain" href={previous.href}>
+                <span aria-hidden="true">‹</span> {previous.label}
+              </a>
+            ) : (
+              <span />
+            )
+          }
+          {
+            next && (
+              <a class="plain" href={next.href}>
+                {next.label} <span aria-hidden="true">›</span>
+              </a>
+            )
+          }
+        </nav>
 
-      <article class="scripture">
-        {book.id === "SNG" && hasSpeakers(chapter) && <p class="speaker-note">{speakerNote}</p>}
+        <h1>{title}</h1>
+
+        <article class="scripture" data-layer="scripture">
+          <span class="numeral" aria-hidden="true">{number}</span>
+          {book.id === "SNG" && hasSpeakers(chapter) && <p class="speaker-note">{speakerNote}</p>}
+          {
+            chapter.verses.map((verse) => {
+              const { above, parts } = speakerParts(verse);
+              return (
+                <>
+                  {above.map((label) => <p class="speaker">{label}</p>)}
+                  <p class="verse" id={`v${verse.number}`}>
+                    <sup>{verse.number}</sup>{" "}
+                    {verse.omitted ? (
+                      <em>Verse omitted in this WEB edition. See the source notes.</em>
+                    ) : (
+                      parts.map((part) => (
+                        <>
+                          {part.label && (
+                            <>
+                              <span class="speaker">{part.label}</span>{" "}
+                            </>
+                          )}
+                          {part.text}
+                        </>
+                      ))
+                    )}
+                  </p>
+                </>
+              );
+            })
+          }
+        </article>
+
+        <nav class="pager end" aria-label="Chapters, end of page">
+          {
+            previous ? (
+              <a class="plain" href={previous.href}>
+                <span aria-hidden="true">‹</span> {previous.label}
+              </a>
+            ) : (
+              <span />
+            )
+          }
+          {
+            next && (
+              <a class="plain" href={next.href}>
+                {next.label} <span aria-hidden="true">›</span>
+              </a>
+            )
+          }
+        </nav>
+
+        <section class="around" aria-labelledby="around-title">
+          <h2 id="around-title">Around {title}</h2>
+          <div class="layer" id="context">
+            <ContextNote note={note} subject={subject} level={3} />
+          </div>
+          {
+            ai && (
+              <div class="layer" id="ai">
+                <AiExplanation explanation={ai} book={book} level={3} />
+              </div>
+            )
+          }
+          <div class="layer">
+            <section class="community" data-layer="voices">
+              <h3>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span>Community</span>
+                <span class="pill">Voices, not sources</span>
+              </h3>
+              <p>Readers share what this chapter means to them in the app.</p>
+              <a class="plain" href={`${appUrl}/bible/${book.slug}/${number}?tab=community`}>
+                See what readers say about {title}
+              </a>
+            </section>
+          </div>
+        </section>
+
         {
-          chapter.verses.map((verse) => {
-            const { above, parts } = speakerParts(verse);
-            return (
-              <>
-                {above.map((label) => <p class="speaker">{label}</p>)}
-                <p class="verse" id={`v${verse.number}`}>
-                  <sup>{verse.number}</sup>{" "}
-                  {verse.omitted ? (
-                    <em>Verse omitted in this WEB edition. See the source notes.</em>
-                  ) : (
-                    parts.map((part) => (
-                      <>
-                        {part.label && (
-                          <>
-                            <span class="speaker">{part.label}</span>{" "}
-                          </>
+          checks.length > 0 && (
+            <section class="checks" data-layer="editorial" aria-labelledby="checks-title">
+              <h2 id="checks-title">Context check</h2>
+              <ul>
+                {checks.map((item) => (
+                  <li>
+                    <a class="row" href={`/context-checks/${item.slug}`}>
+                      <span class="row-text">
+                        <span class="row-ref">{refLabel(item.verse)} in context</span>
+                        <span class="row-hook">{splitHook(item.hook).first}</span>
+                        {item.review === "ai-unreviewed" && (
+                          <span class="row-ai">
+                            <AiBadge />
+                            <span>{aiUnreviewedCardLabel}</span>
+                          </span>
                         )}
-                        {part.text}
-                      </>
-                    ))
-                  )}
-                </p>
-              </>
-            );
-          })
+                      </span>
+                      <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+                        <path d="m7.5 4 6 6-6 6" />
+                      </svg>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
         }
-        <p class="small muted">
+
+        <div class="actions">
+          <a class="button" href={`${appUrl}/bible/${book.slug}/${number}`}>
+            Read {title} in the app
+          </a>
+        </div>
+
+        <p class="web-line">
           World English Bible.{" "}
           <a href="https://ebible.org/engwebp/copyright.htm" rel="noopener noreferrer">
             Public-domain source and edition notes
           </a>
         </p>
-      </article>
-
-      {
-        checks.length > 0 && (
-          <div class="card checks" data-layer="editorial">
-            <h2>Context check</h2>
-            <ul>
-              {checks.map((item) => (
-                <li>
-                  <a href={`/context-checks/${item.slug}`}>{refLabel(item.verse)} in context</a>
-                  <p class="muted">{item.hook}</p>
-                  {item.review === "ai-unreviewed" && <p class="small muted">{aiUnreviewedCardLabel}</p>}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
-
-      <div class="block" id="context">
-        <ContextNote note={note} subject={subject} />
       </div>
-
-      {
-        ai && (
-          <div class="block ai-block" id="ai">
-            <AiExplanation explanation={ai} book={book} />
-          </div>
-        )
-      }
-
-      <div class="card invite">
-        <h2>Go further with this chapter</h2>
-        <p class="muted">Opens the HisFullGlory beta web app.</p>
-        <a class="button" href={`${appUrl}/bible/${book.slug}/${number}`}>
-          Study and discuss this chapter in the app
-        </a>
-      </div>
-
-      <nav class="pager" aria-label="Chapters">
-        {
-          previous ? (
-            <a class="button secondary" href={previous.href}>
-              ← {previous.label}
-            </a>
-          ) : (
-            <span />
-          )
-        }
-        {
-          next && (
-            <a class="button secondary" href={next.href}>
-              {next.label} →
-            </a>
-          )
-        }
-      </nav>
     </div>
   </section>
 </Base>
 
 <style>
-  .scripture {
-    max-width: 42rem;
-    margin-top: 28px;
-    font-size: 1.12rem;
-    line-height: 1.85;
+  /* One centred reading column on the page grid (audit Low: John 3 no longer hugs the left). The
+     prose blocks keep 34em of their own size inside it; the Scripture is wider because it is
+     larger (20px). */
+  .column {
+    width: min(100%, 40rem);
+    margin-inline: auto;
   }
-  .verse {
-    margin: 0 0 12px;
-    scroll-margin-top: 16px;
-  }
-  .verse:target {
-    background: var(--highlight-gold);
-    border-radius: 8px;
-    box-shadow: 0 0 0 6px var(--highlight-gold);
-  }
-  .verse sup {
-    font-size: 0.7em;
-    font-weight: 600;
-    color: var(--muted);
-  }
-  /* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
-  .speaker {
-    color: var(--strong);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    user-select: none;
-  }
-  p.speaker {
-    margin: 20px 0 0;
-    line-height: 1.5;
-  }
-  /* On the highlighted verse --strong drops below 4.5:1 in dark mode, so its label uses ink. */
-  .verse:target .speaker {
-    color: var(--ink);
-  }
-  .speaker-note {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin: 0 0 20px;
-  }
-  .scripture .small {
-    margin-top: 24px;
-  }
-  .jump {
+  .pager {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
   }
-  .jump a {
+  .pager.end {
+    margin-top: var(--space-6);
+  }
+  .plain {
     display: inline-flex;
     align-items: center;
+    gap: var(--space-1);
     min-height: 44px;
-    padding: 0 16px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 0.92rem;
+    padding-inline: var(--space-3);
+    margin-inline: calc(-1 * var(--space-3));
+    border-radius: var(--radius-md);
+    color: var(--link);
     font-weight: 600;
     text-decoration: none;
   }
-  .jump a:hover {
-    border-color: var(--strong);
+  .plain:hover {
+    text-decoration: underline;
   }
+
+  /* Cover and story: the chapter in Display 28 in the Scripture face, with a 32 x 2 rule. */
+  h1 {
+    margin-top: var(--space-4);
+    font-family: var(--font-scripture);
+    font-size: var(--text-display);
+    font-weight: 400;
+    line-height: 1.29;
+  }
+  h1::after {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 2px;
+    margin-top: var(--space-3);
+    background: var(--brand);
+  }
+  .numeral {
+    display: none;
+  }
+
+  .scripture {
+    position: relative;
+    margin-top: var(--space-5);
+    font-family: var(--font-scripture);
+    font-size: var(--text-scripture);
+    line-height: 1.7;
+    max-width: 34em;
+  }
+  .verse {
+    position: relative;
+    margin: 0 0 var(--space-3);
+    padding-left: var(--space-6);
+    scroll-margin-top: var(--space-4);
+  }
+  /* Verse numbers: Footnote 13/600 in --link, raised, in the interface face. */
+  .verse sup {
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    font-family: var(--font-ui);
+    font-size: var(--text-footnote);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--link);
+  }
+  .verse:target {
+    background: var(--highlight-gold);
+    border-radius: var(--radius-xs);
+    box-shadow: 0 0 0 6px var(--highlight-gold);
+  }
+  /* On a highlighted verse in Light the number uses --ink (UI-SPEC 5.4: --link falls under 4.5:1). */
+  .verse:target sup {
+    color: var(--ink);
+  }
+  :global(:root[data-mode="lamplight"]) .verse:target sup {
+    color: var(--link);
+  }
+  /* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
+  .speaker {
+    color: var(--link);
+    font-family: var(--font-ui);
+    font-size: var(--text-footnote);
+    font-weight: 600;
+    user-select: none;
+  }
+  p.speaker {
+    margin: var(--space-5) 0 0;
+    line-height: 1.5;
+  }
+  /* On the highlighted verse --link drops below 4.5:1 in Light, so its label uses ink. */
+  .verse:target .speaker {
+    color: var(--ink);
+  }
+  :global(:root[data-mode="lamplight"]) .verse:target .speaker {
+    color: var(--link);
+  }
+  .speaker-note {
+    margin: 0 0 var(--space-5);
+    font-family: var(--font-ui);
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
+  }
+
+  /* Marked page: the chapter numeral floats over the first three lines, the verses run on as
+     one text, and a 72px ribbon hangs beside the numeral. Same markup, different CSS. */
+  :global(:root[data-look="marked"]) h1 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  :global(:root[data-look="marked"]) h1::after {
+    display: none;
+  }
+  :global(:root[data-look="marked"]) .numeral {
+    display: block;
+    float: left;
+    margin: 0 var(--space-3) 0 0;
+    font-size: var(--text-numeral);
+    line-height: 64px;
+    height: 6rem;
+    color: var(--brand);
+  }
+  /* The ribbon is a float, so the first lines of text wrap around it instead of running under it. */
+  :global(:root[data-look="marked"]) .scripture::before {
+    content: "";
+    float: right;
+    margin: 0 0 0 var(--space-4);
+    width: 10px;
+    height: 72px;
+    background: var(--brand);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+  }
+  :global(:root[data-look="marked"]) .verse {
+    display: inline;
+    margin: 0;
+    padding-left: 0;
+  }
+  :global(:root[data-look="marked"]) .verse sup {
+    position: relative;
+    top: -0.3em;
+    margin-right: 0.2em;
+    vertical-align: baseline;
+  }
+  :global(:root[data-look="marked"]) .verse:target {
+    box-shadow: none;
+  }
+
+  .around {
+    margin-top: var(--space-8);
+  }
+  .around h2 {
+    margin-bottom: var(--space-4);
+  }
+  .layer {
+    margin-top: var(--space-3);
+    scroll-margin-top: var(--space-4);
+  }
+  /* Community: a block on --surface with no border and a 3px rule on the left. */
+  .community {
+    max-width: 34em;
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface);
+    border-left: 3px solid var(--community);
+    border-radius: var(--radius-lg);
+  }
+  .community h3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    color: var(--community);
+  }
+  .community p {
+    margin: var(--space-2) 0 0;
+  }
+  .icon {
+    flex: none;
+    width: 1.15em;
+    height: 1.15em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .pill {
+    padding: 0 var(--space-2);
+    border: 1px solid currentColor;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-footnote);
+    font-weight: 600;
+    line-height: 1.38;
+  }
+
   .checks {
-    max-width: 42rem;
-    margin-top: 32px;
+    margin-top: var(--space-8);
+    max-width: 34em;
+  }
+  .checks h2 {
+    margin-bottom: var(--space-3);
   }
   .checks ul {
     list-style: none;
-    margin: 8px 0 0;
-    padding: 0;
-  }
-  .checks a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    font-weight: 600;
-  }
-  .checks p {
     margin: 0;
+    padding: 0;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
-  .block {
-    margin-top: 40px;
-    scroll-margin-top: 16px;
+  .checks li + li {
+    border-top: 1px solid var(--line);
   }
-  .ai-block {
-    margin-top: 18px;
-  }
-  .invite {
-    max-width: 42rem;
-    margin-top: 18px;
-    background: var(--card);
-  }
-  .invite .button {
-    margin-top: 10px;
-  }
-  .pager {
-    max-width: 42rem;
-    margin-top: 32px;
+  .row {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: var(--space-3);
+    min-height: 52px;
+    padding: var(--space-3) var(--space-5);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .row:hover {
+    background: var(--surface-2);
+  }
+  .row:focus-visible {
+    outline-offset: -3px;
+  }
+  .row-text {
+    display: grid;
+    gap: var(--space-1);
+  }
+  .row-ref {
+    font-weight: 600;
+    color: var(--link);
+  }
+  .row-hook {
+    color: var(--muted);
+  }
+  .row-ai {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--ai);
+  }
+  .row svg {
+    flex: none;
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .actions {
+    margin-top: var(--space-7);
+  }
+  .web-line {
+    margin: var(--space-6) 0 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
   }
 </style>

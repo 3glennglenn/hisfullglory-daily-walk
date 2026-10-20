@@ -217,12 +217,12 @@ async function supportReady(browser,base) {
   } finally {await context.close();}
 }
 
-// The Profile card speaks of codes, and the support address is shown only when forwarding is proven.
+// The Account page speaks of codes, and the support address is shown only when forwarding is proven.
 async function profileCopyAndSupport(browser,base) {
   for(const ready of [false,true]) {
     const {context,page:p,problems}=await open(browser,base,{supportReady:ready});
     try {
-      const card=p.locator(".card",{has:p.getByRole("heading",{name:"Account and privacy",exact:true})});
+      const card=p.locator("section.group",{has:p.getByRole("heading",{name:"Account and privacy",exact:true})});
       const text=await words(card);
       assert.match(text,/You sign in with a 6-digit code we email you\. Signing in does not upload your private journal or prayers\./);
       assert.match(text,/Use Settings to export your private data\. You can delete your account on this page at any time\./);
@@ -241,7 +241,7 @@ async function profileCopyAndSupport(browser,base) {
   }
 }
 
-// The trust pages are linked from Profile and from the last card of Settings (GATE-02, UI-SPEC 6d).
+// The trust pages are linked from Account and from the last group of Settings (GATE-02, UI-SPEC 6d).
 async function legalLinks(browser,base) {
   const pages=[["Privacy policy","https://hisfullglory.com/privacy"],["Terms of use","https://hisfullglory.com/terms"],["How account deletion works","https://hisfullglory.com/delete-account"]];
   for(const settings of [false,true]) for(const ready of [false,true]) for(const viewport of [{width:375,height:812},{width:320,height:568}]) {
@@ -276,12 +276,12 @@ async function legalLinks(browser,base) {
         assert.equal(await p.locator("a[href^='mailto:']").count(),0,where+": no mailto while forwarding is unproven");
         assert.equal(await p.getByText("support@hisfullglory.com").count(),0,where+": and the address is not printed");
       }
-      const card=p.locator(".card",{has:nav});
+      const card=p.locator("section.group",{has:nav});
       if(settings) {
         assert.equal(await card.locator("h2").innerText(),"About and legal");
-        assert.equal(await card.evaluate(el=>el===el.parentElement.lastElementChild),true,where+": About and legal is the final card of Settings");
+        assert.equal(await card.evaluate(el=>el===el.parentElement.lastElementChild),true,where+": About and legal is the final group of Settings");
       } else {
-        assert.equal(await card.locator("h2").innerText(),"Account and privacy",where+": in Profile the links sit in the Account and privacy card");
+        assert.equal(await card.locator("h2").innerText(),"Account and privacy",where+": in Profile the links sit in the Account and privacy group");
       }
       clean(problems);
     } finally {await context.close();}
@@ -551,7 +551,60 @@ async function termsAcceptance(browser,base) {
   } finally {await narrow.context.close();}
 }
 
+// Account and Settings as grouped lists (UI-SPEC A12): the titles, the order of the sections, the retired stats card
+// and long privacy paragraph, "Sign out" as a plain link row, deletion last, and the one-line privacy sentence.
+async function groupedStructure(browser,base) {
+  const account=await open(browser,base);
+  try {
+    const p=account.page;
+    assert.equal(await p.locator("h1").innerText(),"Account");
+    assert.deepEqual(await p.locator("main h2").allInnerTexts(),["Your community profile","Account and privacy","Delete your account"],"Account: sign-in or details, legal links, deletion last");
+    assert.equal(await p.getByText(/daily walks completed|chapters read|private journal entries/).count(),0,"the stats card left Account (the count lives on You)");
+    assert.equal(await p.locator("section.delete-account").evaluate(el=>el===el.parentElement.lastElementChild),true,"the deletion card is the last section");
+    const out=p.getByRole("button",{name:"Sign out",exact:true});
+    const style=await out.evaluate(el=>{const s=getComputedStyle(el);return {background:s.backgroundColor,color:s.color,border:s.borderTopWidth+"|"+s.borderLeftWidth};});
+    assert.equal(style.background,"rgba(0, 0, 0, 0)","Sign out has no filled background");
+    assert.equal(style.color,"rgb(141, 92, 75)","Sign out is written in the link colour");
+    assert.ok((await out.boundingBox()).height>=52,"Sign out is a full-height row");
+    await out.click();
+    assert.equal(await p.evaluate(()=>window.profileTest.signOutCalls.length),1,"Sign out still calls the sign-out handler");
+    await p.getByRole("heading",{name:"Sign in when you are ready",exact:true}).waitFor();
+    assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,"no sideways scroll");
+    clean(account.problems);
+  } finally {await account.context.close();}
+  const settings=await open(browser,base,{settings:true});
+  try {
+    const p=settings.page;
+    assert.equal(await p.locator("h1").innerText(),"Settings");
+    assert.deepEqual(await p.locator("main h2").allInnerTexts(),["Daily rhythm","Privacy and your data","Blocked authors","About and legal"],"Settings sections (Appearance has its own screen), About and legal last");
+    // The long paragraph, the browser-storage sentence and the cloud-sync sentence left Settings (the Privacy policy says it).
+    for(const gone of [/remain in\s+browser storage/,/Browser storage\s+is unencrypted/,/No encrypted cloud sync/,/Profile page/])
+      assert.equal(await p.getByText(gone).count(),0,String(gone)+" is gone from Settings");
+    const line=p.getByRole("link",{name:"Your journal, prayers and reading progress stay on this device. (opens in a new tab)",exact:true});
+    assert.equal(await line.getAttribute("href"),"https://hisfullglory.com/privacy");
+    assert.equal(await line.getAttribute("target"),"_blank");
+    assert.match(await line.getAttribute("rel"),/(^|\s)noopener(\s|$)/);
+    assert.equal(await p.locator("section#privacy h2").innerText(),"Privacy and your data");
+    for(const label of ["Minutes","Time","Faith journey"]) {
+      const select=p.getByLabel(label,{exact:true});
+      assert.equal(await select.count(),1,label+" is one labelled select");
+      assert.ok((await select.boundingBox()).height>=48,label+" select is 48px tall");
+    }
+    await p.getByLabel("Minutes",{exact:true}).selectOption("10");
+    assert.equal(await p.getByLabel("Minutes",{exact:true}).inputValue(),"10");
+    const chips=p.locator("li.list-row-block .chips button");
+    for(let i=0;i<3;i++)await chips.nth(i).click();
+    assert.equal(await chips.nth(3).isDisabled(),true,"at most three focus areas");
+    const [download]=await Promise.all([p.waitForEvent("download"),p.getByRole("button",{name:"Export private backup",exact:true}).click()]);
+    assert.match(download.suggestedFilename(),/^hisfullglory-private-backup-\d{4}-\d{2}-\d{2}\.json$/);
+    await p.getByText("Private backup exported. Store it securely.",{exact:true}).waitFor();
+    assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,"no sideways scroll");
+    clean(settings.problems);
+  } finally {await settings.context.close();}
+}
+
 export async function checkProfile(browser,base) {
+  await groupedStructure(browser,base);
   await deletionFlow(browser,base);
   await cardStates(browser,base);
   await busyAndFailure(browser,base);

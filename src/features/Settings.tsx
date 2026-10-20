@@ -2,9 +2,11 @@ import { TopicPreferences } from "../topics/Preferences";
 import { useEffect, useState } from "react";
 import { usePlatform } from "../platform/store";
 import { backupData } from "../platform/persistence";
-import { goals, type Theme } from "../platform/models";
+import { goals } from "../platform/models";
 import { AuthPanel, DeleteAccount, useAuth } from "../platform/auth";
-import { Reminders } from "./Reminders";
+import { GroupedList, Row } from "../ui/List";
+import { LargeTitle, Toolbar } from "../ui/Screen";
+import { ConfirmDialog } from "../ui/ConfirmDialog";
 import { supabase } from "../supabase";
 import { config } from "../config";
 // The trust pages, reachable from inside the app: store reviewers look for them here (GATE-02). The site
@@ -36,10 +38,41 @@ export function LegalLinks() {
     </nav>
   );
 }
+// A native select as a row: the title on the left, the control on the right (UI-SPEC A12).
+function SelectRow({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string | number;
+  options: readonly (string | number)[];
+  onChange: (value: string) => void;
+}) {
+  return (
+    <li>
+      <label className="list-row select-row">
+        <span className="list-row-title">{label}</span>
+        <select aria-label={label} value={value} onChange={(e) => onChange(e.target.value)}>
+          {options.map((o) => (
+            <option key={o}>{o}</option>
+          ))}
+        </select>
+      </label>
+    </li>
+  );
+}
 export function Settings() {
   const { state, update, notice, recover, storage } = usePlatform();
   const [status, setStatus] = useState("");
   const [backup, setBackup] = useState(false);
+  const [confirmRecover, setConfirmRecover] = useState(false);
+  // "Privacy and your data" on You opens /settings#privacy: bring that section into view.
+  useEffect(() => {
+    const id = location.hash.slice(1);
+    if (id) document.getElementById(id)?.scrollIntoView();
+  }, []);
   function exportBackup() {
     try {
       const blob = new Blob([backupData(storage)], {
@@ -58,164 +91,118 @@ export function Settings() {
     }
   }
   return (
-    <section>
-      <h1>Your rhythm, your settings.</h1>
-      <div className="card">
-        <h2>Appearance</h2>
-        <label>
-          Theme
-          <select
-            aria-label="Theme"
-            value={state.theme}
-            onChange={(e) =>
-              update((s) => ({ ...s, theme: e.target.value as Theme }))
-            }
-          >
-            {["system", "light", "dark"].map((t) => (
-              <option key={t}>{t}</option>
+    <section className="grouped-screen">
+      <Toolbar back="You" to="/you" />
+      <LargeTitle>Settings</LargeTitle>
+      <GroupedList title="Daily rhythm">
+        <SelectRow
+          label="Minutes"
+          value={state.preferences.minutes}
+          options={[5, 10, 20]}
+          onChange={(v) =>
+            update((s) => ({
+              ...s,
+              preferences: { ...s.preferences, minutes: Number(v) as 5 | 10 | 20 },
+            }))
+          }
+        />
+        <SelectRow
+          label="Time"
+          value={state.preferences.time}
+          options={["morning", "afternoon", "evening"]}
+          onChange={(v) =>
+            update((s) => ({
+              ...s,
+              preferences: { ...s.preferences, time: v as typeof s.preferences.time },
+            }))
+          }
+        />
+        <SelectRow
+          label="Faith journey"
+          value={state.preferences.journey}
+          options={[
+            "New to faith",
+            "Returning to faith",
+            "Growing in faith",
+            "Exploring faith",
+            "Prefer not to say",
+          ]}
+          onChange={(v) =>
+            update((s) => ({
+              ...s,
+              preferences: { ...s.preferences, journey: v },
+            }))
+          }
+        />
+        <li className="list-row-block">
+          <p className="list-row-title">Focus · choose up to three</p>
+          <div className="chips">
+            {goals.map((g) => (
+              <button
+                className="secondary"
+                key={g}
+                aria-pressed={state.preferences.goals.includes(g)}
+                disabled={
+                  state.preferences.goals.length === 3 &&
+                  !state.preferences.goals.includes(g)
+                }
+                onClick={() =>
+                  update((s) => ({
+                    ...s,
+                    preferences: {
+                      ...s.preferences,
+                      goals: s.preferences.goals.includes(g)
+                        ? s.preferences.goals.filter((x) => x !== g)
+                        : [...s.preferences.goals, g],
+                    },
+                  }))
+                }
+              >
+                {g}
+              </button>
             ))}
-          </select>
-        </label>
-        <p>
-          System follows your device, including changes while this app is open.
-        </p>
-      </div>
-      <div className="card">
-        <h2>Your daily rhythm</h2>
-        <label>
-          Minutes
-          <select
-            value={state.preferences.minutes}
-            onChange={(e) =>
-              update((s) => ({
-                ...s,
-                preferences: {
-                  ...s.preferences,
-                  minutes: Number(e.target.value) as 5 | 10 | 20,
-                },
-              }))
-            }
-          >
-            {[5, 10, 20].map((m) => (
-              <option key={m}>{m}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Time
-          <select
-            value={state.preferences.time}
-            onChange={(e) =>
-              update((s) => ({
-                ...s,
-                preferences: {
-                  ...s.preferences,
-                  time: e.target.value as typeof s.preferences.time,
-                },
-              }))
-            }
-          >
-            {["morning", "afternoon", "evening"].map((t) => (
-              <option key={t}>{t}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Faith journey
-          <select
-            value={state.preferences.journey}
-            onChange={(e) =>
-              update((s) => ({
-                ...s,
-                preferences: { ...s.preferences, journey: e.target.value },
-              }))
-            }
-          >
-            {[
-              "New to faith",
-              "Returning to faith",
-              "Growing in faith",
-              "Exploring faith",
-              "Prefer not to say",
-            ].map((j) => (
-              <option key={j}>{j}</option>
-            ))}
-          </select>
-        </label>
-        <p>Focus · choose up to three</p>
-        <div className="chips">
-          {goals.map((g) => (
-            <button
-              className="secondary"
-              key={g}
-              aria-pressed={state.preferences.goals.includes(g)}
-              disabled={
-                state.preferences.goals.length === 3 &&
-                !state.preferences.goals.includes(g)
-              }
-              onClick={() =>
-                update((s) => ({
-                  ...s,
-                  preferences: {
-                    ...s.preferences,
-                    goals: s.preferences.goals.includes(g)
-                      ? s.preferences.goals.filter((x) => x !== g)
-                      : [...s.preferences.goals, g],
-                  },
-                }))
-              }
-            >
-              {g}
-            </button>
-          ))}
-        </div>
-      </div>
-      <Reminders />
-      <div className="card">
-        <h2>Privacy and recovery</h2>
-        <p>
-          Private journal, prayers, bookmarks and journey progress remain in
-          browser storage. Export before clearing data or switching devices.
-          Public posts are shared only after you publish explicitly.
-          Each signed-in account has a separate local profile. Guest data stays in
-          the guest profile and is never automatically adopted. Browser storage
-          is unencrypted; account separation is not protection from someone with
-          access to this browser's developer tools.
-        </p>
-        <button onClick={exportBackup}>Export private backup</button>
+          </div>
+        </li>
+      </GroupedList>
+      <TopicPreferences selected={state.privateTopics} onChange={privateTopics => update(s => ({...s,privateTopics}))} />
+      <GroupedList title="Privacy and your data" id="privacy" note={<span role="status">{status}</span>}>
+        <Row title="Export private backup" onClick={exportBackup} />
         {notice && (
-          <>
+          <li className="list-row-block">
             <p>{notice}</p>
             <button
               className="secondary"
               disabled={!backup}
-              onClick={() => {
-                if (
-                  window.confirm(
-                    "Preserve current v3 under a recovery key, then recover available v2/v1 data in this profile? If no readable legacy data exists, this starts fresh.",
-                  )
-                )
-                  recover();
-              }}
+              onClick={() => setConfirmRecover(true)}
             >
-              Recover legacy / start fresh…
+              Recover older data
             </button>
-          </>
+          </li>
         )}
-        <p role="status">{status}</p>
-        <small>
-          No encrypted cloud sync or cross-device restore is configured. To
-          delete your account and its server data, use "Delete my account" on
-          your Profile page; use own-content deletion controls for public
-          contributions.
-        </small>
-      </div>
-      <TopicPreferences selected={state.privateTopics} onChange={privateTopics => update(s => ({...s,privateTopics}))} />
+        <Row
+          quiet
+          external
+          href={`${config.siteUrl}/privacy`}
+          title="Your journal, prayers and reading progress stay on this device."
+        />
+      </GroupedList>
       <BlockedAuthors />
-      <div className="card">
-        <h2>About and legal</h2>
+      <GroupedList title="About and legal" plain>
         <LegalLinks />
-      </div>
+      </GroupedList>
+      {confirmRecover && (
+        <ConfirmDialog
+          title="Recover older data?"
+          body="We keep a copy of your current data, then bring back anything an older version of the app saved on this device. If there is nothing older, you start fresh."
+          actionLabel="Recover older data"
+          safeLabel="Keep things as they are"
+          onAction={() => {
+            setConfirmRecover(false);
+            recover();
+          }}
+          onSafe={() => setConfirmRecover(false)}
+        />
+      )}
     </section>
   );
 }
@@ -285,38 +272,28 @@ export function BlockedAuthors() {
     </div>
   );
 }
+// Account (UI-SPEC A12): the sign-in form and code entry, or the account details, then the legal links,
+// then "Sign out" (AuthPanel's own button, shown as a plain link row by the stylesheet), then deletion.
+// The words of AuthPanel, CodeEntry, the terms acceptance, LegalLinks and DeleteAccount are PR #27's, unchanged.
 export function Profile() {
-  const { state } = usePlatform();
   return (
-    <section>
-      <h1>Your walk with God.</h1>
-      <div className="card">
-        <p>
-          {state.local.completedDates.length} daily walks completed ·{" "}
-          {state.reading.length} chapters read
-        </p>
-        <p>
-          {state.entries.length} private journal entries ·{" "}
-          {state.prayers.length} private prayers
-        </p>
-        <small>
-          Your reading and private reflections are not attached to a public
-          profile.
-        </small>
-      </div>
+    <section className="grouped-screen">
+      <Toolbar back="You" to="/you" />
+      <LargeTitle>Account</LargeTitle>
       <AuthPanel />
-      <div className="card">
-        <h2>Account and privacy</h2>
-        <p>
-          You sign in with a 6-digit code we email you. Signing in does not
-          upload your private journal or prayers.
-        </p>
-        <p>
-          Use Settings to export your private data. You can delete your account
-          on this page at any time.
-        </p>
+      <GroupedList title="Account and privacy" plain>
+        <div className="group-pad">
+          <p>
+            You sign in with a 6-digit code we email you. Signing in does not
+            upload your private journal or prayers.
+          </p>
+          <p>
+            Use Settings to export your private data. You can delete your account
+            on this page at any time.
+          </p>
+        </div>
         <LegalLinks />
-      </div>
+      </GroupedList>
       <DeleteAccount />
     </section>
   );

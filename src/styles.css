@@ -1,63 +1,278 @@
+/*
+  Design tokens, five blocks in this order (UI-SPEC 3.1). The site copies blocks 1 to 5 and the
+  two media rules below through site/scripts/sync-shared.mjs, so keep each block free of nested braces.
+  1 constants | 2 Cover Light | 3 Cover Lamplight | 4 Marked Light | 5 Marked Lamplight.
+  Blocks 2 to 5 list the same colour tokens in the same order; 2 and 4 also hold the two font tokens.
+  With no attributes at all the page renders Cover Light.
+*/
 :root {
-  font-family:
-    Manrope,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  color: var(--ink);
-  background: var(--bg);
-  font-synthesis: none;
-  line-height: 1.65;
-  font-weight: 400;
-  --bg: #f6f0e7;
-  --ink: #251914;
-  --accent: #b97862;
-  --card: #e6d5c1;
-  --secondary: #b88352;
-  --border: #d8c9b9;
-  --muted: #6d5548;
-  --paper: #fcf9f4;
-  --strong: #854b38;
-  --on-strong: #fff;
-  --success: #456448;
-  --danger: #9b2c24;
-  --on-danger: #ffffff;
-  --shadow-soft: #25191408;
-  --shadow: #25191430;
-  --overlay: #25191460;
-  --highlight-gold: #f1dfac;
-  --highlight-sage: #d9e4d2;
-  --highlight-rose: #efd2ca;
+  --text-large-title: calc(1rem + 17px);
+  --text-display: calc(0.6471rem + 17px);
+  --text-title: 1.1765rem;
+  --text-scripture: 1.1765rem;
+  --text-body: 1rem;
+  --text-footnote: 0.7647rem;
+  --text-numeral: calc(2rem + 44px);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+  --space-9: 64px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+  --elev-float: 0 4px 16px var(--shadow), 0 0 0 1px var(--line);
+  --elev-sheet: 0 -8px 32px var(--shadow);
+  --dur-spine: 360ms;
+  --dur-sheet: 280ms;
+  --dur-segment: 150ms;
+  --dur-notice: 150ms;
+  --ease-spine: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-sheet: cubic-bezier(0.2, 0, 0, 1);
+  --z-bar: 10;
+  --z-notice: 20;
+  --z-sheet: 30;
+  --z-skip: 100;
+  /* Height of the Lamplight notice plus its gap while it shows; src/ui/LamplightNotice.tsx sets it on <html>. */
+  --notice-h: 0px;
 }
-:root[data-theme="dark"] {
+:root:not([data-look="marked"]) {
+  color-scheme: light;
+  --bg: #F3F1EE;
+  --surface: #FFFFFF;
+  --surface-2: #ECE7E1;
+  --ink: #251914;
+  --muted: #675A52;
+  --line: #DCD4CC;
+  --link: #8D5C4B;
+  --button: #8D5C4B;
+  --on-button: #FFFFFF;
+  --brand: #B97862;
+  --focus: #8D5C4B;
+  --sig: #603F33;
+  --on-sig: #F6F0E7;
+  --sig-muted: #D9C3B4;
+  --gilt: #E3C08A;
+  --sig-button: #F6F0E7;
+  --on-sig-button: #603F33;
+  --sig-focus: #E3C08A;
+  --ai: #4B5D6E;
+  --on-ai: #FFFFFF;
+  --community: #4A6247;
+  --danger: #9B2C24;
+  --on-danger: #FFFFFF;
+  --success: #456448;
+  --highlight-gold: #F1DFAC;
+  --highlight-sage: #D9E4D2;
+  --highlight-rose: #EFD2CA;
+  --spine-1: #603F33;
+  --spine-2: #6A4538;
+  --spine-3: #4E3329;
+  --spine-ink: #E3C08A;
+  --bar: #FFFFFFEB;
+  --bar-solid: #FFFFFF;
+  --glow: #F0C98700;
+  --overlay: #25191466;
+  --shadow: #2519141F;
+  --theme-color: #F3F1EE;
+  --font-ui: Manrope, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-scripture: Gelasio, Georgia, "Times New Roman", serif;
+}
+:root:not([data-look="marked"])[data-mode="lamplight"] {
   color-scheme: dark;
-  --bg: #181714;
-  --ink: #f6f0e7;
-  --accent: #dca58b;
-  --card: #312a24;
-  --secondary: #d4ae80;
-  --border: #5a4f44;
-  --muted: #c2afa0;
-  --paper: #24211d;
-  --strong: #e0a38a;
-  --on-strong: #251914;
-  --success: #99c49b;
-  --danger: #f2a59b;
-  --on-danger: #251914;
-  --shadow-soft: #00000020;
-  --shadow: #00000060;
-  --overlay: #000000a0;
+  --bg: #1A120E;
+  --surface: #251914;
+  --surface-2: #33251E;
+  --ink: #F6F0E7;
+  --muted: #C2B0A2;
+  --line: #3E2F27;
+  --link: #E2AE96;
+  --button: #B97862;
+  --on-button: #1A120E;
+  --brand: #B97862;
+  --focus: #E2AE96;
+  --sig: #5A3B2F;
+  --on-sig: #F6F0E7;
+  --sig-muted: #DCC7B9;
+  --gilt: #E8C892;
+  --sig-button: #F6F0E7;
+  --on-sig-button: #5A3B2F;
+  --sig-focus: #E8C892;
+  --ai: #A9B8C9;
+  --on-ai: #1A120E;
+  --community: #A9C4A0;
+  --danger: #F2A59B;
+  --on-danger: #1A120E;
+  --success: #99C49B;
   --highlight-gold: #534523;
-  --highlight-sage: #30452e;
-  --highlight-rose: #55362f;
+  --highlight-sage: #30452E;
+  --highlight-rose: #55362F;
+  --spine-1: #5A3B2F;
+  --spine-2: #6A4536;
+  --spine-3: #4A3026;
+  --spine-ink: #E8C892;
+  --bar: #251914EB;
+  --bar-solid: #251914;
+  --glow: #F0C98729;
+  --overlay: #000000A0;
+  --shadow: #00000066;
+  --theme-color: #1A120E;
+}
+/* Marked Light: the translucent bar is white, not the page's cream. With the cream the selected tab
+   icon over ink-coloured content is 2.98:1 and needs 3 (UI-SPEC 5.4 prints 3.03 for it). */
+:root[data-look="marked"] {
+  color-scheme: light;
+  --bg: #FFFDF9;
+  --surface: #F6F0E7;
+  --surface-2: #F0E8DD;
+  --ink: #251914;
+  --muted: #6B5B52;
+  --line: #E6DCCF;
+  --link: #8D5C4B;
+  --button: #251914;
+  --on-button: #FFFDF9;
+  --brand: #B97862;
+  --focus: #8D5C4B;
+  --sig: #FFFDF9;
+  --on-sig: #251914;
+  --sig-muted: #6B5B52;
+  --gilt: #B97862;
+  --sig-button: #251914;
+  --on-sig-button: #FFFDF9;
+  --sig-focus: #8D5C4B;
+  --ai: #4B5D6E;
+  --on-ai: #FFFFFF;
+  --community: #4A6247;
+  --danger: #9B2C24;
+  --on-danger: #FFFFFF;
+  --success: #456448;
+  --highlight-gold: #F1DFAC;
+  --highlight-sage: #D9E4D2;
+  --highlight-rose: #EFD2CA;
+  --spine-1: #F6F0E7;
+  --spine-2: #F0E8DD;
+  --spine-3: #E6D8C6;
+  --spine-ink: #251914;
+  --bar: #FFFFFFEB;
+  --bar-solid: #FFFDF9;
+  --glow: #F0C98700;
+  --overlay: #25191466;
+  --shadow: #2519141F;
+  --theme-color: #FFFDF9;
+  --font-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-scripture: Literata, Georgia, "Times New Roman", serif;
+}
+:root[data-look="marked"][data-mode="lamplight"] {
+  color-scheme: dark;
+  --bg: #1A120E;
+  --surface: #251914;
+  --surface-2: #33251E;
+  --ink: #F6F0E7;
+  --muted: #C2B0A2;
+  --line: #3E2F27;
+  --link: #E2AE96;
+  --button: #B97862;
+  --on-button: #1A120E;
+  --brand: #B97862;
+  --focus: #E2AE96;
+  --sig: #1A120E;
+  --on-sig: #F6F0E7;
+  --sig-muted: #C2B0A2;
+  --gilt: #B97862;
+  --sig-button: #B97862;
+  --on-sig-button: #1A120E;
+  --sig-focus: #E2AE96;
+  --ai: #A9B8C9;
+  --on-ai: #1A120E;
+  --community: #A9C4A0;
+  --danger: #F2A59B;
+  --on-danger: #1A120E;
+  --success: #99C49B;
+  --highlight-gold: #534523;
+  --highlight-sage: #30452E;
+  --highlight-rose: #55362F;
+  --spine-1: #33251E;
+  --spine-2: #3E2C23;
+  --spine-3: #2C1F19;
+  --spine-ink: #F6F0E7;
+  --bar: #251914EB;
+  --bar-solid: #251914;
+  --glow: #F0C98729;
+  --overlay: #000000A0;
+  --shadow: #00000066;
+  --theme-color: #1A120E;
+}
+/*
+  Increase Contrast: selectors are at least as specific as the block they override and come after it.
+  The two Lamplight selectors list their parts in another order than blocks 3 and 5 on purpose
+  (same specificity), so each block selector appears once in this file.
+*/
+@media (prefers-contrast: more) {
+  :root:not([data-look="marked"]) {
+    --muted: #4E433D;
+    --link: #6E4536;
+    --button: #6E4536;
+    --line: var(--muted);
+    --bar: var(--bar-solid);
+  }
+  :root[data-look="marked"] {
+    --muted: #4E433D;
+    --link: #6E4536;
+    --line: var(--muted);
+    --bar: var(--bar-solid);
+  }
+  :root[data-mode="lamplight"]:not([data-look="marked"]) {
+    --muted: #DDD0C5;
+    --line: var(--muted);
+    --bar: var(--bar-solid);
+  }
+  :root[data-mode="lamplight"][data-look="marked"] {
+    --muted: #DDD0C5;
+    --line: var(--muted);
+    --bar: var(--bar-solid);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root:not([data-look="marked"]),
+  :root[data-look="marked"],
+  :root[data-mode="lamplight"]:not([data-look="marked"]),
+  :root[data-mode="lamplight"][data-look="marked"] {
+    --bar: var(--bar-solid);
+  }
+}
+html {
+  font-size: 106.25%;
+}
+@supports (font: -apple-system-body) {
+  html {
+    font: -apple-system-body;
+  }
+}
+/* A focused element is never left under the top bar or the floating tab bar (UI-SPEC 14, 2.4.11):
+   64px is the toolbar plus its gap, the bottom value is the tab bar, its gap and the page's own gap. */
+html {
+  scroll-padding-top: calc(64px + env(safe-area-inset-top));
+  scroll-padding-bottom: calc(64px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
+  font-family: var(--font-ui);
+  font-synthesis: none;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--bg);
+  font-size: var(--text-body);
+  line-height: 1.47;
 }
 button,
 input,
@@ -76,11 +291,11 @@ button,
 .button {
   min-height: 44px;
   border: 1px solid transparent;
-  background: var(--strong);
-  color: var(--on-strong);
+  background: var(--button);
+  color: var(--on-button);
   padding: 10px 16px;
   border-radius: 12px;
-  font-size: 0.87rem;
+  font-size: var(--text-body);
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -99,15 +314,16 @@ button:disabled {
   cursor: default;
 }
 a {
-  color: var(--strong);
+  color: var(--link);
   text-underline-offset: 3px;
 }
 a:focus-visible,
 button:focus-visible,
+summary:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid var(--strong);
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 main:focus {
@@ -117,50 +333,31 @@ main:focus {
 .skip-link {
   position: absolute;
   left: 12px;
-  top: -64px;
+  top: 12px;
+  /* Moved by its own height (and a margin), so it stays off-screen at any text size, also at 200 %. */
+  transform: translateY(calc(-100% - 24px));
   z-index: 20;
   padding: 10px 14px;
   border-radius: 10px;
-  background: var(--strong);
-  color: var(--on-strong);
+  background: var(--button);
+  color: var(--on-button);
 }
 .skip-link:focus {
-  top: 12px;
+  top: calc(12px + env(safe-area-inset-top));
+  transform: none;
 }
+/* Page shell (UI-SPEC 7.1, 7.5, 7.6): 20px screen margin or the side safe area, whichever is larger; the
+   top safe area is padded once here, so the first bar or title of every screen starts below the notch. */
 .shell {
   max-width: 480px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: env(safe-area-inset-top) max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
   background: var(--bg);
   min-height: 100vh;
 }
-.brand {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 26px 0 24px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 26px;
-  color: var(--accent);
-}
-.brand-name {
-  color: var(--ink);
-  text-decoration: none;
-  font-family: inherit;
-  font-size: 1.55rem;
-  line-height: 1.1;
-}
-.brand-name span {
-  display: block;
-  font-family: Manrope, system-ui, sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.23em;
-  margin-top: 9px;
-  font-weight: 600;
-  color: var(--muted);
-}
+/* The floating tab bar is 64px tall and 12px off the edge: the last content scrolls clear of it. */
 main {
-  padding-bottom: 106px;
+  padding-bottom: calc(64px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
 }
 h1,
 h2,
@@ -168,40 +365,34 @@ h3,
 p {
   margin: 0;
 }
+strong {
+  font-weight: 600;
+}
 h1 {
   font-family: inherit;
-  font-weight: 400;
-  line-height: 1.17;
-  font-size: 2.15rem;
-  letter-spacing: -0.035em;
+  font-weight: 600;
+  line-height: 1.2;
+  font-size: var(--text-large-title);
   margin: 8px 0 12px;
 }
 h2 {
-  font-size: 1.08rem;
+  font-size: var(--text-title);
   font-weight: 600;
   line-height: 1.4;
 }
 h3 {
-  font-size: 0.88rem;
+  font-size: var(--text-body);
+  font-weight: 600;
   line-height: 1.5;
   margin: 18px 0 5px;
 }
 p {
   margin: 10px 0;
-  font-size: 0.92rem;
-}
-.eyebrow {
-  font-size: 0.65rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 600;
-  margin: 0 0 8px;
-}
-.intro {
+  font-size: var(--text-body);
+}.intro {
   color: var(--muted);
   margin: 0 0 24px;
-  font-size: 0.89rem;
+  font-size: var(--text-body);
 }
 .section-head,
 .row {
@@ -215,62 +406,47 @@ p {
 }
 .section-head > div {
   min-width: 0;
-}
-.streak {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--card);
-  border-radius: 24px;
-  padding: 6px 10px;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  margin-top: 5px;
-}
-.card {
-  background: var(--paper);
-  border: 1px solid var(--border);
+}.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 22px;
   margin-bottom: 18px;
-  box-shadow: 0 2px 4px var(--shadow-soft);
-}
-.verse-card {
-  background: var(--card);
+  box-shadow: 0 2px 4px var(--shadow);
 }
 blockquote {
-  font-family: inherit;
-  font-size: 1.6rem;
+  font-family: var(--font-scripture);
+  font-size: var(--text-display);
   line-height: 1.5;
   margin: 14px 0;
   overflow-wrap: anywhere;
 }
 .verse-reference {
-  font-size: 0.8rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
 }
 .verse-reference span {
   display: inline-block;
   padding: 1px 6px;
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 5px;
-  font-size: 0.65rem;
+  font-size: var(--text-footnote);
   margin-left: 5px;
 }
 .reflection {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
   padding-top: 18px;
   margin-top: 22px;
 }
 .reflection h2 {
-  font-size: 0.85rem;
+  font-size: var(--text-body);
 }
 .reflection p {
   margin-bottom: 0;
 }
 .journal-card label {
-  font-size: 0.87rem;
+  font-size: var(--text-body);
   margin: 12px 0;
 }
 .journal-card .row:last-child {
@@ -278,14 +454,14 @@ blockquote {
   gap: 8px;
 }
 .journal-card .row:last-child small {
-  font-size: 0.61rem;
+  font-size: var(--text-footnote);
 }
 .journal-card .row:last-child small:last-child {
   text-align: right;
 }
 label {
   display: block;
-  font-size: 0.85rem;
+  font-size: var(--text-footnote);
   font-weight: 600;
   margin: 9px 0 6px;
 }
@@ -299,7 +475,7 @@ select {
   border-radius: 10px;
   padding: 11px 12px;
   min-height: 44px;
-  font-size: 16px;
+  font-size: var(--text-body);
 }
 textarea {
   display: block;
@@ -319,7 +495,7 @@ select:disabled {
 }
 small,
 .helper {
-  font-size: 0.73rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
 }
 .helper {
@@ -327,49 +503,12 @@ small,
 }
 .center {
   text-align: center;
-}
-.complete-button {
-  width: 100%;
-  min-height: 50px;
-}
-.complete-button:disabled {
-  background: var(--card);
-  color: var(--ink);
-  opacity: 1;
-  border-color: var(--border);
-}
-.continue-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  text-align: left;
-  color: var(--ink);
-  background: var(--paper);
-}
-.continue-card small {
-  display: block;
-  margin-top: 8px;
-}
-.deeper {
-  margin-top: 28px;
-}
-.deeper > p:nth-child(2) {
-  font-size: 0.82rem;
-  color: var(--muted);
-  margin: 0 0 12px;
-}
-.product-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-.product-card {
+}.product-card {
   padding: 0;
   overflow: hidden;
 }
 .product-image {
-  background: var(--card);
+  background: var(--surface-2);
   min-height: 180px;
   display: flex;
   align-items: center;
@@ -387,10 +526,10 @@ small,
   padding: 20px;
 }
 .product-copy h2 {
-  font-size: 1rem;
+  font-size: var(--text-body);
 }
 .product-copy p {
-  font-size: 0.82rem;
+  font-size: var(--text-body);
   color: var(--muted);
 }
 .product-copy small {
@@ -399,7 +538,7 @@ small,
 }
 .product-copy .button {
   width: 100%;
-  font-size: 0.75rem;
+  font-size: var(--text-body);
 }
 .product-card.compact {
   display: flex;
@@ -419,20 +558,20 @@ small,
   min-width: 0;
 }
 .compact h2 {
-  font-size: 0.84rem;
+  font-size: var(--text-body);
 }
 .compact .product-copy p {
-  font-size: 0.73rem;
+  font-size: var(--text-footnote);
 }
 .compact .product-copy small {
-  font-size: 0.65rem;
+  font-size: var(--text-footnote);
 }
 .compact .button {
   padding: 9px 7px;
-  font-size: 0.66rem;
+  font-size: var(--text-footnote);
 }
 .book-placeholder {
-  color: var(--secondary);
+  color: var(--muted);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -442,53 +581,8 @@ small,
   min-height: 100px;
 }
 .compact .book-placeholder span {
-  font-size: 0.65rem;
-}
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 480px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-  z-index: 5;
-}
-.bottom-nav button {
-  background: none;
-  color: var(--muted);
-  border-radius: 12px;
-  flex-direction: column;
-  font-size: 0.65rem;
-  gap: 4px;
-  padding: 8px 2px;
-  min-height: 56px;
-}
-.bottom-nav button[aria-current] {
-  background: var(--card);
-  color: var(--ink);
-}
-.install-hint {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  padding: 18px 0;
-  border-top: 1px solid var(--border);
-  margin-top: 28px;
-}
-.install-hint strong {
-  font-size: 0.82rem;
-}
-.install-hint p {
-  font-size: 0.75rem;
-  color: var(--muted);
-  margin-bottom: 0;
-}
-.icon-button {
+  font-size: var(--text-footnote);
+}.icon-button {
   background: none;
   color: var(--muted);
   padding: 10px;
@@ -497,61 +591,20 @@ small,
 }
 .text-button {
   background: none;
-  color: var(--strong);
+  color: var(--link);
   padding: 5px 7px;
   text-decoration: underline;
-  font-size: 0.75rem;
+  font-size: var(--text-body);
 }
 .secondary {
   background: var(--bg);
   color: var(--ink);
-  border-color: var(--border);
-}
-.onboarding {
-  background: var(--card);
-}
-.onboarding h2 {
-  font-family: inherit;
-  font-weight: 400;
-  font-size: 1.65rem;
-  line-height: 1.25;
-}
-.onboarding .text-button {
-  display: block;
-  margin-top: 8px;
-}
-.onboarding fieldset {
-  border: 0;
-  margin: 18px 0;
-  padding: 0;
-}
-.onboarding legend {
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-.goal-option {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 11px 12px;
-  min-height: 48px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-size: 0.82rem;
-}
-.goal-option input {
-  width: 18px;
-  height: 18px;
-  min-height: 18px;
-  accent-color: var(--strong);
-  flex-shrink: 0;
-}
-.plan-choice {
+  border-color: var(--line);
+}.plan-choice {
   width: 100%;
   text-align: left;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--surface);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -559,17 +612,17 @@ small,
   padding: 18px;
 }
 .plan-choice.selected {
-  border-color: var(--accent);
-  background: var(--card);
+  border-color: var(--brand);
+  background: var(--surface-2);
 }
 .plan-choice p {
   font-weight: 400;
-  font-size: 0.79rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
   margin: 6px 0;
 }
 .plan-detail blockquote {
-  font-size: 1.35rem;
+  font-size: var(--text-scripture);
 }
 .plan-detail > button {
   width: 100%;
@@ -586,16 +639,16 @@ small,
   flex: 1;
   background: var(--bg);
   color: var(--ink);
-  border-color: var(--border);
+  border-color: var(--line);
   padding: 10px;
 }
 .day-tabs button[aria-pressed="true"] {
-  background: var(--strong);
-  color: var(--on-strong);
+  background: var(--button);
+  color: var(--on-button);
 }
 .action-note {
   padding: 15px;
-  background: var(--card);
+  background: var(--surface-2);
   border-radius: 12px;
   margin: 16px 0;
 }
@@ -610,39 +663,41 @@ progress {
   height: 7px;
   display: block;
   margin: 16px 0;
-  accent-color: var(--accent);
+  accent-color: var(--brand);
   border: 0;
   border-radius: 6px;
-  background: var(--card);
+  background: var(--surface-2);
 }
 progress::-webkit-progress-bar {
-  background: var(--card);
+  background: var(--surface-2);
   border-radius: 6px;
 }
 progress::-webkit-progress-value {
-  background: var(--accent);
+  background: var(--brand);
   border-radius: 6px;
 }
 .notice {
-  background: var(--card);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 20px;
-  font-size: 0.83rem;
+  background: var(--surface-2);
+  color: var(--ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+  font-size: var(--text-body);
+  line-height: 1.47;
 }
 .notice p {
-  font-size: 0.8rem;
+  font-size: var(--text-footnote);
   margin: 5px 0 0;
 }
 .notice.error {
-  border: 1px solid var(--strong);
-  color: var(--strong);
+  border: 1px solid var(--focus);
+  color: var(--link);
 }
 .segments {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4px;
-  background: var(--card);
+  background: var(--surface-2);
   padding: 4px;
   border-radius: 14px;
   margin: 22px 0;
@@ -650,14 +705,14 @@ progress::-webkit-progress-value {
 .segments button {
   background: none;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: var(--text-footnote);
   gap: 5px;
   padding: 10px 5px;
 }
 .segments button[aria-pressed="true"] {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
-  box-shadow: 0 1px 3px var(--shadow-soft);
+  box-shadow: 0 1px 3px var(--shadow);
 }
 .auth-card form button {
   margin: 12px 0;
@@ -670,7 +725,7 @@ progress::-webkit-progress-value {
   margin: 20px 0;
 }
 .room-heading p {
-  font-size: 0.8rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
   margin: 5px 0;
 }
@@ -679,7 +734,7 @@ progress::-webkit-progress-value {
   height: 7px;
   display: inline-block;
   border-radius: 50%;
-  background: var(--secondary);
+  background: var(--success);
   margin-right: 6px;
 }
 .status-dot.live {
@@ -687,12 +742,12 @@ progress::-webkit-progress-value {
 }
 .scripture-pinned {
   padding: 18px;
-  background: var(--card);
+  background: var(--surface-2);
   border-radius: 14px;
   margin: 15px 0;
 }
 .scripture-pinned blockquote {
-  font-size: 1.2rem;
+  font-size: var(--text-scripture);
 }
 .message-feed {
   max-height: 440px;
@@ -709,11 +764,11 @@ progress::-webkit-progress-value {
   margin: 0 0 18px;
 }
 .avatar {
-  background: var(--card);
+  background: var(--surface-2);
   height: 34px;
   min-width: 34px;
   border-radius: 50%;
-  font-size: 0.65rem;
+  font-size: var(--text-footnote);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -725,10 +780,10 @@ progress::-webkit-progress-value {
   flex: 1;
 }
 .message strong {
-  font-size: 0.78rem;
+  font-size: var(--text-footnote);
 }
 .message p {
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   margin: 4px 0;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -738,7 +793,7 @@ progress::-webkit-progress-value {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  font-size: 0.62rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
 }
 .message-meta a {
@@ -748,30 +803,25 @@ progress::-webkit-progress-value {
 }
 .message-meta .text-button {
   min-height: 44px;
-  font-size: 0.62rem;
+  font-size: var(--text-footnote);
   padding: 0;
 }
 .composer {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
   padding-top: 18px;
   margin-top: 12px;
 }
 .composer label {
-  font-size: 0.79rem;
+  font-size: var(--text-footnote);
 }
 .composer .row small {
-  font-size: 0.7rem;
-}
-.prayer-card .eyebrow {
-  font-size: 0.6rem;
-  margin: 0;
-}
-.prayer-card .row:first-child {
+  font-size: var(--text-footnote);
+}.prayer-card .row:first-child {
   flex-wrap: wrap;
   gap: 4px;
 }
 .prayer-card .row small {
-  font-size: 0.61rem;
+  font-size: var(--text-footnote);
 }
 .user-body {
   white-space: pre-wrap;
@@ -783,10 +833,10 @@ progress::-webkit-progress-value {
   flex-wrap: wrap;
 }
 .prayer-actions button {
-  font-size: 0.72rem;
+  font-size: var(--text-footnote);
 }
 .prayer-actions a {
-  font-size: 0.7rem;
+  font-size: var(--text-footnote);
   min-height: 44px;
   display: flex;
   align-items: center;
@@ -794,7 +844,7 @@ progress::-webkit-progress-value {
 .compact-select {
   width: auto;
   max-width: 150px;
-  font-size: 0.75rem;
+  font-size: var(--text-body);
 }
 .check-label {
   display: flex;
@@ -806,31 +856,19 @@ progress::-webkit-progress-value {
   width: 18px;
   height: 18px;
   min-height: 18px;
-  accent-color: var(--strong);
+  accent-color: var(--button);
 }
 .empty {
   padding: 24px 12px;
   color: var(--muted);
   text-align: center;
-  font-size: 0.85rem;
-}
-.app-footer {
-  font-family: inherit;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin: 22px 0 8px;
-}
-.app-footer small {
-  font-family: Manrope, system-ui, sans-serif;
-  font-size: 0.6rem;
-}
-dialog {
+  font-size: var(--text-body);
+}dialog {
   max-width: calc(100% - 32px);
   width: 420px;
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 24px;
   box-shadow: 0 12px 40px var(--shadow);
@@ -840,7 +878,7 @@ dialog::backdrop {
 }
 dialog p,
 dialog li {
-  font-size: 0.83rem;
+  font-size: var(--text-body);
 }
 dialog ul {
   padding-left: 20px;
@@ -852,18 +890,13 @@ dialog button {
   width: 100%;
   margin-top: 10px;
 }
-/* Report dialog (UI-SPEC Surface 4): text a person must read to act is Body size, not the
-   dialog's 0.83rem; the dialog itself scrolls (.dialog) so both buttons stay reachable. */
-/* .dialog (max-width 440px) outranks dialog's own max-width, so on a 320px screen the 420px
-   dialog ran off both edges; this keeps a 16px margin on each side. */
-dialog:has(> .report-dialog) {
-  width: min(420px, calc(100vw - 32px));
-  max-width: calc(100vw - 32px);
-}
+/* Report dialog (UI-SPEC Surface 4, A14): text a person must read to act is Body size, not the dialog's
+   0.83rem; the dialog is a sheet (.sheet-dialog, below) that scrolls inside 90dvh so both buttons stay
+   reachable, and from 600px a centred 480px dialog. */
 .report-dialog p,
 .report-dialog li,
 .report-dialog label {
-  font-size: 0.92rem;
+  font-size: var(--text-body);
 }
 .report-dialog fieldset {
   border: 0;
@@ -873,13 +906,19 @@ dialog:has(> .report-dialog) {
 }
 .report-dialog legend {
   padding: 0;
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   font-weight: 600;
 }
+/* Reason rows are 52px tall with a 22px radio (A14). */
 .report-dialog .report-reason {
+  min-height: 52px;
+  align-items: center;
   margin: 0 0 8px;
   color: var(--ink);
   overflow-wrap: anywhere;
+}
+.report-dialog .report-reason input {
+  margin-top: 0;
 }
 .report-dialog .report-reason-label {
   display: block;
@@ -887,18 +926,21 @@ dialog:has(> .report-dialog) {
 }
 .report-dialog .report-hint {
   display: block;
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   font-weight: 400;
   color: var(--muted);
 }
+.report-dialog .report-reason .report-hint {
+  font-size: var(--text-footnote);
+}
 .report-dialog .report-label {
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   font-weight: 600;
 }
 .report-dialog .report-block {
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
 }
 .report-dialog button[aria-disabled="true"] {
   opacity: 0.65;
@@ -915,34 +957,13 @@ dialog:has(> .report-dialog) {
   white-space: nowrap;
   border: 0;
 }
-@media (min-width: 481px) {
-  .shell {
-    border-left: 1px solid var(--border);
-    border-right: 1px solid var(--border);
-    padding: 0 28px;
-  }
-  .bottom-nav {
-    border-left: 1px solid var(--border);
-    border-right: 1px solid var(--border);
-  }
-}
 @media (max-width: 360px) {
-  .shell {
-    padding: 0 14px;
-  }
   .card {
     padding: 18px;
   }
   .product-card {
     padding: 0;
-  }
-  .segments button {
-    font-size: 0.68rem;
-  }
-  h1 {
-    font-size: 1.9rem;
-  }
-}
+  }}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -954,26 +975,13 @@ dialog:has(> .report-dialog) {
 }
 
 /* Shared platform primitives: all appearance flows through semantic tokens. */
-.platform-nav {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-.platform-nav button {
-  min-width: 0;
-  padding: 8px 2px;
-  font-size: 0.65rem;
-}
-.platform-nav span {
-  max-width: 100%;
-  overflow-wrap: anywhere;
-}
 .card > button,
 .card > .button {
   margin: 5px 5px 5px 0;
 }
 label {
   display: block;
-  font-size: 0.84rem;
+  font-size: var(--text-footnote);
   color: var(--muted);
   margin: 12px 0;
 }
@@ -983,7 +991,7 @@ textarea {
   max-width: 100%;
   width: 100%;
   min-width: 0;
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
   border: 1px solid var(--muted);
   border-radius: 10px;
@@ -1014,97 +1022,44 @@ textarea {
   margin: 14px 0;
 }
 .tabs button {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
-  border-color: var(--border);
-  text-transform: capitalize;
+  border-color: var(--line);
   flex: 1;
   padding: 10px 8px;
-  font-size: 0.78rem;
+  font-size: var(--text-footnote);
 }
 button[aria-pressed="true"] {
-  border-color: var(--strong);
-  box-shadow: inset 0 0 0 1px var(--strong);
+  border-color: var(--focus);
+  box-shadow: inset 0 0 0 1px var(--focus);
 }
 .tabs button[aria-pressed="true"],
 .chips button[aria-pressed="true"] {
-  background: var(--card);
-}
-.quick-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.entry {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: left;
-  width: 100%;
-  color: var(--ink);
-  font-weight: 400;
-}
-.entry strong {
-  font-size: 1rem;
-}
-.entry span {
-  font-size: 0.85rem;
-  line-height: 1.65;
-}
-.entry strong,
-.entry span {
-  margin-bottom: 8px;
-}
-.preserve {
+  background: var(--surface-2);
+}.preserve {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
-.scripture-reader {
-  padding: 16px;
-}
-.verse {
-  display: block;
-  text-align: left;
-  background: transparent;
-  color: var(--ink);
-  font-size: 1.03rem;
-  line-height: 1.85;
-  font-weight: 400;
-  width: 100%;
-  margin: 0 !important;
-  padding: 8px;
-  border-radius: 6px;
-}
-.verse sup {
-  color: var(--muted);
-  font-size: 0.7rem;
-  margin-right: 8px;
-}
 /* Song of Songs speaker labels: the WEB's, shown apart from the verse text and not copied with it. */
 .speaker {
-  color: var(--strong);
-  font-size: 0.75rem;
+  font-family: var(--font-ui);
+  color: var(--link);
+  font-size: var(--text-footnote);
   font-weight: 600;
-  letter-spacing: 0.06em;
   user-select: none;
 }
 p.speaker {
   margin: 14px 8px 0;
 }
-/* On a highlighted verse --strong drops below 4.5:1 in dark mode, so a label inside it uses ink. */
+/* On a highlighted verse --link drops below 4.5:1 in Light (UI-SPEC 5.4), so a label inside it uses ink. */
 .verse:is(.speaking, .highlight-gold, .highlight-sage, .highlight-rose) .speaker {
   color: var(--ink);
 }
 .speaker-note {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   line-height: 1.5;
   margin: 0 8px 8px;
-}
-.verse.selected {
-  outline: 2px solid var(--strong);
-  outline-offset: 0;
 }
 .highlight-gold {
   background: var(--highlight-gold);
@@ -1115,45 +1070,16 @@ p.speaker {
 .highlight-rose {
   background: var(--highlight-rose);
 }
-.search-result {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  background: transparent;
-  color: var(--ink);
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  font-weight: 400;
-  padding: 12px 0;
-  border-radius: 0;
-}
-.search-result span {
-  font-size: 0.84rem;
-}
 .safety {
   margin-top: 5px;
 }
-.safety .card {
-  padding: 12px;
-}
+/* The only card inside .safety is the report dialog, whose padding is now the sheet's (.sheet-dialog). */
 summary {
   cursor: pointer;
   min-height: 44px;
   padding: 8px 0;
-  color: var(--strong);
-}
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: var(--overlay);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.dialog {
+  color: var(--link);
+}.dialog {
   max-width: 440px;
   max-height: 90dvh;
   overflow-y: auto;
@@ -1173,95 +1099,26 @@ small {
   overflow-wrap: anywhere;
 }
 @media (max-width: 380px) {
-  .shell {
-    padding: 0 16px;
-  }
   .card {
     padding: 18px;
-  }
-  .quick-grid {
-    grid-template-columns: 1fr;
-  }
-  h1 {
-    font-size: 1.9rem;
-  }
-}
-
-.circles .entry {overflow-wrap:anywhere;}
-.circles dialog {color:var(--ink);background:var(--paper);border:1px solid var(--border);width:min(440px,calc(100vw - 32px));margin:auto;}
-.circles dialog::backdrop {background:var(--overlay);}
+  }}.circles dialog::backdrop {background:var(--overlay);}
 
 .circles h1,.circles h2,.circles h3,.circles p {overflow-wrap:anywhere;}
 
 .circles article a {display:block;min-height:44px;padding:8px 0;overflow-wrap:anywhere;}
 
-/* AI explanations: a separate, labelled layer, never part of the sourced note. */
-.ai-explanation {border-style:dashed;background:var(--bg);}
-.ai-badge {display:inline-block;vertical-align:middle;margin-left:6px;padding:1px 9px;border:1px solid var(--border);border-radius:999px;font-size:0.68rem;font-weight:600;color:var(--muted);}
-.ai-explanation h4 {margin:16px 0 4px;font-size:0.88rem;}
-.ai-explanation ul {margin:6px 0;padding-left:1.2rem;font-size:0.92rem;}
-.ai-explanation li + li {margin-top:5px;}
-.ai-compare {border-top:1px solid var(--border);margin-top:10px;padding-top:6px;}
-.ai-compare dl {margin:0 0 6px;}
-.ai-compare dt {margin-top:8px;font-size:0.72rem;font-weight:600;color:var(--muted);}
-.ai-compare dd {margin:2px 0 0;font-size:0.92rem;}
-/* Context check of the day: one part of the story per screen. */
+/* The story and the walk are full-screen flows (plans 07 and 08); their styles are in the last sections of this file. */
 .muted {
   color: var(--muted);
 }
-.context-today h2 {
-  font-size: 1.25rem;
-  line-height: 1.35;
-}
-.story-slide {
-  min-height: 52vh;
-}
-.story-hook {
-  font-size: 1.7rem;
-  line-height: 1.25;
-  font-weight: 400;
-}
-.story-ref {
-  color: var(--strong);
-  font-weight: 600;
-}
 .story-verse {
-  margin: 0 0 8px;
-  font-size: 1.15rem;
-  line-height: 1.75;
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.7;
 }
-.story-slide q {
+.flow-part q {
   quotes: "\201C" "\201D" "\2018" "\2019";
-}
-.story-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.story-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 12px 0;
-}
-.story-dots {
-  display: flex;
-  gap: 6px;
-}
-.story-dots span {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--border);
-}
-.story-dots span.on {
-  background: var(--strong);
-}
-.context-story details .text-button {
-  display: block;
-  text-align: left;
-  margin: 8px 0;
 }
 /* Listen: the verse being read aloud. */
 .verse.speaking {
@@ -1285,7 +1142,7 @@ button.danger {
   border-color: var(--danger);
 }
 .secondary.danger {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--danger);
   border-color: var(--danger);
 }
@@ -1315,11 +1172,11 @@ button.danger {
 /* The instruction and its hint are text a person must read to act, so Body size, as in the report dialog. */
 .delete-account label {
   color: var(--ink);
-  font-size: 0.92rem;
+  font-size: var(--text-body);
 }
 .delete-account .delete-hint {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: var(--text-body);
   margin: 0 0 4px;
 }
 .delete-account button[aria-disabled="true"] {
@@ -1341,14 +1198,14 @@ button.danger {
 /* Sign-in and code entry (UI-SPEC Surface 6b): helper lines are Label size, never the small 0.73rem. */
 .sign-in-note {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--text-body);
   margin: 10px 0;
   overflow-wrap: anywhere;
 }
 .code-entry {
   margin-top: 16px;
   padding-top: 8px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
 }
 .code-entry .code-sent {
   margin: 8px 0 0;
@@ -1372,12 +1229,3351 @@ button.danger {
    version sits on its own line, and the long label wraps beside the 22px checkbox in its 44px row. */
 .terms-accept {
   color: var(--ink);
-  font-size: 0.92rem;
+  font-size: var(--text-body);
   overflow-wrap: anywhere;
 }
 .terms-accept .terms-version {
   display: block;
   margin-top: 4px;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--text-footnote);
+}
+
+/* ==== TabBar (UI-SPEC 7.3, 7.6, 8.1; src/ui/TabBar.tsx) ====
+   A floating capsule 12px off the edges on a phone, a 280px sidebar from 768px. Labels never wrap or
+   truncate; they grow with the text size only up to 16px, icons are in em of the label (24px at 13px). */
+.tabbar {
+  position: fixed;
+  z-index: var(--z-bar);
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  max-width: 456px;
+  margin-inline: auto;
+  display: flex;
+  max-height: 83px;
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tabbar {
+    background: var(--bar-solid);
+  }
+}
+.tabbar ul {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 64px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tabbar li {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 44px;
+}
+.tab {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 9px 8px;
+  border-radius: var(--radius-pill);
+  color: var(--muted);
+  font-size: min(var(--text-footnote), 16px);
+  font-weight: 600;
+  line-height: 1.38;
+  text-decoration: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.tab:focus-visible {
+  outline-offset: -3px;
+}
+.tab-icon {
+  flex: none;
+  width: 1.8462em;
+  height: 1.8462em;
+  max-width: 32px;
+  max-height: 32px;
+}
+.tab-label {
+  white-space: nowrap;
+}
+.tab[aria-current="page"] {
+  color: var(--link);
+}
+.tab[aria-current="page"] .tab-icon {
+  color: var(--brand);
+}
+/* Long press: the tab's name at twice its size, above the bar (UI-SPEC 14, 1.4.4). */
+.tab-tip {
+  position: absolute;
+  bottom: calc(100% + var(--space-3));
+  left: 0;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--bar-solid);
+  color: var(--ink);
+  box-shadow: var(--elev-float);
+  font-size: min(calc(var(--text-footnote) * 2), 13vw);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .tabbar {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 280px;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    display: block;
+    padding: calc(var(--space-6) + env(safe-area-inset-top)) var(--space-3) var(--space-6)
+      max(var(--space-3), env(safe-area-inset-left));
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-right: 1px solid var(--line);
+  }
+  .tabbar ul {
+    flex-direction: column;
+    gap: var(--space-1);
+    min-height: 0;
+  }
+  .tabbar li {
+    min-width: 0;
+  }
+  .tab {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: var(--space-3);
+    min-height: 48px;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--text-body);
+  }
+  .tab-icon {
+    width: 24px;
+    height: 24px;
+  }
+  /* --brand over --surface-2 would be below 3:1 in Cover Light, so the selected row sits on --bg. */
+  .tab[aria-current="page"] {
+    background: var(--bg);
+  }
+  .tab-tip {
+    bottom: auto;
+    top: 0;
+    transform: translateY(-100%);
+  }
+  .shell {
+    max-width: none;
+    margin: 0;
+    padding-left: calc(280px + max(32px, env(safe-area-inset-left)));
+    padding-right: max(32px, env(safe-area-inset-right));
+  }
+  .shell > main,
+  .shell > .notice {
+    max-width: 680px;
+    margin-inline: auto;
+  }
+  main {
+    padding-bottom: calc(var(--space-8) + var(--notice-h));
+  }
+}
+/* Large text (150 % and up, plan 01 sets data-text on <html>): the bar keeps its single-line labels, adds
+   the room the larger label needs and stays at most 83px tall; below 360px it drops its side insets. */
+html[data-text="large"] .tab {
+  padding: 9px 4px;
+}
+html[data-text="large"] main {
+  padding-bottom: calc(83px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
+}
+@media (max-width: 359px) {
+  html[data-text="large"] .tabbar {
+    left: 0;
+    right: 0;
+    max-width: none;
+    border-radius: var(--radius-lg);
+  }
+}
+@media (min-width: 768px) {
+  html[data-text="large"] main {
+    padding-bottom: calc(var(--space-8) + var(--notice-h));
+  }
+  html[data-text="large"] .tab {
+    padding: var(--space-3) var(--space-4);
+  }
+}
+
+/* ==== Large title (UI-SPEC 6.2) ==== */
+.large-title {
+  margin: var(--space-2) 0 var(--space-4);
+  font-size: var(--text-large-title);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+
+/* ==== GroupedList and Row (UI-SPEC 7.1, A12; src/ui/List.tsx) ==== */
+.group {
+  margin: 0 0 var(--space-6);
+}
+.group-title {
+  margin: 0 var(--space-5) var(--space-2);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+.group-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.group-pad {
+  padding: var(--space-4) var(--space-5);
+}
+.group-list > li {
+  position: relative;
+}
+.group-list > li + li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--space-5);
+  right: 0;
+  height: 1px;
+  background: var(--line);
+}
+.list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  text-align: left;
+  text-decoration: none;
+}
+a.list-row:active,
+button.list-row:active {
+  background: var(--bg);
+}
+.list-row:focus-visible {
+  outline-offset: -3px;
+}
+.list-row-text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.list-row-title {
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.list-row-detail {
+  font-size: var(--text-footnote);
+  font-weight: 400;
+  line-height: 1.38;
+  color: var(--muted);
+}
+.list-row-value {
+  flex: 0 1 auto;
+  min-width: 0;
+  color: var(--muted);
+  font-size: var(--text-body);
+  font-weight: 400;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.list-row-chevron {
+  flex: none;
+  color: var(--muted);
+}
+/* Large text: a row's value wraps under its title (UI-SPEC A12). */
+html[data-text="large"] .list-row {
+  flex-wrap: wrap;
+}
+html[data-text="large"] .list-row-value {
+  flex-basis: 100%;
+  text-align: left;
+}
+
+/* ==== You (UI-SPEC A12) ==== */
+.you-footer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin: var(--space-6) var(--space-5) 0;
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.you-footer img {
+  flex: none;
+}
+.you-footer p {
+  margin: 0;
+  font-size: var(--text-footnote);
+}
+/* The links of the About group are rows too (PR #27 markup, restyled). */
+.group .legal-links ul {
+  margin: 0;
+}
+.group .legal-links li {
+  position: relative;
+}
+.group .legal-links li + li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--space-5);
+  right: 0;
+  height: 1px;
+  background: var(--line);
+}
+.group .legal-links a {
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.group a[target="_blank"]::after {
+  content: "\2197" / "";
+  flex: none;
+  color: var(--muted);
+}
+.group .legal-links a:focus-visible {
+  outline-offset: -3px;
+}
+
+/* ==== Account, Settings and the other grouped screens (UI-SPEC A12, A14) ====
+   PR #27's sign-in, code entry, terms acceptance, legal links and deletion card keep their words and their
+   class names; they are restyled here. :where() keeps this scope at the lowest specificity, so a component
+   class (.list-row, .secondary.danger, .terms-accept ...) always wins over it. */
+:where(.grouped-screen) .card {
+  margin: 0 0 var(--space-6);
+  padding: var(--space-5);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: none;
+}
+:where(.grouped-screen) .card > h2 {
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+:where(.grouped-screen) p {
+  margin: var(--space-3) 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  overflow-wrap: anywhere;
+}
+:where(.grouped-screen) p:empty {
+  margin: 0;
+}
+:where(.grouped-screen) small {
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  overflow-wrap: anywhere;
+}
+/* Fields: 48px, radius 10, a 1px --muted edge (3:1), the label above in Footnote 13/600. */
+:where(.grouped-screen) label {
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+:where(.grouped-screen) input:not([type="checkbox"]),
+:where(.grouped-screen) select,
+:where(.grouped-screen) textarea {
+  min-height: 48px;
+  padding: 11px 12px;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--text-body);
+}
+:where(.grouped-screen) .check {
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+}
+:where(.grouped-screen) button,
+:where(.grouped-screen) .button {
+  min-height: 48px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+:where(.grouped-screen) .secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--muted);
+}
+/* One filled button per step: the form's own button, and the code step's "Sign in with code". */
+.grouped-screen .card form > button,
+.grouped-screen .card > button:not(.secondary) {
+  width: 100%;
+  margin: var(--space-4) 0 0;
+}
+.grouped-screen .card:has(.code-entry) > form:not(.code-entry) > button {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.grouped-screen .sign-in-note,
+.grouped-screen .delete-account label,
+.grouped-screen .delete-account .delete-hint {
+  font-size: var(--text-body);
+}
+.grouped-screen .terms-accept .terms-version {
+  font-size: var(--text-footnote);
+}
+/* "Sign out" is AuthPanel's own secondary button; here it is a plain --link row under the details. */
+.grouped-screen .card:not(.delete-account) > button.secondary {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 52px;
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  color: var(--link);
+}
+/* Rows with a native select (Settings), a block of free content, and a sentence under a group. */
+.select-row {
+  margin: 0;
+  cursor: pointer;
+}
+.select-row select {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: 60%;
+  background: var(--bg);
+}
+.list-row-block {
+  padding: var(--space-3) var(--space-5) var(--space-4);
+}
+.list-row-block > p {
+  margin: 0 0 var(--space-2);
+}
+.list-row-block .chips {
+  margin: var(--space-2) 0 0;
+}
+.list-row-quiet .list-row-title {
+  color: var(--link);
+  font-weight: 400;
+}
+.group-note {
+  margin: var(--space-2) var(--space-5) 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.group-note:has(> [role="status"]:empty) {
+  margin: 0;
+}
+html[data-text="large"] .select-row {
+  flex-direction: column;
+  align-items: stretch;
+}
+html[data-text="large"] .select-row select {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ==== Toolbar (UI-SPEC 7.1, 7.3, 7.5, 8.2; src/ui/Screen.tsx) ====
+   Sticky below the top safe area, with the strip above it filled by its own ::before, so the translucent
+   bar covers the notch once the page has scrolled. Back is "‹ {parent}"; the optional title is centred. */
+.toolbar {
+  position: sticky;
+  top: env(safe-area-inset-top);
+  z-index: var(--z-bar);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 52px;
+  margin: 0 calc(-1 * max(20px, env(safe-area-inset-right))) 0 calc(-1 * max(20px, env(safe-area-inset-left)));
+  padding: 0 max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
+}
+.toolbar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: env(safe-area-inset-top);
+}
+.toolbar[data-scrolled="true"],
+.toolbar[data-scrolled="true"]::before {
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+}
+.toolbar[data-scrolled="true"] {
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .toolbar[data-scrolled="true"],
+  .toolbar[data-scrolled="true"]::before {
+    background: var(--bar-solid);
+  }
+}
+.toolbar-back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  margin-left: calc(-1 * var(--space-2));
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.toolbar-title {
+  grid-column: 2;
+  margin: 0;
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  letter-spacing: normal;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.toolbar-actions {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  gap: var(--space-2);
+}
+@media (min-width: 768px) {
+  .toolbar {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* ==== Segmented (UI-SPEC 3.4, 7.4; src/ui/Segmented.tsx) ====
+   A radiogroup on a --surface-2 track. The chosen option is raised on --surface and drawn with a 2px
+   --focus edge, so the choice is clear without relying on a shade of grey. Selection changes over 150ms
+   (the global reduced-motion reset removes it). In large text the options become a vertical list of rows. */
+.segmented {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+.segmented [role="radio"] {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  transition:
+    background-color var(--dur-segment) ease,
+    box-shadow var(--dur-segment) ease;
+}
+.segmented [role="radio"][aria-checked="true"] {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--focus);
+  font-weight: 600;
+}
+html[data-text="large"] .segmented {
+  grid-auto-flow: row;
+}
+html[data-text="large"] .segmented [role="radio"] {
+  justify-content: flex-start;
+  min-height: 52px;
+  text-align: left;
+}
+
+/* ==== Appearance (UI-SPEC A13; src/features/Appearance.tsx) ====
+   Two theme tiles side by side (stacked when two do not fit, and in large text), each with a small drawing
+   of Today in that look and the name below. The drawings show both looks in the current mode, so they
+   carry their own few colours (the values of the two looks' blocks) instead of the active look's tokens. */
+.look-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(152px, 100%), 1fr));
+  gap: var(--space-3);
+}
+html[data-text="large"] .look-tiles {
+  grid-template-columns: 1fr;
+}
+.look-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: var(--space-3);
+  min-height: 176px;
+  padding: var(--space-3);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: left;
+}
+.look-tile[aria-checked="true"] {
+  border-color: var(--focus);
+}
+.look-tile-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 24px;
+  overflow-wrap: anywhere;
+}
+.look-check {
+  flex: none;
+}
+.look-check circle {
+  fill: var(--focus);
+}
+.look-check path {
+  stroke: var(--surface);
+}
+.look-mini {
+  position: relative;
+  display: block;
+  flex: 1;
+  min-height: 96px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: #F3F1EE;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.look-mini[data-look-mini="marked"] {
+  background: #FFFDF9;
+}
+html[data-mode="lamplight"] .look-mini {
+  background: #1A120E;
+}
+.mini-cover {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  height: 46px;
+  border-radius: 8px;
+  background: #603F33;
+}
+.mini-cover::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid #E3C08A;
+  border-radius: 5px;
+}
+html[data-mode="lamplight"] .mini-cover {
+  background: #5A3B2F;
+}
+html[data-mode="lamplight"] .mini-cover::after {
+  border-color: #E8C892;
+}
+.mini-ribbon {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  width: 8px;
+  height: 52px;
+  background: var(--brand);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 6px), 0 100%);
+}
+.mini-bar {
+  position: absolute;
+  left: 10px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--muted);
+  opacity: 0.45;
+}
+[data-look-mini="cover"] .mini-bar:nth-child(2) { top: 66px; width: 78%; }
+[data-look-mini="cover"] .mini-bar:nth-child(3) { top: 77px; width: 62%; }
+[data-look-mini="cover"] .mini-bar:nth-child(4) { top: 88px; width: 70%; }
+[data-look-mini="marked"] .mini-bar:nth-child(2) { top: 20px; width: 56%; }
+[data-look-mini="marked"] .mini-bar:nth-child(3) { top: 32px; width: 48%; }
+[data-look-mini="marked"] .mini-bar:nth-child(4) { top: 44px; width: 52%; }
+.appearance-hint,
+.appearance-now {
+  margin: var(--space-3) var(--space-5) 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.appearance-hint {
+  color: var(--muted);
+}
+.appearance-now {
+  color: var(--ink);
+}
+.appearance-now:empty {
+  margin: 0;
+}
+
+/* ==== Lamplight notice (UI-SPEC 4; src/ui/LamplightNotice.tsx) ====
+   A floating card above the tab bar: 20px from the screen edges, 12px above the bar, --surface with the
+   --elev-float ring (the 1px --line) and a 150ms fade (the global reduced-motion reset removes it). While it
+   shows, main's bottom padding grows by --notice-h so the last content scrolls clear of it. From 768px the
+   tab bar is a sidebar, so the card sits at the bottom of the content column instead. */
+.lamplight-notice {
+  position: fixed;
+  z-index: var(--z-notice);
+  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px);
+  max-width: 456px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--elev-float);
+  animation: lamplight-notice-in var(--dur-notice) ease-out;
+}
+@keyframes lamplight-notice-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+html[data-text="large"] .lamplight-notice {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px);
+}
+.lamplight-notice-icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--brand);
+}
+.lamplight-notice-text {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--ink);
+}
+.lamplight-notice-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.lamplight-notice button {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.lamplight-keep {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--muted);
+}
+.lamplight-plain {
+  background: none;
+  color: var(--link);
+  border: 1px solid transparent;
+}
+@media (min-width: 768px) {
+  .lamplight-notice {
+    left: 280px;
+    right: 0;
+    bottom: max(var(--space-3), env(safe-area-inset-bottom));
+    width: min(680px, calc(100% - 280px - 64px));
+    max-width: none;
+  }
+  html[data-text="large"] .lamplight-notice {
+    bottom: max(var(--space-3), env(safe-area-inset-bottom));
+  }
+}
+
+/* ==== Sheets and confirmations (UI-SPEC 7.2 to 7.5, A14, A15; src/ui/ConfirmDialog.tsx, src/ui/TextSheet.tsx) ====
+   One class, .sheet-dialog, for a native <dialog> that is a bottom sheet on phones (anchored to the bottom, 28px
+   top corners, at most 90dvh, scrolling inside, padded by the home indicator) and a centred 480px dialog from
+   600px. The confirmations, the text sheets and the report dialog all use it; plan 09's reader sheet adds
+   detents and swipe on top. Under reduced motion the global reset removes the slide. */
+dialog.sheet-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: fit-content;
+  max-height: 90dvh;
+  margin: auto 0 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--space-6) max(var(--space-5), env(safe-area-inset-right))
+    calc(var(--space-5) + env(safe-area-inset-bottom)) max(var(--space-5), env(safe-area-inset-left));
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--elev-sheet);
+}
+dialog.sheet-dialog[open] {
+  animation: sheet-up var(--dur-sheet) var(--ease-sheet);
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes sheet-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (min-width: 600px) {
+  dialog.sheet-dialog {
+    width: 480px;
+    max-width: calc(100vw - 32px);
+    margin: auto;
+    padding: var(--space-6);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 40px var(--shadow);
+  }
+  dialog.sheet-dialog[open] {
+    animation-name: sheet-fade;
+  }
+}
+.sheet-title {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+dialog.sheet-dialog p.sheet-body {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  overflow-wrap: anywhere;
+}
+dialog.sheet-dialog .sheet-label {
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* The field grows with its text up to 40 % of the sheet (the sheet is at most 90dvh), then scrolls. */
+dialog.sheet-dialog .sheet-field {
+  display: block;
+  min-height: 96px;
+  max-height: 36dvh;
+  overflow-y: auto;
+  resize: none;
+  padding: 11px 12px;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+dialog.sheet-dialog p.sheet-hint {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.sheet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+/* A text sheet: the named safe choice on the leading edge, the action on the trailing edge. */
+.sheet-actions-split {
+  flex-direction: row;
+  align-items: stretch;
+}
+dialog.sheet-dialog .sheet-actions button,
+dialog.sheet-dialog .report-dialog button {
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.sheet-actions-split button {
+  flex: 1 1 0;
+  min-width: 0;
+}
+dialog.sheet-dialog .secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--muted);
+}
+dialog.sheet-dialog button.danger {
+  background: var(--danger);
+  color: var(--on-danger);
+  border-color: var(--danger);
+}
+dialog.sheet-dialog .sheet-actions button[aria-disabled="true"] {
+  opacity: 0.65;
+  cursor: default;
+}
+@media (max-width: 359px) {
+  .sheet-actions-split {
+    flex-direction: column-reverse;
+  }
+}
+html[data-text="large"] .sheet-actions-split {
+  flex-direction: column-reverse;
+}
+
+/* ==== Pray and Community (UI-SPEC A10, A11; src/features/Pray.tsx, src/social/TopicHub.tsx) ==== */
+.pray > .segmented,
+.community > .segmented {
+  margin: 0 0 var(--space-6);
+}
+.community > .community-intro {
+  margin: 0 0 var(--space-6);
+  color: var(--muted);
+}
+/* The five sub-tabs of Community: one row that scrolls sideways and never wraps. The edge shadows show only
+   on the side that has more to scroll to (the two covers are attached to the content and hide them). */
+.segmented-scroll {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  background:
+    linear-gradient(to right, var(--surface-2), var(--surface-2)) left center / 16px 100% no-repeat local,
+    linear-gradient(to left, var(--surface-2), var(--surface-2)) right center / 16px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, var(--shadow), transparent) left center / 14px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, var(--shadow), transparent) right center / 14px 100% no-repeat scroll,
+    var(--surface-2);
+}
+.segmented-scroll::-webkit-scrollbar {
+  display: none;
+}
+.segmented-scroll [role="radio"] {
+  flex: none;
+  white-space: nowrap;
+}
+html[data-text="large"] .segmented-scroll {
+  display: flex;
+}
+html[data-text="large"] .segmented-scroll [role="radio"] {
+  min-height: 44px;
+  text-align: center;
+}
+.screen-lede {
+  margin: 0 0 var(--space-5);
+  color: var(--muted);
+}
+/* A disclosure that reads as the last row of a grouped list (the original chat and prayer wall). */
+.group-disclosure {
+  margin: 0 0 var(--space-6);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.group-disclosure > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  cursor: pointer;
+  list-style: none;
+}
+.group-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.group-disclosure > summary::after {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 9px;
+  margin-right: 5px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(-45deg);
+}
+.group-disclosure[open] > summary::after {
+  transform: rotate(45deg);
+}
+.group-disclosure > :not(summary) {
+  padding: 0 var(--space-5) var(--space-5);
+}
+
+/* ==== Today and the cover (UI-SPEC 2, A1; src/features/Today.tsx, src/ui/Cover.tsx, src/ui/Badges.tsx) ====
+   Structure and type of the signature block; the drawing of each look (gilt rule and ornaments, ribbon, lamp
+   glow) follows in the next section. Only tokens: the two looks and the two modes change the colours. */
+.today-date {
+  margin: calc(-1 * var(--space-2)) 0 var(--space-5);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* The "AI" badge: 13px/600, --on-ai on --ai, 20px tall, radius 6. The words next to it carry the meaning. */
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  box-sizing: border-box;
+  min-height: 20px;
+  margin: 0;
+  /* Explicit 0 so no rule from a parent (an h3 heading, a row) can widen the badge past its 20px. */
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: var(--ai);
+  color: var(--on-ai);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 20px;
+  vertical-align: baseline;
+}
+/* The reader's heading "AI explanation [AI]" keeps a gap before the badge. */
+h3 > .ai-badge {
+  margin-left: var(--space-2);
+  vertical-align: middle;
+}
+.cover-wrap {
+  position: relative;
+  isolation: isolate;
+  margin: 0 0 var(--space-6);
+}
+.cover {
+  position: relative;
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--sig);
+  color: var(--on-sig);
+}
+html[data-text="large"] .cover {
+  padding: var(--space-4);
+}
+.cover p {
+  margin: 0;
+}
+.cover-ref {
+  font-family: var(--font-scripture);
+  font-style: italic;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--gilt);
+}
+.cover .cover-display {
+  margin-top: var(--space-4);
+  font-family: var(--font-scripture);
+  font-size: var(--text-display);
+  font-weight: 400;
+  line-height: 1.29;
+  color: var(--on-sig);
+  overflow-wrap: anywhere;
+}
+.cover .cover-body {
+  margin-top: var(--space-4);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--sig-muted);
+  overflow-wrap: anywhere;
+}
+.cover .cover-ai {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--on-sig);
+}
+.cover .cover-ai .ai-badge {
+  margin-top: 2px;
+}
+/* The one filled button of the screen (UI-SPEC 5.2): --sig-button on the block, 48px, Body 17/600. */
+.cover .cover-button {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  margin-top: var(--space-6);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--sig-button);
+  color: var(--on-sig-button);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+}
+.cover .cover-button:focus-visible {
+  outline-color: var(--sig-focus);
+}
+/* Drawn in the next section; the spans exist in every look so the markup is the same. */
+.cover-ribbon,
+.cover-orn {
+  display: none;
+}
+
+/* ==== The signature of each look (UI-SPEC 2, D-01) and the states of Today (A1) ====
+   Same DOM for both looks; only the CSS differs by data-look. */
+/* Lamplight: one soft lamp glow behind the block (the token is transparent in Light). It sits behind the block
+   only: it extends a little into the gaps around it, never behind the title or the list, and it takes no clicks. */
+.cover-wrap::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--space-3)) calc(-1 * var(--space-4)) calc(-1 * var(--space-6));
+  z-index: -1;
+  background: radial-gradient(60% 50% at 50% 40%, var(--glow), transparent 70%);
+  pointer-events: none;
+}
+/* Cover and story: the gilt rule 8px inside the leather's edge, and a corner ornament in each corner. */
+:root:not([data-look="marked"]) .cover::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-2);
+  border: 1px solid var(--gilt);
+  border-radius: calc(var(--radius-xl) - var(--space-2));
+  pointer-events: none;
+}
+/* The ornament is src/icons/ornament-corner.svg used as a mask, so it takes the colour of the gilt. */
+:root:not([data-look="marked"]) .cover-orn {
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--gilt);
+  -webkit-mask: url("./icons/ornament-corner.svg") center / contain no-repeat;
+  mask: url("./icons/ornament-corner.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+.cover-orn-tl {
+  top: var(--space-3);
+  left: var(--space-3);
+}
+.cover-orn-tr {
+  top: var(--space-3);
+  right: var(--space-3);
+  transform: rotate(90deg);
+}
+.cover-orn-br {
+  right: var(--space-3);
+  bottom: var(--space-3);
+  transform: rotate(180deg);
+}
+.cover-orn-bl {
+  bottom: var(--space-3);
+  left: var(--space-3);
+  transform: rotate(270deg);
+}
+/* The block's content sits above the rule. */
+.cover > p,
+.cover > button {
+  position: relative;
+}
+/* Marked page: the passage sits on the page, no box and no gilt, with a satin ribbon (10px, --brand, forked tail)
+   hanging from the top of the screen to the reference line, 28px from the right edge. */
+:root[data-look="marked"] .cover {
+  padding: 0;
+  border-radius: 0;
+}
+:root[data-look="marked"] .cover-ref {
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-weight: 600;
+  color: var(--link);
+}
+:root[data-look="marked"] .cover .cover-ai {
+  color: var(--ai);
+}
+:root[data-look="marked"] .cover-ribbon {
+  display: block;
+  position: absolute;
+  right: var(--space-2);
+  width: 10px;
+  background: var(--brand);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+  pointer-events: none;
+}
+/* On Today the ribbon starts at the top safe-area edge: the reach is the height of the title and the date line
+   above the block (8 + title + 8 + date + 20 px) plus the first line of the passage. */
+:root[data-look="marked"] .today .cover-ribbon {
+  top: calc(-1 * (env(safe-area-inset-top) + 36px + 1.2 * var(--text-large-title) + 1.38 * var(--text-footnote)));
+  height: calc(env(safe-area-inset-top) + 36px + 1.2 * var(--text-large-title) + 1.38 * var(--text-footnote) + 1.47 * var(--text-body));
+}
+/* The title and the date leave the ribbon's column free. */
+:root[data-look="marked"] .today .large-title,
+:root[data-look="marked"] .today .today-date {
+  padding-right: calc(var(--space-2) + 10px + var(--space-3));
+}
+/* The state line under the hook: a check icon and "On your shelf" (--gilt on the leather, --success on the page). */
+.cover .cover-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--sig-muted);
+}
+.cover-status svg {
+  flex: none;
+  color: var(--gilt);
+}
+:root[data-look="marked"] .cover-status svg {
+  color: var(--success);
+}
+/* "Read it again": the secondary style on the block, an outline instead of a fill. */
+.cover .cover-button-secondary {
+  background: transparent;
+  color: var(--on-sig);
+  border-color: var(--sig-muted);
+}
+/* No context check is published: the day's verse takes the block (Scripture 20). */
+.cover .cover-verse {
+  margin-top: var(--space-4);
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.5;
+  color: var(--on-sig);
+  overflow-wrap: anywhere;
+}
+/* The list under the block: Today's walk and Your shelf. */
+.today .group {
+  margin-bottom: var(--space-6);
+}
+.row-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.row-success {
+  flex: none;
+  color: var(--success);
+}
+.list-row-detail .row-line {
+  display: block;
+}
+.list-row-detail .row-ai {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  color: var(--ai);
+}
+.list-row-detail .row-ai .ai-badge {
+  margin-top: 1px;
+}
+/* A small picture before a row's text. */
+.list-row-leading {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+}
+/* The mini shelf: spines 8px wide and 24 to 40px tall, the newest on the right; AI-written ones filled --ai. */
+.mini-shelf {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  min-height: 40px;
+}
+.mini-spine {
+  flex: none;
+  width: 8px;
+  border-radius: 1px;
+  background: var(--spine-1);
+}
+.mini-spine-2 {
+  background: var(--spine-2);
+}
+.mini-spine-3 {
+  background: var(--spine-3);
+}
+.mini-spine-ai {
+  background: var(--ai);
+}
+:root[data-look="marked"] .mini-spine {
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+:root[data-look="marked"] .mini-spine-ai {
+  box-shadow: none;
+}
+/* Narrow screens and large text: the picture takes its own line, so the words keep their width. */
+@media (max-width: 359px) {
+  .today .list-row:has(.list-row-leading) {
+    flex-wrap: wrap;
+  }
+  .today .list-row-leading {
+    flex-basis: 100%;
+  }
+}
+html[data-text="large"] .today .list-row-leading {
+  flex-basis: 100%;
+}
+
+/* ==== Sponsor row (UI-SPEC 13, D-13; src/ui/SponsorRow.tsx) ====
+   Rendered only when a sponsor is set (none at launch). The same look at every place; no glow, no image. */
+.sponsor {
+  margin: 0 0 var(--space-6);
+}
+.sponsor-label {
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+.sponsor-line {
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  color: var(--muted);
+}
+.sponsor .group-note {
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+
+/* ==== Plan 07: the story as a full-screen flow, and the step indicator (UI-SPEC A7, A5; src/context/ContextCheck.tsx, src/ui/StepIndicator.tsx) ====
+   A story (and, in plan 08, the walk) covers the tab bar: the shell is marked data-flow, the bar is not drawn and
+   the page's bottom padding is the plain one. Buttons are 48px and named after what they do. */
+.shell[data-flow] main {
+  padding-bottom: calc(var(--space-8) + env(safe-area-inset-bottom) + var(--notice-h));
+}
+.shell[data-flow] .lamplight-notice {
+  bottom: max(var(--space-3), env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) {
+  .shell[data-flow] {
+    padding-left: max(32px, env(safe-area-inset-left));
+  }
+}
+/* The step indicator: 4px segments, the steps done and the current one filled, the rest an outline. */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-2) 0 var(--space-5);
+}
+.step-segments {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--space-1);
+}
+.step-segment {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 4px;
+  box-sizing: border-box;
+  border: 1px solid var(--muted);
+  border-radius: 2px;
+  background: var(--line);
+}
+.step-segment-done {
+  border-color: var(--link);
+  background: var(--link);
+}
+.step-label {
+  flex: none;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+  white-space: nowrap;
+}
+html[data-text="large"] .step-indicator {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-2);
+}
+html[data-text="large"] .step-label {
+  white-space: normal;
+}
+/* One part of a flow: Title 20 heading, Body 17 on a 27px line, Footnote notes. */
+.flow-part {
+  min-height: 40vh;
+  scroll-margin-top: calc(52px + env(safe-area-inset-top) + var(--space-2));
+}
+.flow-part h2 {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.flow-part h2:focus {
+  outline: none;
+}
+.flow-part > p:not([class]) {
+  font-size: var(--text-body);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.flow-part > p:not([class]) + p:not([class]) {
+  margin-top: var(--space-4);
+}
+.flow-part > small {
+  display: block;
+  margin-top: var(--space-4);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.flow-shelf-heading {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+/* The story's first screen is the cover of Today; its hint is a Footnote. The lamp glow belongs to Today only. */
+.cover .cover-hint {
+  margin-top: var(--space-4);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--sig-muted);
+}
+.story-flow .cover-wrap::before {
+  content: none;
+}
+/* Marked page: the ribbon hangs beside the first lines, and the text leaves its column free. */
+:root[data-look="marked"] .story-flow .cover {
+  padding-right: calc(var(--space-2) + 10px + var(--space-3));
+}
+:root[data-look="marked"] .story-flow .cover-ribbon {
+  top: 0;
+  height: 72px;
+}
+.flow-status {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.flow-status:empty {
+  margin: 0;
+}
+.flow-note {
+  margin: var(--space-6) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* Buttons: filled (the next step) and secondary (the safe choice). Both 48px or more, Body 17/600, wrapping. */
+.flow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+.flow-actions .flow-button {
+  flex: 1 1 15rem;
+}
+.story-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.flow-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  width: 100%;
+  min-height: max(48px, 2.8rem);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--button);
+  color: var(--on-button);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.flow-button-secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.flow-link {
+  display: block;
+  padding: var(--space-3) 0;
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: center;
+}
+.flow-more {
+  margin-top: var(--space-6);
+}
+.flow-more summary {
+  min-height: 44px;
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--link);
+}
+.flow-more .text-button {
+  display: block;
+  margin: var(--space-2) 0;
+  font-size: var(--text-body);
+  text-align: left;
+}
+/* An icon button in the toolbar: 44px, the link colour, no box. */
+.toolbar-icon {
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+}
+
+/* ==== Plan 07: Your shelf, spines on boards (UI-SPEC 2, A9; src/ui/Shelf.tsx, src/features/Shelf.tsx) ====
+   A spine is 44px wide and 128 to 160px tall (an inline height from the check's slug), standing on a 4px board; spines touch,
+   oldest to newest from the left, and wrap onto more boards. Cover and story: leather with two gilt bands 10px
+   from the top and the bottom. Marked page: a cream paper slip with a ribbon tab across its top. The reference
+   stands vertically, in the Scripture face, and wraps into a second column when it is long. */
+.shelf-count {
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.shelf-empty {
+  margin: 0 0 var(--space-5);
+}
+.shelf-empty h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.shelf-empty p {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.shelf-boards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-4) 0;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+.shelf-item {
+  flex: none;
+  width: 44px;
+}
+.shelf-item::after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: var(--line);
+}
+.spine {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 44px;
+  height: 144px;
+  padding: 14px 4px;
+  border-radius: 2px 2px 0 0;
+  background: var(--spine-1);
+  color: var(--spine-ink);
+  text-decoration: none;
+}
+.spine-2 {
+  background: var(--spine-2);
+}
+.spine-3 {
+  background: var(--spine-3);
+}
+.spine-with-ai {
+  padding-bottom: 30px;
+}
+a.spine:focus-visible {
+  outline-offset: 2px;
+}
+.spine-ref {
+  max-height: 100%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-scripture);
+  font-size: var(--text-footnote);
+  line-height: 1.2;
+  text-align: center;
+}
+.spine-date,
+.spine-ai-text {
+  display: none;
+}
+/* The AI badge at the foot of a spine written by an AI model: horizontal, 20px tall, 4px from the bottom. */
+.spine-ai {
+  position: absolute;
+  z-index: 1;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+:root:not([data-look="marked"]) .spine::before,
+:root:not([data-look="marked"]) .spine::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gilt);
+}
+:root:not([data-look="marked"]) .spine::before {
+  top: 10px;
+}
+:root:not([data-look="marked"]) .spine::after {
+  bottom: 10px;
+}
+:root[data-look="marked"] .spine {
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+:root[data-look="marked"] .spine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--brand);
+}
+/* Tomorrow's place: an empty dashed outline. Its label is for the eye; the sentence under the shelf carries the meaning. */
+:root .shelf-boards .spine-tomorrow {
+  background: transparent;
+  border: 1px dashed var(--muted);
+  color: var(--muted);
+  box-shadow: none;
+}
+:root .shelf-boards .spine-tomorrow::before,
+:root .shelf-boards .spine-tomorrow::after {
+  content: none;
+}
+.spine-tomorrow .spine-ref {
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+.shelf-tomorrow-line {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.shelf-legend {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--ai);
+}
+.shelf-legend .ai-badge {
+  margin-top: -1px;
+}
+/* Large text (150 % and up) and screens under 320px: the spines become a plain list, with the same links. */
+html[data-text="large"] .shelf-boards {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+html[data-text="large"] .shelf-boards .shelf-item {
+  width: auto;
+}
+html[data-text="large"] .shelf-boards .shelf-item + .shelf-item {
+  border-top: 1px solid var(--line);
+}
+html[data-text="large"] .shelf-boards .shelf-item::after,
+html[data-text="large"] .shelf-boards .shelf-tomorrow,
+html[data-text="large"] .shelf-boards .spine::before,
+html[data-text="large"] .shelf-boards .spine::after {
+  display: none;
+  content: none;
+}
+html[data-text="large"] .shelf-boards .spine {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: auto;
+  height: auto !important;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--ink);
+}
+html[data-text="large"] .shelf-boards .spine-ref {
+  max-height: none;
+  writing-mode: horizontal-tb;
+  transform: none;
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: left;
+}
+html[data-text="large"] .shelf-boards .spine-date {
+  display: block;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+html[data-text="large"] .shelf-boards .spine-ai {
+  position: static;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+html[data-text="large"] .shelf-boards .spine-ai-text {
+  display: inline;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--ai);
+}
+@media (max-width: 319px) {
+  :root .shelf-boards {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  :root .shelf-boards .shelf-item {
+    width: auto;
+  }
+  :root .shelf-boards .shelf-item + .shelf-item {
+    border-top: 1px solid var(--line);
+  }
+  :root .shelf-boards .shelf-item::after,
+  :root .shelf-boards .shelf-tomorrow,
+  :root .shelf-boards .spine::before,
+  :root .shelf-boards .spine::after {
+    display: none;
+    content: none;
+  }
+  :root .shelf-boards .spine {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: auto;
+    height: auto !important;
+    min-height: 52px;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--ink);
+  }
+  :root .shelf-boards .spine-ref {
+    max-height: none;
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-family: var(--font-ui);
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: 1.47;
+    text-align: left;
+  }
+  :root .shelf-boards .spine-date {
+    display: block;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
+  }
+  :root .shelf-boards .spine-ai {
+    position: static;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  :root .shelf-boards .spine-ai-text {
+    display: inline;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--ai);
+  }
+}
+
+/* ==== Plan 07: the context checks list, the shelf moment and the AI line at a story's end (UI-SPEC A7, A8, A16, 7.4; src/context/ContextChecks.tsx, src/context/ContextCheck.tsx) ==== */
+.state-text {
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.check-row-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.check-row-done {
+  flex: none;
+  color: var(--success);
+}
+.check-row-hook {
+  margin-top: var(--space-1);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  color: var(--muted);
+}
+.check-row-ai {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--ai);
+}
+.check-row-ai .ai-badge {
+  margin-top: -1px;
+}
+/* The last screen of a story: the mini shelf and the new spine at full size, standing on one board. */
+.shelf-moment {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-4);
+  border-bottom: 4px solid var(--line);
+}
+.shelf-moment .mini-shelf {
+  min-height: 0;
+}
+.shelf-moment-spine {
+  display: block;
+  flex: none;
+}
+/* The one expressive moment of the phase (L-12): the new spine drops 24px into its place and fades in, once. */
+.shelf-moment-new {
+  animation: spine-settles var(--dur-spine) var(--ease-spine) both;
+}
+@keyframes spine-settles {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shelf-moment-new {
+    animation: none;
+  }
+}
+.flow-ai {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--ai);
+}
+.flow-ai .ai-badge {
+  margin-top: -1px;
+}
+
+/* ==== Plan 08: Today's walk as a full-screen flow (UI-SPEC A5; src/features/Walk.tsx) ====
+   Six steps in the story's flow (toolbar, step indicator, Title 20 heading, Body 17 on a 27px line, Footnote notes,
+   the two named buttons). The Scripture of the first step is the story's Scripture style. */
+.walk-verse {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.flow-part > .walk-sub {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.flow-part > p.walk-note {
+  margin: var(--space-2) 0 var(--space-3);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* A plain link-coloured action under the step's text, 44px tall. */
+.walk-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.walk-link:hover {
+  filter: none;
+}
+.walk-footnote {
+  margin: var(--space-4) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* The Journal step keeps its own card, now without a shadow edge competing with the flow. */
+.walk-flow .journal-card {
+  margin: 0;
+}
+.walk-complete {
+  margin: var(--space-4) 0;
+  font-family: var(--font-scripture);
+  font-size: var(--text-display);
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+/* The Journal step's card is older: its heading, label and small lines go to the five sizes (nothing under 13px). */
+.walk-flow .journal-card h2 {
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.walk-flow .journal-card label {
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.walk-flow .journal-card .row:last-child small {
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+
+/* ==== Plan 08: the walk finish (UI-SPEC A6, D-11; src/features/Walk.tsx) ====
+   Display title, the day's verse in italic Scripture, its reference, one list, one filled button. No motion. */
+.walk-finish-verse {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.walk-finish-ref {
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  color: var(--link);
+}
+/* The sentence about a day away is Body 17 in the list, not the Footnote of a row's detail. */
+.list-row-detail .row-detail-body {
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.walk-finish .group {
+  margin-bottom: var(--space-5);
+}
+
+/* ==== The reader (UI-SPEC 2, 6.3, 7.5, A2, A3; plan 01.1-09; src/bible/*) ====
+   Scripture first: a sticky 52px toolbar, the small book title, the chapter heading and verse 1 within about
+   190px of the top. The verses are text; their numbers are 13px/600 buttons whose hit areas are drawn with
+   ::after (Cover: 44 x 44 in a 24px hanging margin, a block per verse with a 12px gap; Marked: 44px wide by one
+   line box, running text). Same markup in both looks; only these rules differ. Written by the reader track
+   of phase 01.1, appended so that the other track's sections above stay untouched. */
+
+/* -- Toolbar -- */
+.reader {
+  padding-bottom: var(--space-4);
+}
+.reader-toolbar {
+  position: sticky;
+  top: env(safe-area-inset-top);
+  z-index: var(--z-bar);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 52px;
+  margin: 0 calc(-1 * max(20px, env(safe-area-inset-right))) 0 calc(-1 * max(20px, env(safe-area-inset-left)));
+  padding: 0 max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
+}
+/* The strip above the toolbar, so the translucent bar also covers the notch once the page has scrolled. */
+.reader-toolbar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: env(safe-area-inset-top);
+}
+.reader-toolbar[data-scrolled="true"],
+.reader-toolbar[data-scrolled="true"]::before {
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+}
+.reader-toolbar[data-scrolled="true"] {
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .reader-toolbar[data-scrolled="true"],
+  .reader-toolbar[data-scrolled="true"]::before {
+    background: var(--bar-solid);
+  }
+}
+.reader-toolbar .rt-button,
+.tool-button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.rt-slot {
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+.reader-toolbar .rt-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.rt-title svg {
+  flex: none;
+  color: var(--link);
+}
+.rt-title-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* The width budget (A3): 430px and wider shows Books, previous, title, next, Search and Listen; 360 to 429px
+   shows Books, previous, title, next and More; under 360px, and at every width in large-text mode, previous,
+   title, next and More. A hidden control is out of the accessibility tree, so nothing is read twice. */
+.reader-toolbar .rt-books,
+.reader-toolbar .rt-search,
+.reader-toolbar .rt-listen {
+  display: none;
+}
+@media (min-width: 360px) {
+  .reader-toolbar .rt-books {
+    display: inline-flex;
+  }
+}
+@media (min-width: 430px) {
+  .reader-toolbar .rt-search,
+  .reader-toolbar .rt-listen {
+    display: inline-flex;
+  }
+  .reader-toolbar .rt-more {
+    display: none;
+  }
+}
+html[data-text="large"] .reader-toolbar .rt-books,
+html[data-text="large"] .reader-toolbar .rt-search,
+html[data-text="large"] .reader-toolbar .rt-listen {
+  display: none;
+}
+html[data-text="large"] .reader-toolbar .rt-more {
+  display: inline-flex;
+}
+@media (min-width: 768px) {
+  .reader-toolbar {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* -- Heading -- */
+.reader-head {
+  margin: var(--space-3) 0 var(--space-5);
+}
+.reader-book {
+  margin: 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.reader-heading {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-scripture);
+  font-size: var(--text-display);
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+/* Cover and story: the 32 x 2 section rule under the heading. */
+.reader-heading::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 2px;
+  margin-top: var(--space-3);
+  background: var(--brand);
+}
+/* Marked page: the heading is read by assistive technology and shown as the printed numeral. */
+:root[data-look="marked"] .reader-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+:root[data-look="marked"] .reader-heading::after {
+  content: none;
+}
+.reader-status {
+  margin: var(--space-5) 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.reader-retry {
+  min-height: 48px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+
+/* -- The verses -- */
+.chapter-text {
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.7;
+  color: var(--ink);
+}
+.chapter-text .verse {
+  cursor: pointer;
+}
+.verse-lead {
+  white-space: nowrap;
+}
+.verse-num {
+  font-family: var(--font-ui);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--link);
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: 0;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+}
+.verse-num:hover {
+  filter: none;
+}
+.verse-num::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+.verse-mark {
+  flex: none;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 3px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+.verse.highlight-gold {
+  background: var(--highlight-gold);
+}
+.verse.highlight-sage {
+  background: var(--highlight-sage);
+}
+.verse.highlight-rose {
+  background: var(--highlight-rose);
+}
+/* The verse whose sheet is open, or that a link pointed at: --highlight-gold at 50 %, laid over any
+   highlight the reader chose so both stay visible. */
+.verse.selected {
+  background-image: linear-gradient(color-mix(in srgb, var(--highlight-gold) 50%, transparent), color-mix(in srgb, var(--highlight-gold) 50%, transparent));
+}
+.verse.speaking {
+  background: var(--highlight-gold);
+}
+/* On a highlighted verse --link falls short in Light (UI-SPEC 5.4), so its number uses --ink; in Lamplight the
+   link colour passes and stays. */
+:root[data-mode="light"] .verse:is(.highlight-gold, .highlight-sage, .highlight-rose, .selected, .speaking) .verse-num {
+  color: var(--ink);
+}
+
+/* Cover and story: a block per verse, the number hanging in a 24px margin, a 12px gap between verses. */
+:root:not([data-look="marked"]) .chapter-opening {
+  display: none;
+}
+:root:not([data-look="marked"]) .verse {
+  display: block;
+  position: relative;
+  margin: 0 -4px var(--space-3);
+  padding: 0 4px 0 28px;
+  border-radius: var(--radius-xs);
+}
+:root:not([data-look="marked"]) .verse-num {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: calc(var(--text-scripture) * 1.7);
+}
+:root:not([data-look="marked"]) .wide-numbers .verse {
+  padding-left: 36px;
+}
+:root:not([data-look="marked"]) .wide-numbers .verse-num {
+  width: 32px;
+}
+
+/* Marked page: running text, the numbers raised 0.3em, a 44px-wide hit area one line box tall, and the printed
+   chapter numeral with its ribbon floated over the first three lines. */
+:root[data-look="marked"] .verse {
+  display: inline;
+  border-radius: var(--radius-xs);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+:root[data-look="marked"] .verse-num {
+  position: relative;
+  display: inline-block;
+  top: calc(var(--text-scripture) * -0.3);
+  margin-right: 0.25em;
+  vertical-align: baseline;
+  line-height: 1;
+}
+:root[data-look="marked"] .verse-num::after {
+  width: 44px;
+  height: calc(var(--text-scripture) * 1.7);
+  top: calc(50% + var(--text-scripture) * 0.3);
+}
+:root[data-look="marked"] .chapter-opening {
+  float: left;
+  display: flex;
+  gap: var(--space-2);
+  height: calc(var(--text-scripture) * 1.7 * 3);
+  margin: 0 var(--space-3) 0 0;
+}
+.chapter-numeral {
+  font-family: var(--font-scripture);
+  font-size: var(--text-numeral);
+  font-weight: 400;
+  line-height: calc(var(--text-scripture) * 1.7 * 2);
+  color: var(--brand);
+}
+/* The ribbon: 10px wide, forked tail, 72px long at the default size. */
+.chapter-ribbon {
+  flex: none;
+  align-self: flex-start;
+  width: 10px;
+  height: 72px;
+  background: var(--brand);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+}
+.chapter-text .speaker-note {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-ui);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.chapter-text .speaker {
+  font-size: var(--text-footnote);
+  letter-spacing: normal;
+}
+.chapter-text p.speaker {
+  display: block;
+  margin: var(--space-3) 0 0;
+}
+
+/* Under reduced motion a sheet appears with a 150ms change of opacity instead of sliding (UI-SPEC 7.4). The
+   global reset above removes animations with !important; this rule is more specific and wins. */
+@media (prefers-reduced-motion: reduce) {
+  dialog.sheet-dialog[open] {
+    animation: sheet-fade 150ms linear !important;
+  }
+}
+
+/* -- The library, /bible (A2) and the passage picker -- */
+.library-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.library-head .large-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.library-head .tool-button {
+  margin-top: var(--space-2);
+}
+.picker .segmented {
+  margin: 0 0 var(--space-4);
+}
+.picker-books {
+  margin-bottom: 0;
+}
+.picker-books .list-row[aria-expanded] {
+  min-height: 52px;
+}
+/* The chapter grid: 52 x 52 buttons, 6 to a row from 390px, 5 below that (A2). */
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 52px);
+  justify-content: space-between;
+  gap: var(--space-2) 0;
+  padding: var(--space-1) var(--space-2) var(--space-4);
+}
+@media (max-width: 389px) {
+  .chapter-grid {
+    grid-template-columns: repeat(5, 52px);
+  }
+}
+@media (max-width: 359px) {
+  .chapter-grid {
+    padding-inline: 0;
+  }
+}
+html[data-text="large"] .chapter-grid {
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: var(--space-2);
+  justify-content: stretch;
+}
+.chapter-cell {
+  width: 100%;
+  min-width: 52px;
+  height: 52px;
+  min-height: 52px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.chapter-cell[aria-current="true"] {
+  box-shadow: inset 0 0 0 2px var(--focus);
+}
+html[data-text="large"] .chapter-cell {
+  width: auto;
+}
+
+/* -- Sheets that hold content: the picker, search, More, and in plan 10 the verse and chapter sheets -- */
+dialog.reader-sheet[open] {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+dialog.reader-sheet-medium {
+  height: auto;
+  max-height: 50dvh;
+}
+dialog.reader-sheet-large {
+  height: 90dvh;
+  max-height: 90dvh;
+}
+@media (min-width: 600px) {
+  dialog.reader-sheet-medium {
+    max-height: 70dvh;
+  }
+}
+/* The old dialog rules (dialog button, dialog li, dialog ul) made every button full width with a top margin
+   and every list item 13px; a content sheet resets them and gives its own full-width rows back. */
+dialog.reader-sheet button {
+  width: auto;
+  margin: 0;
+}
+dialog.reader-sheet ul {
+  padding-left: 0;
+}
+dialog.reader-sheet li {
+  margin: 0;
+  font-size: inherit;
+}
+dialog.reader-sheet .list-row,
+dialog.reader-sheet .search-hit,
+dialog.reader-sheet .chapter-cell {
+  width: 100%;
+}
+dialog.reader-sheet .chapter-cell {
+  width: 100%;
+}
+html[data-text="large"] dialog.reader-sheet .chapter-cell {
+  width: auto;
+}
+.sheet-head {
+  flex: none;
+  padding: var(--space-2) max(var(--space-5), env(safe-area-inset-right)) 0 max(var(--space-5), env(safe-area-inset-left));
+  touch-action: none;
+}
+.sheet-grabber {
+  display: block;
+  width: 36px;
+  height: 5px;
+  margin: 0 auto var(--space-1);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--muted) 55%, transparent);
+}
+.sheet-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 52px;
+}
+.sheet-bar .sheet-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sheet-bar .sheet-title.sr-only {
+  flex: none;
+}
+.sheet-title:focus {
+  outline: none;
+}
+.sheet-title:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+.sheet-close,
+.sheet-back {
+  flex: none;
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.sheet-back {
+  margin-left: calc(-1 * var(--space-2));
+  text-align: left;
+}
+.sheet-back + .sheet-close,
+.sheet-bar .sheet-title.sr-only + .sheet-close {
+  margin-left: auto;
+}
+.sheet-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 max(var(--space-5), env(safe-area-inset-right)) calc(var(--space-5) + env(safe-area-inset-bottom))
+    max(var(--space-5), env(safe-area-inset-left));
+}
+/* Lists inside a sheet sit on the page colour, so they read as grouped rows on the sheet's own surface. */
+.sheet-body .group-list {
+  background: var(--bg);
+}
+.sheet-body .group {
+  margin-bottom: var(--space-4);
+}
+.sheet-body-text {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+
+/* -- Search sheet -- */
+.search-form .sheet-label {
+  margin-top: var(--space-2);
+}
+.search-line {
+  display: flex;
+  gap: var(--space-2);
+}
+.search-line input {
+  flex: 1 1 auto;
+  min-height: 48px;
+  padding: 11px 12px;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.search-line button {
+  flex: none;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+dialog.sheet-dialog .search-form p.sheet-hint {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.search-status {
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.search-status:empty {
+  display: none;
+}
+.search-results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  overflow: hidden;
+}
+.search-results li + li {
+  border-top: 1px solid var(--line);
+}
+.search-hit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font-weight: 400;
+  text-align: left;
+}
+.search-hit-ref {
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.search-hit-text {
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+
+/* -- The end of the chapter (A3): 48px below the last verse -- */
+.chapter-end {
+  margin-top: var(--space-8);
+}
+.end-of {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* The one filled button of the page. */
+.chapter-end .end-next {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--button);
+  color: var(--on-button);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.end-pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 var(--space-6);
+}
+.chapter-end .end-plain,
+.chapter-end .end-link {
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: left;
+}
+.chapter-end .end-plain {
+  margin-left: calc(-1 * var(--space-2));
+}
+.chapter-end .end-link {
+  margin: 0 0 var(--space-5) calc(-1 * var(--space-2));
+}
+/* Mark as read: a secondary toggle, an outline and no fill, so Next stays the page's one filled button. */
+.chapter-end .end-toggle {
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.chapter-end .end-toggle[aria-pressed="true"] {
+  border-color: var(--focus);
+  box-shadow: inset 0 0 0 1px var(--focus);
+}
+.chapter-end .end-toggle svg {
+  color: var(--success);
+}
+.end-title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.end-questions {
+  margin: 0 0 var(--space-3);
+  padding-left: var(--space-6);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.end-questions li {
+  margin: 0 0 var(--space-2);
+  padding-left: var(--space-1);
+}
+.chapter-end .group {
+  margin-top: var(--space-4);
+}
+/* Whose text this is: stays at the end of every chapter. */
+.web-line {
+  margin: var(--space-6) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.web-line a {
+  display: inline;
+  min-height: 0;
+}
+html[data-text="large"] .end-pair {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* -- Listen as a mini player (A3): floats above the tab bar, never over the text's last lines -- */
+.reader[data-listening] {
+  padding-bottom: calc(var(--space-9) + var(--space-3));
+}
+.mini-player {
+  position: fixed;
+  z-index: var(--z-bar);
+  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px + var(--notice-h));
+  max-width: 456px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 56px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+  box-shadow: var(--elev-float);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .mini-player {
+    background: var(--bar-solid);
+  }
+}
+html[data-text="large"] .mini-player {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px + var(--notice-h));
+}
+.mini-player .mini-button {
+  flex: none;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.mini-verse {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+@media (min-width: 768px) {
+  .mini-player {
+    left: 280px;
+    right: 0;
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+    width: min(456px, calc(100% - 280px - 64px));
+    max-width: none;
+  }
+  html[data-text="large"] .mini-player {
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+  }
+}
+
+/* ==== The verse sheet and the chapter sheet (UI-SPEC A4, plan 01.1-10; src/bible/VerseSheet.tsx) ==== */
+
+/* -- The five actions: an icon above a Footnote label that may wrap to two centred lines, 64px tall at least -- */
+.verse-actions {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-1);
+  margin: var(--space-2) 0 var(--space-3);
+}
+.verse-actions .verse-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-1);
+  min-height: 64px;
+  padding: var(--space-2) 2px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  text-align: center;
+}
+.verse-action span {
+  overflow-wrap: anywhere;
+}
+.verse-actions .verse-action[aria-pressed="true"] {
+  border: 0;
+  box-shadow: none;
+}
+.verse-action[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+html[data-text="large"] .verse-actions {
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+}
+/* The inline choice of a highlight colour: four 44px swatches with their names. */
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+}
+.swatches .swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 64px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+}
+.swatches .swatch[aria-checked="true"] {
+  border: 0;
+  box-shadow: none;
+}
+.swatch-dot {
+  position: relative;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+}
+.swatch-gold .swatch-dot {
+  background: var(--highlight-gold);
+}
+.swatch-sage .swatch-dot {
+  background: var(--highlight-sage);
+}
+.swatch-rose .swatch-dot {
+  background: var(--highlight-rose);
+}
+/* None: an empty circle struck through. */
+.swatch-none .swatch-dot::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--muted);
+  transform: translateX(-50%) rotate(45deg);
+}
+.swatch[aria-checked="true"] .swatch-dot {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);
+}
+.swatches .swatch:focus-visible {
+  outline-offset: 2px;
+}
+.sheet-status {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.sheet-status:empty {
+  display: none;
+}
+/* A focus ring on a chapter button or a row inside a rounded, clipped list stays inside it. */
+.chapter-cell:focus-visible,
+.search-hit:focus-visible {
+  outline-offset: -3px;
+}
+
+/* -- The layers around a verse (UI-SPEC 5.3, A4): apart by words, icon, frame and colour, never by colour alone -- */
+.layer-row {
+  align-items: flex-start;
+}
+.layer-row .layer-row-icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--muted);
+}
+.layer-row .layer-row-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+.layer-row-ai .layer-row-icon,
+.layer-row-ai .list-row-title {
+  color: var(--ai);
+}
+.layer-row-community .layer-row-icon,
+.layer-row-community .list-row-title {
+  color: var(--community);
+}
+/* The words that say how a layer was checked, or what it is: 13px/600 in a --muted outline, radius 6. */
+.review-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-xs);
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 18px;
+}
+.layer-retry {
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+
+.layer {
+  margin: var(--space-2) 0 var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-ui);
+}
+.layer-sourced {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+.layer-ai {
+  border: 1.5px dashed var(--ai);
+  border-radius: var(--radius-md);
+}
+.layer-community {
+  border: 0;
+  border-left: 3px solid var(--community);
+  border-radius: var(--radius-lg);
+}
+.layer-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+.layer-icon {
+  flex: none;
+}
+.layer-title {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.layer-title:focus {
+  outline: none;
+}
+.layer-title:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+.layer-ai .layer-icon,
+.layer-ai .layer-title {
+  color: var(--ai);
+}
+.layer-community .layer-icon,
+.layer-community .layer-title {
+  color: var(--community);
+}
+.layer-note {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--ai);
+}
+.layer .layer-body {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.layer .layer-muted {
+  color: var(--muted);
+}
+.layer .layer-meta {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.layer-section {
+  margin-top: var(--space-5);
+}
+.layer .layer-subtitle {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.layer .layer-list {
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-5);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.layer .layer-list li {
+  margin: 0 0 var(--space-2);
+}
+.layer .layer-link {
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  margin-left: calc(-1 * var(--space-2));
+  border: 0;
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  text-align: left;
+}
+.layer .layer-details {
+  margin-top: var(--space-4);
+}
+.layer .layer-details summary {
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+/* The comparison of translations: the WEB is Scripture and wears the Scripture face; the other
+   public-domain renderings and the explanation do not. */
+.ai-compare {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+.ai-compare dl {
+  margin: 0;
+}
+.ai-compare dt {
+  margin-top: var(--space-3);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+.ai-compare dd {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.ai-compare dd.ai-web {
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.7;
+}
+/* A sheet over a sheet in Lamplight (a report or a confirmation opened from the community page) draws on
+   --surface-2, so it stands apart from the sheet under it (UI-SPEC 7.3). */
+:root[data-mode="lamplight"] dialog.reader-sheet dialog.sheet-dialog {
+  background: var(--surface-2);
+}
+/* The community page: the feed's own cards sit flat inside the layer. */
+.layer-community .card {
+  background: none;
+  border: 0;
+  padding: var(--space-3) 0 0;
+  box-shadow: none;
+}
+
+/* -- The "Around {chapter}" capsule (UI-SPEC A3, 6.3): 44px, --bar, a pill, floating 12px above the tab bar and
+   above the Lamplight notice's space while that shows (--notice-h). Listen's mini player replaces it. In large text
+   it becomes a full-width button above the tab bar. -- */
+.around-capsule {
+  position: fixed;
+  z-index: var(--z-bar);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px + var(--notice-h));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  max-width: calc(100vw - 40px);
+  padding: 0 var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+  box-shadow: var(--elev-float);
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  white-space: nowrap;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .around-capsule {
+    background: var(--bar-solid);
+  }
+}
+html[data-text="large"] .around-capsule {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px + var(--notice-h));
+  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
+  max-width: none;
+  transform: none;
+  border-radius: var(--radius-md);
+  white-space: normal;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  /* The tab bar is a sidebar from here: the capsule sits at the bottom of the content column. */
+  .around-capsule {
+    left: calc(280px + (100% - 280px) / 2);
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+  }
+  html[data-text="large"] .around-capsule {
+    left: calc(280px + max(32px, env(safe-area-inset-left)));
+    right: max(32px, env(safe-area-inset-right));
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+  }
+}
+/* The page makes room for it, and a focused element is never left under it (2.4.11). */
+.reader {
+  padding-bottom: calc(var(--space-9) + var(--space-2));
+}
+:root:has(.around-capsule) {
+  scroll-padding-bottom: calc(64px + 12px + 44px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
+}
+
+/* ==== Plan 11: the remaining screens on the shared primitives (UI-SPEC D-10, 6.2, A12; Journal, My Walk, Grow, Give, Circles, Resources, chat) ====
+   Pushed screens of You use .grouped-screen with a Toolbar and a Large Title. These few classes cover what the
+   grouped list does not: a muted information line under the title (it replaced the uppercase eyebrow), a
+   full-width screen action, two-line row details, a pair of fields, and stacked actions. */
+.screen-meta {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+.grouped-screen .screen-action {
+  display: flex;
+  width: 100%;
+  margin: 0 0 var(--space-6);
+}
+.row-line {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.field-pair {
+  display: grid;
+  gap: var(--space-3);
+}
+.field-pair > * {
+  margin: 0;
+}
+.grouped-screen .actions {
+  flex-direction: column;
+  align-items: stretch;
+  margin: var(--space-4) 0 0;
+}
+.grouped-screen .actions > button,
+.grouped-screen .actions > a {
+  width: 100%;
+  margin: 0;
+}
+.grouped-screen .day-picker {
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: var(--space-4) 0;
+}
+.grouped-screen .day-picker button {
+  flex: 1 1 5.5rem;
+}
+.group-disclosure > :not(summary) {
+  overflow-wrap: anywhere;
+}
+.group-disclosure article + article {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+.group-disclosure article h3 {
+  margin: var(--space-3) 0 var(--space-1);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.group-disclosure > button {
+  display: flex;
+  width: 100%;
+  margin-top: var(--space-3);
+}
+/* The older Daily Walk plans, inside the disclosure at the end of Grow: choices and the open day sit on the
+   disclosure's own surface instead of a card each. */
+.group-disclosure .plan-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+.group-disclosure .card {
+  margin: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  box-shadow: none;
+}
+.group-disclosure .card.plan-detail {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+}
+.group-disclosure .plan-choice.selected {
+  border-color: var(--focus);
+}
+.group > .screen-lede {
+  margin: 0 var(--space-5) var(--space-3);
+}
+/* The install offer sits after the page content as a plain surface: "Install app" is a secondary button and
+   "Later" a plain link, so Today keeps its one filled button (UI-SPEC A16, 9.3). */
+.install-offer {
+  margin: var(--space-6) 0 0;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.install-offer h2 {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.install-offer p {
+  margin: var(--space-2) 0 var(--space-4);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.install-offer button {
+  min-height: 48px;
+  margin: 0 var(--space-2) 0 0;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+}
+.install-offer .secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.install-offer small {
+  display: block;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.crash-screen {
+  padding-top: var(--space-8);
+}
+/* A post's kind in the original prayer wall: a 13px sentence-case label, not an uppercase eyebrow. */
+.post-kind {
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
 }

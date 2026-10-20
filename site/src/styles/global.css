@@ -1,28 +1,42 @@
-/* Base styles for hisfullglory.com. Colours come from tokens.generated.css, which is the
-   app's own token set (src/styles.css). Type and spacing are sized for reading pages. */
+/* Base styles for hisfullglory.com. Colours, faces and type sizes come from tokens.generated.css,
+   which is the app's own token set (src/styles.css, UI-SPEC section 3.1). Root size: 17px on
+   phones (and the system text size on Apple WebKit), 18px from 1024px. Sizes are in rem so they
+   follow the reader's text setting; spacing stays in px. */
 * {
   box-sizing: border-box;
 }
 html {
-  font-family:
-    Manrope,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  font-synthesis: none;
-  font-weight: 400;
-  line-height: 1.65;
+  font-size: 106.25%;
   color: var(--ink);
   background: var(--bg);
   -webkit-text-size-adjust: 100%;
+}
+@supports (font: -apple-system-body) {
+  html {
+    font: -apple-system-body;
+  }
+}
+@media (min-width: 1024px) {
+  html {
+    font-size: 112.5%;
+  }
 }
 body {
   margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: var(--font-ui);
+  font-synthesis: none;
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+}
+/* Buttons do not inherit the page's font by default; two share buttons fell back to Arial. */
+button {
+  font: inherit;
 }
 main {
   flex: 1;
@@ -36,40 +50,51 @@ h3,
 p {
   margin: 0;
 }
+/* A long word (a book name at 200% text) breaks instead of running past the screen. */
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+}
 h1 {
-  font-weight: 400;
-  font-size: clamp(2.15rem, 6vw, 3.4rem);
-  line-height: 1.12;
-  letter-spacing: -0.035em;
+  font-weight: 600;
+  font-size: var(--text-large-title);
+  line-height: 1.2;
 }
 h2 {
   font-weight: 600;
-  font-size: 1.35rem;
-  line-height: 1.3;
+  font-size: var(--text-title);
+  line-height: 1.25;
 }
 h3 {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: var(--text-body);
   line-height: 1.5;
 }
 p {
   margin: 10px 0;
 }
 a {
-  color: var(--strong);
+  color: var(--link);
   text-underline-offset: 3px;
   -webkit-tap-highlight-color: transparent;
 }
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--strong);
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 
+/* One page grid: 20px margins on phones, 32px from 768px, at most 72rem wide (UI-SPEC 7.6). */
 .wrap {
-  width: min(100% - 40px, 68rem);
+  width: min(100% - 40px, 72rem);
   margin-inline: auto;
+}
+@media (min-width: 768px) {
+  .wrap {
+    width: min(100% - 64px, 72rem);
+  }
 }
 .section {
   padding-block: clamp(40px, 8vw, 88px);
@@ -77,16 +102,15 @@ summary:focus-visible {
 .prose {
   max-width: 42rem;
 }
+/* Sentence case, no tracking: the uppercase labels are removed page by page (plans 12 and 13). */
 .eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-size: var(--text-footnote);
   color: var(--muted);
   font-weight: 600;
   margin: 0 0 12px;
 }
 .lede {
-  font-size: 1.15rem;
+  font-size: var(--text-title);
   color: var(--muted);
   max-width: 36rem;
 }
@@ -94,17 +118,17 @@ summary:focus-visible {
   color: var(--muted);
 }
 .small {
-  font-size: 0.86rem;
+  font-size: var(--text-footnote);
 }
 
 .button {
   min-height: 44px;
   border: 1px solid transparent;
-  background: var(--strong);
-  color: var(--on-strong);
+  background: var(--button);
+  color: var(--on-button);
   padding: 10px 18px;
-  border-radius: 12px;
-  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
   font-weight: 600;
   line-height: 1.45;
   display: inline-flex;
@@ -116,10 +140,11 @@ summary:focus-visible {
 .button:hover {
   filter: brightness(0.96);
 }
+/* The quiet button: a page has one filled "Open the app" at most (UI-SPEC 5.2, 8.3). */
 .button.secondary {
-  background: var(--bg);
+  background: var(--surface);
   color: var(--ink);
-  border-color: var(--border);
+  border-color: var(--muted);
 }
 .actions {
   display: flex;
@@ -129,32 +154,33 @@ summary:focus-visible {
 }
 
 .card {
-  background: var(--paper);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 22px;
-  box-shadow: 0 2px 4px var(--shadow-soft);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
 }
 .grid {
   display: grid;
   gap: 18px;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
 }
 
+/* Off-screen until focused, at any text size (it moves by its own height). */
 .skip-link {
   position: absolute;
   left: 12px;
-  top: -80px;
-  z-index: 10;
-  background: var(--paper);
+  top: 12px;
+  z-index: var(--z-skip);
+  background: var(--surface);
   color: var(--ink);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
   padding: 10px 16px;
   font-weight: 600;
+  transform: translateY(calc(-100% - 24px));
 }
 .skip-link:focus {
-  top: 12px;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

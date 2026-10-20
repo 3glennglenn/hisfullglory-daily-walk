@@ -1,277 +1,385 @@
 ---
-// Home, following docs/WEBSITE_PLAN.md, section 4.1.
+// Home (UI-SPEC W1; founder decisions D-05, D-06, D-13): four parts. The newest published context
+// check on the cover, AI-written ones included and always labelled; then what HisFullGlory is,
+// said once, with the page's one filled "Open the app"; then the four layers that are never
+// mixed; then the eight topics to start with. The old "How it works", "Inside the app", the
+// Resources strip, the extra "Open the app" sections and "Join the beta" are gone (audit High).
+// The page title and description stay as they were: they carry search.
 import { launchTopics } from "../../../src/topics/graph.ts";
-import { appUrl, mainNav } from "../config";
-import { appFeatures } from "../data/app";
+import { appUrl } from "../config";
+import AiBadge from "../components/AiBadge.astro";
+import Bookcase from "../components/Bookcase.astro";
+import Cover from "../components/Cover.astro";
+import SponsorBlock from "../components/SponsorBlock.astro";
 import Base from "../layouts/Base.astro";
-import { featuredChecks, publishedTopics, refLabel } from "../lib/content";
+import { featuredChecks, publishedTopics } from "../lib/content";
 
-const ready =(href: string) => mainNav.some((item) => item.href === href && item.ready);
-
-const steps = [
-  { title: "Read", text: "Open any chapter of the Bible in the World English Bible." },
+// The four layers, each with the sentence the founder approved for it (it was in "What you can
+// count on"). Their treatments are those of UI-SPEC 5.3; none is ever drawn inside another.
+const layers = [
   {
-    title: "Understand",
-    text: "See context that names its sources, so you know where it comes from.",
+    id: "scripture",
+    name: "Scripture",
+    text: "Scripture comes first. The text is the World English Bible, a public-domain translation.",
   },
   {
-    title: "Discuss",
-    text: "Bring a question to a topic or a Circle in the app and hear from others.",
+    id: "sourced",
+    name: "Context",
+    text: "Context notes name their sources and carry a label that says how far they have been reviewed.",
   },
   {
-    title: "Grow",
-    text: "Return each day to Scripture, reflection and prayer, and trust God with the growth.",
+    id: "ai",
+    name: "AI explanation",
+    text: "Where we show an AI explanation, it is labelled as AI and kept apart from Scripture and from sourced notes.",
   },
-];
-
-const promises = [
-  "Scripture comes first. The text is the World English Bible, a public-domain translation.",
-  "Context notes name their sources and carry a label that says how far they have been reviewed.",
-  "Where we show an AI explanation, it is labelled as AI and kept apart from Scripture and from sourced notes.",
-  "Community voices are labelled as community. Popularity does not make something true.",
+  {
+    id: "voices",
+    name: "Community",
+    text: "Community voices are labelled as community. Popularity does not make something true.",
+  },
+] as const;
+const kept = [
   "Your journal and private prayers stay on your own device.",
   "The community has rules, reporting and moderation.",
 ];
 
-// A card opens the topic page on this site once that page is approved, and the topic in
-// the app until then.
-// Three context checks on the home page; the section is left out until one is approved.
-// Checks that no person has checked stay off the front door (featuredChecks).
+// The newest published check leads, AI-written ones included (D-06). The site is rebuilt when the
+// daily routine publishes one. With none published the page keeps its old opening, no cover.
 const checks = featuredChecks();
+const newest = checks[0];
+
+// A card opens the topic page on this site once that page is approved, and the topic in the app
+// until then.
 const onSite = new Set(publishedTopics().map((topic) => topic.id));
-const topicHref = (id: string) =>
-  onSite.has(id) ? `/topics/${id}` : `${appUrl}/community/${id}`;
+const topicHref = (id: string) => (onSite.has(id) ? `/topics/${id}` : `${appUrl}/community/${id}`);
 ---
 
 <Base>
-  <section class="section">
-    <div class="wrap">
-      <h1>Study the Bible together.</h1>
-      <p class="lede">
-        Read Scripture, understand its context, and talk it through with others.
-      </p>
-      <div class="actions">
-        <a class="button" href={appUrl}>Open the app</a>
-        {
-          ready("/bible") && (
-            <a class="button secondary" href="/bible">
-              Explore the Bible
-            </a>
-          )
-        }
-      </div>
-      <p class="muted small note">
-        The HisFullGlory app is a beta web app. It opens in your browser.
-      </p>
-    </div>
-  </section>
-
   {
-    checks.length > 0 && (
-      <section class="section follow">
-        <div class="wrap">
-          <h2>You know the verse. Do you know where it stands?</h2>
-          <p class="muted">
-            Context checks put well-known verses back into their surroundings.
-          </p>
-          <ul class="grid plain checks">
-            {checks.map((item) => (
-              <li class="card">
-                <h3>
-                  <a href={`/context-checks/${item.slug}`}>{refLabel(item.verse)}</a>
-                </h3>
-                <p>{item.hook}</p>
-              </li>
-            ))}
-          </ul>
-          <div class="actions">
-            <a class="button secondary" href="/context-checks">
-              All context checks
-            </a>
+    newest ? (
+      <section class="hero">
+        <div class="wrap hero-row">
+          <div class="hero-cover">
+            <Cover item={newest} />
           </div>
+          <div class="hero-case">
+            <Bookcase checks={checks} />
+          </div>
+          <a class="row-link" href="/context-checks">
+            <span>All context checks</span>
+            <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+              <path d="m7.5 4 6 6-6 6"></path>
+            </svg>
+          </a>
+        </div>
+      </section>
+    ) : (
+      <section class="hero plain-hero">
+        <div class="wrap">
+          <h1>Study the Bible together.</h1>
+          <p class="lede">Read Scripture, understand its context, and talk it through with others.</p>
         </div>
       </section>
     )
   }
 
-  <section class="section band">
+  <section class="block intro">
     <div class="wrap">
-      <h2>How it works</h2>
-      <ol class="grid steps">
-        {
-          steps.map((step, i) => (
-            <li class="card">
-              <p class="eyebrow">Step {i + 1}</p>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <h2>Inside the app <span class="pill">Beta</span></h2>
-      <ul class="grid plain">
-        {
-          appFeatures.map((feature) => (
-            <li class="card">
-              <h3>{feature.title}</h3>
-              <p>{feature.text}</p>
-            </li>
-          ))
-        }
-      </ul>
-      <div class="actions">
-        <a class="button" href={appUrl}>Open the app</a>
-        <a class="button secondary" href="/beta">About the beta</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section band">
-    <div class="wrap">
-      <h2>What you can count on</h2>
-      <ul class="promises">
-        {promises.map((promise) => <li>{promise}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <h2>Start here</h2>
-      <p class="muted">Eight topics to begin with.</p>
-      <ul class="topics plain">
-        {
-          launchTopics.map((topic) => (
-            <li>
-              <a href={topicHref(topic.id)}>{topic.label}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="section band">
-    <div class="wrap strip">
-      <div>
-        <h2>Resources</h2>
-        <p class="muted">A small selection of study Bibles, chosen with care.</p>
-      </div>
-      <a class="button secondary" href="/resources">See the resources</a>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <h2>Join the beta</h2>
-      <p class="lede">
-        The app is open to try. You can begin as a guest, and your private
-        writing stays on your device.
+     <div class="column">
+      <p class="positioning">
+        HisFullGlory is a free Bible app: a new context check each day, Scripture first, context that names its sources, and AI and community always labelled.
       </p>
       <div class="actions">
         <a class="button" href={appUrl}>Open the app</a>
-        <a class="button secondary" href="/beta">How the beta works</a>
       </div>
+      <p class="footnote">The HisFullGlory app is a beta web app. It opens in your browser.</p>
+      <p class="footnote"><a class="plain-link" href="/beta">About the beta</a></p>
+     </div>
     </div>
   </section>
+
+  <section class="block layers-block" aria-labelledby="layers-title">
+    <div class="wrap">
+     <div class="column">
+      <h2 id="layers-title">Four layers, never mixed</h2>
+      <ul class="layers">
+        {
+          layers.map((layer) => (
+            <li class="layer" data-layer={layer.id}>
+              <h3 class="layer-name">
+                {layer.id === "sourced" && (
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"></path>
+                  </svg>
+                )}
+                {layer.id === "ai" && (
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path>
+                  </svg>
+                )}
+                {layer.id === "voices" && (
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                )}
+                <span>{layer.name}</span>
+                {layer.id === "ai" && <AiBadge />}
+                {layer.id === "voices" && <span class="pill">Voices, not sources</span>}
+              </h3>
+              <p>{layer.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="kept">
+        {kept.map((line) => <li>{line}</li>)}
+      </ul>
+     </div>
+    </div>
+  </section>
+
+  <section class="block start" aria-labelledby="start-title">
+    <div class="wrap">
+      <h2 id="start-title">Start here</h2>
+      <p class="muted">Eight topics to begin with.</p>
+      <ul class="topics">
+        {
+          launchTopics.map((topic) => (
+            <li>
+              <a href={topicHref(topic.id)}>
+                <span>{topic.label}</span>
+                <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+                  <path d="m7.5 4 6 6-6 6"></path>
+                </svg>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <SponsorBlock place="site-home-end" />
 </Base>
 
 <style>
-  h1 {
+  .hero {
+    padding-block: var(--space-7) 0;
+  }
+  /* On a phone the cover and its row fill the first screen, so the body's "Open the app" comes
+     after it and is never in view together with another one (audit High). */
+  @media (max-width: 767px) {
+    .hero {
+      min-height: calc(100svh - 4rem);
+    }
+  }
+  .hero-row {
+    display: grid;
+    gap: 0;
+  }
+  .hero-case {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .hero {
+      padding-top: var(--space-8);
+    }
+    .hero-row {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--space-7);
+    }
+    .hero-cover {
+      grid-column: 1 / span 7;
+      grid-row: 1;
+    }
+    .hero-case {
+      display: block;
+      grid-column: 8 / span 5;
+      grid-row: 1;
+      align-self: end;
+    }
+    .row-link {
+      grid-column: 1 / span 7;
+      grid-row: 2;
+    }
+  }
+  .row-link {
+    margin-top: var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 52px;
+    padding: var(--space-3) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    color: var(--link);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .row-link:hover {
+    border-color: var(--focus);
+  }
+  .row-link svg,
+  .topics svg {
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .plain-hero h1 {
     max-width: 14ch;
   }
-  h1 + .lede {
-    margin-top: 16px;
+  .plain-hero .lede {
+    margin-top: var(--space-4);
+    font-size: var(--text-title);
   }
-  .note {
-    margin-top: 18px;
+
+  .block {
+    padding-block: var(--space-8) 0;
   }
-  h2 {
-    margin-bottom: 18px;
+  @media (min-width: 1024px) {
+    .block {
+      padding-top: var(--space-9);
+    }
   }
-  h2 + .muted,
-  h2 + .lede {
-    margin-top: -8px;
+  /* Reading columns are 34em of their own font size (UI-SPEC 6.2). */
+  .column {
+    max-width: 34em;
   }
-  /* A section that continues the one above it, without a second top gap. */
-  .follow {
-    padding-top: 0;
+  .positioning {
+    margin: 0;
+    line-height: 1.6;
   }
-  .checks {
-    margin-top: 16px;
+  .intro .actions {
+    margin-top: var(--space-6);
   }
-  .checks p {
-    margin-bottom: 0;
+  .footnote {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
   }
-  .band {
-    background: var(--paper);
-    border-block: 1px solid var(--border);
+  .plain-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
-  .plain,
-  .steps {
+
+  .layers-block h2,
+  .start h2 {
+    margin-bottom: var(--space-4);
+  }
+  .layers,
+  .kept,
+  .topics {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .band .card {
-    background: var(--bg);
+  .layers {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .layer {
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+  }
+  .layer-name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    font-size: var(--text-body);
+    font-weight: 600;
+  }
+  .layer p {
+    margin: var(--space-2) 0 0;
+  }
+  .icon {
+    flex: none;
+    width: 1.15em;
+    height: 1.15em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  /* Scripture: plain text on the page, never in a card or a frame. */
+  .layer[data-layer="scripture"] {
+    padding-inline: 0;
+    background: none;
+  }
+  /* Sourced context: a block with a thin solid edge. */
+  .layer[data-layer="sourced"] {
+    border: 1px solid var(--line);
+  }
+  /* AI explanation: a dashed frame and its own colour for the label. */
+  .layer[data-layer="ai"] {
+    border: 1.5px dashed var(--ai);
+    border-radius: var(--radius-md);
+  }
+  .layer[data-layer="ai"] .layer-name {
+    color: var(--ai);
+  }
+  /* Community: no frame, a 3px rule on the left. */
+  .layer[data-layer="voices"] {
+    border-left: 3px solid var(--community);
+  }
+  .layer[data-layer="voices"] .layer-name {
+    color: var(--community);
   }
   .pill {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 8px;
-    padding: 2px 10px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--muted);
+    padding: 0 var(--space-2);
+    border: 1px solid currentColor;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-footnote);
+    line-height: 1.38;
   }
-  .promises {
-    margin: 0;
-    padding-left: 1.2rem;
-    max-width: 42rem;
+  .kept {
+    margin-top: var(--space-5);
+    padding-left: 1.2em;
+    list-style: disc;
   }
-  .promises li + li {
-    margin-top: 10px;
+  .kept li + li {
+    margin-top: var(--space-2);
+  }
+
+  .start .muted {
+    margin: 0 0 var(--space-4);
   }
   .topics {
     display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-    margin-top: 16px;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
   }
   .topics a {
     display: flex;
     align-items: center;
-    min-height: 56px;
-    padding: 8px 16px;
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 52px;
+    padding: var(--space-3) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
     color: var(--ink);
     font-weight: 600;
     text-decoration: none;
   }
   .topics a:hover {
-    border-color: var(--strong);
+    border-color: var(--focus);
   }
-  .strip {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .strip h2 {
-    margin-bottom: 4px;
-  }
-  .strip .muted {
-    margin: 0;
+  .start {
+    padding-bottom: var(--space-4);
   }
 </style>

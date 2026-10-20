@@ -3,21 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#F6F0E7" />
+    <meta name="theme-color" content="#F3F1EE" />
     <meta name="description" content="Build a daily rhythm with God through Scripture, private reflection, five-day plans, and a kind community." />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>HisFullGlory Daily Walk</title>
     <script>
       (() => {
-        let theme = "system";
+        // Migration read (UI-SPEC 3.2). Reads the old keys only; the app writes hfg-lamplight
+        // and removes the old keys once it has started.
+        const legacy = () => {
+          let old = localStorage.getItem("hfg-appearance") || localStorage.getItem("hfg-theme");
+          if (!old) old = JSON.parse(localStorage.getItem("hfg-daily-walk:v3") || "null")?.theme;
+          return old === "dark" ? "on" : old === "light" ? "off" : "auto";
+        };
+        let look = "cover", lamp = "auto";
         try {
-          theme = localStorage.getItem("hfg-appearance") ||
-            JSON.parse(localStorage.getItem("hfg-daily-walk:v3") || localStorage.getItem("hfg-daily-walk:v2") || "null")?.theme || "system";
-        } catch { /* Storage failure must never block the app shell. */ }
-        const dark = theme === "dark" || (theme !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
-        document.documentElement.dataset.theme = dark ? "dark" : "light";
-        document.querySelector('meta[name="theme-color"]').content = dark ? "#181714" : "#F6F0E7";
+          look = localStorage.getItem("hfg-look") === "marked" ? "marked" : "cover";
+          lamp = localStorage.getItem("hfg-lamplight") || legacy();
+        } catch { /* storage blocked or unreadable JSON: defaults */ }
+        const dark = lamp === "on" || (lamp !== "off" && matchMedia("(prefers-color-scheme: dark)").matches);
+        const root = document.documentElement;
+        root.dataset.look = look;
+        root.dataset.mode = dark ? "lamplight" : "light";
+        const color = { cover: ["#F3F1EE", "#1A120E"], marked: ["#FFFDF9", "#1A120E"] }[look][dark ? 1 : 0];
+        document.querySelector('meta[name="theme-color"]')?.setAttribute("content", color);
       })();
     </script>
   </head>

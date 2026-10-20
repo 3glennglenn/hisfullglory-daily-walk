@@ -1,30 +1,39 @@
-// "Listen": the device reads the chapter aloud with its own voice, verse by verse, so the
-// reader can follow along. The WEB is in the public domain, so reading it aloud needs no
-// licence. Nothing leaves the device; where the browser has no speech, the button is absent.
+// "Listen": the device reads the chapter aloud with its own voice, verse by verse, so the reader can follow
+// along. The WEB is in the public domain, so reading it aloud needs no licence. Nothing leaves the device;
+// where the browser has no speech, there is no control at all.
+//
+// UI-SPEC A3: the control that starts it is the reader toolbar's Listen button (or the entry in More at
+// narrower widths); while it plays, a mini player bar floats above the tab bar with Pause or Resume, the verse
+// being read and Stop, and that verse keeps --highlight-gold in the text. useListen owns the speech state; the
+// toolbar, the More sheet and the bar are views of it.
 import { useEffect, useRef, useState } from "react";
+import { Pause, Play, Square } from "lucide-react";
 import type { Chapter } from "./provider";
 import { speechParts } from "./speech";
 
-const canSpeak = () => typeof window !== "undefined" && "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+export const canSpeak = () => typeof window !== "undefined" && "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
 
 function englishVoice(): SpeechSynthesisVoice | undefined {
   const voices = window.speechSynthesis.getVoices();
   return voices.find((v) => v.lang === "en-US" && v.localService) ?? voices.find((v) => v.lang.startsWith("en"));
 }
 
-export function Listen({ reference, chapter, onVerse }: { reference: string; chapter: Chapter; onVerse: (verse?: number) => void }) {
-  const [state, setState] = useState<"idle" | "playing" | "paused">("idle");
+export type ListenState = "idle" | "playing" | "paused";
+
+export function useListen(reference: string, chapter: Chapter | undefined, onVerse: (verse?: number) => void) {
+  const [state, setState] = useState<ListenState>("idle");
   const run = useRef(0);
   // Stop when the chapter changes or the reader leaves it.
   useEffect(() => {
+    setState("idle");
     return () => {
       run.current++;
       if (canSpeak()) window.speechSynthesis.cancel();
       onVerse(undefined);
     };
   }, [reference]);
-  if (!canSpeak()) return null;
   function start() {
+    if (!canSpeak() || !chapter) return;
     const synth = window.speechSynthesis;
     synth.cancel();
     const id = ++run.current;
@@ -49,23 +58,67 @@ export function Listen({ reference, chapter, onVerse }: { reference: string; cha
     });
     setState("playing");
   }
+  function pause() {
+    window.speechSynthesis.pause();
+    setState("paused");
+  }
+  function resume() {
+    window.speechSynthesis.resume();
+    setState("playing");
+  }
   function stop() {
     run.current++;
     window.speechSynthesis.cancel();
     setState("idle");
     onVerse(undefined);
   }
+  return { supported: canSpeak(), state, start, pause, resume, stop };
+}
+
+export type Listening = ReturnType<typeof useListen>;
+
+/**
+ * The mini player: Pause or Resume, the verse being read, and Stop. Absent while nothing plays. Pause takes focus
+ * when the bar appears, because the Listen button that started it has just gone.
+ */
+export function ListenBar({
+  reference,
+  listening,
+  verse,
+  onStopped,
+}: {
+  reference: string;
+  listening: Listening;
+  verse?: number;
+  /** Called after Stop, so the screen can put focus back on the control that started it. */
+  onStopped: () => void;
+}) {
+  if (listening.state === "idle") return null;
+  const playing = listening.state === "playing";
   return (
-    <div className="listen" role="group" aria-label="Listen to this chapter">
-      {state === "idle" && <button className="secondary" onClick={start}>Listen</button>}
-      {state === "playing" && (
-        <button className="secondary" onClick={() => { window.speechSynthesis.pause(); setState("paused"); }}>Pause</button>
-      )}
-      {state === "paused" && (
-        <button className="secondary" onClick={() => { window.speechSynthesis.resume(); setState("playing"); }}>Resume</button>
-      )}
-      {state !== "idle" && <button className="text-button" onClick={stop}>Stop</button>}
-      <small>Read aloud by your device’s own voice.</small>
+    <div className="mini-player" role="group" aria-label={`Listening to ${reference}`}>
+      <button
+        type="button"
+        className="mini-button"
+        autoFocus
+        onClick={playing ? listening.pause : listening.resume}
+      >
+        {playing ? <Pause size={20} aria-hidden="true" focusable="false" /> : <Play size={20} aria-hidden="true" focusable="false" />}
+        <span>{playing ? "Pause" : "Resume"}</span>
+      </button>
+      <span className="mini-verse">{verse ? `Verse ${verse}` : reference}</span>
+      <button
+        type="button"
+        className="mini-button"
+        onClick={() => {
+          listening.stop();
+          onStopped();
+        }}
+      >
+        <Square size={18} aria-hidden="true" focusable="false" />
+        <span>Stop</span>
+      </button>
+      <span className="sr-only">Read aloud by your device’s own voice.</span>
     </div>
   );
 }

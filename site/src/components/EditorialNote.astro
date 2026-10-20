@@ -1,5 +1,6 @@
 ---
-// Says plainly how an editorial page was made and how far it has been checked.
+// Says plainly how an editorial page was made and how far it has been checked. Footnote 13,
+// muted, last on the page (UI-SPEC W3).
 import { editorialNote, type Review } from "../lib/content";
 
 interface Props {
@@ -11,13 +12,16 @@ const { review, drafted } = Astro.props;
 const note = editorialNote(review, drafted);
 ---
 
-<p class="small muted editorial" data-layer="editorial">{note}</p>
+<p class="editorial" data-layer="editorial">{note}</p>
 
 <style>
   .editorial {
-    margin-top: 32px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-    max-width: 42rem;
+    margin-top: var(--space-7);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+    max-width: 34em;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
   }
 </style>

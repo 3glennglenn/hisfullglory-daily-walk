@@ -1,0 +1,179 @@
+---
+// The bookcase (UI-SPEC 2, W1, W5; founder decisions D-06, D-07): the newest published context
+// checks standing as spines on a shelf board, each a link to its page. Cover and story: leather
+// spines with two gilt bands. Marked page: paper slips with a ribbon tab. A spine whose check no
+// person has checked carries the "AI" badge at its foot, and its link says so in words; a legend
+// line under the shelf repeats the words once for everyone who sees the badge.
+// Shown from 1024px only; on a phone the "All context checks" row stands in for it.
+import AiBadge from "./AiBadge.astro";
+import { aiUnreviewedCardLabel, refLabel, type ContextCheck } from "../lib/content";
+import { spineHeight } from "../lib/editorial";
+import { spineLabel } from "../lib/spines";
+
+interface Props {
+  /** Newest first, as featuredChecks() returns them. */
+  checks: ContextCheck[];
+  /** How many spines stand on the shelf. */
+  count?: number;
+}
+
+const { checks, count = 6 } = Astro.props;
+const spines = checks.slice(0, count);
+const anyUnchecked = spines.some((item) => item.review === "ai-unreviewed");
+---
+
+{
+  spines.length > 0 && (
+    <div class="bookcase">
+      <nav aria-label="The newest context checks">
+        <ul class="shelf">
+          {
+            spines.map((item, index) => {
+              const unchecked = item.review === "ai-unreviewed";
+              const name = refLabel(item.verse);
+              return (
+                <li>
+                  <a
+                    class:list={["spine", `tone-${(index % 3) + 1}`, { unchecked }]}
+                    href={`/context-checks/${item.slug}`}
+                    style={`height: ${spineHeight(item.slug)}px`}
+                    aria-label={unchecked ? `${name}, written by an AI model, not checked by a person` : name}
+                  >
+                    <span class="spine-ref" aria-hidden="true">{spineLabel(item.verse)}</span>
+                    {
+                      unchecked && (
+                        <span class="spine-ai">
+                          <AiBadge />
+                        </span>
+                      )
+                    }
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
+      {
+        anyUnchecked && (
+          <p class="legend">
+            <AiBadge />
+            <span>{aiUnreviewedCardLabel}</span>
+          </p>
+        )
+      }
+    </div>
+  )
+}
+
+<style>
+  .bookcase {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .bookcase {
+      display: block;
+    }
+  }
+  .shelf {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0 var(--space-2);
+    list-style: none;
+    /* The shelf board, 4px. */
+    border-bottom: 4px solid var(--line);
+    border-radius: 0 0 2px 2px;
+  }
+  li {
+    display: block;
+  }
+  .spine {
+    --band-bottom: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 44px;
+    padding-block: 16px 14px;
+    color: var(--spine-ink);
+    text-decoration: none;
+    border-radius: 3px 3px 0 0;
+    background-color: var(--spine-1);
+    /* Cover and story: two 1px gilt bands, 10px from the top and the foot. */
+    background-image:
+      linear-gradient(var(--spine-ink), var(--spine-ink)),
+      linear-gradient(var(--spine-ink), var(--spine-ink));
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    background-position: 0 10px, 0 calc(100% - var(--band-bottom));
+  }
+  .spine.unchecked {
+    --band-bottom: 32px;
+    padding-bottom: 36px;
+  }
+  .tone-2 {
+    background-color: var(--spine-2);
+  }
+  .tone-3 {
+    background-color: var(--spine-3);
+  }
+  .spine:hover {
+    filter: brightness(1.12);
+  }
+  .spine:focus-visible {
+    outline-offset: 2px;
+  }
+  .spine-ref {
+    max-height: 100%;
+    overflow: hidden;
+    font-family: var(--font-scripture);
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  .spine-ai {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .legend {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--ai);
+  }
+
+  /* Marked page: paper slips with a ribbon tab instead of leather and gilt. */
+  :global(:root[data-look="marked"]) .spine {
+    background-image: none;
+    border: 1px solid var(--line);
+    border-bottom: 0;
+    border-radius: 2px 2px 0 0;
+    padding-top: 20px;
+    padding-bottom: 14px;
+  }
+  :global(:root[data-look="marked"]) .spine::before {
+    content: "";
+    position: absolute;
+    inset: -1px -1px auto -1px;
+    height: 4px;
+    background: var(--brand);
+  }
+  :global(:root[data-look="marked"]) .spine.unchecked {
+    padding-bottom: 36px;
+  }
+  :global(:root[data-look="marked"]) .spine-ref {
+    font-family: var(--font-scripture);
+  }
+</style>

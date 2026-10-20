@@ -1,4 +1,5 @@
 import { publishedArticles, publishedChecks, publishedTopics } from "./lib/content.ts";
+import type { Sponsor } from "./lib/sponsor.ts";
 
 export const site = {
   name: "HisFullGlory",
@@ -6,6 +7,9 @@ export const site = {
   positioning: "Simple Bible study. Real community. Deeper faith.",
   description:
     "Study the Bible together: read Scripture, understand its context and discuss it with others.",
+  // The sponsor slot is built for later and empty at launch (founder, 2026-10-19, D-13): while
+  // this is null nothing renders at any place, not even a space. No house messages.
+  sponsor: null as Sponsor | null,
 };
 
 export const appUrl = "https://app.hisfullglory.com";

@@ -1,0 +1,216 @@
+import { useEffect, useRef } from "react";
+import { Check } from "lucide-react";
+import { navigate } from "../platform/router";
+import { usePlatform } from "../platform/store";
+import { contentFor } from "../data";
+import { completeDate, localDate, nextDate } from "../storage";
+import { track } from "../analytics";
+import { aiUnreviewedCardLabel, refLabel, todaysCheck } from "../context/checks";
+import { contextChecks } from "../context/data";
+import { AiBadge } from "../ui/Badges";
+import { GroupedList, Row } from "../ui/List";
+import { Toolbar } from "../ui/Screen";
+import { StepIndicator } from "../ui/StepIndicator";
+import { Journal } from "./LegacyWalk";
+import { dailyReminderOn } from "./Reminders";
+
+// Today's walk (UI-SPEC A5, A6, D-11): a full-screen flow of six steps that ends on the Prayer step, then a finish
+// screen that is a reason to come back and never a reproach. The tab bar is covered while it is open; "‹ Today" is the
+// way out and keeps the step. The stored step keeps its old meaning, walkStep[date]: 0 to 5 are the six steps and 6 is
+// the finish screen, so progress stored before this screen existed resumes where it was.
+export const dailyPassage = (reference: string) =>
+  `/bible/psalms/${reference.includes("121") ? 121 : 23}/${reference.split(":")[1]}`;
+
+const labels = ["Scripture", "Context", "Devotional", "Reflection", "Journal", "Prayer"] as const;
+
+export function Walk() {
+  const { state, update } = usePlatform();
+  const date = localDate();
+  const today = contentFor(date);
+  const done = state.local.completedDates.includes(date);
+  // A finished day shows the finish screen. An unfinished day whose stored step is 6 (the old Completion step, which
+  // no longer exists) lands on the Prayer step, where the filled button now finishes the walk.
+  const step = done ? 6 : Math.min(state.walkStep[date] ?? 0, 5);
+  const title = useRef<HTMLDivElement>(null);
+  // Focus follows the reader to the new step's title, but not when the walk first opens.
+  const moved = useRef(false);
+  useEffect(() => {
+    if (!moved.current) return;
+    const heading = title.current?.querySelector<HTMLElement>("h2");
+    if (!heading) return;
+    heading.tabIndex = -1;
+    heading.focus({ preventScroll: true });
+  }, [step]);
+
+  function localUpdate(fn: (s: typeof state.local) => typeof state.local) {
+    return update((s) => {
+      const local = fn(s.local);
+      const text = local.journals[date];
+      let entries = s.entries;
+      if (text !== undefined) {
+        const entry = {
+          id: `legacy:${date}`,
+          type: "free journal" as const,
+          title: "Daily reflection",
+          body: text,
+          date,
+          source: dailyPassage(today.reference),
+        };
+        entries = entries.some((e) => e.id === entry.id)
+          ? entries.map((e) => (e.id === entry.id ? entry : e))
+          : [entry, ...entries];
+      }
+      return { ...s, local, entries };
+    });
+  }
+
+  if (step === 6) return <WalkFinish date={date} />;
+
+  const goTo = (to: number) => {
+    moved.current = true;
+    update((s) => ({ ...s, walkStep: { ...s.walkStep, [date]: to } }));
+  };
+  // The Prayer step finishes the day exactly as the old Completion step did: the date is kept once (completeDate is
+  // idempotent), the private reflection stays where the Journal step saved it, and the stored step moves to the finish.
+  const finish = () => {
+    moved.current = true;
+    if (update((s) => ({ ...s, local: completeDate(s.local, date), walkStep: { ...s.walkStep, [date]: 6 } })))
+      track("daily_completed", { date });
+  };
+  const label = labels[step];
+  return (
+    <section className="flow walk-flow">
+      <Toolbar back="Today" to="/" title="Today's walk" />
+      <StepIndicator
+        name="Walk progress"
+        current={step + 1}
+        total={labels.length}
+        label={`Step ${step + 1} of ${labels.length}`}
+        valueText={`Step ${step + 1} of ${labels.length}, ${label}`}
+      />
+      <div className="flow-part" ref={title}>
+        <h2>{label}</h2>
+        {step === 0 ? (
+          <>
+            <blockquote className="walk-verse">{today.quote}</blockquote>
+            <p className="walk-note">{today.reference} · WEB</p>
+            <button type="button" className="walk-link" onClick={() => navigate(dailyPassage(today.reference))}>
+              Read the whole passage
+            </button>
+          </>
+        ) : step === 1 ? (
+          <>
+            <p className="walk-sub">Read the surrounding words</p>
+            <p>
+              {today.reference.includes("121")
+                ? "Psalm 121 repeats the assurance that the LORD keeps his people, from day and night to going out and coming in."
+                : "Psalm 23 pictures the LORD as a shepherd and a welcoming host. The valley and the presence of enemies remain part of the picture."}
+            </p>
+            <p className="walk-note">Editorial observation of the source passage.</p>
+            <button type="button" className="walk-link" onClick={() => navigate(dailyPassage(today.reference) + "?tab=context")}>
+              Explore passage context
+            </button>
+          </>
+        ) : step === 2 ? (
+          <>
+            <p className="walk-sub">Receive and respond</p>
+            <p className="walk-note">Original editorial devotional</p>
+            <p>{today.reflection}</p>
+          </>
+        ) : step === 3 ? (
+          <>
+            <p className="walk-sub">A question to carry</p>
+            <p>{today.question}</p>
+            <p>Take a quiet moment. There is no perfect answer.</p>
+          </>
+        ) : step === 4 ? (
+          <Journal key={date} date={date} initial={state.local.journals[date] ?? ""} question={today.question} update={localUpdate} />
+        ) : (
+          <>
+            <p className="walk-sub">An honest prayer</p>
+            <p>
+              Lord Jesus, thank you for your presence. Help me listen to your Word, bring my real needs to you, and take one faithful
+              step in love today. Amen.
+            </p>
+            <button type="button" className="walk-link" onClick={() => navigate("/pray")}>
+              Save a private prayer
+            </button>
+          </>
+        )}
+      </div>
+      <div className="flow-actions">
+        {step > 0 && (
+          <button type="button" className="flow-button flow-button-secondary" aria-label={`Back to ${labels[step - 1]}`} onClick={() => goTo(step - 1)}>
+            <span aria-hidden="true">‹</span> {labels[step - 1]}
+          </button>
+        )}
+        {step < labels.length - 1 ? (
+          <button type="button" className="flow-button" onClick={() => goTo(step + 1)}>
+            Continue to {labels[step + 1]}
+          </button>
+        ) : (
+          <button type="button" className="flow-button" onClick={finish}>
+            Finish today's walk
+          </button>
+        )}
+      </div>
+      <p className="walk-footnote">Progress stays on this device. Resume whenever you're ready.</p>
+    </section>
+  );
+}
+
+// The walk finish (A6): the days walked, counted from every completed date and never reset, with no run length and no
+// calendar of empty days; tomorrow's passage named; today's context check while it is unread; the reminder row reading
+// what the reader chose (reminders are never turned on from here); the rhythm questions once, after the first walk.
+function WalkFinish({ date }: { date: string }) {
+  const { state } = usePlatform();
+  const today = contentFor(date);
+  const tomorrow = contentFor(nextDate(date));
+  const days = state.local.completedDates.length;
+  const found = todaysCheck(contextChecks, state.shelf, date);
+  const unread = found?.state === "unread" ? found.check : null;
+  const reminderOn = state.notifications["Daily Walk"] === true || dailyReminderOn();
+  return (
+    <section className="flow walk-flow walk-finish">
+      <Toolbar back="Today" to="/" title="Today's walk" />
+      <h2 className="walk-complete">Walk complete</h2>
+      <blockquote className="walk-finish-verse">{today.quote}</blockquote>
+      <p className="walk-finish-ref">{today.reference}</p>
+      <GroupedList>
+        <Row
+          title={
+            <span className="row-with-icon">
+              <Check className="row-success" aria-hidden="true" focusable="false" size={18} strokeWidth={2.5} />
+              {days === 1 ? "1 day walked" : `${days} days walked`}
+            </span>
+          }
+          detail={<span className="row-detail-body">A day away is an invitation to begin again. There is no penalty.</span>}
+        />
+        <Row title={`Tomorrow: ${tomorrow.reference}`} detail="Ready in the morning" />
+        {unread && (
+          <Row
+            href={`/context/${unread.slug}`}
+            chevron
+            title="Today's context check"
+            detail={
+              <>
+                <span className="row-line">{refLabel(unread.verse)}</span>
+                {unread.review === "ai-unreviewed" && (
+                  <span className="row-line row-ai">
+                    <AiBadge />
+                    <span>{aiUnreviewedCardLabel}</span>
+                  </span>
+                )}
+              </>
+            }
+          />
+        )}
+        <Row href="/settings/reminders" chevron title="Daily reminder" value={reminderOn ? "On" : "Off"} />
+        {days === 1 && <Row href="/settings" chevron title="Choose your daily rhythm" />}
+      </GroupedList>
+      <button type="button" className="flow-button" onClick={() => navigate("/")}>
+        Back to Today
+      </button>
+    </section>
+  );
+}

@@ -1,7 +1,7 @@
 # HisFullGlory Daily Walk: working notes for Claude
 
 Read `AGENTS.md` first: its product, privacy, Scripture and migration rules still apply.
-This file adds the current state and how to work with the founder. Last updated 2026-10-16.
+This file adds the current state and how to work with the founder. Last updated 2026-10-20.
 
 ## Working with the founder
 
@@ -51,8 +51,10 @@ This file adds the current state and how to work with the founder. Last updated 
   by an AI model from the sources below. Not checked by a person." (review
   `ai-unreviewed`, no approved date); Bible quotations must match the WEB text and no other
   quotation marks are allowed; the verse comes from a committed queue, one check a day.
-  The home page and the app keep showing approved checks only. The routine does not exist
-  yet: it is created after the founder's merge and an environment with network access.
+  Today in the app and the site home show the newest published context check,
+  AI-unreviewed ones included, always with the label "Written by an AI model. Not checked by
+  a person." (founder, 2026-10-19). The routine does not exist yet: it is created after the
+  founder's merge and an environment with network access.
   Rules, limits and the routine prompt: `docs/CONTEXT_CHECKS_ROUTINE.md`.
 - Context checks are the first selling point the founder chose (2026-10-13): a well-known
   verse with the story around it, for the site and for daily short videos that open with

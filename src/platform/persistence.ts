@@ -5,6 +5,7 @@ import {
   type PlatformState,
   type JournalEntry,
   type PrivatePrayer,
+  type ShelfEntry,
 } from "./models.ts";
 export interface StorageLike {
   getItem(key: string): string | null;
@@ -35,6 +36,9 @@ export const freshPlatform = (): PlatformState => ({
   devotionalProgress: {},
   walkStep: {},
   notifications: {},
+  lamplight: "auto",
+  shelf: [],
+  lastChapter: null,
 });
 export function migrateV1(value: unknown): PlatformState {
   const state = freshPlatform();
@@ -61,6 +65,53 @@ const textArray = (v: unknown): string[] =>
   Array.isArray(v)
     ? [...new Set(v.filter((x): x is string => typeof x === "string"))]
     : [];
+// ---- The fields added in plan 01.1-04: lamplight, shelf and lastChapter (UI-SPEC 3.2 and 12) ----
+// The sanitizers are used twice, by normalizePlatform and by upgradeV3Fields, so that a stored state that lacks
+// the fields and the same state after normalization agree and no recovery is triggered.
+const lamplightFromTheme = (theme: unknown): PlatformState["lamplight"] =>
+  theme === "dark" ? "on" : theme === "light" ? "off" : "auto";
+function cleanLamplight(value: unknown, theme: unknown): PlatformState["lamplight"] {
+  return value === "auto" || value === "on" || value === "off" ? value : lamplightFromTheme(theme);
+}
+// Only a slug of lowercase letters, digits and hyphens with a real calendar date is kept; the first entry per
+// slug wins and the stored order is kept. Anything else is dropped (T-01.1-10).
+function cleanShelf(value: unknown): ShelfEntry[] {
+  if (!Array.isArray(value)) return [];
+  const seen = new Set<string>();
+  const shelf: ShelfEntry[] = [];
+  for (const entry of value) {
+    if (!entry || typeof entry !== "object") continue;
+    const { slug, finishedOn } = entry as Record<string, unknown>;
+    if (typeof slug !== "string" || !/^[a-z0-9-]+$/.test(slug) || seen.has(slug)) continue;
+    if (typeof finishedOn !== "string" || !validDate(finishedOn)) continue;
+    seen.add(slug);
+    shelf.push({ slug, finishedOn });
+  }
+  return shelf;
+}
+const cleanLastChapter = (value: unknown): string | null =>
+  typeof value === "string" && /^\/bible\/[a-z0-9-]+\/[1-9][0-9]*$/.test(value) ? value : null;
+
+/**
+ * The explicit forward step for the three fields of plan 01.1-04, applied to a stored v2 or v3 object before it
+ * is compared with its normalized form. An object that lacks any of them gets all three at the end, in the order
+ * of freshPlatform(), with the values normalizePlatform would derive (lamplight from theme: dark on, light off,
+ * system auto). An object that already has all three is returned as it is, byte for byte. Idempotent. The version
+ * stays what it was and the theme stays readable.
+ */
+export function upgradeV3Fields(raw: unknown): unknown {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return raw;
+  const stored = raw as Record<string, unknown>;
+  if (stored.version !== 2 && stored.version !== 3) return raw;
+  if ("lamplight" in stored && "shelf" in stored && "lastChapter" in stored) return raw;
+  const { lamplight, shelf, lastChapter, ...rest } = stored;
+  return {
+    ...rest,
+    lamplight: cleanLamplight(lamplight, stored.theme),
+    shelf: cleanShelf(shelf),
+    lastChapter: cleanLastChapter(lastChapter),
+  };
+}
 export function normalizePlatform(value: unknown): PlatformState | null {
   if (
     !value ||
@@ -99,6 +150,9 @@ export function normalizePlatform(value: unknown): PlatformState | null {
   s.theme = ["light", "dark", "system"].includes(v.theme ?? "")
     ? v.theme!
     : "system";
+  s.lamplight = cleanLamplight(v.lamplight, s.theme);
+  s.shelf = cleanShelf(v.shelf);
+  s.lastChapter = cleanLastChapter(v.lastChapter);
   s.entries = Array.isArray(v.entries)
     ? v.entries.filter(
         (e): e is JournalEntry =>
@@ -208,7 +262,8 @@ function loadLegacyPlatform(storage: StorageLike): {
       try {
         const state = normalizePlatform(JSON.parse(current));
         if (state) {
-          if (JSON.stringify(state) !== JSON.stringify(JSON.parse(current))) {
+          // The forward step first: only a real repair, not the three new fields, counts as recovery.
+          if (JSON.stringify(state) !== JSON.stringify(upgradeV3Fields(JSON.parse(current)))) {
             const recoveryKey = V2_KEY + ":recovery:normalized";
             try {
               const previous = storage.getItem(recoveryKey);
