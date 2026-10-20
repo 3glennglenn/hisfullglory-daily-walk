@@ -413,6 +413,19 @@ const topicHref = (id: string) => (onSite.has(id) ? `/topics/${id}` : `${appUrl}
       width: 100%;
       max-width: 40rem;
     }
+    /* The spines stand in the middle of their board, under the centred hero. */
+    :global(:root[data-mode="lamplight"]) .hero-case :global(.shelf),
+    :global(:root[data-mode="lamplight"]) .hero-case :global(.legend) {
+      justify-content: center;
+    }
+    /* B puts the sentence about the app and its button in the same centred column as the verse. */
+    :global(:root[data-mode="lamplight"]) .intro .column {
+      margin-inline: auto;
+      text-align: center;
+    }
+    :global(:root[data-mode="lamplight"]) .intro .actions {
+      justify-content: center;
+    }
   }
   /* "All context checks" is one of B's raised cards in Lamplight: the raised surface, no edge line, a salmon link. */
   :global(:root[data-mode="lamplight"]) .row-link {
