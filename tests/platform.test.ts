@@ -362,3 +362,16 @@ test("external fundraiser allowlist rejects host tricks, payment instructions an
     assert.equal("raised" in cause, false);
   }
 });
+
+test("the four ?tab= values of a reader address still parse, so old links keep working (UI-SPEC 8.2)", () => {
+  for (const tab of ["read", "context", "study", "community"]) {
+    assert.equal(parseRoute("/bible/romans/8", "?tab=" + tab).tab, tab, tab);
+    assert.equal(parseRoute("/bible/romans/8/28", "?tab=" + tab).tab, tab, tab + " with a verse");
+    assert.equal(parseRoute("/bible/romans/8/28", "?tab=" + tab).verse, 28);
+  }
+  // No tab, or one nobody knows, is the plain reader.
+  assert.equal(parseRoute("/bible/romans/8").tab, "read");
+  assert.equal(parseRoute("/bible/romans/8", "?tab=chat").tab, "read");
+  // The library has no tab.
+  assert.equal(parseRoute("/bible", "?tab=context").tab, "read");
+});

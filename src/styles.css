@@ -3930,3 +3930,66 @@ html[data-text="large"] .verse-actions {
   padding: var(--space-3) 0 0;
   box-shadow: none;
 }
+
+/* -- The "Around {chapter}" capsule (UI-SPEC A3, 6.3): 44px, --bar, a pill, floating 12px above the tab bar and
+   above the Lamplight notice's space while that shows (--notice-h). Listen's mini player replaces it. In large text
+   it becomes a full-width button above the tab bar. -- */
+.around-capsule {
+  position: fixed;
+  z-index: var(--z-bar);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px + var(--notice-h));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  max-width: calc(100vw - 40px);
+  padding: 0 var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+  box-shadow: var(--elev-float);
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  white-space: nowrap;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .around-capsule {
+    background: var(--bar-solid);
+  }
+}
+html[data-text="large"] .around-capsule {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px + var(--notice-h));
+  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
+  max-width: none;
+  transform: none;
+  border-radius: var(--radius-md);
+  white-space: normal;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  /* The tab bar is a sidebar from here: the capsule sits at the bottom of the content column. */
+  .around-capsule {
+    left: calc(280px + (100% - 280px) / 2);
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+  }
+  html[data-text="large"] .around-capsule {
+    left: calc(280px + max(32px, env(safe-area-inset-left)));
+    right: max(32px, env(safe-area-inset-right));
+    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+  }
+}
+/* The page makes room for it, and a focused element is never left under it (2.4.11). */
+.reader {
+  padding-bottom: calc(var(--space-9) + var(--space-2));
+}
+:root:has(.around-capsule) {
+  scroll-padding-bottom: calc(64px + 12px + 44px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
+}

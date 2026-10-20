@@ -10,7 +10,7 @@ import {aiUnreviewedCardLabel,publishedChecks,refLabel,splitHook,todaysCheck} fr
 import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
 import {checkToday,checkTodayFixture,checkTodayLargeText} from "../tests/today.browser.mjs";
 import {checkSponsor} from "../tests/sponsor.browser.mjs";
-import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen,checkVerseSheet,checkLayers,checkLayersCommunity} from "../tests/reader.browser.mjs";
+import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen,checkVerseSheet,checkLayers,checkLayersCommunity,checkChapterSheet,checkCommunityLink} from "../tests/reader.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -189,11 +189,13 @@ try {
       await page.getByRole("heading", { level: 1, name: "Romans 8", exact: true }).waitFor();
       assert.ok((await page.locator("#verse-28").innerText()).includes("all things work together"));
       assert.equal(await page.locator("#verse-28.selected").count(), 1, "the linked verse is selected");
-      // The view buttons are gone; the old addresses still reach the layers (plan 10 moves them into sheets).
+      // The view buttons are gone; the old address opens the verse's sheet at Context (plan 10).
       await page.goto(base + "/bible/romans/8/28?tab=context");
+      const sheet = page.getByRole("dialog", { name: "Romans 8:28" });
+      await sheet.waitFor();
       // Romans 8 has a sourced chapter note (no verse note for 8:28) and an AI explanation.
-      const sourced = page.locator('article[data-layer="sourced"]');
-      await sourced.getByRole("heading", { name: "Chapter context", exact: true }).waitFor();
+      const sourced = sheet.locator('article[data-layer="sourced"]');
+      await sourced.getByRole("heading", { name: "Context", exact: true }).waitFor();
       const sourcedText = await sourced.textContent();
       assert.match(sourcedText, /Verse 28 belongs with verses 29–30/);
       assert.match(sourcedText, /No note for this verse yet, so this shows the wider chapter context\./);
@@ -203,15 +205,18 @@ try {
         await sourced.getByRole("link", { name: "Primary source", exact: true }).getAttribute("href"),
         "https://ebible.org/engwebp/ROM08.htm",
       );
-      const ai = page.locator('article[data-layer="ai"]');
+      assert.equal(await sourced.locator("[data-layer]").count(), 0);
+      // The AI explanation is its own page in the same sheet, after the context page.
+      await sheet.getByRole("button", { name: "Back to Romans 8:28", exact: true }).click();
+      await sheet.locator('[data-layer-row="ai"]').filter({ hasNotText: "Loading…" }).click();
+      const ai = sheet.locator('article[data-layer="ai"]');
       await ai.getByRole("heading", { name: /^AI explanation/ }).waitFor();
       assert.equal(await ai.locator(".layer-note").textContent(), "Written by an AI model. Not reviewed by a theological reader.");
       await ai.getByRole("heading", { name: "What this chapter says", exact: true }).waitFor();
-      assert.equal(await sourced.locator("[data-layer]").count(), 0);
       assert.deepEqual(
-        await page.locator("main [data-layer]").evaluateAll((nodes) => nodes.map((n) => n.dataset.layer)),
-        ["sourced", "ai"],
-        "AI explanation is a separate card after the sourced note",
+        await sheet.locator("[data-layer]").evaluateAll((nodes) => nodes.map((n) => n.dataset.layer)),
+        ["ai"],
+        "one layer on a page: AI explanation never shares a page with the sourced note",
       );
     },
   );
@@ -223,6 +228,8 @@ try {
   await check("a verse opens one sheet: highlight, save, journal, copy and share; a tap or a number opens it, a selection or a long press does not (UI-SPEC A4)", () => checkVerseSheet(browser, base));
   await check("the layers around a verse: Context, AI explanation, Community in a fixed order, each apart by words, icon, frame and colour; loading, none and failure say so (UI-SPEC 5.3, A4, A16)", () => checkLayers(browser, base));
   await check("the Community layer on a controlled service: its row, its page, its words offline (UI-SPEC A4, A16)", () => checkLayersCommunity(browser, base));
+  await check("the chapter sheet and its capsule: above the tab bar and the Lamplight notice, the old ?tab= links land in the right place, no unavailable feature is announced (UI-SPEC A3, A4, 8.2)", () => checkChapterSheet(browser, base));
+  await check("?tab=community opens the chapter sheet at Community on a controlled service", () => checkCommunityLink(browser, base));
   await check(
     "private prayer lifecycle creates an answered journal without automatic publishing",
     async () => {
@@ -1388,17 +1395,19 @@ try {
       await go("/unknown");
       assert.match(await page.locator("main").innerText(), /not found/i);
       await go("/bible/genesis/1?tab=context");
-      // Genesis has no sourced note yet; only the labelled AI explanation is shown.
-      const sourced = page.locator('article[data-layer="sourced"]');
-      await sourced
-        .getByRole("heading", { name: "Context", exact: true })
-        .waitFor();
+      // Genesis has no sourced note yet; only the labelled AI explanation is behind its own row.
+      const sheet = page.getByRole("dialog", { name: "Around Genesis 1" });
+      await sheet.waitFor();
+      const sourced = sheet.locator('article[data-layer="sourced"]');
+      await sourced.getByRole("heading", { name: "Context", exact: true }).waitFor();
       assert.match(
         await sourced.textContent(),
         /Context for this book is being written\..*A note appears here only once it names its sources\./s,
       );
       assert.equal(await sourced.locator("details, a").count(), 0);
-      const ai = page.locator('article[data-layer="ai"]');
+      await sheet.getByRole("button", { name: "Back to Around Genesis 1", exact: true }).click();
+      await sheet.locator('[data-layer-row="ai"]').filter({ hasNotText: "Loading…" }).click();
+      const ai = sheet.locator('article[data-layer="ai"]');
       await ai.getByRole("heading", { name: /^AI explanation/ }).waitFor();
       assert.match(
         await ai.textContent(),

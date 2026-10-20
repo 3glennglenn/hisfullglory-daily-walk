@@ -169,7 +169,8 @@ function LayerRow({
 export function VerseSheet({ data, book, chapter, verse, startPage, records, ai, onLoadAgain, onVerse, onClose, returnFocus }: VerseSheetProps) {
   const { state, update } = usePlatform();
   const online = useOnline();
-  const [page, setPage] = useState<"root" | LayerPage>(startPage ?? "root");
+  // A link to the community page does not open a page that this build does not have.
+  const [page, setPage] = useState<"root" | LayerPage>(startPage === "community" && !supabase ? "root" : (startPage ?? "root"));
   // The row to put focus on when Back returns to the root page: the one that was opened.
   const [focusRow, setFocusRow] = useState<LayerPage | null>(null);
   const [swatchesOpen, setSwatchesOpen] = useState(false);

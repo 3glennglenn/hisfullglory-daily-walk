@@ -1047,3 +1047,229 @@ export async function checkLayersCommunity(browser, base) {
     await ctx.context.close();
   }
 }
+
+// ---------------------------------------------------------------------------------------------------------------
+// The chapter sheet and its capsule, the old links, the old views gone (Task 3 of plan 10).
+
+const noShare = () => Object.defineProperty(navigator, "share", { value: undefined, configurable: true });
+
+export async function checkChapterSheet(browser, base) {
+  const ctx = await open(browser, { extra: { permissions: ["clipboard-read", "clipboard-write"] } });
+  try {
+    const { page, context } = ctx;
+    await context.addInitScript(noShare);
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-36").waitFor();
+    // The capsule: a 44px pill above the tab bar, fixed, named for the chapter.
+    const capsule = page.getByRole("button", { name: "Around John 3", exact: true });
+    assert.equal(await capsule.count(), 1);
+    const geometry = await page.evaluate(() => {
+      const c = document.querySelector(".around-capsule");
+      const t = document.querySelector("nav.tabbar").getBoundingClientRect();
+      const b = c.getBoundingClientRect();
+      const style = getComputedStyle(c);
+      return { height: Math.round(b.height), bottom: b.bottom, tabTop: t.top, position: style.position, radius: parseFloat(style.borderTopLeftRadius), gap: t.top - b.bottom };
+    });
+    assert.equal(geometry.position, "fixed");
+    assert.ok(geometry.height >= 44 && geometry.radius >= 22, JSON.stringify(geometry));
+    assert.ok(geometry.bottom <= geometry.tabTop, `the capsule's bottom is above the tab bar's top (${geometry.bottom} <= ${geometry.tabTop})`);
+    assert.equal(Math.round(geometry.gap), 12, "12px above the tab bar");
+    // It opens "Around John 3" with the layer rows for the chapter and two rows of its own.
+    await capsule.click();
+    const sheet = page.getByRole("dialog", { name: "Around John 3" });
+    await sheet.waitFor();
+    assert.equal(await page.evaluate(() => document.activeElement?.textContent), "Around John 3", "focus on the title");
+    assert.equal(await sheet.getByRole("button", { name: "Close Around John 3", exact: true }).count(), 1);
+    assert.equal(await sheet.locator(".verse-actions").count(), 0, "no action row for a chapter");
+    await sheet.locator('[data-layer-row="ai"] .list-row-detail').filter({ hasNotText: "Loading…" }).waitFor();
+    assert.deepEqual(await layerRows(sheet), ["context", "ai"], "the layers in order (no community service in this build)");
+    assert.match(await sheet.locator('[data-layer-row="context"]').innerText(), /About John/);
+    assert.match(await sheet.locator('[data-layer-row="ai"]').innerText(), /About John 3/);
+    // Save chapter and Share chapter.
+    const save = sheet.getByRole("button", { name: "Save chapter", exact: true });
+    assert.equal(await save.getAttribute("aria-pressed"), "false");
+    await save.click();
+    assert.equal(await sheet.getByRole("button", { name: "Saved", exact: true }).getAttribute("aria-pressed"), "true");
+    assert.ok((await page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")).bookmarks)).includes("/bible/john/3"));
+    await sheet.getByRole("button", { name: "Share chapter", exact: true }).click();
+    await sheet.getByText("Passage link copied.", { exact: true }).waitFor();
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), new URL(page.url()).origin + "/bible/john/3");
+    await page.keyboard.press("Escape");
+    await sheet.waitFor({ state: "detached" });
+    await page.waitForFunction(() => document.activeElement?.classList.contains("around-capsule"), undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the capsule"));
+    // The saved chapter shows in the library.
+    await goto(page, base, "/bible");
+    await page.getByRole("button", { name: /^Saved passages/ }).click();
+    assert.deepEqual(await page.getByRole("dialog", { name: "Saved passages" }).getByRole("link").allInnerTexts(), ["John 3"]);
+
+    // The old addresses land in the right place.
+    await goto(page, base, "/bible/romans/8?tab=context");
+    const around = page.getByRole("dialog", { name: "Around Romans 8" });
+    await around.waitFor();
+    const sourced = around.locator('article[data-layer="sourced"]');
+    await sourced.waitFor();
+    assert.match(await sourced.innerText(), /Verse 28 belongs with verses 29–30/);
+    assert.equal(await around.getByRole("button", { name: "Back to Around Romans 8", exact: true }).count(), 1);
+    await around.getByRole("button", { name: "Close Around Romans 8", exact: true }).click();
+    await around.waitFor({ state: "detached" });
+    assert.equal(new URL(page.url()).search, "", "closing drops the ?tab= from the address");
+    await page.reload();
+    await page.locator("#verse-1").waitFor();
+    assert.equal(await page.getByRole("dialog").count(), 0, "a reload after closing does not open it again");
+    // With a verse in the address the verse sheet opens at Context.
+    await goto(page, base, "/bible/romans/8/28?tab=context");
+    const verse = page.getByRole("dialog", { name: "Romans 8:28" });
+    await verse.waitFor();
+    assert.match(await verse.locator('article[data-layer="sourced"]').innerText(), /No note for this verse yet, so this shows the wider chapter context\./);
+    await page.keyboard.press("Escape");
+    // ?tab=community has no page in a build without a community: the sheet opens at its first page instead.
+    await goto(page, base, "/bible/romans/8?tab=community");
+    await page.getByRole("dialog", { name: "Around Romans 8" }).waitFor();
+    assert.equal(await page.locator('[data-layer="voices"]').count(), 0);
+    assert.equal(await page.getByRole("dialog").locator(".layer-row").count() > 0, true, "at the root page");
+    await page.keyboard.press("Escape");
+    // ?tab=study scrolls the end-of-chapter block into view; ?tab=read and no tab open nothing.
+    await goto(page, base, "/bible/romans/8?tab=study");
+    await page.locator("#chapter-end").waitFor();
+    await page.waitForFunction(() => {
+      const r = document.querySelector("#chapter-end").getBoundingClientRect();
+      return r.top >= 0 && r.top < innerHeight / 2;
+    }, undefined, { timeout: 5000 });
+    assert.equal(await page.getByRole("dialog").count(), 0);
+    for (const tab of ["read", "bogus"]) {
+      await goto(page, base, "/bible/romans/8?tab=" + tab);
+      await page.locator("#verse-1").waitFor();
+      assert.equal(await page.getByRole("dialog").count(), 0, `?tab=${tab} opens nothing`);
+    }
+    // Nothing announces a feature that does not exist.
+    for (const tab of ["read", "context", "study", "community"]) {
+      await goto(page, base, "/bible/romans/8?tab=" + tab);
+      await page.locator("#verse-1").waitFor();
+      await page.waitForTimeout(100);
+      const text = await page.locator("body").evaluate((el) => el.innerText + " " + [...el.querySelectorAll("dialog")].map((d) => d.textContent).join(" "));
+      assert.equal(/pending/i.test(text), false, `the word "pending" appears nowhere (?tab=${tab})`);
+      assert.equal(/Ask HisFullGlory AI|integration|not configured|migration/i.test(text), false, `?tab=${tab}: no unavailable feature is announced`);
+      assert.equal(await page.locator("details summary", { hasText: "Ask HisFullGlory AI" }).count(), 0);
+      assert.equal(await page.getByText("Study, with Scripture first").count(), 0, "the old Study view is gone");
+      await page.keyboard.press("Escape");
+    }
+    assert.deepEqual(ctx.problems, []);
+  } finally {
+    await ctx.context.close();
+  }
+
+  // Dark device: the Lamplight notice shows; the capsule sits above it and neither covers the other.
+  const dark = await open(browser, { colorScheme: "dark" });
+  try {
+    const { page } = dark;
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-1").waitFor();
+    await page.locator(".lamplight-notice").waitFor();
+    const rects = await page.evaluate(() => {
+      const r = (s) => document.querySelector(s).getBoundingClientRect().toJSON();
+      return { capsule: r(".around-capsule"), notice: r(".lamplight-notice"), tab: r("nav.tabbar") };
+    });
+    assert.ok(rects.capsule.bottom <= rects.notice.top, `the capsule is above the notice (${rects.capsule.bottom} <= ${rects.notice.top})`);
+    assert.ok(rects.notice.bottom <= rects.tab.top, "the notice is above the tab bar");
+    assert.equal(Math.round(rects.notice.top - rects.capsule.bottom), 12, "12px between them");
+    assert.deepEqual(dark.problems, []);
+  } finally {
+    await dark.context.close();
+  }
+
+  // 200 % text: the capsule is a full-width button above the tab bar, and the sheet still fits.
+  const large = await open(browser);
+  try {
+    const { page } = large;
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-1").waitFor();
+    await page.evaluate(() => {
+      document.documentElement.style.fontSize = "34px";
+      window.dispatchEvent(new Event("resize"));
+    });
+    await page.waitForFunction(() => document.documentElement.dataset.text === "large");
+    const wide = await page.evaluate(() => {
+      const b = document.querySelector(".around-capsule").getBoundingClientRect();
+      return { width: Math.round(b.width), bottom: b.bottom, tab: document.querySelector("nav.tabbar").getBoundingClientRect().top, page: document.documentElement.scrollWidth <= innerWidth };
+    });
+    assert.ok(wide.width >= 340, `full width (${wide.width})`);
+    assert.ok(wide.bottom <= wide.tab);
+    assert.equal(wide.page, true);
+    await page.getByRole("button", { name: "Around John 3", exact: true }).click();
+    await page.getByRole("dialog", { name: "Around John 3" }).waitFor();
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.deepEqual(large.problems, []);
+  } finally {
+    await large.context.close();
+  }
+
+  // Listen replaces the capsule while it plays.
+  const speaking = await open(browser, { width: 430, height: 800 });
+  try {
+    const { page, context } = speaking;
+    await context.addInitScript(speechStub);
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-1").waitFor();
+    assert.equal(await page.locator(".around-capsule").count(), 1);
+    await page.getByRole("button", { name: "Listen to John 3", exact: true }).click();
+    await page.locator(".mini-player").waitFor();
+    assert.equal(await page.locator(".around-capsule").count(), 0, "the mini player replaces the capsule");
+    await page.locator(".mini-player").getByRole("button", { name: "Stop", exact: true }).click();
+    await page.locator(".around-capsule").waitFor();
+    assert.deepEqual(speaking.problems, []);
+  } finally {
+    await speaking.context.close();
+  }
+}
+
+/** The old links on a controlled community service: ?tab=community opens the Community page. */
+export async function checkCommunityLink(browser, base) {
+  const result = await build({
+    entryPoints: ["tests/fixtures/reader.tsx"],
+    bundle: true,
+    write: false,
+    outfile: ".tooling/reader-link-fixture.js",
+    format: "iife",
+    jsx: "automatic",
+    loader: { ".svg": "dataurl" },
+    define: { "process.env.NODE_ENV": '"production"' },
+    plugins: [
+      {
+        name: "controlled-reader-sdk",
+        setup(b) {
+          b.onResolve({ filter: /\/context\/data$/ }, () => ({ path: "checks", namespace: "reader-fixture" }));
+          b.onResolve({ filter: /^\.\.\/supabase$/ }, () => ({ path: "sdk", namespace: "reader-fixture" }));
+          b.onLoad({ filter: /^checks$/, namespace: "reader-fixture" }, () => ({ loader: "js", contents: "export const contextChecks = [];" }));
+          b.onLoad({ filter: /^sdk$/, namespace: "reader-fixture" }, () => ({
+            loader: "js",
+            contents: `
+              const ok={data:[],error:null};
+              export const supabase={
+                auth:{getSession:async()=>({data:{session:null},error:null}),onAuthStateChange(){return {data:{subscription:{unsubscribe(){}}}};}},
+                from(){const q={select(){return q},eq(){return q},order(){return q},maybeSingle:async()=>({data:null,error:null}),then(done,fail){return Promise.resolve(ok).then(done,fail)}};return q;},
+                rpc:()=>Promise.resolve({data:[],error:null})
+              };
+            `,
+          }));
+        },
+      },
+    ],
+  });
+  const js = result.outputFiles.find((f) => f.path.endsWith(".js"))?.text ?? result.outputFiles[0].text;
+  const css = result.outputFiles.find((f) => f.path.endsWith(".css"))?.text ?? "";
+  const ctx = await open(browser);
+  try {
+    const { page } = ctx;
+    await page.route(base + "/bible/romans/8?tab=community", (route) =>
+      route.fulfill({ contentType: "text/html", body: '<!doctype html><html lang="en" data-look="cover" data-mode="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>' + css + '</style></head><body><div id="root"></div><script>' + js + "</script></body></html>" }),
+    );
+    await page.goto(base + "/bible/romans/8?tab=community");
+    const sheet = page.getByRole("dialog", { name: "Around Romans 8" });
+    await sheet.waitFor();
+    await sheet.locator('article[data-layer="voices"]').waitFor();
+    assert.equal(await sheet.getByRole("button", { name: "Back to Around Romans 8", exact: true }).count(), 1);
+    assert.deepEqual(ctx.problems.filter((p) => !/Failed to load resource/.test(p)), []);
+  } finally {
+    await ctx.context.close();
+  }
+}

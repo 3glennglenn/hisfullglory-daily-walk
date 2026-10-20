@@ -1,31 +1,22 @@
 import { useEffect, useMemo, useState } from "react";
-import { Book, Headphones, Search } from "lucide-react";
+import { Book, Headphones, Search, Sparkles } from "lucide-react";
 import { ListenBar, useListen } from "./Listen";
 import { ChapterEnd } from "./ChapterEnd";
-import { VerseSheet } from "./VerseSheet";
+import { VerseSheet, type LayerPage } from "./VerseSheet";
 import { ChapterText } from "./ChapterText";
 import { ReaderToolbar } from "./ReaderToolbar";
 import { Library, SearchSheet, BIBLE_ERROR } from "./Library";
 import { PassagePicker } from "./PassagePicker";
 import { Sheet } from "../ui/Sheet";
 import { GroupedList, Row } from "../ui/List";
-import { webProvider, studyNote, type BibleData } from "./provider";
-import { adjacentChapters, bookTitle, referenceFromPath, slugWords } from "./passages";
+import { webProvider, type BibleData } from "./provider";
+import { adjacentChapters, bookTitle, slugWords } from "./passages";
 import { usePlatform } from "../platform/store";
 import { navigate, passagePath, type Route } from "../platform/router";
 import { localDate } from "../storage";
-import { Feed } from "../social/Feed";
-import {
-  knowledgeFor,
-  assembleGrounding,
-  knowledgeRecords,
-  loadStudyRecords,
-  scopeLabel,
-  type KnowledgeRecord,
-} from "./knowledge";
+import { knowledgeRecords, loadStudyRecords, type KnowledgeRecord } from "./knowledge";
 import { topicGraph } from "../topics/graph";
-import { aiFor, loadAiStatus, type AiStatus } from "./ai";
-import { AiExplanationCard } from "./AiExplanation";
+import { loadAiStatus, type AiStatus } from "./ai";
 
 /** The toolbar control that is on screen (the width budget hides the others), for returning focus. */
 const shown = (selector: string) => {
@@ -41,8 +32,9 @@ export function Reader({ route }: { route: Route }) {
   // One sheet at a time: the passage picker, search, or the overflow menu of the toolbar.
   const [sheet, setSheet] = useState<null | "picker" | "search" | "more">(null);
   const [narrow, setNarrow] = useState(false);
-  // The verse whose sheet is open (UI-SPEC A4); opening one closes any other sheet.
-  const [layers, setLayers] = useState<null | { verse: number }>(null);
+  // The verse sheet, or the chapter sheet when there is no verse (UI-SPEC A4), at a page for the old ?tab= links;
+  // opening one closes any other sheet.
+  const [layers, setLayers] = useState<null | { verse?: number; page?: LayerPage }>(null);
   const [speaking, setSpeaking] = useState<number | undefined>();
   const studyBook = route.book ?? "psalms";
   const [study, setStudy] = useState<{ book: string; records: KnowledgeRecord[] }>({ book: "", records: [] });
@@ -101,6 +93,13 @@ export function Reader({ route }: { route: Route }) {
   useEffect(() => {
     if (valid && chapterPath && state.lastChapter !== chapterPath) update((s) => ({ ...s, lastChapter: chapterPath }));
   }, [valid, chapterPath]);
+  // The old ?tab= addresses (UI-SPEC 8.2): context and community open the sheet at that page (the verse's when the
+  // address names one, else the chapter's), study scrolls to the end of the chapter; read and no tab open nothing.
+  useEffect(() => {
+    if (!valid) return;
+    if (route.tab === "context" || route.tab === "community") setLayers({ verse: route.verse, page: route.tab });
+    else if (route.tab === "study") requestAnimationFrame(() => document.getElementById("chapter-end")?.scrollIntoView({ block: "start" }));
+  }, [valid, route.book, route.chapter, route.verse, route.tab]);
   // A link to a verse brings it into view; choosing a verse in the reader does not move the page.
   useEffect(() => {
     if (valid && route.verse) document.getElementById(`verse-${route.verse}`)?.scrollIntoView({ block: "center" });
@@ -151,10 +150,7 @@ export function Reader({ route }: { route: Route }) {
   const reference = `${book.name} ${chapter.number}${selected ? `:${selected}` : ""}`;
   const { previous, next } = adjacentChapters(data, book.slug, chapter.number);
   const read = state.reading.includes(chapterPath!);
-  const note = knowledgeFor(book.slug, chapter.number, selected, studyRecords);
   const aiStatus = ai.book === book.slug ? ai.status : "pending";
-  const aiNote = aiStatus !== "pending" && aiStatus.state === "ready" ? aiFor(aiStatus.records, book.slug, chapter.number) : undefined;
-  const tab = route.tab;
 
   // The address follows the chosen verse, but choosing one is not a page change: it must not scroll to the
   // top or add a history entry.
@@ -169,7 +165,12 @@ export function Reader({ route }: { route: Route }) {
       if (box && box.bottom > window.innerHeight * 0.45) window.scrollBy({ top: box.top - window.innerHeight * 0.2 });
     });
   }
-  // Closing the sheet ends the choice: the tint goes and the address is the chapter's again.
+  // The chapter's sheet, from the capsule.
+  function openChapter() {
+    setSheet(null);
+    setLayers({});
+  }
+  // Closing the sheet ends the choice: the tint goes and the address is the chapter's again (without a ?tab=).
   function closeLayers() {
     setLayers(null);
     setSelected(undefined);
@@ -232,121 +233,29 @@ export function Reader({ route }: { route: Route }) {
         onNote={() => journal("study note")}
         topics={topicGraph.filter((t) => t.passages.includes(chapterPath!)).map((t) => ({ id: t.id, label: t.label }))}
       />
-      {tab === "context" ? (
-        <>
-          <article className="card" data-layer="sourced">
-            <h3>{note ? scopeLabel[note.scope] : "Context"}</h3>
-            {note ? (
-              <>
-                <p className="eyebrow">
-                  {note.scope === "book" ? book.name : note.scope === "chapter" ? chapterReference : reference}
-                  {" · "}
-                  {note.review === "reviewed" ? "Reviewed" : note.review === "editorial draft" ? "Editorial draft" : "Editorial observation"}
-                </p>
-                <p>{note.text}</p>
-                {note.scope !== "verse" && selected !== undefined && (
-                  <p>
-                    <small>No note for this verse yet, so this shows the wider {note.scope} context.</small>
-                  </p>
-                )}
-                <details>
-                  <summary>Why we say this</summary>
-                  <p>
-                    {note.editor} · {note.interpretiveStatus}
-                    {note.review === "editorial draft" && " · not yet reviewed by a theological reader"}
-                  </p>
-                  {note.basis && note.basis.length > 0 && (
-                    <>
-                      <h4>From the text itself</h4>
-                      <ul>
-                        {note.basis.map((p) => (
-                          <li key={p}>
-                            <a
-                              href={p}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                navigate(p);
-                              }}
-                            >
-                              {referenceFromPath(data, p)}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                  <h4>Sources</h4>
-                  <ul>
-                    {[{ title: "Primary source", url: note.source }, ...(note.sources ?? [])]
-                      .filter((s, i, all) => all.findIndex((o) => o.url === s.url) === i)
-                      .map((s) => (
-                        <li key={s.url}>
-                          <a href={s.url} target="_blank" rel="noopener noreferrer">
-                            {s.title}
-                          </a>
-                        </li>
-                      ))}
-                  </ul>
-                  <p>
-                    Notes summarise their sources in our own words. Where Christians or scholars disagree, the note
-                    says so. Notes are not original-language evidence and do not replace the text.
-                  </p>
-                </details>
-              </>
-            ) : (
-              <p>
-                Context for this book is being written. Read the surrounding chapter, reflect in your journal or
-                discuss it with the community. A note appears here only once it names its sources.
-              </p>
-            )}
-          </article>
-          {aiNote && (
-            <AiExplanationCard
-              explanation={aiNote}
-              book={book}
-              onVerse={(v) => navigate(passagePath(book.slug, chapter.number, v))}
-            />
-          )}
-        </>
-      ) : tab === "study" ? (
-        <article className="card">
-          <h3>Study, with Scripture first</h3>
-          <p>{studyNote}</p>
-          <ol>
-            <li>What do you observe in these verses?</li>
-            <li>What changes when you read the whole chapter?</li>
-            <li>What question would you bring to a trusted pastor or study group?</li>
-          </ol>
-          <p>Greek, Hebrew, cross-reference commentary and denomination-specific interpretations are not licensed or curated here.</p>
-          <button onClick={() => journal("study note")}>Write a private study note</button>
-          <details>
-            <summary>Ask HisFullGlory AI · integration pending</summary>
-            <p>A server-side grounded explanation provider is not configured. No generated answer or citation is supplied.</p>
-            <h4>Available grounding</h4>
-            {assembleGrounding(data, book.slug, chapter.number, selected, studyRecords).map((s) => (
-              <p key={s.id}>
-                {s.authority} · {s.reference}
-              </p>
-            ))}
-          </details>
-        </article>
-      ) : tab === "community" ? (
-        <Feed source={source} />
-      ) : null}
       {layers && (
         <VerseSheet
-          key={layers.verse}
+          key={layers.verse ?? "chapter"}
           data={data}
           book={book}
           chapter={chapter}
           verse={layers.verse}
+          startPage={layers.page}
           records={studyRecords}
           ai={aiStatus}
           onLoadAgain={loadAiAgain}
           onVerse={openVerse}
-          returnFocus={() => document.querySelector<HTMLElement>(`#verse-${layers.verse} .verse-num`)}
+          returnFocus={() =>
+            layers.verse ? document.querySelector<HTMLElement>(`#verse-${layers.verse} .verse-num`) : document.querySelector<HTMLElement>(".around-capsule")
+          }
           onClose={closeLayers}
         />
+      )}
+      {listening.state === "idle" && (
+        <button type="button" className="around-capsule" onClick={openChapter}>
+          <Sparkles size={18} aria-hidden="true" focusable="false" />
+          Around {chapterReference}
+        </button>
       )}
       <ListenBar
         reference={chapterReference}
