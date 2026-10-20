@@ -4,8 +4,9 @@
 -- the new one before publishing again (GATE-02, GATE-03).
 -- Forward-only and safe to apply twice; apply after 013. Founder approval: 2026-10-20
 -- ("akkoord migratie 014"); to be applied to the hosted project with the hosted name
--- terms_version. Apply it right after the trust pull request (#16) is on main and its
--- production build is live, never before: this file makes the database expect the new
+-- terms_version. Apply it right after the pull request that sets TERMS_VERSION to
+-- 2026-10-19 (branch terms-014) is on main and its production build is live, never
+-- before: this file makes the database expect the new
 -- version, so an app that still sends 2026-10-07 can no longer accept the rules. Applied
 -- long after, a new app could not accept them either.
 --
