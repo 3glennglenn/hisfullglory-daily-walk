@@ -4,23 +4,24 @@
     {
       "id": "ai:lamentations",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Lamentations is five poems of grief over the destruction of Jerusalem. The city is pictured as a widow weeping alone. The poems describe hunger, loss and shame without softening them, and they name the people’s own sin as part of the cause.\n\nAt the center of the book, in chapter 3, comes a turn toward hope: God’s mercies have not come to an end."
+          "text": "A city sits alone. “How the city sits solitary, that was full of people!” the first poem cries, and it says she has become like a widow who was once great among the nations. Lamentations is five poems of grief over the destruction of Jerusalem, and the city is pictured as a widow weeping alone. The poems describe hunger, loss and shame without softening them, and they name the people’s own sin as part of the cause.\n\nThen, at the center of the book, in chapter 3, something turns. In the middle of the darkness the poet says that God’s mercies have not come to an end: “his mercies don’t fail”, and “They are new every morning.”"
         },
         {
           "kind": "background",
-          "text": "The poems respond to the fall of Jerusalem to Babylon in 586 or 587 before Christ. Tradition credits them to Jeremiah, though the Hebrew text names no author. Four of the five follow the Hebrew alphabet, each verse or group of verses beginning with the next letter."
+          "text": "The poems respond to the fall of Jerusalem to Babylon in 586 or 587 before Christ. Tradition credits them to Jeremiah, though the Hebrew text names no author. Four of the five follow the Hebrew alphabet, each verse or group of verses beginning with the next letter. It is as if grief were being given order, from the first letter to the last, so that it could be carried."
         },
         {
           "kind": "interpretations",
           "text": "The book gives God’s people words for grief, and shows that lament belongs within faith. Jews read it each year on the day that remembers the destruction of the temple. Many Christians read it in Holy Week. It ends with a question to God and not with a resolution, which readers have found truthful."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

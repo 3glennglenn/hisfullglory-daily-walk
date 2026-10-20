@@ -73,6 +73,240 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ai:genesis/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The work of creation is finished, and God rests on the seventh day and makes it holy. Then the story slows down and draws close. There is no rain yet and no one to farm the ground, only a mist rising from the earth. The LORD God forms a man from the dust and breathes into his nostrils the breath of life. He plants a garden in Eden, with a river that parts into four, and he puts the man there to cultivate it and keep it. He may eat from every tree but one, the tree of the knowledge of good and evil.\n\nThen comes the first thing in the whole story that is not good: “It is not good for the man to be alone.” The man names the animals, but none is a companion for him. God causes a deep sleep to fall on him and builds a woman. The man cries out, “bone of my bones, and flesh of my flesh.” The chapter ends with the two of them together, naked, and “they were not ashamed.”"
+        },
+        {
+          "kind": "background",
+          "text": "Genesis 1 and Genesis 2 each tell of creation, with a different focus: the first looks at the whole cosmos, this one at the garden and the first man and woman. Many scholars see two accounts brought together; many Christians read them as one story told two ways. Tradition links Genesis to Moses. Christians differ on how literally to read the details, and on what the man’s creation first and the woman’s from his side say about men and women."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A quiet voice interrupts the garden. The serpent asks the woman, “Has God really said” that they may not eat from any tree? She answers with what God said, and the serpent tells her she will not die but will be like God. She sees that the fruit is good for food and a delight to the eyes, and she takes it and gives some to her husband, who is with her. Their eyes are opened. They know they are naked, sew fig leaves, and hide when they hear the LORD God walking in the garden.\n\nGod calls, “Where are you?” The man blames the woman, the woman blames the serpent, and God speaks to each. The serpent is cursed. The woman will have pain in childbirth. The ground is cursed for the man’s sake, and he will return to dust. Yet God also promises that the woman’s offspring will bruise the serpent’s head. He makes clothes of animal skins for them, then sends them out of Eden, with cherubim and a flaming sword guarding the way to the tree of life."
+        },
+        {
+          "kind": "background",
+          "text": "This is the chapter behind the Christian teaching on the fall. Christians differ on the details, such as how far sin and death passed to all people. The words in verse 16 about the woman’s desire and her husband’s rule describe what comes after the break; Christians differ on whether they are a description or a command, and they have sometimes been misused to excuse domination. Many Christians read verse 15 as the first hint of a rescue (see Romans 16:20)."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Eve gives birth to a son and says she has gotten a man with the LORD’s help. Then a second son is born. Cain farms, and Abel keeps sheep. Each brings an offering, and the LORD respects Abel’s but not Cain’s. Cain is very angry, and his face falls. God speaks to him gently: if he does well, will he not be lifted up? And if not, “sin crouches at the door.”\n\nCain says to his brother, Let’s go into the field, and there he kills him. When God asks where Abel is, Cain answers, “Am I my brother’s keeper?” God says, “The voice of your brother’s blood cries to me from the ground.” Cain becomes a wanderer, afraid for his life, and God marks him so that no one will kill him. The chapter follows Cain’s line, with a city and craftsmen and a boastful song of Lamech, and ends with Seth, whose son Enosh is born in a time when people began to call on the LORD’s name."
+        },
+        {
+          "kind": "background",
+          "text": "The first death in the Bible is a murder between brothers. The text does not say why the offering was not respected; the New Testament links it to the heart of the giver (see Hebrews 11:4 and 1 John 3:12). Notice that God speaks to Cain before and after, and protects him even after the crime. Lamech’s song takes the sevenfold protection and turns it into boasting of seventy-seven times. The chapter moves from violence to the beginning of worship."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter is a list, and it reads like a slow drumbeat. It begins with Adam, made in God’s likeness, and he fathers Seth in his own likeness. Then names follow, each with a number of years and, again and again, the same sad word: “then he died.” Seth, Enosh, Kenan, Mahalalel, Jared, Methuselah, Lamech, each living many centuries and having other sons and daughters.\n\nOne name breaks the pattern. Of Enoch the text says, “Enoch walked with God, and he was not found, for God took him.” He lived three hundred sixty-five years, far fewer than the others, and no death is recorded. Near the end, Lamech names his son Noah and says, “This one will comfort us in our work”. The chapter ends with Noah at five hundred years old, the father of three sons."
+        },
+        {
+          "kind": "background",
+          "text": "Genealogies like this one carry the story from Adam to Noah and show that the blessing of Genesis 1 continues even in a world under the curse. Readers differ on the very long lifespans: some read them literally, others as literary or symbolic. Enoch is remembered again in the New Testament (see Hebrews 11:5 and Jude 14). Lamech’s hope for Noah looks back to the cursed ground of Genesis 3 and forward to the flood."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Something has gone wrong with the world. When people multiplied, the sons of God saw that the daughters of men were beautiful and took wives for themselves, and the Nephilim were on the earth. The LORD limited human days to one hundred twenty years. He saw that the wickedness of man was great and that every thought of the heart was only evil, and “it grieved him in his heart.” He resolved to blot out man and the animals.\n\n“But Noah found favor in the LORD’s eyes.” He was a righteous man, blameless in his time, and he “walked with God.” The earth was corrupt and full of violence, so God told Noah to build a ship, giving him its length, width and height, with a roof and a door in its side. God would bring a flood, but he would also keep a covenant with Noah, his wife, his sons and their wives. Noah would bring two of every kind of living thing into the ship. Noah did all that God commanded him."
+        },
+        {
+          "kind": "background",
+          "text": "The meaning of the sons of God in verses 1 to 4 is old and disputed. Some Jewish and Christian readers take them to be heavenly beings, others the descendants of Seth, others powerful rulers. The point the text itself makes is that violence had spread. The chapter shows both God’s grief and his choice of one family to carry a future. The New Testament holds up Noah’s faith (see Hebrews 11:7)."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The LORD tells Noah, “Come with all of your household into the ship, for I have seen your righteousness before me in this generation.” He is to take seven pairs of every clean animal and birds, and two of the unclean. In seven days the rain will fall for forty days and forty nights. Noah does everything the LORD commands. He is six hundred years old when the flood comes.\n\nOn the seventeenth day of the second month, “the fountains of the great deep burst open,” and the windows of the sky open. Noah, his wife, his sons and their wives go into the ship with the animals, pair by pair, male and female. Then the LORD shuts him in. The waters rise and lift the ship above the earth until even the high mountains are covered. Everything that breathed on dry land dies, and only Noah and those with him in the ship are left. The waters flood the earth for one hundred fifty days."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter reads like a record, with dates, numbers and repeated phrases, and it shows the world undone: the waters above and below, divided in Genesis 1, come together again. Stories of a great flood are told by other ancient peoples too, and many scholars compare them. Christians differ on whether the flood was worldwide or regional. The text itself says that God shut the door, and that those inside were kept alive. It does not hide the loss of life."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "“God remembered Noah” and every living thing with him in the ship. He sends a wind over the earth, the springs of the deep and the windows of the sky are closed, and the waters begin to go down. On the seventeenth day of the seventh month the ship comes to rest on the mountains of Ararat. Noah sends out a raven, and then a dove, which finds nowhere to rest and returns. A week later he sends her again, and this time she comes back in the evening with “a freshly plucked olive leaf.” After another week she does not return.\n\nAt last the ground is dry, and God tells Noah to come out. Noah builds an altar and offers burnt offerings. The LORD smells the pleasing aroma and says in his heart that he will never again curse the ground or strike every living thing, although “the imagination of man’s heart is evil from his youth.” While the earth remains, seed time and harvest will not cease."
+        },
+        {
+          "kind": "background",
+          "text": "The turning point is in the first verse: God remembers. In the Bible, to remember is to act on a promise. The chapter is full of small details of waiting, with seven days, then seven more, and each time a bird. The LORD’s promise comes in the same breath as his honest view of human hearts, so mercy rests on grace and not on human goodness. The altar and offerings recall worship in Genesis 4, and the promise leads to the covenant of the next chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "God blesses Noah and his sons with the old words, “Be fruitful, multiply”. The animals will fear them, and every moving thing may be food, but not flesh with its blood in it. God will require a reckoning for human life, “for God made man in his own image.” Then God makes a covenant with Noah, his descendants and every living creature: never again will a flood destroy the earth. As a sign he says, “I set my rainbow in the cloud,” and when he sees it he will remember.\n\nThe last part is darker. Noah plants a vineyard, drinks the wine and becomes drunk, uncovered in his tent. Ham sees his father and tells his brothers, while Shem and Japheth walk in backwards with a garment to cover him. When Noah wakes he says, “Canaan is cursed”, and blesses Shem and Japheth. Noah lives three hundred fifty years after the flood and dies at nine hundred fifty."
+        },
+        {
+          "kind": "background",
+          "text": "The covenant is made with all living creatures, and its sign is a bow hung in the sky. The last scene is hard and unclear. The curse falls on Canaan, Ham’s son, and not on Ham, and the text does not say why. It was later misused in modern history to defend the enslavement of people of African descent; the text does not support that, and it names no such people. The chapter also holds the first call for justice in human life, in verses 5 and 6."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After the flood, the chapter lists the families that spread over the earth. The sons of Japheth are named first, then the sons of Ham, and then the sons of Shem. Under each come their children and the lands where they settled, each “after his language, after their families, in their nations.” Among the names, one stands out: Cush became the father of Nimrod, “a mighty hunter before the LORD”, whose kingdom began in Babel and spread to Nineveh. Canaan’s family is traced with its borders from Sidon to Gaza and toward Sodom and Gomorrah. In Eber’s family one son is named Peleg, “for in his days the earth was divided.”\n\nThe chapter ends with a summary: these are the families of the sons of Noah, and the nations divided from them on the earth after the flood."
+        },
+        {
+          "kind": "background",
+          "text": "This list is often called the table of nations. It places all peoples in one family and ends by saying that nations spread from the three sons of Noah. Many names are places or peoples in the ancient Near East, and scholars still discuss how to identify them. The Bible’s later story of Israel takes place among these neighbors. The chapter sets the stage for Genesis 11, where the mention of Babel returns. The New Testament speaks of one human family (see Acts 17:26)."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The whole earth speaks one language. Traveling east, people settle in a plain in Shinar and learn to make bricks, with tar for mortar. They say, “let’s make a name for ourselves,” and build a city and a tower whose top reaches the sky, so that they will not be scattered. But the LORD comes down to see the city and the tower. He sees that they are one people with one language, and he confuses their speech so that they no longer understand each other. They stop building, and the LORD scatters them. The city is called Babel.\n\nThen the chapter slows into another genealogy, from Shem down to Terah. It ends with the story of one family. Terah fathers Abram, Nahor and Haran. Haran dies in Ur of the Chaldees, and Abram’s wife Sarai “was barren.” Terah takes Abram, Sarai and Lot toward Canaan, but they stop in Haran, and there Terah dies."
+        },
+        {
+          "kind": "background",
+          "text": "The tower story explains why people speak different languages, and many scholars link the name Babel to Babylon. Readers have understood the sin in different ways: as pride, as a refusal to spread over the earth as God had told them, or as a wish for security apart from God. The reversal is often seen at Pentecost (see Acts 2). The final verses prepare for Abram’s call: after the nations are scattered, God chooses one family, and it begins with a childless couple."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Abram is seventy-five, and God’s word reaches him: “Leave your country, and your relatives, and your father’s house, and go to the land that I will show you.” With the command comes a promise of a great nation, a great name and a blessing for others. Abram leaves with Sarai, Lot and all their people. In Canaan, at Shechem, the LORD appears to him and says he will give this land to his offspring, and Abram builds an altar. He builds another near Bethel and calls on the LORD’s name.\n\nThen famine drives him down to Egypt, and fear overtakes him. He asks Sarai, “Please say that you are my sister”. She is taken into Pharaoh’s house, and Abram gains sheep, cattle and servants because of her. The LORD afflicts Pharaoh’s house with plagues. Pharaoh calls Abram to him, asks what he has done, and sends him away with his wife and all that he had."
+        },
+        {
+          "kind": "background",
+          "text": "This is where the story of Israel begins. God’s promise has three parts: a land, a people and a blessing that reaches “All the families of the earth” (verse 3). The New Testament returns to it often (see Galatians 3 and Hebrews 11). The Egypt episode shows a man of faith acting out of fear, and the text does not praise his lie. Pharaoh, a stranger, is the one who tells Abram what he has done wrong. Readers differ on how to judge Abram here."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Abram comes up out of Egypt, very rich in livestock, silver and gold, and returns to the altar he built between Bethel and Ai. But Lot is rich too, and the land cannot hold both their herds. Their herdsmen quarrel. Abram, the elder, speaks first: “let there be no strife between you and me,” for we are relatives. He lets Lot choose. Lot looks over the plain of the Jordan, well watered “like the garden of the LORD,” and takes it, moving his tent as far as Sodom. The narrator adds that the men of Sodom were exceedingly wicked.\n\nAfter Lot leaves, the LORD tells Abram to lift up his eyes in every direction, for all the land he sees will be given to him and his offspring forever. They will be as many “as the dust of the earth”. Abram moves to the oaks of Mamre at Hebron and builds an altar to the LORD."
+        },
+        {
+          "kind": "background",
+          "text": "Abram, who has the promise, gives way, and Lot, who sees the best land, moves toward trouble. The text does not say that Lot was wrong to choose, but it points ahead to Sodom (see Genesis 19). God speaks to Abram only after Lot leaves. The land promise appears here with its widest bounds, and Christians and Jews have read it in different ways. The altars at the start and end of the chapter mark the places where Abram worships."
+        }
+      ]
+    },
+    {
+      "id": "ai:genesis/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Four kings from the east march against five kings of the cities near the Salt Sea, and the five lose. The victors carry off the goods of Sodom and Gomorrah, and with them Lot, Abram’s nephew. A survivor brings word to Abram, who gathers his three hundred eighteen trained men, pursues the raiders by night and brings back the goods, Lot, and the people.\n\nOn his return two kings come out to meet him. The first is Melchizedek king of Salem, “priest of God Most High”, who brings out bread and wine and blesses Abram, “Blessed be Abram of God Most High, possessor of heaven and earth.” Abram gives him a tenth of everything. The second is the king of Sodom, who tells Abram to keep the goods and return the people. Abram refuses to take even “a thread nor a sandal strap”, so that no one can say he made Abram rich."
+        },
+        {
+          "kind": "background",
+          "text": "Melchizedek appears out of nowhere and vanishes again. He is remembered in Psalm 110 and discussed in Hebrews 7, where Christians see him as a figure who points to Christ. Many readers take Salem to be Jerusalem. The story shows Abram acting as a rescuer and refusing a reward from a king who dishonors God, though he lets his allies take their share. Christians and Jews read the tithe and the blessing as signs of how Abram stood before God."
+        }
+      ]
     }
   ]
 }

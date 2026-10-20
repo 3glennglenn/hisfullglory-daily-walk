@@ -4,23 +4,24 @@
     {
       "id": "ai:isaiah",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Isaiah brings words of judgment and of hope to Judah and Jerusalem. The first part (chapters 1 to 39) warns of the consequences of injustice and false trust, and promises a child who will rule on David’s throne. The second part (40 to 55) comforts a people in exile and speaks of a servant who suffers for others. The last part (56 to 66) looks ahead to a renewed people and a new heavens and a new earth."
+          "text": "It begins with a vision. In the year that King Uzziah died, the prophet sees the Lord on a throne, high and lifted up, and voices call, “Holy, holy, holy, is the LORD of Armies!” Then comes a call for someone to go, and the answer, “Here I am. Send me!”\n\nWhat he is sent to say is hard and then tender. To Judah and Jerusalem, the first part of the book (chapters 1 to 39) warns of the consequences of injustice and false trust, and it promises a child who will rule on David’s throne. The second part (40 to 55) opens with “Comfort, comfort my people” and speaks to a people in exile, and it tells of a servant who suffers for others. The last part (56 to 66) looks ahead to a renewed people and to a new heavens and a new earth."
         },
         {
           "kind": "background",
-          "text": "Isaiah son of Amoz prophesied in Jerusalem in the second half of the eighth century before Christ, during the Assyrian threat. Many scholars think chapters 40 to 66 come from later prophets in his tradition, during and after the exile. Others hold that Isaiah wrote the whole book."
+          "text": "Isaiah son of Amoz prophesied in Jerusalem in the second half of the eighth century before Christ, while the Assyrian threat hung over the land. Many scholars think chapters 40 to 66 come from later prophets in his tradition, speaking during and after the exile. Others hold that Isaiah wrote the whole book. Either way, the book reads as one long conversation between God and a people who swing between fear and false confidence."
         },
         {
           "kind": "interpretations",
-          "text": "The New Testament quotes Isaiah more than any other prophet. Christians read the servant of chapter 53 as fulfilled in the death of Jesus. Jewish interpretation has most often understood the servant as Israel. Passages such as 7:14 and 9:6 are read by Christians as pointing to Christ, while also having a meaning in Isaiah’s own day."
+          "text": "No prophet is quoted more in the New Testament. Readers have long weighed who the suffering servant is. Christians read the servant of chapter 53 as fulfilled in the death of Jesus, and Jewish interpretation has most often understood the servant as Israel. Passages such as 7:14 and 9:6 are read by Christians as pointing to Christ, while also having a meaning in Isaiah’s own day. These are old readings held by people who love the same pages."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

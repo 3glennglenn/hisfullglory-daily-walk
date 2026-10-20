@@ -4,23 +4,24 @@
     {
       "id": "ai:joel",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-20",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Joel begins with a plague of locusts that has stripped the land. He reads it as a warning of the day of the LORD and calls everyone, from priests to children, to return to God with their whole heart.\n\nGod answers with a promise to restore what the locusts have eaten, and beyond that to pour out his Spirit on all people, young and old, men and women."
+          "text": "The fields are bare. “What the swarming locust has left, the great locust has eaten”, and the next swarm has eaten what that one left. Joel begins with a plague of locusts that has stripped the land, and he reads it as a warning of the day of the LORD. He calls everyone, from priests to children, to return to God with their whole heart. “Tear your heart and not your garments,” he says.\n\nGod answers with a promise to restore what the locusts have eaten, and beyond that to pour out his Spirit on all people, young and old, men and women. The words are: “I will pour out my Spirit on all flesh”."
         },
         {
           "kind": "background",
-          "text": "The book gives no date and names no king, so proposals range over several centuries. Joel is one of the twelve shorter prophetic books that Jewish tradition counts together as one scroll."
+          "text": "The book gives no date and names no king, so proposals range over several centuries. Joel is one of the twelve shorter prophetic books that Jewish tradition counts together as one scroll. Because nothing fixes its time, its message stays open to every generation that reads it."
         },
         {
           "kind": "interpretations",
-          "text": "On the day of Pentecost, Peter explains what is happening by quoting Joel’s promise of the Spirit (Acts 2). Christians therefore read that promise as fulfilled in the church. The day of the LORD in the prophets is both judgment and rescue, and Joel holds the two together."
+          "text": "On the day of Pentecost, Peter explains what is happening by quoting Joel’s promise of the Spirit (Acts 2). Christians therefore read that promise as fulfilled in the church. The day of the LORD in the prophets is both judgment and rescue, and Joel holds the two together. The call to return rests on who God is, gracious and merciful and slow to anger, so the book reads both as a sober warning and as an open door."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
