@@ -10,6 +10,7 @@ import { contextChecks } from "../context/data";
 import { AiBadge } from "../ui/Badges";
 import { GroupedList, Row } from "../ui/List";
 import { Toolbar } from "../ui/Screen";
+import { StarField } from "../ui/StarField";
 import { StepIndicator } from "../ui/StepIndicator";
 import { Journal } from "./LegacyWalk";
 import { dailyReminderOn } from "./Reminders";
@@ -174,6 +175,8 @@ function WalkFinish({ date }: { date: string }) {
   return (
     <section className="flow walk-flow walk-finish">
       <Toolbar back="Today" to="/" title="Today's walk" />
+      {/* Lamplight only: the sky with today's star lit and one soft glow (a 600 ms fade-in; none under Reduce Motion). */}
+      <StarField walked={state.local.completedDates} today={date} finish />
       <h2 className="walk-complete">Walk complete</h2>
       <blockquote className="walk-finish-verse">{today.quote}</blockquote>
       <p className="walk-finish-ref">{today.reference}</p>

@@ -382,4 +382,41 @@ const topicHref = (id: string) => (onSite.has(id) ? `/topics/${id}` : `${appUrl}
   .start {
     padding-bottom: var(--space-4);
   }
+
+  /* Lamplight (direction B, plan 16): from 900px the hero is one centred column like B's desktop hero, the text at most
+     about 34rem, and the bookcase stands below it instead of beside it. On a phone it stays one column, as above. The
+     light modes keep the two columns from 1024px. */
+  @media (min-width: 900px) {
+    :global(:root[data-mode="lamplight"]) .hero-row {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+      column-gap: 0;
+    }
+    :global(:root[data-mode="lamplight"]) .hero-cover {
+      grid-column: 1;
+      grid-row: 1;
+      width: 100%;
+      max-width: 34rem;
+    }
+    :global(:root[data-mode="lamplight"]) .hero-case {
+      display: block;
+      grid-column: 1;
+      grid-row: 2;
+      align-self: auto;
+      width: 100%;
+      max-width: 40rem;
+      margin-top: var(--space-7);
+    }
+    :global(:root[data-mode="lamplight"]) .row-link {
+      grid-column: 1;
+      grid-row: 3;
+      width: 100%;
+      max-width: 40rem;
+    }
+  }
+  /* "All context checks" is one of B's raised cards in Lamplight: the raised surface, no edge line, a salmon link. */
+  :global(:root[data-mode="lamplight"]) .row-link {
+    border-color: transparent;
+    border-radius: var(--radius-lg);
+  }
 </style>

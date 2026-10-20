@@ -500,6 +500,53 @@ const subject = note?.scope === "chapter" ? `${book.name} ${number}` : book.name
     stroke-linejoin: round;
   }
 
+  /* Lamplight (direction B, plan 16): each check is one of B's raised cards: the raised surface, the radius of the design
+     system, the reference in the italic serif in --link, the hook in --ink and "Read the story" as a salmon text link. The
+     whole card is still the one link, so its name is what it was; the words "Read the story" are drawn by the CSS. */
+  :global(:root[data-mode="lamplight"]) .checks ul {
+    display: grid;
+    gap: var(--space-3);
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+  :global(:root[data-mode="lamplight"]) .checks ul li + li {
+    border-top: 0;
+  }
+  :global(:root[data-mode="lamplight"]) .checks ul .row {
+    align-items: flex-start;
+    padding: var(--space-5);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+  }
+  :global(:root[data-mode="lamplight"]) .checks ul .row:hover {
+    background: var(--surface-2);
+  }
+  :global(:root[data-mode="lamplight"]) .checks ul .row:focus-visible {
+    outline-offset: 3px;
+  }
+  :global(:root[data-mode="lamplight"]) .checks ul .row-ref {
+    font-family: var(--font-scripture);
+    font-style: italic;
+    font-size: var(--text-title);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--link);
+  }
+  :global(:root[data-mode="lamplight"]) .checks ul .row-hook {
+    color: var(--ink);
+  }
+  :global(:root[data-mode="lamplight"]) .checks ul .row-text::after {
+    content: "Read the story";
+    margin-top: var(--space-1);
+    font-weight: 600;
+    color: var(--link);
+  }
+  :global(:root[data-mode="lamplight"]) .checks ul .row svg {
+    display: none;
+  }
+
   .actions {
     margin-top: var(--space-7);
   }

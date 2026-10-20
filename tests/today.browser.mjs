@@ -240,7 +240,7 @@ export async function checkToday(browser, base, published) {
       assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "lamplight");
       const glow = await page.locator(".cover-wrap").evaluate((el) => getComputedStyle(el, "::before").backgroundImage);
       assert.match(glow, /radial-gradient/);
-      assert.match(glow, /rgba\(240, 201, 135, 0\.16/, look + ": the lamp glow of Lamplight");
+      assert.match(glow, /rgba\(240, 201, 135, 0\.17/, look + ": the lamp glow of Lamplight (direction B's 17 %, plan 16)");
       assert.equal(await page.locator(".cover").evaluate((el) => getComputedStyle(el).backgroundImage), "none", "never on the block");
       const behind = await page.evaluate(() => {
         const g = document.querySelector(".cover-wrap").getBoundingClientRect();

@@ -11,6 +11,7 @@ import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
 import {checkToday,checkTodayFixture,checkTodayLargeText} from "../tests/today.browser.mjs";
 import {checkSponsor} from "../tests/sponsor.browser.mjs";
 import {checkWelcome} from "../tests/welcome.browser.mjs";
+import {checkLamplight} from "../tests/lamplight.browser.mjs";
 import {freshPlatform} from "../src/platform/persistence.ts";
 import {checkStoryFlow} from "../tests/story.browser.mjs";
 import {checkShelfScreen} from "../tests/shelf.browser.mjs";
@@ -176,6 +177,7 @@ try {
     },
   );
   await check("welcome questionnaire: once, on the first open of the app, five screens with Back and Skip for now, saved choices, never again, no hold on a deep link, both looks and modes, 200 % text", () => checkWelcome(browser, base));
+  await check("Lamplight is direction B's room: no leather slab, one pool of lamp light, the salmon pill, a sky with a star for each day walked and its line, the walk finish with today's star lit, the light modes unchanged, 200 % text", () => checkLamplight(browser, base));
   await check("Today: its states, the walk and shelf rows, and what each look draws (UI-SPEC A1)", () => checkToday(browser, base, published));
   await check("Today on controlled content: no published check, an AI-written newest check, files the app cannot read", () => checkTodayFixture(browser, base));
   await check("Today at 200 % text on 390 and 320px: no sideways scroll, nothing clipped, the button and the last row above the tab bar, tab labels on one line", () => checkTodayLargeText(browser, base, published));
