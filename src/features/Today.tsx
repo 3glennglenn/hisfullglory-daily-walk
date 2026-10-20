@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { navigate } from "../platform/router";
 import { usePlatform } from "../platform/store";
 import { contentFor } from "../data";
-import { dateNumber, localDate } from "../storage";
+import { localDate } from "../storage";
 import { refLabel, todaysCheck } from "../context/checks";
 import { contextChecks } from "../context/data";
 import { countLabel, monthDay, shelfSummary } from "../context/shelf";
@@ -12,6 +12,7 @@ import { GroupedList, Row } from "../ui/List";
 import { LargeTitle } from "../ui/Screen";
 import { MiniShelf } from "../ui/Shelf";
 import { SponsorRow } from "../ui/SponsorRow";
+import { nextDate } from "./Walk";
 
 const parts = (date: string) => date.split("-").map(Number) as [number, number, number];
 
@@ -20,8 +21,6 @@ function dateLine(date: string): string {
   const [year, month, day] = parts(date);
   return new Date(year, month - 1, day).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
 }
-
-const nextDate = (date: string) => new Date((dateNumber(date) + 1) * 86400000).toISOString().slice(0, 10);
 
 // Today (UI-SPEC A1): one focus, the day's context check, the newest one the reader has not finished on an
 // earlier day, written by an AI model or not (D-05, D-06). Under it one quiet list: Today's walk and Your shelf

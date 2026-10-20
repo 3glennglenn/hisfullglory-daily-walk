@@ -15,7 +15,7 @@ import { currentRoute, navigate } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
 import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
-import { Walk } from "./features/Home";
+import { Walk } from "./features/Walk";
 import { Today } from "./features/Today";
 import { YourShelf } from "./features/Shelf";
 import { Reader } from "./bible/Reader";
@@ -114,9 +114,9 @@ function App() {
   // Sets data-text="large" on <html> while the system text size is 150 % or more (UI-SPEC 6.3).
   useEffect(() => watchTextSize(document.documentElement), []);
   const page = route.page;
-  // A story is a full-screen flow (UI-SPEC A7, 8.1): the tab bar is covered while it is open and "‹ Today" is the
-  // way out. A slug that names no published check is the error state, which keeps the tab bar.
-  const flow = page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id);
+  // The story and Today's walk are full-screen flows (UI-SPEC A5, A7, 8.1): the tab bar is covered while one is open
+  // and "‹ Today" is the way out. A slug that names no published check is the error state, which keeps the tab bar.
+  const flow = page === "walk" || (page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id));
   let content: ReactNode;
   switch (page) {
     case "my-walk":

@@ -160,32 +160,40 @@ try {
   await check("Context checks list newest first with its marks and AI labels; an unknown check shows two ways on (UI-SPEC A8, A16)", () => checkContextList(browser, base, published));
   await check("story end: the shelf moment settles once (none under Reduce Motion), the AI line, no sponsor, and the label on the share picture and the share text (UI-SPEC A7, D-06)", () => checkStoryEnd(browser, base, published));
   await check(
-    "complete daily walk saves private reflection and idempotent completion",
+    "complete daily walk: six named steps with the step indicator, the private reflection saved, finishing on the Prayer step, idempotent completion (UI-SPEC A5)",
     async () => {
       await go("/walk");
-      for (let i = 0; i < 4; i++)
-        await page.getByRole("button", { name: /Continue to/ }).click();
-      await page
-        .locator("#journal")
-        .fill("An honest private reflection for testing.");
+      assert.equal(await page.getByRole("navigation", { name: "Main navigation" }).count(), 0, "the tab bar is covered while the walk is open");
+      assert.equal(await page.locator("main h1").innerText(), "Today's walk", "the toolbar title is the h1");
+      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1);
+      const bar = page.getByRole("progressbar", { name: "Walk progress" });
+      assert.equal(await bar.getAttribute("aria-valuenow"), "1");
+      assert.equal(await bar.getAttribute("aria-valuemin"), "1");
+      assert.equal(await bar.getAttribute("aria-valuemax"), "6");
+      assert.equal(await bar.getAttribute("aria-valuetext"), "Step 1 of 6, Scripture");
+      assert.equal(await page.locator(".step-label").innerText(), "Step 1 of 6");
+      assert.equal(await page.locator(".step-segment-done").count(), 1, "the first segment is filled on the first step");
+      assert.equal(await page.locator(".flow-actions").getByRole("button").count(), 1, "step 1 has no back button");
+      for (let i = 0; i < 4; i++) {
+        await page.getByRole("button", { name: /^Continue to / }).click();
+        assert.equal(await bar.getAttribute("aria-valuenow"), String(i + 2));
+      }
+      assert.equal(await page.locator(".step-label").innerText(), "Step 5 of 6");
+      await page.locator("#journal").fill("An honest private reflection for testing.");
       await page.getByRole("button", { name: "Continue to Prayer" }).click();
-      await page
-        .getByRole("button", { name: "Continue to Completion" })
-        .click();
-      await page
-        .getByRole("button", { name: "Complete today’s walk", exact: true })
-        .click();
-      assert.equal(
-        await page
-          .getByRole("button", { name: "Completed · come back anytime" })
-          .isDisabled(),
-        true,
-      );
-      const s = await page.evaluate(() =>
-        JSON.parse(localStorage.getItem("hfg-daily-walk:v3")),
-      );
+      assert.equal(await page.locator(".step-label").innerText(), "Step 6 of 6");
+      assert.equal(await page.getByRole("button", { name: /^Continue to / }).count(), 0, "no Continue on the last step");
+      assert.equal(await page.getByRole("button", { name: "Back to Journal", exact: true }).count(), 1, "the safe choice names the step");
+      await page.getByRole("button", { name: "Finish today's walk", exact: true }).click();
+      await page.getByRole("heading", { name: "Walk complete", exact: true }).waitFor();
+      const s = await page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")));
       assert.equal(s.local.completedDates.length, 1);
-      assert.ok(s.entries.some((e) => e.body.includes("honest private")));
+      assert.ok(s.entries.some((e) => e.body.includes("honest private")), "the private reflection is kept");
+      // Reopening shows the finish screen and completes nothing a second time.
+      await go("/walk");
+      await page.getByRole("heading", { name: "Walk complete", exact: true }).waitFor();
+      const again = await page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")));
+      assert.equal(again.local.completedDates.length, 1, "completion stays idempotent");
     },
   );
   await check(
@@ -1032,7 +1040,6 @@ try {
       const selected = async () => nav.locator('a[aria-current="page"]').allInnerTexts();
       for (const [path, tab] of [
         ["/", "Today"],
-        ["/walk", "Today"],
         ["/bible/psalms/23", "Bible"],
         ["/pray", "Pray"],
         ["/community", "Community"],

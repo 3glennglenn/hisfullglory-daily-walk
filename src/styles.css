@@ -3400,3 +3400,79 @@ html[data-text="large"] .shelf-boards .spine-ai-text {
 .flow-ai .ai-badge {
   margin-top: -1px;
 }
+
+/* ==== Plan 08: Today's walk as a full-screen flow (UI-SPEC A5; src/features/Walk.tsx) ====
+   Six steps in the story's flow (toolbar, step indicator, Title 20 heading, Body 17 on a 27px line, Footnote notes,
+   the two named buttons). The Scripture of the first step is the story's Scripture style. */
+.walk-verse {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.flow-part > .walk-sub {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.flow-part > p.walk-note {
+  margin: var(--space-2) 0 var(--space-3);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* A plain link-coloured action under the step's text, 44px tall. */
+.walk-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.walk-link:hover {
+  filter: none;
+}
+.walk-footnote {
+  margin: var(--space-4) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* The Journal step keeps its own card, now without a shadow edge competing with the flow. */
+.walk-flow .journal-card {
+  margin: 0;
+}
+.walk-complete {
+  margin: var(--space-4) 0;
+  font-family: var(--font-scripture);
+  font-size: var(--text-display);
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+/* The Journal step's card is older: its heading, label and small lines go to the five sizes (nothing under 13px). */
+.walk-flow .journal-card h2 {
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.walk-flow .journal-card label {
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.walk-flow .journal-card .row:last-child small {
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
