@@ -224,7 +224,8 @@ export async function checkDialogs(browser, base) {
       await p.getByRole("heading", { name: "Test-only request", exact: true }).waitFor();
       // Close.
       const closing = p.getByRole("dialog", { name: "Close this support request?", exact: true });
-      const closeButton = p.getByRole("button", { name: "Close", exact: true });
+      // The visible word is "Close"; its accessible name says which request (no bare Close, UI-SPEC 15.9).
+      const closeButton = p.getByRole("button", { name: "Close request: Test-only request", exact: true });
       await closeButton.click();
       await closing.waitFor();
       assert.deepEqual(await closing.getByRole("button").allInnerTexts(), ["Close request", "Keep it open"]);

@@ -10,10 +10,11 @@ import {
 import { supabase } from "../supabase";
 import { AuthPanel, useAuth } from "../platform/auth";
 import { SafetyControls } from "../social/safety";
-import { navigate } from "../platform/router";
 import { track } from "../analytics";
 import { Dialog } from "../platform/Dialog";
 import { ConfirmDialog } from "../ui/ConfirmDialog";
+import { GroupedList, Row } from "../ui/List";
+import { LargeTitle, Toolbar } from "../ui/Screen";
 const causes = curatedCharityCatalog.list();
 const empty = {
   title: "",
@@ -29,8 +30,11 @@ const empty = {
 };
 export function GivingPolicy() {
   return (
-    <section className="card">
-      <h1>Giving with care.</h1>
+    <section className="grouped-screen">
+      <Toolbar back="Give" to="/give" />
+      <LargeTitle>Giving with care.</LargeTitle>
+      <GroupedList plain>
+        <div className="group-pad">
       <p>
         HisFullGlory helps you discover causes and reviewed personal requests.
         Donations happen on an external provider’s site. We do not collect
@@ -63,15 +67,15 @@ export function GivingPolicy() {
         recurring gifts and platform receipts are unavailable.
       </p>
       <a
+        className="inline-link"
         href="https://www.gofundme.com/c/how-it-works"
         target="_blank"
         rel="noopener noreferrer"
       >
         GoFundMe’s official process
       </a>
-      <button className="secondary" onClick={() => navigate("/give")}>
-        Back to Give
-      </button>
+        </div>
+      </GroupedList>
     </section>
   );
 }
@@ -195,19 +199,16 @@ export function Give() {
   }
   const cause = causes.find((c) => c.id === detail);
   return (
-    <section>
-      <p className="eyebrow">Love made practical</p>
-      <h1>Give with intention.</h1>
-      <p>
+    <section className="grouped-screen">
+      <Toolbar back="You" to="/you" />
+      <LargeTitle>Give with intention.</LargeTitle>
+      <p className="screen-lede">
         Explore independently evaluated, high-impact giving options or reviewed
         requests from people. All giving stays with the external provider.
       </p>
-      <button
-        className="text-button"
-        onClick={() => navigate("/giving-policy")}
-      >
-        Read the giving policy
-      </button>
+      <GroupedList>
+        <Row title="Read the giving policy" href="/giving-policy" chevron />
+      </GroupedList>
       <div className="tabs">
         {[
           ["causes", "Causes"],
@@ -526,6 +527,7 @@ export function Give() {
                     )}
                     <button
                       className="secondary"
+                      aria-label={`Close request: ${r.title}`}
                       onClick={() => setConfirming({ id: r.id, remove: false })}
                     >
                       Close

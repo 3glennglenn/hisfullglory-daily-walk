@@ -794,13 +794,15 @@ progress::-webkit-progress-value {
 }
 .notice {
   background: var(--surface-2);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 20px;
-  font-size: 0.83rem;
+  color: var(--ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+  font-size: var(--text-body);
+  line-height: 1.47;
 }
 .notice p {
-  font-size: 0.8rem;
+  font-size: var(--text-footnote);
   margin: 5px 0 0;
 }
 .notice.error {
@@ -1163,7 +1165,6 @@ textarea {
   background: var(--surface);
   color: var(--ink);
   border-color: var(--line);
-  text-transform: capitalize;
   flex: 1;
   padding: 10px 8px;
   font-size: 0.78rem;
@@ -1281,7 +1282,6 @@ small {
 }
 
 .circles .entry {overflow-wrap:anywhere;}
-.circles dialog {color:var(--ink);background:var(--surface);border:1px solid var(--line);width:min(440px,calc(100vw - 32px));margin:auto;}
 .circles dialog::backdrop {background:var(--overlay);}
 
 .circles h1,.circles h2,.circles h3,.circles p {overflow-wrap:anywhere;}
@@ -4712,4 +4712,49 @@ html[data-text="large"] .around-capsule {
 }
 .group > .screen-lede {
   margin: 0 var(--space-5) var(--space-3);
+}
+/* The install offer sits after the page content as a plain surface: "Install app" is a secondary button and
+   "Later" a plain link, so Today keeps its one filled button (UI-SPEC A16, 9.3). */
+.install-offer {
+  margin: var(--space-6) 0 0;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.install-offer h2 {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.install-offer p {
+  margin: var(--space-2) 0 var(--space-4);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.install-offer button {
+  min-height: 48px;
+  margin: 0 var(--space-2) 0 0;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+}
+.install-offer .secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.install-offer small {
+  display: block;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.crash-screen {
+  padding-top: var(--space-8);
+}
+/* A post's kind in the original prayer wall: a 13px sentence-case label, not an uppercase eyebrow. */
+.post-kind {
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
 }

@@ -17,7 +17,7 @@ import {checkWalkFinish} from "../tests/walk.browser.mjs";
 import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen,checkVerseSheet,checkLayers,checkLayersCommunity,checkChapterSheet,checkCommunityLink} from "../tests/reader.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
-import {checkPushedScreens} from "../tests/remaining.browser.mjs";
+import {checkPushedScreens,checkSurfaces} from "../tests/remaining.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 // Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
 const contentDir = "site/content/context-checks";
@@ -1771,6 +1771,7 @@ try {
   await check("report dialog states, focus and sizes (controlled SDK)",()=>checkSafety(browser,base));
   await check("dialogs that replaced browser pop-ups: public contributions, public prayer updates, support requests (controlled SDK)",()=>checkDialogs(browser,base));
   await check("Journal, My Walk and Grow are pushed screens of You: Back to You, one large title, no eyebrow, no uppercase text (UI-SPEC D-10, A12)",()=>checkPushedScreens(browser,base));
+  await check("Give and its policy, Resources, Circles, the not-found and crash screens and the install offer: shared primitives, one filled button, the words of A16 (UI-SPEC A12, A16, 9.3)",()=>checkSurfaces(browser,base));
   assert.deepEqual(errors, []);
   assert.deepEqual(consoleErrors, [], "no unexpected main-page console errors");
   assert.deepEqual(consoleWarnings, [], "no unexpected main-page console warnings");

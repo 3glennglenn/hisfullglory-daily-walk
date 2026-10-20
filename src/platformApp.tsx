@@ -52,11 +52,13 @@ class ErrorBoundary extends Component<
   render() {
     return this.state.failed ? (
       <main className="shell">
-        <div className="card">
-          <h1>A moment to begin again</h1>
-          <p>Your saved data remains on this device.</p>
-          <button onClick={() => window.location.reload()}>Reload</button>
-        </div>
+        <section className="grouped-screen crash-screen">
+          <LargeTitle>A moment to begin again</LargeTitle>
+          <p className="screen-lede">Your saved data remains on this device.</p>
+          <button className="screen-action" onClick={() => window.location.reload()}>
+            Reload the app
+          </button>
+        </section>
       </main>
     ) : (
       this.props.children
@@ -178,10 +180,10 @@ function App() {
       break;
     case "shop":
       content = (
-        <section>
-          <p className="eyebrow">Find a Bible for your journey</p>
-          <h1>Rooted in the Word.</h1>
-          <p>Current price, stock and checkout are shown by the store.</p>
+        <section className="grouped-screen">
+          <Toolbar back="You" to="/you" />
+          <LargeTitle>Rooted in the Word.</LargeTitle>
+          <p className="screen-lede">Current price, stock and checkout are shown by the store.</p>
           {products.map((p) => (
             <ProductCard key={p.handle} product={p} />
           ))}
@@ -190,10 +192,12 @@ function App() {
       break;
     default:
       content = (
-        <div className="card">
-          <h1>Page not found</h1>
-          <button onClick={() => navigate("/")}>Go home</button>
-        </div>
+        <section className="grouped-screen">
+          <LargeTitle>Page not found</LargeTitle>
+          <button className="screen-action" onClick={() => navigate("/")}>
+            Back to Today
+          </button>
+        </section>
       );
   }
   return (
@@ -215,10 +219,11 @@ function App() {
       <main id="main" tabIndex={-1}>
         {content}
         {install && !state.local.installDismissed && (
-          <aside className="card">
+          <aside className="install-offer">
             <h2>Keep your daily walk close</h2>
             <p>Install for a home-screen shortcut.</p>
             <button
+              className="secondary"
               onClick={async () => {
                 await install.prompt();
                 const choice = await install.userChoice;
@@ -233,7 +238,7 @@ function App() {
               Install app
             </button>
             <button
-              className="secondary"
+              className="text-button"
               onClick={() =>
                 update((s) => ({
                   ...s,
