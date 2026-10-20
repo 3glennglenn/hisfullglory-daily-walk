@@ -38,7 +38,9 @@ const { parseContextCheck } = await import("../site/src/lib/content.ts");
 const { library } = await import("../site/src/lib/bible.ts");
 const { bible } = library();
 
-const today = "2026-10-20";
+// A fixed day on which no real check was written. It was 2026-10-20 until the daily routine wrote a real check on that
+// day, which made the one-a-day rule fail these tests; the routine only ever writes on or after 2026-10-16.
+const today = "2026-10-15";
 const html = (body: string) => `<!doctype html><html><head><title>x</title><style>p{}</style><script>var a = "ignored words";</script></head><body>${body}</body></html>`;
 const page = (body: string, type = "text/html; charset=utf-8", status = 200, headers: Record<string, string> = {}) =>
   new Response(body, { status, headers: { "content-type": type, ...headers } });
