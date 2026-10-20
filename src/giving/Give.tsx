@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import {
-  curatedCharityCatalog,
+  causes,
   supportCategories,
   goFundMeProvider,
   hasPaymentDetails,
   supportExpiry,
   type SupportRequest,
 } from "./catalog";
+import { GivePager, checkedOn } from "./GivePages";
 import { supabase } from "../supabase";
 import { AuthPanel, useAuth } from "../platform/auth";
 import { SafetyControls } from "../social/safety";
@@ -15,7 +16,6 @@ import { Dialog } from "../platform/Dialog";
 import { ConfirmDialog } from "../ui/ConfirmDialog";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle, Toolbar } from "../ui/Screen";
-const causes = curatedCharityCatalog.list();
 const empty = {
   title: "",
   story: "",
@@ -82,8 +82,6 @@ export function GivingPolicy() {
 export function Give() {
   const { session, accepted } = useAuth();
   const [view, setView] = useState("causes");
-  const [category, setCategory] = useState("all");
-  const [detail, setDetail] = useState<string | null>(null);
   const [outbound, setOutbound] = useState<{
     url: string;
     title: string;
@@ -197,7 +195,6 @@ export function Give() {
     setStatus(error ? "Could not update your request." : "Request updated.");
     await load();
   }
-  const cause = causes.find((c) => c.id === detail);
   return (
     <section className="grouped-screen">
       <Toolbar back="You" to="/you" />
@@ -206,9 +203,6 @@ export function Give() {
         Explore independently evaluated, high-impact giving options or reviewed
         requests from people. All giving stays with the external provider.
       </p>
-      <GroupedList>
-        <Row title="Read the giving policy" href="/giving-policy" chevron />
-      </GroupedList>
       <div className="tabs">
         {[
           ["causes", "Causes"],
@@ -222,65 +216,15 @@ export function Give() {
       </div>
       {view === "causes" ? (
         <>
-          <label>
-            Category
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="all">All causes</option>
-              {[...new Set(causes.map((c) => c.category))].map((c) => (
-                <option key={c}>{c}</option>
-              ))}
-            </select>
-          </label>
-          {causes
-            .filter((c) => category === "all" || c.category === category)
-            .map((c) => (
-              <article className="card" key={c.id}>
-                <small>{c.category}</small>
-                <h2>{c.title}</h2>
-                <p>{c.description}</p>
-                <button className="secondary" onClick={() => setDetail(c.id)}>
-                  Learn about this cause
-                </button>
-              </article>
-            ))}
-          {cause && (
-            <div className="card">
-              <h2>{cause.title}</h2>
-              <p>{cause.description}</p>
-              <p>
-                Evaluation and official checkout checked {cause.verifiedOn}.{" "}
-                <a
-                  href={cause.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GiveWell’s current recommendations and evidence
-                </a>
-              </p>
-              <p>
-                At the official GiveWell checkout choose “{cause.checkoutChoice}
-                ”. Impact depends on implementation and context; no individual
-                outcome is promised.
-              </p>
-              <button
-                onClick={() =>
-                  setOutbound({
-                    url: cause.donationUrl,
-                    title: cause.title,
-                    choice: cause.checkoutChoice,
-                  })
-                }
-              >
-                Give through the official provider
-              </button>
-              <button className="secondary" onClick={() => setDetail(null)}>
-                Close details
-              </button>
-            </div>
-          )}
+          <GivePager
+            onGive={(c) =>
+              setOutbound({ url: c.donationUrl, title: c.title, choice: c.checkoutChoice })
+            }
+          />
+          <p className="give-checked">
+            Checked on {checkedOn(causes.map((c) => c.verifiedOn))}. Charities and evaluators change; we re-check them regularly.
+          </p>
+          <p className="give-checked">Impact depends on implementation and context; no individual outcome is promised.</p>
         </>
       ) : view === "people" ? (
         <>
@@ -545,6 +489,9 @@ export function Give() {
           )}
         </>
       )}
+      <GroupedList>
+        <Row title="Read the giving policy" href="/giving-policy" chevron />
+      </GroupedList>
       <p role="status">{status}</p>
       {confirming && (
         <ConfirmDialog

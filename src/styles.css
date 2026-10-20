@@ -4625,6 +4625,213 @@ html[data-text="large"] .around-capsule {
   filter: none;
 }
 
+/* ==== Give: six pages of charities, and the Give card on You (quick 261020-give; src/giving/GivePages.tsx) ====
+   Calm, on the raised surface: one row of page tabs (a scrolling track like Community's sections), a page
+   indicator, then a pager that snaps one page per screen width. Cards sit in a grid inside each page, one column
+   on a phone and two on a wide column. The charity buttons are outlined, so the one filled button on You is the
+   Give card's. Only existing tokens: Cover Light and Marked Light use --button (brand brown), Lamplight the salmon
+   pill. In large text the tab row keeps scrolling sideways and the cards stay one column. */
+.give-pages {
+  margin: 0 0 var(--space-4);
+  /* The tab row and the pager scroll inside the column; their content width must not widen the screen. */
+  min-width: 0;
+  max-width: 100%;
+  contain: inline-size;
+}
+.give-tabs {
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+}
+.give-tabs [role="tab"] {
+  flex: none;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.47;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-segment) ease,
+    box-shadow var(--dur-segment) ease;
+}
+.give-tabs [role="tab"][aria-selected="true"] {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--focus);
+  font-weight: 600;
+}
+.give-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: var(--space-3) 0;
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.give-dots {
+  display: flex;
+  gap: 6px;
+}
+.give-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--muted);
+}
+.give-dot-current {
+  background: var(--ink);
+  box-shadow: none;
+}
+.give-pager {
+  align-items: flex-start;
+  /* Positioned, so the screen-reader-only text of the cards on the other pages (position: absolute) is clipped here, not
+     measured from the screen, which would widen it. */
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.give-pager::-webkit-scrollbar {
+  display: none;
+}
+.give-page {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.give-page > h2 {
+  margin: var(--space-2) 0 var(--space-1);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.give-intro {
+  margin: 0 0 var(--space-4);
+  color: var(--muted);
+}
+.give-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-3);
+}
+.give-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-width: 0;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.give-card > h3 {
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  overflow-wrap: anywhere;
+}
+.give-card > p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.give-label {
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-xs);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+}
+.give-why {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-3);
+  width: 100%;
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.give-source {
+  display: inline-flex;
+  align-items: center;
+  min-height: max(44px, 2.6rem);
+  font-weight: 600;
+}
+.give-card > p.give-note {
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.give-card .give-button {
+  width: 100%;
+  margin-top: var(--space-2);
+  text-align: center;
+}
+.give-card .give-button span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.grouped-screen p.give-checked {
+  margin: var(--space-3) 0 0;
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+:root[data-mode="lamplight"] .give-tabs,
+:root[data-mode="lamplight"] .give-tabs [role="tab"],
+:root[data-mode="lamplight"] .give-card .give-button {
+  border-radius: var(--radius-pill);
+}
+
+/* The Give card on You: directly under the large title, the one prominent element on that screen. */
+.give-feature {
+  margin: 0 0 var(--space-6);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.give-feature > h2 {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.give-feature > p {
+  margin: var(--space-2) 0 0;
+  overflow-wrap: anywhere;
+}
+.give-feature > p.give-feature-names {
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+}
+.give-feature > .button {
+  display: flex;
+  width: 100%;
+  margin-top: var(--space-4);
+  min-height: 52px;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+:root[data-mode="lamplight"] .give-feature > .button {
+  border-radius: var(--radius-pill);
+}
+
 /* ==== Plan 16: Lamplight is direction B's room (founder, 2026-10-20; sketches/direction-b) ====
    Only while data-mode="lamplight", in both looks. The light modes are untouched. The cover is no longer a leather
    block: no slab, no gilt rule, no corner ornaments, no ribbon. The words sit on the night page inside one soft pool of
@@ -4751,3 +4958,4 @@ html[data-text="large"] .around-capsule {
   line-height: 1.47;
   color: var(--muted);
 }
+
