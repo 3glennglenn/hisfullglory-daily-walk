@@ -22,6 +22,7 @@ import { Reader } from "./bible/Reader";
 import { Pray } from "./features/Pray";
 import { Grow } from "./features/Grow";
 import { ContextCheck } from "./context/ContextCheck";
+import { ContextChecks } from "./context/ContextChecks";
 import { JournalLibrary } from "./features/Journal";
 import { Settings, Profile } from "./features/Settings";
 import { You } from "./features/You";
@@ -137,7 +138,7 @@ function App() {
       content = <Pray />;
       break;
     case "context":
-      content = <ContextCheck key={route.id ?? "today"} slug={route.id} />;
+      content = route.id ? <ContextCheck key={route.id} slug={route.id} /> : <ContextChecks />;
       break;
     case "grow":
       content = <Grow id={route.id} />;

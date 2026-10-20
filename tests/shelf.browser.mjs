@@ -184,6 +184,30 @@ export async function checkShelfScreen(browser, base, published) {
     }
   }
 
+  // Under 320px the spines are a plain list too, with the same links and no sideways scroll.
+  {
+    const { context, page, problems } = await open(browser, base, "/", { width: 300, height: 700 });
+    try {
+      await seedShelf(
+        page,
+        nine.map((n) => n.entry),
+      );
+      await page.goto(base + "/shelf");
+      await page.locator("main h1").waitFor();
+      const links = page.locator('ul[aria-label="Your shelf"] a');
+      assert.equal(await links.count(), nine.length, "the same links at 300px");
+      for (let i = 0; i < nine.length; i++) {
+        assert.equal(await links.nth(i).locator(".spine-ref").evaluate((el) => getComputedStyle(el).writingMode), "horizontal-tb");
+        assert.equal(await links.nth(i).locator(".spine-date").innerText(), "Read " + monthDay(nine[i].entry.finishedOn));
+        assert.equal(Math.round((await links.nth(i).evaluate((el) => parseFloat(getComputedStyle(el).height)))) >= 52, true, "a list row, not a spine");
+      }
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, "no horizontal scroll at 300px");
+      assert.deepEqual(problems, []);
+    } finally {
+      await context.close();
+    }
+  }
+
   // Where the shelf is opened from decides what Back says; You has the row with the count.
   {
     const { context, page, problems } = await open(browser, base, "/", { width: 390, height: 844 });

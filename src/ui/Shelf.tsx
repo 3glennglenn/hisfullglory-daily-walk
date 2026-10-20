@@ -1,9 +1,9 @@
-import type { CSSProperties, MouseEvent } from "react";
+import type { CSSProperties } from "react";
 import { aiUnreviewedCardLabel, refLabel, spineHeight, type AppContextCheck } from "../context/checks";
 import { miniSpineHeight, monthDay, slugReference } from "../context/shelf";
-import { navigate } from "../platform/router";
 import type { ShelfEntry } from "../platform/models";
 import { AiBadge } from "./Badges";
+import { openInApp } from "./internalLink";
 
 // The shelf (UI-SPEC 2, A9, 12, D-07). Three pieces:
 //   Spine      one finished context check: a 44px spine, 128 to 160px tall, or a row of a plain list
@@ -19,13 +19,6 @@ const AI_SUFFIX = ", written by an AI model, not checked by a person";
 export function spineName(reference: string, finishedOn: string, ai: boolean, published: boolean): string {
   return `${reference}, read ${monthDay(finishedOn)}${ai ? AI_SUFFIX : ""}${published ? "" : ", no longer published"}`;
 }
-
-/** A link inside the app: the router moves, and a modifier or middle click is left to the browser. */
-const open = (path: string) => (e: MouseEvent<HTMLAnchorElement>) => {
-  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-  e.preventDefault();
-  navigate(path);
-};
 
 /**
  * One spine. With a path it is a link to the story (or, for a check that is no longer published, to the list of
@@ -47,7 +40,7 @@ export function Spine({
   const reference = check ? refLabel(check.verse) : slugReference(entry.slug);
   const ai = check?.review === "ai-unreviewed";
   const className = `spine spine-${(position % 3) + 1}${ai ? " spine-with-ai" : ""}`;
-  const style = { "--spine-h": `${spineHeight(entry.slug)}px` } as CSSProperties;
+  const style: CSSProperties = { height: spineHeight(entry.slug) };
   const inner = (
     <>
       <span className="spine-ref">{reference}</span>
@@ -69,7 +62,7 @@ export function Spine({
     );
   const path = check ? `/context/${entry.slug}` : "/context?unpublished=1";
   return (
-    <a className={className} style={style} href={path} onClick={open(path)} aria-label={spineName(reference, entry.finishedOn, ai, !!check)}>
+    <a className={className} style={style} href={path} onClick={openInApp(path)} aria-label={spineName(reference, entry.finishedOn, ai, !!check)}>
       {inner}
     </a>
   );

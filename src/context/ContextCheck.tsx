@@ -8,6 +8,7 @@ import { navigate } from "../platform/router";
 import { usePlatform } from "../platform/store";
 import { localDate } from "../storage";
 import {
+  aiUnreviewedCardLabel,
   checkUrl,
   editorialNote,
   paragraphs,
@@ -20,9 +21,12 @@ import {
 import { contextChecks } from "./data";
 import { finishCheck, shelfHeading } from "./shelf";
 import { shareCheckPicture } from "./shareCard";
+import { AiBadge } from "../ui/Badges";
 import { Cover, CoverAiRow, CoverHook } from "../ui/Cover";
+import { LargeTitle, Toolbar } from "../ui/Screen";
+import { MiniShelf, Spine } from "../ui/Shelf";
+import { SponsorRow } from "../ui/SponsorRow";
 import { StepIndicator } from "../ui/StepIndicator";
-import { Toolbar } from "../ui/Screen";
 
 function Told({ value, check }: { value: string; check: AppContextCheck }) {
   return (
@@ -72,6 +76,9 @@ function Story({ check }: { check: AppContextCheck }) {
   const [index, setIndex] = useState(0);
   const [status, setStatus] = useState("");
   const [shelved, setShelved] = useState<ReturnType<typeof shelfHeading>>(null);
+  // The one expressive moment (L-12): the new spine settles in once, when the check was just put on the shelf. It
+  // stops after its 360ms, so coming back to the last screen later shows the spine in place.
+  const [settling, setSettling] = useState(false);
   const touch = useRef<number | null>(null);
   const card = useRef<HTMLElement>(null);
   // Focus follows the reader to the new part's title, but not when the story first opens.
@@ -128,6 +135,25 @@ function Story({ check }: { check: AppContextCheck }) {
       body: (
         <>
           {shelved && <h3 className="flow-shelf-heading">{shelved}</h3>}
+          {shelved && (
+            <div className="shelf-moment">
+              <MiniShelf shelf={state.shelf.filter((entry) => entry.slug !== check.slug)} checks={contextChecks} />
+              <span className={settling ? "shelf-moment-spine shelf-moment-new" : "shelf-moment-spine"} onAnimationEnd={() => setSettling(false)}>
+                <Spine
+                  entry={state.shelf.find((entry) => entry.slug === check.slug) ?? { slug: check.slug, finishedOn: localDate() }}
+                  check={check}
+                  position={Math.max(0, state.shelf.findIndex((entry) => entry.slug === check.slug))}
+                  linked={false}
+                />
+              </span>
+            </div>
+          )}
+          {check.review === "ai-unreviewed" && (
+            <p className="flow-ai">
+              <AiBadge />
+              <span>{aiUnreviewedCardLabel}</span>
+            </p>
+          )}
           <div className="story-actions">
             <button type="button" className="flow-button" onClick={() => navigate(`/bible/${check.verse.book}/${check.verse.chapter}/${check.verse.start}`)}>
               Read {label.replace(/:.*/, "")} in full
@@ -143,6 +169,7 @@ function Story({ check }: { check: AppContextCheck }) {
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </div>
+          <SponsorRow place="story-end" />
           <p className="flow-note">{editorialNote(check.review, check.drafted)}</p>
         </>
       ),
@@ -157,11 +184,18 @@ function Story({ check }: { check: AppContextCheck }) {
   // The last screen is reached: the check goes on the shelf once. "Added to your shelf" is said only when the
   // write worked; a check that was already there says "On your shelf" and is not written again.
   useEffect(() => {
-    if (index !== last || finished.current) return;
+    // Leaving the last screen ends the moment, so it never plays a second time.
+    if (index !== last) {
+      setSettling(false);
+      return;
+    }
+    if (finished.current) return;
     finished.current = true;
     const already = state.shelf.some((entry) => entry.slug === check.slug);
     const saved = already ? true : update((s) => ({ ...s, shelf: finishCheck(s.shelf, check.slug, localDate()) }));
-    setShelved(shelfHeading(already, saved));
+    const heading = shelfHeading(already, saved);
+    setShelved(heading);
+    setSettling(heading === "Added to your shelf");
   }, [index]);
 
   // A new part starts at its title: focus moves there, and the part scrolls into view if Next was tapped below it.
@@ -227,28 +261,34 @@ function Story({ check }: { check: AppContextCheck }) {
           </button>
         )}
       </nav>
-      <details className="flow-more">
-        <summary>More context checks</summary>
-        {contextChecks.map((c) => (
-          <button key={c.slug} type="button" className="text-button" onClick={() => navigate(`/context/${c.slug}`)}>
-            {refLabel(c.verse)}: {c.hook}
-          </button>
-        ))}
-      </details>
     </section>
   );
 }
 
-export function ContextCheck({ slug }: { slug?: string }) {
+/** The state of a story whose check is not published (UI-SPEC A16): two ways on, never a dead end. */
+function NotAvailable() {
   const { state } = usePlatform();
-  // Until the list of context checks arrives, /context without a slug opens Today’s check.
-  const check = slug ? contextChecks.find((c) => c.slug === slug) : todaysCheck(contextChecks, state.shelf, localDate())?.check;
-  if (!check)
-    return (
-      <section>
-        <h1>Context check not found</h1>
-        <button onClick={() => navigate("/context")}>Today’s context check</button>
-      </section>
-    );
-  return <Story key={check.slug} check={check} />;
+  const todays = todaysCheck(contextChecks, state.shelf, localDate())?.check;
+  return (
+    <section className="grouped-screen">
+      <Toolbar back="Today" to="/" />
+      <LargeTitle>Context check not available</LargeTitle>
+      <p className="state-text">This context check is not available. It may have been taken down.</p>
+      <div className="story-actions">
+        {todays && (
+          <button type="button" className="flow-button" onClick={() => navigate(`/context/${todays.slug}`)}>
+            Read today's story
+          </button>
+        )}
+        <button type="button" className={todays ? "flow-button flow-button-secondary" : "flow-button"} onClick={() => navigate("/context")}>
+          See all context checks
+        </button>
+      </div>
+    </section>
+  );
+}
+
+export function ContextCheck({ slug }: { slug: string }) {
+  const check = contextChecks.find((c) => c.slug === slug);
+  return check ? <Story key={check.slug} check={check} /> : <NotAvailable />;
 }

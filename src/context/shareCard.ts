@@ -1,7 +1,7 @@
 // A picture of a context check for Instagram, TikTok and WhatsApp: the opening line, the
 // verse and the address of the full story on the website. Drawn on the device; nothing is
 // uploaded.
-import { checkUrl, refLabel, type AppContextCheck } from "./checks";
+import { aiUnreviewedCardLabel, checkUrl, refLabel, shareText, type AppContextCheck } from "./checks";
 
 const size = { width: 1080, height: 1350 };
 // Cover Light of src/styles.css (--bg, --surface, --ink, --muted, --link), so the card looks the same in every look and mode.
@@ -50,17 +50,26 @@ export async function drawShareCard(check: AppContextCheck): Promise<Blob> {
   ctx.fillStyle = colors.link;
   ctx.font = font(600, 30);
   ctx.textBaseline = "alphabetic";
-  ctx.fillText("CONTEXT CHECK", margin, margin + 196);
-  // The opening line, as large as it fits.
+  ctx.fillText("Context check", margin, margin + 196);
+  // The opening line, as large as it fits. A check that no person checked leaves room for its label below.
+  const unchecked = check.review === "ai-unreviewed";
+  const room = unchecked ? 560 : 640;
   let px = 72;
   let lines: string[] = [];
   for (; px >= 44; px -= 4) {
     ctx.font = font(400, px);
     lines = wrap(ctx, check.hook, size.width - margin * 2);
-    if (lines.length * px * 1.3 <= 640) break;
+    if (lines.length * px * 1.3 <= room) break;
   }
   ctx.fillStyle = colors.ink;
   lines.forEach((line, i) => ctx.fillText(line, margin, margin + 300 + i * px * 1.3));
+  // D-06: the label of a check written by an AI model, above the reference, in ink at 600 and 40px, wrapped to the text width.
+  if (unchecked) {
+    ctx.font = font(600, 40);
+    ctx.fillStyle = colors.ink;
+    const label = wrap(ctx, aiUnreviewedCardLabel, size.width - margin * 2);
+    label.forEach((line, i) => ctx.fillText(line, margin, size.height - margin - 192 - (label.length - 1 - i) * 52));
+  }
   ctx.fillStyle = colors.link;
   ctx.font = font(600, 48);
   ctx.fillText(refLabel(check.verse), margin, size.height - margin - 120);
@@ -83,7 +92,7 @@ export async function shareCheckPicture(check: AppContextCheck): Promise<"shared
   const file = new File([blob], `hisfullglory-${check.slug}.png`, { type: "image/png" });
   if (navigator.canShare?.({ files: [file] })) {
     try {
-      await navigator.share({ files: [file], text: `${check.hook} ${checkUrl(check)}` });
+      await navigator.share({ files: [file], text: shareText(check) });
       return "shared";
     } catch {
       return "cancelled";

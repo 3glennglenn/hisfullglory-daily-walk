@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { countLabel, finishCheck, miniSpineHeight, monthDay, shelfHeading, shelfSummary, slugReference, spineHeight } from "../src/context/shelf.ts";
 import { freshPlatform, savePlatform, V3_KEY } from "../src/platform/persistence.ts";
 import type { ShelfEntry } from "../src/platform/models.ts";
-import type { AppContextCheck } from "../src/context/checks.ts";
+import { aiUnreviewedCardLabel, checkUrl, shareText, type AppContextCheck } from "../src/context/checks.ts";
 
 // Only the fields the shelf looks at.
 const check = (slug: string, review: "approved" | "ai-unreviewed") => ({ slug, review }) as AppContextCheck;
@@ -119,4 +119,13 @@ test("slugReference reads a verse out of a slug, and monthDay says the day in En
   assert.equal(slugReference("not-a-verse"), "Context check");
   assert.equal(monthDay("2026-10-19"), "October 19");
   assert.equal(monthDay("2026-03-04"), "March 4");
+});
+
+test("shareText: an approved check shares as before, an AI-unreviewed one carries its label in the same words (D-06)", () => {
+  const approved = { slug: "psalm-46-10", review: "approved", hook: "You know the verse. But did you know it was a battle cry?" } as AppContextCheck;
+  const written = { slug: "john-3-16", review: "ai-unreviewed", hook: "You know the verse. But did you know it was said at night?" } as AppContextCheck;
+  assert.equal(shareText(approved), `${approved.hook} ${checkUrl(approved)}`, "unchanged for an approved check");
+  assert.equal(shareText(written), `${written.hook} Written by an AI model. Not checked by a person. ${checkUrl(written)}`);
+  assert.ok(shareText(written).includes(aiUnreviewedCardLabel), "the words are the card's");
+  assert.ok(!shareText(approved).includes("AI model"));
 });

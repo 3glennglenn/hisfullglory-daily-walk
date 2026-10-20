@@ -134,6 +134,13 @@ export function refLabel(ref: CheckRef): string {
 
 export const checkUrl = (check: AppContextCheck) => `${siteUrl}/context-checks/${check.slug}`;
 
+/**
+ * The text that goes with a shared picture (UI-SPEC A7, D-06): the hook, then the address. A check that no person
+ * checked says so between them, in the same words as the card, so the label travels with every share.
+ */
+export const shareText = (check: AppContextCheck): string =>
+  `${check.hook} ${check.review === "ai-unreviewed" ? `${aiUnreviewedCardLabel} ` : ""}${checkUrl(check)}`;
+
 /** Splits text into its own words and the quoted voices its [[id]] markers stand for. */
 export function withVoices(value: string, voices: CheckVoice[]): (string | CheckVoice)[] {
   return value.split(/\[\[([a-z0-9-]+)\]\]/).map((piece, index) => {
