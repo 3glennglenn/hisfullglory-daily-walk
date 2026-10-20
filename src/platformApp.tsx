@@ -36,6 +36,7 @@ import { LamplightNotice, noticeText } from "./ui/LamplightNotice";
 import { LargeTitle, Toolbar } from "./ui/Screen";
 import { products } from "./config";
 import { contentFor } from "./data";
+import { contextChecks } from "./context/data";
 import { localDate } from "./storage";
 import { track } from "./analytics";
 class ErrorBoundary extends Component<
@@ -111,6 +112,9 @@ function App() {
   // Sets data-text="large" on <html> while the system text size is 150 % or more (UI-SPEC 6.3).
   useEffect(() => watchTextSize(document.documentElement), []);
   const page = route.page;
+  // A story is a full-screen flow (UI-SPEC A7, 8.1): the tab bar is covered while it is open and "‹ Today" is the
+  // way out. A slug that names no published check is the error state, which keeps the tab bar.
+  const flow = page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id);
   let content: ReactNode;
   switch (page) {
     case "my-walk":
@@ -188,7 +192,7 @@ function App() {
       );
   }
   return (
-    <div className="shell">
+    <div className="shell" data-flow={flow ? "true" : undefined}>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -239,7 +243,7 @@ function App() {
         )}
         <LamplightNotice tab={tabFor(page)} path={location.pathname} />
       </main>
-      <TabBar active={tabFor(page)} />
+      {!flow && <TabBar active={tabFor(page)} />}
     </div>
   );
 }

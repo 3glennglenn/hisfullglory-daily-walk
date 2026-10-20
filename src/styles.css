@@ -1341,60 +1341,18 @@ small {
 .ai-compare dl {margin:0 0 6px;}
 .ai-compare dt {margin-top:8px;font-size:0.72rem;font-weight:600;color:var(--muted);}
 .ai-compare dd {margin:2px 0 0;font-size:0.92rem;}
-/* Context check of the day: one part of the story per screen. */
+/* The story and the walk are full-screen flows (plans 07 and 08); their styles are in the last sections of this file. */
 .muted {
   color: var(--muted);
 }
-.story-slide {
-  min-height: 52vh;
-}
-.story-hook {
-  font-size: 1.7rem;
-  line-height: 1.25;
-  font-weight: 400;
-}
-.story-ref {
-  color: var(--link);
-  font-weight: 600;
-}
 .story-verse {
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-2);
   font-family: var(--font-scripture);
-  font-size: 1.15rem;
-  line-height: 1.75;
+  font-size: var(--text-scripture);
+  line-height: 1.7;
 }
-.story-slide q {
+.flow-part q {
   quotes: "\201C" "\201D" "\2018" "\2019";
-}
-.story-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.story-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 12px 0;
-}
-.story-dots {
-  display: flex;
-  gap: 6px;
-}
-.story-dots span {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--line);
-}
-.story-dots span.on {
-  background: var(--button);
-}
-.context-story details .text-button {
-  display: block;
-  text-align: left;
-  margin: 8px 0;
 }
 /* Listen: the verse being read aloud. */
 .verse.speaking {
@@ -2872,4 +2830,201 @@ html[data-text="large"] .today .list-row-leading {
 .sponsor .group-note {
   font-size: var(--text-footnote);
   line-height: 1.38;
+}
+
+/* ==== Plan 07: the story as a full-screen flow, and the step indicator (UI-SPEC A7, A5; src/context/ContextCheck.tsx, src/ui/StepIndicator.tsx) ====
+   A story (and, in plan 08, the walk) covers the tab bar: the shell is marked data-flow, the bar is not drawn and
+   the page's bottom padding is the plain one. Buttons are 48px and named after what they do. */
+.shell[data-flow] main {
+  padding-bottom: calc(var(--space-8) + env(safe-area-inset-bottom) + var(--notice-h));
+}
+.shell[data-flow] .lamplight-notice {
+  bottom: max(var(--space-3), env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) {
+  .shell[data-flow] {
+    padding-left: max(32px, env(safe-area-inset-left));
+  }
+}
+/* The step indicator: 4px segments, the steps done and the current one filled, the rest an outline. */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-2) 0 var(--space-5);
+}
+.step-segments {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--space-1);
+}
+.step-segment {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 4px;
+  box-sizing: border-box;
+  border: 1px solid var(--muted);
+  border-radius: 2px;
+  background: var(--line);
+}
+.step-segment-done {
+  border-color: var(--link);
+  background: var(--link);
+}
+.step-label {
+  flex: none;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+  white-space: nowrap;
+}
+html[data-text="large"] .step-indicator {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-2);
+}
+html[data-text="large"] .step-label {
+  white-space: normal;
+}
+/* One part of a flow: Title 20 heading, Body 17 on a 27px line, Footnote notes. */
+.flow-part {
+  min-height: 40vh;
+  scroll-margin-top: calc(52px + env(safe-area-inset-top) + var(--space-2));
+}
+.flow-part h2 {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.flow-part h2:focus {
+  outline: none;
+}
+.flow-part > p {
+  font-size: var(--text-body);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.flow-part > p + p {
+  margin-top: var(--space-4);
+}
+.flow-part > small {
+  display: block;
+  margin-top: var(--space-4);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.flow-shelf-heading {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+/* The story's first screen is the cover of Today; its hint is a Footnote. The lamp glow belongs to Today only. */
+.cover .cover-hint {
+  margin-top: var(--space-4);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--sig-muted);
+}
+.story-flow .cover-wrap::before {
+  content: none;
+}
+/* Marked page: the ribbon hangs beside the first lines, and the text leaves its column free. */
+:root[data-look="marked"] .story-flow .cover {
+  padding-right: calc(var(--space-2) + 10px + var(--space-3));
+}
+:root[data-look="marked"] .story-flow .cover-ribbon {
+  top: 0;
+  height: 72px;
+}
+.flow-status {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.flow-status:empty {
+  margin: 0;
+}
+.flow-note {
+  margin: var(--space-6) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+/* Buttons: filled (the next step) and secondary (the safe choice). Both 48px or more, Body 17/600, wrapping. */
+.flow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+.flow-actions .flow-button {
+  flex: 1 1 15rem;
+}
+.story-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.flow-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  width: 100%;
+  min-height: max(48px, 2.8rem);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--button);
+  color: var(--on-button);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.flow-button-secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.flow-link {
+  display: block;
+  padding: var(--space-3) 0;
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+  text-align: center;
+}
+.flow-more {
+  margin-top: var(--space-6);
+}
+.flow-more summary {
+  min-height: 44px;
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--link);
+}
+.flow-more .text-button {
+  display: block;
+  margin: var(--space-2) 0;
+  font-size: var(--text-body);
+  text-align: left;
+}
+/* An icon button in the toolbar: 44px, the link colour, no box. */
+.toolbar-icon {
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
 }

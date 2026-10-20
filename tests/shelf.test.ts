@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { countLabel, finishCheck, miniSpineHeight, shelfSummary, spineHeight } from "../src/context/shelf.ts";
+import { countLabel, finishCheck, miniSpineHeight, shelfHeading, shelfSummary, spineHeight } from "../src/context/shelf.ts";
+import { freshPlatform, savePlatform, V3_KEY } from "../src/platform/persistence.ts";
 import type { ShelfEntry } from "../src/platform/models.ts";
 import type { AppContextCheck } from "../src/context/checks.ts";
 
@@ -64,4 +65,48 @@ test("countLabel says it plainly and never scolds", () => {
   assert.equal(countLabel(2), "2 context checks read");
   assert.equal(countLabel(9), "9 context checks read");
   assert.equal(countLabel(12), "12 context checks read");
+});
+
+// ---- Plan 07: finishing a story (UI-SPEC A7, 12, E10) ---------------------------------------------------------
+
+test("shelfHeading: 'Added to your shelf' only after a saved first finish, 'On your shelf' when it was there, nothing when the write failed", () => {
+  assert.equal(shelfHeading(false, true), "Added to your shelf");
+  assert.equal(shelfHeading(true, true), "On your shelf");
+  // Already on the shelf: nothing needed saving, so the true sentence still holds.
+  assert.equal(shelfHeading(true, false), "On your shelf");
+  // Not there before and the write failed: no heading at all (T-01.1-25).
+  assert.equal(shelfHeading(false, false), null);
+});
+
+/** A storage that keeps what it is given, and one that refuses every write (the browser's full or blocked storage). */
+const working = () => {
+  const data = new Map<string, string>();
+  return { data, getItem: (k: string) => data.get(k) ?? null, setItem: (k: string, v: string) => void data.set(k, v) };
+};
+const failing = { getItem: () => null, setItem: () => { throw new Error("QuotaExceededError"); } };
+
+test("finishing through the real save path: one entry with today's date, again adds nothing, a failing storage says not saved", () => {
+  const storage = working();
+  const start = freshPlatform();
+  // The same step the story takes: the new shelf goes into the state and the state is saved.
+  const first = { ...start, shelf: finishCheck(start.shelf, "john-3-16", "2026-10-20") };
+  assert.equal(savePlatform(storage, first), true);
+  assert.deepEqual(JSON.parse(storage.data.get(V3_KEY)!).shelf, [{ slug: "john-3-16", finishedOn: "2026-10-20" }]);
+  assert.equal(shelfHeading(false, true), "Added to your shelf");
+
+  // Finishing it again: the shelf comes back unchanged, so the story does not even write.
+  const again = finishCheck(first.shelf, "john-3-16", "2026-10-21");
+  assert.equal(again, first.shelf);
+  assert.equal(first.shelf.some((e) => e.slug === "john-3-16"), true);
+  assert.equal(shelfHeading(true, true), "On your shelf");
+
+  // A storage that cannot write: savePlatform says false, the state in memory is not replaced, no heading.
+  const kept = start;
+  const attempt = { ...start, shelf: finishCheck(start.shelf, "psalm-46-10", "2026-10-20") };
+  const saved = savePlatform(failing, attempt);
+  assert.equal(saved, false);
+  assert.deepEqual(kept.shelf, [], "the shelf the reader had is unchanged");
+  assert.equal(shelfHeading(false, saved), null);
+  // Blocked storage (a migration that could not be saved) refuses too.
+  assert.equal(savePlatform(storage, attempt, true), false);
 });

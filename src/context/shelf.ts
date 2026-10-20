@@ -16,6 +16,16 @@ export function finishCheck(shelf: ShelfEntry[], slug: string, date: string): Sh
   return [...shelf, { slug, finishedOn: date }];
 }
 
+/**
+ * The heading above the shelf moment at the end of a story (UI-SPEC A7, E10). "Added to your shelf" is said only
+ * after the entry was really written; "On your shelf" when the check was there before; nothing when it was not
+ * there and the write failed, so the screen never claims what the device did not keep.
+ */
+export function shelfHeading(alreadyThere: boolean, saved: boolean): "Added to your shelf" | "On your shelf" | null {
+  if (alreadyThere) return "On your shelf";
+  return saved ? "Added to your shelf" : null;
+}
+
 /** How many checks stand on the shelf, and how many of them were written by an AI model that no person checked. */
 export function shelfSummary(shelf: ShelfEntry[], checks: AppContextCheck[]): { count: number; ai: number } {
   const unchecked = new Set(checks.filter((check) => check.review === "ai-unreviewed").map((check) => check.slug));
