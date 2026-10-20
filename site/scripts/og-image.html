@@ -1,7 +1,8 @@
 <!doctype html>
 <!-- The design of public/og.png. scripts/og-image.mjs photographs this page at 1200 x 630.
-     Always Light: a shared link looks the same for everyone. -->
-<html lang="en" data-theme="light">
+     Always Cover and story in Light: a shared link looks the same for everyone. The colours
+     are the tokens of src/styles.css (UI-SPEC 5.1). -->
+<html lang="en" data-mode="light">
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../src/styles/tokens.generated.css" />
@@ -48,12 +49,12 @@
         height: 76px;
       }
       .brand rect {
-        fill: var(--paper);
-        stroke: var(--border);
+        fill: var(--surface);
+        stroke: var(--line);
       }
       .brand path {
         fill: none;
-        stroke: var(--accent);
+        stroke: var(--button);
         stroke-width: 3;
         stroke-linecap: round;
       }
@@ -77,12 +78,7 @@
         align-items: baseline;
         font-size: 24px;
         font-weight: 600;
-        color: var(--strong);
-      }
-      footer span:first-child {
-        letter-spacing: 0.13em;
-        text-transform: uppercase;
-        font-size: 20px;
+        color: var(--ink);
       }
       .rule {
         position: absolute;
@@ -90,7 +86,7 @@
         top: 0;
         width: 14px;
         height: 630px;
-        background: var(--accent);
+        background: var(--button);
       }
     </style>
   </head>

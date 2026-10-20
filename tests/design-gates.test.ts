@@ -266,3 +266,28 @@ test("the crash screen says what UI-SPEC 9.2 says, and the install offer keeps o
   assert.match(source, /className="secondary"\s+onClick=\{async/);
   assert.match(source, /className="text-button"\s+onClick=\{\(\) =>\s+update/);
 });
+
+// ---- Plan 14: the rule files match the redesign (UI-SPEC 16, T-01.1-45) ----------------------------------------------
+
+test("rule files match the redesign", () => {
+  const flat = (file: string) => readFileSync(file, "utf8").replace(/\s+/g, " ");
+
+  const agents = flat("AGENTS.md");
+  assert.ok(agents.includes("Primary navigation: Today, Bible, Pray, Community, You."));
+  assert.ok(!agents.includes("Home, Bible, Pray, Community, More"));
+  assert.ok(agents.includes("Lamplight"));
+  assert.ok(agents.includes("Gelasio and Literata for Scripture, all bundled"));
+  // The founder's position on ad placement is pending: this sentence stays word for word until he answers.
+  assert.ok(agents.includes("No public emails, private chat, media uploads, ads inside community, or browser admin role."));
+
+  // D-06 (founder, 2026-10-19): the front door shows the newest check, AI-unreviewed ones included, always labelled.
+  const old = ["keep showing", "approved checks only"].join(" ");
+  const oldSite = ["show", "approved checks only"].join(" ");
+  for (const file of ["CLAUDE.md", "docs/CONTEXT_CHECKS_ROUTINE.md", "site/README.md"]) {
+    const text = flat(file);
+    assert.ok(text.includes("AI-unreviewed ones included"), file + " lacks the D-06 sentence");
+    assert.ok(!text.includes(old) && !text.includes(oldSite), file + " still says only approved checks are shown");
+  }
+  assert.ok(flat("CLAUDE.md").includes("Written by an AI model. Not checked by a person."));
+  assert.ok(flat("docs/CONTEXT_CHECKS_ROUTINE.md").includes("not whether it is shown"));
+});
