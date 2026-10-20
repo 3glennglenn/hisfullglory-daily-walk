@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { build } from "esbuild";
 import { readdirSync, readFileSync } from "node:fs";
 import { publishedChecks } from "../src/context/checks.ts";
 
@@ -824,5 +825,225 @@ export async function checkVerseSheet(browser, base) {
     assert.deepEqual(sharing.problems, []);
   } finally {
     await sharing.context.close();
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// The layers around a verse (Task 2 of plan 10).
+
+const layerRows = (sheet) => sheet.locator(".layer-row").evaluateAll((els) => els.map((el) => el.dataset.layerRow));
+const openVerseSheet = async (page, verse, name) => {
+  await page.locator(`#verse-${verse} .verse-num`).click();
+  const sheet = page.getByRole("dialog", { name });
+  await sheet.waitFor();
+  return sheet;
+};
+const serif = /^["']?(Gelasio|Literata)/;
+
+/** Context, AI explanation and Community: apart by words, icon, frame and colour, with honest states. */
+export async function checkLayers(browser, base) {
+  const ctx = await open(browser);
+  try {
+    const { page } = ctx;
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-3").waitFor();
+    const sheet = await openVerseSheet(page, 3, "John 3:3");
+    // "Around this verse": the layers in their fixed order (no community service is configured in this build, so no
+    // Community row: the feature is hidden, not announced).
+    assert.equal(await sheet.getByRole("heading", { name: "Around this verse", exact: true }).count(), 1);
+    await sheet.locator('[data-layer-row="ai"] .list-row-detail').filter({ hasNotText: "Loading…" }).waitFor();
+    assert.deepEqual(await layerRows(sheet), ["context", "ai"]);
+    const context = sheet.locator('[data-layer-row="context"]');
+    assert.match(await context.innerText(), /^Context\n(Editorial draft|Reviewed|Editorial observation)\nAbout John/);
+    // The AI row: the badge at 13px or more, a sparkle icon, its label in the AI colour; the words say what it is.
+    const aiRow = sheet.locator('[data-layer-row="ai"]');
+    const badge = await aiRow.locator(".ai-badge").evaluate((el) => ({ text: el.textContent, size: parseFloat(getComputedStyle(el).fontSize) }));
+    assert.equal(badge.text, "AI");
+    assert.ok(badge.size >= 12.99, `the AI badge is at least 13px (${badge.size})`);
+    assert.match(await aiRow.innerText(), /^AI explanation\nAI\n(How translations differ here|About John)/);
+    const colours = await page.evaluate(() => {
+      const read = (name) => {
+        const probe = document.createElement("i");
+        probe.style.color = `var(${name})`;
+        document.body.append(probe);
+        const v = getComputedStyle(probe).color;
+        probe.remove();
+        return v;
+      };
+      return { ai: read("--ai"), label: getComputedStyle(document.querySelector('[data-layer-row="ai"] .list-row-title')).color };
+    });
+    assert.equal(colours.label, colours.ai, "the AI label is --ai");
+    // The AI page opens inside the same sheet: Back and Close, the dashed frame, the words, the badge, no serif.
+    await aiRow.click();
+    assert.equal(await page.getByRole("dialog").count(), 1, "still one sheet");
+    const back = sheet.getByRole("button", { name: "Back to John 3:3", exact: true });
+    assert.equal(await back.textContent(), "‹ John 3:3");
+    assert.equal(await sheet.getByRole("button", { name: "Close John 3:3", exact: true }).count(), 1);
+    const ai = sheet.locator('article[data-layer="ai"]');
+    await ai.waitFor();
+    assert.equal(await page.evaluate(() => document.activeElement?.textContent), "AI explanation", "focus is on the page's heading");
+    // 1.5px is the frame the stylesheet draws; a 1x screen snaps a border to whole pixels, so it reads 1px there.
+    assert.match(await ai.evaluate((el) => getComputedStyle(el).borderTopStyle + " " + getComputedStyle(el).borderTopWidth), /^dashed (1|1\.5)px$/, "the dashed AI frame");
+    assert.equal(await ai.evaluate((el) => getComputedStyle(el).borderTopColor), colours.ai, "in the AI colour");
+    assert.equal(await ai.locator(".layer-note").innerText(), "Written by an AI model. Not reviewed by a theological reader.");
+    assert.ok((await ai.locator(".ai-badge").evaluate((el) => parseFloat(getComputedStyle(el).fontSize))) >= 12.99, "13px (0.7647rem at a 17px root is 12.9999)");
+    assert.equal(await ai.locator("h3").innerText(), "AI explanation");
+    assert.equal(await ai.locator(".layer-icon").count(), 1, "a sparkle icon");
+    const faces = await ai.locator("*").evaluateAll((els) => els.filter((el) => !el.classList.contains("ai-web") && el.textContent.trim() && !el.children.length).map((el) => getComputedStyle(el).fontFamily));
+    assert.ok(faces.length > 5 && faces.every((f) => !/Gelasio|Literata/.test(f)), "AI text is never set in the Scripture face");
+    assert.ok(!serif.test(await ai.locator(".layer-body").first().evaluate((el) => getComputedStyle(el).fontFamily)));
+    // Only the WEB quotations of the comparison are Scripture, and wear its face.
+    for (const web of await ai.locator(".ai-web").all()) assert.match(await web.evaluate((el) => getComputedStyle(el).fontFamily), /Gelasio/);
+    assert.equal(await ai.locator('details summary:text("About this explanation")').count(), 1);
+    assert.equal(await sheet.locator("[data-layer]").count(), 1, "one layer on a page");
+    // Back returns to the root page, focus on the row it came from.
+    await back.click();
+    await sheet.locator(".verse-actions").waitFor();
+    await page.waitForFunction(() => document.activeElement?.dataset.layerRow === "ai", undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the AI row"));
+    // The Context page: a solid frame, the heading, the review words, its own page.
+    await sheet.locator('[data-layer-row="context"]').click();
+    const sourced = sheet.locator('article[data-layer="sourced"]');
+    await sourced.waitFor();
+    assert.equal(await sourced.evaluate((el) => getComputedStyle(el).borderTopStyle + " " + getComputedStyle(el).borderTopWidth), "solid 1px", "the solid sourced frame");
+    assert.equal(await sourced.locator("h3").innerText(), "Context");
+    assert.match(await sourced.locator(".review-pill").innerText(), /^(Editorial draft|Reviewed|Editorial observation)$/);
+    assert.equal(await sourced.locator(".ai-badge, [data-layer=ai]").count(), 0, "sourced context stays free of AI");
+    await sheet.getByRole("button", { name: "Back to John 3:3", exact: true }).click();
+    await page.keyboard.press("Escape");
+    await sheet.waitFor({ state: "detached" });
+    assert.deepEqual(ctx.problems, []);
+  } finally {
+    await ctx.context.close();
+  }
+
+  // The AI file is slow, then missing, then fails: each state says so.
+  const states = await open(browser);
+  try {
+    const { page } = states;
+    let release;
+    const gate = new Promise((resolve) => (release = resolve));
+    await page.route("**/ai/john.json", async (route) => {
+      await gate;
+      await route.continue();
+    });
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-3").waitFor();
+    let sheet = await openVerseSheet(page, 3, "John 3:3");
+    assert.match(await sheet.locator('[data-layer-row="ai"]').innerText(), /Loading…/, "Loading… until the file arrives");
+    assert.equal(await sheet.locator('[data-layer-row="ai"]').evaluate((el) => el.tagName), "DIV", "not a link while it loads");
+    release();
+    await sheet.locator('[data-layer-row="ai"]').filter({ hasNotText: "Loading…" }).waitFor();
+    assert.equal(await sheet.locator('[data-layer-row="ai"]').evaluate((el) => el.tagName), "BUTTON", "a link once it has loaded");
+    await page.keyboard.press("Escape");
+    await page.unroute("**/ai/john.json");
+    // No file for the book: the words, and no chevron.
+    await page.route("**/ai/john.json", (route) => route.fulfill({ status: 404, body: "Not found" }));
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-3").waitFor();
+    sheet = await openVerseSheet(page, 3, "John 3:3");
+    const none = sheet.locator('[data-layer-row="ai"]');
+    await none.filter({ hasText: "No AI explanation for this chapter yet." }).waitFor();
+    assert.equal(await none.evaluate((el) => el.tagName), "DIV");
+    assert.equal(await none.locator(".list-row-chevron").count(), 0, "no chevron");
+    assert.equal(await sheet.getByRole("button", { name: "Load again" }).count(), 0, "nothing to retry for a missing file");
+    await page.keyboard.press("Escape");
+    await page.unroute("**/ai/john.json");
+    // The request fails: the sentence and Load again; one press asks once; the row recovers.
+    let asked = 0;
+    await page.route("**/ai/john.json", (route) => {
+      asked++;
+      return route.abort();
+    });
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-3").waitFor();
+    sheet = await openVerseSheet(page, 3, "John 3:3");
+    const failed = sheet.locator('[data-layer-row="ai"]');
+    await failed.filter({ hasText: "The AI explanation could not be loaded. Check your connection, then tap Load again." }).waitFor();
+    assert.equal(await failed.evaluate((el) => el.tagName), "DIV");
+    const before = asked;
+    await page.unroute("**/ai/john.json");
+    await sheet.getByRole("button", { name: "Load again", exact: true }).click();
+    await sheet.locator('[data-layer-row="ai"]').filter({ hasNotText: /could not be loaded|Loading…/ }).waitFor();
+    assert.equal(await sheet.locator('[data-layer-row="ai"]').evaluate((el) => el.tagName), "BUTTON", "recovered");
+    assert.equal(asked, before, "the retry went to the real file, not the aborted one");
+    assert.deepEqual(states.problems.filter((p) => !/Failed to load resource|ERR_FAILED|404/.test(p)), []);
+  } finally {
+    await states.context.close();
+  }
+}
+
+/** The community layer, on a controlled service: its row, its page, its words offline. */
+export async function checkLayersCommunity(browser, base) {
+  const result = await build({
+    entryPoints: ["tests/fixtures/reader.tsx"],
+    bundle: true,
+    write: false,
+    outfile: ".tooling/reader-fixture.js",
+    format: "iife",
+    jsx: "automatic",
+    loader: { ".svg": "dataurl" },
+    define: { "process.env.NODE_ENV": '"production"' },
+    plugins: [
+      {
+        name: "controlled-reader-sdk",
+        setup(b) {
+          // The published context checks come from a Vite-only glob; the reader does not need them here.
+          b.onResolve({ filter: /\/context\/data$/ }, () => ({ path: "checks", namespace: "reader-fixture" }));
+          b.onResolve({ filter: /^\.\.\/supabase$/ }, () => ({ path: "sdk", namespace: "reader-fixture" }));
+          b.onLoad({ filter: /^checks$/, namespace: "reader-fixture" }, () => ({ loader: "js", contents: "export const contextChecks = [];" }));
+          b.onLoad({ filter: /^sdk$/, namespace: "reader-fixture" }, () => ({
+            loader: "js",
+            contents: `
+              const posts=[{origin_kind:'post',id:'c0000000-0000-4000-8000-000000000011',display_name:'Fixture reader',body:'Test-only reflection on this verse',post_type:'reflection',source_path:'/bible/john/3/3',created_at:'2026-10-07T00:00:00Z',is_owner:false,prayer_status:null,amen_count:0,helped_count:0,praying_count:0}];
+              const ok={data:[],error:null};
+              export const supabase={
+                auth:{getSession:async()=>({data:{session:null},error:null}),onAuthStateChange(){return {data:{subscription:{unsubscribe(){}}}};}},
+                from(){const q={select(){return q},eq(){return q},order(){return q},maybeSingle:async()=>({data:null,error:null}),then(done,fail){return Promise.resolve(ok).then(done,fail)}};return q;},
+                rpc:(name)=>Promise.resolve(name==='read_aggregate_feed'?{data:posts,error:null}:{data:null,error:null})
+              };
+            `,
+          }));
+        },
+      },
+    ],
+  });
+  const js = result.outputFiles.find((f) => f.path.endsWith(".js"))?.text ?? result.outputFiles[0].text;
+  const css = result.outputFiles.find((f) => f.path.endsWith(".css"))?.text ?? "";
+  const ctx = await open(browser);
+  try {
+    const { page, context } = ctx;
+    await page.route(base + "/bible/john/3", (route) =>
+      route.fulfill({ contentType: "text/html", body: '<!doctype html><html lang="en" data-look="cover" data-mode="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>' + css + '</style></head><body><div id="root"></div><script>' + js + "</script></body></html>" }),
+    );
+    await page.goto(base + "/bible/john/3");
+    await page.locator("#verse-3").waitFor();
+    const sheet = await openVerseSheet(page, 3, "John 3:3");
+    await sheet.locator('[data-layer-row="ai"] .list-row-detail').filter({ hasNotText: "Loading…" }).waitFor();
+    assert.deepEqual(await layerRows(sheet), ["context", "ai", "community"], "Context, AI explanation, Community, in that order");
+    const row = sheet.locator('[data-layer-row="community"]');
+    assert.match(await row.innerText(), /^Community\nVoices, not sources\nWhat this verse means to people$/);
+    assert.equal(await row.locator("svg").first().evaluate((el) => el.classList.contains("layer-row-icon")), true, "a people icon");
+    await row.click();
+    const voices = sheet.locator('article[data-layer="voices"]');
+    await voices.waitFor();
+    assert.equal(await voices.locator(".layer-title").innerText(), "Community");
+    assert.equal(await voices.locator(".review-pill").innerText(), "Voices, not sources");
+    const frame = await voices.evaluate((el) => ({ left: getComputedStyle(el).borderLeftWidth + " " + getComputedStyle(el).borderLeftStyle, top: getComputedStyle(el).borderTopWidth, face: getComputedStyle(el).fontFamily }));
+    assert.deepEqual([frame.left, frame.top], ["3px solid", "0px"], "a 3px rule on the left, no other frame");
+    assert.ok(!serif.test(frame.face), "community text is never in the Scripture face");
+    await voices.getByText("Test-only reflection on this verse").waitFor();
+    assert.equal(await sheet.locator("[data-layer]").count(), 1);
+    await sheet.getByRole("button", { name: "Back to John 3:3", exact: true }).click();
+    await page.waitForFunction(() => document.activeElement?.dataset.layerRow === "community", undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the Community row"));
+    // Offline: the words, and the row is information, not a link.
+    await context.setOffline(true);
+    await row.filter({ hasText: "Community voices need a connection." }).waitFor();
+    assert.equal(await row.evaluate((el) => el.tagName), "DIV");
+    await context.setOffline(false);
+    await sheet.locator('[data-layer-row="community"]').filter({ hasText: "What this verse means to people" }).waitFor();
+    assert.equal(await sheet.locator('[data-layer-row="community"]').evaluate((el) => el.tagName), "BUTTON");
+    assert.deepEqual(ctx.problems.filter((p) => !/Failed to load resource|ERR_INTERNET_DISCONNECTED/.test(p)), []);
+  } finally {
+    await ctx.context.close();
   }
 }

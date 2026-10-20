@@ -1288,16 +1288,6 @@ small {
 
 .circles article a {display:block;min-height:44px;padding:8px 0;overflow-wrap:anywhere;}
 
-/* AI explanations: a separate, labelled layer, never part of the sourced note. */
-.ai-explanation {border-style:dashed;background:var(--bg);}
-.ai-badge {display:inline-block;vertical-align:middle;margin-left:6px;padding:1px 9px;border:1px solid var(--line);border-radius:999px;font-size:0.68rem;font-weight:600;color:var(--muted);}
-.ai-explanation h4 {margin:16px 0 4px;font-size:0.88rem;}
-.ai-explanation ul {margin:6px 0;padding-left:1.2rem;font-size:0.92rem;}
-.ai-explanation li + li {margin-top:5px;}
-.ai-compare {border-top:1px solid var(--line);margin-top:10px;padding-top:6px;}
-.ai-compare dl {margin:0 0 6px;}
-.ai-compare dt {margin-top:8px;font-size:0.72rem;font-weight:600;color:var(--muted);}
-.ai-compare dd {margin:2px 0 0;font-size:0.92rem;}
 /* Context check of the day: one part of the story per screen. */
 .muted {
   color: var(--muted);
@@ -3739,4 +3729,204 @@ html[data-text="large"] .verse-actions {
 .chapter-cell:focus-visible,
 .search-hit:focus-visible {
   outline-offset: -3px;
+}
+
+/* -- The layers around a verse (UI-SPEC 5.3, A4): apart by words, icon, frame and colour, never by colour alone -- */
+.layer-row {
+  align-items: flex-start;
+}
+.layer-row .layer-row-icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--muted);
+}
+.layer-row .layer-row-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+.layer-row-ai .layer-row-icon,
+.layer-row-ai .list-row-title {
+  color: var(--ai);
+}
+.layer-row-community .layer-row-icon,
+.layer-row-community .list-row-title {
+  color: var(--community);
+}
+/* The words that say how a layer was checked, or what it is: 13px/600 in a --muted outline, radius 6. */
+.review-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-xs);
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 18px;
+}
+.layer-retry {
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+
+.layer {
+  margin: var(--space-2) 0 var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-ui);
+}
+.layer-sourced {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+.layer-ai {
+  border: 1.5px dashed var(--ai);
+  border-radius: var(--radius-md);
+}
+.layer-community {
+  border: 0;
+  border-left: 3px solid var(--community);
+  border-radius: var(--radius-lg);
+}
+.layer-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+.layer-icon {
+  flex: none;
+}
+.layer-title {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.layer-title:focus {
+  outline: none;
+}
+.layer-title:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+.layer-ai .layer-icon,
+.layer-ai .layer-title {
+  color: var(--ai);
+}
+.layer-community .layer-icon,
+.layer-community .layer-title {
+  color: var(--community);
+}
+.layer-note {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--ai);
+}
+.layer .layer-body {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.layer .layer-muted {
+  color: var(--muted);
+}
+.layer .layer-meta {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.layer-section {
+  margin-top: var(--space-5);
+}
+.layer .layer-subtitle {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.layer .layer-list {
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-5);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.layer .layer-list li {
+  margin: 0 0 var(--space-2);
+}
+.layer .layer-link {
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  margin-left: calc(-1 * var(--space-2));
+  border: 0;
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  text-align: left;
+}
+.layer .layer-details {
+  margin-top: var(--space-4);
+}
+.layer .layer-details summary {
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+/* The comparison of translations: the WEB is Scripture and wears the Scripture face; the other
+   public-domain renderings and the explanation do not. */
+.ai-compare {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+.ai-compare dl {
+  margin: 0;
+}
+.ai-compare dt {
+  margin-top: var(--space-3);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--muted);
+}
+.ai-compare dd {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.ai-compare dd.ai-web {
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.7;
+}
+/* A sheet over a sheet in Lamplight (a report or a confirmation opened from the community page) draws on
+   --surface-2, so it stands apart from the sheet under it (UI-SPEC 7.3). */
+:root[data-mode="lamplight"] dialog.reader-sheet dialog.sheet-dialog {
+  background: var(--surface-2);
+}
+/* The community page: the feed's own cards sit flat inside the layer. */
+.layer-community .card {
+  background: none;
+  border: 0;
+  padding: var(--space-3) 0 0;
+  box-shadow: none;
 }

@@ -9,3 +9,10 @@ export function AiBadge() {
     </span>
   );
 }
+
+// The review pill (UI-SPEC 5.3, A4): the words that say how a layer was checked ("Editorial draft", "Reviewed",
+// "Editorial observation") or what a layer is ("Voices, not sources"), in 13px/600 with a --muted outline and a radius
+// of 6. It is text that is read: the words carry the meaning, the outline only frames them.
+export function ReviewPill({ children }: { children: string }) {
+  return <span className="review-pill">{children}</span>;
+}

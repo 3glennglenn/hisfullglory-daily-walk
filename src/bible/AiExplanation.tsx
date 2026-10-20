@@ -1,8 +1,17 @@
 import { config } from "../config";
+import { LayerBlock } from "../ui/LayerBlock";
 import { blocks, publicDomainTranslations, sectionTitles, type AiExplanation } from "./ai";
 import type { BibleBook } from "./provider";
 
-// The AI layer is always its own labelled card, never part of the sourced note.
+// The AI layer is always its own labelled block, never part of the sourced note (UI-SPEC 5.3, A4). It is
+// the existing explanation with the container of the layer: a dashed frame, the heading "AI explanation" with the
+// "AI" badge, and the sentence that says an AI model wrote it (it replaces the uppercase eyebrow). The text is UI
+// face; only the WEB quotations of the translation comparison are Scripture, and so are set in the Scripture face.
+export const aiNoteLine = (review: AiExplanation["review"]) =>
+  review === "reviewed"
+    ? "Written by an AI model. Reviewed by a theological reader."
+    : "Written by an AI model. Not reviewed by a theological reader.";
+
 export function AiExplanationCard({ explanation, book, onVerse }: {
   explanation: AiExplanation; book: BibleBook; onVerse: (verse: number) => void;
 }) {
@@ -10,40 +19,33 @@ export function AiExplanationCard({ explanation, book, onVerse }: {
   const subject = explanation.chapter ? `${book.name} ${explanation.chapter}` : book.name;
   const verses = explanation.chapter ? book.chapters[explanation.chapter - 1].verses : [];
   return (
-    <article className="card ai-explanation" data-layer="ai">
-      <h3>AI explanation <span className="ai-badge">AI</span></h3>
-      <p className="eyebrow">
-        {explanation.scope === "book" ? `About ${book.name} as a whole` : subject} · Written by an AI model ·{" "}
-        {explanation.review === "reviewed" ? "Reviewed by a theological reader" : "Not reviewed by a theological reader"}
-      </p>
-      <p>
-        <small>
-          This explanation was written by an AI model to help you get started. It names no sources and can
-          contain mistakes. Scripture comes first, and context with sources is shown separately above.
-        </small>
+    <LayerBlock kind="ai" note={aiNoteLine(explanation.review)}>
+      <p className="layer-body layer-muted">
+        This explanation was written by an AI model to help you get started. It names no sources and can
+        contain mistakes. Scripture comes first, and context with sources is shown separately.
       </p>
       {explanation.sections.map((section) => (
-        <section key={section.kind}>
-          <h4>{sectionTitles[explanation.scope][section.kind]}</h4>
+        <section key={section.kind} className="layer-section">
+          <h4 className="layer-subtitle">{sectionTitles[explanation.scope][section.kind]}</h4>
           {blocks(section.text).map((block, i) =>
             "list" in block ? (
-              <ul key={i}>{block.list.map((item) => <li key={item}>{item}</li>)}</ul>
+              <ul key={i} className="layer-list">{block.list.map((item) => <li key={item}>{item}</li>)}</ul>
             ) : (
-              <p key={i}>{block.paragraph}</p>
+              <p key={i} className="layer-body">{block.paragraph}</p>
             ),
           )}
         </section>
       ))}
       {explanation.translations.length > 0 && (
-        <section>
-          <h4>How translations differ</h4>
-          <p><small>Compared with public-domain translations only.</small></p>
+        <section className="layer-section">
+          <h4 className="layer-subtitle">How translations differ</h4>
+          <p className="layer-meta">Compared with public-domain translations only.</p>
           {explanation.translations.map((entry) => (
             <div className="ai-compare" key={entry.verse}>
-              <button className="text-button" onClick={() => onVerse(entry.verse)}>Verse {entry.verse}</button>
+              <button type="button" className="layer-link" onClick={() => onVerse(entry.verse)}>Verse {entry.verse}</button>
               <dl>
                 <dt>World English Bible</dt>
-                <dd>{verses.find((v) => v.number === entry.verse)?.text}</dd>
+                <dd className="ai-web">{verses.find((v) => v.number === entry.verse)?.text}</dd>
                 {entry.renderings.map((rendering) => (
                   <div key={rendering.translation}>
                     <dt>{publicDomainTranslations[rendering.translation]}</dt>
@@ -51,28 +53,26 @@ export function AiExplanationCard({ explanation, book, onVerse }: {
                   </div>
                 ))}
               </dl>
-              <p>{entry.note}</p>
+              <p className="layer-body">{entry.note}</p>
             </div>
           ))}
         </section>
       )}
-      <details>
+      <details className="layer-details">
         <summary>About this explanation</summary>
-        <p>
-          <small>
-            Written by {explanation.model}, an AI model, on {written}. It draws on the WEB text and general
-            knowledge and was not checked against sources by a person. Every quotation from Scripture is
-            checked automatically against the WEB text.
-          </small>
+        <p className="layer-meta">
+          Written by {explanation.model}, an AI model, on {written}. It draws on the WEB text and general
+          knowledge and was not checked against sources by a person. Every quotation from Scripture is
+          checked automatically against the WEB text.
         </p>
         {config.supportEmailReady && (
-          <p>
+          <p className="layer-meta">
             <a href={`mailto:${config.supportEmail}?subject=${encodeURIComponent(`Mistake in the AI explanation of ${subject}`)}`}>
               Report a mistake
             </a>
           </p>
         )}
       </details>
-    </article>
+    </LayerBlock>
   );
 }

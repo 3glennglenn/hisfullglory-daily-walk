@@ -24,7 +24,7 @@ import {
   type KnowledgeRecord,
 } from "./knowledge";
 import { topicGraph } from "../topics/graph";
-import { aiFor, loadAiExplanations, type AiExplanation } from "./ai";
+import { aiFor, loadAiStatus, type AiStatus } from "./ai";
 import { AiExplanationCard } from "./AiExplanation";
 
 /** The toolbar control that is on screen (the width budget hides the others), for returning focus. */
@@ -56,18 +56,25 @@ export function Reader({ route }: { route: Route }) {
       live = false;
     };
   }, [studyBook]);
-  // AI explanations are a separate layer; a missing or invalid file simply shows none.
-  const [ai, setAi] = useState<{ book: string; records: AiExplanation[] }>({ book: "", records: [] });
+  // AI explanations are a separate layer: loading, ready, none for this book, or failed (and worth asking again).
+  const [ai, setAi] = useState<{ book: string; status: AiStatus | "pending" }>({ book: "", status: "pending" });
   useEffect(() => {
     if (!data || !route.book) return;
     let live = true;
-    void loadAiExplanations(studyBook, data).then((records) => {
-      if (live) setAi({ book: studyBook, records });
+    setAi({ book: studyBook, status: "pending" });
+    void loadAiStatus(studyBook, data).then((status) => {
+      if (live) setAi({ book: studyBook, status });
     });
     return () => {
       live = false;
     };
   }, [studyBook, data]);
+  // "Load again": one request per press (loadAiStatus drops a failure and asks again).
+  function loadAiAgain() {
+    if (!data) return;
+    setAi({ book: studyBook, status: "pending" });
+    void loadAiStatus(studyBook, data).then((status) => setAi({ book: studyBook, status }));
+  }
   async function load() {
     setFailed(false);
     try {
@@ -145,7 +152,8 @@ export function Reader({ route }: { route: Route }) {
   const { previous, next } = adjacentChapters(data, book.slug, chapter.number);
   const read = state.reading.includes(chapterPath!);
   const note = knowledgeFor(book.slug, chapter.number, selected, studyRecords);
-  const aiNote = ai.book === book.slug ? aiFor(ai.records, book.slug, chapter.number) : undefined;
+  const aiStatus = ai.book === book.slug ? ai.status : "pending";
+  const aiNote = aiStatus !== "pending" && aiStatus.state === "ready" ? aiFor(aiStatus.records, book.slug, chapter.number) : undefined;
   const tab = route.tab;
 
   // The address follows the chosen verse, but choosing one is not a page change: it must not scroll to the
@@ -328,9 +336,14 @@ export function Reader({ route }: { route: Route }) {
       {layers && (
         <VerseSheet
           key={layers.verse}
+          data={data}
           book={book}
           chapter={chapter}
           verse={layers.verse}
+          records={studyRecords}
+          ai={aiStatus}
+          onLoadAgain={loadAiAgain}
+          onVerse={openVerse}
           returnFocus={() => document.querySelector<HTMLElement>(`#verse-${layers.verse} .verse-num`)}
           onClose={closeLayers}
         />
