@@ -57,7 +57,7 @@ export async function checkReaderText(browser, base) {
     // Verse 1 sits near the top instead of 539px down (audit); the slogan, eyebrow, search field, selects and
     // view buttons are gone from the top of the page.
     const first = await box(page, "#verse-1");
-    assert.ok(first.top < 260, `verse 1 is near the top (${Math.round(first.top)}px)`);
+    assert.ok(first.top < 190, `verse 1 is near the top (${Math.round(first.top)}px)`);
     for (const gone of ["The Bible, open to you.", "Scripture · Public domain · WEB"]) assert.equal(await page.getByText(gone).count(), 0, gone + " is gone");
     assert.equal(await page.getByRole("searchbox").count(), 0, "no search field in the page");
     assert.equal(await page.locator("main select").count(), 0, "no book and chapter selects");
@@ -205,7 +205,7 @@ export async function checkReaderText(browser, base) {
         assert.ok(a.right <= b.left + 0.5 || b.right <= a.left + 0.5 || a.bottom <= b.top + 0.5 || b.bottom <= a.top + 0.5, `Marked hit areas of verses ${a.verse} and ${b.verse} do not overlap`);
       }
     const first = await box(page, "#verse-1");
-    assert.ok(first.top < 260, `verse 1 is near the top in Marked too (${Math.round(first.top)}px)`);
+    assert.ok(first.top < 190, `verse 1 is near the top in Marked too (${Math.round(first.top)}px)`);
     assert.deepEqual(marked.problems, []);
   } finally {
     await marked.context.close();
