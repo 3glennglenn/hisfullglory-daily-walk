@@ -1,5 +1,8 @@
 # Changelog
 
+## The founder's corrections after the merge: branch `redesign-fixes` (2026-10-20)
+- The AI label now says what the AI wrote. Cards: "Context written by AI, from named sources." Top of a check page: "Context written by AI, from the sources below. The Bible text is the World English Bible." The closing note says the AI model wrote the context to help you see the verse in its setting, that the Bible text is the World English Bible, that an automatic check made sure every source opens and every quotation matches, that it can contain mistakes, and "If a source says otherwise, tell us." "Not checked by a person" is gone (founder, 2026-10-20: "it looks like the whole bible is written by ai"). The AI badge still shows next to the words everywhere a check written by the routine appears. The entry below keeps the old wording as history.
+
 ## Calm redesign of the app and website: branch `calm-redesign`, waiting for the founder's copy approval and merge (2026-10-20)
 - Redesign every screen of the app and the website on one design system: two reading themes (Cover and story, the default; Marked page), each with Light and Lamplight modes that follow the device unless the reader changes them. Manrope (Cover) and the system font (Marked) for interface text, Gelasio and Literata for Scripture, all bundled (SIL OFL 1.1). Five text sizes (34, 28, 20, 17, 13), nothing under 13px, no uppercase labels, and the text follows the system size up to 200 %.
 - Navigation is Today, Bible, Pray, Community and You. A floating tab bar on phones, a sidebar from 768px. The More tab and the branded header are gone; You holds the walk, settings, appearance, Give and Resources, and Account is the old Profile.

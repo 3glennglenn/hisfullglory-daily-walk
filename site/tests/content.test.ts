@@ -1,6 +1,6 @@
 // Checks the topic pages, articles and context checks on file, and that drafts were not
 // built (run `npm run build` first; `npm run check` does both). Context checks may also be
-// "ai-unreviewed": built, and labelled as not checked by a person. With SHOW_DRAFTS=1 set
+// "ai-unreviewed": built, and labelled as context written by AI. With SHOW_DRAFTS=1 set
 // for both the build and the tests, drafts count as shown, so their pages can be checked too.
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
@@ -217,20 +217,20 @@ test("a context check may be AI-unreviewed, with rules that make up for the miss
   assert.throws(() => parseArticle({ ...article, review: "ai-unreviewed", approved: undefined }, article.slug, bible), /review/);
 });
 
-test("the note under a page says how it was made, and an AI-unreviewed page says nobody checked it", () => {
+test("the note under a page says how it was made, and an AI-unreviewed page says an AI wrote the context, not the Bible", () => {
   const made = "Scripture quotations are checked against the World English Bible.";
   assert.equal(editorialNote("approved", "ai"), `Written with the help of an AI model. ${made} Approved by HisFullGlory. Not reviewed by a theological reader.`);
   assert.equal(editorialNote("approved", "human"), `Written by HisFullGlory. ${made} Approved by HisFullGlory. Not reviewed by a theological reader.`);
   assert.equal(editorialNote("draft", "ai"), `Written with the help of an AI model. ${made} Not approved yet.`);
   assert.equal(editorialNote("draft", "human"), `Written by HisFullGlory. ${made} Not approved yet.`);
   for (const label of [aiUnreviewedLabel, aiUnreviewedCardLabel]) {
-    assert.match(label, /AI model/);
-    assert.match(label, /not checked by a person/i);
+    assert.match(label, /written by AI/i);
   }
   const note = editorialNote("ai-unreviewed", "ai");
-  assert.match(note, /AI model/);
-  assert.match(note, /no person has checked/i);
+  assert.match(note, /written by an AI model/);
+  assert.match(note, /can contain mistakes/);
   for (const line of [aiUnreviewedLabel, aiUnreviewedCardLabel, note]) {
+    assert.ok(!/not checked by a person/i.test(line), line + ": the founder took that sentence out (2026-10-20)");
     assert.ok(!line.includes("—") && !line.includes("!"), line);
   }
 });
@@ -371,9 +371,9 @@ test("a hook is split where its turn is, and a hook without a turn stays whole",
 test("the shared label words are free of Node imports and say what they said before", () => {
   const source = readFileSync("src/lib/editorial.ts", "utf8");
   assert.ok(!/from\s+["']node:/.test(source) && !/require\(/.test(source), "the app imports this file, so it needs no Node");
-  assert.equal(aiUnreviewedLabel, "Written by an AI model from the sources below. Not checked by a person.");
-  assert.equal(aiUnreviewedCardLabel, "Written by an AI model. Not checked by a person.");
-  assert.ok(editorialNote("ai-unreviewed", "ai").endsWith("No person has checked this page."));
+  assert.equal(aiUnreviewedLabel, "Context written by AI, from the sources below. The Bible text is the World English Bible.");
+  assert.equal(aiUnreviewedCardLabel, "Context written by AI, from named sources.");
+  assert.equal(editorialNote("ai-unreviewed", "ai"), "This context was written by an AI model to help you see the verse in its setting. The Bible text is the World English Bible. Before publishing, an automatic check made sure every source below opens and every quotation matches its source. It can contain mistakes. If a source says otherwise, tell us.");
   assert.equal(
     editorialNote("approved", "human"),
     "Written by HisFullGlory. Scripture quotations are checked against the World English Bible. Approved by HisFullGlory. Not reviewed by a theological reader.",

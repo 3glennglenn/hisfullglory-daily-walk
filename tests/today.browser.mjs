@@ -157,12 +157,12 @@ export async function checkToday(browser, base, published) {
         assert.ok(box.h >= 24 && box.h <= 40, "spines are 24 to 40px tall");
       }
       if (ai) {
-        assert.equal(await row.locator(".row-ai").innerText(), "AI\n1 written by an AI model, not checked by a person.");
+        assert.equal(await row.locator(".row-ai").innerText(), "AI\n1 with context written by AI.");
         assert.equal(await row.locator(".row-ai").evaluate((el) => getComputedStyle(el).color), await colour(page, "--ai"));
         // Newest on the right: the AI spine, finished last, is the last one, filled --ai.
         assert.equal(await spines.last().evaluate((el) => getComputedStyle(el).backgroundColor), await colour(page, "--ai"));
         assert.notEqual(await spines.first().evaluate((el) => getComputedStyle(el).backgroundColor), await colour(page, "--ai"));
-        assert.match(await row.innerText(), /not checked by a person/, "the words carry the label, not the colour");
+        assert.match(await row.innerText(), /with context written by AI/, "the words carry the label, not the colour");
       } else assert.equal(await row.locator(".row-ai").count(), 0);
     },
   );
@@ -399,7 +399,7 @@ export async function checkTodayFixture(browser, base) {
       const block = next.page.getByRole("region", { name: TITLE, exact: true });
       assert.equal(await block.locator(".cover-ref").innerText(), "John 3:16");
       assert.equal(await block.locator(".cover-ai").count(), 0, "an approved check shows no label row");
-      assert.match(await shelfRow(next.page).innerText(), /1 written by an AI model, not checked by a person\./, "the shelf row says it");
+      assert.match(await shelfRow(next.page).innerText(), /1 with context written by AI\./, "the shelf row says it");
     } finally {
       await next.context.close();
     }

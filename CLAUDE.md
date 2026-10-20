@@ -47,14 +47,16 @@ This file adds the current state and how to work with the founder. Last updated 
   `main` without the founder's review. His words: "a and b and i don't have to review them".
   It applies to context checks only. Safeguards, each enforced by code: a script
   finds the exact words of every quoted person on the linked source page; every source
-  must open (HTTP 200, a text page), and at least two are required; the page says "Written
-  by an AI model from the sources below. Not checked by a person." (review
+  must open (HTTP 200, a text page), and at least two are required; the page says "Context
+  written by AI, from the sources below. The Bible text is the World English Bible." (review
   `ai-unreviewed`, no approved date); Bible quotations must match the WEB text and no other
   quotation marks are allowed; the verse comes from a committed queue, one check a day.
   Today in the app and the site home show the newest published context check,
-  AI-unreviewed ones included, always with the label "Written by an AI model. Not checked by
-  a person." (founder, 2026-10-19). The routine does not exist yet: it is created after the
-  founder's merge and an environment with network access.
+  AI-unreviewed ones included, always with the label "Context written by AI, from named sources."
+  (founder, 2026-10-19; reworded on 2026-10-20 because "it looks like the whole bible is
+  written by ai": the label says the context is written by AI and the Bible text is the
+  World English Bible, and no longer says that no person checked it). The routine has run
+  daily since 2026-10-19 at 05:00 UTC.
   Rules, limits and the routine prompt: `docs/CONTEXT_CHECKS_ROUTINE.md`.
 - Context checks are the first selling point the founder chose (2026-10-13): a well-known
   verse with the story around it, for the site and for daily short videos that open with

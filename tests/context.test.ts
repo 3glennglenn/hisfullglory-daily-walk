@@ -193,9 +193,9 @@ test("splitHook splits at the turn of the hook and leaves other hooks whole", ()
 });
 
 test("the label words are the site's, word for word", () => {
-  assert.equal(aiUnreviewedCardLabel, "Written by an AI model. Not checked by a person.");
-  assert.equal(aiUnreviewedLabel, "Written by an AI model from the sources below. Not checked by a person.");
-  assert.match(editorialNote("ai-unreviewed", "ai"), /^Written by an AI model\. Before publishing, an automatic check compared Scripture quotations/);
+  assert.equal(aiUnreviewedCardLabel, "Context written by AI, from named sources.");
+  assert.equal(aiUnreviewedLabel, "Context written by AI, from the sources below. The Bible text is the World English Bible.");
+  assert.equal(editorialNote("ai-unreviewed", "ai"), "This context was written by an AI model to help you see the verse in its setting. The Bible text is the World English Bible. Before publishing, an automatic check made sure every source below opens and every quotation matches its source. It can contain mistakes. If a source says otherwise, tell us.");
   assert.equal(
     editorialNote("approved", "ai"),
     "Written with the help of an AI model. Scripture quotations are checked against the World English Bible. Approved by HisFullGlory. Not reviewed by a theological reader.",

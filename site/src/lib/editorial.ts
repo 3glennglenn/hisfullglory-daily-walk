@@ -8,13 +8,16 @@ export type Review = "draft" | "approved" | "ai-unreviewed";
 
 /**
  * The label at the top of an AI-unreviewed context check, the shorter one on its cards, and
- * the closing note. Each says both facts: an AI model wrote it, and no person checked it.
- * Wording settled with the UX copy review of 2026-10-16.
+ * the closing note. Together they say that an AI model wrote the context, that the Bible text
+ * is not AI-written (it is the World English Bible), and that the context can contain mistakes.
+ * They say the AI wrote the context, never the Bible: the founder's wording of 2026-10-20
+ * (D-06 amended). "Not checked by a person" is gone by that decision; the earlier wording was
+ * settled with the UX copy review of 2026-10-16.
  */
-export const aiUnreviewedLabel = "Written by an AI model from the sources below. Not checked by a person.";
-export const aiUnreviewedCardLabel = "Written by an AI model. Not checked by a person.";
+export const aiUnreviewedLabel = "Context written by AI, from the sources below. The Bible text is the World English Bible.";
+export const aiUnreviewedCardLabel = "Context written by AI, from named sources.";
 export const aiUnreviewedNote =
-  "Written by an AI model. Before publishing, an automatic check compared Scripture quotations with the World English Bible and the words of quoted people with their linked sources. No person has checked this page.";
+  "This context was written by an AI model to help you see the verse in its setting. The Bible text is the World English Bible. Before publishing, an automatic check made sure every source below opens and every quotation matches its source. It can contain mistakes. If a source says otherwise, tell us.";
 
 /** How an editorial page says it was made and how far it has been checked. */
 export function editorialNote(review: Review, drafted: "ai" | "human"): string {

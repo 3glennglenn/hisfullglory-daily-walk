@@ -37,7 +37,7 @@ const anyUnchecked = spines.some((item) => item.review === "ai-unreviewed");
                     class:list={["spine", `tone-${(index % 3) + 1}`, { unchecked }]}
                     href={`/context-checks/${item.slug}`}
                     style={`height: ${spineHeight(item.slug)}px`}
-                    aria-label={unchecked ? `${name}, written by an AI model, not checked by a person` : name}
+                    aria-label={unchecked ? `${name}, context written by AI` : name}
                   >
                     <span class="spine-ref" aria-hidden="true">{spineLabel(item.verse)}</span>
                     {

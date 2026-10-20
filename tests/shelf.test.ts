@@ -125,7 +125,7 @@ test("shareText: an approved check shares as before, an AI-unreviewed one carrie
   const approved = { slug: "psalm-46-10", review: "approved", hook: "You know the verse. But did you know it was a battle cry?" } as AppContextCheck;
   const written = { slug: "john-3-16", review: "ai-unreviewed", hook: "You know the verse. But did you know it was said at night?" } as AppContextCheck;
   assert.equal(shareText(approved), `${approved.hook} ${checkUrl(approved)}`, "unchanged for an approved check");
-  assert.equal(shareText(written), `${written.hook} Written by an AI model. Not checked by a person. ${checkUrl(written)}`);
+  assert.equal(shareText(written), `${written.hook} Context written by AI, from named sources. ${checkUrl(written)}`);
   assert.ok(shareText(written).includes(aiUnreviewedCardLabel), "the words are the card's");
   assert.ok(!shareText(approved).includes("AI model"));
 });

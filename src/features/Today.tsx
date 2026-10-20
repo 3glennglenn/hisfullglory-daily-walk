@@ -108,7 +108,7 @@ export function Today() {
               {ai > 0 && (
                 <span className="row-line row-ai">
                   <AiBadge />
-                  <span>{ai} written by an AI model, not checked by a person.</span>
+                  <span>{ai} with context written by AI.</span>
                 </span>
               )}
             </>

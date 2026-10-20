@@ -105,7 +105,7 @@ test("the bookcase stands the six newest checks, and says in words which ones no
   );
   for (const [index, match] of links.entries()) {
     const unchecked = expected[index].review === "ai-unreviewed";
-    assert.equal(match[2].endsWith(", written by an AI model, not checked by a person"), unchecked, `${match[1]}: accessible name`);
+    assert.equal(match[2].endsWith(", context written by AI"), unchecked, `${match[1]}: accessible name`);
   }
   // The legend line is there when a spine carries the badge, and only then.
   const anyUnchecked = expected.some((item) => item.review === "ai-unreviewed");

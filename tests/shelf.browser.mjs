@@ -8,7 +8,7 @@ const monthDay = (iso) => {
   const [y, m, d] = iso.split("-").map(Number);
   return new Date(y, m - 1, d).toLocaleDateString("en-US", { month: "long", day: "numeric" });
 };
-const AI_WORDS = "Written by an AI model. Not checked by a person.";
+const AI_WORDS = "Context written by AI, from named sources.";
 
 /** Writes a shelf into the page's private storage (the caller reloads or navigates). */
 async function seedShelf(page, shelf) {
@@ -57,7 +57,7 @@ export async function checkShelfScreen(browser, base, published) {
         const ai = check.review === "ai-unreviewed";
         assert.equal(
           await links.nth(i).getAttribute("aria-label"),
-          `${refLabel(check.verse)}, read ${monthDay(entry.finishedOn)}${ai ? ", written by an AI model, not checked by a person" : ""}`,
+          `${refLabel(check.verse)}, read ${monthDay(entry.finishedOn)}${ai ? ", context written by AI" : ""}`,
           "accessible name of spine " + (i + 1),
         );
         assert.equal(await links.nth(i).getAttribute("href"), "/context/" + check.slug);
