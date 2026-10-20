@@ -1,7 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
+import { Book, Search } from "lucide-react";
 import { Listen } from "./Listen";
 import { ChapterText } from "./ChapterText";
 import { ReaderToolbar } from "./ReaderToolbar";
+import { Library, SearchSheet, BIBLE_ERROR } from "./Library";
+import { PassagePicker } from "./PassagePicker";
+import { Sheet } from "../ui/Sheet";
+import { GroupedList, Row } from "../ui/List";
 import { webProvider, studyNote, type BibleData } from "./provider";
 import { adjacentChapters, bookTitle, referenceFromPath, slugWords } from "./passages";
 import { usePlatform } from "../platform/store";
@@ -20,7 +25,11 @@ import { topicGraph } from "../topics/graph";
 import { aiFor, loadAiExplanations, type AiExplanation } from "./ai";
 import { AiExplanationCard } from "./AiExplanation";
 
-export const BIBLE_ERROR = "The Bible could not be opened. Check your connection and try again.";
+/** The toolbar control that is on screen (the width budget hides the others), for returning focus. */
+const shown = (selector: string) => {
+  const el = document.querySelector<HTMLElement>(selector);
+  return el && el.getClientRects().length ? el : null;
+};
 
 export function Reader({ route }: { route: Route }) {
   const { state, update } = usePlatform();
@@ -28,10 +37,14 @@ export function Reader({ route }: { route: Route }) {
   const [failed, setFailed] = useState(false);
   const [selected, setSelected] = useState<number | undefined>(route.verse);
   const [status, setStatus] = useState("");
+  // One sheet at a time: the passage picker, search, or the overflow menu of the toolbar.
+  const [sheet, setSheet] = useState<null | "picker" | "search" | "more">(null);
+  const [narrow, setNarrow] = useState(false);
   const [speaking, setSpeaking] = useState<number | undefined>();
   const studyBook = route.book ?? "psalms";
   const [study, setStudy] = useState<{ book: string; records: KnowledgeRecord[] }>({ book: "", records: [] });
   useEffect(() => {
+    if (!route.book) return;
     let live = true;
     void loadStudyRecords(studyBook).then((records) => {
       if (live) setStudy({ book: studyBook, records });
@@ -43,7 +56,7 @@ export function Reader({ route }: { route: Route }) {
   // AI explanations are a separate layer; a missing or invalid file simply shows none.
   const [ai, setAi] = useState<{ book: string; records: AiExplanation[] }>({ book: "", records: [] });
   useEffect(() => {
-    if (!data) return;
+    if (!data || !route.book) return;
     let live = true;
     void loadAiExplanations(studyBook, data).then((records) => {
       if (live) setAi({ book: studyBook, records });
@@ -71,7 +84,7 @@ export function Reader({ route }: { route: Route }) {
   const book = data?.books.find((b) => b.slug === (route.book ?? "psalms"));
   const chapter = book?.chapters.find((c) => c.number === (route.chapter ?? 23));
   const valid =
-    !!book && !!chapter && (route.verse === undefined || chapter.verses.some((v) => v.number === route.verse));
+    !!route.book && !!book && !!chapter && (route.verse === undefined || chapter.verses.some((v) => v.number === route.verse));
   const chapterPath = book && chapter ? passagePath(book.slug, chapter.number) : undefined;
 
   // The chapter the reader is in is the one "Continue reading" returns to (private state, this device only).
@@ -95,6 +108,7 @@ export function Reader({ route }: { route: Route }) {
     [studyRecords, book?.slug, chapter?.number],
   );
 
+  if (!route.book) return <Library data={data} failed={failed} onRetry={() => void load()} />;
   if (!data)
     return (
       <section className="reader">
@@ -136,6 +150,11 @@ export function Reader({ route }: { route: Route }) {
     setSelected(n);
     history.replaceState({}, "", passagePath(book!.slug, chapter!.number, n));
   }
+  // Under 360px, and in large-text mode, Books is not in the toolbar and moves into More.
+  function openMore() {
+    setNarrow(window.matchMedia("(max-width: 359px)").matches || document.documentElement.dataset.text === "large");
+    setSheet("more");
+  }
   function journal(type: "Bible passage" | "study note") {
     if (
       update((s) => ({
@@ -154,7 +173,9 @@ export function Reader({ route }: { route: Route }) {
         reference={chapterReference}
         previous={previous && { label: `Previous chapter: ${previous.reference}`, path: passagePath(previous.book, previous.chapter) }}
         next={next && { label: `Next chapter: ${next.reference}`, path: passagePath(next.book, next.chapter) }}
-        onTitle={() => navigate("/bible")}
+        onTitle={() => setSheet("picker")}
+        onSearch={() => setSheet("search")}
+        onMore={openMore}
       />
       <header className="reader-head">
         <p className="reader-book">{bookTitle(book)}</p>
@@ -375,15 +396,51 @@ export function Reader({ route }: { route: Route }) {
       ) : tab === "community" ? (
         <Feed source={source} />
       ) : null}
-      {state.bookmarks.length > 0 && (
-        <section className="card">
-          <h3>Saved passages</h3>
-          {state.bookmarks.map((p) => (
-            <button className="text-button" key={p} onClick={() => navigate(p)}>
-              {referenceFromPath(data, p)}
-            </button>
-          ))}
-        </section>
+      {sheet === "picker" && (
+        <Sheet title="Choose a passage" detent="large" returnFocus={() => shown(".rt-title")} onClose={() => setSheet(null)}>
+          <PassagePicker
+            data={data}
+            current={{ book: book.slug, chapter: chapter.number }}
+            onPick={(path) => {
+              setSheet(null);
+              navigate(path);
+            }}
+          />
+        </Sheet>
+      )}
+      {sheet === "search" && (
+        <SearchSheet
+          data={data}
+          returnFocus={() => shown(".rt-search") ?? shown(".rt-more")}
+          onClose={() => setSheet(null)}
+          onPick={(path) => {
+            setSheet(null);
+            navigate(path);
+          }}
+        />
+      )}
+      {sheet === "more" && (
+        <Sheet title="More options" returnFocus={() => shown(".rt-more")} onClose={() => setSheet(null)}>
+          <GroupedList>
+            {narrow && (
+              <Row
+                leading={<Book size={22} aria-hidden="true" focusable="false" />}
+                title="Books"
+                chevron
+                onClick={() => {
+                  setSheet(null);
+                  navigate("/bible");
+                }}
+              />
+            )}
+            <Row
+              leading={<Search size={22} aria-hidden="true" focusable="false" />}
+              title="Search the Bible"
+              chevron
+              onClick={() => setSheet("search")}
+            />
+          </GroupedList>
+        </Sheet>
       )}
     </section>
   );

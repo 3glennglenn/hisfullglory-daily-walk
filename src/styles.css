@@ -3182,3 +3182,269 @@ html[data-text="large"] .reader-toolbar .rt-more {
     animation: sheet-fade 150ms linear !important;
   }
 }
+
+/* -- The library, /bible (A2) and the passage picker -- */
+.library-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.library-head .large-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.library-head .tool-button {
+  margin-top: var(--space-2);
+}
+.picker .segmented {
+  margin: 0 0 var(--space-4);
+}
+.picker-books {
+  margin-bottom: 0;
+}
+.picker-books .list-row[aria-expanded] {
+  min-height: 52px;
+}
+/* The chapter grid: 52 x 52 buttons, 6 to a row from 390px, 5 below that (A2). */
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 52px);
+  justify-content: space-between;
+  gap: var(--space-2) 0;
+  padding: var(--space-1) var(--space-2) var(--space-4);
+}
+@media (max-width: 389px) {
+  .chapter-grid {
+    grid-template-columns: repeat(5, 52px);
+  }
+}
+@media (max-width: 359px) {
+  .chapter-grid {
+    padding-inline: 0;
+  }
+}
+html[data-text="large"] .chapter-grid {
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: var(--space-2);
+  justify-content: stretch;
+}
+.chapter-cell {
+  width: 100%;
+  min-width: 52px;
+  height: 52px;
+  min-height: 52px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.chapter-cell[aria-current="true"] {
+  box-shadow: inset 0 0 0 2px var(--focus);
+}
+html[data-text="large"] .chapter-cell {
+  width: auto;
+}
+
+/* -- Sheets that hold content: the picker, search, More, and in plan 10 the verse and chapter sheets -- */
+dialog.reader-sheet[open] {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+dialog.reader-sheet-medium {
+  height: auto;
+  max-height: 50dvh;
+}
+dialog.reader-sheet-large {
+  height: 90dvh;
+  max-height: 90dvh;
+}
+@media (min-width: 600px) {
+  dialog.reader-sheet-medium {
+    max-height: 70dvh;
+  }
+}
+/* The old dialog rules (dialog button, dialog li, dialog ul) made every button full width with a top margin
+   and every list item 13px; a content sheet resets them and gives its own full-width rows back. */
+dialog.reader-sheet button {
+  width: auto;
+  margin: 0;
+}
+dialog.reader-sheet ul {
+  padding-left: 0;
+}
+dialog.reader-sheet li {
+  margin: 0;
+  font-size: inherit;
+}
+dialog.reader-sheet .list-row,
+dialog.reader-sheet .search-hit,
+dialog.reader-sheet .chapter-cell {
+  width: 100%;
+}
+dialog.reader-sheet .chapter-cell {
+  width: 100%;
+}
+html[data-text="large"] dialog.reader-sheet .chapter-cell {
+  width: auto;
+}
+.sheet-head {
+  flex: none;
+  padding: var(--space-2) max(var(--space-5), env(safe-area-inset-right)) 0 max(var(--space-5), env(safe-area-inset-left));
+  touch-action: none;
+}
+.sheet-grabber {
+  display: block;
+  width: 36px;
+  height: 5px;
+  margin: 0 auto var(--space-1);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--muted) 55%, transparent);
+}
+.sheet-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 52px;
+}
+.sheet-bar .sheet-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sheet-bar .sheet-title.sr-only {
+  flex: none;
+}
+.sheet-title:focus {
+  outline: none;
+}
+.sheet-title:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+.sheet-close,
+.sheet-back {
+  flex: none;
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--link);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.sheet-back {
+  margin-left: calc(-1 * var(--space-2));
+  text-align: left;
+}
+.sheet-back + .sheet-close,
+.sheet-bar .sheet-title.sr-only + .sheet-close {
+  margin-left: auto;
+}
+.sheet-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 max(var(--space-5), env(safe-area-inset-right)) calc(var(--space-5) + env(safe-area-inset-bottom))
+    max(var(--space-5), env(safe-area-inset-left));
+}
+/* Lists inside a sheet sit on the page colour, so they read as grouped rows on the sheet's own surface. */
+.sheet-body .group-list {
+  background: var(--bg);
+}
+.sheet-body .group {
+  margin-bottom: var(--space-4);
+}
+.sheet-body-text {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+
+/* -- Search sheet -- */
+.search-form .sheet-label {
+  margin-top: var(--space-2);
+}
+.search-line {
+  display: flex;
+  gap: var(--space-2);
+}
+.search-line input {
+  flex: 1 1 auto;
+  min-height: 48px;
+  padding: 11px 12px;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+.search-line button {
+  flex: none;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  line-height: 1.47;
+}
+dialog.sheet-dialog .search-form p.sheet-hint {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}
+.search-status {
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.search-status:empty {
+  display: none;
+}
+.search-results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  overflow: hidden;
+}
+.search-results li + li {
+  border-top: 1px solid var(--line);
+}
+.search-hit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font-weight: 400;
+  text-align: left;
+}
+.search-hit-ref {
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.search-hit-text {
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
+}

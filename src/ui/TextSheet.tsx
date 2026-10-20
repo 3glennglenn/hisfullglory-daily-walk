@@ -1,6 +1,6 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { Dialog } from "../platform/Dialog";
-import { isPromise, useReturnFocus } from "./sheet";
+import { isPromise, useReturnFocus } from "./dialogFocus";
 
 // Text typed in a sheet and then dismissed by Escape or a tap outside it. Held in this page's memory only,
 // per item, until the page is closed: never written to storage, never sent anywhere (T-01.1-16).
