@@ -35,8 +35,10 @@ export function GroupedList({
 // One row: the whole row is the target. A link when it has an href (an address on this site goes
 // through the router, `external` opens another page in a new tab), a button when it has onClick,
 // otherwise plain information. Title is Body 17/600, the detail Footnote 13 and the value Body 17,
-// both muted. `quiet` turns the title into a plain link-coloured line.
+// both muted. `quiet` turns the title into a plain link-coloured line. `leading` is a small picture before the
+// text (the mini shelf on Today); it is decoration, so it should be aria-hidden.
 export function Row({
+  leading,
   title,
   detail,
   value,
@@ -47,6 +49,7 @@ export function Row({
   disabled,
   onClick,
 }: {
+  leading?: ReactNode;
   title: ReactNode;
   detail?: ReactNode;
   value?: ReactNode;
@@ -60,6 +63,7 @@ export function Row({
   const className = quiet ? "list-row list-row-quiet" : "list-row";
   const inner = (
     <>
+      {leading && <span className="list-row-leading">{leading}</span>}
       <span className="list-row-text">
         <span className="list-row-title">{title}</span>
         {detail && <span className="list-row-detail">{detail}</span>}

@@ -8,7 +8,7 @@ const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VE
 const NOTE="PRIVATE NOTE 7391 do not log";
 const REASON_LABELS=["Harassment or threats","Hate","Sexual content","Dangerous advice","Scam","Private information","Spam","Something else"];
 export async function checkSafety(browser,base){
-  const result=await build({entryPoints:["tests/fixtures/safety.tsx"],bundle:true,write:false,outfile:".tooling/safety-fixture.js",format:"iife",jsx:"automatic",define:{"process.env.NODE_ENV":'"production"'},plugins:[{
+  const result=await build({entryPoints:["tests/fixtures/safety.tsx"],bundle:true,write:false,outfile:".tooling/safety-fixture.js",format:"iife",jsx:"automatic",loader:{".svg":"dataurl"},define:{"process.env.NODE_ENV":'"production"'},plugins:[{
     name:"controlled-safety-sdk",
     setup(b){
       b.onResolve({filter:/^\.\.\/supabase$/},()=>({path:"sdk",namespace:"fixture"}));

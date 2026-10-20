@@ -2655,3 +2655,199 @@ html[data-text="large"] .cover {
 .cover-orn {
   display: none;
 }
+
+/* ==== The signature of each look (UI-SPEC 2, D-01) and the states of Today (A1) ====
+   Same DOM for both looks; only the CSS differs by data-look. */
+/* Lamplight: one soft lamp glow behind the block (the token is transparent in Light). It sits behind the block
+   only: it extends a little into the gaps around it, never behind the title or the list, and it takes no clicks. */
+.cover-wrap::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--space-3)) calc(-1 * var(--space-4)) calc(-1 * var(--space-6));
+  z-index: -1;
+  background: radial-gradient(60% 50% at 50% 40%, var(--glow), transparent 70%);
+  pointer-events: none;
+}
+/* Cover and story: the gilt rule 8px inside the leather's edge, and a corner ornament in each corner. */
+:root:not([data-look="marked"]) .cover::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-2);
+  border: 1px solid var(--gilt);
+  border-radius: calc(var(--radius-xl) - var(--space-2));
+  pointer-events: none;
+}
+/* The ornament is src/icons/ornament-corner.svg used as a mask, so it takes the colour of the gilt. */
+:root:not([data-look="marked"]) .cover-orn {
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--gilt);
+  -webkit-mask: url("./icons/ornament-corner.svg") center / contain no-repeat;
+  mask: url("./icons/ornament-corner.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+.cover-orn-tl {
+  top: var(--space-3);
+  left: var(--space-3);
+}
+.cover-orn-tr {
+  top: var(--space-3);
+  right: var(--space-3);
+  transform: rotate(90deg);
+}
+.cover-orn-br {
+  right: var(--space-3);
+  bottom: var(--space-3);
+  transform: rotate(180deg);
+}
+.cover-orn-bl {
+  bottom: var(--space-3);
+  left: var(--space-3);
+  transform: rotate(270deg);
+}
+/* The block's content sits above the rule. */
+.cover > p,
+.cover > button {
+  position: relative;
+}
+/* Marked page: the passage sits on the page, no box and no gilt, with a satin ribbon (10px, --brand, forked tail)
+   hanging from the top of the screen to the reference line, 28px from the right edge. */
+:root[data-look="marked"] .cover {
+  padding: 0;
+  border-radius: 0;
+}
+:root[data-look="marked"] .cover-ref {
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-weight: 600;
+  color: var(--link);
+}
+:root[data-look="marked"] .cover .cover-ai {
+  color: var(--ai);
+}
+:root[data-look="marked"] .cover-ribbon {
+  display: block;
+  position: absolute;
+  right: var(--space-2);
+  width: 10px;
+  background: var(--brand);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+  pointer-events: none;
+}
+/* On Today the ribbon starts at the top safe-area edge: the reach is the height of the title and the date line
+   above the block (8 + title + 8 + date + 20 px) plus the first line of the passage. */
+:root[data-look="marked"] .today .cover-ribbon {
+  top: calc(-1 * (env(safe-area-inset-top) + 36px + 1.2 * var(--text-large-title) + 1.38 * var(--text-footnote)));
+  height: calc(env(safe-area-inset-top) + 36px + 1.2 * var(--text-large-title) + 1.38 * var(--text-footnote) + 1.47 * var(--text-body));
+}
+/* The title and the date leave the ribbon's column free. */
+:root[data-look="marked"] .today .large-title,
+:root[data-look="marked"] .today .today-date {
+  padding-right: calc(var(--space-2) + 10px + var(--space-3));
+}
+/* The state line under the hook: a check icon and "On your shelf" (--gilt on the leather, --success on the page). */
+.cover .cover-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--sig-muted);
+}
+.cover-status svg {
+  flex: none;
+  color: var(--gilt);
+}
+:root[data-look="marked"] .cover-status svg {
+  color: var(--success);
+}
+/* "Read it again": the secondary style on the block, an outline instead of a fill. */
+.cover .cover-button-secondary {
+  background: transparent;
+  color: var(--on-sig);
+  border-color: var(--sig-muted);
+}
+/* No context check is published: the day's verse takes the block (Scripture 20). */
+.cover .cover-verse {
+  margin-top: var(--space-4);
+  font-family: var(--font-scripture);
+  font-size: var(--text-scripture);
+  line-height: 1.5;
+  color: var(--on-sig);
+  overflow-wrap: anywhere;
+}
+/* The list under the block: Today's walk and Your shelf. */
+.today .group {
+  margin-bottom: var(--space-6);
+}
+.row-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.row-success {
+  flex: none;
+  color: var(--success);
+}
+.list-row-detail .row-line {
+  display: block;
+}
+.list-row-detail .row-ai {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  color: var(--ai);
+}
+.list-row-detail .row-ai .ai-badge {
+  margin-top: 1px;
+}
+/* A small picture before a row's text. */
+.list-row-leading {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+}
+/* The mini shelf: spines 8px wide and 24 to 40px tall, the newest on the right; AI-written ones filled --ai. */
+.mini-shelf {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  min-height: 40px;
+}
+.mini-spine {
+  flex: none;
+  width: 8px;
+  border-radius: 1px;
+  background: var(--spine-1);
+}
+.mini-spine-2 {
+  background: var(--spine-2);
+}
+.mini-spine-3 {
+  background: var(--spine-3);
+}
+.mini-spine-ai {
+  background: var(--ai);
+}
+:root[data-look="marked"] .mini-spine {
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+:root[data-look="marked"] .mini-spine-ai {
+  box-shadow: none;
+}
+/* Narrow screens and large text: the picture takes its own line, so the words keep their width. */
+@media (max-width: 359px) {
+  .today .list-row:has(.list-row-leading) {
+    flex-wrap: wrap;
+  }
+  .today .list-row-leading {
+    flex-basis: 100%;
+  }
+}
+html[data-text="large"] .today .list-row-leading {
+  flex-basis: 100%;
+}

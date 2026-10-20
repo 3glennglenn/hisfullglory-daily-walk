@@ -8,6 +8,7 @@ import {readdirSync,readFileSync} from "node:fs";
 // Node strips the types, so the app's own rules decide which context check Today should open with (Node 24, local and CI).
 import {aiUnreviewedCardLabel,publishedChecks,refLabel,splitHook,todaysCheck} from "../src/context/checks.ts";
 import {checkTopicComposer} from "../tests/topic-hub.browser.mjs";
+import {checkToday,checkTodayFixture} from "../tests/today.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -146,6 +147,8 @@ try {
       assert.equal(await page.getByLabel("Minutes", { exact: true }).inputValue(), "10");
     },
   );
+  await check("Today: its states, the walk and shelf rows, and what each look draws (UI-SPEC A1)", () => checkToday(browser, base, published));
+  await check("Today on controlled content: no published check, an AI-written newest check, files the app cannot read", () => checkTodayFixture(browser, base));
   await check(
     "complete daily walk saves private reflection and idempotent completion",
     async () => {

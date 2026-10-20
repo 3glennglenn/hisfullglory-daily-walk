@@ -4,7 +4,7 @@ import {readFileSync} from "node:fs";
 // The version the app asks for is read from the app, so this fixture follows it when it changes.
 const TERMS_VERSION=readFileSync("src/platform/auth.tsx","utf8").match(/TERMS_VERSION = "([^"]+)"/)[1];
 export async function checkCircles(browser,base){
- const result=await build({entryPoints:["tests/fixtures/circles.tsx"],bundle:true,write:false,outfile:".tooling/circles-fixture.js",format:"iife",jsx:"automatic",define:{"process.env.NODE_ENV":'"production"'},plugins:[{
+ const result=await build({entryPoints:["tests/fixtures/circles.tsx"],bundle:true,write:false,outfile:".tooling/circles-fixture.js",format:"iife",jsx:"automatic",loader:{".svg":"dataurl"},define:{"process.env.NODE_ENV":'"production"'},plugins:[{
  name:"controlled-circle-sdk",setup(b){
  b.onResolve({filter:/^\.\.\/supabase$/},()=>({path:"sdk",namespace:"fixture"}));
  b.onLoad({filter:/.*/,namespace:"fixture"},()=>({loader:"js",contents:`

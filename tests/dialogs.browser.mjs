@@ -17,6 +17,8 @@ export async function checkDialogs(browser, base) {
     outfile: ".tooling/dialogs-fixture.js",
     format: "iife",
     jsx: "automatic",
+    // The stylesheet references src/icons/ornament-corner.svg (the cover of Today); the bundle inlines it.
+    loader: { ".svg": "dataurl" },
     define: { "process.env.NODE_ENV": '"production"' },
     plugins: [
       {
