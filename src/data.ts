@@ -236,8 +236,8 @@ export const plans: Plan[] = [
       day(
         "Return with grace",
         13,
-        "A missed day is an invitation to return, not a verdict on your faith. Keep your rhythm simple. Plan how you will begin again when life interrupts it.",
-        "What will help you return after a missed day?",
+        "A day away is an invitation to return, not a verdict on your faith. Keep your rhythm simple. Plan how you will begin again when life interrupts it.",
+        "What will help you return after a day away?",
         "Lord, help me return to your Word with humility and hope. Amen.",
         "Write a simple reading rhythm for the coming week.",
       ),

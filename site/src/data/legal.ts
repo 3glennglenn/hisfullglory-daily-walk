@@ -58,7 +58,7 @@ export const ageLabel = need(
 );
 
 // P6: the date of the founder's approval.
-export const lastUpdated = need("lastUpdated", "October 19, 2026");
+export const lastUpdated = need("lastUpdated", "October 20, 2026");
 
 // P7, P8: the law and the legal bases. Drafts proposed by Claude on 2026-10-19; the founder accepts
 // or changes them on the preview. "We" is the person named in `entity`.
