@@ -33,6 +33,7 @@ with a daily reminder as a notification.
 | A web page to request deletion (Google) | `site/src/pages/delete-account.astro`, same branch. Uses support@hisfullglory.com, which must forward before it goes live. The founder approved its promise of deletion by email within 30 days on 2026-10-14. |
 | Sign-in that works inside the app | To do: a 6-digit code instead of only a link, because a link opens the browser, not the app. |
 | A sign-in for the reviewers | To do. They cannot use the founder's mailbox. |
+| Sign in with Apple (App Store guideline 4.8), an iOS release gate | Not built. The app offers Google sign-in (`docs/GOOGLE_SIGN_IN.md`), and guideline 4.8 requires an equivalent privacy-focused login option, such as Sign in with Apple, next to a third-party login. It needs the Apple developer account (the founder: end of October 2026). Do not submit the iOS build before it is built and tested, and read the current wording of 4.8 when submitting. |
 | Filtering of objectionable content (Apple 1.2) | To do. Reporting and blocking exist. |
 | Privacy policy and terms for the app | To do: pages on the site, written by Claude, approved by the founder. |
 | Native shell and a notification | To do. |

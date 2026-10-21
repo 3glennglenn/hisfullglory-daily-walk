@@ -1,5 +1,13 @@
 # Changelog
 
+## Continue with Google: branch `google-signin`, on top of pull request #32 (2026-10-21)
+- The sign-in panel offers "Continue with Google" first (Google's button, light in the light looks and dark in Lamplight, the multicolour "G" unchanged), a quiet "or", then the email field and "Email me a sign-in code" as the second way. It calls `signInWithOAuth` with the app's own origin and the current path as the way back, and nothing else. Busy state "Opening Google…". Why: Supabase's built-in email only reaches team members, so nobody else could sign in; the founder chose Google over setting up Resend now.
+- "Signing in by email is not open yet. Use Continue with Google." replaces the generic failure when Supabase answers `email_address_not_authorized`. A sign-in that comes back from Google with an error says "Google sign-in did not finish. Try again." and the error leaves the address bar.
+- A Google reader chooses a display name and accepts the terms as an email reader does. The app never uses the name or picture Google sends.
+- Texts for the founder's approval (listed in the pull request): the privacy page (email address line, a Google card under "Who helps us", Supabase's card, date October 21, 2026), the terms ("Your account"), the delete-account page (step 1 and one sentence about Google's third-party connections) and the line on Account. Resend is removed from the privacy policy, `legal.ts` and `docs/PRIVACY_DATA_FLOW.md`.
+- New `docs/GOOGLE_SIGN_IN.md` (set-up, secret rotation, follow-ups: Google brand verification, Supabase custom domain); `docs/APP_STORES.md` gets the Sign in with Apple release gate (guideline 4.8); `CLAUDE.md` has a sign-in section.
+- Tests: `tests/google-signin.test.ts` (way-back builder, error parameters, error mapping) and a browser flow `tests/google.browser.mjs` on the controlled SDK (Google never reached).
+
 ## A stronger, paged Give section: branch `give-pages` (2026-10-20)
 - Give lists 32 independently evaluated charities on six swipeable pages (most effective, poverty and hunger, health and research, children and protection, animals, Christian charities), each with the evaluator that backs it and a link to its source. Data: `src/giving/catalogData.ts`; rules and re-check dates: `docs/GIVING_CATALOG.md`. World Vision's donation page was checked by hand by the founder; Samaritan's Purse is not included (founder).
 - You opens with a Give card ("Give where it helps most"); the plain Give row is gone and the group is called Resources.

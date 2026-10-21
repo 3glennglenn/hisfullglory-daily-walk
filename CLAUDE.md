@@ -1,7 +1,7 @@
 # HisFullGlory Daily Walk: working notes for Claude
 
 Read `AGENTS.md` first: its product, privacy, Scripture and migration rules still apply.
-This file adds the current state and how to work with the founder. Last updated 2026-10-20.
+This file adds the current state and how to work with the founder. Last updated 2026-10-21.
 
 ## Working with the founder
 
@@ -68,6 +68,21 @@ This file adds the current state and how to work with the founder. Last updated 
   rests on: the Bible itself, outside sources, or one reading that scholars dispute
   (`site/README.md`). The founder approved the first eleven on 2026-10-13, after three
   rounds of feedback; they are on the site under `/context-checks`.
+
+## Sign-in (since 2026-10-21, branch `google-signin`)
+
+- Two ways in, in `AuthPanel` (`src/platform/auth.tsx`): **Continue with Google** first, then "or",
+  then **Email me a sign-in code**. Everything about Google sign-in (what is set up in Google Cloud
+  and in Supabase, how to rotate the secret, the open follow-ups) is in `docs/GOOGLE_SIGN_IN.md`.
+- Why Google first: Supabase's built-in email sender only reaches members of its own team
+  (`email_address_not_authorized`), so email codes work for the founder and nobody else. The founder
+  chose Google over a custom sender ("c start voor nu we gaan het waarschijnlijk later aanpassen") and
+  does not want Resend now, so Resend is not used and not in the privacy policy.
+- The Google client secret lives only in Supabase. Never put it, or any key, in the repo.
+- The app never reads, copies or shows the name or picture Google sends. The display name is
+  chosen in the app, as for email readers.
+- iOS release gate: App Store guideline 4.8 (Sign in with Apple), in `docs/APP_STORES.md`.
+- Not tested on production: the browser tests stub the Supabase client and never reach Google.
 
 ## Live state (verified 2026-10-12, evening)
 
