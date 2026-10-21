@@ -17,7 +17,7 @@ import { CodeEntry, SignInNote, SiteLink, codeSendFailed, codeSentStatus } from 
 // (vite.config.ts), so the app never shows a placeholder to the public.
 import { ageLabel } from "../../site/src/data/legal.ts";
 import { postError } from "../social/blockedLanguage";
-export const TERMS_VERSION = "2026-10-07";
+export const TERMS_VERSION = "2026-10-19";
 const Auth = createContext<{
   session: Session | null;
   ready: boolean;

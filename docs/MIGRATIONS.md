@@ -35,3 +35,22 @@ A dry run is not deployment. No reset, repair, bootstrap recreation or old-migra
 ## Post-deployment gate on an isolated QA project first
 
 Use genuine guest/A/B/C accounts plus owner/scoped moderator. Exercise the five prioritized flows in CIRCLES_QA.md, direct RPC/raw table access, concurrent vote/join/review/removal, account refresh/expiry, private/public deep-link refresh/back/forward and PWA launch. Confirm 006 recorded remotely before testing the frontend. Original Community/Scripture/devotional/prayer/support moderation must still work. Keep production release blocked until real Auth/permissions, moderation coverage and deployment are reviewed independently.
+
+## 014 terms version
+
+`014_terms_version.sql` makes the terms the founder approved on 2026-10-19 (pull request #27) the version everyone accepts. Founder approval of the migration: 2026-10-20 ("akkoord migratie 014"). It is forward-only and safe to apply twice, and changes no data.
+
+What it does:
+
+- Adds `public.current_terms_version()`, which returns `2026-10-19`. It is the one place in the database that names the version in force. Anon and authenticated may call it.
+- Redefines `public.accept_community_terms(terms_version text)` and `public.require_terms()` with the same signatures, messages and grants as in 001, comparing with `current_terms_version()` instead of the literal `2026-10-07`. After 014 an acceptance of `2026-10-07` is refused ("Current terms and authentication required"), and an account that accepted only `2026-10-07` gets "Accept current community rules before publishing" until it accepts the new version once. Old `community_terms` rows stay as the record. Every function that calls `require_terms()` (posts, prayer updates, support requests, topics, Circles, the chat and prayer-wall guards) follows at once.
+
+The same date must stand in three places: `current_terms_version()` (this file), `TERMS_VERSION` in `src/platform/auth.tsx` and `termsVersion` in `site/src/data/legal.ts`. `tests/terms-version-schema.test.mjs` and `site/tests/legal.test.ts` keep them equal. A later terms change needs a new migration that redefines `current_terms_version()`, plus both constants, in one pull request.
+
+Apply timing: the database and the app must switch together.
+
+1. The founder merges the pull request that carries the new `TERMS_VERSION` (this branch, `terms-014`, together with the trust pull request).
+2. Claude applies 014 to the hosted project right after the production app build of that merge is live, with the Supabase MCP `apply_migration` (name `terms_version`), never before. Applied earlier, the old app sends `2026-10-07` and cannot accept the rules; applied much later, the new app sends `2026-10-19` and cannot accept them. The window between the live build and the migration is minutes, and today only the founder can sign in, so it affects nobody else.
+3. Check read-only afterwards: `list_migrations` lists `terms_version` after `report_hold`, and `select public.current_terms_version()` returns `2026-10-19`.
+
+The earlier schema tests (`platform-schema`, `report-hold-schema` and the others) keep the old literal `2026-10-07` in their fixtures because they load migrations up to 013 and never load 014; only `terms-version-schema.test.mjs` loads it. Undoing 014 needs another forward migration that points `current_terms_version()` back, and asks people to accept again.
