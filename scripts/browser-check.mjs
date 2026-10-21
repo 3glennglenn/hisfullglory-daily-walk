@@ -20,6 +20,7 @@ import {checkWalkFinish} from "../tests/walk.browser.mjs";
 import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkListen,checkVerseSheet,checkLayers,checkLayersCommunity,checkChapterSheet,checkCommunityLink} from "../tests/reader.browser.mjs";
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
+import {checkGoogle} from "../tests/google.browser.mjs";
 import {checkPushedScreens,checkSurfaces,checkTextSweep} from "../tests/remaining.browser.mjs";
 import {checkGive} from "../tests/give.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
@@ -1781,6 +1782,7 @@ try {
   });
   await check("actual account boundary isolates guest/A/B drafts and rejects stale Terms after token refresh (controlled SDK)",()=>checkAuthBoundary(browser,base));
   await check("account deletion flow (controlled SDK)",()=>checkProfile(browser,base));
+  await check("Continue with Google: first in the sign-in panel in both looks and Lamplight, one signInWithOAuth call with a same-origin way back, busy and failed states, the error on the returning address, the friendly email message, no name or picture taken from Google, 200 % text (controlled SDK, Google never reached)",()=>checkGoogle(browser,base));
   await check("topic voting preserves drafts and late publishing cannot erase a new topic draft (controlled SDK)",()=>checkTopicComposer(browser,base));
   await check("Circle SPA routes reload/back/forward and installed shell launches offline without a fake backend",async()=>{
     await go("/community/circles");await page.getByRole("heading",{name:"Circles",exact:true}).waitFor();

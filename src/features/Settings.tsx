@@ -284,8 +284,8 @@ export function Profile() {
       <GroupedList title="Account and privacy" plain>
         <div className="group-pad">
           <p>
-            You sign in with a 6-digit code we email you. Signing in does not
-            upload your private journal or prayers.
+            You sign in with Google or with a 6-digit code we email you. Signing
+            in does not upload your private journal or prayers.
           </p>
           <p>
             Use Settings to export your private data. You can delete your account

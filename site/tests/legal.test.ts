@@ -93,7 +93,7 @@ test("a value left empty in legal.ts fails here instead of rendering an empty se
 
 test("the privacy page names the five processors in cards, with a contents list that is collapsed", () => {
   const html = read("/privacy");
-  for (const name of ["Supabase", "Vercel", "Resend", "Shopify", "Browser and phone push services"])
+  for (const name of ["Supabase", "Google", "Vercel", "Shopify", "Browser and phone push services"])
     assert.ok(new RegExp(`<h3[^>]*>${name}</h3>`).test(html), `${name} card`);
   assert.equal(html.match(/<article class="card processor"/g)?.length, 5, "five processor cards");
   assert.ok(/<details[^>]*>\s*<summary[^>]*>On this page<\/summary>/.test(html), "On this page is a details element");

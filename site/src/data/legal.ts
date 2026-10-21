@@ -58,7 +58,7 @@ export const ageLabel = need(
 );
 
 // P6: the date of the founder's approval.
-export const lastUpdated = need("lastUpdated", "October 20, 2026");
+export const lastUpdated = need("lastUpdated", "October 21, 2026");
 
 // P7, P8: the law and the legal bases. Drafts proposed by Claude on 2026-10-19; the founder accepts
 // or changes them on the preview. "We" is the person named in `entity`.
@@ -118,16 +118,15 @@ export const backups = need(
 );
 
 // P10: Supabase read from the project by the orchestrator on 2026-10-16 (fccwqguqhnbayuowmamy is
-// in eu-west-1, Ireland). Vercel serves the static pages from its worldwide network. Resend: the
-// founder will create the sending domain in the EU (Ireland) region; confirm it is done before he
-// approves the text.
+// in eu-west-1, Ireland). Vercel serves the static pages from its worldwide network. Resend is not
+// used for now (the founder, 2026-10-21): Supabase sends the sign-in email itself. Bring Resend back,
+// with its region, when a custom sender is set up.
 export const regions = {
   supabase: need("regions.supabase", "Ireland, in the European Union."),
   vercel: need(
     "regions.vercel",
     "Vercel's worldwide network. Pages are delivered from a server near the reader, which can be outside the European Economic Area.",
   ),
-  resend: need("regions.resend", "Ireland, in the European Union. This is the region we will use for our sign-in email domain."),
 };
 
 // P13, P14: business statements, not facts the code can prove. Proposed by Claude, accepted or
@@ -155,9 +154,17 @@ export const processors: Processor[] = [
   {
     id: "supabase",
     name: "Supabase",
-    does: "Runs our database and the sign-in. Until our own email sender is ready, it also sends the sign-in email.",
+    does: "Runs our database and the sign-in. It also sends the sign-in code by email.",
     receives: "Your email address, your display name and what you publish.",
     where: regions.supabase,
+  },
+  {
+    id: "google",
+    name: "Google",
+    does: "Lets you sign in with your Google account, if you choose to.",
+    receives:
+      "That you are signing in to HisFullGlory, and the technical details of that sign-in, such as your IP address. Google tells us your email address, your name and a link to your profile picture.",
+    where: "Google's worldwide network.",
   },
   {
     id: "vercel",
@@ -165,13 +172,6 @@ export const processors: Processor[] = [
     does: "Hosts the website and the app.",
     receives: `The technical details every web server sees, such as your IP address and the pages you request. ${logRetention}`,
     where: regions.vercel,
-  },
-  {
-    id: "resend",
-    name: "Resend",
-    does: "Will send your sign-in code by email from our own address, once that is set up.",
-    receives: "Your email address and the email it delivers.",
-    where: regions.resend,
   },
   {
     id: "shopify",
@@ -229,10 +229,11 @@ export const outboundHosts: OutboundHost[] = [
     viaConfiguration: true,
   },
   {
-    host: "smtp.resend.com",
-    purpose: "Relays the sign-in email. Set in the Supabase dashboard (custom SMTP), not in our code.",
+    host: "accounts.google.com",
+    purpose:
+      "Google's own sign-in page, where \"Continue with Google\" sends the reader by way of Supabase. The address is set in the Supabase project and in Google's reply, not written in our code.",
     kind: "processor",
-    processor: "resend",
+    processor: "google",
     viaConfiguration: true,
   },
   {

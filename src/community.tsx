@@ -11,9 +11,9 @@ import { supabase } from "./supabase";
 import {
   CodeEntry,
   SignInNote,
-  codeSendFailed,
   codeSentStatus,
 } from "./platform/CodeEntry";
+import { codeFailureMessage } from "./platform/googleSignIn";
 import { postError } from "./social/blockedLanguage";
 import { useAuth, AuthPanel } from "./platform/auth";
 import { SafetyControls } from "./social/safety";
@@ -243,7 +243,7 @@ export function Community({
         email: email.trim(),
         options: { emailRedirectTo: window.location.origin + "/" },
       });
-      setAuthNote(error ? codeSendFailed : codeSentStatus);
+      setAuthNote(error ? codeFailureMessage(error) : codeSentStatus);
       if (!error) {
         setSentTo(email.trim());
         setSentAt(Date.now());
