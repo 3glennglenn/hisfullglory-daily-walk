@@ -4,23 +4,24 @@
     {
       "id": "ai:micah",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-21",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Micah speaks against the leaders of Samaria and Jerusalem: rulers who take bribes, prophets who say what pays, and the powerful who seize the fields of the poor. He announces that both cities will fall.\n\nWoven through the warnings are promises: nations streaming to learn God’s ways, swords beaten into plowshares, and a ruler who will come from the small town of Bethlehem."
+          "text": "The leaders of Jerusalem have an answer ready for anyone who warns them. “Isn’t the LORD among us? No disaster will come on us.” Micah has seen what lies behind it. Rulers who take bribes, prophets who say what pays, and the powerful who seize the fields of the poor. To Micah, none of this goes unseen.\n\nSo he announces that the two cities, Samaria and Jerusalem, will fall.\n\nBut the warnings are threaded with promise, as if the speaker could not stop himself. Nations stream to learn God’s ways. Out of the teaching comes peace: “They will beat their swords into plowshares, and their spears into pruning hooks.” And out of the small town of Bethlehem will come a ruler. The book keeps turning between what is coming and what is hoped for."
         },
         {
           "kind": "background",
-          "text": "Micah came from Moresheth, a country town in Judah, and prophesied in the late eighth century before Christ, at the same time as Isaiah. A century later Jeremiah’s defenders quoted him in court (Jeremiah 26)."
+          "text": "Micah came from Moresheth, a country town in Judah, and prophesied in the late eighth century before Christ, at the same time as Isaiah. He spoke as an outsider to the capital. A century later, Jeremiah’s defenders quoted him in court when his own life was at stake (Jeremiah 26)."
         },
         {
           "kind": "interpretations",
-          "text": "Micah 6:8 is one of the best-known summaries of what God asks: to act justly, to love mercy and to walk humbly with God. Matthew quotes the promise about Bethlehem in the story of Jesus’ birth. The book ends by marvelling at a God who pardons and delights in mercy."
+          "text": "Micah 6:8 is one of the best-known summaries of what God asks of people: “to act justly, to love mercy, and to walk humbly with your God?” Matthew quotes the promise about Bethlehem in the story of Jesus’ birth. The book ends by marveling at God: “Who is a God like you, who pardons iniquity,” and who delights in mercy."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

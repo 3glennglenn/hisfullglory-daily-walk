@@ -4,23 +4,24 @@
     {
       "id": "ai:zephaniah",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-21",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Zephaniah warns that the day of the LORD is near, a day of judgment that begins with Judah and Jerusalem and reaches the surrounding nations. He names idolatry, violence and complacency.\n\nThe book turns at the end to joy. A humble people will be left, gathered and brought home, and God himself is pictured rejoicing over them with singing."
+          "text": "“Be silent at the presence of the Lord GOD, for the day of the LORD is at hand.” The words open with a hush and then a warning. Zephaniah says the day of judgment is near, and it will begin with Judah and Jerusalem. He names idolatry, violence and complacency.\n\nThe complacency is the most familiar of them. The LORD says he will search Jerusalem with lamps, to find those who have settled comfortably into their own ways and tell themselves that “The LORD will not do good, neither will he do evil.” From there the judgment reaches the surrounding nations.\n\nAnd then the book turns. A humble people will be left, gathered and brought home. Jerusalem is told to sing and not to be afraid. The LORD is among them, a mighty one who will save: “He will rejoice over you with singing.” The book that began with a hush ends with a song."
         },
         {
           "kind": "background",
-          "text": "Zephaniah prophesied in the reign of King Josiah of Judah, about 640 to 609 before Christ, probably before Josiah’s reforms. His opening line traces his family back four generations, possibly to King Hezekiah."
+          "text": "Zephaniah prophesied in the reign of King Josiah of Judah, about 640 to 609 before Christ, probably before Josiah’s reforms. His opening line traces his family back four generations, possibly to King Hezekiah. Few prophets name so long a line, and it places him close to the royal house."
         },
         {
           "kind": "interpretations",
-          "text": "The picture of God singing over his people (3:17) is among the warmest in the prophets and is often quoted. Read with the rest of the book it shows that judgment in the prophets is aimed at restoration, not at destruction for its own sake."
+          "text": "The picture of God singing over his people (3:17) is among the warmest in the prophets and is often quoted. Read with the rest of the book, it shows that judgment in the prophets is aimed at restoration, not at destruction for its own sake. The same book holds both the storm and the song, and the two halves are meant to be read together."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

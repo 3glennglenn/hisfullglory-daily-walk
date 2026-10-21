@@ -4,23 +4,24 @@
     {
       "id": "ai:habakkuk",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-21",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Habakkuk is a conversation between a prophet and God. Habakkuk asks why God allows injustice among his people. God answers that he is raising up the Babylonians. Habakkuk protests: how can God use a nation more wicked than the one it punishes?\n\nGod’s reply is that the proud will fall and the righteous will live by faith. The book ends with a prayer that chooses to rejoice in God even if every crop fails."
+          "text": "Habakkuk does not begin with praise. He begins with a complaint. “LORD, how long will I cry, and you will not hear?” Violence, strife and injustice are all around him, and the law is paralyzed.\n\nGod answers, and the answer is worse than the silence. He is raising up the Chaldeans, the Babylonians, a nation swift and fierce. Habakkuk protests. How can the God whose eyes are too pure to look on evil use a nation more wicked than the one it punishes?\n\nThen the prophet does something unusual: “I will stand at my watch and set myself on the ramparts,” he says, and waits for the reply. It comes: the vision is for an appointed time, so wait for it. The proud will fall, and “the righteous will live by his faith.”\n\nThe book ends not with an answer to every question but with a prayer. Even if the fig tree does not flourish, even if the fields yield no food: “yet I will rejoice in the LORD.”"
         },
         {
           "kind": "background",
-          "text": "The book belongs to the late seventh century before Christ, as Babylon was rising to power and shortly before it conquered Judah."
+          "text": "The book belongs to the late seventh century before Christ, as Babylon was rising to power and shortly before it conquered Judah. That is the world in which a prophet asks God how long, and is told that something large is already on its way. The opening line calls him only Habakkuk the prophet."
         },
         {
           "kind": "interpretations",
-          "text": "The line about the righteous living by faith (2:4) is quoted three times in the New Testament, in Romans, Galatians and Hebrews, and stood at the center of the Reformation. The book also shows that bringing hard questions to God is itself an act of faith."
+          "text": "The line about the righteous living by faith (2:4) is quoted three times in the New Testament, in Romans, Galatians and Hebrews, and it stood at the center of the Reformation. The book also shows that bringing hard questions to God is itself an act of faith: Habakkuk argues with God, waits for him, and ends in trust. The book gives room to the question and to the waiting."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

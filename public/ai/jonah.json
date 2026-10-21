@@ -4,23 +4,24 @@
     {
       "id": "ai:jonah",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-21",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jonah is told to preach to Nineveh, the capital of Israel’s enemy Assyria, and runs the other way. A storm, a great fish and a prayer bring him back. He delivers his message, the city repents, and God spares it.\n\nJonah is furious. The book ends with God’s question to him: should I not care about this great city?"
+          "text": "The word comes plainly: “Arise, go to Nineveh, that great city, and preach against it,” for its wickedness has come up before God. Nineveh is the capital of Assyria, Israel’s enemy. Jonah gets up, and goes the other way, down to Joppa and onto a ship for Tarshish.\n\nA great storm breaks over the sea. The sailors cry to their gods and throw the cargo overboard, and Jonah is asleep in the innermost part of the ship. When the lot falls on him, he does not argue. “Take me up, and throw me into the sea.” The sea goes quiet. The LORD has prepared a huge fish, and in it Jonah prays. A fish, a storm and a prayer bring him back. He delivers his message, the city repents, and God spares it.\n\nJonah is furious. He says he fled because he knew God to be “a gracious God and merciful, slow to anger,” and abundant in loving kindness. The book ends on no verdict from Jonah, only on God’s question: should I not care about this great city?"
         },
         {
           "kind": "background",
-          "text": "A prophet named Jonah son of Amittai is mentioned in 2 Kings 14:25, in the eighth century before Christ. When the book about him was written is debated. Unlike other prophetic books it is almost all story and contains only one short line of preaching."
+          "text": "Jonah son of Amittai is named in 2 Kings 14:25, in the eighth century before Christ. When the book about him was written is debated. It is unlike the other prophetic books. They are known for their words, and this one is known for its story: almost all narrative, with only one short line of preaching."
         },
         {
           "kind": "interpretations",
-          "text": "Christians differ on whether the book is a historical account or a parable; both views are held by readers who take Scripture seriously. Jesus points to Jonah’s three days in the fish as a sign of his own death and resurrection. The book’s message is not in dispute: God’s mercy reaches people his own servants would prefer to see judged."
+          "text": "Christians differ on whether the book is a historical account or a parable. Both views are held by readers who take Scripture seriously. Jesus points to Jonah’s three days in the fish as a sign of his own death and resurrection. The book’s message is not in dispute: God’s mercy reaches people whom his own servants would prefer to see judged, and the book leaves that question open to the very end."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
