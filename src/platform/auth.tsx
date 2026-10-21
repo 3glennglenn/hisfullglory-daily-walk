@@ -13,23 +13,46 @@ import { deletedWithAccount, isDeleteConfirmation } from "./deleteConfirm";
 import { navigate } from "./router";
 import { config } from "../config";
 import { CodeEntry, SignInNote, SiteLink, codeSendFailed, codeSentStatus } from "./CodeEntry";
+import { GoogleButton } from "./GoogleButton";
 // Marker text until the founder confirms the age; the production build refuses to ship it
 // (vite.config.ts), so the app never shows a placeholder to the public.
 import { ageLabel } from "../../site/src/data/legal.ts";
 import { postError } from "../social/blockedLanguage";
+import {
+  codeFailureMessage,
+  googleFailed,
+  hasOauthError,
+  oauthRedirectTo,
+  withoutOauthError,
+} from "./googleSignIn";
 export const TERMS_VERSION = "2026-10-07";
 const Auth = createContext<{
   session: Session | null;
   ready: boolean;
   accepted: boolean;
+  /** Words for a Google sign-in that came back with an error, until the next try. Empty otherwise. */
+  oauthError: string;
+  clearOauthError: () => void;
   refresh: () => Promise<void>;
-}>({ session: null, ready: false, accepted: false, refresh: async () => {} });
+}>({
+  session: null,
+  ready: false,
+  accepted: false,
+  oauthError: "",
+  clearOauthError: () => {},
+  refresh: async () => {},
+});
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [accepted, setAccepted] = useState(false);
   const [ready, setReady] = useState(!supabase);
   const generation = useRef(0);
   const [authEpoch,setAuthEpoch] = useState(0);
+  // Supabase sends the reader back with error parameters on the address when Google sign-in fails
+  // (in the hash for the implicit flow this app uses, in the query otherwise). Read once, kept here.
+  const [oauthError, setOauthError] = useState(() =>
+    typeof window !== "undefined" && hasOauthError(window.location) ? googleFailed : "",
+  );
   async function refresh() {
     if (!supabase) return;
     const request = generation.current;
@@ -40,6 +63,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .maybeSingle();
     if (request === generation.current) setAccepted(data?.version === TERMS_VERSION);
   }
+  // The error parameters leave the address bar, so a reload does not show the message again.
+  useEffect(() => {
+    const here = window.location.pathname + window.location.search + window.location.hash;
+    const clean = withoutOauthError(here);
+    if (clean !== here) window.history.replaceState(window.history.state, "", clean);
+  }, []);
   useEffect(() => {
     if (!supabase) return;
     let active = true;
@@ -59,14 +88,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (session) void refresh();
   }, [session?.user.id,authEpoch]);
   return (
-    <Auth.Provider value={{ session, ready, accepted, refresh }}>
+    <Auth.Provider
+      value={{ session, ready, accepted, oauthError, clearOauthError: () => setOauthError(""), refresh }}
+    >
       {children}
     </Auth.Provider>
   );
 }
 export const useAuth = () => useContext(Auth);
 export function AuthPanel() {
-  const { session, accepted, refresh } = useAuth();
+  const { session, accepted, oauthError, clearOauthError, refresh } = useAuth();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [checked, setChecked] = useState(false);
@@ -74,8 +105,18 @@ export function AuthPanel() {
   const [status, setStatusLine] = useState({ text: "", error: false });
   const setStatus = (text: string, error = false) => setStatusLine({ text, error });
   const [busy, setBusy] = useState(false);
+  // True from the press on "Continue with Google" until the browser has left for Google.
+  const [googleBusy, setGoogleBusy] = useState(false);
   const [sentTo, setSentTo] = useState("");
   const [sentAt, setSentAt] = useState(0);
+  // Coming back with the Back button can restore this page as it was left, still waiting for Google.
+  useEffect(() => {
+    const restored = (e: PageTransitionEvent) => {
+      if (e.persisted) setGoogleBusy(false);
+    };
+    window.addEventListener("pageshow", restored);
+    return () => window.removeEventListener("pageshow", restored);
+  }, []);
   useEffect(() => {
     if (session && supabase)
       void supabase
@@ -85,36 +126,56 @@ export function AuthPanel() {
         .maybeSingle()
         .then((r) => setName(r.data?.display_name ?? ""));
   }, [session?.user.id]);
-  // Asks for an email with the sign-in code. Resolves true when it was sent.
+  // Asks for an email with the sign-in code. Resolves "" when it was sent, otherwise the words for the failure.
   async function requestCode(address: string) {
-    if (!supabase) return false;
+    if (!supabase) return codeSendFailed;
     try {
       const { error } = await supabase.auth.signInWithOtp({
         email: address,
         options: { emailRedirectTo: window.location.origin },
       });
-      return !error;
+      return error ? codeFailureMessage(error) : "";
     } catch {
-      return false;
+      return codeSendFailed;
     }
   }
   async function login() {
     const address = email.trim();
-    if (!supabase || busy || !address) return;
+    if (!supabase || busy || googleBusy || !address) return;
     setBusy(true);
     setStatus("");
-    if (await requestCode(address)) {
+    clearOauthError();
+    const failure = await requestCode(address);
+    if (!failure) {
       setSentTo(address);
       setSentAt(Date.now());
       setStatus(codeSentStatus);
-    } else setStatus(codeSendFailed, true);
+    } else setStatus(failure, true);
     setBusy(false);
   }
   // Asking again resets the wait that CodeEntry counts down.
   async function resendCode() {
-    const sent = await requestCode(sentTo);
+    const sent = !(await requestCode(sentTo));
     if (sent) setSentAt(Date.now());
     return sent;
+  }
+  // Sends the browser to Google by way of Supabase, and back to this page. On success the page is
+  // left, so the busy state stays until then. Only the provider and the way back are passed on.
+  async function continueWithGoogle() {
+    if (!supabase || busy || googleBusy) return;
+    setGoogleBusy(true);
+    setStatus("");
+    clearOauthError();
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: oauthRedirectTo(window.location) },
+      });
+      if (error) throw error;
+    } catch {
+      setStatus(googleFailed, true);
+      setGoogleBusy(false);
+    }
   }
   async function save() {
     if (!supabase || !session || name.trim().length < 2 || busy) return;
@@ -156,6 +217,8 @@ export function AuthPanel() {
     setStatus("Profile saved.");
     setBusy(false);
   }
+  // A Google sign-in that came back with an error is told until the next try, if nothing newer was said.
+  const line = status.text || session || !oauthError ? status : { text: oauthError, error: true };
   if (!supabase)
     return (
       <section className="card">
@@ -174,25 +237,35 @@ export function AuthPanel() {
         {session ? "Your community profile" : "Sign in when you are ready"}
       </h2>
       {!session ? (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            void login();
-          }}
-        >
-          <label>
-            Email
-            <input
-              type="email"
-              required
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
-          <button disabled={busy}>{busy ? "Sending…" : "Email me a sign-in code"}</button>
-          <SignInNote />
-        </form>
+        <>
+          <GoogleButton
+            busy={googleBusy}
+            disabled={busy}
+            onPress={() => void continueWithGoogle()}
+          />
+          <p className="sign-in-or">or</p>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              void login();
+            }}
+          >
+            <label>
+              Email
+              <input
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </label>
+            <button className="secondary" disabled={busy || googleBusy}>
+              {busy ? "Sending…" : "Email me a sign-in code"}
+            </button>
+            <SignInNote />
+          </form>
+        </>
       ) : (
         <>
           <label>
@@ -235,11 +308,11 @@ export function AuthPanel() {
           {accepted && <small>Community rules accepted.</small>}
         </>
       )}
-      <p role="status">{status.error ? "" : status.text}</p>
-      {status.error && (
+      <p role="status">{line.error ? "" : line.text}</p>
+      {line.error && (
         <p role="alert" className="danger-text">
           <span className="sr-only">Error: </span>
-          {status.text}
+          {line.text}
         </p>
       )}
       {!session && sentTo && (

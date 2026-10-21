@@ -7,6 +7,7 @@ import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { supabase } from "../supabase";
 import { config } from "../config";
 import { cleanCode, resendSecondsLeft } from "./signInCode";
+import { codeSendFailedMessage } from "./googleSignIn";
 
 /** A link to a page of the website. It opens in a new tab so the reader keeps their place. */
 export function SiteLink({ path, children }: { path: string; children: ReactNode }) {
@@ -37,8 +38,7 @@ export function SignInNote() {
 /** The words after an email was requested. */
 export const codeSentStatus =
   "Check your email. The code usually arrives within a minute. Look in spam if you do not see it.";
-export const codeSendFailed =
-  "We could not send the code. Check the address, wait a minute and try again.";
+export const codeSendFailed = codeSendFailedMessage;
 
 export function CodeEntry({
   email,

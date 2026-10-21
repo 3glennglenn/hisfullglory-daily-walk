@@ -19,11 +19,15 @@ const AGE_LABEL=JSON.parse(`"${readFileSync("site/src/data/legal.ts","utf8").mat
 const sdk=({signedOut,accepted})=>`
 const U=${JSON.stringify(USER)};
 const listeners=[];let current=${signedOut?"null":"{user:{id:U},access_token:'synthetic-test-only'}"};
-const t=window.profileTest={rpcMode:'resolve',rpcCalls:0,signOutCalls:[],pending:[],
-  otpMode:'resolve',otpCalls:[],verifyMode:'reject',verifyCalls:[],signInOnVerify:false,acceptMode:'resolve',acceptCalls:[],
-  release(error){const r=t.pending.splice(0);r.forEach(done=>done({data:null,error:error?{message:'synthetic failure'}:null}));}};
+const t=window.profileTest={rpcMode:'resolve',rpcCalls:0,signOutCalls:[],pending:[],profileName:'Fixture reader',
+  oauthMode:'resolve',oauthCalls:[],otpMode:'resolve',otpCalls:[],verifyMode:'reject',verifyCalls:[],signInOnVerify:false,acceptMode:'resolve',acceptCalls:[],
+  release(error){const r=t.pending.splice(0);r.forEach(done=>done({data:null,error:error?{message:'synthetic failure'}:null}));},
+  // A Google sign-in that finished: the session carries the name and picture Google sent, which the app must never use.
+  googleSignedIn(){current={user:{id:U,user_metadata:{full_name:'Gwen Googler',name:'Gwen Googler',avatar_url:'https://example.invalid/gwen.png',picture:'https://example.invalid/gwen.png'}},access_token:'synthetic-test-only'};listeners.slice().forEach(l=>l('SIGNED_IN',current));}};
 const answer=mode=>{
   if(mode==='hang')return new Promise(resolve=>t.pending.push(resolve));
+  // The shape of supabase-js's AuthApiError for an address the built-in email sender may not write to.
+  if(mode==='not-authorized')return Promise.resolve({data:{},error:{name:'AuthApiError',status:400,code:'email_address_not_authorized',message:'Email address "reader@example.org" cannot be used as it is not authorized'}});
   return Promise.resolve({data:{},error:mode==='reject'?{message:'synthetic failure'}:null});
 };
 export const supabase={
@@ -31,6 +35,7 @@ export const supabase={
     getSession:()=>Promise.resolve({data:{session:current},error:null}),
     onAuthStateChange:cb=>{listeners.push(cb);return {data:{subscription:{unsubscribe(){const i=listeners.indexOf(cb);if(i>=0)listeners.splice(i,1);}}}}},
     signOut:async options=>{t.signOutCalls.push(options);current=null;listeners.slice().forEach(l=>l('SIGNED_OUT',null));return {error:null};},
+    signInWithOAuth:args=>{t.oauthCalls.push(args);return answer(t.oauthMode);},
     signInWithOtp:args=>{t.otpCalls.push(args);return answer(t.otpMode);},
     verifyOtp:async args=>{
       t.verifyCalls.push(args);
@@ -39,7 +44,7 @@ export const supabase={
       return result;
     }
   },
-  from(table){const q={error:null,select(){return q},eq(){return q},update(){return q},insert(){return q},maybeSingle(){return Promise.resolve({data:table==='profiles'?{display_name:'Fixture reader'}:${accepted?`{version:${JSON.stringify(TERMS_VERSION)}}`:"null"},error:null});}};return q;},
+  from(table){const q={error:null,select(){return q},eq(){return q},update(){return q},insert(){return q},maybeSingle(){return Promise.resolve({data:table==='profiles'?(t.profileName===null?null:{display_name:t.profileName}):${accepted?`{version:${JSON.stringify(TERMS_VERSION)}}`:"null"},error:null});}};return q;},
   rpc(name,args){
     if(name==='accept_community_terms'){t.acceptCalls.push(args);return answer(t.acceptMode);}
     if(name!=='delete_my_account')return Promise.resolve({data:null,error:null});
@@ -67,22 +72,23 @@ async function bundle({supportReady,signedOut,accepted}) {
   return result.outputFiles[0].text;
 }
 
-async function open(browser,base,{supportReady=false,viewport={width:375,height:812},settings=false,signedOut=false,accepted=true,clock=false}={}) {
+export async function open(browser,base,{supportReady=false,viewport={width:375,height:812},settings=false,signedOut=false,accepted=true,clock=false,address="",scale=1}={}) {
   const script=await bundle({supportReady,signedOut,accepted});
-  const context=await browser.newContext({serviceWorkers:"block",viewport});
+  const context=await browser.newContext({serviceWorkers:"block",viewport,deviceScaleFactor:scale});
   const page=await context.newPage();
   const problems={errors:[],consoleErrors:[],consoleWarnings:[]};
   page.on("pageerror",e=>problems.errors.push(e.message));
   page.on("console",m=>{if(m.type()==="error")problems.consoleErrors.push(m.text());if(m.type()==="warning")problems.consoleWarnings.push(m.text());});
-  await page.route(base+"/__profile",route=>route.fulfill({contentType:"text/html",body:`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css}</style></head><body><div id="root"></div><script>${script}</script></body></html>`}));
+  // A function, so the same page also opens with a query or a hash on the address (the way back from Google).
+  await page.route(url=>url.pathname==="/__profile",route=>route.fulfill({contentType:"text/html",body:`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css}</style></head><body><div id="root"></div><script>${script}</script></body></html>`}));
   // A clock the test steps by hand (the resend countdown), stopped ten seconds after the page opened.
   if(clock) await page.clock.install({time:new Date("2026-10-16T10:00:00Z")});
-  await page.goto(base+"/__profile"+(settings?"#settings":""));
+  await page.goto(base+"/__profile"+(settings?"#settings":address));
   await page.getByRole("heading",{name:settings?"About and legal":signedOut?"Sign in when you are ready":"Delete your account",exact:true}).waitFor();
   if(clock) await page.clock.pauseAt(new Date("2026-10-16T10:00:10Z"));
   return {context,page,problems};
 }
-const clean=problems=>{assert.deepEqual(problems.errors,[]);assert.deepEqual(problems.consoleErrors,[]);assert.deepEqual(problems.consoleWarnings,[]);};
+export const clean=problems=>{assert.deepEqual(problems.errors,[]);assert.deepEqual(problems.consoleErrors,[]);assert.deepEqual(problems.consoleWarnings,[]);};
 
 async function deletionFlow(browser,base) {
   const {context,page:p,problems}=await open(browser,base);
@@ -107,7 +113,7 @@ const permanent=p=>p.getByRole("button",{name:"Delete my account permanently",ex
 const keep=p=>p.getByRole("button",{name:"Keep my account",exact:true});
 const field=p=>p.getByLabel("Type DELETE to confirm");
 const focused=locator=>locator.evaluate(el=>el===document.activeElement);
-const words=async locator=>(await locator.textContent()).replace(/\s+/g," ").trim();
+export const words=async locator=>(await locator.textContent()).replace(/\s+/g," ").trim();
 
 // Empty, wrong and right words; what the card lists; focus when it opens and when it is dismissed.
 async function cardStates(browser,base) {
@@ -224,7 +230,7 @@ async function profileCopyAndSupport(browser,base) {
     try {
       const card=p.locator("section.group",{has:p.getByRole("heading",{name:"Account and privacy",exact:true})});
       const text=await words(card);
-      assert.match(text,/You sign in with a 6-digit code we email you\. Signing in does not upload your private journal or prayers\./);
+      assert.match(text,/You sign in with Google or with a 6-digit code we email you\. Signing in does not upload your private journal or prayers\./);
       assert.match(text,/Use Settings to export your private data\. You can delete your account on this page at any time\./);
       assert.doesNotMatch(text,/magic|secure link|email links|Google and Apple/i);
       const mailtos=await p.locator("a[href^='mailto:']").count();
@@ -330,9 +336,9 @@ async function reflow(browser,base) {
 
 // Signed out: the sign-in form and the code entry speak of a 6-digit code like the email does (UI-SPEC 6b, E10).
 const withoutHint=text=>text.replace(/ \(opens in a new tab\)/g,"");
-const signInCard=p=>p.locator("section.card",{has:p.getByRole("heading",{name:"Sign in when you are ready",exact:true})});
-const emailField=p=>p.getByLabel("Email",{exact:true});
-const sendCode=p=>p.getByRole("button",{name:"Email me a sign-in code",exact:true});
+export const signInCard=p=>p.locator("section.card",{has:p.getByRole("heading",{name:"Sign in when you are ready",exact:true})});
+export const emailField=p=>p.getByLabel("Email",{exact:true});
+export const sendCode=p=>p.getByRole("button",{name:"Email me a sign-in code",exact:true});
 const codeField=p=>p.getByLabel("Enter the 6-digit code from your email");
 const codeButton=p=>p.getByRole("button",{name:/^Sign in with code$|^Signing in…$/});
 const resendButton=p=>p.getByRole("button",{name:/^Send a new code$|^Sending…$/});

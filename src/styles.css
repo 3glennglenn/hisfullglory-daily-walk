@@ -1215,6 +1215,46 @@ button.danger {
   width: 100%;
   margin-top: 10px;
 }
+/* "Continue with Google" (src/platform/GoogleButton.tsx), the first way to sign in. Google's branding
+   guidelines fix its colours, so they are literal here and not tokens: the light button (white, a 1px
+   #747775 edge, #1F1F1F text) in the light looks, the dark button (#131314, #8E918F, #E3E3E3) in
+   Lamplight. The "G" keeps its own colours on both. 44px or more, wraps at large text, the global
+   focus ring. */
+.google-button {
+  width: 100%;
+  margin: var(--space-4) 0 0;
+  padding: 10px 16px;
+  gap: 10px;
+  text-align: center;
+  background: #FFFFFF;
+  color: #1F1F1F;
+  border-color: #747775;
+}
+.google-button .google-mark {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+:root[data-mode="lamplight"] .google-button {
+  background: #131314;
+  color: #E3E3E3;
+  border-color: #8E918F;
+}
+/* The quiet "or" between the two ways in: a hairline each side of the word. */
+.sign-in-or {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-4) 0 0;
+  color: var(--muted);
+  font-size: var(--text-footnote);
+}
+.sign-in-or::before,
+.sign-in-or::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--line);
+}
 /* A link inside a sentence still gets a 44px target: padding adds the height and the negative margin
    takes it out of the line, so the text does not move. The padding is vertical only and the hidden
    "(opens in a new tab)" is held inside the link, so a link that ends a line never reaches past the
