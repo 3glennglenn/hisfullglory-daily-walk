@@ -6,7 +6,7 @@
 // The other way round also fails: a host the code no longer uses must leave the list, so the
 // policy never names a company we stopped using. Hosts reached through configuration (the
 // Supabase project in VITE_SUPABASE_URL, the push services in the allow-list of
-// supabase/migrations/010_push.sql, the mail relay set in the Supabase dashboard) are marked
+// supabase/migrations/010_push.sql, Google's sign-in page, which Supabase sends the reader to) are marked
 // `viaConfiguration` and are not expected as literals.
 //
 // Run from the project root: node --experimental-strip-types --test tests/third-parties.test.ts
