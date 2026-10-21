@@ -345,20 +345,20 @@ test("external fundraiser allowlist rejects host tricks, payment instructions an
   ])
     assert.equal(hasPaymentDetails(text), true);
   assert.equal(hasPaymentDetails("Help with school supplies"), false);
-  assert.equal(causes.length, 5);
-  const copy = curatedCharityCatalog.get("top-charities")!;
+  assert.equal(causes.length, curatedCharityCatalog.list().length);
+  const copy = curatedCharityCatalog.get("givewell-top-charities-fund")!;
   copy.title = "Changed outside provider";
   assert.equal(
-    curatedCharityCatalog.get("top-charities")?.title,
+    curatedCharityCatalog.get("givewell-top-charities-fund")?.title,
     "GiveWell Top Charities Fund",
   );
-  assert.equal(curatedCharityCatalog.list("Malaria prevention").length, 2);
+  assert.equal(curatedCharityCatalog.list("Animals").length, 4);
   assert.equal(
     goFundMeProvider.accepts("https://www.gofundme.com/f/help-a-family"),
     true,
   );
   for (const cause of causes) {
-    assert.equal(cause.donationUrl, "https://secure.givewell.org/");
+    assert.match(cause.donationUrl, /^https:\/\//);
     assert.equal("raised" in cause, false);
   }
 });

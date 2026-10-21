@@ -58,7 +58,7 @@ export const ageLabel = need(
 );
 
 // P6: the date of the founder's approval.
-export const lastUpdated = need("lastUpdated", "October 19, 2026");
+export const lastUpdated = need("lastUpdated", "October 20, 2026");
 
 // P7, P8: the law and the legal bases. Drafts proposed by Claude on 2026-10-19; the founder accepts
 // or changes them on the preview. "We" is the person named in `entity`.
@@ -292,6 +292,36 @@ export const outboundHosts: OutboundHost[] = [
   { host: "www.gofundme.com", purpose: "The fundraising platform behind reviewed fundraisers, and its how-it-works page.", kind: "link you click" },
   { host: "www.givewell.org", purpose: "GiveWell's list of top charities, linked as the source.", kind: "link you click" },
   { host: "secure.givewell.org", purpose: "GiveWell's own donation page. We never handle the money.", kind: "link you click" },
+  // The Give screen's charities and the evaluators behind them (src/giving/catalogData.ts). Links the reader opens; nothing here is fetched, embedded or loaded by the app.
+  { host: "donate.givedirectly.org", purpose: "GiveDirectly's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "strongminds.org", purpose: "StrongMinds's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "oneacrefund.org", purpose: "One Acre Fund's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "raisingthevillage.org", purpose: "Raising the Village's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "sanku.com", purpose: "Sanku - Project Healthy Children's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "taimaka.org", purpose: "Taimaka's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "unlimithealth.org", purpose: "Unlimit Health's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.evidenceaction.org", purpose: "Evidence Action's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "fistulafoundation.org", purpose: "Fistula Foundation's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.hollows.org", purpose: "The Fred Hollows Foundation's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "food4education.org", purpose: "Food4Education's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "love146.org", purpose: "Love146's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "takeaction.thehumaneleague.org", purpose: "The Humane League's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.shrimpwelfareproject.org", purpose: "Shrimp Welfare Project's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.wildanimalinitiative.org", purpose: "Wild Animal Initiative's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "sinergiaanimal.org", purpose: "Sinergia Animal's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.ijm.org", purpose: "International Justice Mission's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "worldrelief.org", purpose: "World Relief's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.medicalteams.org", purpose: "Medical Teams International's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "water.cc", purpose: "Living Water International's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "give.fmsc.org", purpose: "Feed My Starving Children's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.habitat.org", purpose: "Habitat for Humanity's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.compassion.com", purpose: "Compassion International's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.worldvision.org", purpose: "World Vision's own donation page. We never handle the money.", kind: "link you click" },
+  { host: "www.thelifeyoucansave.org", purpose: "The Life You Can Save's charity pages, linked as the source, and its own cause-fund donation page.", kind: "link you click" },
+  { host: "www.happierlivesinstitute.org", purpose: "Happier Lives Institute's charity evaluations, linked as the source.", kind: "link you click" },
+  { host: "animalcharityevaluators.org", purpose: "Animal Charity Evaluators's recommendations, and the donation page of its Recommended Charity Fund, linked as the source.", kind: "link you click" },
+  { host: "www.charitynavigator.org", purpose: "Charity Navigator's ratings, linked as the source.", kind: "link you click" },
+  { host: "www.ecfa.org", purpose: "ECFA's list of accredited members, linked as the source.", kind: "link you click" },
   { host: "www.facebook.com", purpose: "Share to X from the website.", kind: "link you click" },
   { host: "wa.me", purpose: "WhatsApp share link on the website.", kind: "link you click" },
   { host: "twitter.com", purpose: "Share to X from the website.", kind: "link you click" },

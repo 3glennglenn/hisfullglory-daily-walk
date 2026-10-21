@@ -279,7 +279,7 @@ export async function checkTextSweep(browser, base, published) {
     ["/pray", null],
     ["/community", null],
     ["/community/circles", null],
-    ["/you", ".list-row"],
+    ["/you", ".give-feature"], // the Give card now leads You (quick 261020-give); the rows follow it
     ["/profile", null],
     ["/settings", null],
     ["/settings/appearance", null],

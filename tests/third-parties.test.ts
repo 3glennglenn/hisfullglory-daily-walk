@@ -133,6 +133,8 @@ test("a host that receives data is tied to a processor card, and every card has 
     );
 });
 
+// The charities and evaluators of the Give screen (src/giving/catalogData.ts) are on this list: outbound links the
+// reader opens, never fetched, embedded or loaded by the app.
 test("today's outside addresses are all accounted for", () => {
   assert.deepEqual(
     outboundHosts
@@ -140,18 +142,47 @@ test("today's outside addresses are all accounted for", () => {
       .map((entry) => entry.host)
       .sort(),
     [
+      "animalcharityevaluators.org",
       "app.hisfullglory.com",
       "cdn.shopify.com",
+      "donate.givedirectly.org",
       "ebible.org",
+      "fistulafoundation.org",
+      "food4education.org",
+      "give.fmsc.org",
       "hisfullglory.com",
+      "love146.org",
+      "oneacrefund.org",
+      "raisingthevillage.org",
+      "sanku.com",
       "secure.givewell.org",
       "shop.hisfullglory.com",
+      "sinergiaanimal.org",
+      "strongminds.org",
+      "taimaka.org",
+      "takeaction.thehumaneleague.org",
       "twitter.com",
+      "unlimithealth.org",
       "wa.me",
+      "water.cc",
+      "worldrelief.org",
+      "www.charitynavigator.org",
+      "www.compassion.com",
+      "www.ecfa.org",
+      "www.evidenceaction.org",
       "www.facebook.com",
       "www.givewell.org",
       "www.gofundme.com",
+      "www.habitat.org",
+      "www.happierlivesinstitute.org",
+      "www.hollows.org",
+      "www.ijm.org",
+      "www.medicalteams.org",
+      "www.shrimpwelfareproject.org",
       "www.sitemaps.org",
+      "www.thelifeyoucansave.org",
+      "www.wildanimalinitiative.org",
+      "www.worldvision.org",
     ],
   );
 });

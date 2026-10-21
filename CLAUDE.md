@@ -202,8 +202,6 @@ the same path on the shop; the shop's home page, two product pages, cart, polici
 contact page answer on the new address; the app is unaffected.
 
 Not done or not checked:
-- `www.hisfullglory.com` still points at Shopify and ends up in the shop. It should
-  redirect to the site: Vercel already has the redirect, the DNS record has not changed.
 - Checkout with a real order, the Meta Pixel and the product catalog on the new shop
   address.
 - The app builds product links from `storeUrl` in `src/config.ts`, still the old address.
@@ -216,8 +214,10 @@ How it is set up: the Vercel project `hisfullglory-site` (root directory `site`,
 source files outside the root directory included) has `hisfullglory.com` as its production
 domain and follows `main`; https://hisfullglory-site.vercel.app stays as a review address
 with a noindex header. The domain is managed in Shopify (Settings, Domains): its A record
-points at Vercel, the AAAA record is removed, and `shop`, `www` and `account` point at
-Shopify. Claude cannot change domain, DNS or certificate settings; the founder makes those
+points at Vercel, the AAAA record is removed, `shop` and `account` point at Shopify and
+`www` points at Vercel (since 2026-10-20: `www.hisfullglory.com` answers with a 308 to
+`https://hisfullglory.com`, path kept, verified the same day; the founder changed the CNAME in
+Shopify DNS and Vercel issued the certificate). Claude cannot change domain, DNS or certificate settings; the founder makes those
 changes himself, one approved step at a time.
 
 ## Environment notes

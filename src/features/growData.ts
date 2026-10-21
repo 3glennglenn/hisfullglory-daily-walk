@@ -9,7 +9,7 @@ const applications = [
   "Notice a situation that makes a harmful choice easier. Ask for help and make one practical change to your environment.",
   "Trust can begin with a small step even when questions remain. Bring one honest question to God in prayer.",
   "Forgiveness does not require denying harm or removing safe boundaries. Ask for wisdom for a truthful next step.",
-  "Choose a rhythm small enough to return to tomorrow. A missed day can become a beginning, without shame.",
+  "Choose a rhythm small enough to return to tomorrow. A day away can become a beginning, without shame.",
   "Bring loneliness into prayer and consider one safe human connection. Invite a conversation or take part in a local community.",
   "You do not need to hurry grief. Remember someone or something you have lost, and make room for tears and companionship.",
   "Consider how being loved by God might shape the words you use about yourself. Name a strength with humility and gratitude.",

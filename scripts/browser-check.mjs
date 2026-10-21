@@ -21,6 +21,7 @@ import {checkReaderText,checkLibrary,checkReaderSheets,checkChapterEnd,checkList
 import {checkAuthBoundary} from "../tests/auth-boundary.browser.mjs";
 import {checkProfile} from "../tests/profile.browser.mjs";
 import {checkPushedScreens,checkSurfaces,checkTextSweep} from "../tests/remaining.browser.mjs";
+import {checkGive} from "../tests/give.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 // Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
 const contentDir = "site/content/context-checks";
@@ -629,12 +630,10 @@ try {
     "giving verifies external destination and guest support cannot publish",
     async () => {
       await go("/give");
+      // The first card of the first page is GiveWell's fund; its button names the host the gift goes to.
       await page
-        .getByRole("button", { name: "Learn about this cause" })
+        .getByRole("button", { name: "Give on secure.givewell.org" })
         .first()
-        .click();
-      await page
-        .getByRole("button", { name: "Give through the official provider" })
         .click();
       const dialog = page.getByRole("dialog");
       await dialog.waitFor();
@@ -1077,7 +1076,7 @@ try {
       assert.equal(await page.locator("main h1").innerText(), "Page not found");
       // You: the sections of UI-SPEC A12, in order, and one way to each screen.
       await go("/you");
-      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Your walk", "Settings", "Give and resources", "About"]);
+      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Give where it helps most", "Your walk", "Settings", "Resources", "About"]);
       assert.match(await page.locator("main").innerText(), /Sign in\s+Join the community and keep your account safe\./);
       assert.match(await page.locator("main").innerText(), /Days walked\s+\d+/);
       assert.match(await page.locator("main").innerText(), /Daily reminder\s+Off/);
@@ -1090,7 +1089,7 @@ try {
         ["Daily rhythm", "/settings"],
         ["Daily reminder", "/settings/reminders"],
         ["Privacy and your data", "/settings#privacy"],
-        ["Give", "/give"],
+        ["See where to give", "/give"],
         ["Resources", "/shop"],
       ]) {
         const row = page.getByRole("link", { name: new RegExp("^" + name) }).first();
@@ -1795,6 +1794,7 @@ try {
   await check("report dialog states, focus and sizes (controlled SDK)",()=>checkSafety(browser,base));
   await check("dialogs that replaced browser pop-ups: public contributions, public prayer updates, support requests (controlled SDK)",()=>checkDialogs(browser,base));
   await check("Journal, My Walk and Grow are pushed screens of You: Back to You, one large title, no eyebrow, no uppercase text (UI-SPEC D-10, A12)",()=>checkPushedScreens(browser,base));
+  await check("Give: the card on You opens /give on page 1; the six pages change by tab, swipe and arrow keys; a card opens the outbound dialog with its host; nothing is loaded from the charities; 200 % text, the wide grid and Lamplight render",()=>checkGive(browser,base));
   await check("Give and its policy, Resources, Circles, the not-found and crash screens and the install offer: shared primitives, one filled button, the words of A16 (UI-SPEC A12, A16, 9.3)",()=>checkSurfaces(browser,base));
   await check("200 % text sweep over every app route at 390 and 320px: no sideways scroll, nothing clipped, controls 44px, tab labels on one line, the first screen holds the title and content, no bare Cancel, OK, Done or Close button (UI-SPEC 15.4, 15.9)",()=>checkTextSweep(browser,base,published));
   assert.deepEqual(errors, []);
