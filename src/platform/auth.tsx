@@ -25,7 +25,7 @@ import {
   oauthRedirectTo,
   withoutOauthError,
 } from "./googleSignIn";
-export const TERMS_VERSION = "2026-10-07";
+export const TERMS_VERSION = "2026-10-19";
 const Auth = createContext<{
   session: Session | null;
   ready: boolean;

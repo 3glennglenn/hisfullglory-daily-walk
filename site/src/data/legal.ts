@@ -21,7 +21,7 @@ export const supportEmailReady = true;
 export const supportEmail = "support@hisfullglory.com";
 
 /** Must equal TERMS_VERSION in src/platform/auth.tsx (site/tests/legal.test.ts checks it). */
-export const termsVersion = "2026-10-07";
+export const termsVersion = "2026-10-19";
 
 /** A value that is empty would render as a broken sentence, so it stops the build instead. */
 function need(name: string, value: string): string {

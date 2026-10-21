@@ -4,23 +4,24 @@
     {
       "id": "ai:obadiah",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-21",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Obadiah is the shortest book of the Old Testament, a single chapter. It announces judgment on Edom, the nation descended from Esau, for standing by and gloating when Jerusalem was destroyed and for handing over its survivors.\n\nIt widens at the end to the day of the LORD on all nations and closes with the words that the kingdom will be the LORD’s."
+          "text": "A city is breaking. Foreign armies are through its gates, and strangers cast lots for Jerusalem. And off to the side, watching, stands a brother.\n\n“In the day that you stood on the other side,” Obadiah tells Edom, the nation descended from Esau, “even you were like one of them.” Edom lives high in the clefts of the rock and asks who could ever bring it down. The LORD answers that he will bring it down from the height of its nest, and that its allies and friends will turn on it.\n\nThen comes a list of the things Edom should not have done in that day: look down on its brother, enter his gate, seize his wealth, wait at the crossroads to cut off those who escape, hand over those who remain. Above all: “don’t rejoice over the children of Judah in the day of their destruction.”\n\nThe last verses widen the view. The day of the LORD is near for all the nations, and the book closes with the words that “the kingdom will be the LORD’s.”"
         },
         {
           "kind": "background",
-          "text": "The setting is most likely the fall of Jerusalem to Babylon in 586 or 587 before Christ. Edom lay south-east of the Dead Sea, and the long rivalry between Edom and Israel is traced back in Genesis to the brothers Esau and Jacob."
+          "text": "Obadiah is the shortest book of the Old Testament, a single chapter, and the moment behind it is most likely the fall of Jerusalem to Babylon in 586 or 587 before Christ. Edom lay south-east of the Dead Sea. The long rivalry between Edom and Israel is traced back in Genesis to the brothers Esau and Jacob, which is why the book keeps saying brother (see Genesis 25 and 36)."
         },
         {
           "kind": "interpretations",
-          "text": "The book is a warning against pride and against taking pleasure in another’s disaster, especially a brother’s. Readers take its ending as its center: beyond the fall of any one nation, God’s rule is what remains."
+          "text": "Readers have long taken Obadiah as a warning against pride, and against taking pleasure in another’s disaster, most of all a brother’s. Many take its ending as its center. Beyond the fall of any one nation, what remains is God’s rule. A book that begins with one sharp charge against one people ends on a line that is much wider than Edom."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

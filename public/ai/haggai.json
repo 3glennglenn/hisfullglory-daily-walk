@@ -4,23 +4,24 @@
     {
       "id": "ai:haggai",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-21",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Haggai speaks to the people who have returned from exile and have left the temple in ruins while building their own houses. In four short messages he urges them to rebuild, promises that God is with them, and says that the glory of this house will be greater than the first. The people listen, and the work begins again."
+          "text": "The people have come home from exile, and they have been busy. They have built their own houses, with paneled walls, and the house of the LORD still lies in ruins. When they are asked about it, they have an answer: “The time hasn’t yet come, the time for the LORD’s house to be built.”\n\nHaggai does not accept it. “Is it a time for you yourselves to dwell in your paneled houses, while this house lies waste?” He asks them to consider their ways. They have sown much and gathered little, and their wages go into “a bag with holes in it.”\n\nIn four short messages he urges them to rebuild, and he promises that God is with them. When the old men recall the first temple, the new one seems to be nothing, and Haggai answers that the glory of this house will be greater than the first.\n\nThe people listen. The work begins again."
         },
         {
           "kind": "background",
-          "text": "The four messages are dated precisely to a few months in the year 520 before Christ, under the Persian king Darius. The leaders named are the governor Zerubbabel, a descendant of David, and the high priest Joshua. The events are also told in Ezra 5 and 6."
+          "text": "The four messages are dated precisely to a few months in the year 520 before Christ, under the Persian king Darius. The leaders named are the governor Zerubbabel, a descendant of David, and the high priest Joshua. The events are also told in Ezra 5 and 6. Each message is given as the LORD’s word coming by Haggai the prophet."
         },
         {
           "kind": "interpretations",
-          "text": "Haggai connects the people’s priorities with their well-being, without turning that into a formula. Christians read the promise of greater glory in the light of Christ, who taught in the rebuilt temple and spoke of his own body as the temple."
+          "text": "Haggai connects the people’s priorities with their well-being, without turning that into a formula. Christians read the promise of greater glory in the light of Christ, who taught in the rebuilt temple and spoke of his own body as the temple. The book is short, but it shows how a people can be moved by a plain word at the right time."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

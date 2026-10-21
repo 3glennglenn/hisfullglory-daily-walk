@@ -4,23 +4,24 @@
     {
       "id": "ai:zechariah",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-21",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Zechariah encouraged the same returned community as Haggai. The first part of the book (chapters 1 to 8) contains eight night visions and messages that promise God’s return to Jerusalem and call for justice and mercy.\n\nThe second part (9 to 14) is harder to place. It speaks of a humble king riding on a donkey, of a shepherd who is struck, of one who is pierced and mourned, and of a day when the LORD will be king over all the earth."
+          "text": "The same returned community that heard Haggai hears Zechariah. His first message is an invitation: “Return to me,” says the LORD of Armies, “and I will return to you,” says the LORD of Armies. Then come the visions, eight of them, seen at night. A man on a red horse among myrtle trees. Four horns, and four craftsmen coming to cast them down. Behind them stands a promise that the LORD has returned to Jerusalem with mercy. The first part of the book (chapters 1 to 8) promises God’s return to Jerusalem and calls for justice and mercy.\n\nThe second part (9 to 14) is harder to place. Its first great cry is a call to joy: “Rejoice greatly, daughter of Zion!” The king who comes is righteous and having salvation, “lowly, and riding on a donkey,” even on a colt. The chapters go on to speak of a shepherd who is struck, of one who is pierced and mourned, and of a day when the LORD will be king over all the earth."
         },
         {
           "kind": "background",
-          "text": "The dated messages fall between 520 and 518 before Christ. Many scholars think chapters 9 to 14 come from a later time; others hold that Zechariah wrote the whole book."
+          "text": "The dated messages fall between 520 and 518 before Christ. Many scholars think chapters 9 to 14 come from a later time. Others hold that Zechariah wrote the whole book. The question is still open, and readers who take Scripture seriously stand on both sides of it. The prophet is called the son of Berechiah, the son of Iddo, in the opening lines."
         },
         {
           "kind": "interpretations",
-          "text": "The Gospels quote Zechariah repeatedly in telling of Jesus’ last week: the entry into Jerusalem on a donkey, the thirty pieces of silver, the scattered sheep and the pierced one. Christians differ on how much of the final chapters still lies ahead."
+          "text": "The Gospels quote Zechariah repeatedly in telling of Jesus’ last week: the entry into Jerusalem on a donkey, the thirty pieces of silver, the scattered sheep and the pierced one. Christians differ on how much of the final chapters still lies ahead. Some read them mostly as pictures already fulfilled, and others look for more. How the book is read depends in part on how its two halves are related."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
