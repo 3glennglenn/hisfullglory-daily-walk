@@ -4,23 +4,24 @@
     {
       "id": "ai:malachi",
       "scope": "book",
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Malachi is a series of disputes between God and his people. God makes a statement, the people answer back, and God replies. The subjects are careless worship, unfaithful priests, broken marriages, withheld offerings and the complaint that serving God makes no difference.\n\nThe book ends by promising a messenger who will prepare the way, and the coming of the prophet Elijah before the day of the LORD."
+          "text": "The LORD opens with a tender sentence: “I have loved you”. And the people answer with a shrug. “How have you loved us?” That is how this whole book goes. God speaks, the people talk back, and God replies, round after round.\n\nIt is a quarrel among people who still belong to each other. God says the priests despise his name and bring second-best offerings to his altar. Marriages are broken faithlessly. Tithes are held back. And some have decided that serving God changes nothing: “It is vain to serve God” The proud seem to do well, they say.\n\nBut the book does not end in argument. It ends with a promise. A messenger will prepare the way before the LORD. And before the great day of the LORD, the prophet Elijah will come: “He will turn the hearts of the fathers to the children and the hearts of the children to their fathers”."
         },
         {
           "kind": "background",
-          "text": "Malachi belongs to the fifth century before Christ, after the temple had been rebuilt and early hopes had faded. The name means my messenger and may be a title. It is the last of the twelve shorter prophets."
+          "text": "The book belongs to the fifth century before Christ. The temple had been rebuilt, and the early hopes that came with it had faded, which may be why the people sound so weary. The name Malachi means my messenger and may be a title, not a personal name, so we know little about the writer. It is the last of the twelve shorter prophets, the final voice before the New Testament begins in most Christian Bibles."
         },
         {
           "kind": "interpretations",
-          "text": "The New Testament applies the promised messenger to John the Baptist. Christians differ on whether the book’s teaching on tithes sets a rule for the church or reflects the support of the temple, with the New Testament asking instead for generous and willing giving."
+          "text": "The New Testament applies the promised messenger to John the Baptist, and Christians generally follow that reading. They differ on one other point. Some hold that the book's teaching on tithes sets a rule for the church. Others think it reflects how the temple and its priests were supported, and they point out that the New Testament asks instead for generous and willing giving. Neither side doubts that the book calls God's people to honest worship and faithfulness."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

@@ -27,84 +27,88 @@
       "id": "ai:matthew/1",
       "chapter": 1,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-22",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Matthew opens with a genealogy that runs in three sets of fourteen generations: from Abraham to David, from David to the exile to Babylon, and from the exile to the Christ. Besides the expected names it includes four women: Tamar, Rahab, Ruth and the wife of Uriah. The list ends with Joseph, the husband of Mary, and Jesus, who is called Christ.\n\nThe chapter then tells of the birth of Jesus. Mary is engaged to Joseph and is found pregnant by the Holy Spirit. Joseph, described as a righteous man, plans to end the engagement quietly. An angel appears to him in a dream, tells him to take Mary as his wife, and says the child is to be named Jesus because he will save his people from their sins. Matthew links this to a prophecy and gives the name Immanuel, which means “God with us”. Joseph obeys."
+          "text": "It starts with a list, and the list is a story. Abraham, Isaac, Jacob, Judah. Then, in the middle of all those fathers, four women: Tamar, Rahab, Ruth and the wife of Uriah. The names run in three sets of fourteen generations, from Abraham to David, from David to the exile in Babylon, and from the exile to the Christ. They end with Joseph, the husband of Mary, and Jesus, who is called Christ.\n\nThen the story slows to a single night. Mary is engaged to Joseph, and she is found pregnant by the Holy Spirit. Joseph is a righteous man, and he plans to end the engagement quietly. Then an angel comes to him in a dream and tells him not to be afraid to take Mary as his wife. The child is to be named Jesus, “it is he who shall save his people from their sins.” Matthew gives another name, Immanuel, which means “God with us”. Joseph wakes, and does as he was told."
         },
         {
           "kind": "background",
           "text": "Matthew is the first book of the New Testament and is usually read as written for readers familiar with Jewish Scripture. Tradition links it to the apostle Matthew, though many scholars think it came from an unnamed writer, usually dated to the later first century. A genealogy mattered because it showed descent from Abraham and King David, the royal line. The prophecy Matthew cites is from Isaiah 7. Christians differ on how that passage first applied in Isaiah's own time and how it relates to Jesus. See also Genesis 38, Joshua 2 and Ruth 4 for the women named."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/2",
       "chapter": 2,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-22",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Wise men from the east come to Jerusalem asking where the newborn king of the Jews is, because they saw his star. King Herod is troubled. He asks the chief priests and scribes where the Christ is to be born, and they answer Bethlehem, citing a prophet. Herod secretly asks the wise men when the star appeared and sends them to find the child, saying he also wants to worship. The star leads them to the house, where they kneel and offer gold, frankincense and myrrh. Warned in a dream, they go home another way.\n\nAn angel tells Joseph to flee to Egypt. Herod then orders the killing of the boys in Bethlehem and the surrounding area who are two years old and under. After Herod dies, the family returns and settles in Nazareth in Galilee."
+          "text": "Strangers arrive in Jerusalem with a question that frightens a king. “Where is he who is born King of the Jews?” The wise men from the east have seen his star and come to worship. King Herod is troubled, and all Jerusalem with him. He asks the chief priests and scribes where the Christ is to be born. Bethlehem, they say, and cite a prophet.\n\nHerod sends the wise men off to search and report back, saying he wants to worship too. The star leads them to a house, where they kneel and offer gold, frankincense and myrrh. Warned in a dream, they go home another way.\n\nThen the danger turns real. An angel tells Joseph to take the child and his mother to Egypt. Herod orders the killing of the boys in Bethlehem and the surrounding area who are two years old and under. After Herod's death the family comes back and settles in Nazareth in Galilee."
         },
         {
           "kind": "background",
-          "text": "Herod the Great ruled Judea under Rome and was known for his suspicion of rivals. The wise men are not numbered in the text; the traditional count of three comes from the three gifts. Matthew ties each stage of the story to a passage of Scripture: see Micah 5, Hosea 11, Jeremiah 31 and the story of Israel in Egypt in Exodus. Outside historians do not record the killing of the children in Bethlehem, which some scholars connect to the small size of the town. Many see Jesus here retracing Israel's own path."
+          "text": "Herod the Great ruled Judea under Rome and was known for his suspicion of rivals. The wise men are not numbered in the text; the traditional count of three comes from the three gifts. Matthew ties each stage of the story to a passage of Scripture: see Micah 5, Hosea 11, Jeremiah 31 and the story of Israel in Egypt in Exodus. Matthew writes that the Lord called his son out of Egypt, which he reads in light of Hosea. Outside historians do not record the killing of the children in Bethlehem, which some scholars connect to the small size of the town. Many see Jesus here retracing Israel's own path."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/3",
       "chapter": 3,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-22",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "John the Baptizer appears in the wilderness of Judea, calling people to repent because the Kingdom of Heaven is near. Matthew says he is the voice Isaiah spoke of. John wears camel's hair and eats locusts and wild honey. People from Jerusalem, Judea and the Jordan region come, confess their sins and are baptized in the river.\n\nWhen many Pharisees and Sadducees come, John speaks sharply to them. He tells them to produce fruit worthy of repentance and not to rely on having Abraham as their father. He says someone mightier is coming who will baptize in the Holy Spirit and will sort wheat from chaff.\n\nJesus comes from Galilee to be baptized. John at first objects, but Jesus says it is fitting. As Jesus comes up from the water, the heavens open, the Spirit descends like a dove, and a voice says, “This is my beloved Son, with whom I am well pleased.”"
+          "text": "A man in camel's hair, with a leather belt and a meal of locusts and wild honey, is preaching in the wilderness of Judea. “Repent, for the Kingdom of Heaven is at hand!” Matthew says he is the voice Isaiah spoke of. And people come. From Jerusalem, all Judea and the whole region around the Jordan, they walk out to him, confess their sins and are baptized in the river.\n\nWhen many Pharisees and Sadducees arrive, John does not soften. Produce fruit worthy of repentance, he says, and don't rely on having Abraham as your father. Someone mightier is coming, who will baptize in the Holy Spirit and sort wheat from chaff.\n\nThen Jesus walks down from Galilee, asking to be baptized. John objects at first, but Jesus tells him it is fitting. Coming up out of the water, he sees the heavens open and the Spirit descend like a dove. A voice says, “This is my beloved Son, with whom I am well pleased.”"
         },
         {
           "kind": "background",
           "text": "John's clothing recalls the prophet Elijah (see 2 Kings 1), and his message follows Isaiah 40. Baptism in water was already used in Jewish life for washing and cleansing, but John's call to repentance in the Jordan was striking to those who came. The Pharisees were a lay movement known for careful observance of the law. The Sadducees were closely tied to the temple and its priests. The baptism of Jesus is a key scene in all four Gospels. Christians differ on why Jesus was baptized and on how baptism is best practiced today."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/4",
       "chapter": 4,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-22",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "After his baptism, the Spirit leads Jesus into the wilderness, where he fasts forty days and nights. The devil tests him three times: to turn stones into bread, to throw himself from the temple pinnacle, and to receive all the kingdoms of the world in return for worship. Each time Jesus answers with a line from Scripture, and the devil leaves. Angels then serve him.\n\nHearing that John has been arrested, Jesus withdraws to Galilee and settles in Capernaum. Matthew sees in this the fulfilling of a prophecy of Isaiah about a great light for people in darkness. Jesus begins to preach the same message John did: repent, for the Kingdom of Heaven is near. He calls the fishermen Simon Peter, Andrew, James and John, and they leave their nets and follow. He then teaches, preaches and heals across Galilee, and crowds come from many regions."
+          "text": "Right after the voice from heaven comes the silence of the desert. The Spirit leads Jesus into the wilderness, and he fasts forty days and forty nights. Then he is hungry. The tempter comes with three tests: turn these stones into bread, throw yourself down from the pinnacle of the temple, take all the kingdoms of the world if you will worship me. Each time Jesus answers with Scripture, beginning with “Man shall not live by bread alone”. The devil leaves, and angels come and serve him.\n\nWhen he hears that John has been arrested, Jesus withdraws to Galilee and settles in Capernaum. Matthew sees Isaiah's words coming true: “the people who sat in darkness saw a great light”. Jesus begins to preach what John preached.\n\nBy the lake he meets two pairs of fishermen, Simon Peter and Andrew, James and John. They leave nets, boat and father to follow him. Then he goes through Galilee teaching and healing, and crowds follow."
         },
         {
           "kind": "background",
           "text": "The forty days recall Moses on Sinai and Israel's forty years in the wilderness; the replies Jesus gives all come from Deuteronomy 6 and 8. The devil quotes Psalm 91 in the second test. Galilee was a mixed region with many Gentile neighbors, which is why Matthew uses Isaiah's phrase Galilee of the Gentiles. Capernaum was a fishing town on the northwest shore of the lake. This chapter closes the opening section of the Gospel and leads into the Sermon on the Mount in chapters 5 to 7."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/5",
       "chapter": 5,
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Matthew 5 opens the Sermon on the Mount, which runs through chapter 7. Jesus sits down on a mountain and teaches his disciples, with the crowds nearby.\n\nHe begins with the Beatitudes (verses 3 to 12), a series of sayings that call “Blessed” the people one would not expect: the poor in spirit, those who mourn, those who are persecuted. He then calls his followers “the salt of the earth” and “the light of the world”.\n\nFrom verse 17 Jesus speaks about the law. He says he came not to destroy it but “to fulfill”. Six times he quotes what was said and answers “But I tell you”, taking the command to the heart: from murder to anger, from adultery to the lustful look, from limited revenge to love of enemies."
+          "text": "Jesus sees the crowds and climbs a mountain. He sits down, his disciples come to him, and he begins to teach. The first words are not commands. “Blessed are the poor in spirit, for theirs is the Kingdom of Heaven.” Blessed are those who mourn, the gentle, the merciful, the peacemakers, those who are persecuted. It is a list of the people no one would have put first.\n\nHe tells his followers they are the salt of the earth and the light of the world. Then he turns to the law. He did not come to destroy it, he says, but to fulfill it. Six times he quotes what was said and answers “But I tell you”, and each time he goes deeper: from murder to anger, from adultery to the lustful look, from limited revenge to love for enemies.\n\nHe ends on a command that stops many readers: be perfect, as the Father in heaven is perfect."
         },
         {
           "kind": "background",
-          "text": "Matthew’s Gospel has Jewish readers much in view and often shows Jesus in relation to the law and the prophets. A teacher going up a mountain to speak about the law would have reminded many of Moses at Sinai. Sitting down was the usual posture of a teacher.\n\nSeveral details reflect daily life under Roman rule. A soldier could force a civilian to carry his load for a mile (verse 41). Gehenna (verses 22, 29 and 30) is the name of a valley outside Jerusalem that had become a picture of final judgment."
+          "text": "Matthew's Gospel has Jewish readers much in view and often shows Jesus in relation to the law and the prophets. A teacher going up a mountain to speak about the law would have reminded many of Moses at Sinai. Sitting down was the usual posture of a teacher.\n\nSeveral details reflect daily life under Roman rule. A soldier could force a civilian to carry his load for a mile (verse 41). Gehenna (verses 22, 29 and 30) is the name of a valley outside Jerusalem that had become a picture of final judgment."
         },
         {
           "kind": "interpretations",
@@ -140,41 +144,44 @@
             }
           ]
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/6",
       "chapter": 6,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-22",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "This chapter continues the Sermon on the Mount. Jesus speaks of three acts of devotion: giving to the poor, praying and fasting. In each case he warns against doing them to be seen by others and says the Father who sees in secret will reward. He tells his hearers not to pile up empty words in prayer, and gives a short prayer that begins Our Father in heaven. It asks for God's name to be honored, for his Kingdom and will to come, for daily bread, for forgiveness as we forgive, and for deliverance from the evil one.\n\nJesus then says treasure on earth is not lasting, and that no one can serve both God and Mammon, meaning wealth. He urges his hearers not to be anxious about food or clothing, pointing to the birds and the lilies, and to seek God's Kingdom first."
+          "text": "Jesus keeps teaching on the mountain, and now he talks about what goes on when nobody is looking. Giving to the poor, prayer and fasting are all good, he says, but not if they are done to be seen. The Father sees in secret, and he will reward. Don't pile up empty words either, because the Father knows what you need before you ask.\n\nThen he gives a prayer. It begins, “Our Father in heaven, may your name be kept holy.” It asks for God's Kingdom and will to come, for daily bread, for forgiveness as we forgive, and for deliverance from the evil one.\n\nHe speaks of treasure that moth and rust cannot reach. “You can’t serve both God and Mammon” he says, meaning wealth. And he asks his hearers to look at the birds and the lilies, which neither sow nor spin, and not to be anxious. Seek first God's Kingdom, he says, and let tomorrow worry about itself."
         },
         {
           "kind": "background",
           "text": "Jesus speaks to his disciples, with crowds listening, as the sermon began in chapter 5. Almsgiving, prayer and fasting were three well-known practices in Jewish life. Mammon is an Aramaic word for money or property. The prayer is known as the Lord's Prayer, and Christians use it in different forms. Some copies of Matthew lack the closing line about the Kingdom, the power and the glory; the WEB includes it. Luke 11 has a shorter form of the prayer. The word translated debts also means wrongs owed."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/7",
       "chapter": 7,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-22",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "The Sermon on the Mount ends in this chapter. Jesus tells his hearers not to judge, warning that the same measure will be used on them, and uses the picture of a speck in a brother's eye and a beam in one's own. He says not to give what is holy to dogs or pearls to pigs. He then says to ask, seek and knock, and compares God to a father who gives good gifts. The Golden Rule follows: do to others what you want them to do to you, which sums up the law and the prophets.\n\nHe speaks of the narrow gate, false prophets known by their fruit, and people who say Lord, Lord but do not do the Father's will. The sermon closes with the builders on rock and on sand. The crowds are amazed because he taught with authority, unlike the scribes."
+          "text": "The sermon's last stretch begins with a picture that makes people laugh and then wince: a man with a beam in his own eye offering to take a speck out of his brother's. Don't judge, Jesus says, or you will be judged by the same measure. Ask, seek, knock, and he points to a father who would never hand his child a stone for bread. Then comes a single sentence that sums up the law and the prophets: do to others what you would have them do to you.\n\nHe warns about a narrow gate, and about false prophets in sheep's clothing. “By their fruits you will know them.” Words alone are not enough: not everyone who says “Lord, Lord” enters the Kingdom.\n\nThe sermon ends with two houses, one on rock, one on sand, and one storm that falls on both. When he finishes, the crowds are astonished, “for he taught them with authority, and not like the scribes”."
         },
         {
           "kind": "background",
           "text": "Many readers see the warnings here as aimed at hypocrisy and not at all moral judgment, since Jesus also tells his hearers to recognize false prophets by their fruit. Christians differ on how to read the saying about few finding the narrow way and on the meaning of the dogs and pigs. The sermon is spoken to disciples on a mountainside in Galilee. Scribes were trained teachers of the law who usually cited earlier teachers. Houses on sand and rock would have been familiar images in a land with sudden winter floods."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/8",
