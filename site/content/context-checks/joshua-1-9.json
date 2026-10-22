@@ -1,0 +1,89 @@
+{
+  "slug": "joshua-1-9",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-10-22",
+  "verse": {
+    "book": "joshua",
+    "chapter": 1,
+    "start": 9,
+    "end": 9
+  },
+  "hook": "You know “Be strong and courageous”. But did you know God says it to Joshua three times in a single chapter?",
+  "story": "The book of Joshua opens with a death: “Moses my servant is dead.” Now the people stood at the edge of the Jordan River without him.\n\nJoshua was not a stranger to the work. The Jewish Virtual Library says he first appears in Exodus 17, under the name Hosea, and that he was one of the twelve men sent to scout the land. The page adds that of that generation, only he and Caleb survived. When Moses neared his death, the same page says, Joshua was chosen to be his successor.\n\nThen God speaks to him, and the command comes in waves. In verse 6: “Be strong and courageous”. In verse 7: “Only be strong and very courageous”. And in our verse, the third time, it comes as a question and a promise together: “Haven’t I commanded you? Be strong and courageous. Don’t be afraid. Don’t be dismayed, for the LORD your God is with you wherever you go.”\n\nThe text does not tell us what Joshua felt. It tells us what God said, and what Joshua did next: he commanded the officers of the people. The people answered him: “Just as we listened to Moses in all things, so will we listen to you. Only may the LORD your God be with you, as he was with Moses.” And they ended with the words God had used: “Only be strong and courageous.”",
+  "storyStatus": "scripture",
+  "sources": [
+    {
+      "title": "Jewish Virtual Library: Joshua",
+      "url": "https://www.jewishvirtuallibrary.org/joshua"
+    },
+    {
+      "title": "Wikipedia: Joshua",
+      "url": "https://en.wikipedia.org/wiki/Joshua"
+    },
+    {
+      "title": "Erin M. Stout, commentary on Joshua 1 (Center for Excellence in Preaching)",
+      "url": "https://cepreaching.org/commentary/erin-m-stout/joshua-1/"
+    },
+    {
+      "title": "Matthew Henry, Complete Commentary on Joshua 1 (Bible Study Tools)",
+      "url": "https://www.biblestudytools.com/commentaries/matthew-henry-complete/joshua/1.html"
+    },
+    {
+      "title": "John Gill, Exposition of the Bible on Joshua 1:9 (Bible Study Tools)",
+      "url": "https://www.biblestudytools.com/commentaries/gills-exposition-of-the-bible/joshua-1-9.html"
+    }
+  ],
+  "voices": [
+    {
+      "id": "henry",
+      "name": "Matthew Henry",
+      "about": "English Bible commentator, in his Complete Commentary on Joshua 1",
+      "words": "When we are in the way of our duty we have reason to be strong and very courageous",
+      "source": {
+        "title": "Matthew Henry, Complete Commentary on Joshua 1 (Bible Study Tools)",
+        "url": "https://www.biblestudytools.com/commentaries/matthew-henry-complete/joshua/1.html"
+      }
+    },
+    {
+      "id": "gill",
+      "name": "John Gill",
+      "about": "English Baptist minister, in his Exposition of the Bible on this verse",
+      "words": "it was enough that the divine Presence was promised him, and which is repeated",
+      "source": {
+        "title": "John Gill, Exposition of the Bible on Joshua 1:9 (Bible Study Tools)",
+        "url": "https://www.biblestudytools.com/commentaries/gills-exposition-of-the-bible/joshua-1-9.html"
+      }
+    },
+    {
+      "id": "stout",
+      "name": "Erin M. Stout",
+      "about": "preaching commentator, on Joshua 1",
+      "words": "Joshua needed strength and courage to follow in those footsteps.",
+      "source": {
+        "title": "Erin M. Stout, commentary on Joshua 1 (Center for Excellence in Preaching)",
+        "url": "https://cepreaching.org/commentary/erin-m-stout/joshua-1/"
+      }
+    }
+  ],
+  "moment": "Just before our verse, God has laid out the task: cross this Jordan, take the land, and keep the book of the law close, so that “you shall meditate on it day and night”.\n\nThen comes verse 9. It sits between a long list of instructions and the first order Joshua gives to his own people. It is the hinge of the chapter: what God has said to him becomes what he says to them.",
+  "around": "Before the verse, God promises: “No man will be able to stand before you all the days of your life. As I was with Moses, so I will be with you. I will not fail you nor forsake you.” After it, Joshua commands the officers: “Pass through the middle of the camp, and command the people”.",
+  "readings": "Many readers hear this verse as a personal word of comfort, for any frightening road. They hear God promising to be present wherever they go, and they take it with them.\n\nRead inside the chapter, it is first a charge to one leader at a turning point in the story of a nation, and the people take it up together at the end. The two readings are not rivals. The words were given to a person with a task, and believers have carried them into their own tasks ever since.\n\nOn either reading the courage is not self-confidence. Verse 9 gives its reason in the same breath as the command: “for the LORD your God is with you wherever you go.”",
+  "argued": "Commentators have long noticed where the weight of this verse rests. The English commentator Matthew Henry wrote: [[henry]]\n\nJohn Gill asked readers to think about who gives the order, and judged that the promise of God was enough: [[gill]]\n\nA modern preacher, Erin M. Stout, notes the same pattern of the command growing stronger each time and what it asked of Joshua: [[stout]]\n\nThree writers, one steady point: the courage is asked for, and the reason for it is given with it.",
+  "point": "God does not tell Joshua to feel brave. He tells him, three times in one chapter, to be strong, and in verse 9 he gives the reason: the LORD is with him wherever he goes.",
+  "basis": [
+    {
+      "book": "joshua",
+      "chapter": 1,
+      "start": 1,
+      "end": 11
+    },
+    {
+      "book": "joshua",
+      "chapter": 1,
+      "start": 16,
+      "end": 18
+    }
+  ]
+}
