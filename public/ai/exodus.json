@@ -22,6 +22,438 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:exodus/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The book opens with a list of names, the sons of Israel who came into Egypt. Joseph and that whole generation die, but the family doesn't shrink. The children of Israel are fruitful and increase until the land is filled with them.\n\nThen comes a sentence that changes everything: “Now there arose a new king over Egypt, who didn’t know Joseph.” He fears the numbers of the Israelites and sets taskmasters over them, building storage cities with brick and mortar. The harder the work, the more they multiply.\n\nSo the king speaks to two Hebrew midwives, Shiphrah and Puah, and orders them to kill every newborn boy. They fear God and refuse. When they are called in, they answer that the Hebrew women give birth before the midwife arrives. God deals well with them. Pharaoh then orders his people to throw every newborn son into the river."
+        },
+        {
+          "kind": "background",
+          "text": "Exodus picks up where Genesis ends, with the family of Jacob in Egypt. Tradition links the book to Moses, though many scholars think it took shape over time. The Bible does not name this Pharaoh, and historians debate which king and which century it may be. The chapter shows power turning against a people it once welcomed. It also notes two women by name, Shiphrah and Puah, whose quiet refusal opens the way for the story of Moses in the next chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A baby is hidden for three months, because the king has ordered every newborn Hebrew boy into the river. When his mother can hide him no longer, she makes a papyrus basket, coats it with tar and pitch, and lays him among the reeds. His sister stands far off to see what will happen.\n\nPharaoh's daughter comes down to bathe, opens the basket, and the baby cries. She has compassion on him. His sister steps forward and offers to find a nurse, and she brings the child's own mother. The boy grows and becomes the princess's son, and she names him Moses.\n\nGrown, Moses sees an Egyptian beating a Hebrew and kills him. When the deed is known he flees to Midian, where he helps seven sisters at a well and marries Zipporah. In Egypt the Israelites groan, and “God heard their groaning”"
+        },
+        {
+          "kind": "background",
+          "text": "The story of Moses begins in the shadow of the order from Exodus 1. Moses's name is explained in the text by a Hebrew word play on drawing out of the water. He is raised between two worlds, an Israelite by birth and a member of Pharaoh's household by upbringing. His act of violence and his flight set up his years as a shepherd in Midian, which prepares for the burning bush in Exodus 3. The closing verses say God remembered the covenant with Abraham, Isaac and Jacob."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses is an ordinary shepherd, leading his father-in-law's flock to the back of the wilderness, when he sees a bush on fire that is not burned up. He turns aside to look. God calls him by name out of the bush: “Moses! Moses!” He answers, “Here I am.” He is told to take off his sandals, for the ground is holy, and he hides his face.\n\nGod says he has seen the affliction of his people in Egypt, heard their cry, and come down to deliver them. Moses is sent to Pharaoh. His reply is the question of every reluctant servant: “Who am I” God promises to be with him.\n\nWhen Moses asks for God's name, the answer is “I AM WHO I AM” God lays out the plan: elders, a request, a hard-hearted king, wonders, and a people who will leave."
+        },
+        {
+          "kind": "background",
+          "text": "This is the call of Moses, forty years after his flight (see Acts 7). It is also the place where God's name is given, which Jews and Christians have discussed for a very long time. The Hebrew can be translated in more than one way, and readers differ on what exactly it says about God. The chapter ties the rescue to the earlier promises to Abraham, Isaac and Jacob (see Genesis 15). The mountain where Moses stands is the one where the people will later be given the law (see Exodus 19)."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses still has doubts, and he says them out loud: they won't believe me. God asks what is in his hand. It is a rod. Thrown down it becomes a snake, and Moses runs. At God's word he takes it by the tail and it is a rod again. His hand turns white as snow and is restored. If those fail, river water poured on dry ground will become blood.\n\nThen Moses says he is slow of speech. “Who made man’s mouth?” God replies, and promises to teach him what to say. When Moses asks God to send someone else, God's anger burns, and Aaron is named as his spokesman.\n\nMoses sets out for Egypt with his family. On the way something strange and unsettling happens at a lodging place, and Zipporah circumcises her son. Aaron meets Moses, the elders hear the signs, and the people bow and worship."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter completes Moses's call. Its three signs answer his worry that Israel will not trust him, and they prepare for the wonders before Pharaoh. The night scene at the lodging place is one of the most puzzling passages in the Bible. The text does not explain who is threatened or why, and readers differ on how to understand it. It does connect Moses's household to the covenant sign of circumcision (see Genesis 17). God also says in verse 21 that he will harden Pharaoh's heart, a theme the book returns to."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses and Aaron walk into Pharaoh's court with God's words: let my people go, that they may hold a feast in the wilderness. Pharaoh's answer is cold. “Who is the LORD, that I should listen to his voice” He says he does not know the LORD, and he will not let Israel go.\n\nThe same day, Pharaoh makes the work worse. No more straw will be given for the bricks, but the quota stays the same. The people scatter across Egypt to gather stubble, and the Israelite officers who can't meet the number are beaten.\n\nThe officers come to Pharaoh and are dismissed as idle. Then they meet Moses and Aaron outside and blame them. Moses goes back to God with a hard question: why have you brought trouble on this people? You have not rescued them at all."
+        },
+        {
+          "kind": "background",
+          "text": "The first meeting with Pharaoh goes badly, and the book does not hide it. Deliverance begins by making life worse for the people it is meant to save. Moses's complaint to God is an honest prayer of the kind found elsewhere in Scripture (see Psalm 22 and Jeremiah 20). Pharaoh's question about who the LORD is frames the whole contest of the plagues, which are meant, in the text's own words, to teach Egypt that he is the LORD. The reply to Moses comes in the next chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses has just asked why God has not rescued his people, and God answers with a flood of promises. “I am the LORD.” He appeared to Abraham, Isaac and Jacob, and he has heard the groaning of Israel and remembered his covenant. He will bring them out, redeem them with an outstretched arm, take them as his people, and be their God.\n\nBut when Moses tells the Israelites, they don't listen, for anguish of spirit and cruel bondage. Moses tells God that if Israel won't listen, Pharaoh certainly won't, since his lips are uncircumcised. God commands him and Aaron to go anyway.\n\nThen the narrative pauses for a family record of Reuben, Simeon and Levi, which leads to Amram, Jochebed, and their sons Aaron and Moses."
+        },
+        {
+          "kind": "background",
+          "text": "After the setback in Exodus 5, the chapter restates the heart of the promise in several verbs of rescue, which Jewish tradition connects with the cups of the Passover meal. The statement about God's name in verse 3 has been discussed by readers for a long time, because the name appears earlier in Genesis. The genealogy may feel like an interruption, but it places Moses and Aaron in the line of Levi and shows that these leaders belong to the people they serve. The same two brothers speak to Pharaoh in Exodus 7."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "God sends Moses and Aaron back to Pharaoh with a warning. Moses is eighty and Aaron eighty-three. God says that Pharaoh will not listen, but that Egypt will come to know that he is the LORD.\n\nThey go in. Aaron throws down his rod and it becomes a serpent. Pharaoh calls his wise men and sorcerers, and they do the same with their enchantments. But Aaron's rod swallows up theirs. Pharaoh's heart is still hardened.\n\nThen the first plague. At the river's bank, in the sight of Pharaoh, Aaron strikes the water with the rod, and all the waters of Egypt turn to blood. The fish die. The river stinks. The Egyptians can't drink from it, and they dig along its banks for water. The magicians do the same thing with their enchantments, and Pharaoh turns and goes into his house. Seven days pass."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter opens the plagues, which run through Exodus 11. The Nile was Egypt's lifeblood, so a plague on the river reaches every household. The text presents the plagues as God's judgments and also as a contest in which Pharaoh's own experts try to match Moses and Aaron. Readers have long discussed what it means that God hardens Pharaoh's heart here and elsewhere, and the passage itself also says Pharaoh hardened it. Christians and Jews read these verses in different ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The second plague is frogs, and the text makes them come into every place a person lives. They swarm from the river into houses, bedrooms, beds, ovens and kneading troughs. The magicians bring up frogs too. Pharaoh calls for Moses and begs him to pray, promising to let the people go. Moses gives him the honor of choosing the time. Pharaoh says, “Tomorrow.” The frogs die in heaps and the land stinks.\n\nThen Pharaoh hardens his heart. Lice follow, and this time the magicians can't copy it. “This is God’s finger” they tell Pharaoh, and still he will not listen.\n\nThe fourth plague, swarms of flies, falls on Egypt but not on Goshen, where Israel lives. Pharaoh bargains: sacrifice here, or don't go far. When the flies are gone, he refuses again."
+        },
+        {
+          "kind": "background",
+          "text": "In this chapter the plagues become more pointed. The land of Goshen is spared, which the text says is meant to show a distinction between Egypt and Israel. The magicians fail at the lice and say it is God's finger, the first time Pharaoh's own people admit something beyond their skill. Pharaoh's repeated pattern of promising, then going back on his word, runs through the whole story (see Exodus 9 and 10). Moses's concern about sacrificing in the land points to the different religious practices of Egypt and Israel."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Three more plagues fall in this chapter, each heavier than the last. First comes a pestilence on Egypt's livestock, while not one animal of Israel dies. Pharaoh sends to check, finds it is true, and his heart is stubborn. Then Moses throws furnace ashes toward the sky, and boils and blisters break out on people and animals. The magicians can't even stand before Moses.\n\nThe last is hail, announced a day ahead. God says he has kept Pharaoh standing so that his name may be declared throughout the earth. Some of Pharaoh's servants fear the LORD's word and bring their people and livestock indoors. Others leave theirs in the fields.\n\nThe storm breaks trees and strikes down all in the open. Goshen is spared. Pharaoh says, “I have sinned this time.” When the hail stops, he sins again."
+        },
+        {
+          "kind": "background",
+          "text": "The plagues now reach livestock, bodies and crops. The text notes that some Egyptians heeded the warning and others did not, so response to God's word is not decided by nationality. Pharaoh's confession in verse 27 sounds like repentance, but the narrator says it does not last. Verse 16 is quoted by Paul in Romans 9, where Christians read it in different ways, some stressing God's sovereignty and others human responsibility. The timing of the barley and flax in verses 31 and 32 may fit the season of the story."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "God tells Moses to go in to Pharaoh again, so that Israel will be able to tell their children and grandchildren what he has done. Moses asks Pharaoh, “How long will you refuse to humble yourself before me?” and warns of locusts.\n\nEven Pharaoh's servants have had enough. “Don’t you yet know that Egypt is destroyed?” Pharaoh offers a compromise: the men may go, but not the children. Moses will not accept it. An east wind brings the locusts, and nothing green is left in Egypt. Pharaoh calls in haste and confesses, and a strong west wind carries the locusts into the Red Sea. Then his heart hardens again.\n\nNext comes a darkness that can be felt, three days of it, while Israel has light. Pharaoh bargains once more, then orders Moses out: never see my face again."
+        },
+        {
+          "kind": "background",
+          "text": "The plagues here are tied to memory. God says the purpose is, in part, that later generations would hear what happened, which is the idea behind Passover in Exodus 12. Pharaoh's negotiations show what he is willing to risk, and he keeps the children and flocks as leverage. Some readers connect the darkness to Egypt's reverence for the sun, but the text itself only describes it. Moses's last words to Pharaoh in verse 29 prepare for the final plague in the next chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses is warned that one more plague is coming, and that after it Pharaoh will not just let Israel go, he will thrust them out. The people are told to ask their neighbors for silver and gold, and the LORD gives them favor with the Egyptians. Moses himself is very great in the eyes of Pharaoh's servants.\n\nThen Moses speaks the last warning. “About midnight I will go out into the middle of Egypt” Every firstborn will die, from Pharaoh's son on the throne to the servant girl at the mill, and the firstborn of livestock. The cry throughout Egypt will be greater than any before or after. Against Israel not even a dog will bark.\n\nMoses leaves Pharaoh in hot anger. The chapter closes by saying that Pharaoh would not listen, and his heart remained hardened."
+        },
+        {
+          "kind": "background",
+          "text": "This short chapter is the last warning before the Passover night. It is among the hardest in the book, since it speaks of the death of children, and the text says plainly what is coming. The people of Israel are set apart from Egypt in the language of the chapter, and Moses leaves in anger, so he is not a calm bystander. Christians and Jews have read the plagues as God's judgment on an empire that enslaved and killed (see Exodus 1). Exodus 12 tells how Israel is kept safe."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Before the worst night in Egypt's history, God gives Israel a new calendar. “This month shall be to you the beginning of months.” Each household takes a lamb without defect, keeps it until the fourteenth day, kills it at evening, and puts its blood on the doorposts and lintel. They eat the meat roasted, with unleavened bread and bitter herbs, dressed to travel: belt on, sandals on, staff in hand. “it is the LORD’s Passover.”\n\nAt midnight the LORD strikes every firstborn in Egypt. Pharaoh rises in the night, and a great cry goes up, for there is not a house without one dead. He summons Moses and tells Israel to go.\n\nThey leave in haste, with dough not yet leavened, carrying silver, gold and clothing, after four hundred thirty years. God also gives rules to remember the night."
+        },
+        {
+          "kind": "background",
+          "text": "Passover is the feast Jews have kept for thousands of years to remember the exodus, and the instructions here are the earliest account of it. Christians have long seen the Passover lamb as a pattern for Jesus (see John 1, 1 Corinthians 5 and Luke 22), while Jews keep the feast as the memory of their own liberation. The chapter also sets rules for foreigners to join in. The number of people in verse 37 and the length of the stay in Egypt are discussed by readers, and the text itself gives the figures as written."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Israel is out of Egypt, and the first thing Moses does is tell them to remember. “Remember this day, in which you came out of Egypt” They are to keep seven days of unleavened bread, and when their children ask what it means, they are to answer: by strength of hand the LORD brought us out.\n\nThe firstborn belong to God, because he spared Israel's firstborn when Egypt's died. Firstborn sons are to be redeemed.\n\nThen they walk. God doesn't take them by the short road through Philistine country, because they might see war and go back. He leads them around by the wilderness instead. Moses carries the bones of Joseph, as Joseph made Israel swear. And the LORD goes before them: a pillar of cloud by day, and a pillar of fire by night, which never leaves."
+        },
+        {
+          "kind": "background",
+          "text": "Before the crossing of the sea, this chapter sets a pattern of telling the story to the next generation, which Passover still follows. The firstborn rules look back to the tenth plague (see Exodus 11 and 12), and the redemption of the firstborn son is a practice that continues in some Jewish communities. Joseph's bones are the keeping of the promise in Genesis 50. Verse 17 gives a reason for the route that is not strategy alone but God's care for a frightened people."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "God tells Israel to turn back and camp by the sea, where it looks like a trap. Pharaoh changes his mind, takes six hundred chosen chariots and chases them down. When the Israelites see the Egyptians marching, they are terrified. They cry out to the LORD, and they turn on Moses: wasn't it better to serve Egypt than to die in the wilderness?\n\nMoses answers, “Don’t be afraid. Stand still, and see the salvation of the LORD” God tells him to go forward. The pillar of cloud moves behind Israel, between the two camps. Moses stretches out his hand, a strong east wind blows all night, and the sea becomes dry land with walls of water on each side.\n\nThe Egyptians follow. In the morning the waters return, and not one is left. Israel sees them dead on the shore, and the people believe in the LORD and in Moses."
+        },
+        {
+          "kind": "background",
+          "text": "The crossing of the sea is the central rescue of the Old Testament, looked back on across Scripture (see Psalm 106, Isaiah 63 and 1 Corinthians 10). The sea is called the Red Sea in the chapter's neighbors, and readers differ on the exact body of water, because the Hebrew phrase can be read in more than one way. The text includes both a natural wind and a miracle, and does not separate them. Christians have also read the crossing as a picture of baptism. Exodus 15 answers it with a song."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The people who were crying out in fear two days ago are now singing. “I will sing to the LORD, for he has triumphed gloriously.” The song of Moses and Israel tells the story again in poetry: the horse and rider thrown into the sea, the deeps covering the chariots like a stone, the right hand of the LORD glorious in power. It asks, “Who is like you, LORD, among the gods?” and looks ahead to the nations trembling and God's people planted in his holy place.\n\nMiriam the prophetess takes up a tambourine, and the women follow her with dancing.\n\nThen the road resumes. Three days without water, then Marah, where the water is bitter. The people complain. God shows Moses a tree, and the water turns sweet. They come to Elim, with twelve springs and seventy palm trees."
+        },
+        {
+          "kind": "background",
+          "text": "The Song of the Sea is among the oldest poetry in the Bible, and many scholars think it may be very early, though that is debated. It has shaped Jewish and Christian worship ever since (see Revelation 15, where a similar song appears). Miriam is the first woman called a prophetess in the Bible. The second half of the chapter is a reminder that deliverance did not end the hardship: the same people who sang soon complained. That pattern runs through the wilderness stories that follow in Exodus 16 and 17."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Six weeks into freedom, the whole congregation is hungry, and their memory of Egypt has changed. They say, “We wish that we had died by the LORD’s hand in the land of Egypt” remembering the meat pots and bread. God answers with a promise: bread from the sky, enough for each day, as a test of whether they will walk in his law.\n\nIn the evening quail cover the camp. In the morning there is dew, and when it lifts, something small and round lies on the ground, like frost. They ask, “What is it?” Moses says it is the bread the LORD gave. Each person gathers an omer, and whoever gathers much has nothing over, and whoever gathers little has no lack. What is kept overnight breeds worms.\n\nOn the sixth day they gather double, and the seventh is a Sabbath. They call it manna, and eat it for forty years."
+        },
+        {
+          "kind": "background",
+          "text": "The manna story teaches daily dependence on God and introduces the Sabbath rest before the law is given at Sinai (see Exodus 20). The Hebrew for “What is it?” is the likely source of the name manna, as the text hints. The jar of manna kept before the LORD was a lasting reminder for later generations. In John 6 Jesus speaks of this bread, and Christians read that passage in different ways. The chapter also shows the people's complaints as part of the story, to which God responds with provision."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "At Rephidim there is no water, and the people are close to rebellion. They quarrel with Moses and ask, “Is the LORD among us, or not?” Moses cries out to God: they are almost ready to stone me. God tells him to take the elders and the rod, and to strike the rock at Horeb, and water comes out for the people to drink. The place is named Massah and Meribah.\n\nThen a new enemy. Amalek attacks. Joshua leads the fighting men, and Moses, Aaron and Hur climb the hill. When Moses holds up his hand, Israel prevails, and when he lowers it, Amalek does. His hands grow heavy, so they put a stone under him, and Aaron and Hur hold up his arms until sunset. Joshua wins.\n\nMoses builds an altar called The LORD our Banner."
+        },
+        {
+          "kind": "background",
+          "text": "The two stories show Israel facing thirst and then war in the same place. The rock at Horeb is read by Paul in 1 Corinthians 10 as a picture of Christ, and Christians understand that in different ways. Joshua appears for the first time here and later succeeds Moses (see Numbers 27 and Joshua 1). Amalek appears again as an enemy in 1 Samuel 15, and the text's language about Amalek is among the harsh passages that readers have long struggled with. Here it records what the text says, not a rule for any later group."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/18",
+      "chapter": 18,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A family reunion in the wilderness. Jethro, Moses's father-in-law and the priest of Midian, hears everything God has done and brings Zipporah and her two sons to Moses at the mountain of God. Moses goes out to meet him, bows and kisses him. He tells the whole story, and Jethro rejoices. “Blessed be the LORD,” he says, and he offers sacrifices, with Aaron and the elders sharing the meal.\n\nThe next day Jethro watches Moses judge the people from morning to evening. His counsel is plain: “The thing that you do is not good.” Moses will wear himself out. Jethro tells him to teach the people the laws and choose able, God-fearing men to be rulers of thousands, hundreds, fifties and tens, who will take the small cases while the hard ones come to Moses.\n\nMoses listens and does it."
+        },
+        {
+          "kind": "background",
+          "text": "Jethro is a priest of Midian, not of Israel, and yet the text has him praise the LORD and share a sacrificial meal with Israel's leaders. His advice has been a model of delegating responsibility in many later traditions, but the text presents it as wisdom Moses accepted. The chapter comes just before Sinai and sets up the structure of Israel's courts, which appear again in Deuteronomy 1. The names of Moses's sons recall what he went through in Exodus 2, with his first son named from his exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/19",
+      "chapter": 19,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Three months after leaving Egypt, Israel camps in front of a mountain, and Moses climbs up to God. The LORD speaks: “You have seen what I did to the Egyptians, and how I bore you on eagles’ wings” If they obey and keep his covenant, they will be his own possession from among all peoples, “a kingdom of priests and a holy nation.” The people answer together, “All that the LORD has spoken we will do.”\n\nThen the preparations. They wash their clothes. Boundaries are set around the mountain, and no one is to touch it.\n\nOn the third day, thunder, lightning, a thick cloud and a very loud trumpet. All the people tremble. Mount Sinai is covered in smoke, because the LORD has come down in fire, and the whole mountain quakes. God calls Moses to the top, and he goes up."
+        },
+        {
+          "kind": "background",
+          "text": "Mount Sinai is where God makes a covenant with Israel, and it is the center of the books from Exodus through Numbers. The phrase “kingdom of priests” is echoed in the New Testament in 1 Peter 2 and Revelation 1, and Jews and Christians understand its meaning in their own ways. The boundaries around the mountain show how seriously the text treats God's holiness, and the strict warnings should be read in that light. The next chapter gives the Ten Commandments."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/20",
+      "chapter": 20,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "God speaks, and these are the first words: “I am the LORD your God, who brought you out of the land of Egypt, out of the house of bondage.” The commandments rest on a rescue. No other gods. No idols. Do not misuse the name of the LORD. Remember the Sabbath day and keep it holy, six days of work and a seventh of rest, for everyone in the household, servants, livestock and the stranger inside the gates. Honor your father and mother. Do not murder, commit adultery, steal, bear false witness or covet.\n\nThe people see the thunder, the lightning and the smoking mountain, and they tremble. They ask Moses to speak with them himself, lest they die. Moses tells them not to be afraid, then draws near the thick darkness where God is.\n\nGod adds instructions for altars."
+        },
+        {
+          "kind": "background",
+          "text": "These are the Ten Commandments, among the most influential texts in history. Jews, Catholics, Orthodox and Protestants number and divide them in slightly different ways, so the order and grouping you hear depends on the tradition. The Sabbath command gives creation as its reason, while the version in Deuteronomy 5 points to the exodus. In the Sermon on the Mount Jesus speaks of several of these commands (see Matthew 5). The following chapters apply them to daily life."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/21",
+      "chapter": 21,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The mountain falls quiet, and the law turns to everyday life. These are the ordinances Moses sets before the people, and they begin with the most vulnerable. A Hebrew servant serves six years and goes out free in the seventh. A female servant has protections that are named. Several laws deal with killing: for murder, death, and for accidental death, a place to flee.\n\nThe chapter then sets out cases of harm. A man who strikes a servant so that he dies is to be punished, and if he destroys a servant's eye or tooth, the servant goes free. The rule of “life for life” appears with its famous list, eye for eye and tooth for tooth.\n\nFinally the law covers an ox that gores, and a pit left uncovered, with responsibility falling on the owner who was warned or careless."
+        },
+        {
+          "kind": "background",
+          "text": "This is the start of what is called the Book of the Covenant (Exodus 21 to 23), the oldest law collection in the Bible. These laws govern slavery, a hard subject, and the text regulates a practice it does not abolish. Readers have long noted that the rules limit the owner's power and that other passages, such as Deuteronomy 15 and Philemon, shaped later thinking, and the Bible has also been misused to defend slavery. The rule of eye for eye was widely read as a limit on revenge, and Jesus speaks to it in Matthew 5."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/22",
+      "chapter": 22,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The laws continue with people and their property. A thief must pay back several times what he took, and if he has nothing, he can be sold for his theft. Someone who lets an animal graze in another man's field, or whose fire spreads, makes restitution. Goods left for safekeeping, borrowed animals and disputed claims each get a rule, and the cases come before God.\n\nThen the tone shifts toward the poor. “You shall not wrong an alien or oppress him, for you were aliens in the land of Egypt.” Widows and orphans are not to be taken advantage of, and God says he will hear their cry. A loan to a poor neighbor carries no interest, and a cloak taken as collateral must be returned before sundown, because it is the person's only covering.\n\nThe chapter closes with a call to be holy."
+        },
+        {
+          "kind": "background",
+          "text": "These laws apply the Ten Commandments to farm and village life in ancient Israel. Several verses are hard: the penalty for sorcery in verse 18 and for sexual acts with animals in verse 19, and the language about worshiping other gods in verse 20. They reflect a society where such matters were treated as grave. The care for the alien, the widow and the poor is repeated through the Bible (see Leviticus 19, Deuteronomy 24 and James 1). The reason given is memory: Israel was once oppressed in Egypt."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/23",
+      "chapter": 23,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter begins with honesty in the courtroom. “You shall not spread a false report.” Do not follow a crowd to do evil or give testimony that bends justice. Take no bribe, because a bribe blinds those who can see. Even an enemy's ox gone astray must be brought back, and his fallen donkey helped. The poor must not be denied justice. And again: “You shall not oppress an alien, for you know the heart of an alien”\n\nThe land rests in the seventh year, so that the poor may eat, and people and animals rest on the seventh day. Three feasts a year are named.\n\nThen God promises an angel to guard Israel on the road and bring them to the place prepared. The people are told to serve the LORD, and to make no covenant with the nations or their gods."
+        },
+        {
+          "kind": "background",
+          "text": "This closes the Book of the Covenant with justice at its center, and the Sabbath rest extends to the land, servants and animals. The yearly feasts are Unleavened Bread, Harvest and Ingathering, which Jewish tradition later connects with Passover, Weeks and Booths. The last section speaks of driving out the peoples of Canaan, a hard passage that readers handle in different ways. The text presents it as part of Israel's story and, in Deuteronomy 7, ties it to worship. It must not be taken as a license for violence toward others today."
+        }
+      ]
+    },
+    {
+      "id": "ai:exodus/24",
+      "chapter": 24,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-22",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The covenant is sealed in a ceremony. Moses comes down and tells the people all the LORD's words, and they answer with one voice: “All the words which the LORD has spoken will we do.” Moses writes them down, builds an altar with twelve pillars for the twelve tribes, and sends young men to offer sacrifices. He reads the book of the covenant aloud, and again the people say they will obey. Then he sprinkles them with the blood and says, “this is the blood of the covenant”\n\nMoses, Aaron, Nadab, Abihu and seventy elders go up the mountain. They see the God of Israel, with something like sapphire under his feet, and they eat and drink.\n\nThen Moses goes further, with Joshua. The glory of the LORD settles on Sinai like fire, and Moses enters the cloud for forty days and forty nights."
+        },
+        {
+          "kind": "background",
+          "text": "This is the formal making of the covenant between God and Israel at Sinai. The blood ceremony is echoed in the New Testament, where Jesus speaks of the blood of the covenant at the Last Supper (see Matthew 26) and the book of Hebrews connects the two (see Hebrews 9). Christians read these links in different ways. The meal on the mountain is a moment of close fellowship. The forty days lead to the instructions for the tabernacle in Exodus 25 and to the golden calf in Exodus 32."
+        }
+      ]
     }
   ]
 }
