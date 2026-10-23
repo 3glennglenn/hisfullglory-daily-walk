@@ -1,0 +1,91 @@
+{
+  "slug": "isaiah-40-31",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-10-23",
+  "verse": {
+    "book": "isaiah",
+    "chapter": 40,
+    "start": 31,
+    "end": 31
+  },
+  "hook": "You know the eagle verse. But did you know it answers people who said, “My way is hidden from the LORD”?",
+  "story": "This verse does not stand alone on a card. It is the last line of an answer, and the question it answers is hard. In the chapter before, King Hezekiah hosts an envoy from the faraway country of Babylon, and that visit is where the book of Isaiah first points toward the exile. By chapter 40 the exile is simply assumed. Jerusalem has fallen and the people of Judah are far from home.\n\nThe chapter opens with a word to them: “Comfort, comfort my people,” says your God. Then it makes room for what the people have been saying: “My way is hidden from the LORD, and the justice due me is disregarded by my God”.\n\nThe reply asks them to lift up their eyes to the heavens, and it says of the God who calls their host by name: “He gives power to the weak.” Even the youths faint and get weary, it says, “but those who wait for the LORD will renew their strength.”\n\nCenturies later that same chapter opened a famous piece of music. The English aristocrat Charles Jennens put together the words of Messiah from Scripture and sent them to Handel in July 1741. The opening movements draw on Isaiah 40. Handel composed the score in just 24 days, and it was first performed in Dublin on April 13, 1742, during Lent. Three charities were to benefit: relief for prisoners in debt, Mercer's Hospital and the Charitable Infirmary.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Working Preacher: Isaiah of the Exile, commentary on Isaiah 40:1-11",
+      "url": "https://www.workingpreacher.org/commentaries/narrative-lectionary/isaiah-of-the-exile/commentary-on-isaiah-401-11"
+    },
+    {
+      "title": "Jamieson, Fausset and Brown, Commentary on Isaiah 40 (Bible Hub)",
+      "url": "https://biblehub.com/commentaries/jfb/isaiah/40.htm"
+    },
+    {
+      "title": "Matthew Henry, Commentary on Isaiah 40 (Bible Hub)",
+      "url": "https://biblehub.com/commentaries/mhc/isaiah/40.htm"
+    },
+    {
+      "title": "The Tabernacle Choir: Handel's Messiah libretto with Scripture links",
+      "url": "https://www.thetabernaclechoir.org/messiah/libretto-with-scripture-links.html"
+    },
+    {
+      "title": "IrishCentral: Handel's Messiah premiere in Dublin",
+      "url": "https://www.irishcentral.com/roots/history/handel-messiah-dublin-premiere"
+    }
+  ],
+  "voices": [
+    {
+      "id": "jfb",
+      "name": "Jamieson, Fausset and Brown",
+      "about": "nineteenth-century Bible commentators, on the eagle in this verse",
+      "words": "The eagle was thought to moult and renew his feathers, and with them his strength, in old age",
+      "source": {
+        "title": "Jamieson, Fausset and Brown, Commentary on Isaiah 40 (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/jfb/isaiah/40.htm"
+      }
+    },
+    {
+      "id": "henry",
+      "name": "Matthew Henry",
+      "about": "English minister and commentator, on the same promise",
+      "words": "In the strength of Divine grace their souls shall ascend above the world.",
+      "source": {
+        "title": "Matthew Henry, Commentary on Isaiah 40 (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/mhc/isaiah/40.htm"
+      }
+    }
+  ],
+  "moment": "The words are spoken to people who have just said that God does not see them. Before the verse comes a run of questions: “Haven’t you known? Haven’t you heard?” The God who “doesn’t faint” and “isn’t weary” is set beside the youths who do.\n\nThen the line turns. The ones who wait for the LORD are given what the strongest young men cannot keep for themselves.",
+  "around": "The verse before it says: “He gives power to the weak. He increases the strength of him who has no might.” The chapter began with comfort: “Comfort, comfort my people,” and it speaks of a God who “will feed his flock like a shepherd.”",
+  "readings": "Many readers hear the eagle as a picture of lifting above trouble. The verse names the soaring first, and that is the part most often quoted.\n\nOthers point to the order of the three lines. The verse ends not with flying but with walking: “They will walk, and not faint.” For some readers the quiet promise at the end is the larger one, strength for the ordinary road when no one is watching.\n\nBoth readings stand inside the same verse, and neither needs to cancel the other.",
+  "argued": "Two older commentaries read the eagle differently. Jamieson, Fausset and Brown note an old belief about the bird: [[jfb]]\n\nMatthew Henry takes the image as a lifting of the soul: [[henry]]\n\nOne looks at the eagle itself, the other at what the image does for the believer. Both are trying to say why the verse reaches the weary.",
+  "point": "This verse is an answer to people who said their way was hidden from God, and it comes after a chapter about a God who does not grow weary. Its promise is strength for those who wait for him, from flying to walking.",
+  "basis": [
+    {
+      "book": "isaiah",
+      "chapter": 40,
+      "start": 1,
+      "end": 1
+    },
+    {
+      "book": "isaiah",
+      "chapter": 40,
+      "start": 11,
+      "end": 11
+    },
+    {
+      "book": "isaiah",
+      "chapter": 40,
+      "start": 21,
+      "end": 21
+    },
+    {
+      "book": "isaiah",
+      "chapter": 40,
+      "start": 27,
+      "end": 30
+    }
+  ]
+}
