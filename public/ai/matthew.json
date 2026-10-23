@@ -187,137 +187,145 @@
       "id": "ai:matthew/8",
       "chapter": 8,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-23",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "After the sermon, Matthew gathers a series of healings and acts of authority. Jesus touches a man with leprosy and makes him clean, then tells him to show himself to the priest. A Roman centurion asks for help for his paralyzed servant and says Jesus need only say the word. Jesus is amazed at his faith, says many will come from east and west to sit with Abraham, Isaac and Jacob, and heals the servant. He heals Peter's mother-in-law and many others in the evening.\n\nHe speaks to two would-be followers about the cost of following him. In a boat he calms a violent storm with a word, and the disciples wonder what kind of man this is. On the far shore he sends demons out of two men into a herd of pigs, which rush into the sea, and the people of the town ask him to leave."
+          "text": "A man with leprosy comes to Jesus and worships him. “Lord, if you want to, you can make me clean.” Jesus stretches out his hand and touches him, and the man is clean at once.\n\nIn Capernaum a centurion asks help for his paralyzed servant. He will not have Jesus come under his roof: “Just say the word, and my servant will be healed.” Jesus marvels. He has not found such faith, not even in Israel, and many, he says, will come from east and west to sit with Abraham, Isaac and Jacob. The servant is healed in that hour.\n\nOn the lake a violent storm covers the boat while he sleeps. He rebukes the wind and the sea, and the men ask, “What kind of man is this, that even the wind and the sea obey him?” On the far shore, demons leave two men and enter a herd of pigs, and the town begs him to go."
         },
         {
           "kind": "background",
-          "text": "Leprosy in the Bible covers several skin conditions and brought ritual uncleanness under the law of Moses (see Leviticus 13). Touching the man was striking. A centurion commanded about a hundred soldiers in the Roman army, so this is a Gentile and an outsider. The saying about being thrown into outer darkness has been read in different ways by Christians. Gergesenes is the WEB's name for the region across the lake; the Gospels give slightly different names for it. Matthew quotes Isaiah 53 in verse 17."
+          "text": "Leprosy in the Bible covers several skin conditions and brought ritual uncleanness under the law of Moses (see Leviticus 13). That is why the touch is striking. A centurion commanded about a hundred soldiers in the Roman army, so he is a Gentile and an outsider. Christians read the saying about outer darkness in different ways. Gergesenes is the WEB's name for the region across the lake; the Gospels give slightly different names for it. Matthew quotes Isaiah 53 in verse 17."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/9",
       "chapter": 9,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-23",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus returns to his own city, where friends bring a paralyzed man. He tells the man that his sins are forgiven. Some scribes think this is blasphemy. Jesus answers that the Son of Man has authority on earth to forgive sins and tells the man to get up and go home, which he does. Jesus then calls Matthew, a tax collector, and eats with tax collectors and sinners. When the Pharisees object, he says the sick need a physician and quotes a line from Hosea about mercy and sacrifice.\n\nAsked why his disciples do not fast, he speaks of a bridegroom, old cloth and new wine. He raises a ruler's daughter and heals a woman who touched his garment, then heals two blind men and a mute man. Seeing the crowds like sheep without a shepherd, he asks the disciples to pray for workers for the harvest."
+          "text": "Jesus comes back to his own city, and some people bring him a man who is paralyzed. Seeing their faith, Jesus says, “Son, cheer up! Your sins are forgiven you.” Some scribes whisper that this is blasphemy. Jesus answers that the Son of Man has authority on earth to forgive sins, and he tells the man to get up and go home. He does.\n\nThen Jesus sees Matthew at the tax office and says, “Follow me.” That evening tax collectors and sinners sit at table with him, and the Pharisees object. The sick need a physician, he says, and he sends them to learn what Hosea meant by mercy and not sacrifice.\n\nA ruler's daughter is raised, and a woman who only touched his garment is made well. Two blind men and a mute man are healed. Seeing the crowds like sheep without a shepherd, Jesus says, “The harvest indeed is plentiful, but the laborers are few.”"
         },
         {
           "kind": "background",
-          "text": "Tax collectors worked for the Roman system and were often seen as dishonest and as collaborators, so eating with them drew criticism. Pharisees valued separation from anything that made one unclean. The woman with a flow of blood would have been considered ritually unclean under Leviticus 15, which makes her touching him bold. Scribes believed that only God forgives sins, and Jesus's words claim a place that many find striking. The phrase son of David in the cry of the blind men is a royal title for the promised king. Compare Hosea 6."
+          "text": "Tax collectors worked for the Roman system and were often seen as dishonest and as collaborators, so eating with them drew criticism. Pharisees valued separation from anything that made one unclean. The woman with a flow of blood would have been considered ritually unclean under Leviticus 15, which makes her touching him bold. Scribes believed that only God forgives sins, and Jesus's words claim a place that many find striking. Son of David in the cry of the blind men is a royal title for the promised king. Compare Hosea 6."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/10",
       "chapter": 10,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-23",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus calls his twelve disciples, gives them authority over unclean spirits and over disease, and names the twelve apostles. He sends them first to the lost sheep of the house of Israel and not to Gentiles or Samaritans. They are to preach that the Kingdom of Heaven is near, to heal, and to give freely, taking no extra money or supplies, and to stay with those who welcome them.\n\nJesus warns that they go out like sheep among wolves. They will be brought before councils, governors and kings, and families will be divided, yet the Spirit of their Father will speak through them. He tells them not to fear those who kill the body and says God cares even for sparrows. Those who confess him will be confessed by him. He says he came with a sword, not peace, and calls for taking up a cross. The chapter ends with a promise about welcoming his followers."
+          "text": "Jesus calls his twelve disciples to himself and gives them authority over unclean spirits and every sickness. Jesus sends them out, first to the lost sheep of the house of Israel, not to Gentiles or Samaritans. They are to say that the Kingdom of Heaven is near and to heal. “Freely you received, so freely give.” They take no extra money or supplies.\n\nThe road will not be easy. “Behold, I send you out as sheep among wolves.” They will stand before councils, governors and kings, and families will turn on one another, yet the Spirit of their Father will speak in them. They are not to fear those who kill the body, for God notices every sparrow. Jesus says he came with a sword, not peace, and calls them to take up a cross. A promise for those who welcome his followers ends the chapter."
         },
         {
           "kind": "background",
-          "text": "The twelve recall the twelve tribes of Israel. This is the second of five long teaching sections in Matthew. The command to go only to Israel reflects the first stage of the mission; the Gospel ends in chapter 28 with a call to all nations. The saying about a sword is a figure of speech about division, not a call to violence, and Christians have read it that way. Gehenna was a valley outside Jerusalem used as an image of judgment. The saying in verse 23 is read in several ways by Christians, and they differ."
+          "text": "The twelve recall the twelve tribes of Israel. This is the second of five long teaching sections in Matthew. The command to go only to Israel reflects the first stage of the mission; the Gospel ends in chapter 28 with a call to all nations. The saying about a sword is a figure of speech about division, not a call to violence, and Christians have read it that way. Gehenna was a valley outside Jerusalem used as an image of judgment. Christians read the saying in verse 23 in several ways, and they differ."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/11",
       "chapter": 11,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-23",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "John the Baptizer, in prison, sends disciples to ask whether Jesus is the one who is to come. Jesus tells them to report what they hear and see: the blind see, the lame walk, lepers are cleansed, the dead are raised and good news is preached to the poor. He then speaks to the crowds about John, calling him more than a prophet and saying he is the Elijah who was to come.\n\nJesus compares this generation to children who will not join in either a wedding game or a funeral game, since they rejected John for fasting and Jesus for feasting. He denounces Chorazin, Bethsaida and Capernaum for not repenting despite his works. He thanks the Father for revealing things to infants and speaks of the Son and the Father knowing each other. The chapter ends with an invitation to all who are weary: come to me and find rest."
+          "text": "John the Baptizer sits in prison and hears what Jesus is doing. He sends two disciples with a question: “Are you he who comes, or should we look for another?” Jesus tells them to report what they hear and see: the blind see, the lame walk, the dead are raised, and the poor have good news preached to them.\n\nThen he speaks to the crowd about John. What did they go out to see in the wilderness? A prophet, and much more. If they are willing to receive it, John is the Elijah who was to come.\n\nThis generation, he says, is like children who join neither the wedding game nor the funeral game. He denounces Chorazin, Bethsaida and Capernaum, then thanks the Father. The chapter ends with an open door: “Come to me, all you who labor and are heavily burdened, and I will give you rest.”"
         },
         {
           "kind": "background",
           "text": "John was arrested by Herod, as told in chapter 14. His question has been read both as real doubt and as a request for confirmation, and readers differ. The list in verse 5 echoes phrases from Isaiah 35 and 61. The reference to Elijah comes from Malachi 4. Chorazin and Bethsaida were towns near the Sea of Galilee. Tyre, Sidon and Sodom were old cities of judgment in the Old Testament. Verse 12 is hard to translate, and Christians read the violence it mentions in different ways. The yoke was a common picture for a teacher's way of life."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/12",
       "chapter": 12,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-23",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "The Pharisees object when Jesus's hungry disciples pick grain on the Sabbath. Jesus points to David eating the show bread and to the priests working in the temple, and says the Son of Man is Lord of the Sabbath. In a synagogue he heals a man with a withered hand, saying it is lawful to do good on the Sabbath. The Pharisees then plot to destroy him, and Matthew quotes Isaiah about a gentle servant who will not break a bruised reed.\n\nWhen Jesus frees a blind and mute man, the Pharisees say he casts out demons by Beelzebul. Jesus replies that a divided kingdom cannot stand, and warns about speaking against the Holy Spirit. He speaks of good and bad fruit and of words. Asked for a sign, he gives the sign of Jonah. A man's family waits outside, and Jesus says whoever does his Father's will is his mother and brother and sister."
+          "text": "On a Sabbath, Jesus walks through the grain fields, and his hungry disciples pluck heads of grain to eat. The Pharisees call it unlawful. Jesus reminds them of David eating the show bread and of the priests in the temple. He says the Son of Man is “Lord of the Sabbath”. In the synagogue a man has a withered hand, and the question comes: “Is it lawful to heal on the Sabbath day?” Jesus says it is lawful to do good, and the hand is restored. The Pharisees go out to plot against him.\n\nWhen Jesus frees a blind and mute man, some say he casts out demons by Beelzebul. He answers that a divided kingdom cannot stand, and gives only the sign of Jonah. When his mother and brothers wait outside, he asks, “Who is my mother? Who are my brothers?” and points to those who do his Father's will."
         },
         {
           "kind": "background",
           "text": "The Sabbath was the weekly day of rest commanded in the law (see Exodus 20). Debates about what counted as work were common among teachers. The story about David comes from 1 Samuel 21. Sign of Jonah refers to the book of Jonah, and Christians connect it with the resurrection. The warning about blasphemy against the Spirit is one of the most discussed sayings in the Gospels, and Christians understand it in different ways. Pharisee opposition in Matthew is aimed at particular leaders. It has too often been wrongly turned against all Jews, which the text does not support."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/13",
       "chapter": 13,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-23",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus sits by the sea and teaches the crowd in parables. In the first, a farmer sows seed that lands on a path, rocky ground, thorns and good soil, and the good soil yields a large harvest. When the disciples ask why he uses parables, he says the secrets of the Kingdom are given to them, and he explains the sower: the word of the Kingdom meets different responses.\n\nHe tells more parables of the Kingdom of Heaven: the wheat and the darnel weeds, the mustard seed, yeast in meal, hidden treasure, a pearl of great price and a dragnet. In a house he explains the weeds as the children of the Kingdom and of the evil one, with a separation at the end of the age. The chapter closes in Nazareth, where people are offended by him, and he does not do many works there because of their unbelief."
+          "text": "Jesus sits by the sea, and the crowd is so large that he teaches from a boat. “Behold, a farmer went out to sow.” Some seed falls on the path and the birds eat it, some on rock, some among thorns, and some on good soil that yields thirty, sixty or a hundred times. The disciples ask why he speaks this way. The secrets of the Kingdom are given to them, he says, and he explains the sower: the word meets different hearts.\n\nMore parables of the Kingdom of Heaven follow: wheat and darnel growing together until harvest, a mustard seed, yeast in meal, hidden treasure, a pearl of great price and a dragnet. In the house he explains the weeds and the separation at the end of the age.\n\nIn his own country, the people ask, “Isn’t this the carpenter’s son?” They are offended, and he does not do many mighty works there because of their unbelief."
         },
         {
           "kind": "background",
           "text": "A parable is a short story that makes a point by comparison. This is the third of the five teaching sections in Matthew, and it gathers seven parables. Matthew cites Isaiah 6 to explain why some do not understand, and Christians read the verses on hiding and revealing in different ways. Darnel is a weed that looks like wheat until it matures. Mustard was a garden plant, and three measures of meal is a large amount, perhaps enough for a village. People in Nazareth name Jesus's brothers and sisters; Christians differ on how to understand that."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/14",
       "chapter": 14,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-23",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Herod the tetrarch hears about Jesus and wonders if he is John the Baptizer risen from the dead. Matthew explains how John died. Herod had arrested him because John said it was not lawful for Herod to have his brother's wife, Herodias. At Herod's birthday the daughter of Herodias danced, Herod promised her anything with an oath, and prompted by her mother she asked for John's head. Herod, grieved but bound by his oaths, ordered it. John's disciples buried him and told Jesus.\n\nJesus withdraws to a deserted place, but crowds follow, and he heals them. In the evening he takes five loaves and two fish, blesses them, and feeds about five thousand men besides women and children, with twelve baskets left. He then walks to the disciples on the sea in a storm, and Peter walks toward him but begins to sink. In the boat they worship him as Son of God."
+          "text": "Herod the tetrarch hears of Jesus and says it is John the Baptizer, risen from the dead. Herod had put John in prison because John said it was not lawful for him to have Herodias, his brother's wife. At Herod's birthday her daughter danced, and he promised with an oath to give her whatever she asked. Prompted by her mother, she said, “Give me here on a platter the head of John the Baptizer.” Herod was grieved, but for the sake of his oaths he gave the order. John's disciples bury him and tell Jesus.\n\nJesus withdraws to a deserted place, but the crowds follow. He heals their sick, and five loaves and two fish feed about five thousand men, besides women and children. That night he walks on the sea toward the boat. Peter steps onto the water, begins to sink, and Jesus takes hold of him. In the boat they worship him as the Son of God."
         },
         {
           "kind": "background",
           "text": "Herod Antipas ruled Galilee and Perea as tetrarch under Rome. The marriage that John criticized was against Jewish law (see Leviticus 18). Josephus, a Jewish historian, also wrote about the death of John, though with a different account of the reasons. The feeding of the five thousand is the only miracle told in all four Gospels. The fourth watch of the night is the hour before dawn. Christians have read the walking on the water as a sign of Jesus's authority over the sea, a power that the Psalms give to God."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/15",
       "chapter": 15,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-23",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Pharisees and scribes from Jerusalem ask why Jesus's disciples do not wash their hands before eating, which broke the tradition of the elders. Jesus answers that their tradition sets aside God's commandment to honor father and mother, calls them hypocrites, and cites Isaiah about lips that honor God while hearts are far away. He tells the crowd that what goes into the mouth does not defile a person, but what comes out of the heart does, and he lists evil thoughts, murder, theft and false testimony.\n\nHe goes to the region of Tyre and Sidon, where a Canaanite woman asks him to help her daughter. At first he does not answer, then says he was sent to the lost sheep of Israel. She keeps asking, and he praises her faith and heals her daughter. He heals many by the Sea of Galilee and feeds four thousand men, besides women and children, with seven loaves and a few fish."
+          "text": "Pharisees and scribes come from Jerusalem with a complaint: Jesus's disciples do not wash their hands before eating, and that breaks the tradition of the elders. Jesus asks why they set aside God's commandment to honor father and mother for their own tradition. What goes into the mouth does not defile a person, he tells the crowd. What comes out of the heart does.\n\nThen he goes toward Tyre and Sidon, where a Canaanite woman cries out, “Have mercy on me, Lord, you son of David!” At first he gives her no answer. He says he was sent only to the lost sheep of Israel, and that it is not appropriate to throw the children's bread to the dogs. She does not leave. “Yes, Lord, but even the dogs eat the crumbs which fall from their masters’ table.” Jesus answers that her faith is great, and her daughter is healed."
         },
         {
           "kind": "background",
           "text": "The hand washing here was a custom of the elders and was not commanded in the written law. The passage about honoring parents is from Exodus 20 and 21. Christians differ on how far this chapter sets aside the food laws of the law of Moses; compare Mark 7, Acts 10 and Romans 14. The Canaanite woman is a Gentile, and the word dogs in the exchange has troubled many readers. Some see a test of faith, others see a hard saying that she turns around. The feeding of four thousand happens in a mostly Gentile area."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/16",
