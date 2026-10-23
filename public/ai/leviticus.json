@@ -22,6 +22,258 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:leviticus/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The book opens with a voice from the tent. The LORD calls to Moses from the Tent of Meeting and tells him what to say to Israel about offerings. The first kind is the burnt offering. If a person brings one from the herd, it must be “a male without defect”, offered at the door of the tent. He lays his hand on its head, and it is accepted for him to make atonement. He kills it before the LORD, the priests sprinkle the blood around the altar, and the animal is skinned, cut up and laid in order on the fire. The priest burns all of it, a pleasant aroma to the LORD. The same pattern holds for a male from the flock. For those who offer birds, turtledoves or young pigeons, the priest burns the bird on the altar."
+        },
+        {
+          "kind": "background",
+          "text": "Leviticus follows directly after Exodus 40, where the glory of God filled the tent; now God speaks from it. Tradition links the book to Moses. The first section, chapters 1 to 7, teaches Israel how to approach God with offerings. The text gives the options of herd, flock or birds, which means that a person could bring what they could afford. Readers differ on what sacrifice means today: many Christians read it with Hebrews 10, and Jewish tradition remembers it in prayer and study."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Not every offering is an animal. The meal offering is a gift of grain. A person brings fine flour, pours oil on it and adds frankincense. The priest takes a handful as a memorial and burns it on the altar as a pleasant aroma, and what remains belongs to Aaron and his sons, a most holy part. The offering can also be baked: unleavened cakes mixed with oil, or wafers anointed with oil, or flour cooked on a griddle or in a pan. No meal offering may be made with yeast, and honey is not burned on the altar either. Every offering is to be seasoned with salt, for “the salt of the covenant of your God” must not be lacking. The chapter ends with the first fruits, fresh heads of grain parched with fire and crushed, with oil and frankincense, part of which the priest burns."
+        },
+        {
+          "kind": "background",
+          "text": "Having described animal offerings in Leviticus 1, the book now describes what comes from fields and kitchens. Ordinary food, flour and oil, becomes a gift to God. The portion for the priests shows how the priesthood was supported. Because the text does not explain why yeast and honey are excluded, readers have offered different guesses, and it is best to say that the reason is not given. Compare Leviticus 6 for more on the meal offering."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The peace offering is the third kind. A person brings a bull or cow, a lamb, or a goat, male or female, without defect. He lays his hand on its head and kills it at the door of the Tent of Meeting, and the priests sprinkle the blood around the altar. The fat that covers the innards, the two kidneys and the cover of the liver are burned on the altar, an offering by fire of a pleasant aroma. For a lamb, the fat tail is included as well. The text calls this the food of the offering, and says plainly that all the fat is the LORD's. The chapter ends with a rule for all generations and all dwellings: “you shall eat neither fat nor blood.”"
+        },
+        {
+          "kind": "background",
+          "text": "Leviticus 7 shows that a peace offering is the one where the worshiper shares in a meal, so it is often read as an offering of fellowship or thanks. The chapter itself stays with the rules for the fat, which belongs to the LORD, and the blood. Jewish tradition has treated the rule against eating blood as lasting; many Christians point to Acts 15 when discussing it. Readers differ on how these rules apply today."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "This chapter is about sins nobody meant. If anyone sins unintentionally, doing one of the things the LORD has commanded not to be done, the sin is still serious, and there is a way back. The text follows the case upward and downward through the community. If the anointed priest sins so that guilt falls on the people, he brings a young bull. If the whole congregation sins, hidden from them until it is known, the elders lay their hands on a bull. When a ruler sins, he brings a male goat; when one of the common people sins, a female goat or lamb. In each case the offerer lays a hand on the animal and kills it, and the priest puts blood on the horns of the altar. For the priest and the congregation, blood is sprinkled seven times before the veil. The result is stated: the priest makes atonement, and “he will be forgiven.”"
+        },
+        {
+          "kind": "background",
+          "text": "The offering here is for sin done without intent. The chapter shows that guilt can be real even when it is unknowing, and it scales the offering to the person's position: leaders bear greater responsibility. The same pattern ends with forgiveness. Readers often compare Hebrews 9 and 10 when reading about blood and atonement, while Jewish readers remember these offerings in the context of Temple service and repentance."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Some wrongs are easy to miss, and this chapter lists them. A witness hears a public call to testify and stays silent. Someone touches an unclean carcass or human uncleanness without knowing it. Someone swears a rash oath. When the person learns of it, “he shall confess that in which he has sinned” and bring an offering for atonement. The cost depends on what the person can pay. A lamb or goat is first, but “If he can’t afford a lamb,” two turtledoves or pigeons will do, and if even that is too much, a tenth of an ephah of fine flour. The chapter then turns to the LORD's holy things. If someone wrongs them unwittingly, he brings a ram and makes restitution, adding a fifth. Even someone who sinned without knowing remains guilty, and brings a ram to the priest to be forgiven."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter keeps together confession, restitution and offerings. The provision for the poor is notable: the law makes room for those who have little, so that forgiveness is not reserved for the wealthy. Mary and Joseph's offering in Luke 2:24 is often connected with this kind of provision. The word for this offering is sometimes translated as guilt offering or trespass offering, and the exact lines between types are explained differently by different readers."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "What happens when one person wrongs another? This chapter takes up wrongs against a neighbor: lying about a deposit, taking by robbery or oppression, or finding something lost and swearing falsely about it. The answer has two steps. First the person restores what was taken in full and adds a fifth part more, giving it to its owner on the day he is found guilty. Then he brings a ram as a trespass offering, and the priest makes atonement, and he will be forgiven. After this the chapter gives instructions for the priests. The fire on the altar is to burn all night until morning, and “it shall not go out.” The priest removes the ashes and carries them outside the camp. Then come the rules for the meal offering, the daily offering of Aaron and his sons, and the sin offering, which is to be eaten in a holy place."
+        },
+        {
+          "kind": "background",
+          "text": "Here the offering for a wrong against a neighbor cannot be separated from making it right with the person. Restitution comes first. These are instructions for priests, spoken to Aaron and his sons, and they describe the daily work behind the altar. The fire that must never go out is mentioned again in Leviticus 9, where fire from the LORD consumes the offering. Readers differ on whether the law's picture of restitution applies directly today, but many see its concern for justice as lasting."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The long list of offering laws is finished here. The trespass offering is most holy, killed where the burnt offering is killed, and its fat is burned; the priests eat of it in a holy place. The law of the peace offering follows, with a distinction between a thanksgiving offering, eaten on the day it is offered, and a vow or freewill offering, eaten that day or the next, and burned on the third day. Anyone who eats unclean meat, or eats while unclean, is cut off from his people. The people may not eat fat, of bull, sheep or goat, nor any blood, whether of bird or animal. The priests receive the breast and right thigh as their portion forever. The chapter ends by gathering all the laws of the burnt offering, the meal offering, the sin offering, the trespass offering, the consecration and the peace offering, given “in the wilderness of Sinai.”"
+        },
+        {
+          "kind": "background",
+          "text": "This chapter finishes the first section of the book. The phrase cut off from his people is serious, and the text does not spell out exactly what it means; readers have understood it in different ways. The priests' share of the offerings supported their work. The closing note places everything at Sinai, in the same wilderness setting as Exodus 19 and the building of the tent in Exodus 35 to 40."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The words of Leviticus 1 to 7 now become action. At the LORD's command, Moses assembles the whole congregation at the door of the Tent of Meeting and tells them, “This is the thing which the LORD has commanded to be done.” He washes Aaron and his sons, dresses Aaron in the tunic, sash, robe, ephod and breastplate, sets the turban on his head, and fixes the golden plate. He anoints the tabernacle, the altar and its vessels, then pours oil on Aaron's head. A bull is brought for a sin offering, one ram for a burnt offering, and a second ram for the consecration, and its blood goes on the right ear, thumb and great toe of Aaron and his sons. They are told to stay at the door of the tent for seven days, day and night. The chapter ends with their obedience."
+        },
+        {
+          "kind": "background",
+          "text": "This is the ordination that Exodus 28 and 29 planned in detail. Moses acts here as the one who sets Aaron and his sons apart, and the repeated phrase as the LORD commanded Moses shows that the work follows the plan. Readers have long found meaning in the seven days of waiting, which keep the new priests at the tent. It leads straight to Leviticus 9, where their service begins."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "On the eighth day Moses calls Aaron, his sons and the elders, and the day of service begins. Aaron first offers a calf as a sin offering for himself, and a ram as a burnt offering. Then he brings the people's offering: a goat for sin, a calf and a lamb for burning, a bull and a ram for peace offerings, and a meal offering. His sons hand him the blood, and he does each step as the LORD commanded. Aaron lifts up his hands toward the people and blesses them. Moses and Aaron go into the Tent of Meeting, come out, and bless the people again, and “the LORD’s glory appeared to all the people.” Fire comes out from before the LORD and consumes the burnt offering and fat on the altar. When the people see it, they shout and fall on their faces."
+        },
+        {
+          "kind": "background",
+          "text": "The glory promised in Exodus 29:43 now appears. Notice that Aaron offers for himself before he offers for the people; the priest is also in need. The fire from the LORD follows the pattern of earlier scenes, and the same kind of fire appears in 1 Kings 18 and 2 Chronicles 7. The next chapter turns suddenly and darkly, and the two chapters are best read together."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Joy turns to horror. Nadab and Abihu, sons of Aaron, take their censers, put fire in them, lay incense on it, and offer what the text calls strange fire before the LORD, which he had not commanded. Fire comes out from before the LORD and devours them, and they die. Moses tells Aaron that the LORD said he would show himself holy to those who come near him. And “Aaron held his peace.” Cousins carry the bodies out of the camp, and Moses tells Aaron and his other sons not to mourn in the usual ways, for the anointing oil is on them. The LORD then speaks to Aaron directly: the priests must not drink wine or strong drink when they enter the tent, and they must teach the people the difference between holy and common, clean and unclean. The chapter ends with Moses angry that a sin offering was burned, not eaten, and Aaron's answer, which pleases Moses."
+        },
+        {
+          "kind": "background",
+          "text": "This is one of the hardest scenes in Leviticus. The text says only that the fire was not commanded, and it does not explain more. Some readers link the warning about wine that follows, but the text does not say that this was the reason. Jewish and Christian interpreters have offered different readings, and it is honest to say that the explanation is not given. The chapter shows that approaching God is serious, and that grief and duty could collide."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "God speaks to Moses and Aaron about what Israel may eat. On land, an animal that has a parted hoof and chews the cud may be eaten. The camel, the hyrax and the hare chew the cud but do not part the hoof, and the pig parts the hoof but does not chew the cud, so these are unclean. In the water, whatever has fins and scales may be eaten, and the rest is an abomination. A list of birds follows, including the eagle, vulture, raven, owl, stork and bat. Winged insects are unclean, though locusts, katydids, crickets and grasshoppers may be eaten. The chapter then explains what touching a carcass does: a person is unclean until evening and washes his clothes. At the center of the chapter, God gives the reason: “be holy, for I am holy.” The law, the chapter ends, is to make a distinction between the unclean and the clean."
+        },
+        {
+          "kind": "background",
+          "text": "Why these animals? The text does not give reasons beyond holiness, and many theories have been proposed, such as health, symbolism or setting Israel apart. Jewish tradition has kept these laws as part of daily life. Christians differ on whether they still apply. Many point to Mark 7 and Acts 10 as showing a change, while others see lasting wisdom in them. The uncleanness here is ritual, not a statement that people or animals are evil."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A short chapter, and it concerns birth. When a woman bears a son, she is unclean for seven days, as in the days of her period, and on the eighth day the boy is circumcised. She then continues in the blood of purification for thirty-three days, during which she may not touch any holy thing or come into the sanctuary. If she bears a daughter, the times are doubled: two weeks of uncleanness and sixty-six days of purification. When the days are completed, she brings a year-old lamb for a burnt offering and a young pigeon or turtledove for a sin offering. The priest offers it, makes atonement, and she is clean from the flow of her blood. If she cannot afford a lamb, two turtledoves or two young pigeons will do, one for each offering, and she shall be clean."
+        },
+        {
+          "kind": "background",
+          "text": "The uncleanness in this chapter is ritual. It marks a time when a woman keeps apart from the sanctuary and does not say that birth is sinful. Readers differ on why a sin offering is named, and why the time doubles for a daughter; the text does not explain either. The provision for the poor appears again, and Luke 2:22 to 24 records Mary bringing the offering for those who could not afford a lamb. The chapter should be read with care, and it gives no medical advice."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A person finds a swelling, a scab or a bright spot on the skin, and must go to the priest. The priest looks closely: has the hair turned white, does it lie deeper than the skin, has it spread? Some cases he declares unclean at once. In others he isolates the person for seven days and looks again, and if the spot has faded, he pronounces the person clean, and the person washes his clothes. The chapter works through boils, burns, itches of the head and beard, harmless rashes, and baldness. One who is declared leprous must live apart: he wears torn clothes, lets his hair hang loose, covers his upper lip and cries “Unclean! Unclean!” His home is outside the camp. The chapter then turns to mildew in garments of wool, linen or leather, which the priest examines, isolates, and, if it spreads, burns."
+        },
+        {
+          "kind": "background",
+          "text": "The word translated leprosy here covers a range of skin conditions, and many scholars think it is not the same as the modern disease of that name. The priest's job in this chapter is to examine and decide, not to heal. The chapter has often been misused to justify cruel treatment of sick people, and it should not be read that way. It gives no medical advice. See Leviticus 14 for what follows, and Mark 1:40 to 45 for Jesus meeting such a person."
+        }
+      ]
+    },
+    {
+      "id": "ai:leviticus/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-23",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Now the other side: the skin disease has healed. The person is brought to the priest outside the camp. Two living birds, cedar wood, scarlet and hyssop are taken. One bird is killed over running water, the living bird is dipped in its blood, and the priest sprinkles the person seven times, pronounces him clean and lets “the living bird go into the open field.” The person washes, shaves and bathes, waits seven days outside his tent, and on the eighth day brings offerings. The chapter makes room for those who are poor: “If he is poor, and can’t afford so much,” he brings less. Then it turns to a house with spreading mildew. The priest has it emptied and shut up for seven days. If the plague spreads, stones are removed, and if it returns, the house is torn down; if not, it is cleansed with birds and running water."
+        },
+        {
+          "kind": "background",
+          "text": "After the exclusion of Leviticus 13, this chapter is about return: a person coming back into the camp and the worship of Israel. The ritual is long, and every step is a movement toward restored life with others. The law once again provides for the poor. As in chapter 13, the word translated leprosy covers several conditions, and the chapter gives no medical advice. Jesus tells people he heals to show themselves to the priest, as in Luke 17:14."
+        }
+      ]
     }
   ]
 }
