@@ -1,0 +1,79 @@
+{
+  "slug": "psalm-23-1",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-10-24",
+  "verse": {
+    "book": "psalms",
+    "chapter": 23,
+    "start": 1,
+    "end": 1
+  },
+  "hook": "You know “The LORD is my shepherd”. But did you know a Mesopotamian king once called himself a shepherd, too?",
+  "story": "Long before this psalm was sung, the word shepherd already belonged to rulers. In Mesopotamia a king could use it of himself. Hammurabi did, in his law code, as the Wikipedia article on this psalm quotes it. In the same breath he calls his rule just.\n\nIsrael knew the picture too. Wikipedia notes that the theme of God as a shepherd was common in ancient Israel and in Mesopotamia. The heading of this psalm ascribes it to David, and David himself was a shepherd. BiblePlaces says he likely herded in the fields just outside his hometown, Bethlehem, and that a good shepherd finds a source of water for his flock even in hard places like the Judean wilderness.\n\nSo when the psalm says “The LORD is my shepherd; I shall lack nothing”, it uses a title that a Mesopotamian king had claimed for himself, and it gives it to God. The one speaking says my. The psalm does not talk about a shepherd in general. It speaks about the shepherd of one person.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Wikipedia: Psalm 23",
+      "url": "https://en.wikipedia.org/wiki/Psalm_23"
+    },
+    {
+      "title": "BiblePlaces: Psalm 23:2",
+      "url": "https://www.bibleplaces.com/psalm23-2/"
+    },
+    {
+      "title": "C. H. Spurgeon, The Treasury of David, Psalm 23 (The Spurgeon Archive)",
+      "url": "https://archive.spurgeon.org/treasury/ps023.php"
+    },
+    {
+      "title": "Hymnary.org: Jessie Seymour Irvine",
+      "url": "https://www.hymnary.org/person/Irvine_JS"
+    },
+    {
+      "title": "Wikipedia: The Lord's My Shepherd",
+      "url": "https://en.wikipedia.org/wiki/The_Lord%27s_My_Shepherd"
+    }
+  ],
+  "voices": [
+    {
+      "name": "Hammurabi",
+      "about": "Mesopotamian king, in his law code, as quoted on Wikipedia",
+      "words": "I am the shepherd who brings well-being and abundant prosperity; my rule is just",
+      "source": {
+        "title": "Wikipedia: Psalm 23",
+        "url": "https://en.wikipedia.org/wiki/Psalm_23"
+      }
+    },
+    {
+      "name": "Charles Spurgeon",
+      "about": "Preacher, in The Treasury of David, on the psalm",
+      "words": "cultivate the spirit of assured dependence upon our heavenly Father",
+      "source": {
+        "title": "C. H. Spurgeon, The Treasury of David, Psalm 23 (The Spurgeon Archive)",
+        "url": "https://archive.spurgeon.org/treasury/ps023.php"
+      }
+    },
+    {
+      "name": "Charles Spurgeon",
+      "about": "Preacher, in The Treasury of David, on the shepherd and his sheep",
+      "words": "A sheep is an object of property, not a wild animal; its owner sets great store by it",
+      "source": {
+        "title": "C. H. Spurgeon, The Treasury of David, Psalm 23 (The Spurgeon Archive)",
+        "url": "https://archive.spurgeon.org/treasury/ps023.php"
+      }
+    }
+  ],
+  "moment": "The psalm opens with one short sentence, and it is spoken in the first person: “The LORD is my shepherd; I shall lack nothing.” Then the picture unfolds from the shepherd outward: “He makes me lie down in green pastures. He leads me beside still waters.”\n\nLater the voice changes from talking about him to talking to him: “Even though I walk through the valley of the shadow of death, I will fear no evil, for you are with me.”",
+  "around": "Right after the opening line come the pastures and the waters. BiblePlaces points out that sheep need water daily in the climate of Israel, and that the Hebrew behind “still waters” means waters of rest, so the water is not necessarily placid. The psalm ends with a house: “I will dwell in the LORD’s house forever.”",
+  "readings": "Many readers have heard in the opening line a promise of provision. Spurgeon heard in it a call to trust, as his words below show.\n\nThe psalm has also found a home in worship and in grief. Wikipedia reports that it is traditionally sung during the third Shabbat meal in Jewish practice and is commonly recited in the presence of a deceased person. Orthodox Christians typically include it in their prayers of preparation for receiving the Eucharist.\n\nIn Scotland the psalm became a song for a whole congregation. A metrical version of it first appeared in the Scots Metrical Psalter of 1650. In 1871, according to Hymnary.org, Jessie Seymour Irvine wrote the tune Crimond for it, in Crimond, as a composition class exercise. It was printed in 1872 in The Northern Psalter, credited at first to David Grant, a musician from Aberdeen. After a 1911 letter from her sister, many hymnals began crediting Irvine, though Wikipedia adds that some scholars still favor Grant. That setting was sung at the wedding of Princess Elizabeth and Philip Mountbatten in 1947.",
+  "point": "This verse takes a word that kings used of themselves and gives it to God, and it says my: the shepherd it names is one the speaker can call their own.",
+  "basis": [
+    {
+      "book": "psalms",
+      "chapter": 23,
+      "start": 1,
+      "end": 6
+    }
+  ]
+}
