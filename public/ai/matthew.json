@@ -331,137 +331,145 @@
       "id": "ai:matthew/16",
       "chapter": 16,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-24",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Pharisees and Sadducees ask Jesus for a sign from heaven. He says they can read the sky but not the signs of the times, and offers only the sign of Jonah. Crossing the lake, the disciples forget bread, and Jesus warns them about the yeast of the Pharisees and Sadducees, which the disciples finally understand to mean their teaching.\n\nAt Caesarea Philippi Jesus asks who people say he is, and then who the disciples say he is. Simon Peter answers, “You are the Christ, the Son of the living God.” Jesus blesses him, says he is Peter and that on this rock he will build his assembly, and promises the keys of the Kingdom of Heaven. He then begins to say that he must suffer, be killed and be raised on the third day. Peter objects and Jesus rebukes him. He calls his followers to take up their cross and says that losing one's life for his sake means finding it."
+          "text": "They want a sign, and they want it from heaven. The Pharisees and Sadducees come to test Jesus, and he answers that they can read a red sky but not the signs of the times. The only sign he offers is the sign of Jonah. Then he leaves them.\n\nOn the lake the disciples realize they forgot bread, and Jesus warns them about the yeast of the Pharisees and Sadducees. They think he is scolding them about lunch. Slowly they see he meant the teaching.\n\nAt Caesarea Philippi he asks who people say he is, and then who the disciples say he is. Simon Peter answers, “You are the Christ, the Son of the living God.” Jesus blesses him, calls him Peter, speaks of building his assembly on this rock, and promises the keys of the Kingdom of Heaven. Then he says he must suffer, be killed and be raised on the third day. Peter objects, and Jesus rebukes him. Whoever loses life for his sake will find it."
         },
         {
           "kind": "background",
-          "text": "Caesarea Philippi lay in the far north, near the foot of Mount Hermon. The meaning of the rock and the keys in verses 18 and 19 is one of the long-standing differences among Christians. Roman Catholics usually see Peter and his successors, many Orthodox and Protestant readers see Peter's confession or Peter as one among the apostles. Binding and loosing are also read in several ways. The assembly is the Greek word ekklesia, usually translated church. Verse 28 is read in several ways as well."
+          "text": "Caesarea Philippi lay in the far north, near the foot of Mount Hermon, far from Jerusalem. The meaning of the rock and the keys in verses 18 and 19 is one of the long-standing differences among Christians. Roman Catholics usually see Peter and his successors; many Orthodox and Protestant readers see Peter's confession, or Peter as one among the apostles. Binding and loosing are also read in several ways. The assembly is the Greek word ekklesia, usually translated church. Verse 28 is read in several ways as well."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/17",
       "chapter": 17,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-24",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Six days later Jesus takes Peter, James and John up a high mountain, where he is changed before them: his face shines like the sun and his clothes become white as light. Moses and Elijah appear and talk with him. Peter offers to build three tents. A bright cloud covers them and a voice says that this is the beloved Son and that they should listen to him. The disciples fall down in fear, and Jesus touches them and tells them to get up. He tells them not to speak of it until the Son of Man has risen, and says Elijah has already come in John the Baptizer.\n\nBelow, Jesus heals a boy that the disciples could not cure and speaks of faith like a mustard seed. He again says he will be killed and raised. In Capernaum he tells Peter to find a coin in a fish's mouth to pay the temple tax."
+          "text": "Six days later Jesus takes Peter, James and John up a high mountain, away from everyone. There he is changed before their eyes: his face shines like the sun, and his clothes turn white as light. Moses and Elijah are there, talking with him.\n\nPeter offers to build three tents. While he is still speaking, a bright cloud covers them, and a voice says that this is the beloved Son, and they are to listen to him. The three fall on their faces, afraid. Jesus touches them: “Get up, and don’t be afraid.” When they look up, only Jesus is there.\n\nComing down, he tells them to keep quiet until the Son of Man has risen, and says Elijah has already come in John the Baptizer. At the foot of the mountain he heals a boy the disciples could not cure, and speaks of faith like a mustard seed. He says again that he will be killed and raised. In Capernaum he sends Peter to find a coin in a fish's mouth for the temple tax."
         },
         {
           "kind": "background",
           "text": "Moses and Elijah stand for the law and the prophets, and both met God on a mountain (see Exodus 24 and 1 Kings 19). The tents may recall the Feast of Tabernacles. Tradition names Mount Tabor or Mount Hermon, but the text does not say which mountain. The boy is described as epileptic, and many modern readers ask how ancient accounts relate to medical conditions; the text itself speaks of a demon. Some copies lack verse 21. The temple tax was a yearly payment of half a shekel, based on Exodus 30."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/18",
       "chapter": 18,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-24",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "The disciples ask who is greatest in the Kingdom of Heaven. Jesus sets a child among them and says that unless they turn and become like children they will not enter, and that the one who humbles himself like this child is greatest. He gives a stern warning against causing little ones who believe in him to stumble. He uses strong language about cutting off a hand or foot that causes stumbling, and tells the story of the shepherd who leaves ninety-nine sheep to find one that is lost.\n\nHe then gives steps for when a brother sins: speak privately, then with one or two others, then tell the assembly. Where two or three gather in his name, he is among them. Peter asks how often to forgive, and Jesus says seventy times seven. He tells of a servant forgiven a huge debt who refuses to forgive a small one, and the king condemns him."
+          "text": "The disciples ask who is greatest in the Kingdom of Heaven, and Jesus does not answer with a name. He calls a little child and sets the child among them. Unless they turn and become like children, he says, they will not enter. Whoever humbles himself like this child is the greatest.\n\nThen his voice turns stern. Anyone who causes one of these little ones who believe in him to stumble would be better off with a millstone around the neck. He speaks sharply of cutting off a hand or a foot that causes stumbling. Then he tells of a shepherd who leaves ninety-nine sheep to find the one that wandered.\n\nHe gives steps for when a brother sins: speak alone, then bring one or two, then tell the assembly. Where two or three gather in his name, he is among them. Peter asks how often to forgive, and Jesus says seventy times seven. A servant forgiven a huge debt will not forgive a small one, and the king condemns him."
         },
         {
           "kind": "background",
           "text": "This is the fourth teaching section in Matthew and focuses on life together among the disciples. The language about cutting off a hand or an eye is a figure of speech for dealing seriously with what leads to sin, not a call to injure the body. Gehenna is described in verse 9 as a place of fire. Christians differ on how the steps in verses 15 to 17 apply in churches today. A talent was a very large sum of money and a denarius roughly a day's wage, so the contrast in the parable is great."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/19",
       "chapter": 19,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-24",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus leaves Galilee for Judea beyond the Jordan. Pharisees test him by asking if it is lawful to divorce a wife for any reason. He points back to creation, where a man and woman become one flesh, and says what God has joined people should not separate. When they ask about Moses allowing divorce, he says it was a concession because of hard hearts and that, except for sexual immorality, remarriage after divorce is adultery. The disciples react that marriage might not be wise, and Jesus speaks of those to whom a different calling is given.\n\nHe welcomes little children. A man asks what good thing he must do for eternal life, and Jesus points to the commandments and then says to sell his possessions and follow him. The man goes away sad. Jesus says it is hard for a rich person to enter the Kingdom, but with God all things are possible. Peter asks what the disciples will receive."
+          "text": "Jesus leaves Galilee for Judea beyond the Jordan, and crowds follow and are healed. The Pharisees come with a test: is it lawful to divorce a wife for any reason? He sends them back to the beginning, when God made them male and female and the two became one flesh. What God has joined, people should not tear apart. About Moses, Jesus says divorce was allowed because of hard hearts, and that remarriage after divorce, except for sexual immorality, is adultery. The disciples say perhaps it is better not to marry. Jesus speaks of those to whom another calling is given.\n\nThen children are brought to him, and he welcomes them. A man asks what good thing he must do for eternal life. Jesus points him to the commandments, then to selling his possessions and following. The man goes away sad. Jesus says it is hard for the rich to enter the Kingdom, but with God all things are possible. Peter asks what the disciples will receive."
         },
         {
           "kind": "background",
           "text": "Divorce was debated among Jewish teachers of the time, with some allowing it for many reasons and others only for serious ones (see Deuteronomy 24). Christians differ on how to read the exception clause in verse 9 and on remarriage, and many churches have different practices. This is a place where pastoral care matters. The text does not give counsel for individual situations. The image of the needle's eye has been explained in different ways, but the point is plainly that salvation cannot be earned. Verse 28 mentions twelve thrones for the twelve tribes."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/20",
       "chapter": 20,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-24",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus tells a parable about a master who hires workers for his vineyard at different times of the day, from early morning to the eleventh hour. At evening he pays everyone a denarius, starting with the last. Those hired first complain, but the master says he has done them no wrong and asks if they begrudge his generosity. The last will be first and the first last.\n\nOn the way up to Jerusalem Jesus tells the twelve a third time that he will be handed over, mocked, flogged, crucified and raised on the third day. The mother of James and John asks for her sons to sit at his right and left in his Kingdom. Jesus asks if they can drink his cup, and says it is not his to give. The other ten are angry. Jesus says that among them the great must serve, as the Son of Man came to serve and to give his life as a ransom for many. At Jericho he heals two blind men."
+          "text": "A man goes out early to hire workers for his vineyard, and they agree on a denarius a day. He goes out again at the third hour, the sixth, the ninth, and the eleventh, and each time finds people standing idle. He sends them in too.\n\nAt evening he pays them, starting with the last. Each of the last gets a denarius. Those hired first expect more, and they get a denarius too. They grumble. The master says he has done them no wrong. Is their eye evil because he is good? The last will be first and the first last.\n\nOn the road up to Jerusalem, Jesus tells the twelve a third time that he will be handed over, mocked, flogged, crucified and raised. The mother of James and John asks for places for her sons at his right and left. Jesus says those places are not his to give. The ten are angry. Among them, he says, the great must serve, as the Son of Man came to give his life as a ransom for many. At Jericho he heals two blind men."
         },
         {
           "kind": "background",
           "text": "A denarius was about a day's wage for a laborer. The hours are counted from sunrise, so the third hour is around nine in the morning and the eleventh hour is about five in the evening. Christians read the parable as a picture of God's grace, though they differ on the exact focus. The cup stands for suffering, as in Isaiah 51 and Matthew 26. The word ransom is read in several ways by Christians when they speak about the meaning of the cross. Jericho lies on the road up to Jerusalem."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/21",
       "chapter": 21,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-24",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "As Jesus nears Jerusalem he sends two disciples to bring a donkey and a colt. He rides into the city while crowds spread cloaks and branches and shout Hosanna to the son of David. Matthew says this fulfills a prophecy about a humble king. Jesus enters the temple and drives out those buying and selling and overturns the tables of the money changers, saying God's house is to be a house of prayer. He heals the blind and lame there, and children shout praise.\n\nThe next morning he curses a fig tree with leaves but no fruit, and it withers. He tells his disciples about faith and prayer. When priests and elders ask by what authority he acts, he asks about John's baptism and they will not answer. He tells the parables of two sons and of the tenants in the vineyard who kill the owner's son. The leaders realize he is speaking about them."
+          "text": "Near Jerusalem, on the Mount of Olives, Jesus sends two disciples for a donkey and her colt. If anyone asks, they are to say the Lord needs them. He rides into the city while the crowd spreads cloaks and branches before him and shouts, “Hosanna to the son of David!” Matthew says this fulfills a prophecy of a humble king on a donkey. The whole city asks who he is.\n\nIn the temple he drives out the buyers and sellers and overturns the tables of the money changers, saying God's house is to be a house of prayer. The blind and lame come to him there and are healed, and children keep shouting praise.\n\nNext morning he finds a fig tree with leaves but no fruit, and it withers. He speaks of faith and prayer. The priests and elders ask by what authority he acts, and he asks about John's baptism. They will not answer. He tells of two sons, and of tenants who kill a vineyard owner's son. The leaders see he means them."
         },
         {
           "kind": "background",
           "text": "Zechariah 9 is the prophecy behind the donkey, and Psalm 118 lies behind Hosanna and Blessed is he who comes in the name of the Lord. The temple was the center of worship in Jerusalem. The money changers exchanged coins for the temple tax. Passover crowds filled the city at this time. Many scholars read the fig tree as a symbolic act connected with the temple, and Christians differ on its exact meaning. The vineyard recalls Isaiah 5. The words about the Kingdom being taken away have been misused against Jews, but in the text they are addressed to leaders."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/22",
       "chapter": 22,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-24",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus tells a parable of a king who gives a wedding feast for his son. The invited guests refuse and some kill the servants, so the king sends soldiers, then invites everyone found on the roads. One guest without wedding clothing is cast out, and many are called but few chosen.\n\nThen come questions from different groups. The Pharisees and Herodians ask if it is lawful to pay taxes to Caesar. Jesus asks whose image is on the coin and says to give Caesar what is Caesar's and God what is God's. Sadducees, who deny the resurrection, ask about a woman who married seven brothers in turn. Jesus answers that in the resurrection they neither marry nor are given in marriage, and cites God's words to Moses. A lawyer asks which commandment is greatest, and Jesus names loving God and loving neighbor. Jesus then asks how the Christ can be David's son if David calls him Lord, and no one can answer."
+          "text": "A king gives a wedding feast for his son, and nobody invited will come. Some go to their farm or their business. Some seize his servants and kill them. The king sends soldiers, then tells his servants to invite everyone at the crossroads, bad and good. The hall fills. One guest has no wedding clothing and is thrown out. Many are called, Jesus says, but few chosen.\n\nThen the questions come, each meant as a trap. The Pharisees and Herodians ask if it is lawful to pay taxes to Caesar. Jesus asks whose face is on the coin, and says to give Caesar what is Caesar's and God what is God's. The Sadducees, who deny the resurrection, tell of a woman who married seven brothers in turn. Jesus says that in the resurrection they neither marry nor are given in marriage, and cites God's words to Moses. A lawyer asks which commandment is greatest, and Jesus names love of God and love of neighbor. Then he asks a question of his own, and no one can answer."
         },
         {
           "kind": "background",
           "text": "The Herodians supported the family of Herod and its rule under Rome, while many Pharisees disliked Roman taxes, so the question put Jesus in a trap. The Sadducees were a priestly group who accepted only the first five books of Moses, so Jesus answers from Exodus 3. Loving God comes from Deuteronomy 6 and loving neighbor from Leviticus 19. The question about David's son uses Psalm 110. The king burning a city may recall Jerusalem's later fall, which many scholars think is in view, though Christians read the parable in more than one way."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/23",
       "chapter": 23,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-24",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus speaks to the crowds and his disciples about the scribes and Pharisees, who sit in Moses' seat. He says to do what they teach but not what they do, because they tie heavy burdens on others and do their works to be seen. He tells his followers not to seek titles like Rabbi, because they are all brothers with one teacher, the Christ, and says the greatest among them will be a servant.\n\nHe then speaks a series of woes against the scribes and Pharisees, calling them hypocrites. They shut the Kingdom against people, make converts who are worse off, split hairs over oaths, tithe herbs while neglecting justice, mercy and faith, clean the outside of the cup, and are like whitened tombs. They build tombs for the prophets but are the heirs of those who killed them. He ends by lamenting over Jerusalem, wishing to gather her children like a hen gathers her chicks."
+          "text": "Jesus speaks to the crowds and his disciples about the scribes and Pharisees, who sit on Moses' seat. Do what they teach, he says, but not what they do. They tie heavy loads on other people's shoulders and will not lift a finger to help. Everything they do is meant to be seen. He tells his own followers not to seek titles like Rabbi, for they are all brothers with one teacher, the Christ. The greatest among them will be a servant.\n\nThen come the woes, aimed at hypocrites. They shut the Kingdom against people. They split hairs over oaths. They tithe mint, dill and cumin yet neglect “justice, mercy, and faith.” They clean the outside of the cup. They are like whitened tombs. They build tombs for the prophets, yet are heirs of those who killed them.\n\nThe chapter ends on grief. “Jerusalem, Jerusalem,” he says, wishing to gather her children as a hen gathers her chicks."
         },
         {
           "kind": "background",
           "text": "These are some of the harshest words of Jesus in the Gospels. They are spoken inside a Jewish debate, by a Jewish teacher to leaders of his own people. They must not be read as a verdict on all Pharisees or on the Jewish people, a misuse that has caused real harm. Phylacteries are small boxes with Scripture verses worn during prayer (see Deuteronomy 6). Woe is a cry of grief and warning. Abel and Zachariah stand for the first and last murders in the Hebrew Bible order (see Genesis 4 and 2 Chronicles 24)."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/24",
