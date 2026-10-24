@@ -22,6 +22,312 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:numbers/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A people who walked out of slavery are now counted like an army. It is the second year after Egypt, in the wilderness of Sinai, and the LORD tells Moses to take a census of every man twenty years old and up who can go to war. One head from each tribe stands with Moses and Aaron, and the names are given: Elizur, Shelumiel, Nahshon and nine more.\n\nThen the numbers roll out tribe by tribe. Reuben is counted at 46,500, Judah at 74,600, Dan at 62,700. The total is 603,550.\n\nOne tribe is left out. The LORD tells Moses not to count Levi. The Levites are set over the tabernacle, to carry it, care for it and camp around it, so that no wrath falls on the people. The chapter ends with Israel doing all that was commanded."
+        },
+        {
+          "kind": "background",
+          "text": "The book of Numbers takes its English name from these censuses. Israel has been at Sinai since Exodus 19, and now the camp is being organized for the march to the land. Many scholars debate how the large numbers should be understood, and the text itself does not explain them. The setting apart of the Levites ties to the laws of Leviticus. Christians and Jews read the lists as a record of every tribe and name being known to God."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Picture a camp arranged like a great square around the tabernacle. The LORD tells Moses and Aaron that each tribe must camp under its own standard, at some distance from the Tent of Meeting. On the east, toward the sunrise, stand Judah, Issachar and Zebulun. On the south are Reuben, Simeon and Gad. On the west are Ephraim, Manasseh and Benjamin. On the north are Dan, Asher and Naphtali.\n\nEach group has its prince and its numbers, and each camp's total is given: 186,400 for Judah's camp, 151,450 for Reuben's, 108,100 for Ephraim's, 157,600 for Dan's. When the camp moves, they march in order: Judah first, Reuben second, then the Tent of Meeting with the Levites in the middle, then Ephraim, and last Dan. The Levites are not counted among the other tribes. Israel does just as the LORD commanded."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses and Aaron, and this chapter shows how the tribes were to camp and march. It follows the census of Numbers 1. The Tent of Meeting stands at the center, so the camp is built around the presence of God. Many readers see in the order a sign that the people were not a crowd but a community with a place for everyone. The same order is repeated when they set out in Numbers 10."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter starts by naming Aaron's four sons, and then it recalls a loss: Nadab and Abihu died before the LORD when they offered strange fire in the wilderness of Sinai, and had no children. Eleazar and Ithamar carry on.\n\nThen the LORD makes a claim. He has taken the Levites from among Israel in place of all the firstborn, because on the day he struck the firstborn in Egypt he made every firstborn in Israel holy to himself. Moses counts the Levites by their three families, Gershon, Kohath and Merari, every male a month old and up: 22,000 in all. Each family gets a place to camp around the tabernacle and a share of its work.\n\nThen the firstborn of Israel are counted: 22,273. For the 273 who exceed the Levites, Moses collects five shekels apiece, and gives the money to Aaron and his sons."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses at Sinai. This chapter explains why the tribe of Levi serves at the sanctuary: they stand in place of the firstborn, who belonged to God after the exodus; see Exodus 13. The deaths of Nadab and Abihu are told in Leviticus 10. Many readers note that the arithmetic of the 273 shows the redemption was carried out exactly. The role of the Levites is later echoed in the New Testament, for example in Hebrews 7."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Someone has to carry the holy things, and this chapter says exactly who and how. The LORD tells Moses and Aaron to count the men of each Levite family from thirty to fifty years old. The sons of Kohath carry the most holy things, but they may not touch them or look on them. Aaron and his sons go in first when the camp moves, covering the ark with the veil and a cover of sealskin and a blue cloth. The table, the lamp stand and the altars are each wrapped in their own cloth.\n\nOnly then do the Kohathites come to carry, “lest they die.” The Gershonites carry the curtains and hangings. The Merarites carry the boards, bars, pillars and sockets. Counts follow for each family: 2,750, 2,630 and 3,200, 8,580 in all."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses and Aaron in the wilderness. The chapter is a work assignment for the Levites when the tabernacle moves, and it shows how seriously the holy things are treated: the Kohathites are protected by the rule that they must not see or touch them. Eleazar and Ithamar, Aaron's sons, supervise. In Numbers 7 the Merarites and Gershonites receive wagons. Christians have often read the care taken here as a picture of reverence before God."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The camp has a center, and the LORD dwells in it, so the chapter begins with a cleansing of the camp. Those with a skin disease, a discharge or uncleanness from a corpse are sent outside, and Israel does it. A person who wrongs another must confess and repay in full, adding a fifth.\n\nThen comes a hard case. A husband feels the spirit of jealousy, though there is no witness. He brings his wife to the priest with an offering of barley. The priest has her stand before the LORD, loosens her hair, and gives her holy water mixed with dust from the floor of the tabernacle, with a curse written and washed into it. She says “Amen, Amen.” If she is guilty, her body will swell and her thigh fall away. If she is innocent, she is free and will conceive."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses. The first part ties to the laws of Leviticus 13 to 15. The second part, often called the ordeal of jealousy, is one of the hardest in the Bible: only the wife is tested, and the text gives no matching rite for a husband. Many scholars see it as a way to protect a woman from violence by handing the case to God, since no human witness is available. Christians and Jews read it differently. For another case involving a woman accused, see John 8."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Some people in Israel set themselves apart for a time, and this chapter describes the vow. A man or woman may take a Nazirite vow to be separate to the LORD. For the days of the vow they drink no wine or strong drink, eat nothing from the grapevine, let no razor touch their head, and go near no dead body, not even for a father or mother. If someone dies suddenly nearby, the head is shaved and offerings are made, and the days start again.\n\nWhen the days are done, the Nazirite comes to the Tent of Meeting with a lamb, a ewe lamb, a ram and a basket of bread. The hair is shaved and burned on the fire of the peace offering.\n\nThe chapter ends with words still used in worship: “The LORD bless you, and keep you.”"
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses, and then tells Aaron and his sons how to bless Israel. The Nazirite vow is open to both men and women. Samson, in Judges 13, and Samuel, in 1 Samuel 1, are linked to similar vows, and Paul takes a vow in Acts 18. The blessing at the end is thought to be among the oldest pieces of text still in common use. Jews and Christians both use it in worship, and the LORD says it puts his name on his people."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The tabernacle is finished, anointed and made holy, and the leaders of Israel come with gifts. The twelve princes bring six covered wagons and twelve oxen. The LORD tells Moses to accept them and give them to the Levites. Gershon receives two wagons and four oxen, Merari four wagons and eight oxen. Kohath gets none, since their duty is to carry the holy things on their shoulders.\n\nThen, for twelve days, one prince each day brings the same offering for the altar: a silver platter of 130 shekels, a silver bowl of 70, a golden ladle of ten shekels full of incense, and a long list of animals. The chapter names each prince and each day, and repeats the gift every time. In the end the totals are added up. The chapter closes quietly: Moses goes into the Tent, and he hears the LORD speaking to him from above the mercy seat."
+        },
+        {
+          "kind": "background",
+          "text": "This is the longest chapter in the first half of Numbers, and its repetition has a purpose: every tribe is named and every gift is counted, so that none is forgotten or placed above another. The chapter looks back to the setting up of the tabernacle in Exodus 40. The wagons ease the work of the Levites described in Numbers 4. The last verse shows the purpose of it all, that God speaks to Moses from the mercy seat."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "First, light. The LORD tells Moses to say to Aaron that when he lights the lamps, the seven lamps shall give light in front of the lamp stand. Aaron does so. The lamp stand is of beaten gold, made on the pattern the LORD showed Moses.\n\nThen the Levites are cleansed for service. Water of cleansing is sprinkled on them, they shave their whole bodies, wash their clothes, and are presented before the Tent with the whole congregation gathered. The people lay their hands on the Levites, and Aaron offers them as a wave offering. The Levites then lay their hands on the heads of two bulls, one for a sin offering and one for a burnt offering. The LORD says again that he has taken them in place of the firstborn.\n\nAfter that they serve. The Levites begin at twenty-five and retire from the work at fifty, but still assist their brothers."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses. This chapter completes the setting apart of the Levites begun in Numbers 3, and the age for service differs from the thirty given in Numbers 4. Many readers think the difference reflects different kinds of work or a later practice, and the text does not settle it. The lamp stand recalls Exodus 25. The laying on of hands shows that the people themselves present the Levites to God. See Hebrews 7 for how the priesthood is read later."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A year after leaving Egypt, the LORD tells Israel to keep the Passover, and they do, in the wilderness of Sinai. But some men are unclean from touching a dead body, and they come to Moses and Aaron with a question: “Why are we kept back” Moses does not answer on his own. He says, “Wait, that I may hear what the LORD will command”.\n\nThe LORD gives a second chance. Anyone unclean or far away on a journey may keep the Passover one month later. But the person who is clean and nearby and simply fails to keep it is cut off. A foreigner who wishes to keep it may, under one statute.\n\nThe chapter then turns to the cloud over the tabernacle. When it rests, Israel camps, whether two days, a month or a year. When it lifts, they travel."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses in the wilderness of Sinai. The Passover is described in Exodus 12, and this is the first time it is kept after the exodus. The men's question leads to a new rule, a pattern seen elsewhere in Numbers when people bring a case before Moses. The cloud of fire and smoke shows how Israel was guided; compare Exodus 40. Many readers see in the closing verses a picture of trust, moving and resting at God's word."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Two silver trumpets are made, and they become the voice of the camp. Blown together, they call the whole congregation to the Tent of Meeting. One alone calls the princes. An alarm sends the eastern camps forward, and a second alarm the southern. The priests, Aaron's sons, blow them, and in war the sound will make Israel remembered before the LORD.\n\nOn the twentieth day of the second month in the second year, the cloud lifts, and Israel leaves Sinai for the first time. Judah goes first, then the others in the order set earlier. Moses asks his father-in-law Hobab to come along: “you can be our eyes.” Hobab says he will go home.\n\nThe ark goes ahead three days' journey. When it moves, Moses says, “Rise up, LORD,” and when it rests, “Return, LORD, to the ten thousands of the thousands of Israel.”"
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses, and the camp leaves Sinai, where Israel had stayed since Exodus 19. The marching order follows Numbers 2. The text does not say whether Hobab finally went; compare Judges 1 for a hint about his family. Moses' words over the ark are the best known part of the chapter, and are still prayed in some synagogues when the Torah scroll is carried. The march begins in order and hope, and the next chapter shows how quickly it frays."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The march is only days old when the complaints start. The people grumble in the LORD's ears, and fire burns at the edge of the camp until Moses prays. Then the hunger for meat begins. They weep: “Who will give us meat to eat?” They remember fish, cucumbers, melons, leeks, onions and garlic. All they have is manna.\n\nMoses is at the end of himself. “I am not able to bear all this people alone”. The LORD tells him to gather seventy elders, and takes some of the Spirit on Moses and puts it on them. They prophesy. Two men, Eldad and Medad, prophesy in the camp. Joshua wants them stopped, but Moses says, “I wish that all the LORD’s people were prophets”.\n\nThen the LORD sends quails. The people gather them greedily, and a plague strikes while the meat is still between their teeth."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses in the wilderness of Paran region, soon after leaving Sinai. The manna was first given in Exodus 16. This chapter shows leadership under strain: Moses asks to die, and God shares the burden among seventy elders. Moses' wish that all God's people be prophets is echoed in Joel 2 and Acts 2, where Christians see it fulfilled at Pentecost. The place names mark the cost: the text says they buried the people who lusted."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The trouble this time comes from inside Moses' own family. Miriam and Aaron speak against him because of the Cushite woman he had married. Then the real complaint comes out: “Has the LORD indeed spoken only with Moses? Hasn’t he spoken also with us?” The text adds a quiet aside: Moses was very humble, more than all others on earth.\n\nThe LORD calls the three of them to the Tent of Meeting and comes down in a pillar of cloud. He tells Aaron and Miriam that prophets receive visions and dreams, but with Moses he speaks mouth to mouth, plainly. When the cloud lifts, Miriam is leprous, white as snow.\n\nAaron pleads with Moses, and Moses cries out, “Heal her, God, I beg you!” She is shut outside the camp seven days, and the people wait for her before moving on."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses, Aaron and Miriam. The text does not say who the Cushite woman was, and readers have disagreed about it for centuries. The chapter is mainly about the place of Moses among the prophets, and Hebrews 3 later calls him faithful in God's house. Miriam's role as a prophet is noted in Exodus 15. The people's waiting for her shows she was valued. Some readers see in Moses' prayer a pattern of intercession."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "They are almost there. At Paran, on the edge of Canaan, the LORD tells Moses to send men to spy out the land, one leader from each tribe. The names are given, among them Caleb of Judah and Hoshea of Ephraim, whom Moses calls Joshua. Moses sends them with a list: Is the land good or bad? Are the people strong or weak? Are the cities camps or strongholds? “Be courageous,” he says, and bring some fruit.\n\nThey go the length of the land. At the valley of Eshcol they cut a single cluster of grapes so large that two men carry it on a staff. After forty days they return. The land flows with milk and honey, they say, but the people are strong and the cities fortified. Caleb says to go up at once. The others say, “We aren’t able” They saw the Nephilim, and felt like grasshoppers."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses, and the spies set out from the wilderness of Paran, near Kadesh. The land had been promised to Abraham, as in Genesis 15. The men give a report of fact, then a report of fear, and the text calls the second an evil report. The chapter sets up the crisis of Numbers 14. Deuteronomy 1 retells the story from Moses' own view. Christians have often read this story as a warning about unbelief; see Hebrews 3."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The people cry all night. They say they wish they had died in Egypt, and they decide to choose a leader and go back. Moses and Aaron fall on their faces. Joshua and Caleb tear their clothes and plead: the land is exceedingly good, and “the LORD is with us.” The crowd talks of stoning them, and the glory of the LORD appears at the Tent.\n\nThe LORD says he will strike them and make of Moses a greater nation. Moses pleads instead, appealing to what the LORD himself has said: slow to anger, abundant in loving kindness. The LORD pardons, yet the generation that refused will not enter the land. They will wander forty years, a year for each day of the spying. Caleb will go in. Their children will go in.\n\nThe people then try to attack anyway, without the ark, and are beaten back to Hormah."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses at Kadesh in the wilderness of Paran. This is a turning point in Numbers, since it explains why Israel spent forty years in the wilderness. Moses' prayer uses the words the LORD spoke about himself in Exodus 34. Psalm 95 and Hebrews 3 and 4 look back on this event as a warning. The text holds both forgiveness and consequence together, and Christians and Jews have both reflected on how they fit."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After the failure at Kadesh, the LORD speaks of a future: “When you have come into the land” The chapter gives rules for offerings made there, with fine flour, oil and wine measured out for each lamb, ram and bull. One law is to apply to the native-born and to the foreigner alike. The first of the dough is to be given as a wave offering.\n\nThere is a difference between sin done unwittingly, which can be atoned for with an offering, and sin done “with a high hand,” which despises the LORD's word and brings being cut off.\n\nThen a man is found gathering sticks on the Sabbath. He is held in custody, since no ruling has been given. The LORD says he must be stoned outside the camp, and it is done. The chapter ends with a gentler command: put blue-corded fringes on your garments, so you may see them and remember."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses, and this chapter looks past the forty years toward life in the land. The Sabbath had been commanded in Exodus 20 and 31. The case of the man gathering sticks is hard, and the text does not explain why his act is treated as a defiant one. The fringes, called tzitzit by Jews, are still worn, and Jesus' clothing is mentioned in Matthew 9 and Matthew 23. Christians read these laws in different ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Korah, a Levite, gathers 250 respected leaders and stands before Moses and Aaron. “You take too much on yourself, since all the congregation are holy”. Moses falls on his face. He tells Korah to bring censers with fire and incense to the LORD the next day, and the LORD will show who is holy. Dathan and Abiram refuse to come at all, and accuse Moses of making himself a prince.\n\nThe next day the glory of the LORD appears. Moses and Aaron plead for the people. Then the ground splits open and swallows Korah's household and goods alive, and fire consumes the 250. The people flee.\n\nBut by morning the congregation says, “You have killed the LORD’s people!” A plague begins. Aaron runs into the crowd with incense and stands between the dead and the living, and the plague stops."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses and Aaron, and this revolt tests the special place of the priests and of Moses. Korah's complaint sounds like a call for equality, and Moses answers that they seek the priesthood too. Many scholars see more than one complaint woven together here: one by Levites, one by Reubenites. Jude 11 mentions Korah as a warning. Christians and Jews read the story as being about the holiness of God and the danger of presumption."
+        }
+      ]
+    },
+    {
+      "id": "ai:numbers/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-24",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The LORD answers the quarrel about the priesthood with a sign. Moses is to collect a rod from each tribe's leader, twelve in all, and write each man's name on his rod. On the rod of Levi, Aaron's name. They are laid before the covenant in the Tent. The rod of the man the LORD chooses will bud.\n\nThe next morning Moses goes in. Aaron's rod has sprouted, budded, produced blossoms, and borne ripe almonds, all in a single night. Moses brings all the rods out, and each man takes his own.\n\nThe LORD says to put Aaron's rod back before the covenant, as a token against rebellion, so that the complaining will end and the people not die. But the people are afraid: “Behold, we perish! We are undone!” Everyone who approaches the tabernacle dies, they say, and ask if they will all perish."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD speaks to Moses, and this chapter ends the dispute begun in Numbers 16. The rod is kept as a lasting sign; Hebrews 9 mentions Aaron's rod that budded as being kept with the ark. The people's fear shows how heavy the experience of the holy has become for them, and the next chapters give the priests and Levites a duty to guard the sanctuary. Christians have often seen in the budding rod a sign of life from what seemed dead."
+        }
+      ]
     }
   ]
 }
