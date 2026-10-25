@@ -1,0 +1,87 @@
+{
+  "slug": "romans-12-2",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-10-25",
+  "verse": {
+    "book": "romans",
+    "chapter": 12,
+    "start": 2,
+    "end": 2
+  },
+  "hook": "You know “Don’t be conformed to this world”. But did you know the word for “transformed” is the one used for Jesus on the mountain?",
+  "story": "Picture a letter being written in Corinth. Paul does not hold the pen himself. Smith’s Bible Names Dictionary says the body of the letter was written at Paul’s dictation by Tertius, and places the writing in Corinth. Wikipedia adds that Romans was likely written while Paul was staying in the house of Gaius there.\n\nThe letter was going to Christians in Rome, a city Paul had not yet visited. The dictionary describes them as a mixed church of Jews and Gentiles, and says it was a Greek-speaking church. It also says Phoebe, a deaconess of the church at Cenchreae, was about to leave for Rome and probably carried the letter. Wikipedia notes that Jews had been expelled from Rome around AD 49 by an edict of Claudius, and that Nero later allowed them back.\n\nThe verse does not open the request. Paul begins it with “Therefore I urge you, brothers, by the mercies of God, to present your bodies a living sacrifice”. The command in verse 2 follows from those mercies.\n\nThe Greek verb for “be transformed” is metamorphoo, the word our word metamorphosis comes from. Thayer’s Greek lexicon, reproduced on Bible Hub, lists the very same verb for what happened to Jesus on the mountain, where his appearance was changed and he was resplendent with a divine brightness. It lists Romans 12:2 under the change of moral character for the better.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Smith’s Bible Names Dictionary, Romans, Epistle To The (Bible Gateway)",
+      "url": "https://search.biblegateway.com/resources/smiths-bible-names-dictionary/Romans-Epistle"
+    },
+    {
+      "title": "Wikipedia: Epistle to the Romans",
+      "url": "https://en.wikipedia.org/wiki/Epistle_to_the_Romans"
+    },
+    {
+      "title": "Thayer’s Greek Lexicon on metamorphoo (Bible Hub)",
+      "url": "https://biblehub.com/greek/3339.htm"
+    },
+    {
+      "title": "John Chrysostom, Homily 20 on Romans (New Advent)",
+      "url": "https://www.newadvent.org/fathers/210220.htm"
+    }
+  ],
+  "voices": [
+    {
+      "id": "chrysostom-form",
+      "name": "John Chrysostom",
+      "about": "Early church preacher, in his homily on Romans 12:2",
+      "words": "He says not change the fashion, but be transformed",
+      "source": {
+        "title": "John Chrysostom, Homily 20 on Romans (New Advent)",
+        "url": "https://www.newadvent.org/fathers/210220.htm"
+      }
+    },
+    {
+      "id": "chrysostom-renew",
+      "name": "John Chrysostom",
+      "about": "Early church preacher, on renewing oneself again each day",
+      "words": "Have you sinned today? Have you made your soul old? Despair not, despond not, but renew it by repentance",
+      "source": {
+        "title": "John Chrysostom, Homily 20 on Romans (New Advent)",
+        "url": "https://www.newadvent.org/fathers/210220.htm"
+      }
+    }
+  ],
+  "moment": "Paul is writing to people he has not met. He has just asked them to give their bodies to God, and now he names two ways of living: being pressed into the shape of this world, or being transformed as the mind is renewed.\n\nThe purpose is stated in the verse itself: “so that you may prove what is the good, well-pleasing, and perfect will of God.”",
+  "around": "The verses after it show what this renewed life looks like in a community: “Let love be without hypocrisy”, “Rejoice with those who rejoice. Weep with those who weep.” and “Don’t be overcome by evil, but overcome evil with good.” The chapter does not leave the renewing of the mind in the head. It follows it into the way people treat each other.",
+  "readings": "Many believers hear this verse as a call to guard what they let into their minds, and to fill them with Scripture and prayer. Others hear it first as a call to a different shape of life, lived with others, as the verses that follow suggest.\n\nThe early church preacher John Chrysostom read the word for this world as a fashion, something that looks like a lot and does not last, set against virtue as a real form. He also read the renewing as something repeated, since people sin and need to begin again.\n\nThese readings fit together. The verse can be a call to think differently and to live differently.",
+  "argued": "John Chrysostom, in a homily on this verse, noticed that Paul does not ask for a change of costume. [[chrysostom-form]] To him the ways of the world were a show and a mask, and virtue a form with a beauty of its own.\n\nHe also expected that people would fall short day after day, and he offered the verse as a comfort: [[chrysostom-renew]]",
+  "point": "Paul writes this verse after asking the Romans to answer the mercies of God with their whole lives, and the word he chooses for change is the one used of Jesus on the mountain. The renewing of the mind is a change that begins in mercy.",
+  "basis": [
+    {
+      "book": "romans",
+      "chapter": 12,
+      "start": 1,
+      "end": 2
+    },
+    {
+      "book": "romans",
+      "chapter": 12,
+      "start": 9,
+      "end": 9
+    },
+    {
+      "book": "romans",
+      "chapter": 12,
+      "start": 15,
+      "end": 15
+    },
+    {
+      "book": "romans",
+      "chapter": 12,
+      "start": 21,
+      "end": 21
+    }
+  ]
+}
