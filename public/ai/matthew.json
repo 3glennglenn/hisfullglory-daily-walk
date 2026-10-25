@@ -475,86 +475,91 @@
       "id": "ai:matthew/24",
       "chapter": 24,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-25",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "As Jesus leaves the temple, he tells his disciples that not one stone of its buildings will be left on another. On the Mount of Olives they ask when this will be, and what the sign of his coming and the end of the age is. Jesus warns them not to be led astray by those who claim to be the Christ. Wars, famines and earthquakes are only the beginning of birth pains. His followers will face hatred and persecution, many will stumble, and the Good News will be preached to all nations before the end.\n\nHe speaks of the abomination of desolation spoken of by Daniel, tells those in Judea to flee, and warns of great suffering and false christs. The Son of Man will come like lightning and gather his chosen ones. No one knows the day or hour. He urges the disciples to watch and be ready, using the days of Noah, the thief and the faithful servant."
+          "text": "Jesus is walking out of the temple when his disciples stop to show him its buildings. He answers with a shock: not one stone will be left on another. Later, sitting on the Mount of Olives, they come to him privately and ask when, and what the sign of his coming will be.\n\nHis first word is a warning. Be careful that no one leads you astray. Many will come saying, “I am the Christ,” and there will be wars, famines and earthquakes, and he calls all of it the beginning of birth pains. His followers will be hated, many will stumble, and the Good News will be preached to all nations before the end.\n\nHe speaks of the abomination of desolation that Daniel spoke of, and tells those in Judea to flee. Great suffering, false christs. Then the Son of Man will come like lightning and gather his chosen ones. No one knows the day or hour, so he asks them to watch, with the days of Noah, a thief in the night and a faithful servant as his pictures."
         },
         {
           "kind": "background",
           "text": "The temple was destroyed by the Romans in AD 70, and many scholars think this event is partly in view in the first part of the chapter. Christians differ widely on how to read the rest, especially on timing, the meaning of this generation in verse 34, and the sequence of events at the end. The abomination of desolation comes from Daniel 9, 11 and 12. The taken and the left behind in verses 40 and 41 are also read in different ways. This chapter is part of the fifth and last of the long speeches in Matthew."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/25",
       "chapter": 25,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-25",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "The speech on the Mount of Olives continues with three pictures. In the first, ten virgins go out with lamps to meet a bridegroom. Five are wise and bring extra oil. Five are foolish and do not. The bridegroom is delayed, and when he comes at midnight the foolish ones go to buy oil and are shut out. Jesus says to watch, because you do not know the day or hour.\n\nIn the second, a man going on a journey entrusts talents to three servants. Two put the money to work and double it, and are praised. The third buries his one talent, says he feared a hard master, and is called wicked and lazy and cast out.\n\nIn the third, the Son of Man comes in glory and separates the nations like sheep and goats. The King welcomes those who fed, clothed and visited the least of his brothers, and he sends away those who did not."
+          "text": "The night is still dark on the Mount of Olives, and Jesus keeps talking. He tells three stories.\n\nIn the first, ten young women go out with lamps to meet a bridegroom. Five are wise and bring extra oil. Five are foolish and bring none. The bridegroom is slow, and they all fall asleep. At midnight a cry goes up, and the foolish ones run to buy oil. While they are gone the door is shut, and the answer they get is that he does not know them. So, he says, watch.\n\nIn the second, a man leaving on a journey hands out talents to three servants. Two put the money to work and double it, and are praised. The third buries his one talent, says he was afraid of a hard master, and is called wicked and lazy.\n\nThe third is a throne. The Son of Man separates the nations like a shepherd with sheep and goats. The King welcomes those who fed, clothed and visited the least of his brothers, and sends away those who did not."
         },
         {
           "kind": "background",
           "text": "Weddings in the first century involved a procession at night, with friends meeting the bridegroom and escorting him with lamps. A talent was a very large amount of money, often reckoned as the pay of many years. The least of these my brothers in verse 40 is read in different ways: as any person in need, as fellow believers, or as followers sent out in mission. Christians differ, and all have taken the call to mercy seriously. Eternal punishment in verse 46 is also read in different ways, and Christians have held several views."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/26",
       "chapter": 26,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-25",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus tells his disciples that the Passover is two days away and that he will be delivered to be crucified, while the chief priests plot to arrest him. In Bethany a woman pours costly ointment on his head. The disciples complain of waste, but Jesus says she has prepared him for burial and that her act will be remembered. Judas Iscariot agrees to betray Jesus for thirty pieces of silver.\n\nAt the Passover meal Jesus says one of the twelve will betray him. He takes bread and says it is his body, and the cup and says it is his blood of the new covenant, poured out for many for the remission of sins. On the way to the Mount of Olives he says they will all fall away, and Peter insists he will not. In Gethsemane Jesus prays in anguish, and the disciples sleep. Judas arrives with a crowd and Jesus is arrested. Before Caiaphas, he is accused of blasphemy, and Peter denies him three times."
+          "text": "Two days before the Passover, Jesus tells his disciples he will be delivered up to be crucified, and the leaders are already plotting. In Bethany a woman pours expensive ointment over his head. The disciples call it waste. Jesus calls it a good work, says she has prepared him for burial, and says her deed will be remembered. Judas Iscariot goes to the chief priests, and they weigh out thirty pieces of silver.\n\nAt the table Jesus says one of the twelve will betray him, and each asks, “It isn’t me, is it, Lord?” He takes bread and says it is his body, and the cup, his blood of the new covenant. Peter swears he will never stumble.\n\nIn Gethsemane Jesus is deeply troubled and prays while his friends sleep. Judas arrives with a crowd and a kiss, and Jesus is taken. Before Caiaphas he is charged with blasphemy. In the courtyard Peter denies him three times, the rooster crows, and Peter weeps bitterly."
         },
         {
           "kind": "background",
           "text": "Passover remembers Israel's rescue from Egypt (see Exodus 12). The meaning of the bread and cup, and what Christians call the Lord's Supper or Communion, is understood in several ways among Catholics, Orthodox and Protestants. Gethsemane means oil press and was on the Mount of Olives. Caiaphas was the high priest and the council was the Jewish leadership of the time. The night trial and its legal details are discussed by historians. Blame for the death of Jesus has too often been placed on all Jews, which Christian churches now reject."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/27",
       "chapter": 27,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-25",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "In the morning the chief priests and elders bind Jesus and hand him to Pilate, the Roman governor. Judas feels remorse, returns the silver, and hangs himself. The priests use the money to buy a field to bury strangers. Pilate questions Jesus, who gives almost no answer. Pilate offers the crowd a choice between Jesus and Barabbas, a notable prisoner, and, urged on by the chief priests, they ask for Barabbas. Pilate's wife has had a troubling dream about Jesus. Pilate washes his hands and says he is innocent of this blood, and the crowd answers. He then has Jesus flogged and handed over to be crucified.\n\nSoldiers mock Jesus, and Simon of Cyrene carries his cross. At Golgotha he is crucified between two robbers. There is darkness from the sixth to the ninth hour, Jesus cries out in a loud voice, and he dies. The temple veil is torn, and the centurion says he was the Son of God. Joseph of Arimathaea buries him, and guards seal the tomb."
+          "text": "Morning comes, and Jesus is bound and handed over to Pilate, the Roman governor. Judas sees that Jesus is condemned and brings back the silver. “I have sinned in that I betrayed innocent blood.” The priests tell him to see to it himself. He throws the coins down in the sanctuary and hangs himself.\n\nPilate asks if he is the King of the Jews, and Jesus answers almost nothing. The crowd is offered Jesus or Barabbas, a notable prisoner. The chief priests and elders persuade the crowd to ask for Barabbas. Pilate washes his hands and says he is innocent of this blood, and the people answer. He has Jesus flogged and handed over to be crucified.\n\nSoldiers mock him, and Simon of Cyrene carries the cross. At Golgotha he is crucified between two robbers. Darkness covers the land, Jesus cries out in a loud voice and dies, and the temple veil tears in two. A centurion says he was the Son of God. Joseph of Arimathaea lays him in a new tomb, and a guard seals the stone."
         },
         {
           "kind": "background",
           "text": "Crucifixion was a Roman punishment, and only the governor could order it in Judea. Pontius Pilate ruled from AD 26 to 36, and outside writers also mention his execution of Jesus. Verse 25, the cry of the crowd, has been used for centuries to blame all Jews for the death of Jesus. That reading is a serious misuse that the text does not support, and churches today reject it. The cry My God, my God quotes Psalm 22. The raising of the saints in verses 52 and 53 is read in several ways."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:matthew/28",
       "chapter": 28,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-25",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "After the Sabbath, at dawn on the first day of the week, Mary Magdalene and the other Mary come to see the tomb. There is a great earthquake, and an angel rolls away the stone and sits on it, and the guards shake with fear. The angel tells the women that Jesus has risen as he said, shows them the place, and sends them to tell the disciples that he goes before them into Galilee. On the way Jesus meets them, they take hold of his feet and worship, and he tells them to send word to his brothers.\n\nSome of the guards report to the chief priests, who give them a large sum of silver to say the disciples stole the body. Matthew says this story is still told among the Jews. The eleven go to Galilee, where Jesus meets them on a mountain. Some doubt. He says all authority has been given to him, sends them to make disciples of all nations, baptizing and teaching, and promises, “I am with you always”."
+          "text": "The Sabbath is over. At first light Mary Magdalene and the other Mary go to look at the tomb. The ground shakes. An angel comes down, rolls the stone away and sits on it, and the guards shake with fear until they are like dead men.\n\nThe angel tells the women not to be afraid. Jesus is not here, for he has risen, just like he said. They are to tell the disciples that he goes before them into Galilee. They run with fear and great joy, and Jesus meets them on the way. They take hold of his feet and worship.\n\nThe guards report to the chief priests, who give them a large sum of silver to say the disciples stole the body. Matthew writes that the story is still told among the Jews.\n\nThe eleven go to a mountain in Galilee. They bow down, though some doubt. Jesus says all authority has been given to him, sends them to make disciples of all nations, and ends: “I am with you always, even to the end of the age.”"
         },
         {
           "kind": "background",
           "text": "Matthew ends his Gospel with what is often called the Great Commission. All four Gospels report the empty tomb and the women as first witnesses, but they differ in details such as who went and what was seen, and Christians have long compared them. The sealed tomb and the guard appear only in Matthew. The remark about the report spreading among the Jews refers to a dispute from the time of writing and should not be read as blaming all Jews. The Father, Son and Holy Spirit named together in verse 19 are central to Christian belief about the Trinity."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }

@@ -27,52 +27,55 @@
       "id": "ai:mark/1",
       "chapter": 1,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-25",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Mark begins with the beginning of the Good News of Jesus Christ, the Son of God. He cites Scripture about a messenger preparing the way, and John comes baptizing in the wilderness, calling people to repent for forgiveness of sins. John says one mightier is coming who will baptize in the Holy Spirit. Jesus comes from Nazareth and is baptized, the heavens part, the Spirit descends like a dove, and a voice calls him the beloved Son. The Spirit drives him into the wilderness for forty days of testing by Satan.\n\nAfter John is taken into custody, Jesus preaches in Galilee that the time is fulfilled and God's Kingdom is near. He calls Simon, Andrew, James and John from their nets. In Capernaum he teaches with authority and drives an unclean spirit out of a man in the synagogue. He heals Simon's mother-in-law and many others, prays in a quiet place, and then heals a man with leprosy."
+          "text": "There is no birth story here and no family tree. Mark starts with a sentence: the beginning of the Good News of Jesus Christ, the Son of God. Then comes a voice in the wilderness. John is baptizing at the Jordan, dressed in camel's hair, eating locusts and wild honey, and all Judea and Jerusalem go out to him, confessing their sins. Someone mightier is coming, he says, who will baptize in the Holy Spirit.\n\nJesus comes from Nazareth and is baptized. The heavens part, the Spirit comes down like a dove, and a voice says, “You are my beloved Son, in whom I am well pleased.” Immediately the Spirit drives him into the wilderness for forty days of testing by Satan.\n\nAfter John is taken into custody, Jesus goes to Galilee preaching that God's Kingdom is at hand. He calls Simon, Andrew, James and John from their nets. In Capernaum he teaches with authority and drives an unclean spirit out of a man in the synagogue. He heals many, prays in a quiet place, and touches and heals a man with leprosy."
         },
         {
           "kind": "background",
           "text": "Mark is usually seen as the earliest Gospel, often dated to around the time of AD 65 to 70. Tradition links it to John Mark and to the preaching of Peter, though many scholars treat the author as unknown. It is the shortest Gospel and moves quickly, often using the word immediately. The messenger passage combines lines from Exodus, Malachi and Isaiah. The unclean spirits recognize who Jesus is before the people do, and Jesus tells them to be quiet. Scholars call this theme the messianic secret."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/2",
       "chapter": 2,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-25",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Back in Capernaum, a crowd fills the house where Jesus is teaching. Four people carrying a paralyzed man open the roof and lower him down. Jesus sees their faith and tells the man his sins are forgiven. Some scribes think this is blasphemy, because only God can forgive sins. Jesus asks which is easier, to say sins are forgiven or to say get up and walk, and then heals the man to show that the Son of Man has authority on earth to forgive sins. Everyone is amazed.\n\nJesus calls Levi, a tax collector, and eats at his house with tax collectors and sinners. He tells the scribes and Pharisees that the healthy do not need a physician. When asked about fasting, he speaks of a bridegroom, cloth and wineskins. Pharisees object when his disciples pick grain on the Sabbath. He mentions David and says the Sabbath was made for man, not man for the Sabbath, and the Son of Man is lord even of the Sabbath."
+          "text": "The house in Capernaum is so full that nobody can get near the door. Four men arrive carrying a paralyzed friend, and they cannot get through the crowd. So they take the roof apart and let him down on his mat in front of Jesus.\n\nJesus sees their faith and says, “Son, your sins are forgiven you.” Some scribes think in their hearts that this is blasphemy, since only God can forgive sins. Jesus knows it and asks which is easier, to say sins are forgiven or to say, get up and walk. Then he tells the man to rise, and he does, and walks out in front of them all. The crowd is amazed.\n\nNext Jesus calls Levi from the tax office and eats at his house with tax collectors and sinners. When he is questioned, he says the healthy do not need a physician. Asked about fasting, he speaks of a bridegroom, cloth and wineskins. When the disciples pick grain on the Sabbath, he mentions David and says the Sabbath was made for man, not man for the Sabbath."
         },
         {
           "kind": "background",
           "text": "A typical house in Galilee had a flat roof made of beams, branches and packed earth, reached by an outside stair, which is how the men could open it. Levi is called Matthew in the First Gospel; the two names are usually taken to refer to the same person. Tax collectors were disliked because they worked for the Roman system and often took extra. The David story is told in 1 Samuel 21. Mark gives the name of the high priest as Abiathar, while the Old Testament names his father Ahimelech, and readers have explained this in different ways."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/3",
       "chapter": 3,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-12",
+      "written": "2026-10-25",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus enters a synagogue where a man has a withered hand. Some watch to see whether he will heal on the Sabbath so they can accuse him. He asks if it is lawful on the Sabbath to do good or harm, to save life or kill, and they are silent. He looks at them with anger, grieved at their hard hearts, and restores the man's hand. The Pharisees go out and begin plotting with the Herodians to destroy him.\n\nA large crowd follows Jesus to the sea from many regions. Unclean spirits call him Son of God, and he tells them not to make him known. He goes up a mountain and appoints twelve, to be with him and to be sent out to preach and to have authority over demons. His family come to seize him, saying he is insane. Scribes from Jerusalem say he has Beelzebul. He answers that a divided kingdom cannot stand, and warns about blaspheming against the Holy Spirit. His mother and brothers wait outside, and he says whoever does God's will is his brother, sister and mother."
+          "text": "In the synagogue there is a man with a withered hand, and people are watching Jesus to see whether he will heal on the Sabbath, so they can accuse him. Jesus tells the man to stand up, then asks the room: is it lawful on the Sabbath to do good or to do harm, to save a life or to kill? Nobody answers. He looks around at them with anger, grieved at their hard hearts, and tells the man to stretch out his hand. It is restored. The Pharisees walk out and begin plotting with the Herodians to destroy him.\n\nCrowds follow him to the sea, and unclean spirits cry out that he is the Son of God. He warns them not to make him known. On a mountain he appoints twelve.\n\nAt home his family come to seize him, saying he is insane. Scribes from Jerusalem say he has Beelzebul. He answers that a divided kingdom cannot stand. When his mother and brothers wait outside, he says that whoever does the will of God is his brother, sister and mother."
         },
         {
           "kind": "background",
           "text": "The Herodians were supporters of the ruling family of Herod, so an alliance with Pharisees against Jesus was unusual. Mark often places two stories together so that one explains the other. Here the family's concern frames the scribes' accusation. The list of the twelve differs a little from the lists in Matthew and Luke. The warning about blasphemy against the Holy Spirit is read in different ways, but Mark links it directly to the charge that Jesus had an unclean spirit. Christians have long said that those troubled by the passage should not take it as a sentence on themselves."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/4",
