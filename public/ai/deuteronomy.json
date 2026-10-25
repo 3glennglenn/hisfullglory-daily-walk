@@ -22,6 +22,204 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:deuteronomy/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A man is looking back. Moses stands beyond the Jordan in the fortieth year, in the eleventh month, and begins to speak to all Israel. These are the words of a leader who knows he will not cross the river.\n\nHe goes back to Horeb, where the LORD told the people they had stayed long enough at that mountain. He remembers sharing the load by appointing wise men as captains and judges, and telling them not to show partiality, because the judgment is God's.\n\nThen he comes to Kadesh Barnea. Twelve spies went in, brought back fruit, and said it was a good land. But the people would not go up. They murmured in their tents and said the LORD hated them. Moses told them not to be afraid and reminded them that the LORD carried them as a man carries his son. They did not believe.\n\nThe LORD swore that none of that generation would see the land, except Caleb. Moses himself is told he will not enter. When they tried to fight on their own, they were beaten back."
+        },
+        {
+          "kind": "background",
+          "text": "Deuteronomy is presented as Moses' farewell speeches on the plains of Moab. Tradition links the book to Moses, and many scholars think its final form is later. He is speaking to the children of those who left Egypt, retelling the story so they will choose differently. The Kadesh events are first told in Numbers 13 and 14. Here they are told in Moses' own voice, as a warning from one who was there."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "For many days the people walked in circles around Mount Seir. Then the LORD said: you have encircled this mountain long enough. Turn northward.\n\nThe next part is a lesson in borders. Edom belongs to the children of Esau, Moab to the children of Lot, and Ammon too. Israel is told not to contend with them or take any of their land, and to pay for food and water. The text says that for forty years the LORD has been with Israel, and they lacked nothing.\n\nThe long wait ends. It took thirty-eight years from Kadesh Barnea to the brook Zered, until all the men of war were gone, as the LORD swore.\n\nThen comes Sihon, king of Heshbon. Moses sent him words of peace and asked to pass through. Sihon refused, and the chapter says the LORD had hardened his spirit. Israel defeated him and utterly destroyed every inhabited city, with women and little ones."
+        },
+        {
+          "kind": "background",
+          "text": "Moses is still retelling the journey, now covering the years after Kadesh. The land of Edom, Moab and Ammon is treated as given by the LORD to other peoples, so Israel's own claim is limited to what it was given. The accounts of Sihon and Og are first told in Numbers 21. The destruction of whole cities is the most difficult part of this chapter, and Jewish and Christian readers have long struggled with it."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The road turns north, and a giant stands in the way. Og, king of Bashan, comes out with all his people to battle at Edrei. The LORD tells Moses not to fear him, because he is already delivered into their hand. Israel takes sixty cities. The text adds an odd detail: Og's iron bedstead was nine cubits long.\n\nMoses then recalls how he divided the new land among Reuben, Gad and half of Manasseh. Their men would cross the Jordan armed in front of their brothers, while wives, children and livestock stayed in the cities.\n\nThe chapter ends quietly. Moses begged the LORD to let him cross and see the good land beyond the Jordan. The answer is no: that is enough, speak no more of this. He may climb Pisgah and look in every direction with his own eyes, but Joshua will lead the people over. Moses is told to encourage him. So they stayed in the valley near Beth Peor."
+        },
+        {
+          "kind": "background",
+          "text": "This is the third chapter of Moses' opening speech on the plains of Moab. He is giving his people the history that leads to the moment they are in. Og and Sihon were told in Numbers 21, and the arrangement with the eastern tribes in Numbers 32. The personal plea of Moses is one of the most human moments in the book, and it is linked back to the events at Meribah in Numbers 20."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses turns from history to a plea. Listen, Israel, to the statutes and ordinances I teach you, so that you may live and go in and possess the land. Do not add to the word, and do not take away from it.\n\nHe asks them to remember Horeb, the day the mountain burned with fire to the heart of the sky, and the LORD spoke out of the fire. They heard a voice of words, but saw no form. Because they saw no form, they are warned never to make an image of anything, nor to worship sun, moon or stars.\n\nMoses says he himself must die in this land, and he warns that if Israel forgets and corrupts itself, they will be scattered among the nations. But from there, if they seek the LORD with all their heart and soul, they will find him. The LORD is a merciful God who will not forget the covenant.\n\nNo other people ever heard the voice of God out of the fire and lived. Three cities of refuge are set apart east of the Jordan."
+        },
+        {
+          "kind": "background",
+          "text": "Moses is speaking to the generation that stood at Horeb as children or was born after it. His main concern is faithfulness to the one God without images. The warning of scattering is read by many Jews and Christians as looking ahead to the exile, and the promise of return is read alongside Deuteronomy 30. The statement that the LORD is God and there is no one else is basic to later Jewish and Christian teaching on one God."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses calls all Israel together and says something surprising. The LORD did not make this covenant with our fathers, but with us, even us who are all here alive today. The mountain is not only in the past.\n\nHe recalls the day at Horeb, when the people were afraid of the fire and he stood between them and the LORD. Then the Ten Commandments are given, beginning with “I am the LORD your God, who brought you out of the land of Egypt, out of the house of bondage.” No other gods. No carved image. Do not misuse the name. Keep the Sabbath, and the text ties it to the memory of slavery in Egypt, so that servants and animals rest as well. Honor father and mother. “You shall not murder.” No adultery, theft, false testimony or coveting.\n\nThe people, terrified by the voice from the fire, ask Moses to go near and hear for them. The LORD says they have spoken well and wishes they would always have such a heart."
+        },
+        {
+          "kind": "background",
+          "text": "The Ten Commandments were first told in Exodus 20, and here Moses repeats them to a new generation on the plains of Moab. A few details differ from Exodus, such as the reason given for the Sabbath, and readers have noticed and discussed them. Jewish, Catholic, Orthodox and Protestant traditions divide and number the commandments in somewhat different ways. The commandments are read as the heart of the covenant."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses gives the people the words that Jews call the Shema. “Hear, Israel: The LORD is our God. The LORD is one.” Then comes the command that follows: love the LORD your God with all your heart, soul and might.\n\nThese words are not meant to stay in a scroll. They are to be on the heart, taught diligently to children, and talked about sitting at home, walking on the road, lying down and rising up. They are bound as a sign on the hand and frontlets between the eyes, and written on the door posts and gates.\n\nMoses looks ahead to a land of houses they did not build and vineyards they did not plant, and he warns about forgetting the LORD when they are full. When a son asks what these laws mean, the answer is a story: we were Pharaoh's slaves in Egypt, and the LORD brought us out.\n\nThey are told not to tempt the LORD as they did at Massah."
+        },
+        {
+          "kind": "background",
+          "text": "Moses is still speaking to Israel on the plains of Moab, now explaining what the commandments of chapter 5 ask of daily life. Jewish tradition has made verses 4 to 9 a daily prayer, and some Jews still wear and mount these words in small boxes. Jesus quotes the command to love God in Matthew 22, Mark 12 and Luke 10. Christians and Jews read the physical signs in different ways, some literally and others figuratively."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses looks ahead to a land full of nations, seven of them, greater and mightier than Israel. He tells the people what to do when the LORD delivers them up: utterly destroy them, make no covenant, show no mercy, and make no marriages with them. Break down their altars, dash their pillars, burn their engraved images. The reason given is that their sons would be turned to other gods.\n\nThen the chapter pauses on a surprise. Israel is a holy people, chosen not because they were many, for they were the fewest of all peoples, but because the LORD loves them and keeps his oath. He is the faithful God who keeps covenant to a thousand generations.\n\nMoses promises blessing for obedience and warns against fear: remember what the LORD did to Pharaoh. The nations will be cast out little by little."
+        },
+        {
+          "kind": "background",
+          "text": "Moses is preparing a nation for entering Canaan, and the language of total destruction is some of the hardest in the Bible. Many scholars note that such language was common in the ancient world and may be partly formal, and some point out that later books show the peoples were not wiped out. This text has been misused to justify violence against groups in later history, and Jewish and Christian readers have sharply rejected that use. Compare Deuteronomy 20 and Joshua 9 to 11."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Remember the way. Moses asks Israel to look back on forty years in the wilderness, and he says what they were for: that the LORD might humble them, test them, and know what was in their heart.\n\nHe tells them what hunger taught. The LORD fed them with manna, which neither they nor their fathers had known, so that they would learn “man does not live by bread only” in the wilderness. Their clothing did not wear out, and their feet did not swell. As a man disciplines his son, so the LORD disciplines them.\n\nThen Moses paints the good land ahead: brooks and springs, wheat, barley, vines, figs, pomegranates, olives and honey, with iron in the stones and copper in the hills. But he sees the danger of plenty. When you have eaten and built fine houses and your silver is multiplied, do not say that your own power got you this wealth. It is the LORD who gives power to get wealth.\n\nForgetting him and following other gods would end in perishing."
+        },
+        {
+          "kind": "background",
+          "text": "Moses is addressing the people just before the Jordan crossing. The wilderness is remembered here as a school as well as a hardship. Jesus quotes the line about bread when he is tempted in the wilderness in Matthew 4 and Luke 4. The warning about prosperity is a theme that appears across the book and again in the prophets."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Israel is about to cross the Jordan to face cities fortified up to the sky and the sons of Anak, and Moses tells them how it will go: the LORD himself goes over before them as a devouring fire.\n\nThen he turns the story against any pride. Do not say the LORD brings you in because of your righteousness. It is because of the wickedness of these nations, and to keep his oath to Abraham, Isaac and Jacob. You are a stiff-necked people.\n\nHe proves it with a memory. At Horeb he stayed on the mountain forty days and nights while the LORD wrote the tablets. Meanwhile the people made a molded calf. Moses came down, threw the two tablets, and broke them before their eyes. Then he fell down before the LORD for another forty days and nights and prayed, and the LORD listened.\n\nHis prayer rests on the LORD's own name: they are your people and your inheritance."
+        },
+        {
+          "kind": "background",
+          "text": "This is part of Moses' long address on the plains of Moab, retelling the golden calf of Exodus 32 to 34 from his own point of view. Notice that the reason given for the conquest is the wickedness of the nations and the LORD's promise, not Israel's merit. The statement about the nations' wickedness is a hard claim, and some readers have misused it. The prayer of Moses is also remembered in Psalm 106."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After the breaking comes the mending. The LORD tells Moses to cut two new stone tablets like the first and to make an ark of wood. He writes the same words on them, the ten commandments, and Moses puts them in the ark, where they remain.\n\nA short note about the journey and the death of Aaron at Moserah is set in parentheses, followed by the setting apart of the tribe of Levi to carry the ark. The LORD himself is their inheritance.\n\nThen the center of the chapter: “what does the LORD your God require of you,” The answer is to fear him, walk in his ways, love him, and serve him with all your heart and soul. All heaven and earth belong to him, yet he set his love on the fathers. Moses says to circumcise the foreskin of your heart.\n\nThe LORD does not respect persons or take bribes. He executes justice for the fatherless and the widow, and loves the foreigner. So love the foreigner, for you were foreigners in Egypt."
+        },
+        {
+          "kind": "background",
+          "text": "Moses is continuing his retelling of Horeb. The second tablets follow the broken ones of Deuteronomy 9, and the story is first told in Exodus 34. The phrase about the circumcision of the heart appears again in Deuteronomy 30, Jeremiah 4 and Romans 2. The command to love the foreigner is a clear ethical center in the middle of a book that also contains hard laws."
+        }
+      ]
+    },
+    {
+      "id": "ai:deuteronomy/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-25",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses speaks to the generation that saw it. Your children have not seen the discipline of the LORD, but your eyes have seen his great work: the signs in Egypt, the army drowned in the Red Sea, and the earth opening to swallow Dathan and Abiram.\n\nThen he describes the land ahead, and how different it is from Egypt, where the seed was watered by foot like a garden of herbs. This land is one of hills and valleys that drinks rain from the sky, a land the LORD cares for, with his eyes on it from the beginning of the year to the end.\n\nThe rain, though, depends on the people. If they listen and love, the early and latter rain will come, and they will eat and be full. If their hearts are deceived and they serve other gods, the sky will shut up.\n\nThe words are to be laid up in the heart, taught to children, and written on door posts. Moses sets before them a blessing and a curse, to be proclaimed at Mount Gerizim and Mount Ebal."
+        },
+        {
+          "kind": "background",
+          "text": "Moses is closing the opening part of his speeches before the detailed laws begin in chapter 12. The contrast between Egypt's irrigated fields and Canaan's rain-fed hills sets up the idea that the land's fruitfulness is tied to faithfulness. The blessing and curse on Gerizim and Ebal are carried out in Joshua 8. This chapter repeats the instructions about teaching children from Deuteronomy 6."
+        }
+      ]
     }
   ]
 }
