@@ -81,137 +81,145 @@
       "id": "ai:mark/4",
       "chapter": 4,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-26",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus teaches a large crowd from a boat on the Sea of Galilee. He tells the parable of a farmer whose seed lands on the road, on rocky ground, among thorns, and on good ground. Only the last kind produces a harvest, thirty, sixty or one hundred times over.\n\nPrivately, Jesus explains the parable to his followers: the seed is the word, and the four soils are four ways people respond to it. He adds sayings about a lamp that belongs on a stand, and two more pictures of God’s Kingdom: seed that grows by itself until harvest, and a mustard seed that becomes a large plant.\n\nAt evening a storm hits the boat while Jesus sleeps. The disciples wake him, he commands the wind and sea to be still, and they are left asking who he is."
+          "text": "A great crowd lines the shore of the Sea of Galilee, so many that Jesus steps into a boat and teaches from the water. His story begins with a farmer who went out to sow. Some seed lands on the road, and the birds eat it. Some lands on rocky ground and springs up fast, then is scorched for lack of root. Some falls among thorns and is choked. Some falls on good ground and yields thirty, sixty or one hundred times over.\n\nLater, alone with his followers, Jesus explains. The seed is the word, and the four soils are four ways people respond to it. He adds sayings about a lamp that belongs on a stand, and two more pictures of God’s Kingdom: seed that grows by itself until harvest, and a mustard seed that becomes a large plant.\n\nThen evening comes, and a storm fills the boat while Jesus sleeps on a cushion in the stern. The disciples wake him, asking if he does not care. He speaks to the sea: “Peace! Be still!” The wind stops, and they are left asking who he is."
         },
         {
           "kind": "background",
-          "text": "Mark is usually dated to around the time of the Roman-Jewish war in the first century. This is the first long block of Jesus’s teaching in the book. A parable is a short story that makes a point by comparison, and Mark says Jesus used them often. Verses 11 and 12 are hard, and Christians read why Jesus spoke in parables in different ways. The Sea of Galilee is a large lake known for sudden storms. Compare the stilling of the sea with Psalm 107:23 to 30."
+          "text": "Mark is usually dated to around the time of the Roman-Jewish war in the first century. Here is the first long block of Jesus’s teaching in the book. A parable is a short story that makes a point by comparison, and Mark says Jesus used them often. Verses 11 and 12 are hard, and Christians read why Jesus spoke in parables in different ways. The Sea of Galilee is a large lake known for sudden storms. Compare the stilling of the sea with Psalm 107:23 to 30."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/5",
       "chapter": 5,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-26",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Mark 5 holds three healing stories. Jesus crosses the lake to the region of the Gadarenes, where a man living among the tombs is controlled by many unclean spirits. They give their name as Legion and ask to be sent into a herd of pigs, which then rush into the sea. The man is found sitting, clothed and in his right mind. The local people ask Jesus to leave, and the man is told to go home and tell what the Lord has done.\n\nBack across the lake, a synagogue leader named Jairus asks Jesus to heal his dying daughter. On the way, a woman who had bled for twelve years touches his clothes and is healed. Jesus then goes to Jairus’s house, where the girl has died, takes her by the hand and tells her to get up."
+          "text": "The boat has barely touched the far shore when a man comes out of the tombs to meet Jesus. He lives there. No chains have held him, and night and day he cries out among the tombs and the mountains. Jesus asks his name, and the answer is “My name is Legion, for we are many.” The spirits beg to be sent into a herd of pigs on the hillside, and the herd rushes into the sea. The people come and find the man sitting, clothed and in his right mind, and they are afraid. They ask Jesus to leave. The man begs to go with him, but is told to go home and tell what the Lord has done.\n\nBack across the lake, Jairus, a synagogue leader, falls at Jesus’s feet for his dying daughter. On the way a woman who has bled for twelve years touches his clothes and is healed. Then word comes that the girl has died. Jesus takes her by the hand and says “Talitha cumi!” and the girl, twelve years old, gets up and walks."
         },
         {
           "kind": "background",
           "text": "The two stories of Jairus’s daughter and the bleeding woman are wrapped together, a pattern Mark uses elsewhere. Under Jewish law of the time, both a long-term bleeding and contact with a dead body made a person ritually unclean, so Jesus’s touch crosses a boundary in each case. Decapolis means ten cities, a region of mostly non-Jewish towns east of the Jordan, so the man’s message goes to a Gentile area. Tombs and pigs also mark this as unclean ground for a Jewish reader."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/6",
       "chapter": 6,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-26",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus returns to his hometown and teaches in the synagogue. People are astonished but take offense, and he does few miracles there. He then sends out the twelve in pairs with authority over unclean spirits, with instructions to travel light, and they preach, heal and cast out demons.\n\nMark pauses to tell how Herod Antipas had John the Baptist executed. Herod had imprisoned John for criticizing his marriage to Herodias, and at a birthday banquet he made a rash promise to her daughter, who asked for John’s head.\n\nThe apostles return, and a crowd follows Jesus to a quiet place. He feeds about five thousand men with five loaves and two fish. That night he walks toward the disciples on the lake and calms the wind. In Gennesaret people bring the sick to touch his clothes."
+          "text": "Jesus comes home. On the Sabbath he teaches in the synagogue, and the town is astonished and then offended: isn’t this the carpenter, Mary’s son? He does few miracles there. He sends the twelve out in pairs with authority over unclean spirits, taking almost nothing, and they preach, heal and cast out demons.\n\nThen Mark stops for a darker story. Herod Antipas had jailed John the Baptist for criticizing his marriage to Herodias. At his birthday banquet he made a rash promise to her daughter, and she asked for John’s head.\n\nThe apostles return, and Jesus says, “Come away into a deserted place, and rest awhile.” The crowd runs ahead. He has compassion on them, and when evening nears he tells the disciples, “You give them something to eat.” Five loaves and two fish feed about five thousand men. That night he walks toward the disciples on the lake, and the wind stops. At Gennesaret people bring the sick to touch his clothes."
         },
         {
           "kind": "background",
           "text": "This Herod is Herod Antipas, a son of Herod the Great, who ruled Galilee under Rome. He is called king here, though his official title was tetrarch. The shaking off of dust was a gesture of leaving a place that had refused a message. The feeding of the five thousand is the only miracle of Jesus told in all four Gospels. Compare John 6. The story echoes Moses and the manna in Exodus 16, and Elisha in 2 Kings 4:42 to 44."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/7",
       "chapter": 7,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-26",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Pharisees and scribes from Jerusalem notice that some disciples eat without the ritual hand washing that tradition required. Jesus answers that they honor the tradition of men but set aside God’s commandment, and he gives the example of a vow called Corban that excuses people from supporting their parents.\n\nHe then tells the crowd that nothing going into a person defiles them, but what comes out does. In private he explains this to the disciples, and Mark adds that this makes all foods clean. He lists evils that come from the heart.\n\nJesus travels to the region of Tyre, where a Gentile woman asks him to free her daughter from an unclean spirit. After a short exchange about children and dogs, he tells her the demon has gone. Back near Galilee he heals a deaf man who has trouble speaking."
+          "text": "Scribes and Pharisees have come from Jerusalem, and they are watching how the disciples eat. Some eat with unwashed hands, against the tradition of the elders. Jesus turns the question around. They honor tradition and set aside God’s commandment, and he gives the example of Corban, a vow that excuses a person from supporting father or mother.\n\nThen he calls the whole crowd and says that nothing going into a person defiles them, but what comes out does. In the house he explains it to his disciples, and Mark adds that this makes all foods clean. Evil thoughts, theft, murder, deceit and pride, he says, come from within, out of the heart.\n\nHe goes north to the region of Tyre. A Gentile woman falls at his feet for her little daughter. He speaks of children and dogs, and she answers, “Yes, Lord. Yet even the dogs under the table eat the children’s crumbs.” He tells her the demon has gone, and she finds her child on the bed.\n\nA deaf man is brought to him near Galilee. Jesus sighs, says “Ephphatha!” and the man speaks clearly."
         },
         {
           "kind": "background",
           "text": "The washings Mark describes were customs passed down by the elders, which many Pharisees treated as binding alongside the written law. Mark explains them for readers who may not be Jewish. Jesus’s words about food are read in different ways: many Christians see the end of the Old Testament food laws here, while others stress that his main point is about the heart. His reply to the Syrophoenician woman is difficult, and readers explain it differently. Tyre and Sidon were non-Jewish cities on the coast. See Leviticus 11 and Isaiah 29:13."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/8",
       "chapter": 8,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-26",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "A second crowd has been with Jesus three days with nothing to eat. He takes seven loaves and a few small fish, gives thanks, and feeds about four thousand, with seven baskets left over. The Pharisees then ask for a sign from heaven, and Jesus refuses.\n\nIn the boat he warns his disciples to beware of the yeast of the Pharisees and of Herod. They think he is talking about bread, and he reminds them of the two feedings and the baskets left over. At Bethsaida he heals a blind man in two stages.\n\nAt Caesarea Philippi he asks who people say he is, and who the disciples say he is. Peter answers, “You are the Christ.” Jesus then says he must suffer, be killed and rise. Peter objects and is rebuked, and Jesus calls his followers to take up their cross."
+          "text": "Three days with Jesus, and nothing left to eat. He has compassion on the crowd and will not send them home fasting. With seven loaves and a few small fish he gives thanks, and about four thousand eat and are filled, with seven baskets left over. The Pharisees then ask for a sign from heaven, and Jesus sighs deeply and refuses.\n\nIn the boat he warns his disciples about the yeast of the Pharisees and of Herod, and they think he means bread. He asks them to remember the baskets from the two feedings. At Bethsaida he heals a blind man in two stages. The man first says, “I see men, but I see them like walking trees” and then, at a second touch, sees everyone clearly.\n\nOn the road to Caesarea Philippi Jesus asks who people say he is, and who the disciples say. Peter answers, “You are the Christ.” Jesus begins to teach that he must suffer, be killed and rise. Peter begins to rebuke him and is rebuked in turn. Jesus calls his followers to take up their cross."
         },
         {
           "kind": "background",
           "text": "This chapter is the turning point of Mark. Before it the question is who Jesus is; after it, the focus moves toward Jerusalem and the cross. Christ is the Greek form of Messiah, meaning anointed one. Son of Man is Jesus’s usual way of speaking of himself, and it draws on Daniel 7. The healing of the blind man comes just before Peter’s confession, and many readers see a link between gradual sight and gradual understanding. Caesarea Philippi was a largely non-Jewish city north of Galilee."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/9",
       "chapter": 9,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-26",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus takes Peter, James and John up a high mountain, where he is changed in appearance and Moses and Elijah talk with him. A voice from a cloud says, “This is my beloved Son. Listen to him.” On the way down he tells them to keep this quiet until he has risen from the dead.\n\nAt the foot of the mountain a father brings his son, who has convulsions that Jesus’s disciples could not heal. The father says, “I believe. Help my unbelief!” and Jesus heals the boy.\n\nJesus again says he will be killed and rise, and the disciples do not understand. They argue about who is greatest, and he places a child among them. He then gives sayings about welcoming others, causing others to stumble, and being salted with fire."
+          "text": "After six days Jesus leads Peter, James and John up a high mountain, alone. There he is changed before their eyes, his clothes glistening white, and Elijah and Moses are talking with him. Peter, afraid and not knowing what to say, offers to build three tents. A cloud overshadows them and a voice says, “This is my beloved Son. Listen to him.” Then they see only Jesus. On the way down he tells them to say nothing until he has risen from the dead.\n\nAt the foot of the mountain a crowd surrounds the other disciples, who could not heal a father’s son. The boy has suffered since childhood. The father pleads, and when Jesus speaks of believing, he cries out with tears, “I believe. Help my unbelief!” Jesus heals the boy and raises him up by the hand.\n\nAgain Jesus says he will be killed and rise, and they do not understand. They argue about who is greatest, and he sets a child in their midst. Then come sayings on welcoming others, on causing little ones to stumble, and on being salted with fire."
         },
         {
           "kind": "background",
           "text": "The mountain scene is often called the Transfiguration. Moses and Elijah stand for the law and the prophets in Jewish thought. The boy’s symptoms are described in ways that some readers connect to epilepsy, but Mark presents the cause as an unclean spirit, and the passage gives no medical guidance. Verses 43 to 48 use strong hyperbole about hands, feet and eyes, and Christians differ on how literally to read the warnings about Gehenna, a valley near Jerusalem used as an image of judgment. Some early copies omit verses 44 and 46."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/10",
       "chapter": 10,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-26",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus teaches in Judea and beyond the Jordan. Pharisees test him with a question about divorce. He points back to creation, where God made them male and female, and says that what God has joined, no one should separate. In private he says more to the disciples. He then welcomes children and says the Kingdom belongs to such as these.\n\nA man asks what he must do to inherit eternal life. Jesus lists commandments and then tells him to sell what he owns, give to the poor and follow. The man leaves sad because he is rich. Jesus says it is hard for the rich to enter the Kingdom, but all things are possible with God.\n\nJesus predicts his death a third time. James and John ask for places of honor, and he teaches that greatness means serving. In Jericho he heals the blind beggar Bartimaeus."
+          "text": "Pharisees come to test him: is it lawful for a man to divorce his wife? Jesus points them back to creation, when God made them male and female, and says, “What therefore God has joined together, let no man separate.” The disciples turn away parents bringing children, and Jesus is moved with indignation: the Kingdom belongs to such as these.\n\nA man kneels and asks what he must do to inherit eternal life. Jesus lists commandments, and the man says he has kept them all. Jesus looks at him with love and says, “One thing you lack.” He is to sell what he has, give to the poor and follow. He goes away sorrowful, for he has great possessions. Jesus says it is hard for the rich to enter the Kingdom, yet all things are possible with God.\n\nOn the road up to Jerusalem he says a third time that he will be killed and rise. James and John ask for places of honor, and he teaches that greatness is serving. At Jericho a blind beggar, Bartimaeus, cries out, “Jesus, you son of David, have mercy on me!” and sees."
         },
         {
           "kind": "background",
           "text": "Divorce was debated among Jewish teachers of the time. Moses’s allowance refers to Deuteronomy 24:1 to 4. Christians differ today on how these words apply to divorce and remarriage, and the passage gives no legal or counseling advice. The needle’s eye saying is a vivid exaggeration, though some later writers tried to soften it. Verse 45 is a key verse for many Christians on the meaning of Jesus’s death, and traditions explain ransom in different ways. Jericho is on the road up to Jerusalem."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/11",
       "chapter": 11,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-26",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Near Jerusalem, Jesus sends two disciples to fetch a young donkey and rides it into the city. Crowds spread garments and branches on the road and shout “Hosanna!” He enters the temple, looks around, and leaves for Bethany.\n\nThe next day he curses a fig tree that has leaves but no figs. He then enters the temple and drives out those buying and selling, overturning the tables of the money changers. He says the temple was meant to be a house of prayer for all the nations, and the chief priests and scribes look for a way to destroy him. The next morning the disciples see the fig tree withered, and Jesus speaks about faith, prayer and forgiveness.\n\nLater, temple leaders ask by what authority he acts. He asks them about John’s baptism, and when they will not answer, he will not answer them."
+          "text": "Jesus sends two disciples to fetch a young donkey that no one has ridden, and rides it toward Jerusalem. People spread their garments on the road and cut branches from the trees, and cry out “Hosanna!” In the temple he looks around, and since it is evening he goes out to Bethany.\n\nThe next day he is hungry. He sees a fig tree with leaves but no figs, and he says that no one will ever eat fruit from it again. Then in the temple he throws out those who buy and sell, and overturns the tables of the money changers. He teaches that the temple was to be “a house of prayer for all the nations” and that they have made it a den of robbers. The chief priests and scribes look for a way to destroy him. By morning the disciples see the fig tree withered from the roots. Jesus says, “Have faith in God” and speaks of prayer and forgiveness.\n\nLater the temple leaders ask by what authority he does these things. He asks them about John’s baptism, and when they will not answer, neither will he."
         },
         {
           "kind": "background",
           "text": "Mark places the fig tree story on either side of the temple scene, so the two seem to explain each other, though readers differ on how. Money changers exchanged coins for the temple tax, and doves were sold for sacrifices. The temple Jesus clears is the Second Temple, which stood until the Romans destroyed it in the year 70. The quotation about the house of prayer comes from Isaiah 56:7, and the phrase den of robbers echoes Jeremiah 7:11. Hosanna is a cry from Psalm 118."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/12",
