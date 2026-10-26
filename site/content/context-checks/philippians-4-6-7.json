@@ -1,0 +1,71 @@
+{
+  "slug": "philippians-4-6-7",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-10-26",
+  "verse": {
+    "book": "philippians",
+    "chapter": 4,
+    "start": 6,
+    "end": 7
+  },
+  "hook": "You know “In nothing be anxious”. But did you know Paul wrote it to friends in a Roman city, while he was in custody?",
+  "story": "These words were not written from a quiet room. The letter says Paul is in custody, and the most likely city is Rome, around the year 62, though it is unclear which period of imprisonment the letter belongs to.\n\nThe people he writes to live in Philippi, a city with a history of soldiers. In 42 BC Antony and Octavian defeated Brutus and Cassius on the plain west of it, and the city was refounded as a Roman colony, where some of the victorious soldiers were settled. Paul is believed to have preached there for the first time on European soil.\n\nA few lines before our verses Paul names two women, Euodia and Syntyche, and urges them “to think the same way in the Lord”. And a few lines after, he thanks the church for a gift that reached him through Epaphroditus: “I have all things and abound. I am filled, having received from Epaphroditus the things that came from you”.\n\nSo the command to be anxious about nothing comes from a man in chains, to a church where two women are asked to agree, and in the same letter he tells them what they should do instead: bring everything to God, with thanksgiving.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Wikipedia: Epistle to the Philippians",
+      "url": "https://en.wikipedia.org/wiki/Epistle_to_the_Philippians"
+    },
+    {
+      "title": "Wikipedia: Philippi",
+      "url": "https://en.wikipedia.org/wiki/Philippi"
+    },
+    {
+      "title": "Jamieson, Fausset and Brown, Commentary on the Whole Bible (1871), Philippians (Christian Classics Ethereal Library)",
+      "url": "https://www.ccel.org/j/jfb/jfb/JFB50.htm"
+    },
+    {
+      "title": "John Chrysostom, Homily 14 on Philippians, translated in Nicene and Post-Nicene Fathers (New Advent)",
+      "url": "https://www.newadvent.org/fathers/230214.htm"
+    }
+  ],
+  "voices": [
+    {
+      "id": "chrysostom-medicine",
+      "name": "John Chrysostom",
+      "about": "Preacher of the fourth century, in his Homily 14 on Philippians",
+      "words": "Behold another consolation, a medicine which heals grief, and distress, and all that is painful.",
+      "source": {
+        "title": "John Chrysostom, Homily 14 on Philippians, translated in Nicene and Post-Nicene Fathers (New Advent)",
+        "url": "https://www.newadvent.org/fathers/230214.htm"
+      }
+    }
+  ],
+  "moment": "The verses sit in the middle of a run of short commands. Paul has just written “Rejoice in the Lord always!” and “Let your gentleness be known to all men. The Lord is at hand.” Then comes the turn: “In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God.”\n\nThe promise that follows is about what God does, not about what the reader manages: “the peace of God, which surpasses all understanding, will guard your hearts and your thoughts in Christ Jesus.”",
+  "around": "After the promise, Paul turns to what to think about: “whatever things are true, whatever things are honorable, whatever things are just”. A little further on he says he has “learned in whatever state I am, to be content in it”, and that he knows “the secret both to be filled and to be hungry”.",
+  "readings": "One reading takes the verses as a practical way through worry: name every request to God, and put thanksgiving beside the asking.\n\nAnother hears the peace as something larger than a calm feeling. It is a peace that stands guard, as the verse puts it, over hearts and thoughts.\n\nThe two readings are not rivals. One says what to do with worry, the other says what God gives in return.",
+  "argued": "In the fourth century the preacher John Chrysostom read the verse as a remedy for hard times. Of prayer with thanksgiving he said: [[chrysostom-medicine]]\n\nHe also heard in the phrase the peace of God something more specific than a feeling. For him it was the reconciliation God made with people through his Son, and that was the peace he saw standing guard over the believer.\n\nA man in custody, a city of old soldiers, two women asked to agree and a gift carried by Epaphroditus: the letter keeps its feet on the ground, and so does the advice in it.",
+  "point": "Paul does not tell the Philippians that nothing will trouble them. He writes from custody, and he tells them where to take what troubles them: to God, with thanksgiving, and he promises peace that guards.",
+  "basis": [
+    {
+      "book": "philippians",
+      "chapter": 4,
+      "start": 2,
+      "end": 9
+    },
+    {
+      "book": "philippians",
+      "chapter": 4,
+      "start": 11,
+      "end": 12
+    },
+    {
+      "book": "philippians",
+      "chapter": 4,
+      "start": 18,
+      "end": 18
+    }
+  ]
+}
