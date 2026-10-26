@@ -22,6 +22,132 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:joshua/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-26",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Moses my servant is dead. Joshua hears the news and the command in the same breath: now arise, go across this Jordan. The LORD gives him the land from the wilderness and Lebanon to the Euphrates and the great sea, and promises that no one will stand before him all his life. As I was with Moses, so I will be with you.\n\nThree times the LORD says it: be strong and courageous. Joshua is to keep all the law Moses commanded, not turning right or left. The book of the law is not to depart from his mouth, and he is to meditate on it day and night. The LORD is with him wherever he goes.\n\nJoshua then moves. He tells the officers to tell the people to prepare food, for in three days they cross. To the Reubenites, the Gadites and half of Manasseh, who settled east of the Jordan, he recalls what Moses said: your fighting men must cross armed and help their brothers.\n\nThey answer that they will go wherever he sends them, as they listened to Moses."
+        },
+        {
+          "kind": "background",
+          "text": "Joshua opens the section of the Bible often called the Former Prophets, which tells Israel's story from the land to the exile. The speaker is Joshua's new commander, the LORD, and the setting is the east bank of the Jordan after the long wilderness years. The words to be strong and courageous echo Deuteronomy 31. Joshua is described as Moses' servant, and the promise of the land goes back to Genesis 15. The tribes east of the Jordan are described in Numbers 32."
+        }
+      ]
+    },
+    {
+      "id": "ai:joshua/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-26",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Two spies slip into Jericho and end up in the house of a prostitute named Rahab. The king hears of it and sends word to bring them out. Rahab has already hidden them under stalks of flax on her roof, and she tells the king's men that the strangers left at dusk and could still be caught.\n\nThen she goes up to the roof and speaks to the spies. She has heard how the LORD dried up the Red Sea and what happened to Sihon and Og. Our hearts melted, she says, for the LORD your God is God in heaven above and on earth beneath. She asks them to swear to spare her father's house, since she dealt kindly with them.\n\nThey agree, and she lowers them by a cord through her window in the city wall. They give her a sign: a scarlet thread tied in the window, and everyone in her house must stay inside.\n\nShe ties it. The spies hide in the hills for three days and then report to Joshua that all the inhabitants melt away before them."
+        },
+        {
+          "kind": "background",
+          "text": "Rahab is an outsider who shows faith in the God of Israel. She appears again in Joshua 6, and the New Testament mentions her as an ancestor of Jesus in Matthew 1, and as an example of faith in Hebrews 11 and of works in James 2. Christians have read her lie to the king in different ways, and the text itself does not comment on it. Many readers see her story as a sign that outsiders could join Israel."
+        }
+      ]
+    },
+    {
+      "id": "ai:joshua/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-26",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Joshua rises early, and Israel camps by the Jordan, in the season when the river overflows all its banks. After three days the officers pass through the camp with instructions. When you see the ark of the covenant carried by the Levitical priests, leave your place and follow, keeping a space of about two thousand cubits, so that you will know the way, for you have not passed this way before.\n\nJoshua tells the people to sanctify themselves, for tomorrow the LORD will do wonders. The LORD tells Joshua that today he will begin to magnify him, so Israel will know that as he was with Moses, he will be with Joshua.\n\nThe priests carry the ark to the water's edge. As soon as their feet touch the river, the water coming down from above stands in one heap, far upstream at Adam, and the water below is cut off. The priests stand firm on dry ground in the middle of the Jordan while all Israel crosses over, near Jericho, until the whole nation has passed."
+        },
+        {
+          "kind": "background",
+          "text": "The crossing recalls the Red Sea in Exodus 14, and the next chapter says so directly. The ark is the symbol of the LORD's presence, and the people follow it as their guide. A twelve-man group, one from each tribe, is chosen in verse 12 and appears again in chapter 4. Some readers have noted that the damming of a river at the town of Adam has parallels in history, but the text describes the event as the LORD's act."
+        }
+      ]
+    },
+    {
+      "id": "ai:joshua/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-26",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "When all the nation has crossed, the LORD tells Joshua to choose twelve men, one from each tribe. Each is to take a stone from the middle of the Jordan, from the place where the priests' feet stood firm, and carry it to the camp for the night.\n\nJoshua explains. When your children ask in the future, What do you mean by these stones? you will tell them how the waters of the Jordan were cut off before the ark of the covenant. They are a memorial forever.\n\nThe twelve do it. Joshua also sets up twelve stones in the middle of the river, where the priests stood. The priests wait until everything is done, and then at the LORD's command they come up, and the waters return to their place and overflow the banks as before.\n\nOn the tenth day of the first month, Israel camps at Gilgal, and Joshua sets up the twelve stones there. He repeats the lesson for the children: the LORD dried up the Jordan as he did the Red Sea, so that all peoples may know his hand is mighty."
+        },
+        {
+          "kind": "background",
+          "text": "The stones are an early example of memory built into the landscape, and the question of the children echoes Exodus 12 and 13 and Deuteronomy 6. Gilgal becomes a base for Israel's early camps and appears in later chapters and in 1 Samuel. The date, the tenth day of the first month, falls four days before Passover, which the next chapter describes. About forty thousand armed men are mentioned in verse 13."
+        }
+      ]
+    },
+    {
+      "id": "ai:joshua/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-26",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The kings across the land hear that the Jordan was dried up, and their hearts melt. Israel stands at the edge of the first fight, and the LORD tells Joshua to stop and make flint knives. The generation born in the wilderness was never circumcised, and the sign of the covenant is now renewed. When it is done, they rest in the camp until they are healed.\n\nThe LORD says, Today I have rolled away the reproach of Egypt from you, and the place is called Gilgal. They keep the Passover on the fourteenth day, in the plains of Jericho, and the next day they eat the produce of the land. The manna stops. After forty years, the people eat the fruit of Canaan.\n\nThen Joshua looks up near Jericho and sees a man standing with a drawn sword. Are you for us, or for our enemies? he asks. No, the man says, I have come as commander of the LORD's army. Joshua falls on his face and worships. Take off your sandals, the man says, for the place where you stand is holy."
+        },
+        {
+          "kind": "background",
+          "text": "The scene with the commander echoes Moses at the burning bush in Exodus 3. The man's answer shows that the LORD is not on anyone's side so much as Israel is called to be on his. Many readers see the figure as an angel or as a visit of the LORD himself, and the text leaves it open. The manna began in Exodus 16, and its end marks a change of life. The circumcision rule goes back to Genesis 17."
+        }
+      ]
+    },
+    {
+      "id": "ai:joshua/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-26",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jericho is shut up tight. No one goes out, no one comes in. The LORD tells Joshua his plan, and it is not a siege. The soldiers are to march around the city once a day for six days, with seven priests carrying seven rams' horn trumpets before the ark. On the seventh day they march seven times, the priests blow, and the people shout, and the wall will fall down flat.\n\nJoshua gives the order, and the people must say nothing until he tells them to shout. For six days the trumpets sound and the army circles in silence. On the seventh, at dawn, they go around seven times. Then Joshua says, Shout, for the LORD has given you the city!\n\nThe wall falls. The city is devoted to the LORD, and everything that breathes in it is destroyed. Only Rahab and those in her house are saved, as the spies swore, and she lives in Israel to this day. Joshua lays a curse on anyone who rebuilds the city, and his fame spreads through the land."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter contains one of the hardest ideas in the Bible, the devoting of a city to destruction. Readers differ widely on how to understand it. Some see the language as ritual and exaggerated, as in similar ancient accounts, and some see it as a real act that Christians and Jews have found painful, and the text should not be used to justify violence today. The story of Rahab in chapter 2 stands next to it. Hebrews 11 recalls the fall of the wall as a work of faith."
+        }
+      ]
+    },
+    {
+      "id": "ai:joshua/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-26",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Joshua's army had just seen a wall fall, and now they lose a small battle. Israel sends about three thousand men against Ai, and they flee. Thirty-six are killed, and the hearts of the people melt and become like water.\n\nJoshua tears his clothes and lies on his face before the ark until evening, with dust on his head. Why, Lord GOD, did you bring us over the Jordan at all? he asks. What will you do for your great name? The LORD tells him to get up. Israel has sinned. Someone has taken some of the devoted things from Jericho, hidden them among his own goods, and Israel cannot stand until it is removed.\n\nThe next morning the lot narrows from tribe to family to household to man, and Achan is taken. Joshua asks him to confess. He says he saw a beautiful robe, silver and a wedge of gold, coveted them and buried them in his tent. They are found there. Achan and his family are brought to the valley of Achor and stoned, and a heap of stones is raised over him."
+        },
+        {
+          "kind": "background",
+          "text": "This is one of the hardest stories in Joshua. It shows a belief that the guilt of one person could affect the whole community, an idea that appears in Deuteronomy 24 along with the rule that children are not to die for their fathers, and readers have long asked how the two fit together. The text does not say whether Achan's family knew, and some readers note that the verbs in verse 25 are ambiguous. Joshua 8 continues with Ai."
+        }
+      ]
     }
   ]
 }
