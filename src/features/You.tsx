@@ -7,6 +7,7 @@ import { supabase } from "../supabase";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle } from "../ui/Screen";
 import { GiveFeature } from "../giving/GiveFeature";
+import { ShopFeature } from "./ShopFeature";
 import { dailyReminderOn } from "./Reminders";
 import { LegalLinks } from "./Settings";
 
@@ -47,6 +48,7 @@ export function You() {
     <section className="grouped-screen">
       <LargeTitle>You</LargeTitle>
       <GiveFeature />
+      <ShopFeature />
       <GroupedList>
         {session ? (
           <Row title={name || "Account"} detail={name ? "Account" : undefined} href="/profile" chevron />
@@ -76,9 +78,6 @@ export function You() {
         />
         <Row title="Daily reminder" value={reminder ? "On" : "Off"} href="/settings/reminders" chevron />
         <Row title="Privacy and your data" href="/settings#privacy" chevron />
-      </GroupedList>
-      <GroupedList title="Resources">
-        <Row title="Resources" href="/shop" chevron />
       </GroupedList>
       <GroupedList title="About" plain>
         <LegalLinks />

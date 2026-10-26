@@ -1,17 +1,20 @@
 ---
-// Home (UI-SPEC W1; founder decisions D-05, D-06, D-13): four parts. The newest published context
+// Home (UI-SPEC W1; founder decisions D-05, D-06, D-13): four parts, plus one calm shop band after the intro (2026-10-22). The newest published context
 // check on the cover, AI-written ones included and always labelled; then what HisFullGlory is,
 // said once, with the page's one filled "Open the app"; then the four layers that are never
 // mixed; then the eight topics to start with. The old "How it works", "Inside the app", the
 // Resources strip, the extra "Open the app" sections and "Join the beta" are gone (audit High).
 // The page title and description stay as they were: they carry search.
 import { launchTopics } from "../../../src/topics/graph.ts";
-import { appUrl } from "../config";
+// The prices are the app's: one list, so the site and the app cannot show different ones.
+import { products } from "../../../src/config.ts";
+import { appUrl, shopUrl } from "../config";
 import AiBadge from "../components/AiBadge.astro";
 import Bookcase from "../components/Bookcase.astro";
 import Cover from "../components/Cover.astro";
 import SponsorBlock from "../components/SponsorBlock.astro";
 import Base from "../layouts/Base.astro";
+import { resources } from "../data/resources";
 import { featuredChecks, publishedTopics } from "../lib/content";
 
 // The four layers, each with the sentence the founder approved for it (it was in "What you can
@@ -42,6 +45,13 @@ const kept = [
   "Your journal and private prayers stay on your own device.",
   "The community has rules, reporting and moderation.",
 ];
+
+// The shop band (founder, 2026-10-22): the three Bibles of the Shop page, small, each with the price the
+// app shows. Nothing from the shop sits next to "Start here".
+const bibles = resources.map((resource) => ({
+  ...resource,
+  price: products.find((product) => product.handle === resource.handle)?.price ?? "",
+}));
 
 // The newest published check leads, AI-written ones included (D-06). The site is rebuilt when the
 // daily routine publishes one. With none published the page keeps its old opening, no cover.
@@ -95,6 +105,39 @@ const topicHref = (id: string) => (onSite.has(id) ? `/topics/${id}` : `${appUrl}
       <p class="footnote">The HisFullGlory app is a beta web app. It opens in your browser.</p>
       <p class="footnote"><a class="plain-link" href="/beta">About the beta</a></p>
      </div>
+    </div>
+  </section>
+
+  <section class="block shop-band" aria-labelledby="shop-title">
+    <div class="wrap">
+      <h2 id="shop-title">Study Bibles for your walk</h2>
+      <ul class="bibles">
+        {
+          bibles.map((bible) => (
+            <li>
+              <a class="bible-card" href={`${shopUrl}/products/${bible.handle}`}>
+                <img
+                  src={`${bible.image.src}&width=240`}
+                  srcset={`${bible.image.src}&width=240 240w, ${bible.image.src}&width=480 480w`}
+                  sizes="(min-width: 48rem) 14rem, 5.5rem"
+                  width={bible.image.width}
+                  height={bible.image.height}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="bible-text">
+                  <span class="bible-title">{bible.title}</span>
+                  {bible.price && <span class="bible-price">{bible.price}</span>}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="actions shop-action">
+        <a class="button secondary" href={shopUrl}>Visit the shop</a>
+      </div>
     </div>
   </section>
 
@@ -270,6 +313,80 @@ const topicHref = (id: string) => (onSite.has(id) ? `/topics/${id}` : `${appUrl}
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+  }
+
+  /* The shop band: raised cards like the layers and the topics, no colour of its own. On a phone each Bible is
+     one row (a small cover, the title, the price); from 768px the three stand side by side. "Visit the shop" is
+     the quiet button, so the page keeps its one filled "Open the app". */
+  .shop-band h2 {
+    margin-bottom: var(--space-4);
+  }
+  .bibles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .bible-card {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 52px;
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .bible-card:hover {
+    border-color: var(--focus);
+  }
+  .bible-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    /* The pictures are shot on white; a white tile keeps them whole in Lamplight too. */
+    background: #ffffff;
+  }
+  .bible-text {
+    display: grid;
+    gap: var(--space-1);
+    overflow-wrap: anywhere;
+  }
+  .bible-title {
+    font-weight: 600;
+  }
+  .bible-price {
+    font-size: var(--text-footnote);
+    line-height: 1.38;
+    color: var(--muted);
+  }
+  .shop-action {
+    margin-top: var(--space-4);
+  }
+  @media (min-width: 768px) {
+    .bibles {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+    .bible-card {
+      grid-template-columns: minmax(0, 1fr);
+      align-content: start;
+      gap: var(--space-3);
+      height: 100%;
+    }
+    .bible-card img {
+      aspect-ratio: 4 / 3;
+    }
+  }
+  /* Raised cards in Lamplight like the others: the raised surface, no edge line. */
+  :global(:root[data-mode="lamplight"]) .bible-card {
+    border-color: transparent;
   }
 
   .layers-block h2,

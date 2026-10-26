@@ -41,13 +41,13 @@ export async function checkGive(browser, base) {
     const { context, page, problems } = await open(browser, base, "/you");
     try {
       const order = await page.locator("main > section > *").evaluateAll((els) => els.slice(0, 3).map((el) => el.tagName + "." + el.className));
-      assert.deepEqual(order, ["H1.large-title", "SECTION.give-feature", "SECTION.group"], "the Give card sits directly under the title, above the account group");
+      assert.deepEqual(order, ["H1.large-title", "SECTION.give-feature", "SECTION.shop-feature"], "the Give card sits directly under the title, the Shop card directly under the Give card");
       const card = page.locator(".give-feature");
       assert.equal(await card.locator("h2").innerText(), "Give where it helps most");
       assert.match(await card.innerText(), /Six pages of charities chosen by independent evaluators, from malaria nets to Christian relief\./);
       assert.match(await card.innerText(), /GiveWell Top Charities Fund, Against Malaria Foundation and GiveDirectly/);
       assert.equal(await page.locator('main a[href="/give"]').count(), 1, "Give is on You once, and the old plain row is gone");
-      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Give where it helps most", "Your walk", "Settings", "Resources", "About"]);
+      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Give where it helps most", "Study Bibles for your walk", "Your walk", "Settings", "About"]);
       const button = card.getByRole("link", { name: "See where to give", exact: true });
       const box = await button.boundingBox();
       assert.ok(box && box.height >= 44, "a 44px target");

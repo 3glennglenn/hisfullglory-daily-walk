@@ -563,6 +563,79 @@ try {
     }
   });
 
+  await check("the shop is prominent and calm (founder, 2026-10-22): Shop in the header and the phone menu, the primary Visit the shop on /resources, the Study Bibles band on the home in Light and Lamplight, nothing next to Start here", async () => {
+    // Header at 1280px: "Shop" replaces "Resources", same address, still six links.
+    let { context, page } = await open("/", { width: 1280 });
+    const nav = page.locator("header .main-nav a");
+    assert.deepEqual(await nav.allInnerTexts(), ["Bible", "Context checks", "Topics", "Articles", "Shop", "About"]);
+    assert.equal(await nav.filter({ hasText: "Shop" }).getAttribute("href"), "/resources", "old /resources links keep working");
+    await context.close();
+    // The phone menu shows it the same way, 44px tall.
+    ({ context, page } = await open("/", { width: 390 }));
+    await page.locator("header summary").click();
+    const link = page.locator("header details nav li:not(.menu-app) a", { hasText: "Shop" });
+    assert.equal(await link.getAttribute("href"), "/resources");
+    assert.ok((await link.boundingBox()).height >= 44);
+    await context.close();
+    // /resources is now the Shop page: H1, one primary button to the shop above the Bibles, each Bible keeps its button.
+    ({ context, page } = await open("/resources", { width: 390 }));
+    assert.equal(await page.locator("main h1").innerText(), "Shop");
+    assert.equal(await page.title(), "Shop | HisFullGlory");
+    const primary = page.locator("main a.button:not(.secondary)", { hasText: "Visit the shop" });
+    assert.equal(await primary.count(), 1, "one primary Visit the shop");
+    assert.equal(await primary.getAttribute("href"), "https://shop.hisfullglory.com");
+    const primaryBox = await primary.boundingBox();
+    const firstBible = await page.locator("main ul.list li").first().boundingBox();
+    assert.ok(primaryBox.y + primaryBox.height <= firstBible.y, "the button is above the three Bibles");
+    assert.ok(primaryBox.height >= 44);
+    const buttons = page.locator("main ul.list a.button", { hasText: "View in the shop" });
+    assert.equal(await buttons.count(), 3);
+    for (const href of await buttons.evaluateAll((list) => list.map((a) => a.getAttribute("href"))))
+      assert.match(href, /^https:[/][/]shop[.]hisfullglory[.]com[/]products[/][a-z0-9-]+$/);
+    await context.close();
+    // The home band, in Light and Lamplight, phone and desktop.
+    for (const [seed, label] of [[{}, "Light"], [{ "hfg-lamplight": "on" }, "Lamplight"]])
+      for (const width of [390, 1280]) {
+        ({ context, page } = await open("/", { width, seed }));
+        const band = page.locator("section.shop-band");
+        assert.equal(await band.locator("h2").innerText(), "Study Bibles for your walk");
+        const order = await page.locator("main section.block").evaluateAll((els) => els.map((el) => ["intro", "shop-band", "layers-block", "start"].find((c) => el.classList.contains(c))));
+        assert.deepEqual(order, ["intro", "shop-band", "layers-block", "start"], `${label} ${width}: the band sits after the intro and before the four layers`);
+        const cards = band.locator("a.bible-card");
+        assert.equal(await cards.count(), 3);
+        for (const card of await cards.all()) {
+          assert.match(await card.getAttribute("href"), /^https:[/][/]shop[.]hisfullglory[.]com[/]products[/][a-z0-9-]+$/);
+          assert.match(await card.innerText(), /[$][0-9]+[.][0-9][0-9] USD/, "each card shows its price");
+          assert.ok((await card.boundingBox()).height >= 52);
+        }
+        assert.match(await band.innerText(), /From [$]49[.]99 USD/);
+        const visit = band.getByRole("link", { name: "Visit the shop", exact: true });
+        assert.equal(await visit.getAttribute("href"), "https://shop.hisfullglory.com");
+        assert.equal(await visit.evaluate((el) => el.classList.contains("secondary")), true, "the page keeps its one filled button");
+        assert.equal(await page.locator("main a.button:not(.secondary)").count(), 1, "only Open the app is filled");
+        // Nothing from the shop sits next to the Start here topics.
+        assert.equal(await page.locator("section.start a[href*='shop.hisfullglory.com'], section.start img").count(), 0);
+        if (label === "Lamplight") {
+          const raised = await cards.first().evaluate((el) => ({ bg: getComputedStyle(el).backgroundColor, border: getComputedStyle(el).borderTopColor }));
+          const layer = await page.locator("section.start .topics a").first().evaluate((el) => getComputedStyle(el).backgroundColor);
+          assert.equal(raised.bg, layer, "a raised card, like the others");
+          assert.equal(raised.border, "rgba(0, 0, 0, 0)", "no edge line in Lamplight");
+        }
+        if (width === 1280) {
+          const tops = await cards.evaluateAll((list) => list.map((el) => el.getBoundingClientRect().y));
+          assert.ok(Math.max(...tops) - Math.min(...tops) < 2, "side by side from 768px");
+        }
+        const { scroll, width: client } = await overflow(page);
+        assert.ok(scroll <= client, `${label} ${width}: no sideways scroll`);
+        await context.close();
+      }
+    // 200 % text at 320px: the band holds.
+    ({ context, page } = await open("/", { width: 320, rootPx: 34 }));
+    const { scroll, width: client } = await overflow(page);
+    assert.ok(scroll <= client, "the band scrolls sideways at 320px and 34px");
+    await context.close();
+  });
+
   await check("the skip link is off-screen until focused, at a 34px root too", async () => {
     const { context, page } = await open("/", { width: 390, rootPx: 34 });
     const skip = page.locator("a.skip-link");

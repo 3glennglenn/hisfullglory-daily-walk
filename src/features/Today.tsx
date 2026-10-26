@@ -1,4 +1,5 @@
-import { Check } from "lucide-react";
+import type { MouseEvent } from "react";
+import { Check, ShoppingBag } from "lucide-react";
 import { navigate } from "../platform/router";
 import { usePlatform } from "../platform/store";
 import { contentFor } from "../data";
@@ -62,7 +63,25 @@ export function Today() {
 
   return (
     <section className="today">
-      <LargeTitle>Today</LargeTitle>
+      {/* The shop's quiet door (founder, 2026-10-22): a bag at the trailing end of the title row, tinted like the
+          other toolbar icons. It is a link because it goes to another screen; the shop never sits next to the
+          reader's prayers, so this is the only shop mark on Today. */}
+      <div className="today-head">
+        <LargeTitle>Today</LargeTitle>
+        <a
+          className="shop-bag"
+          href="/shop"
+          aria-label="Shop"
+          onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+            // Modifier and middle clicks are left to the browser (new tab, copy link).
+            if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            e.preventDefault();
+            navigate("/shop");
+          }}
+        >
+          <ShoppingBag aria-hidden="true" focusable="false" size={24} strokeWidth={2} />
+        </a>
+      </div>
       <p className="today-date">{dateLine(date)}</p>
       {/* Lamplight only (the CSS leaves both out in the light modes): a star for every day walked, and the same in words. */}
       <StarField walked={state.local.completedDates} today={date} />

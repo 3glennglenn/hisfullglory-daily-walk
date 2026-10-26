@@ -23,6 +23,7 @@ import {checkProfile} from "../tests/profile.browser.mjs";
 import {checkGoogle} from "../tests/google.browser.mjs";
 import {checkPushedScreens,checkSurfaces,checkTextSweep} from "../tests/remaining.browser.mjs";
 import {checkGive} from "../tests/give.browser.mjs";
+import {checkShop} from "../tests/shop.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 // Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
 const contentDir = "site/content/context-checks";
@@ -335,7 +336,7 @@ try {
           "the only filled button on the private view",
         );
         const mainText = await page.locator("main").innerText();
-        assert.ok(!/Resources|shop/i.test(mainText), "no Resources or shop link on Pray");
+        assert.ok(!/Resources|shop|study bibles/i.test(mainText), "no Resources or shop link on Pray");
         assert.equal(await page.locator('main a[href*="shop"]').count(), 0);
 
         // An update, in a sheet.
@@ -1077,7 +1078,7 @@ try {
       assert.equal(await page.locator("main h1").innerText(), "Page not found");
       // You: the sections of UI-SPEC A12, in order, and one way to each screen.
       await go("/you");
-      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Give where it helps most", "Your walk", "Settings", "Resources", "About"]);
+      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Give where it helps most", "Study Bibles for your walk", "Your walk", "Settings", "About"]);
       assert.match(await page.locator("main").innerText(), /Sign in\s+Join the community and keep your account safe\./);
       assert.match(await page.locator("main").innerText(), /Days walked\s+\d+/);
       assert.match(await page.locator("main").innerText(), /Daily reminder\s+Off/);
@@ -1091,7 +1092,7 @@ try {
         ["Daily reminder", "/settings/reminders"],
         ["Privacy and your data", "/settings#privacy"],
         ["See where to give", "/give"],
-        ["Resources", "/shop"],
+        ["Visit the shop", "/shop"],
       ]) {
         const row = page.getByRole("link", { name: new RegExp("^" + name) }).first();
         assert.equal(await row.getAttribute("href"), path, name);
@@ -1797,7 +1798,8 @@ try {
   await check("dialogs that replaced browser pop-ups: public contributions, public prayer updates, support requests (controlled SDK)",()=>checkDialogs(browser,base));
   await check("Journal, My Walk and Grow are pushed screens of You: Back to You, one large title, no eyebrow, no uppercase text (UI-SPEC D-10, A12)",()=>checkPushedScreens(browser,base));
   await check("Give: the card on You opens /give on page 1; the six pages change by tab, swipe and arrow keys; a card opens the outbound dialog with its host; nothing is loaded from the charities; 200 % text, the wide grid and Lamplight render",()=>checkGive(browser,base));
-  await check("Give and its policy, Resources, Circles, the not-found and crash screens and the install offer: shared primitives, one filled button, the words of A16 (UI-SPEC A12, A16, 9.3)",()=>checkSurfaces(browser,base));
+  await check("Shop: the bag on Today and the card on You open the Shop screen; product links go to shop.hisfullglory.com/products/<handle>; both looks, Lamplight, 200 % text, no sideways scroll; nothing on Pray or Community links to the shop",()=>checkShop(browser,base));
+  await check("Give and its policy, the Shop screen, Circles, the not-found and crash screens and the install offer: shared primitives, one filled button, the words of A16 (UI-SPEC A12, A16, 9.3)",()=>checkSurfaces(browser,base));
   await check("200 % text sweep over every app route at 390 and 320px: no sideways scroll, nothing clipped, controls 44px, tab labels on one line, the first screen holds the title and content, no bare Cancel, OK, Done or Close button (UI-SPEC 15.4, 15.9)",()=>checkTextSweep(browser,base,published));
   assert.deepEqual(errors, []);
   assert.deepEqual(consoleErrors, [], "no unexpected main-page console errors");

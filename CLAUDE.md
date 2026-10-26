@@ -1,7 +1,7 @@
 # HisFullGlory Daily Walk: working notes for Claude
 
 Read `AGENTS.md` first: its product, privacy, Scripture and migration rules still apply.
-This file adds the current state and how to work with the founder. Last updated 2026-10-21.
+This file adds the current state and how to work with the founder. Last updated 2026-10-26.
 
 ## Working with the founder
 
@@ -14,7 +14,16 @@ This file adds the current state and how to work with the founder. Last updated 
 ## Direction (decided)
 
 - The app and its community are the core. The website attracts and teaches. The Shopify
-  shop is a supporting "Resources" section, never placed next to prayers or sensitive topics.
+  shop is a supporting section that is now prominent, by the founder's decision of 2026-10-22
+  ("de shop moet veel meer prominent zijn ... maar niet de ui ux verneuken"): a shopping-bag
+  button at the end of Today's title row, a Shop card under the Give card on You, a Shop screen
+  (`/shop`), "Shop" in the website's header menu (the page keeps the address `/resources`), and
+  a "Study Bibles for your walk" band on the website home. It is still never placed next to
+  prayers, the community, topic pages, the journal, the walk flow or Scripture text, and never
+  next to the home's "Start here" topics. The app's tab bar stays at five tabs: Apple's HIG keeps
+  an iPhone tab bar to five, and a sixth would turn into a "More" tab that hides things.
+  Product pictures load from `cdn.shopify.com` on the website home and Shop page and in the app's
+  You and Shop screens; the privacy wording names all of them (`site/src/data/legal.ts`).
 - One English-language community. US online growth; the founder's Dutch network is the
   closed beta group. Dutch comes later, with a licensed Dutch Bible.
 - Study first, community second: Scripture with real context is the entry point.
@@ -202,7 +211,6 @@ chapters used by the launch topics.
 2. Community annotations on passages, built on existing Scripture-linked posts
    (`source_path`), not a new social system.
 3. Home and onboarding "study first": open a passage, read context, write a reflection.
-4. Rename the Shop entry to Resources, matched to study goals.
 
 ## Website: live on `hisfullglory.com` since 2026-10-13; plan in `docs/WEBSITE_PLAN.md`
 

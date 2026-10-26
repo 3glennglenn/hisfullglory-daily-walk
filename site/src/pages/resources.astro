@@ -5,15 +5,18 @@ import Base from "../layouts/Base.astro";
 ---
 
 <Base
-  title="Resources"
-  description="Study Bibles chosen to support your reading, grouped by study goal. Each one links to the HisFullGlory shop."
+  title="Shop"
+  description="Shop study Bibles chosen to support your reading, grouped by study goal. Each one links to the HisFullGlory shop."
 >
   <section class="section">
     <div class="wrap">
-      <h1>Resources</h1>
+      <h1>Shop</h1>
       <p class="lede">
         Study Bibles chosen to support your reading. Each one opens in our shop.
       </p>
+      <div class="actions top-action">
+        <a class="button" href={shopUrl}>Visit the shop</a>
+      </div>
 
       <ul class="grid list">
         {
@@ -64,6 +67,9 @@ import Base from "../layouts/Base.astro";
 <style>
   .lede {
     margin-top: 16px;
+  }
+  .top-action {
+    margin-top: 24px;
   }
   .list {
     list-style: none;

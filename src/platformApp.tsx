@@ -37,7 +37,7 @@ import { ProductCard } from "./features/LegacyWalk";
 import { TabBar, tabFor } from "./ui/TabBar";
 import { LamplightNotice, noticeText } from "./ui/LamplightNotice";
 import { LargeTitle, Toolbar } from "./ui/Screen";
-import { products } from "./config";
+import { config, products } from "./config";
 import { contentFor } from "./data";
 import { contextChecks } from "./context/data";
 import { localDate } from "./storage";
@@ -188,11 +188,14 @@ function App() {
       content = (
         <section className="grouped-screen">
           <Toolbar back="You" to="/you" />
-          <LargeTitle>Rooted in the Word.</LargeTitle>
-          <p className="screen-lede">Current price, stock and checkout are shown by the store.</p>
+          <LargeTitle>Shop</LargeTitle>
+          <p className="screen-lede">Study Bibles we recommend. Price, stock and checkout are on the HisFullGlory shop.</p>
           {products.map((p) => (
             <ProductCard key={p.handle} product={p} />
           ))}
+          <a className="button secondary shop-all" href={config.storeUrl}>
+            Visit the full shop
+          </a>
         </section>
       );
       break;

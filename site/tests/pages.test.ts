@@ -69,6 +69,35 @@ test("site copy follows the copy rules it can be checked against", () => {
   }
 });
 
+test("the header's Shop is the old Resources address, and the Shop page leads with one primary button to the shop (2026-10-22)", () => {
+  const item = mainNav.find((entry) => entry.href === "/resources");
+  assert.equal(item?.label, "Shop");
+  assert.ok(!mainNav.some((entry) => entry.label === "Resources"), "Resources is no longer a header word");
+  const html = read("/resources");
+  assert.ok(/<h1[^>]*>Shop<[/]h1>/.test(html), "the page's h1 is Shop");
+  assert.ok(/<title>Shop [|] HisFullGlory<[/]title>/.test(html), "the title says Shop");
+  assert.ok(/<meta name="description" content="Shop study Bibles/.test(html), "the description says shop and study Bibles");
+  const top = html.match(/<a class="button"[^>]*href="https:[/][/]shop[.]hisfullglory[.]com"[^>]*>\s*Visit the shop\s*<[/]a>/);
+  assert.ok(top, "a primary Visit the shop to the shop");
+  assert.ok(html.indexOf(top[0]) < html.indexOf("/products/"), "it comes above the three Bibles");
+});
+
+test("the home page has a Study Bibles band after the intro and before the four layers, and none beside Start here", () => {
+  const html = read("/");
+  const band = html.match(/<section class="[^"]*shop-band[^"]*"[\s\S]*?<[/]section>/)?.[0] ?? "";
+  assert.ok(band.includes("Study Bibles for your walk"), "the heading");
+  for (const resource of resources) {
+    assert.ok(band.includes(`${shopUrl}/products/${resource.handle}"`), `${resource.title} links to its product page`);
+    assert.ok(band.includes(resource.title), `${resource.title}: title`);
+  }
+  assert.equal([...band.matchAll(/class="bible-card"/g)].length, 3);
+  assert.equal([...band.matchAll(/class="bible-price"/g)].length, 3, "each card shows a price");
+  assert.ok(/Visit the shop/.test(band) && band.includes(`href="${shopUrl}"`));
+  assert.ok(html.indexOf("shop-band") > html.indexOf("block intro") && html.indexOf("shop-band") < html.indexOf("layers-title"), "after the intro, before the four layers");
+  const start = html.match(/<section class="[^"]*start[^"]*"[\s\S]*?<[/]section>/)?.[0] ?? "";
+  assert.ok(!start.includes("shop.hisfullglory.com") && !start.includes("cdn.shopify.com"), "nothing from the shop next to Start here");
+});
+
 test("every resource links to its product in the shop", () => {
   const html = read("/resources");
   for (const resource of resources)

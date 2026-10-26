@@ -2321,6 +2321,35 @@ html[data-text="large"] .segmented-scroll [role="radio"] {
 /* ==== Today and the cover (UI-SPEC 2, A1; src/features/Today.tsx, src/ui/Cover.tsx, src/ui/Badges.tsx) ====
    Structure and type of the signature block; the drawing of each look (gilt rule and ornaments, ribbon, lamp
    glow) follows in the next section. Only tokens: the two looks and the two modes change the colours. */
+/* The title row of Today: the large title and, at its trailing end, the shop bag (founder, 2026-10-22). The bag is a
+   44x44 target tinted --link like the toolbar's Back; its negative block margin cancels the 4px it is taller than the
+   title, so neither the title nor the context check below moves. The icon's edge lines up with the page margin. */
+.today-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: var(--space-2) 0 var(--space-4);
+}
+.today-head .large-title {
+  margin: 0;
+  min-width: 0;
+}
+.shop-bag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-block: calc((1.2 * var(--text-large-title) - 44px) / 2);
+  margin-inline-end: calc(-1 * var(--space-2) - 2px);
+  border-radius: var(--radius-md);
+  color: var(--link);
+}
+.shop-bag:hover {
+  background: var(--surface-2);
+}
 .today-date {
   margin: calc(-1 * var(--space-2)) 0 var(--space-5);
   font-size: var(--text-footnote);
@@ -2517,7 +2546,7 @@ html[data-text="large"] .cover {
   height: calc(env(safe-area-inset-top) + 36px + 1.2 * var(--text-large-title) + 1.38 * var(--text-footnote) + 1.47 * var(--text-body));
 }
 /* The title and the date leave the ribbon's column free. */
-:root[data-look="marked"] .today .large-title,
+:root[data-look="marked"] .today .today-head,
 :root[data-look="marked"] .today .today-date {
   padding-right: calc(var(--space-2) + 10px + var(--space-3));
 }
@@ -4872,6 +4901,95 @@ html[data-text="large"] .around-capsule {
   border-radius: var(--radius-pill);
 }
 
+/* The Shop card on You, directly under the Give card (founder, 2026-10-22). Same surface and rhythm as the Give card,
+   but its button is the outlined secondary one, so Give keeps the only filled button on the screen. The covers sit on
+   a light tile in every mode: a book photo is shot on white and must not be multiplied into the night page. */
+.shop-feature {
+  margin: 0 0 var(--space-6);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.shop-feature > h2 {
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.shop-feature > p {
+  margin: var(--space-2) 0 0;
+  overflow-wrap: anywhere;
+}
+.shop-feature-thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.shop-feature-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 3 / 4;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px var(--line);
+  overflow: hidden;
+}
+.shop-feature-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.shop-feature-thumb .book-placeholder {
+  min-height: 0;
+  gap: var(--space-1);
+  text-align: center;
+  font-size: var(--text-footnote);
+  color: #675a52;
+}
+.shop-feature > .button {
+  display: flex;
+  width: 100%;
+  margin-top: var(--space-4);
+  min-height: 52px;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+:root[data-mode="lamplight"] .shop-feature > .button {
+  border-radius: var(--radius-pill);
+  background: transparent;
+}
+
+/* The Shop screen: the product image sits on the same light tile, and "Visit the full shop" closes the list as a
+   full-width secondary link. */
+.grouped-screen .product-image {
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.grouped-screen .product-image img {
+  mix-blend-mode: normal;
+}
+.grouped-screen .product-copy .button {
+  min-height: 52px;
+}
+.shop-all {
+  display: flex;
+  width: 100%;
+  min-height: 52px;
+  margin: 0 0 var(--space-6);
+  text-align: center;
+}
+:root[data-mode="lamplight"] .shop-all,
+:root[data-mode="lamplight"] .grouped-screen .product-copy .button {
+  border-radius: var(--radius-pill);
+}
+
 /* ==== Plan 16: Lamplight is direction B's room (founder, 2026-10-20; sketches/direction-b) ====
    Only while data-mode="lamplight", in both looks. The light modes are untouched. The cover is no longer a leather
    block: no slab, no gilt rule, no corner ornaments, no ribbon. The words sit on the night page inside one soft pool of
@@ -4894,7 +5012,7 @@ html[data-text="large"] .around-capsule {
   display: none;
   content: none;
 }
-:root[data-mode="lamplight"] .today .large-title,
+:root[data-mode="lamplight"] .today .today-head,
 :root[data-mode="lamplight"] .today .today-date {
   padding-right: 0;
 }
