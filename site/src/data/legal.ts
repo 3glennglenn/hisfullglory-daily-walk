@@ -178,7 +178,7 @@ export const processors: Processor[] = [
     name: "Shopify",
     does: "Runs the shop at shop.hisfullglory.com and manages the DNS records of our domain.",
     receives:
-      "What you give the shop when you order. Product pictures on our Resources page and in the app's Shop tab load from Shopify, so Shopify also sees your IP address then. The shop has its own privacy policy, and your app account and your shop account are separate.",
+      "What you give the shop when you order. Product pictures on our home page and Shop page, and in the app's You and Shop screens, load from Shopify, so Shopify also sees your IP address then. The shop has its own privacy policy, and your app account and your shop account are separate.",
     where: "Set by Shopify. See the shop's own privacy policy.",
   },
   {
@@ -267,7 +267,7 @@ export const outboundHosts: OutboundHost[] = [
   // Written in the code.
   {
     host: "cdn.shopify.com",
-    purpose: "Product pictures on the Resources page and in the app's Shop tab.",
+    purpose: "Product pictures on the website's home page and Shop page, and in the app's You and Shop screens.",
     kind: "loaded by the page",
     processor: "shopify",
   },

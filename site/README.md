@@ -175,8 +175,9 @@ stops the build.
   `src/lib/content.ts`, AI-unreviewed ones included and labelled), with a bookcase of the six
   newest from 1024px. The label words come from `src/lib/editorial.ts`, which the app imports
   too, so the two cannot disagree. `site.sponsor` is `null`: the sponsor slot renders nothing.
-- The Resources page shows each product's first picture straight from Shopify's image
-  address (`cdn.shopify.com`), so a visitor's browser contacts Shopify on that page only.
+- The Shop page (`/resources`) and the home page's Study Bibles band show each product's first
+  picture straight from Shopify's image address (`cdn.shopify.com`), so a visitor's browser
+  contacts Shopify on those two pages only.
 - A topic page ends with a card that points to Circles in the app.
 - Copy rules: `docs/WEBSITE_PLAN.md`, section 5.
 

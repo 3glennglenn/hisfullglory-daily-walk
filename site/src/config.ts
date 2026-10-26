@@ -28,7 +28,8 @@ export const mainNav: NavItem[] = [
   { label: "Context checks", href: "/context-checks", ready: publishedChecks().length > 0 },
   { label: "Topics", href: "/topics", ready: publishedTopics().length > 0 },
   { label: "Articles", href: "/articles", ready: publishedArticles().length > 0 },
-  { label: "Resources", href: "/resources", ready: true },
+  // "Shop" is the founder's name for it (2026-10-22). The address stays /resources so old links keep working.
+  { label: "Shop", href: "/resources", ready: true },
   { label: "About", href: "/about", ready: true },
 ];
 
