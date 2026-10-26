@@ -256,7 +256,7 @@ export function ProductCard({
           href={`${config.storeUrl}/products/${product.handle}`}
           onClick={() => track("product_clicked", { product: product.handle })}
         >
-          View on HisFullGlory <ChevronRight size={16} />
+          View in the shop <ChevronRight size={16} />
         </a>
       </div>
     </article>

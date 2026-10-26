@@ -71,7 +71,7 @@ async function filledButtons(page) {
   });
 }
 
-// Task 2: Give and its policy, Resources, Circles, the not-found screen, the crash screen and the install offer.
+// Task 2: Give and its policy, the Shop screen, Circles, the not-found screen, the crash screen and the install offer.
 export async function checkSurfaces(browser, base) {
   // Back, one large title, no eyebrow, no uppercase, no button whose whole name is Cancel, OK, Done or Close.
   for (const [path, back] of [
@@ -95,11 +95,11 @@ export async function checkSurfaces(browser, base) {
       await context.close();
     }
   }
-  // Give and Resources are never placed next to prayer (CLAUDE.md shop rule): no link to either on Pray.
+  // Give and the shop are never placed next to prayer (CLAUDE.md shop rule): no link to either on Pray.
   {
     const { context, page } = await open(browser, base, "/pray");
     try {
-      assert.equal(await page.locator("main").getByText(/Resources|Give with intention|\/shop|\/give/).count(), 0, "no Give or Resources on Pray");
+      assert.equal(await page.locator("main").getByText(/Resources|Give with intention|Study Bibles|\/shop|\/give/).count(), 0, "no Give or shop on Pray");
       assert.equal(await page.locator('main a[href="/give"], main a[href="/shop"]').count(), 0);
     } finally {
       await context.close();
