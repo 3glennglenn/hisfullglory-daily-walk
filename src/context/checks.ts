@@ -25,6 +25,8 @@ export { aiUnreviewedCardLabel, aiUnreviewedLabel, aiUnreviewedNote, editorialNo
 
 export interface CheckRef { book: string; chapter: number; start: number; end: number }
 export interface CheckVoice { id?: string; name: string; about: string; words: string; source: { title: string; url: string } }
+/** Another verse that says the same thing, with a line on how it connects. */
+export interface CheckEcho { ref: CheckRef; note: string }
 export interface AppContextCheck {
   slug: string;
   /** "approved" by the founder, or "ai-unreviewed": written by an AI model, no person has checked it. */
@@ -44,6 +46,11 @@ export interface AppContextCheck {
   readings: string;
   argued?: string;
   point: string;
+  /** What happened next, what it means for the reader, and other verses (founder, 2026-10-27). The site requires
+   * them; the app shows them when a file has them. */
+  after?: string;
+  lesson?: string;
+  echoes: CheckEcho[];
   voices: CheckVoice[];
   sources: { title: string; url: string }[];
 }
@@ -89,6 +96,9 @@ export function toAppCheck(raw: unknown): AppContextCheck | null {
     readings: r.readings as string,
     ...(text(r.argued) ? { argued: r.argued } : {}),
     point: r.point as string,
+    ...(text(r.after) ? { after: r.after } : {}),
+    ...(text(r.lesson) ? { lesson: r.lesson } : {}),
+    echoes: Array.isArray(r.echoes) ? (r.echoes as CheckEcho[]).filter((echo) => echo?.ref && text(echo.note)) : [],
     voices: Array.isArray(r.voices) ? (r.voices as CheckVoice[]) : [],
     sources: Array.isArray(r.sources) ? (r.sources as AppContextCheck["sources"]) : [],
   };

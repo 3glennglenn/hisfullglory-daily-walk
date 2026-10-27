@@ -212,7 +212,7 @@ export function routineProblems(raw, { checks, queue, today }) {
   return problems;
 }
 
-const keyOrder = ["slug", "review", "drafted", "model", "written", "verse", "hook", "story", "storyStatus", "sources", "voices", "moment", "around", "readings", "argued", "point", "basis"];
+const keyOrder = ["slug", "review", "drafted", "model", "written", "verse", "hook", "story", "storyStatus", "sources", "voices", "moment", "around", "after", "readings", "argued", "point", "lesson", "echoes", "basis"];
 
 /** The draft as a file would hold it: review ai-unreviewed, written today, keys in the usual order. */
 export function prepareDraft(draft, { model, today }) {

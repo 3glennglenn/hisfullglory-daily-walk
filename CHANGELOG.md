@@ -1,5 +1,13 @@
 # Changelog
 
+## Context checks tell the whole arc: branch `context-story-arc` (2026-10-27)
+- Founder, after his John 21 video: "ik wil dat je dit ook in de context beschrijvingen zet en zo uitschrijft met de emotionele pull en lessen en refrences naar andere verses naast de andere manieren hoe we de context maken voeg dit ook toe daarnaast".
+- Every context check gains three parts next to the existing ones: `after` ("What happened next"), `lesson` ("What it means for you") and `echoes` ("Other verses that say it too": 2 to 4 short passages, shown with their WEB text and a note). The site requires them (`site/src/lib/content.ts`); the app shows them as screens when a file has them. Order: story, moment, around (site), what happened next, readings, argued, point, what it means for you, other verses.
+- New check `john-21-15-17` (AI-unreviewed, Claude Opus 5.5): the two fires of coals, the three questions, what became of Peter, with Augustine, Eusebius and Jerome as sourced voices. It is the site page the episode 2 video points to, and the model the daily routine now reads.
+- All earlier checks got the three parts. Approved texts were not changed; only the new parts, and `basis` or `sources` where a new part needed them.
+- The routine prompt and `scripts/context-checks.mjs` (key order, model files) follow; `site/README.md` describes the parts.
+- Built on `mt539-cheek-coat-mile` (Matthew 5:39, approved 2026-10-27), so merging this also brings that change.
+
 ## The shop becomes prominent: branch `shop-prominent` (2026-10-22 request, built 2026-10-26)
 - Founder: "de shop moet veel meer prominent zijn je kan het ze eigen shop sectie in de menu balk geven of ergens waar het heel visible is maar niet de ui ux verneuken". The tab bar stays at five tabs (Apple's HIG); the shop gets visible places instead.
 - App: Today has a shopping-bag button (lucide `ShoppingBag`, 44x44, named "Shop") at the end of the title row, tinted like the toolbar icons and not pushing the title or the context check down; it opens `/shop`. You has a Shop card directly under the Give card: "Study Bibles for your walk", "Hand-picked study Bibles from the HisFullGlory shop.", the three covers, and an outlined "Visit the shop" button (Give keeps the only filled button). The old Resources group and row are gone. The `/shop` screen is titled "Shop" with the lede "Study Bibles we recommend. Price, stock and checkout are on the HisFullGlory shop.", each product button reads "View in the shop", and "Visit the full shop" closes the list.

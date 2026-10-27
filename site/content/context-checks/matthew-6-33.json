@@ -59,15 +59,82 @@
   ],
   "moment": "Jesus has been teaching about giving, prayer and fasting, and then about treasure: “Don’t lay up treasures for yourselves on the earth”. He says that where your treasure is, there your heart will be also. Now he turns to the ordinary fears that sit under all of that: what we will eat, what we will drink, what we will wear.",
   "around": "The passage is built from small pictures. “See the birds of the sky”, he says, and “Consider the lilies of the field”. Then he asks, “Aren’t you of much more value than they?” He is not mocking worry. He is asking his listeners to look at something living and ask what it says about the one who made it.\n\nThe pictures end with a plain instruction: “Therefore don’t be anxious for tomorrow, for tomorrow will be anxious for itself.” The verse in the middle holds the turn. Instead of chasing the necessities, aim at God’s Kingdom, and the necessities are not forgotten.",
+  "after": "The disciples were soon asked to live this sentence. Jesus sent the twelve out to preach God’s Kingdom with no bread and no money, not even a second tunic. At the last supper, Luke records, he reminded them of it: “When I sent you out without purse, bag, and sandals, did you lack anything?” They said, “Nothing.” Then he told them that things were about to change, and that now whoever had a purse should take it.\n\nAfter Pentecost the first believers in Jerusalem lived the verse together. Those who owned land or houses sold them and laid the money at the apostles’ feet, and it was shared out as each one had need. Acts sums it up simply: “neither was there among them any who lacked”. In Acts, what was added came to them through one another’s hands.\n\nSeeking the Kingdom first did not mean an easy life. Paul, who gave his life to it, listed what it had cost him: “in hunger and thirst, in fastings often, and in cold and nakedness.” Yet when the church at Philippi sent him help, he wrote that he rejoiced greatly, and that he had learned to be content in every state, “both to be filled and to be hungry, both to abound and to be in need.”",
   "readings": "Readers have taken the verse in several ways, and they sit side by side here.\n\nAugustine, as the Wikipedia article on the passage notes, argued that it should be read plainly rather than as an allegory. For him the point was about order: the Kingdom is the good, and the needs of daily life are met on the way to it.\n\nSome hear a promise that God will meet the needs of those who put him first. Others stress that the verse is about where the heart is aimed, and that it does not say what any one person will receive or when.\n\nWhat the readings share is the word “first”: it names a priority, not a bargain.",
   "argued": "The verse has been sung, not only argued over. In 1971 Karen Lafferty was in a hard season: [[lafferty]] After a Bible study on this verse she wrote Seek Ye First, and it caught on at once. She says it has opened doors for her around the world.\n\nCenturies earlier, Augustine of Hippo heard the same verse as a question of order: [[augustine]] A song and an old commentary both treat the verse as a way to hold needs and calling together.",
   "point": "The verse does not tell anyone to stop caring about food, drink or clothing. Jesus says the Father knows these things are needed. What he moves is the order. The sources here point the same way: the Kingdom comes first, and daily needs are not ignored.",
+  "lesson": "If you lie awake doing sums, this passage was spoken to people like you. Jesus is not scolding anyone for having needs. He is talking to people who worried about food and clothes, which is to say, to almost everyone.\n\nSeeking first can be very practical. Before you check your balance or your calendar tomorrow, give the first minutes of the day to God. Ask what his Kingdom and his righteousness would look like in the day ahead: at work, at home, with the money you have. Then do the next sensible thing, and leave tomorrow for tomorrow.\n\nThis is not a bargain. The verse does not promise that putting God first will make life comfortable; Paul knew hunger and still sought the Kingdom. But you are not meant to carry the need alone. In Acts, the first believers’ needs were met through one another. If you have more than you need, you may be part of how someone else’s need is met. And if you are the one in need, asking for help is not a failure of faith.\n\nIf you do not share this faith, the passage still asks a fair question: what comes first in your life, and is it worth your heart?",
+  "echoes": [
+    {
+      "ref": {
+        "book": "luke",
+        "chapter": 12,
+        "start": 32,
+        "end": 32
+      },
+      "note": "In Luke’s telling, the same teaching turns tender: “Don’t be afraid, little flock, for it is your Father’s good pleasure to give you the Kingdom.” The Kingdom they are told to seek is one the Father wants to give."
+    },
+    {
+      "ref": {
+        "book": "1-peter",
+        "chapter": 5,
+        "start": 7,
+        "end": 7
+      },
+      "note": "A letter in Peter’s name gives the reason worry can be handed over: “casting all your worries on him, because he cares for you.”"
+    },
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 127,
+        "start": 2,
+        "end": 2
+      },
+      "note": "An old psalm warns against the anxious striving Jesus describes: “It is vain for you to rise up early, to stay up late, eating the bread of toil”. Work matters, but it is not what holds up a life."
+    }
+  ],
   "basis": [
     {
       "book": "matthew",
       "chapter": 6,
       "start": 19,
       "end": 34
+    },
+    {
+      "book": "luke",
+      "chapter": 9,
+      "start": 1,
+      "end": 6
+    },
+    {
+      "book": "luke",
+      "chapter": 22,
+      "start": 35,
+      "end": 36
+    },
+    {
+      "book": "acts",
+      "chapter": 2,
+      "start": 44,
+      "end": 45
+    },
+    {
+      "book": "acts",
+      "chapter": 4,
+      "start": 32,
+      "end": 35
+    },
+    {
+      "book": "2-corinthians",
+      "chapter": 11,
+      "start": 27,
+      "end": 27
+    },
+    {
+      "book": "philippians",
+      "chapter": 4,
+      "start": 10,
+      "end": 12
     }
   ]
 }

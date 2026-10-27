@@ -75,7 +75,10 @@ This file adds the current state and how to work with the founder. Last updated 
   respect for the faith. He leaves checking the facts to Claude: a moving claim that the
   sources do not carry is rewritten until it is true. A story therefore says what it
   rests on: the Bible itself, outside sources, or one reading that scholars dispute
-  (`site/README.md`). The founder approved the first eleven on 2026-10-13, after three
+  (`site/README.md`). Since 2026-10-27 every check also tells the whole arc, as his John 21
+  video does: "What happened next", "What it means for you" (a lesson that ends in an
+  invitation, never pressure) and "Other verses that say it too", with feeling where the text
+  gives it (`after`, `lesson`, `echoes`; model `john-21-15-17.json`). The founder approved the first eleven on 2026-10-13, after three
   rounds of feedback; they are on the site under `/context-checks`.
 
 ## Sign-in (since 2026-10-21, branch `google-signin`)

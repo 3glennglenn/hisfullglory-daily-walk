@@ -15,9 +15,11 @@
   "storyStatus": "scripture",
   "moment": "Jesus is in Jerusalem, in the middle of a long and tense public argument about who he is. Some who are listening want him arrested. Others, John says, have just begun to believe: “As he spoke these things, many believed in him.”\n\nIt is to these new believers that he speaks, and he does not flatter them. A moment of belief is not what he is after. He wants them to stay: “If you remain in my word, then you are truly my disciples.” The promise of freedom is the second half of that same sentence.",
   "around": "The promise hangs on the sentence before it: “If you remain in my word, then you are truly my disciples.” When his hearers say they have never been in bondage, he names the bondage he means: “everyone who commits sin is the bondservant of sin”. He ends: “If therefore the Son makes you free, you will be free indeed.”",
+  "after": "The conversation that began with new believers did not end in faith. As it went on, his hearers called Jesus a Samaritan with a demon. When he told them, “before Abraham came into existence, I AM”, they picked up stones to throw at him, and he went out of the temple. John tells it as one conversation, from belief to stones, and does not say which of the new believers were still standing there at the end.\n\nBelief that does not remain comes back later in the same Gospel. Even many of the rulers believed in him, John writes, but kept it quiet so that they would not be put out of the synagogue, “for they loved men’s praise more than God’s praise.”\n\nThe word truth returns on the day Jesus died. Standing before Pilate, he says he came into the world “that I should testify to the truth.” Pilate answers, “What is truth?”, and John records no reply. Having said it, Pilate went back out to the crowd.\n\nYet the Gospel does not end the story of remaining with failure. After the crucifixion two men who had kept their faith hidden stepped into the open. Joseph of Arimathaea was a disciple of Jesus, “but secretly for fear of the Jews”, and now he asked Pilate for the body. Nicodemus, “who at first came to Jesus by night”, brought about a hundred Roman pounds of myrrh and aloes. One had been afraid, the other had come in the dark. Now they took his body together and bound it in linen cloths with the spices.",
   "readings": "These words are quoted wherever people praise learning and free inquiry. In that use the truth means knowledge, and knowledge sets a mind free.\n\nJesus is speaking of something more personal. The truth is what he teaches, and the freedom is freedom from sin. Later in this Gospel he says of himself that he is the truth (John 14:6).\n\nChristians who have lived under oppression have heard a third note in the verse: a freedom no ruler can grant or take away. All three readings honor truth. The second is the one the passage itself gives.",
   "argued": "In the lobby of the CIA’s original headquarters building, this verse is fixed in stone in the old King James wording. The agency’s own history says that Allen Dulles, its fifth and longest-serving director, quoted it at the building’s dedication and insisted that it be set in stone there.\n\nThe California Institute of Technology put the same words on its seal: The truth shall make you free. In places like these the truth means knowledge, gathered and tested.\n\nPope John Paul II pressed the verse in another direction. In his 1993 encyclical Veritatis Splendor he wrote of [[jp2]], and taught that the open acceptance of truth is the condition for real freedom.\n\nKnowledge that frees the mind, moral truth that frees the will: in the passage itself Jesus offers something more personal still, a freedom given by the Son.",
   "point": "The truth in this verse is tied to a person and to a condition: remaining in the word of Jesus. The freedom is freedom from sin, and the Son is the one who gives it.",
+  "lesson": "Jesus did not tell his new believers that they had arrived. He told them to stay. That matters if your faith began with a strong moment and then went quiet, or if you once believed and slowly stopped listening. What he points to is not a feeling you have to get back. It is his word, and you can open it again today.\n\nIt also takes honesty. His hearers said they had never been slaves to anyone. You may know better: a habit you cannot break, a resentment you keep feeding, a fear that makes your choices for you. The passage does not tell you to try harder. It points you to the Son, and to the freedom he gives.\n\nSo stay with him for a while. Read John 8 slowly, then keep reading. Bring him the thing that holds you, by name. In this passage freedom is not promised to a single moment of belief, but to the one who remains. Joseph and Nicodemus kept their faith hidden at first, and still they came into the open.\n\nAnd if you do not share this faith, the passage still asks something fair of anyone: what are you not free from, and are you willing to say so?",
   "voices": [
     {
       "id": "jp2",
@@ -44,6 +46,35 @@
       "url": "https://www.vatican.va/content/john-paul-ii/en/encyclicals/documents/hf_jp-ii_enc_06081993_veritatis-splendor.html"
     }
   ],
+  "echoes": [
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 119,
+        "start": 45,
+        "end": 45
+      },
+      "note": "Long before Jesus, a psalmist tied freedom to staying close to God’s word: “I will walk in liberty, for I have sought your precepts.”"
+    },
+    {
+      "ref": {
+        "book": "romans",
+        "chapter": 6,
+        "start": 17,
+        "end": 18
+      },
+      "note": "Paul uses the picture Jesus used in John 8, slaves of sin set free: “Being made free from sin, you became bondservants of righteousness.” Freedom here means a new master, not no master."
+    },
+    {
+      "ref": {
+        "book": "galatians",
+        "chapter": 5,
+        "start": 1,
+        "end": 1
+      },
+      "note": "Paul writes to believers in danger of losing what they had been given: “Stand firm therefore in the liberty by which Christ has made us free”. As in John 8, freedom is Christ’s gift, and it is kept by staying."
+    }
+  ],
   "basis": [
     {
       "book": "john",
@@ -68,6 +99,30 @@
       "chapter": 14,
       "start": 6,
       "end": 6
+    },
+    {
+      "book": "john",
+      "chapter": 8,
+      "start": 48,
+      "end": 59
+    },
+    {
+      "book": "john",
+      "chapter": 12,
+      "start": 42,
+      "end": 43
+    },
+    {
+      "book": "john",
+      "chapter": 18,
+      "start": 37,
+      "end": 38
+    },
+    {
+      "book": "john",
+      "chapter": 19,
+      "start": 38,
+      "end": 40
     }
   ]
 }

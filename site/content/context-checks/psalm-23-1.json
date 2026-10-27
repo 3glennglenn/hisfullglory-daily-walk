@@ -33,6 +33,10 @@
     {
       "title": "Wikipedia: The Lord's My Shepherd",
       "url": "https://en.wikipedia.org/wiki/The_Lord%27s_My_Shepherd"
+    },
+    {
+      "title": "Wikipedia: Good Shepherd",
+      "url": "https://en.wikipedia.org/wiki/Good_Shepherd"
     }
   ],
   "voices": [
@@ -66,14 +70,75 @@
   ],
   "moment": "The psalm opens with one short sentence, and it is spoken in the first person: “The LORD is my shepherd; I shall lack nothing.” Then the picture unfolds from the shepherd outward: “He makes me lie down in green pastures. He leads me beside still waters.”\n\nLater the voice changes from talking about him to talking to him: “Even though I walk through the valley of the shadow of death, I will fear no evil, for you are with me.”",
   "around": "Right after the opening line come the pastures and the waters. BiblePlaces points out that sheep need water daily in the climate of Israel, and that the Hebrew behind “still waters” means waters of rest, so the water is not necessarily placid. The psalm ends with a house: “I will dwell in the LORD’s house forever.”",
+  "after": "If the heading is right, the man who first sang this was a shepherd who became a king. Another psalm says God “took him from the sheepfolds” to be “the shepherd of Jacob, his people”, and that he shepherded them “according to the integrity of his heart”. But not all who ruled after him lived up to the title. Through Ezekiel, God condemns “the shepherds of Israel who feed themselves”, and then makes a promise that sounds like this psalm: “I myself will be the shepherd of my sheep”.\n\nCenturies later Jesus saw a great crowd and “had compassion on them because they were like sheep without a shepherd”. He took the title for himself and added something no king had claimed for it: “The good shepherd lays down his life for the sheep.” The last book of the Bible brings the picture back to the water. Of those who came out of great suffering it says that the Lamb “shepherds them and leads them to springs of life-giving waters. And God will wipe away every tear from their eyes.”\n\nThe first Christians painted it. In the catacombs of Rome and on carved stone coffins, a young shepherd carrying a lamb became the most common of their symbolic images of Christ, some of them from the third century. The figure itself was borrowed from older pagan art. Once again, an old picture was given a new meaning.",
   "readings": "Many readers have heard in the opening line a promise of provision. Spurgeon heard in it a call to trust, as his words below show.\n\nThe psalm has also found a home in worship and in grief. Wikipedia reports that it is traditionally sung during the third Shabbat meal in Jewish practice and is commonly recited in the presence of a deceased person. Orthodox Christians typically include it in their prayers of preparation for receiving the Eucharist.\n\nIn Scotland the psalm became a song for a whole congregation. A metrical version of it first appeared in the Scots Metrical Psalter of 1650. In 1871, according to Hymnary.org, Jessie Seymour Irvine wrote the tune Crimond for it, in Crimond, as a composition class exercise. It was printed in 1872 in The Northern Psalter, credited at first to David Grant, a musician from Aberdeen. After a 1911 letter from her sister, many hymnals began crediting Irvine, though Wikipedia adds that some scholars still favor Grant. That setting was sung at the wedding of Princess Elizabeth and Philip Mountbatten in 1947.",
   "point": "This verse takes a word that kings used of themselves and gives it to God, and it says my: the shepherd it names is one the speaker can call their own.",
+  "lesson": "Notice what the psalm does not promise. It does not say you will never walk through the valley of the shadow of death. It says “you are with me” in the middle of it. The shepherd here is not the one who keeps every hard road away from you. He is the one who walks it with you, and brings you through to a table and a house.\n\n“I shall lack nothing” is not a promise that you will get everything you want. Sheep do not choose the pasture. It is the quieter trust that the one leading you knows what you need, and that “goodness and loving kindness” follow you all the way.\n\nTry praying the psalm slowly tonight, one line at a time, and stop at the line that catches. If you cannot yet say the first line with confidence, say it as a question. If you are grieving, you are holding words that many have spoken beside the dead.\n\nIf you do not share this faith, the psalm still gives words to a longing many people know: for someone who knows the way, who stays, and who leads to rest.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "isaiah",
+        "chapter": 40,
+        "start": 11,
+        "end": 11
+      },
+      "note": "In Isaiah’s message of comfort, the mighty God is a shepherd who will “gather the lambs in his arm, and carry them in his bosom.” His strength shows in how gently he leads."
+    },
+    {
+      "ref": {
+        "book": "john",
+        "chapter": 10,
+        "start": 14,
+        "end": 15
+      },
+      "note": "Jesus speaks of a shepherd and sheep who know each other: “I know my own, and I’m known by my own; even as the Father knows me, and I know the Father.”"
+    },
+    {
+      "ref": {
+        "book": "1-peter",
+        "chapter": 2,
+        "start": 25,
+        "end": 25
+      },
+      "note": "Peter writes to people who had wandered: “you were going astray like sheep; but now you have returned to the Shepherd and Overseer of your souls.” The shepherd also brings strays home."
+    }
+  ],
   "basis": [
     {
       "book": "psalms",
       "chapter": 23,
       "start": 1,
       "end": 6
+    },
+    {
+      "book": "psalms",
+      "chapter": 78,
+      "start": 70,
+      "end": 72
+    },
+    {
+      "book": "ezekiel",
+      "chapter": 34,
+      "start": 1,
+      "end": 16
+    },
+    {
+      "book": "mark",
+      "chapter": 6,
+      "start": 34,
+      "end": 34
+    },
+    {
+      "book": "john",
+      "chapter": 10,
+      "start": 11,
+      "end": 11
+    },
+    {
+      "book": "revelation",
+      "chapter": 7,
+      "start": 14,
+      "end": 17
     }
   ]
 }

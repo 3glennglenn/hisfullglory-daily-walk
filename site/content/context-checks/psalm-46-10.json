@@ -37,9 +37,11 @@
   ],
   "moment": "This psalm is a song for a whole people to sing together, and for most of its length the singers do the talking: “God is our refuge and strength, a very present help in trouble.”\n\nThen, near the end, the voice changes. God himself speaks, and he is not speaking only to the singers. He addresses the raging world around them: “I will be exalted among the nations. I will be exalted on the earth.” And the people answer with the line that closes the psalm: “The LORD of Armies is with us. The God of Jacob is our refuge.”",
   "around": "The verse before it describes what God does: “He makes wars cease to the end of the earth. He breaks the bow, and shatters the spear.” The psalm opens with the confidence it ends on: “God is our refuge and strength”.",
+  "after": "The Bible never says when this psalm was first sung. It does show the family named in its heading, the sons of Korah, on a day much like the one the psalm describes. A great army was coming against Judah, and King Jehoshaphat “was alarmed”. The word that came to him sounds like this psalm: “Set yourselves, stand still, and see the salvation of the LORD with you”. The Levites of the Korahites “stood up to praise the LORD, the God of Israel, with an exceedingly loud voice”, and singers went out ahead of the army. The invaders turned on each other. The people came home “with joy”, and Chronicles ends the story with the words “the realm of Jehoshaphat was quiet”.\n\nMany centuries later the psalm became one man’s song. Charles Spurgeon thought Christians would remember it above all as Luther’s psalm, because the reformer loved it so. His Treasury of David passes on a story printed in 1866: when Luther and his companions were downcast, Luther would cheerfully ask his friend Philip Melanchthon to sing the forty-sixth psalm with him, in Luther’s own version.\n\nThat hymn did not stay in Germany. Myles Coverdale put it into English in 1539, and it has been translated into English at least seventy times since. Bach built a cantata on it for Reformation Day. And the battle hymn of the Reformation is now a suggested hymn for Catholic Masses in the United States, sung on both sides of the old divide.",
   "readings": "For centuries believers have used this verse as a doorway into quiet prayer. They sit down, stop talking and remember who God is. Many have found in these few words a way into silence.\n\nRead inside the psalm, the words are stronger than that. They are an order to a world at war to lay down its weapons and recognize its God. Some translations bring out that sense of stopping a fight.\n\nThe two belong together. The quiet a person finds in this verse is not the quiet of an empty room. It is the quiet of someone who has remembered, in the middle of the noise, who holds the nations.",
   "argued": "In the eleventh century the great Jewish commentator Rashi read this verse as an order to armies. God speaks to the nations marching against his city: [[rashi]] Hebrew Bibles number the verse 46:11.\n\nSix centuries later in Scotland, the Covenanter preacher Richard Cameron preached on these words in July 1680, days before he was killed at Airds Moss. The London preacher Charles Spurgeon kept one line from that sermon in his Treasury of David: [[cameron]]\n\nSpurgeon himself heard the verse speaking to two audiences at once: [[spurgeon-psalm]]\n\nAnd on September 11, 2011, ten years after the attacks, President Barack Obama read Psalm 46 at the new September 11 Memorial in New York, after a moment of silence at the minute the first plane struck.\n\nAn order to armies, a preacher days from his death, a word to enemies and believers, a nation remembering its dead: the stillness in this verse has never been an empty one.",
   "point": "“Be still” is first a command to stop fighting and to recognize who God is. The rest it gives his people follows from that: the one who ends wars is their refuge.",
+  "lesson": "You do not have to win every battle that rages around you, or inside you.\n\nThe singers of this psalm were not describing a calm day. They sang about mountains shaken into the sea and nations in an uproar. They do not say the danger is gone. They say “we won’t be afraid, though the earth changes”, and they give one reason, sung twice: “The LORD of Armies is with us.”\n\nMaybe your world is loud right now: an argument you keep replaying, a future you are trying to control, a fight you are tired of carrying alone. This psalm does not ask you to pretend the ground is steady. It asks you to put down what you are gripping and to look at who God is.\n\nYou can start with something small. Read all eleven verses out loud, slowly. Then stay silent for a minute without asking for anything, and remember who is speaking in verse 10. And if you do not share this faith, the psalm still says something true about people: much of our fear comes from believing that everything depends on us.",
   "voices": [
     {
       "id": "rashi",
@@ -72,6 +74,44 @@
       }
     }
   ],
+  "echoes": [
+    {
+      "ref": {
+        "book": "exodus",
+        "chapter": 14,
+        "start": 13,
+        "end": 14
+      },
+      "note": "At the Red Sea, with Pharaoh’s chariots closing in, Moses tells a terrified people: “The LORD will fight for you, and you shall be still.” As in the psalm, the stillness is not giving up. It is leaving the battle to God."
+    },
+    {
+      "ref": {
+        "book": "mark",
+        "chapter": 4,
+        "start": 39,
+        "end": 41
+      },
+      "note": "Jesus says “Peace! Be still!” to the wind and the sea, not to the frightened men in the boat. The calm leaves them asking who he is, as the psalm calls the nations to know who God is."
+    },
+    {
+      "ref": {
+        "book": "isaiah",
+        "chapter": 30,
+        "start": 15,
+        "end": 15
+      },
+      "note": "Judah wanted Egypt’s horses to save it. God offered another way: “Your strength will be in quietness and in confidence.” Here too the quiet is trust in God instead of in armies."
+    },
+    {
+      "ref": {
+        "book": "habakkuk",
+        "chapter": 2,
+        "start": 20,
+        "end": 20
+      },
+      "note": "Habakkuk ends a string of woes against an empire that plundered many nations with a call much like the psalm’s: “Let all the earth be silent before him!”"
+    }
+  ],
   "basis": [
     {
       "book": "psalms",
@@ -84,6 +124,12 @@
       "chapter": 46,
       "start": 6,
       "end": 11
+    },
+    {
+      "book": "2-chronicles",
+      "chapter": 20,
+      "start": 1,
+      "end": 30
     }
   ]
 }

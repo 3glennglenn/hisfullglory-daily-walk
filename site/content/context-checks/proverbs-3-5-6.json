@@ -45,15 +45,91 @@
   ],
   "moment": "The speaker is a teacher and the listener is a young person he calls a son. He has just asked that kindness and truth be bound around the neck and written “on the tablet of your heart”. The two verses that follow turn to where to put one's trust, and what to do on every road.\n\nThe promise attached is modest in its picture: “he will make your paths straight.” The Hebrew word for straight, one commentary says, describes travel made safe by clearing and leveling the road.",
   "around": "Verse 4 names the result of a life shaped by kindness and truth: “So you will find favor, and good understanding in the sight of God and man.” Verse 7 repeats the warning of verse 5 in new words: “Don’t be wise in your own eyes. Fear the LORD, and depart from evil.”",
+  "after": "We never learn the names of the teacher or of the young listener. But the lesson did not stay between the two of them.\n\nA few lines further on, the same teacher says, “My son, don’t despise the LORD’s discipline”, because the LORD corrects “even as a father reproves the son in whom he delights.” Centuries later the letter to the Hebrews was written to Christians in danger of growing weary under hardship. It quoted those very lines and told its readers that they had forgotten “the exhortation which reasons with you as with children”. The son in Proverbs 3 had become every reader. A few verses later Hebrews tells them to “make straight paths for your feet”.\n\nThe end of the chapter travelled too. The teacher says that the LORD “gives grace to the humble.” James and Peter both quote that line in their letters, in a slightly different wording: “God resists the proud, but gives grace to the humble.” James wrote it to believers torn by quarrels, Peter to a church facing suffering. Not leaning on your own understanding had become a word about humility, for whole churches.\n\nOn a wall or a card, the two verses stand alone. In the Bible they belong to a lesson a teacher passed to a son, and that the first Christians passed on to their churches as a word for God’s children.",
   "readings": "Many readers take these verses as a promise of direction for personal choices, such as a job or a marriage.\n\nOne modern commentary reads the two verses more narrowly. It says they speak more about guidance in ethical behavior than about particular choices such as career or mate, and it calls leaning on one's own understanding more like being wise in one's own eyes. The same commentary adds that this trust is not a blind trust that suspends critical judgment.\n\nThe two readings are not far apart. Both ask a person to hold their own judgment loosely and to bring the road to God first.",
   "argued": "Matthew Henry, writing in 1710, heard in verse 5 a warning to people who think they can steer their own affairs without God. His words: [[henry]]\n\nHe treats prayer as the way to follow verse 6, and he adds a promise of his own: those who put themselves under divine guidance have the benefit of it. A modern commentary on the same verses stresses ethics more than future plans. They are two ways of reading one line, from an English minister of 1710 and from a present-day commentary.",
   "point": "These verses come from a teacher's lesson to a young listener. They ask for trust in the LORD instead of leaning on one's own understanding, and they promise a level road.",
+  "lesson": "This lesson was given to someone young, by someone who cared what became of him. Read it that way. It is not a slogan to quiet your questions. It is counsel from a voice that wants your life to go well.\n\nLeaning on your own understanding is the most natural thing there is. You know your situation better than anyone, or so it feels. The teacher does not tell you to stop thinking. He tells you not to make your own mind the thing that holds you up. Think hard, and then hold your conclusions with open hands before God.\n\n“In all your ways” means the ordinary ways too: how you spend your money, how you treat the neighbor who lives next to you, what you do when it is in your power to do good. The verses that follow this one fill in exactly that. And the road it promises is a straight one, not a short one, and not one without hills.\n\nIf a decision is in front of you today, bring it to God before you settle it. Tell him what you think, and ask him what you are missing. Then read the whole of Proverbs 3, and listen to the teacher as if you were the one being taught.\n\nIf you do not share this faith, the lesson still holds a wisdom anyone can test: know the limits of your own judgment, and listen for a voice beyond it.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "jeremiah",
+        "chapter": 17,
+        "start": 7,
+        "end": 8
+      },
+      "note": "Jeremiah sets two lives side by side, one that trusts in human strength and one that trusts in the LORD and grows “as a tree planted by the waters”. As in Proverbs, trust decides what holds a life up."
+    },
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 37,
+        "start": 5,
+        "end": 5
+      },
+      "note": "The psalm uses the same picture of a road: “Commit your way to the LORD. Trust also in him”. It is written to people tempted to fret over those who prosper by doing wrong."
+    },
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 32,
+        "start": 8,
+        "end": 9
+      },
+      "note": "After confessing his sin, the psalmist hears a promise of guidance, “I will instruct you and teach you in the way which you shall go”, and a warning not to be like a mule with “no understanding”."
+    },
+    {
+      "ref": {
+        "book": "james",
+        "chapter": 1,
+        "start": 5,
+        "end": 5
+      },
+      "note": "James gives the other half of not leaning on your own understanding: “if any of you lacks wisdom, let him ask of God, who gives to all liberally and without reproach”."
+    }
+  ],
   "basis": [
     {
       "book": "proverbs",
       "chapter": 3,
       "start": 1,
       "end": 8
+    },
+    {
+      "book": "proverbs",
+      "chapter": 3,
+      "start": 11,
+      "end": 12
+    },
+    {
+      "book": "proverbs",
+      "chapter": 3,
+      "start": 27,
+      "end": 34
+    },
+    {
+      "book": "hebrews",
+      "chapter": 12,
+      "start": 3,
+      "end": 6
+    },
+    {
+      "book": "hebrews",
+      "chapter": 12,
+      "start": 13,
+      "end": 13
+    },
+    {
+      "book": "james",
+      "chapter": 4,
+      "start": 1,
+      "end": 6
+    },
+    {
+      "book": "1-peter",
+      "chapter": 5,
+      "start": 5,
+      "end": 10
     }
   ]
 }

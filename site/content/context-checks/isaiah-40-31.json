@@ -59,9 +59,49 @@
   ],
   "moment": "The words are spoken to people who have just said that God does not see them. Before the verse comes a run of questions: “Haven’t you known? Haven’t you heard?” The God who “doesn’t faint” and “isn’t weary” is set beside the youths who do.\n\nThen the line turns. The ones who wait for the LORD are given what the strongest young men cannot keep for themselves.",
   "around": "The verse before it says: “He gives power to the weak. He increases the strength of him who has no might.” The chapter began with comfort: “Comfort, comfort my people,” and it speaks of a God who “will feed his flock like a shepherd.”",
+  "after": "The people who said their way was hidden from God were not left in Babylon forever. A few chapters on, the book names the Persian king Cyrus and has God say of Jerusalem, “She will be built”. The book of Ezra tells how it happened: in Cyrus’s first year a proclamation went out, and all those “whose spirit God had stirred to go up” set out for home.\n\nIt was not a flight on eagles’ wings. It was a long road and slow rebuilding. When the foundation of the new temple was laid, the people sang and shouted. But many of the old men who had seen the first temple “wept with a loud voice”, and the crowd could not tell the shout of joy from the sound of weeping.\n\nLater, in the rebuilt city, the people stood while God’s law was read aloud, and they wept. They were told not to grieve, “for the joy of the LORD is your strength.” Strength for tired people, once again, and once again it was not their own.\n\nThe chapter’s words kept travelling. All four Gospels reach for its third verse, the voice in the wilderness, to introduce John the Baptist. And when a letter in Peter’s name wanted to tell scattered believers what lasts, it quoted this chapter too: “the Lord’s word endures forever.”",
   "readings": "Many readers hear the eagle as a picture of lifting above trouble. The verse names the soaring first, and that is the part most often quoted.\n\nOthers point to the order of the three lines. The verse ends not with flying but with walking: “They will walk, and not faint.” For some readers the quiet promise at the end is the larger one, strength for the ordinary road when no one is watching.\n\nBoth readings stand inside the same verse, and neither needs to cancel the other.",
   "argued": "Two older commentaries read the eagle differently. Jamieson, Fausset and Brown note an old belief about the bird: [[jfb]]\n\nMatthew Henry takes the image as a lifting of the soul: [[henry]]\n\nOne looks at the eagle itself, the other at what the image does for the believer. Both are trying to say why the verse reaches the weary.",
   "point": "This verse is an answer to people who said their way was hidden from God, and it comes after a chapter about a God who does not grow weary. Its promise is strength for those who wait for him, from flying to walking.",
+  "lesson": "If you have ever felt that God has lost track of you, notice that the Bible lets people say so. “My way is hidden from the LORD” stands in this chapter word for word, and God answers it instead of silencing it. You can bring him the same sentence.\n\nThe answer the exiles got was not a date. They were not told when they would go home. They were told who God is: the one who calls every star by name and never runs out of strength. And they were told that waiting for him is not wasted time.\n\nSo if you are worn out, do not measure your hope by your own reserves. Read Isaiah 40 from the beginning, slowly. Lift up your eyes, as the chapter says. Tell God honestly where you are, and wait for him, even if waiting is all you can manage today.\n\nIf you do not share this faith, the chapter still takes seriously something many people know: the fear of being unseen. It answers that fear not with a promise of a quick way out, but with a reason to keep walking.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "isaiah",
+        "chapter": 49,
+        "start": 14,
+        "end": 15
+      },
+      "note": "Later in the same book Zion says it again: “The LORD has forsaken me, and the Lord has forgotten me.” The answer is a mother who cannot forget her child: “yet I will not forget you!”"
+    },
+    {
+      "ref": {
+        "book": "lamentations",
+        "chapter": 3,
+        "start": 25,
+        "end": 26
+      },
+      "note": "In a lament over fallen Jerusalem, the same hope is found in the same place: “It is good that a man should hope and quietly wait for the salvation of the LORD.”"
+    },
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 27,
+        "start": 14,
+        "end": 14
+      },
+      "note": "The psalm puts waiting and strength side by side, as Isaiah does: “Wait for the LORD. Be strong, and let your heart take courage.”"
+    },
+    {
+      "ref": {
+        "book": "2-corinthians",
+        "chapter": 4,
+        "start": 16,
+        "end": 16
+      },
+      "note": "Paul, pressed on every side, uses the same language of fainting and renewal: “we don’t faint”, because “our inward person is renewed day by day.”"
+    }
+  ],
   "basis": [
     {
       "book": "isaiah",
@@ -86,6 +126,42 @@
       "chapter": 40,
       "start": 27,
       "end": 30
+    },
+    {
+      "book": "isaiah",
+      "chapter": 44,
+      "start": 28,
+      "end": 28
+    },
+    {
+      "book": "ezra",
+      "chapter": 1,
+      "start": 1,
+      "end": 5
+    },
+    {
+      "book": "ezra",
+      "chapter": 3,
+      "start": 10,
+      "end": 13
+    },
+    {
+      "book": "nehemiah",
+      "chapter": 8,
+      "start": 9,
+      "end": 10
+    },
+    {
+      "book": "mark",
+      "chapter": 1,
+      "start": 2,
+      "end": 4
+    },
+    {
+      "book": "1-peter",
+      "chapter": 1,
+      "start": 24,
+      "end": 25
     }
   ]
 }

@@ -75,7 +75,23 @@ its surroundings, told as one continuing story: `story` (the story around it), `
 (who is speaking, to whom, and what was happening to them), `around` (what stands around
 the verse), `readings` (how people have read it, side by side and without a winner) and
 `point` (what the context adds). The founder asked for this on 2026-10-13: no short fact
-fields, because a reader's interest drops there. Every quotation in curly double quotes
+fields, because a reader's interest drops there.
+
+Since 2026-10-27 every check also tells the whole arc, as the founder's John 21 video does
+("ik wil dat je dit ook in de context beschrijvingen zet en zo uitschrijft met de emotionele
+pull en lessen en refrences naar andere verses"), next to the parts above:
+- `after`, "What happened next" (200-1800 characters): what became of the people and of the
+  words afterwards. The Bible first, then history from opened sources; tradition is called
+  tradition.
+- `lesson`, "What it means for you" (200-1400): the lesson in the second person, warm and
+  firm, grown out of the context and never undoing it. It may invite, never pressures, never
+  promises what Scripture does not, and respects a reader who does not share the faith.
+- `echoes`, "Other verses that say it too": 2 to 4 entries `{ ref, note }`. Each `ref` is at
+  most three verses and never the verse itself; the page shows its WEB text. The `note`
+  (40-280) says how it connects and may quote only its own verse.
+Feeling belongs in `story`, `moment` and `after`: say what people felt where the text says it
+(Peter "was grieved", he "wept bitterly"), mark what it only implies, and never invent it.
+`site/content/context-checks/john-21-15-17.json` is the model. Every quotation in curly double quotes
 must occur in the verse or in its `basis` passages. `hook` opens the page, is its
 description for search engines, and is the opening line for a video about it. A published
 check gets its own page under `/context-checks`, a card on the chapter page of its verse

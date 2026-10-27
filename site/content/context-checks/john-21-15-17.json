@@ -1,0 +1,237 @@
+{
+  "slug": "john-21-15-17",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-10-27",
+  "verse": {
+    "book": "john",
+    "chapter": 21,
+    "start": 15,
+    "end": 17
+  },
+  "hook": "You know Jesus asked Peter three times if he loved him. But did you know he asked it beside a fire of coals, like the night Peter denied him?",
+  "story": "The last time Peter stood beside a fire of coals, he was cold, and he was lying.\n\nIt was the night Jesus was arrested. Hours earlier Peter had promised, “If I must die with you, I will not deny you.” Now he stood in the high priest’s courtyard with the servants and the officers, warming himself. A servant girl asked if he was one of the disciples. Others asked. One of them was a relative of the man whose ear Peter had cut off in the garden. Three times Peter said he did not know Jesus. Then the rooster crowed, and Luke records a moment no reader forgets: “The Lord turned and looked at Peter.” He went out, “and wept bitterly.”\n\nSome time after Easter, Peter is back on the Sea of Tiberias, the lake of Galilee where he had worked as a fisherman. When the disciple whom Jesus loved says “It’s the Lord!”, Peter throws himself into the water and swims for the shore. And there, waiting for him, is “a fire of coals”.\n\nThe Greek word John uses for that charcoal fire appears only twice in the whole New Testament: in the courtyard where Peter denied Jesus, and on this beach. Three denials at the first fire. At the second, three questions.",
+  "storyStatus": "scripture",
+  "sources": [
+    {
+      "title": "Strong’s Greek 439, anthrakia: a heap of burning coals, with its two occurrences (Bible Hub)",
+      "url": "https://biblehub.com/greek/439.htm"
+    },
+    {
+      "title": "Strong’s Greek 5368, phileó: to love as a friend, on John 21:15-17 (Bible Hub)",
+      "url": "https://biblehub.com/greek/5368.htm"
+    },
+    {
+      "title": "Augustine, Tractate 123 on the Gospel of John (New Advent)",
+      "url": "https://www.newadvent.org/fathers/1701123.htm"
+    },
+    {
+      "title": "Eusebius, Church History, Book III, chapter 1 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250103.htm"
+    },
+    {
+      "title": "Eusebius, Church History, Book II, chapter 25 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250102.htm"
+    },
+    {
+      "title": "Jerome, Lives of Illustrious Men, chapter 1 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/2708.htm"
+    }
+  ],
+  "voices": [
+    {
+      "id": "augustine",
+      "name": "Augustine of Hippo",
+      "about": "bishop in North Africa, preaching on John 21 in his Tractates on the Gospel of John",
+      "words": "To the threefold denial there is now appended a threefold confession, that his tongue may not yield a feebler service to love than to fear",
+      "source": {
+        "title": "Augustine, Tractate 123 on the Gospel of John (New Advent)",
+        "url": "https://www.newadvent.org/fathers/1701123.htm"
+      }
+    },
+    {
+      "id": "augustine-love",
+      "name": "Augustine of Hippo",
+      "about": "in the same sermon, on the change of the word for love in his Latin Bible",
+      "words": "We have it also demonstrated here that love and liking are one and the same thing",
+      "source": {
+        "title": "Augustine, Tractate 123 on the Gospel of John (New Advent)",
+        "url": "https://www.newadvent.org/fathers/1701123.htm"
+      }
+    },
+    {
+      "name": "Eusebius of Caesarea",
+      "about": "church historian, writing around 325 and passing on what Origen had written in the century before",
+      "words": "And at last, having come to Rome, he was crucified head-downwards; for he had requested that he might suffer in this way.",
+      "source": {
+        "title": "Eusebius, Church History, Book III, chapter 1 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/250103.htm"
+      }
+    },
+    {
+      "name": "Jerome",
+      "about": "in his Lives of Illustrious Men, written around 392, on how Peter died",
+      "words": "being nailed to the cross with his head towards the ground and his feet raised on high, asserting that he was unworthy to be crucified in the same manner as his Lord.",
+      "source": {
+        "title": "Jerome, Lives of Illustrious Men, chapter 1 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/2708.htm"
+      }
+    }
+  ],
+  "moment": "Between the courtyard and this beach lies the worst week of Peter’s life, and then the strangest. When Jesus was arrested, “They all left him, and fled.” He was crucified the next day. Two of his followers, walking away from Jerusalem, put the mood into words: “But we were hoping that it was he who would redeem Israel.”\n\nThen the tomb was empty, and the message the women were given there named one disciple in particular: “go, tell his disciples and Peter”. Paul later lists the witnesses, and Peter comes first: “he appeared to Cephas, then to the twelve.”\n\nSo the man on this beach has seen Jesus alive, but the Gospels record no word between them about that night. Now seven of the disciples are back at the lake, and Peter is the one who says, “I’m going fishing.” A night of empty nets, a stranger on the shore, a net suddenly full. Breakfast comes first: Jesus takes the bread and gives it to them. Only “when they had eaten their breakfast” does he turn to Peter, and he calls him by his old name, Simon, son of Jonah, the name he had before Jesus called him Peter. He asks three times. The third time, John says, “Peter was grieved”. It is the one feeling the text names, and it is not hard to see why.",
+  "around": "Right after the three questions, Jesus tells Peter how his life will end: “when you are old, you will stretch out your hands, and another will dress you and carry you where you don’t want to go.” John explains that this signified “by what kind of death he would glorify God”. Then comes the call Peter had first heard by this same lake, years before, now in two words: “Follow me.”\n\nEarlier in the same Gospel Jesus had called himself the good shepherd, the one who lays down his life for the sheep. On this beach he hands his sheep to the man who ran.",
+  "after": "The man who could not admit to a servant girl that he knew Jesus became the first to speak for him in public. At Pentecost, Peter stood up with the eleven in Jerusalem, “lifted up his voice”, and preached. Luke records that about three thousand people were baptized that day.\n\nSoon he was arrested. The council saw “the boldness of Peter and John” and was amazed that such ordinary men spoke like that. When they were ordered to be silent, Peter answered, “we can’t help telling the things which we saw and heard.”\n\nYears later, a letter that carries Peter’s name tells church leaders to “shepherd the flock of God”, not for money and not by lording it over anyone. The fisherman had become the shepherd Jesus asked for on the beach.\n\nHow did his life end? The Bible does not say. Early church writers do. Around the year 325 the historian Eusebius wrote that Peter was crucified in Rome under Nero, and he passed on what Origen had written in the century before: that Peter asked to be crucified head downward. Jerome, writing around 392, gives the reason church tradition remembers: Peter did not think himself worthy to die in the same way as his Lord. The man who fled on the night of the arrest went to his own cross with his eyes open.",
+  "readings": "Most readers, from the early church to today, have heard the three questions as an answer to the three denials. Jesus does not pretend the night by the first fire never happened. He lets Peter say three times what he had denied three times.\n\nA second reading looks at the words for love. In the Greek, Jesus twice asks with agapao, and Peter twice answers with phileo, a word for the love between close friends. The third time, Jesus uses Peter’s own word. The World English Bible shows the change: Jesus asks “do you love me?”, Peter answers “you know that I have affection for you”, and the third time Jesus asks “do you have affection for me?” Some teachers see Jesus coming down to where Peter honestly stood. Others think John simply varied his words, and that no lesson hangs on it.\n\nA third question is what “more than these” means. More than the other disciples love me, as Peter once claimed when he said that even if all fell away, he would not? Or more than these boats, these fish and the old life? The text leaves it open.",
+  "argued": "In the early fifth century Augustine of Hippo preached his way through the Gospel of John in North Africa. When he reached this beach, he saw in the three questions the mirror of the three denials: [[augustine]]\n\nHe also noticed that his Latin Bible changed its word for love in the last question, and he decided the change meant nothing: [[augustine-love]] Teachers still disagree on that point. Some find the shift in the Greek too striking to pass over; others side with Augustine. Both sides agree on what matters most in the scene: the man who failed is asked about love, not about his failure.",
+  "point": "Read on its own, the scene is a gentle exchange about love. Read after the courtyard, it is a restoration. Three denials at one fire of coals, three questions at another, and after each answer not a rebuke but a task: feed my lambs, tend my sheep, feed my sheep. Jesus does not restore Peter by going over his failure. He restores him by trusting him again.",
+  "lesson": "Peter’s worst night did not get the last word, and yours does not have to either.\n\nLook at what Jesus does on that beach. He makes breakfast before he asks anything. He does not shame Peter in front of the others, and he does not demand a promise or hand out a punishment. He asks a question and lets Peter answer for himself. Then he gives him work to do, as if to say: I still trust you. In the whole chapter he never names the denial.\n\nMaybe you have your own courtyard: a moment when fear spoke louder than love, a promise you did not keep, a time you walked away. This passage does not ask you to pretend it never happened. It shows a Lord who comes looking for the one who fell and calls him by name.\n\nIf you feel far from God, the way back can start the way it did for Peter, with an honest answer. You can tell him what Peter told him, “you know that I have affection for you”, and mean it. And if you do not share this faith, the scene still says something true about people: a failure can be answered with trust instead of shame.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 103,
+        "start": 12,
+        "end": 12
+      },
+      "note": "The psalm says God removes our wrongs “As far as the east is from the west”. On the beach, the denial is not brought up again."
+    },
+    {
+      "ref": {
+        "book": "luke",
+        "chapter": 15,
+        "start": 20,
+        "end": 20
+      },
+      "note": "In Jesus’ story of the lost son, the father sees him “while he was still far off” and runs to him. He does not wait for his son to earn the way back, and Jesus did not wait for Peter."
+    },
+    {
+      "ref": {
+        "book": "1-samuel",
+        "chapter": 16,
+        "start": 7,
+        "end": 7
+      },
+      "note": "When a king was chosen, God told Samuel that “the LORD looks at the heart.” On the beach Peter has no record to point to, only his heart, and Jesus asks about that."
+    },
+    {
+      "ref": {
+        "book": "1-peter",
+        "chapter": 5,
+        "start": 2,
+        "end": 2
+      },
+      "note": "Years later a letter in Peter’s name tells church leaders to “shepherd the flock of God”, the work Jesus gave Peter at the second fire."
+    }
+  ],
+  "basis": [
+    {
+      "book": "john",
+      "chapter": 21,
+      "start": 1,
+      "end": 14
+    },
+    {
+      "book": "john",
+      "chapter": 21,
+      "start": 18,
+      "end": 19
+    },
+    {
+      "book": "john",
+      "chapter": 18,
+      "start": 15,
+      "end": 27
+    },
+    {
+      "book": "mark",
+      "chapter": 14,
+      "start": 27,
+      "end": 31
+    },
+    {
+      "book": "mark",
+      "chapter": 14,
+      "start": 50,
+      "end": 50
+    },
+    {
+      "book": "luke",
+      "chapter": 22,
+      "start": 54,
+      "end": 62
+    },
+    {
+      "book": "luke",
+      "chapter": 24,
+      "start": 13,
+      "end": 21
+    },
+    {
+      "book": "mark",
+      "chapter": 16,
+      "start": 5,
+      "end": 7
+    },
+    {
+      "book": "1-corinthians",
+      "chapter": 15,
+      "start": 3,
+      "end": 6
+    },
+    {
+      "book": "mark",
+      "chapter": 1,
+      "start": 16,
+      "end": 16
+    },
+    {
+      "book": "john",
+      "chapter": 6,
+      "start": 1,
+      "end": 1
+    },
+    {
+      "book": "john",
+      "chapter": 1,
+      "start": 42,
+      "end": 42
+    },
+    {
+      "book": "john",
+      "chapter": 10,
+      "start": 11,
+      "end": 11
+    },
+    {
+      "book": "acts",
+      "chapter": 2,
+      "start": 14,
+      "end": 14
+    },
+    {
+      "book": "acts",
+      "chapter": 2,
+      "start": 41,
+      "end": 41
+    },
+    {
+      "book": "acts",
+      "chapter": 4,
+      "start": 13,
+      "end": 13
+    },
+    {
+      "book": "acts",
+      "chapter": 4,
+      "start": 18,
+      "end": 20
+    },
+    {
+      "book": "1-peter",
+      "chapter": 5,
+      "start": 1,
+      "end": 4
+    }
+  ]
+}

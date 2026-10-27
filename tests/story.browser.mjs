@@ -61,7 +61,9 @@ export async function checkStoryFlow(browser, base, published) {
   const newest = published[0];
   assert.ok(newest, "at least one context check is published");
   const ref = refLabel(newest.verse);
-  const total = 7 + (newest.argued ? 1 : 0);
+  // Cover, verse, story, moment, readings, point, Keep going; then the parts a check may have: argued, and since
+  // 2026-10-27 what happened next, what it means for you and the other verses.
+  const total = 7 + [newest.argued, newest.after, newest.lesson, newest.echoes?.length].filter(Boolean).length;
 
   // ---- the flow: toolbar, indicator, the cover first, buttons named after the parts ------------------------------
   {
@@ -120,6 +122,11 @@ export async function checkStoryFlow(browser, base, published) {
       assert.equal(titles.at(-1), "Keep going", "the last part is Keep going");
       assert.equal(await nav.getByRole("button", { name: /^Next: / }).count(), 0, "no Next on the last screen");
       assert.equal(titles.includes("The moment") && titles.includes("What the context adds"), true, "the part titles are unchanged");
+      if (newest.after && newest.lesson && newest.echoes?.length) {
+        const at = (title) => titles.indexOf(title);
+        assert.ok(at("The moment") < at("What happened next") && at("What happened next") < at("How people have read it"), "what happened next follows the moment");
+        assert.ok(at("What the context adds") < at("What it means for you") && at("What it means for you") < at("Other verses that say it too") && at("Other verses that say it too") < at("Keep going"), "the lesson and the other verses come before Keep going");
+      }
 
       // The last screen: the heading after a real write, one shelf entry with today's local date, the closing note.
       await page.getByRole("heading", { name: "Added to your shelf", exact: true }).waitFor();

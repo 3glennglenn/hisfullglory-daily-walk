@@ -1120,6 +1120,25 @@ small {
 .flow-part q {
   quotes: "\201C" "\201D" "\2018" "\2019";
 }
+/* Other verses that say it too: each verse in the Scripture face behind a quiet rule, its reference and note below. */
+.story-echo {
+  margin: 0;
+}
+.story-echo + .story-echo {
+  margin-top: var(--space-5);
+}
+.story-echo .story-verse {
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--line);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.story-echo figcaption {
+  padding-left: calc(var(--space-4) + 3px);
+  font-size: var(--text-footnote);
+  line-height: 1.45;
+  color: var(--muted);
+}
 /* Listen: the verse being read aloud. */
 .verse.speaking {
   background: var(--highlight-gold);
