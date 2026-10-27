@@ -27,52 +27,55 @@
       "id": "ai:luke/1",
       "chapter": 1,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-27",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Luke opens with a short preface to Theophilus, saying he has traced events carefully so the reader can know they are certain. The story begins with Zacharias, a priest, and his wife Elizabeth, who have no children. While Zacharias serves in the temple, the angel Gabriel tells him they will have a son named John. Zacharias doubts and is made mute until the birth.\n\nSix months later Gabriel appears to Mary in Nazareth. He says she will conceive by the Holy Spirit and bear a son named Jesus, who will reign on David’s throne forever. Mary answers, “Behold, the servant of the Lord; let it be done to me according to your word.”\n\nMary visits Elizabeth and speaks a song of praise, often called the Magnificat. John is born, Zacharias speaks again, and he prophesies a song of blessing."
+          "text": "Luke begins like a careful historian. Many have written about these events, he says, and he has traced everything from the start so that Theophilus can know the certainty of what he was taught.\n\nThen the scene is the temple, in the days of Herod. Zacharias, a priest, and his wife Elizabeth have no children, and both are well along in years. As the people pray outside, an angel appears beside the altar of incense. “Don’t be afraid, Zacharias”, he says, and promises a son named John. Zacharias doubts, and the angel, Gabriel, tells him he will be silent until it happens.\n\nSix months later Gabriel appears to Mary in Nazareth. She will conceive by the Holy Spirit and bear a son named Jesus, who will reign on David’s throne forever. Mary answers, “Behold, the servant of the Lord; let it be done to me according to your word.”\n\nShe hurries to Elizabeth and sings the song known as the Magnificat. When John is born, Zacharias writes, “His name is John.” His voice returns, and he prophesies a song of blessing."
         },
         {
           "kind": "background",
           "text": "Luke is the first part of a two-volume work, followed by Acts. Tradition links it with Luke, a companion of Paul, and says he wrote for readers outside Judea. Luke gives special attention to women, the poor and outsiders. The priestly divisions served in the temple in rotation, and burning incense was an honor that a priest might receive only once. Mary’s song echoes Hannah’s prayer in 1 Samuel 2:1 to 10. The virgin birth is held by most Christians as a doctrine, and a few scholars read it differently."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/2",
       "chapter": 2,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-27",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "A decree from Caesar Augustus sends everyone to be counted in their own town. Joseph and Mary travel from Nazareth to Bethlehem, where Mary gives birth to her firstborn son and lays him in a feeding trough. An angel tells shepherds nearby of good news of great joy, a Savior who is Christ the Lord, and many angels praise God. The shepherds go to see the baby and tell what they were told.\n\nAt eight days he is named Jesus. Mary and Joseph bring him to the temple in Jerusalem, where Simeon and the prophet Anna recognize him as the one Israel has been waiting for. Simeon warns Mary that a sword will pierce her own soul.\n\nWhen Jesus is twelve, his family goes to Jerusalem for Passover. He stays behind and is found after three days in the temple, listening to teachers and asking them questions."
+          "text": "A decree goes out from Caesar Augustus, and everyone must be counted in their own town. Joseph takes Mary from Nazareth to Bethlehem, the city of David. While they are there she gives birth to her firstborn son, and lays him in a feeding trough, because there is no room for them in the inn.\n\nNearby, shepherds are keeping watch over their flock at night. An angel stands before them, and they are terrified. “Don’t be afraid, for behold, I bring you good news of great joy which will be to all the people.” A Savior has been born, who is Christ the Lord, and the sign is a baby in a feeding trough. Then a multitude of angels praises God. The shepherds hurry to Bethlehem, find the child, and tell everyone. Mary keeps it all in her heart.\n\nAt eight days he is named Jesus. In the temple, Simeon and the prophet Anna recognize him, and Simeon tells Mary that a sword will pierce her own soul. When Jesus is twelve, his family finds him after three days in the temple, among the teachers, listening and asking questions."
         },
         {
           "kind": "background",
           "text": "Luke places the birth within world events and names Roman rulers. Quirinius and the date of the census are debated by historians, and scholars have proposed several ways to line up Luke’s account with other sources. Shepherds were ordinary working people, often of low standing. The offering of two birds in verse 24 was the allowance for families who could not afford a lamb, according to Leviticus 12:8. Simeon’s song is traditionally called the Nunc Dimittis. Passover pilgrimage was a yearly custom for devout families."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/3",
       "chapter": 3,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-27",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Luke dates the start of John’s ministry by naming the Roman emperor, the governor and several rulers, and says the word of God came to John in the wilderness. John preaches a baptism of repentance and quotes Isaiah about preparing the way of the Lord.\n\nHe warns the crowds not to rely on being descended from Abraham, and says the ax is already at the root of the trees. When people ask what to do, he tells them to share clothes and food, tells tax collectors to collect no more than is due, and tells soldiers not to extort or accuse falsely. He says that one more powerful is coming, who will baptize with the Holy Spirit and fire. Herod has John put in prison for criticizing his marriage.\n\nJesus is baptized, the Spirit descends like a dove, and a voice says, “You are my beloved Son.” The chapter ends with a long family line from Jesus back through David and Abraham to Adam."
+          "text": "Luke pins the moment to the map. It is the fifteenth year of Tiberius Caesar, with Pilate governing Judea, when the word of God comes to John in the wilderness. He goes through the region around the Jordan preaching a baptism of repentance, and Luke recalls Isaiah: “The voice of one crying in the wilderness”.\n\nThe crowds come, and John is blunt. Do not lean on being children of Abraham, for the ax already lies at the root of the trees. When people ask what to do, he answers plainly. Share your coats and your food. To tax collectors he says, “Collect no more than that which is appointed to you.” When people wonder if he is the Christ, he says one more powerful is coming, who will baptize with the Holy Spirit and fire. Herod, rebuked for his marriage, shuts John in prison.\n\nJesus is baptized and praying when the sky opens, the Spirit descends like a dove, and a voice speaks. Then Luke lists Jesus’s family line, back through David and Abraham to Adam."
         },
         {
           "kind": "background",
           "text": "Tiberius became emperor in the year 14, so the fifteenth year of his reign is usually dated to about 28 or 29. John’s baptism was a washing that marked repentance, and it differs from later Christian baptism. Luke’s family line runs backward and ends at Adam, the son of God, while Matthew’s runs forward from Abraham and differs in several names. Scholars and churches explain the differences in more than one way, for example as two lines of descent or as tracing Mary’s side. Compare Matthew 1."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/4",
