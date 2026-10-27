@@ -1,0 +1,73 @@
+{
+  "slug": "matthew-6-33",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-10-27",
+  "verse": {
+    "book": "matthew",
+    "chapter": 6,
+    "start": 33,
+    "end": 33
+  },
+  "hook": "You know “seek first God’s Kingdom”. But did you know it comes from a sermon about worry, and a song was born from it?",
+  "story": "Read the verse by itself and it sounds like a rule. Read the page around it and it sounds like a rescue.\n\nJust before it, Jesus says “don’t be anxious for your life”. He points to birds that do not sow or reap, and to wildflowers that do not spin. He says that “even Solomon in all his glory was not dressed like one of these.” Then he says that “the Gentiles seek after all these things”, the food and drink and clothing, and that the heavenly Father knows they are needed. Only then comes the sentence: “But seek first God’s Kingdom and his righteousness; and all these things will be given to you as well.”\n\nEarlier in the chapter he had said “You can’t serve both God and Mammon.” The word Mammon is Aramaic in origin and is tied to money or possessions. In the Middle Ages some writers made Mammon a demon of greed, but in Matthew it is simply a rival master.\n\nThe word “first” has also been read closely. Augustine, in his commentary on this sermon, pressed on it. Food, drink and clothing are real needs, he said, and the verse does not wave them away. It puts them in their place.\n\nAnd in 1971 the verse met a person with an empty bank account. Karen Lafferty had left a job in entertainment and was trying to live on guitar lessons. She went to a Bible study on this verse, went home, wrote a tune, recorded it on a tape recorder and taught it at church the next week. That song, Seek Ye First, is now in many hymnbooks.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Augustine, Our Lord’s Sermon on the Mount, Book II (New Advent)",
+      "url": "https://www.newadvent.org/fathers/16012.htm"
+    },
+    {
+      "title": "Seek Ye First: interview with Karen Lafferty (Reformed Worship)",
+      "url": "https://reformedworship.org/resource/seek-ye-first-interview-karen-lafferty"
+    },
+    {
+      "title": "Wikipedia: Seek Ye First",
+      "url": "https://en.wikipedia.org/wiki/Seek_Ye_First"
+    },
+    {
+      "title": "Wikipedia: Mammon",
+      "url": "https://en.wikipedia.org/wiki/Mammon"
+    },
+    {
+      "title": "Wikipedia: The Birds of the Air",
+      "url": "https://en.wikipedia.org/wiki/The_Birds_of_the_Air"
+    }
+  ],
+  "voices": [
+    {
+      "id": "augustine",
+      "name": "Augustine of Hippo",
+      "about": "North African bishop, in his commentary on the Sermon on the Mount",
+      "words": "For in using that word first, He has indicated that this is to be sought later, not in point of time, but in point of importance",
+      "source": {
+        "title": "Augustine, Our Lord’s Sermon on the Mount, Book II (New Advent)",
+        "url": "https://www.newadvent.org/fathers/16012.htm"
+      }
+    },
+    {
+      "id": "lafferty",
+      "name": "Karen Lafferty",
+      "about": "songwriter, in an interview about Seek Ye First",
+      "words": "When my savings were all gone and I had no money to make my car payments, I became very discouraged and confused.",
+      "source": {
+        "title": "Seek Ye First: interview with Karen Lafferty (Reformed Worship)",
+        "url": "https://reformedworship.org/resource/seek-ye-first-interview-karen-lafferty"
+      }
+    }
+  ],
+  "moment": "Jesus has been teaching about giving, prayer and fasting, and then about treasure: “Don’t lay up treasures for yourselves on the earth”. He says that where your treasure is, there your heart will be also. Now he turns to the ordinary fears that sit under all of that: what we will eat, what we will drink, what we will wear.",
+  "around": "The passage is built from small pictures. “See the birds of the sky”, he says, and “Consider the lilies of the field”. Then he asks, “Aren’t you of much more value than they?” He is not mocking worry. He is asking his listeners to look at something living and ask what it says about the one who made it.\n\nThe pictures end with a plain instruction: “Therefore don’t be anxious for tomorrow, for tomorrow will be anxious for itself.” The verse in the middle holds the turn. Instead of chasing the necessities, aim at God’s Kingdom, and the necessities are not forgotten.",
+  "readings": "Readers have taken the verse in several ways, and they sit side by side here.\n\nAugustine, as the Wikipedia article on the passage notes, argued that it should be read plainly rather than as an allegory. For him the point was about order: the Kingdom is the good, and the needs of daily life are met on the way to it.\n\nSome hear a promise that God will meet the needs of those who put him first. Others stress that the verse is about where the heart is aimed, and that it does not say what any one person will receive or when.\n\nWhat the readings share is the word “first”: it names a priority, not a bargain.",
+  "argued": "The verse has been sung, not only argued over. In 1971 Karen Lafferty was in a hard season: [[lafferty]] After a Bible study on this verse she wrote Seek Ye First, and it caught on at once. She says it has opened doors for her around the world.\n\nCenturies earlier, Augustine of Hippo heard the same verse as a question of order: [[augustine]] A song and an old commentary both treat the verse as a way to hold needs and calling together.",
+  "point": "The verse does not tell anyone to stop caring about food, drink or clothing. Jesus says the Father knows these things are needed. What he moves is the order. The sources here point the same way: the Kingdom comes first, and daily needs are not ignored.",
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 6,
+      "start": 19,
+      "end": 34
+    }
+  ]
+}
