@@ -14,6 +14,7 @@ import {
   arguedHeading,
   checkParts,
   content,
+  echoesHeading,
   editorialNote,
   featuredChecks,
   parseArticle,
@@ -156,6 +157,29 @@ test("a context check must quote the verse or the passages around it exactly", (
   );
 });
 
+test("a context check tells what happened next, what it means for you, and other verses that say it too", () => {
+  // The founder's request of 2026-10-27, after his John 21 video: the whole arc, a lesson, other verses.
+  const item = raw("context-checks", "john-21-15-17");
+  const parse = (changes: Record<string, unknown>) => () => parseContextCheck({ ...item, ...changes }, item.slug, bible);
+  assert.doesNotThrow(parse({}));
+  assert.throws(parse({ after: undefined }), /after: must be text/);
+  assert.throws(parse({ lesson: "Too short." }), /lesson: must be 200 to 1400/);
+  assert.throws(parse({ echoes: undefined }), /2 to 4 echoes/);
+  assert.throws(parse({ echoes: [item.echoes[0]] }), /2 to 4 echoes/);
+  assert.throws(parse({ echoes: [...item.echoes, item.echoes[0]] }), /2 to 4 echoes/);
+  // An echo is short, so a page can show all of it, and it is another verse.
+  const [first, second] = item.echoes;
+  assert.throws(parse({ echoes: [{ ...first, ref: { book: "psalms", chapter: 103, start: 8, end: 12 } }, second] }), /at most three verses/);
+  assert.throws(parse({ echoes: [{ ...first, ref: item.verse }, second] }), /not the verse itself/);
+  assert.throws(parse({ echoes: [{ ...first, note: "Too short." }, second] }), /echo 1 note: must be 40 to 280/);
+  // A note quotes only its own verse, word for word.
+  assert.throws(parse({ echoes: [{ ...first, note: "The psalm answers Jesus, who said “Feed my lambs.” on the beach, with mercy." }, second] }), /not in the WEB text of psalms 103:12/);
+  // The new parts may quote an echo, and nothing that is not in the WEB text.
+  assert.doesNotThrow(parse({ lesson: `${item.lesson} Remember: “As far as the east is from the west”.` }));
+  assert.throws(parse({ lesson: `${item.lesson} The Bible says “God helps those who help themselves”.` }), /not in the WEB text/);
+  assert.throws(parse({ after: `${item.after} He said ‘never again’.` }), /only quotation marks allowed/);
+});
+
 test("people quoted in “Who has argued over it” are real voices, each with its source", () => {
   const item = raw("context-checks", "matthew-5-39");
   const parse = (changes: Record<string, unknown>) => () => parseContextCheck({ ...item, ...changes }, item.slug, bible);
@@ -251,6 +275,18 @@ test("drafts are never built; approved and AI-unreviewed context checks are, and
         assert.ok(text.includes(flat(paragraph)), `${item.slug}: ${name}, ${paragraph.slice(0, 40)}`);
     }
     for (const ref of item.basis) assert.ok(text.includes(refLabel(ref)), `${item.slug}: ${refLabel(ref)}`);
+    // Other verses that say it too: each with its WEB text, its reference and its note, after the lesson.
+    assert.ok(text.includes(echoesHeading), `${item.slug}: ${echoesHeading}`);
+    for (const echo of item.echoes) {
+      assert.ok(text.includes(refLabel(echo.ref)) && text.includes(flat(echo.note)), `${item.slug}: echo ${refLabel(echo.ref)}`);
+      for (const verse of verses(echo.ref)) assert.ok(text.includes(verse.text), `${item.slug}: the text of ${refLabel(echo.ref)}`);
+    }
+    {
+      const html = readFileSync(page(`/context-checks/${item.slug}`), "utf8");
+      const at = (name: string) => html.indexOf(`data-part="${name}"`);
+      assert.ok(at("around") < at("after") && at("after") < at("readings"), `${item.slug}: what happened next follows the text around it`);
+      assert.ok(at("point") < at("lesson") && at("lesson") < at("echoes"), `${item.slug}: the lesson and the other verses come last`);
+    }
     // The story is shown as written, with the line that says what it rests on and its sources.
     for (const paragraph of item.story.split("\n\n"))
       assert.ok(text.includes(flat(paragraph)), `${item.slug}: story, ${paragraph.slice(0, 40)}`);

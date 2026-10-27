@@ -95,8 +95,9 @@ Behind a proxy (`HTTPS_PROXY`), the command restarts itself once with `NODE_USE_
 so that fetch uses the proxy. That changes how the network is reached, not which checks run.
 
 A draft file holds `slug` (optional, it must equal the slug of the verse), `verse`, `hook`,
-`story`, `storyStatus`, `sources`, `voices`, `moment`, `around`, `readings`, `argued`
-(optional), `point` and `basis`, as in `matthew-5-39.json`. `add` sets `review`, `drafted`,
+`story`, `storyStatus`, `sources`, `voices`, `moment`, `around`, `after`, `readings`, `argued`
+(optional), `point`, `lesson`, `echoes` and `basis`, as in `john-21-15-17.json`. `after`,
+`lesson` and `echoes` were added on 2026-10-27 at the founder's request (`site/README.md`). `add` sets `review`, `drafted`,
 `model` and `written` itself.
 
 ## 7. The queue
@@ -138,7 +139,7 @@ READ FIRST
 - CLAUDE.md (the Direction bullets on context checks).
 - site/README.md (the section "Topic pages, articles and context checks").
 - docs/CONTEXT_CHECKS_ROUTINE.md.
-- site/content/context-checks/matthew-5-39.json and site/content/context-checks/psalm-46-10.json, as models of voice, structure and length.
+- site/content/context-checks/john-21-15-17.json and site/content/context-checks/matthew-5-39.json, as models of voice, structure and length. john-21-15-17 is the model for the parts after, lesson and echoes. If it is not on main yet, follow site/README.md for those parts.
 
 NETWORK SELF-TEST
 Run: node --experimental-strip-types scripts/context-checks.mjs sources site/content/context-checks/matthew-5-39.json
@@ -149,24 +150,31 @@ Run: node --experimental-strip-types scripts/context-checks.mjs next
 Take the first candidate (it also prints two alternates, the WEB text of the verse and of its whole chapter). If it says the queue is empty, stop and report that.
 
 RESEARCH
-Use WebSearch and WebFetch. Use only pages that you actually opened and read. Prefer openly readable, reputable pages that a script can read as text: no PDFs, and no pages that only show their text with JavaScript (the Sefaria text pages are like that: do not use them as the source of a voice). Look for history, anecdotes and striking facts around the verse and for named people who said something about this passage.
+Use WebSearch and WebFetch. Use only pages that you actually opened and read. Prefer openly readable, reputable pages that a script can read as text: no PDFs, and no pages that only show their text with JavaScript (the Sefaria text pages are like that: do not use them as the source of a voice). Look for history, anecdotes and striking facts around the verse and for named people who said something about this passage, and for what became of the people in the passage, and of the verse, afterwards. Take your time: open at least five pages before you write. Use at least three sources from at least two different websites, and at least one of them must not be Wikipedia (for example a university, museum or library page, a reputable encyclopedia such as Britannica, a church body or historic society describing its own history, a newspaper of record, or a primary text on Project Gutenberg or Wikisource).
 Quote a person only with words copied from the page you opened, as one continuous run: no ellipses, no joining of two places. A script checks every quotation against its page. When a page does not hold the words, drop the quotation, or say it in your own words without quotation marks.
 
 WRITE THE DRAFT
-Write the draft as JSON to /tmp/context-check.json, following the README rules and the two model files:
+Write the draft as JSON to /tmp/context-check.json, following the README rules and the model files:
 - verse: exactly the candidate. basis: the passages around it that you quote. slug: the slug that next printed.
 - hook: in the form "You know ... But did you know ...", 60 to 160 characters, different from every other hook.
 - story: the story around the verse, told with feeling but never larger than its sources. storyStatus honest: scripture, history or reading.
+- Feeling, in story, moment and after: say what people felt where the WEB text or one of your sources says it (grieved, wept, rejoiced, afraid). Never say what a person felt, feared, wanted or thought unless the WEB text or a source says it; when they do not, describe what the person did and leave the inner life open. Tell it so that it moves a believer and a non-believer alike.
 - moment, around, readings (told with respect, side by side, without a winner), point, and argued only when sources show people arguing over this passage.
-- sources: at least two pages you opened, each with an https link. Every voice's source must also be in sources.
+- after ("What happened next", 200 to 1800 characters): what became of the people and of the words afterwards. The Bible first (later chapters, Acts, letters), then history only from pages you opened and listed in sources; call tradition tradition.
+- lesson ("What it means for you", 200 to 1400 characters): the lesson in the second person, warm and firm, grown out of the context and never undoing it. It may invite (come back, pray, read the chapter), never pressures, never promises what Scripture does not promise, never says what a reader will feel or receive, and respects a reader who does not share the faith. Do not repeat point.
+- echoes ("Other verses that say it too"): 2 to 4 entries of the form {"ref": {"book", "chapter", "start", "end"}, "note": "..."}. Each ref at most three verses, never the verse itself, and it must carry the same truth in its own context (read its chapter with the text command; no proof-texting). The note, 40 to 280 characters, says how it connects and may quote only its own verse.
+- sources: at least three pages you opened, from at least two different websites, at least one of them not on wikipedia.org, each with an https link. Every voice's source must also be in sources.
 - voices: only named people, words copied word for word from their own linked page.
-- Curly double quotes only around words from the WEB text of the verse or its basis passages. No other quotation marks at all: not single curly quotes, not straight quotes, not guillemets. The words of people go in voices.
+- Curly double quotes only around words from the WEB text of the verse, its basis passages or its echoes (an echo's note only from its own verse). No other quotation marks at all: not single curly quotes, not straight quotes, not guillemets. The words of people go in voices.
 - No em dashes. American English. Do not name any translation other than the WEB (no NIV, ESV and so on).
 - Do not write review, drafted, model, written or approved: the add command sets them.
 
 VERIFY
 Run: node --experimental-strip-types scripts/context-checks.mjs verify /tmp/context-check.json --model "<the name of the model you are>"
 If it prints problems, fix the draft and run it again, up to five times in all. Drop a quotation that is not found. Replace a source that does not open. If it still fails, try the next candidate once, from the start of RESEARCH. If that fails too, stop and report. Write nothing.
+
+FINAL READ
+Before ADD, read the whole draft once more, sentence by sentence. Delete or rewrite every claim that is not in the WEB text or in one of the sources you opened, including the hook, the point, what happened next and the lesson. Check the point, the hook and the lesson against the story: they may not claim more than the story does.
 
 ADD
 Run: node --experimental-strip-types scripts/context-checks.mjs add /tmp/context-check.json --model "<the name of the model you are>"
@@ -191,13 +199,13 @@ NEVER
 - Publish when verify failed, when a source could not be reached, or when you are unsure.
 
 FINAL REPORT
-Give: the reference, the slug, https://hisfullglory.com/context-checks/<slug>, the sources opened, the quotations you dropped, anything that failed or was skipped, and the commit SHA. Or, if nothing was published, say exactly why.
+Give: the reference, the slug, the number of sources and how many are not Wikipedia, https://hisfullglory.com/context-checks/<slug>, the sources opened, the quotations you dropped, the echoes you chose, anything that failed or was skipped, and the commit SHA. Or, if nothing was published, say exactly why.
 ```
 
 ## 10. Status
 
-The routine is created after the founder has merged the pull request that brought this
-page, and after he has made the environment with network access (section 8). Suggested name
-"HisFullGlory: daily context check", once a day after the AI-explanations routine
-(04:00 UTC), for example 05:00 UTC. Test it with Run now before the first scheduled run.
-Not done yet: the routine has not been created and nothing has run.
+The routine "HisFullGlory: daily context check" has run every day at 05:00 UTC since 2026-10-19, in
+its own cloud environment with network access. Its instructions are the text in section 9. They
+were brought up to date on 2026-10-27 (more research before writing, at least three sources of
+which one is not Wikipedia, no invented feelings, and the parts after, lesson and echoes). Change
+the routine and this section together.

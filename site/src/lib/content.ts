@@ -207,6 +207,12 @@ export interface ContextCheck extends Editorial {
    */
   argued?: string;
   point: string;
+  /** What became of the people and of the words afterwards (founder, 2026-10-27). */
+  after: string;
+  /** What it means for the reader: the lesson, told warmly and firmly, ending in an invitation. */
+  lesson: string;
+  /** Other verses that carry the same truth, each with a line on how it connects. */
+  echoes: Echo[];
   /** The story around the verse: what was going on, or what the verse went on to mean. */
   story: string;
   /** How firm the story is. Anything from outside the Bible has to name its sources. */
@@ -225,6 +231,11 @@ export interface Voice {
   about: string;
   words: string;
   source: { title: string; url: string };
+}
+/** Another verse that says the same thing; pages show its WEB text with the note. */
+export interface Echo {
+  ref: PassageRef;
+  note: string;
 }
 
 /** The heading of the optional `argued` part, shown after "How people have read it". */
@@ -248,13 +259,20 @@ export const storyStatuses = {
 /**
  * The parts that follow the story, with their headings, in the order a page shows them.
  * Each is told as part of one continuing story, in paragraphs, not as a list of facts.
+ * "What happened next" and "What it means for you" were added on 2026-10-27, after the founder's
+ * John 21 video: the whole arc, with feeling, and a lesson for the reader.
  */
 export const checkParts = [
   ["moment", "The moment", 200, 1800],
   ["around", "What stands around it", 100, 1400],
+  ["after", "What happened next", 200, 1800],
   ["readings", "How people have read it", 200, 1800],
   ["point", "What the context adds", 80, 1000],
+  ["lesson", "What it means for you", 200, 1400],
 ] as const;
+
+/** The heading of the other verses, shown after "What it means for you". */
+export const echoesHeading = "Other verses that say it too";
 
 // Names of translations that are not public domain, as in scripts/ai-chapters.mjs.
 const licensed = /\b(NIV|ESV|NLT|NKJV|NASB|CSB|NRSV|NBV|New International|English Standard|New Living|New King James|The Message)\b/;
@@ -272,14 +290,38 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
   const verse = passageText(raw.verse, bible, `${where} verse`);
   check(Array.isArray(raw.basis) && raw.basis.length > 0, where, "needs the passages around the verse");
   const around = raw.basis.map((entry, index) => passageText(entry, bible, `${where} basis ${index + 1}`));
-  // The verse and the passages around it are the only source, so every quotation must be in them.
+  // Other verses that say the same thing. Short, so a page can show their whole WEB text, and
+  // never the verse itself.
+  check(Array.isArray(raw.echoes) && raw.echoes.length >= 2 && raw.echoes.length <= 4, where, "needs 2 to 4 echoes: other verses that say it too");
+  const echoes = (raw.echoes as Raw[]).map((entry, index) => {
+    const at = `${where} echo ${index + 1}`;
+    const passage = passageText(entry?.ref, bible, at);
+    const { ref } = passage;
+    check(ref.end - ref.start <= 2, at, "an echo is at most three verses");
+    check(
+      !(ref.book === verse.ref.book && ref.chapter === verse.ref.chapter && ref.start <= verse.ref.end && verse.ref.start <= ref.end),
+      at,
+      "an echo is another verse, not the verse itself",
+    );
+    return passage;
+  });
+  // The verse, the passages around it and the other verses are the only source, so every
+  // quotation must be in them.
   const part = (name: string, min: number, max: number) => {
     const value = text(raw[name], min, max, `${where} ${name}`);
     for (const words of quotations(value))
-      check([verse, ...around].some((passage) => passage.words.includes(words)), `${where} ${name}`, `“${words}” is not in the WEB text of the verse or its basis passages`);
+      check([verse, ...around, ...echoes].some((passage) => passage.words.includes(words)), `${where} ${name}`, `“${words}” is not in the WEB text of the verse, its basis passages or its echoes`);
     return value;
   };
   const parts = Object.fromEntries(checkParts.map(([name, , min, max]) => [name, part(name, min, max)]));
+  // An echo's note may only quote its own verse.
+  const echoNotes = (raw.echoes as Raw[]).map((entry, index) => {
+    const at = `${where} echo ${index + 1} note`;
+    const note = text(entry.note, 40, 280, at);
+    for (const words of quotations(note))
+      check(echoes[index].words.includes(words), at, `“${words}” is not in the WEB text of ${echoes[index].ref.book} ${echoes[index].ref.chapter}:${echoes[index].ref.start}`);
+    return note;
+  });
   check(typeof raw.storyStatus === "string" && raw.storyStatus in storyStatuses, where, "storyStatus must be scripture, history or reading");
   const storyStatus = raw.storyStatus as keyof typeof storyStatuses;
   check(raw.sources === undefined || Array.isArray(raw.sources), where, "sources must be a list");
@@ -329,6 +371,7 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
       ["story", raw.story as string],
       ...checkParts.map(([name]): [string, string] => [name, raw[name] as string]),
       ...(raw.argued === undefined ? [] : [["argued", raw.argued as string] as [string, string]]),
+      ...echoNotes.map((note, index): [string, string] => [`echo ${index + 1} note`, note]),
       ...voices.flatMap((voice, index): [string, string][] => [
         [`voice ${index + 1} name`, voice.name],
         [`voice ${index + 1} about`, voice.about],
@@ -355,6 +398,7 @@ export function parseContextCheck(input: unknown, slug: string, bible: BibleData
     hook: part("hook", 60, 160),
     ...(parts as Pick<ContextCheck, (typeof checkParts)[number][0]>),
     ...(raw.argued === undefined ? {} : { argued: raw.argued as string }),
+    echoes: echoes.map((passage, index) => ({ ref: passage.ref, note: echoNotes[index] })),
     story: part("story", 200, 2000),
     storyStatus,
     sources,

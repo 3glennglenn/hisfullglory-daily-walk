@@ -17,6 +17,7 @@ import {
   todaysCheck,
   withVoices,
   type AppContextCheck,
+  type CheckRef,
 } from "./checks";
 import { contextChecks } from "./data";
 import { finishCheck, shelfHeading } from "./shelf";
@@ -42,22 +43,23 @@ function Told({ value, check }: { value: string; check: AppContextCheck }) {
   );
 }
 
-function VerseText({ check }: { check: AppContextCheck }) {
+function VerseText({ verse }: { verse: CheckRef }) {
   const [verses, setVerses] = useState<string[] | null>(null);
+  const label = refLabel(verse);
   useEffect(() => {
     let active = true;
     webProvider
       .load()
       .then((bible) => {
-        const chapter = bible.books.find((b) => b.slug === check.verse.book)?.chapters.find((c) => c.number === check.verse.chapter);
-        const found = chapter?.verses.filter((v) => v.number >= check.verse.start && v.number <= check.verse.end && !v.omitted).map((v) => v.text);
+        const chapter = bible.books.find((b) => b.slug === verse.book)?.chapters.find((c) => c.number === verse.chapter);
+        const found = chapter?.verses.filter((v) => v.number >= verse.start && v.number <= verse.end && !v.omitted).map((v) => v.text);
         if (active) setVerses(found?.length ? found : []);
       })
       .catch(() => active && setVerses([]));
     return () => {
       active = false;
     };
-  }, [check.slug]);
+  }, [label]);
   if (verses === null) return <p className="muted">Loading the verse…</p>;
   if (!verses.length) return <p className="muted">Open the chapter to read the verse once the Bible has downloaded.</p>;
   return <blockquote className="story-verse">{verses.join(" ")}</blockquote>;
@@ -109,7 +111,7 @@ function Story({ check }: { check: AppContextCheck }) {
       heading: "hidden",
       body: (
         <>
-          <VerseText check={check} />
+          <VerseText verse={check.verse} />
           <small>{label}, World English Bible</small>
         </>
       ),
@@ -125,9 +127,31 @@ function Story({ check }: { check: AppContextCheck }) {
       ),
     },
     { title: "The moment", heading: "shown", body: <Told value={check.moment} check={check} /> },
+    ...(check.after ? [{ title: "What happened next", heading: "shown" as const, body: <Told value={check.after} check={check} /> }] : []),
     { title: "How people have read it", heading: "shown", body: <Told value={check.readings} check={check} /> },
     ...(check.argued ? [{ title: "Who has argued over it", heading: "shown" as const, body: <Told value={check.argued} check={check} /> }] : []),
     { title: "What the context adds", heading: "shown", body: <Told value={check.point} check={check} /> },
+    ...(check.lesson ? [{ title: "What it means for you", heading: "shown" as const, body: <Told value={check.lesson} check={check} /> }] : []),
+    ...(check.echoes.length
+      ? [
+          {
+            title: "Other verses that say it too",
+            heading: "shown" as const,
+            body: (
+              <>
+                {check.echoes.map((echo) => (
+                  <figure className="story-echo" key={refLabel(echo.ref)}>
+                    <VerseText verse={echo.ref} />
+                    <figcaption>
+                      <strong>{refLabel(echo.ref)}</strong>. {echo.note}
+                    </figcaption>
+                  </figure>
+                ))}
+              </>
+            ),
+          },
+        ]
+      : []),
     {
       title: "Keep going",
       // The shelf heading is the first thing seen here; "Keep going" stays the screen's heading for a screen reader.

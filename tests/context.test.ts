@@ -59,6 +59,26 @@ test("every context check the website publishes reads cleanly in the app, and dr
   for (const check of checks)
     for (const piece of withVoices(check.argued ?? "", check.voices))
       assert.ok(typeof piece === "string" || piece.words.length > 0, `${check.slug}: quoted voice`);
+  // What happened next, what it means for you and the other verses reach the app (founder, 2026-10-27).
+  for (const f of published) {
+    const read = toAppCheck(f)!;
+    assert.equal(read.after, f.after, `${f.slug}: after`);
+    assert.equal(read.lesson, f.lesson, `${f.slug}: lesson`);
+    assert.deepEqual(read.echoes, f.echoes, `${f.slug}: echoes`);
+  }
+});
+
+test("a file without the newer parts still reads in the app, without those screens", () => {
+  const read = toAppCheck(file("older"))!;
+  assert.equal(read.after, undefined);
+  assert.equal(read.lesson, undefined);
+  assert.deepEqual(read.echoes, []);
+  const echo = { ref: { book: "psalms", chapter: 103, start: 12, end: 12 }, note: "A line on how it connects." };
+  const full = toAppCheck(file("newer", { after: "Later.", lesson: "For you.", echoes: [echo, { ref: echo.ref }] }))!;
+  assert.equal(full.after, "Later.");
+  assert.equal(full.lesson, "For you.");
+  // An echo without a note is left out.
+  assert.deepEqual(full.echoes, [echo]);
 });
 
 // Founder decision D-06 of 2026-10-19 ("Ja, elke dag de nieuwste") replaced the old assertion that a check

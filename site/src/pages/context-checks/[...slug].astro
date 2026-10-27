@@ -20,12 +20,14 @@ import {
   aiUnreviewedCardLabel,
   arguedHeading,
   checkParts,
+  echoesHeading,
   featuredChecks,
   publishedChecks,
   refHref,
   refLabel,
   splitHook,
   storyStatuses,
+  verses,
   withVoices,
   type ContextCheck,
 } from "../../lib/content";
@@ -135,6 +137,22 @@ const newestFirst = featuredChecks();
               </>
             ))
           }
+
+          <section class="part echoes" data-part="echoes">
+            <h2>{echoesHeading}</h2>
+            {item.echoes.map((echo) => (
+              <figure class="echo">
+                <blockquote>
+                  {verses(echo.ref)
+                    .map((verse) => verse.text)
+                    .join(" ")}
+                </blockquote>
+                <figcaption>
+                  <a href={refHref(echo.ref)}>{refLabel(echo.ref)}</a>. {echo.note}
+                </figcaption>
+              </figure>
+            ))}
+          </section>
 
           <div class="card sources" data-layer="sourced">
             <h2>Why we say this</h2>
@@ -291,6 +309,32 @@ const newestFirst = featuredChecks();
   }
   .argued q {
     quotes: "\201C" "\201D" "\2018" "\2019";
+  }
+  /* Other verses are Scripture: the Scripture face behind a quiet rule, with the reference and
+     the note on how it connects in the caption style. */
+  .echo {
+    margin: 0;
+  }
+  .echo + .echo {
+    margin-top: var(--space-5);
+  }
+  .echo blockquote {
+    margin: 0 0 var(--space-2);
+    padding-left: var(--space-4);
+    border-left: 3px solid var(--line);
+    font-family: var(--font-scripture);
+    font-size: var(--text-body);
+    line-height: 1.6;
+  }
+  .echo figcaption {
+    margin: 0;
+    padding-left: calc(var(--space-4) + 3px);
+    font-size: var(--text-footnote);
+    line-height: 1.45;
+    color: var(--muted);
+  }
+  .echo figcaption a {
+    font-weight: 600;
   }
   .sources {
     margin-top: var(--space-8);

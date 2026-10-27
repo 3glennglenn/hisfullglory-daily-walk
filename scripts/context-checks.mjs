@@ -52,7 +52,7 @@ if (!["status", "next", "text", "sources", "verify", "add"].includes(command)) f
 const bible = JSON.parse(readFileSync(join(root, "public/bible/web.json"), "utf8"));
 const queue = JSON.parse(readFileSync(join(root, "scripts/context-check-queue.json"), "utf8"));
 const today = new Date().toISOString().slice(0, 10);
-const modelsToRead = ["site/content/context-checks/matthew-5-39.json", "site/content/context-checks/psalm-46-10.json"];
+const modelsToRead = ["site/content/context-checks/john-21-15-17.json", "site/content/context-checks/matthew-5-39.json"];
 
 function printVerses(chapter, only) {
   for (const verse of chapter.verses)
