@@ -225,86 +225,91 @@
       "id": "ai:mark/12",
       "chapter": 12,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-27",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "In the temple, Jesus tells the parable of a vineyard owner who sends servants to collect fruit from tenant farmers. They beat or kill the servants, and finally kill the owner’s son. Jesus says the owner will give the vineyard to others, and the leaders see that the story is aimed at them.\n\nDifferent groups then try to trap him. Pharisees and Herodians ask about paying taxes to Caesar, and he answers, “Give to Caesar the things that are Caesar’s, and to God the things that are God’s.” Sadducees ask a puzzle about resurrection, and he answers from the story of the bush. A scribe asks for the greatest commandment, and Jesus names love of God and love of neighbor.\n\nHe asks how the Christ can be David’s son, warns against scribes who seek honor, and praises a poor widow who gave two small coins."
+          "text": "Jesus is teaching in the temple, and he starts with a story about a vineyard. A man plants it, rents it to farmers and goes away. When the time comes he sends servants for his share of the fruit, and the farmers beat and kill them. Last of all he sends his beloved son, and the farmers decide to kill the heir. Jesus says the owner will give the vineyard to others. The leaders see the story is aimed at them, and they leave.\n\nThen the questions come, each one a trap. Is it lawful to pay taxes to Caesar? Jesus asks whose image is on a coin, then answers, “Give to Caesar the things that are Caesar’s, and to God the things that are God’s.” Sadducees bring a puzzle about resurrection, and he answers from the story of the bush. A scribe asks, “Which commandment is the greatest of all?” Jesus names love of God and love of neighbor.\n\nHe ends with a question of his own, a warning about scribes who seek honor, and a poor widow who gives two small coins."
         },
         {
           "kind": "background",
-          "text": "The vineyard picture comes from Isaiah 5, where Israel is God’s vineyard. The parable is aimed at the temple leaders of that day, and it has sometimes been misused to claim that God rejected the Jewish people as a whole. The text does not say that, and the first followers of Jesus were themselves Jews. The Sadducees were a priestly group who accepted only the first five books of Moses and denied resurrection. The Herodians supported the family of Herod. The great commandments come from Deuteronomy 6:4 and 5 and Leviticus 19:18."
+          "text": "The vineyard picture comes from Isaiah 5, where Israel is God’s vineyard. The parable is aimed at the temple leaders of that day. It has sometimes been misused to claim that God rejected the Jewish people as a whole, but the text does not say that, and the first followers of Jesus were themselves Jews. The Sadducees were a priestly group who accepted only the first five books of Moses and denied resurrection. The Herodians supported the family of Herod. The great commandments come from Deuteronomy 6:4 and 5 and Leviticus 19:18."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/13",
       "chapter": 13,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-27",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "As Jesus leaves the temple, a disciple admires the buildings, and Jesus says not one stone will be left on another. On the Mount of Olives, four disciples ask him when this will be and what the sign will be.\n\nJesus warns them not to be led astray by those who claim to be him. He speaks of wars, earthquakes and famines as the beginning of birth pains, of arrests and trials in which the Holy Spirit will give them words, and of the Good News being preached to all nations. He describes a time of great trouble, the abomination of desolation, and a call to flee, and says false christs will arise.\n\nThen the Son of Man will come in clouds and gather his chosen ones. He says no one knows the day or hour, and he ends by telling them to watch."
+          "text": "They are walking out of the temple when a disciple stops to admire it. “Teacher, see what kind of stones and what kind of buildings!” Jesus answers that not one stone will be left on another. Later, on the Mount of Olives, facing the temple, Peter, James, John and Andrew ask him privately when this will be and what the sign will be.\n\nHe begins with a warning. Do not be led astray. Many will come saying, I am he. Wars, earthquakes and famines are only the beginning of birth pains. His followers will be arrested and brought before councils and rulers, and when that happens the Holy Spirit will give them words. The Good News must first be preached to all the nations. He speaks of great trouble, the abomination of desolation, and a call to flee, and says false christs will arise.\n\nThen the Son of Man will come in clouds and gather his chosen ones. No one knows the day or hour. His last word to them, and to all, is “Watch!”"
         },
         {
           "kind": "background",
           "text": "This speech is often called the Olivet Discourse. Christians read it in different ways. Some think most of it concerns the Roman destruction of Jerusalem in the year 70, others see it as describing the end of the age, and many see both together. The phrase abomination of desolation comes from Daniel 9:27 and Daniel 11:31. The words about this generation in verse 30 and the Son not knowing the day in verse 32 are also read in different ways. Birth pains was a common image for the troubles before a new age."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/14",
       "chapter": 14,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-27",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Two days before Passover, the chief priests plot to arrest Jesus quietly. At Bethany a woman pours costly ointment on his head. Some object to the waste, but Jesus says she has prepared his body for burial. Judas Iscariot goes to the chief priests and agrees to betray him.\n\nJesus shares the Passover meal with the twelve, says one of them will betray him, and gives them bread and the cup, calling them his body and his blood of the new covenant. He predicts that Peter will deny him. In Gethsemane he prays in distress, “not what I desire, but what you desire”, while the disciples sleep.\n\nJudas arrives with an armed crowd and Jesus is arrested. He is tried before the council and answers that he is the Christ, and he is condemned. Peter denies him three times and weeps."
+          "text": "Passover is two days away, and the chief priests are looking for a quiet way to arrest Jesus. At Bethany a woman breaks an alabaster jar of costly ointment over his head. Some grumble at the waste. Jesus says, “Leave her alone.” She has anointed his body beforehand for the burying. Judas Iscariot goes to the chief priests and agrees to hand him over.\n\nIn an upper room, Jesus eats the Passover with the twelve. He says one of them will betray him, and one by one they ask, “Surely not I?” He gives them bread and the cup, and calls them his body and his blood of the new covenant. He tells Peter he will deny him three times, and Peter swears he will not.\n\nIn Gethsemane Jesus is greatly troubled. He prays, “not what I desire, but what you desire.” The disciples sleep. Judas arrives with a crowd, and Jesus is seized and taken before the council, where he answers that he is the Christ and is condemned. In the courtyard Peter denies him three times, remembers, and weeps."
         },
         {
           "kind": "background",
           "text": "Passover remembers God freeing Israel from Egypt, and the Last Supper is set within it. Christians differ on what happens in the bread and the cup: Catholic, Orthodox, Lutheran and Reformed traditions each understand the meal differently. The trial scene has sometimes been misused to blame the Jewish people as a whole for Jesus’s death. The text names a group of temple leaders and the Roman governor in the next chapter, and the church has rejected collective blame. Gethsemane means oil press, a garden on the Mount of Olives. See Psalm 41:9 and Zechariah 13:7."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/15",
       "chapter": 15,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-27",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Early in the morning the council binds Jesus and hands him to Pilate, the Roman governor. Pilate asks if he is the King of the Jews, and Jesus answers little. Pilate offers to release a prisoner at the feast. Stirred up by the chief priests, the crowd asks for Barabbas, and Pilate has Jesus flogged and handed over to be crucified.\n\nSoldiers mock Jesus with a purple robe and a crown of thorns. Simon of Cyrene is made to carry the cross. At Golgotha Jesus is crucified between two robbers, with the charge written above him. People passing by and the chief priests mock him. At the ninth hour he cries out, “My God, my God, why have you forsaken me?” and dies. The temple curtain tears in two, and a centurion says this man was the Son of God.\n\nSeveral women watch from a distance. Joseph of Arimathea asks Pilate for the body and lays it in a rock tomb."
+          "text": "It is morning, and Jesus has been bound and handed over to Pilate, the Roman governor. Pilate asks, “Are you the King of the Jews?” Jesus says only, “So you say.” The chief priests accuse him of many things, and he gives no further answer, so that Pilate marvels.\n\nAt the feast Pilate used to release one prisoner. Stirred up by the chief priests, the crowd asks for Barabbas, a man jailed for murder in an uprising. Pilate asks what he should do with the King of the Jews, and they cry out, “Crucify him!” He has Jesus flogged and handed over.\n\nSoldiers dress him in purple and press a crown of thorns on his head. Simon of Cyrene is made to carry his cross. At Golgotha Jesus is crucified between two robbers, with the charge written above him. Passersby and the chief priests mock him. At the ninth hour he cries out to God and dies, and the temple curtain tears in two. A centurion says this man was the Son of God. Women watch from afar, and Joseph of Arimathea lays the body in a rock tomb."
         },
         {
           "kind": "background",
           "text": "Crucifixion was a Roman punishment used on slaves and rebels, and the charge posted above Jesus was political. Pontius Pilate governed Judea in the 20s of the first century. This chapter has sometimes been used to blame the Jewish people as a whole, and that reading is a serious misuse. The text names the temple leaders, a crowd, and the Roman authorities who carried out the sentence. Jesus’s cry on the cross quotes Psalm 22:1. Christians read the torn curtain in several ways, often as a sign of access to God or of judgment on the temple."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:mark/16",
       "chapter": 16,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-27",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "After the Sabbath, Mary Magdalene, another Mary and Salome go to the tomb early on the first day of the week to anoint Jesus’s body. They find the stone already rolled away. Inside, a young man in white tells them Jesus has risen, that he is not there, and that they should tell his disciples and Peter that he goes ahead of them into Galilee. The women flee, trembling and afraid, and say nothing to anyone.\n\nMany early manuscripts end here. Later copies add more verses. They tell of Jesus appearing to Mary Magdalene, to two travelers, and to the eleven, whom he rebukes for unbelief. He sends them to preach to all creation, mentions signs that will accompany believers, and is taken up to heaven."
+          "text": "The Sabbath is over. Mary Magdalene, Mary the mother of James, and Salome buy spices and go to the tomb at sunrise on the first day of the week. On the way they ask each other, “Who will roll away the stone from the door of the tomb for us?” It is very big. When they look up, the stone is already rolled back.\n\nInside they see a young man in a white robe, and they are amazed. He tells them not to be. They are looking for Jesus the Nazarene, who was crucified. “He has risen!” He is not here. They should tell his disciples and Peter that he goes ahead of them into Galilee, where they will see him.\n\nThe women run from the tomb, trembling and astonished. They say nothing to anyone, for they are afraid.\n\nMany early manuscripts end here. Later copies add more verses: Jesus appears to Mary Magdalene, to two travelers and to the eleven, whom he rebukes for unbelief. He sends them to preach to all creation, speaks of signs that will follow believers, and is taken up into heaven."
         },
         {
           "kind": "background",
           "text": "The ending of Mark is a well-known textual question. The oldest and best known manuscripts stop at verse 8, and verses 9 to 20 appear in later ones. Most Bibles mark this with a note. Churches differ on how to treat the longer ending, but many read it as early and still valued. Verses 17 and 18 about serpents and poison are read in different ways, and some groups have taken them as instructions. Others read them as describing what happened in the early church. See Acts 28:3 to 6 for comparison."
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
