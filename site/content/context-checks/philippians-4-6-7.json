@@ -45,9 +45,49 @@
   ],
   "moment": "The verses sit in the middle of a run of short commands. Paul has just written “Rejoice in the Lord always!” and “Let your gentleness be known to all men. The Lord is at hand.” Then comes the turn: “In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God.”\n\nThe promise that follows is about what God does, not about what the reader manages: “the peace of God, which surpasses all understanding, will guard your hearts and your thoughts in Christ Jesus.”",
   "around": "After the promise, Paul turns to what to think about: “whatever things are true, whatever things are honorable, whatever things are just”. A little further on he says he has “learned in whatever state I am, to be content in it”, and that he knows “the secret both to be filled and to be hungry”.",
+  "after": "The letter does not tell us whether Euodia and Syntyche found their way back to each other. Paul asked a trusted partner in the church to help them, and he reminded everyone that these two women had “labored with me in the Good News”. Their names stay in the letter, and so does his hope for them. How it ended is not told.\n\nThe letter went home, it seems, with Epaphroditus, the man who had carried the church’s gift to Paul and nearly died doing it. Paul does not hide what that illness cost. Epaphroditus “was very troubled” because the church had heard he was sick, and Paul says God spared him “that I might not have sorrow on sorrow.” The man who wrote “In nothing be anxious” was no stranger to sorrow, and he said so in the same letter.\n\nThe church in that city of old soldiers lasted. By around 343 Philippi had a bishop, Porphyrios, and a small church named for Paul, known from an inscription in its mosaic floor. Between the middle of the fourth century and the end of the sixth, seven churches were built there, some of them rivaling the great churches of Constantinople. Their ruins are now a UNESCO World Heritage Site, listed in 2016 in part for the city’s place in early Christianity.",
   "readings": "One reading takes the verses as a practical way through worry: name every request to God, and put thanksgiving beside the asking.\n\nAnother hears the peace as something larger than a calm feeling. It is a peace that stands guard, as the verse puts it, over hearts and thoughts.\n\nThe two readings are not rivals. One says what to do with worry, the other says what God gives in return.",
   "argued": "In the fourth century the preacher John Chrysostom read the verse as a remedy for hard times. Of prayer with thanksgiving he said: [[chrysostom-medicine]]\n\nHe also heard in the phrase the peace of God something more specific than a feeling. For him it was the reconciliation God made with people through his Son, and that was the peace he saw standing guard over the believer.\n\nA man in custody, a city of old soldiers, two women asked to agree and a gift carried by Epaphroditus: the letter keeps its feet on the ground, and so does the advice in it.",
   "point": "Paul does not tell the Philippians that nothing will trouble them. He writes from custody, and he tells them where to take what troubles them: to God, with thanksgiving, and he promises peace that guards.",
+  "lesson": "Paul says “in everything”, and he means it. You do not have to sort your worries into the ones big enough for God and the ones you should handle alone. The rent, the test result, the child who does not call back, the thing you are ashamed to be anxious about: all of it can be said to him, plainly.\n\nTry it the way Paul describes. Name what you are carrying, one thing at a time. Then name something you are thankful for, even something small, and set it beside the asking. Thanksgiving does not mean pretending the trouble is not there. It means the trouble is not the only thing there.\n\nPaul does not promise that you will understand what happens next. He speaks of a peace “which surpasses all understanding”, one that stands guard over the heart while the answer is still out of sight.\n\nIf your anxiety is heavy and lasting, praying does not rule out other help. Paul, in chains, was glad of the help his friends sent him. Let people who love you, and people trained to help, carry part of it with you.\n\nIf you do not pray, there is still something here worth trying: say plainly what weighs on you instead of letting it circle, and look for what is still good.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "1-peter",
+        "chapter": 5,
+        "start": 6,
+        "end": 7
+      },
+      "note": "Peter gives the same instruction with a different picture: “casting all your worries on him, because he cares for you.” Prayer here is a handing over, and the reason given is God’s care."
+    },
+    {
+      "ref": {
+        "book": "isaiah",
+        "chapter": 26,
+        "start": 3,
+        "end": 3
+      },
+      "note": "Isaiah’s song pictures a city whose walls are salvation, and promises “perfect peace” to the mind that trusts God. In Philippians, too, peace is something that stands guard."
+    },
+    {
+      "ref": {
+        "book": "john",
+        "chapter": 14,
+        "start": 27,
+        "end": 27
+      },
+      "note": "On the night before he died, Jesus told his friends, “Peace I leave with you. My peace I give to you; not as the world gives, I give to you.” The peace Paul speaks of is given, not achieved."
+    },
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 55,
+        "start": 22,
+        "end": 22
+      },
+      "note": "A psalmist betrayed by a friend writes, “Cast your burden on the LORD and he will sustain you.” Bringing everything to God is far older than Paul’s letter."
+    }
+  ],
   "basis": [
     {
       "book": "philippians",
@@ -66,6 +106,18 @@
       "chapter": 4,
       "start": 18,
       "end": 18
+    },
+    {
+      "book": "philippians",
+      "chapter": 4,
+      "start": 3,
+      "end": 3
+    },
+    {
+      "book": "philippians",
+      "chapter": 2,
+      "start": 25,
+      "end": 30
     }
   ]
 }

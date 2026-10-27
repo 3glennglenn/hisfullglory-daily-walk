@@ -15,9 +15,11 @@
   "storyStatus": "scripture",
   "moment": "Paul is writing to Timothy, whom he calls “my true child in faith”. He has left him in Ephesus with a hard task: to stop certain people from teaching a different message.\n\nNear the end of the letter Paul comes to money. Some in the church want to be rich, and he has watched what that wish does to people. He writes like someone who has seen friends go under: they “fall into a temptation, a snare”, and some “have pierced themselves through with many sorrows”. This is a warning from a father to a son about a danger he has seen up close.",
   "around": "The verse itself reads: “the love of money is a root of all kinds of evil”. The verse before it is aimed at “those who are determined to be rich”.",
+  "after": "Paul wrote to Timothy once more, this time in chains, in a letter that says the time of his departure has come. He calls him “my beloved child” and tells him he is “longing to see you, remembering your tears, that I may be filled with joy”.\n\nIt is a lonely letter. Demas, one of Paul’s companions, had left him, “having loved this present world”. At his first defense in court, Paul writes, “no one came to help me, but all left me.” The man who had told Timothy that food and clothing are enough now asks him for very little: come soon, come before winter, and bring the cloak he had left at Troas, and the books. Then he looks back on his life in the words he once gave Timothy: “I have fought the good fight.” And: “I have kept the faith.”\n\nTimothy’s own road was not easy either. The letter to the Hebrews ends with the news that “our brother Timothy has been freed”, which most readers take to mean he had been in prison.\n\nThe Bible does not tell how either man died. Church tradition, as the historian Eusebius later recorded it, says Paul was beheaded in Rome under the emperor Nero, in the 60s, and that Timothy was the first to lead the church in Ephesus, the city of the silversmiths. An old account of Timothy’s life, ascribed to an early bishop of Ephesus, says he served there until he was past eighty and was beaten to death by pagans. It is tradition, not Scripture, but it remembers him where Paul had left him, still at his post.",
   "readings": "The shortened form of this verse has shaped whole lives. Some Christians have concluded that money itself is the enemy, and through the centuries many have given away everything they owned in order to follow Christ without it.\n\nOthers have read the verse as it stands: the root is the love of money, the wish to be rich at any price. On that reading a person can be poor and ruled by money, or wealthy and free of it.\n\nThe same chapter goes on to speak to believers who are rich. It does not tell them to become poor. It tells them not to set their hope on riches, to do good and to be ready to share (1 Timothy 6:17-18).",
   "argued": "More than six hundred years ago Geoffrey Chaucer gave this verse to one of his great rogues. In The Canterbury Tales the Pardoner, who sells pardons, boasts that his sermon text never changes. It is this verse in Latin, the love of money is the root of evils, and the text names it: to Timothy, chapter six. Then he admits what he does: [[chaucer]]\n\nIn 1872 the satirist Samuel Butler turned the saying around in his novel Erewhon: [[butler]]\n\nThe novelist and philosopher Ayn Rand took up the shortened saying as a question, so you think money is the root of all evil, and answered it with another: [[rand]]\n\nNotice that Butler and Rand both argue with the shortened saying. Paul wrote something else: the love of money.",
   "point": "Three small words change the saying. The problem named is the love of money, and not money. It is a root, and not the only one. And it leads to all kinds of evil, which is not the same as every evil there is. The warning is about what a person wants most.",
+  "lesson": "Most of us would not say we love money. But love shows itself in what we think about at night, what we are afraid to lose, and what we would bend the truth to keep. Paul’s warning is not only for the rich. It reaches anyone who has quietly decided that enough is always a little more.\n\nHe does not leave Timothy with a warning alone. He gives him a direction, “flee these things”, and a list worth running toward instead: righteousness, faith, love, perseverance, gentleness. Contentment is not something you can buy. Paul says elsewhere that he had to learn it.\n\nSo start small and honest. Notice what money does to your peace. Give away something you could have kept. Bring your worries about money to God instead of carrying them alone. You will still need food and clothing, and the chapter says so plainly. It only refuses to let them become what you live for.\n\nIf you do not share this faith, the warning still describes something many people have watched happen: wanting more can cost a person the very things that made life good.",
   "voices": [
     {
       "id": "chaucer",
@@ -62,6 +64,56 @@
     {
       "title": "Ayn Rand, The Meaning of Money, in For the New Intellectual (Ayn Rand Lexicon)",
       "url": "https://aynrandlexicon.com/lexicon/money.html"
+    },
+    {
+      "title": "Eusebius, Church History, Book II, chapter 25, on the deaths of Paul and Peter under Nero (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250102.htm"
+    },
+    {
+      "title": "Eusebius, Church History, Book III, chapter 4, on Timothy in Ephesus (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250103.htm"
+    },
+    {
+      "title": "Catholic Encyclopedia: Epistles to Timothy and Titus, on the later life of Timothy (New Advent)",
+      "url": "https://www.newadvent.org/cathen/14727b.htm"
+    }
+  ],
+  "echoes": [
+    {
+      "ref": {
+        "book": "hebrews",
+        "chapter": 13,
+        "start": 5,
+        "end": 5
+      },
+      "note": "The letter that brings news of Timothy’s release also says, “Be free from the love of money, content with such things as you have”, and gives the reason: God has promised not to leave his people."
+    },
+    {
+      "ref": {
+        "book": "luke",
+        "chapter": 12,
+        "start": 15,
+        "end": 15
+      },
+      "note": "Asked to settle a quarrel over an inheritance, Jesus warned that “a man’s life doesn’t consist of the abundance of the things which he possesses.” Then he told of a rich man who built bigger barns and died that night."
+    },
+    {
+      "ref": {
+        "book": "ecclesiastes",
+        "chapter": 5,
+        "start": 10,
+        "end": 10
+      },
+      "note": "Centuries before Paul, the Teacher saw the same trap: “He who loves silver shall not be satisfied with silver”. The love of money never arrives at enough."
+    },
+    {
+      "ref": {
+        "book": "mark",
+        "chapter": 10,
+        "start": 21,
+        "end": 22
+      },
+      "note": "Jesus looked at this man with love and invited him to follow. But “he went away sorrowful, for he was one who had great possessions.” It is the sorrow Paul warns about, seen in one face."
     }
   ],
   "basis": [
@@ -94,6 +146,42 @@
       "chapter": 6,
       "start": 17,
       "end": 18
+    },
+    {
+      "book": "1-timothy",
+      "chapter": 6,
+      "start": 11,
+      "end": 12
+    },
+    {
+      "book": "2-timothy",
+      "chapter": 1,
+      "start": 2,
+      "end": 4
+    },
+    {
+      "book": "2-timothy",
+      "chapter": 4,
+      "start": 6,
+      "end": 13
+    },
+    {
+      "book": "2-timothy",
+      "chapter": 4,
+      "start": 16,
+      "end": 16
+    },
+    {
+      "book": "2-timothy",
+      "chapter": 4,
+      "start": 21,
+      "end": 21
+    },
+    {
+      "book": "hebrews",
+      "chapter": 13,
+      "start": 23,
+      "end": 23
     }
   ]
 }

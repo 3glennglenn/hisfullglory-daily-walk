@@ -29,6 +29,22 @@
     {
       "title": "John Chrysostom, Homily 20 on Romans (New Advent)",
       "url": "https://www.newadvent.org/fathers/210220.htm"
+    },
+    {
+      "title": "Wikipedia: Tacitus on Jesus (Annals 15.44, on Nero and the Christians of Rome)",
+      "url": "https://en.wikipedia.org/wiki/Tacitus_on_Jesus"
+    },
+    {
+      "title": "Eusebius, Church History, Book II, chapter 25 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250102.htm"
+    },
+    {
+      "title": "Augustine, Confessions, Book VIII, chapter 12 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/110108.htm"
+    },
+    {
+      "title": "Wikipedia: Augustine of Hippo",
+      "url": "https://en.wikipedia.org/wiki/Augustine_of_Hippo"
     }
   ],
   "voices": [
@@ -55,9 +71,40 @@
   ],
   "moment": "Paul is writing to people he has not met. He has just asked them to give their bodies to God, and now he names two ways of living: being pressed into the shape of this world, or being transformed as the mind is renewed.\n\nThe purpose is stated in the verse itself: “so that you may prove what is the good, well-pleasing, and perfect will of God.”",
   "around": "The verses after it show what this renewed life looks like in a community: “Let love be without hypocrisy”, “Rejoice with those who rejoice. Weep with those who weep.” and “Don’t be overcome by evil, but overcome evil with good.” The chapter does not leave the renewing of the mind in the head. It follows it into the way people treat each other.",
+  "after": "Paul had told the Romans that he longed to see them, and he hoped to stop in their city on his way to Spain. He did reach Rome, but not as he had planned. He came as a prisoner, after a shipwreck. When believers in Rome heard he was near, they walked out to meet him as far as The Market of Appius and The Three Taverns, and Acts tells how it felt: “When Paul saw them, he thanked God and took courage.” For two whole years he lived in a rented house with a soldier guarding him, and taught all who came “with all boldness, without hindrance.”\n\nLess than ten years after the letter arrived, the church that first heard “Don’t be conformed to this world” faced the worst that Rome could do. In July of 64 a great fire burned much of Rome. The Roman historian Tacitus, writing some fifty years later, records that Nero put the blame on the Christians. A great many were convicted and killed in cruel ways; some were burned to light Nero’s gardens at night. Church tradition, written down by the historian Eusebius, says that Paul himself was beheaded in Rome under Nero.\n\nThe letter lived on. In late August of 386, in a small garden in Milan, a 31-year-old teacher of rhetoric named Augustine threw himself down under a fig tree and wept over his own life. From a nearby house he heard a child’s voice chanting, again and again, words that told the hearer to pick up and read. He took it as a word from God, went back to the book of Paul’s letters he had left with his friend, and read where his eyes first fell, in the chapter after this one: “put on the Lord Jesus Christ, and make no provision for the flesh”. He later wrote that in that moment his doubts were gone.",
   "readings": "Many believers hear this verse as a call to guard what they let into their minds, and to fill them with Scripture and prayer. Others hear it first as a call to a different shape of life, lived with others, as the verses that follow suggest.\n\nThe early church preacher John Chrysostom read the word for this world as a fashion, something that looks like a lot and does not last, set against virtue as a real form. He also read the renewing as something repeated, since people sin and need to begin again.\n\nThese readings fit together. The verse can be a call to think differently and to live differently.",
   "argued": "John Chrysostom, in a homily on this verse, noticed that Paul does not ask for a change of costume. [[chrysostom-form]] To him the ways of the world were a show and a mask, and virtue a form with a beauty of its own.\n\nHe also expected that people would fall short day after day, and he offered the verse as a comfort: [[chrysostom-renew]]",
   "point": "Paul writes this verse after asking the Romans to answer the mercies of God with their whole lives, and the word he chooses for change is the one used of Jesus on the mountain. The renewing of the mind is a change that begins in mercy.",
+  "lesson": "You do not have to let whatever surrounds you decide who you become.\n\nThe world does a great deal of shaping without asking: what to want, what to fear, who counts and who does not. Paul’s answer is not a harder effort to look different on the outside. It is a change from within, and the rest of the chapter shows where it will be seen: in love “without hypocrisy”, in weeping with those who weep, in refusing to pay back evil with evil.\n\nMaybe you can feel that pressure in your own life, in what you scroll past, what you buy, how you talk about people. Being renewed does not mean pretending you are untouched by it. It means letting God work on the way you think, day by day, among real people. And if you slipped yesterday, you do not have to wait to begin again.\n\nYou could start with Romans 12 itself. Read all twenty-one verses slowly, and ask God to show you one thought that needs renewing and one person you could love better this week. If you do not share this faith, the chapter still asks a question worth sitting with: what is shaping you, and is it making you into the person you want to be?",
+  "echoes": [
+    {
+      "ref": {
+        "book": "2-corinthians",
+        "chapter": 3,
+        "start": 18,
+        "end": 18
+      },
+      "note": "Paul uses the same Greek verb here. Believers, “seeing the glory of the Lord as in a mirror”, are “transformed into the same image from glory to glory”. The change comes from looking at the Lord, and it keeps going."
+    },
+    {
+      "ref": {
+        "book": "ephesians",
+        "chapter": 4,
+        "start": 22,
+        "end": 24
+      },
+      "note": "Ephesians describes the same change: put away the old way of life, “be renewed in the spirit of your mind”, and “put on the new man”. Like Romans 12, it then turns at once to how people speak and forgive."
+    },
+    {
+      "ref": {
+        "book": "titus",
+        "chapter": 3,
+        "start": 4,
+        "end": 5
+      },
+      "note": "Here too renewal begins with mercy, not effort: “not by works of righteousness which we did ourselves, but according to his mercy”, through the “renewing by the Holy Spirit”."
+    }
+  ],
   "basis": [
     {
       "book": "romans",
@@ -82,6 +129,42 @@
       "chapter": 12,
       "start": 21,
       "end": 21
+    },
+    {
+      "book": "romans",
+      "chapter": 1,
+      "start": 11,
+      "end": 11
+    },
+    {
+      "book": "romans",
+      "chapter": 15,
+      "start": 23,
+      "end": 24
+    },
+    {
+      "book": "acts",
+      "chapter": 27,
+      "start": 41,
+      "end": 44
+    },
+    {
+      "book": "acts",
+      "chapter": 28,
+      "start": 14,
+      "end": 16
+    },
+    {
+      "book": "acts",
+      "chapter": 28,
+      "start": 30,
+      "end": 31
+    },
+    {
+      "book": "romans",
+      "chapter": 13,
+      "start": 13,
+      "end": 14
     }
   ]
 }

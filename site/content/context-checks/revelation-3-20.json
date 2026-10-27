@@ -29,13 +29,19 @@
     {
       "title": "Cru: Would You Like to Know God Personally?",
       "url": "https://www.cru.org/us/en/how-to-know-god/would-you-like-to-know-god-personally.html"
+    },
+    {
+      "title": "Wikipedia: Laodicea on the Lycus",
+      "url": "https://en.wikipedia.org/wiki/Laodicea_on_the_Lycus"
     }
   ],
   "moment": "The speaker is the risen Jesus, who introduces himself here as “the Faithful and True Witness”. He is sending seven letters to seven churches, and this is the last of them, to “the assembly in Laodicea”.\n\nIt is one of the sternest of the seven. The church thinks it is doing well: “I am rich, and have gotten riches, and have need of nothing”. He tells them the truth they cannot see. And then the tone turns in a single line: “As many as I love, I reprove and chasten.” The knock at the door comes from someone who has not given up on them.",
   "around": "The verse before it sets the tone: “As many as I love, I reprove and chasten. Be zealous therefore, and repent.” The knock is part of that correction, and it comes with a promise to come in and eat with anyone who opens.",
+  "after": "The Bible never says how Laodicea answered the knock. The letter ends by turning to everyone who hears it: “He who has an ear, let him hear what the Spirit says to the assemblies.” But the book does not forget the meal. Near its end a voice says, “Blessed are those who are invited to the wedding supper of the Lamb.” And its last page turns the knock into an open invitation: “He who is thirsty, let him come.”\n\nThe church in Laodicea did not disappear. The city became a bishopric early on. A bishop named Sagaris died as a martyr around the year 166. In 325 its bishop Nunechius took part in the Council of Nicaea, and a church council met in Laodicea itself; sixty of its rules for church life survive. The city was eventually destroyed in the invasions of the Turks and the Mongols, and the last known bishop held the see in 1450. Today its ruins lie near Denizli in Turkey, and since 2002 archaeologists from Pamukkale University have been digging and restoring them: colonnaded streets, theaters, and the aqueduct that brought water to a rich city.\n\nThe painting had a life of its own too. Hunt was old and suffering from glaucoma when he worked on the life-sized version, and another painter, Edward Robert Hughes, helped him finish it. Engraved copies hung in nurseries, schools and churches. A letter to a comfortable church had become a picture on the nursery wall.",
   "readings": "Preachers have long used this verse to invite people to faith: Christ stands at the door of every heart and waits to be let in. Hunt’s painting fixed that picture in many minds.\n\nReaders who stay with the letter notice that the invitation is first addressed to believers. On this reading the verse is about renewal. A church, or a Christian, can go on with the routines of faith while Christ himself has been left outside.\n\nAnd many have noticed the meal. He promises to come in and eat with anyone who opens. Some hear in that the fellowship of the Lord’s table, and some the great feast at the end of all things. Either way, the knock ends at a shared table.",
   "argued": "In 1874, preaching in London on the letter to Laodicea, Charles Spurgeon said he had often heard this text preached to unbelievers, as if Christ were knocking at their door. He disagreed: [[spurgeon-rev]]\n\nIn the next century the other reading went around the world. Cru, the ministry founded by Bill and Vonette Bright, developed the Four Spiritual Laws in 1957, and more than two and a half billion copies of the booklet have been printed. One of its principles is that a person receives Christ by personal invitation, and Cru’s own page still explains it with this verse.\n\nOne verse, two doors: the door of a single heart, and the door of a church that has left its Lord outside. Both readings are still preached today.",
   "point": "The picture is of Christ outside a congregation that carries his name, asking to be let back in. Many Christians also use the verse when inviting someone to faith. In Revelation it is first a call to a church to repent.",
+  "lesson": "You can be busy with faith and still have left Jesus standing outside.\n\nThis letter went to a church, not to strangers. He does not flatter them, and he does not walk away. He tells them the truth because he loves them, and then he knocks. He does not break the door down. He speaks, and he waits to be let in, and what waits on the other side is a meal: “I will come in to him and will dine with him, and he with me.”\n\nMaybe your faith has become something you keep up from the outside: the right words, the right places, and no real conversation with him in a long time. The way back can start small. Stop and listen. Tell him honestly where you are. You can open the door today and let him sit at your table.\n\nAnd the promise is to “anyone”. If you have never opened that door at all, the knock is for you as well. If you do not share this faith, the picture still says something true about love: it knocks, and it does not force the door.",
   "voices": [
     {
       "id": "spurgeon-rev",
@@ -48,12 +54,53 @@
       }
     }
   ],
+  "echoes": [
+    {
+      "ref": {
+        "book": "luke",
+        "chapter": 24,
+        "start": 28,
+        "end": 30
+      },
+      "note": "On the road to Emmaus the risen Jesus “acted like he would go further” until two sad disciples urged him to stay. Then “He went in to stay with them”, and he broke bread at their table."
+    },
+    {
+      "ref": {
+        "book": "proverbs",
+        "chapter": 3,
+        "start": 11,
+        "end": 12
+      },
+      "note": "The words just before the knock, about reproving those he loves, go back a long way. The proverb says “whom the LORD loves, he corrects, even as a father reproves the son in whom he delights.”"
+    },
+    {
+      "ref": {
+        "book": "james",
+        "chapter": 4,
+        "start": 8,
+        "end": 8
+      },
+      "note": "James writes to believers who have drifted toward the world, and he calls them back without closing the door: “Draw near to God, and he will draw near to you.”"
+    }
+  ],
   "basis": [
     {
       "book": "revelation",
       "chapter": 3,
       "start": 14,
       "end": 22
+    },
+    {
+      "book": "revelation",
+      "chapter": 19,
+      "start": 9,
+      "end": 9
+    },
+    {
+      "book": "revelation",
+      "chapter": 22,
+      "start": 17,
+      "end": 17
     }
   ]
 }
