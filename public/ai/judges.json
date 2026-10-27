@@ -22,6 +22,240 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:judges/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Joshua is dead, and the people ask the LORD who should go up first. The answer is Judah. Judah asks his brother Simeon to join him, and together they win at Bezek. They catch the king there, Adoni-Bezek, and cut off his thumbs and big toes. He says, in the text’s own words, that seventy kings had scavenged under his table, and that as he had done, God had done to him.\n\nThe chapter then offers a bright list: Jerusalem struck, Hebron given to Caleb, Othniel winning Achsah as his wife, and the LORD was with Judah. After that comes a different tone. “he could not drive out the inhabitants of the valley, because they had chariots of iron.”\n\nTribe after tribe follows: Benjamin, Manasseh, Ephraim, Zebulun, Asher, Naphtali. Each “didn’t drive out” the people of the land. The Danites are pushed into the hills."
+        },
+        {
+          "kind": "background",
+          "text": "Judges takes up the story after Joshua. The first chapter repeats some events from the book of Joshua, with Caleb and Othniel; see Joshua 15. It sets the mood for the whole book: promising beginnings followed by incomplete results. Scholars debate how the account fits with Joshua’s picture of a nearly complete conquest. The cruel treatment of Adoni-Bezek is told without comment on whether it was right. Judges 2 explains what the writer thinks this means."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "An angel of the LORD comes up from Gilgal to a place called Bochim and speaks to all of Israel. The LORD brought them out of Egypt and into this land and promised never to break the covenant. They were told not to make covenants with the people here, and they did. “Why have you done this?” Then the people lift up their voices and weep. They name the place Bochim, which the text connects with weeping.\n\nThe story then steps back and sketches a pattern. Joshua dies. Another generation rises, one that does not know the LORD. They serve the Baals, and the LORD gives them to raiders. In their distress the LORD raises up judges to save them. But when each judge dies, the people turn back, “more corruptly than their fathers”.\n\nSo the LORD says he will no longer drive out the nations Joshua left, and will use them to test Israel."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is the key to the book. It explains why the stories that follow repeat: sin, oppression, a cry for help, a rescuer, a time of rest, and then a new fall. Scholars often point out that the cycle shows Israel moving downhill. Baal was the storm god of Canaan, and Ashtaroth were goddesses linked to him. The first verses of the chapter echo the covenant warnings in Deuteronomy 7 and the end of Joshua 23."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The first verses ask why enemies were left in the land: to test Israel and to teach war to a new generation. Then the pattern begins. Israel marries among the peoples around them and serves their gods, and a king from Mesopotamia rules them for eight years. When they cry out, the LORD raises up Othniel, Caleb’s younger brother, and the land has rest for forty years.\n\nIsrael falls again, and Eglon of Moab holds them for eighteen. This time the rescuer is Ehud, a left-handed man from Benjamin. He carries tribute to the king, with a double-edged sword strapped under his clothing on his right thigh. Alone with Eglon in a cool upper room, he says, “I have a message from God to you.” Then he kills him. He locks the doors behind him and escapes.\n\nEhud blows a trumpet in the hills and leads Israel against Moab. The land rests eighty years. A line about Shamgar and an ox goad closes the chapter."
+        },
+        {
+          "kind": "background",
+          "text": "Othniel and Ehud are the first two judges. In this book a judge is a leader who rescues the people, not just a courtroom officer. Othniel is the connection with Joshua and Caleb; see Joshua 15. The story of Ehud is told with dark humor and many details, and readers have long found it striking. It is a story about violence, and the text does not offer a moral verdict on every act. The next judge, Deborah, comes in chapter 4."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "For twenty years the Canaanite king Jabin, with a captain named Sisera and nine hundred chariots of iron, has pressed hard on Israel. The people cry to the LORD, and the chapter turns to a woman sitting under a palm tree between Ramah and Bethel. Deborah is a prophetess, and Israel comes to her for judgment.\n\nShe sends for Barak and passes on the LORD’s command to lead ten thousand men to Mount Tabor. Barak says he will go only if she goes with him. She agrees, and tells him the honor of the day will not be his, for the LORD “will sell Sisera into a woman’s hand.”\n\nThe LORD confuses Sisera and his chariots at the river Kishon, and Sisera runs away on foot to the tent of Jael, whose husband’s family has peace with his king. She gives him milk and covers him with a rug. When he sleeps, she takes a tent peg and a hammer. Barak arrives to find Sisera already dead."
+        },
+        {
+          "kind": "background",
+          "text": "Deborah is the only judge described as a prophet, and the only one who settles disputes in the way the book’s title suggests. The war was fought in the Jezreel valley, where chariots were strong. Chapter 5 retells the same victory as a poem. Readers have long asked about Jael’s act of killing a guest after offering him shelter; the text reports it and the song praises her, and different readers have judged it differently. Compare Judges 5:24."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After the battle comes the song. Deborah and Barak sing, and the first thing they do is bless the LORD, for leaders who “took the lead in Israel” and a people who “offered themselves willingly”.\n\nThe song looks back to Sinai, when the earth shook at the LORD’s presence. It remembers empty roads and frightened travelers, and the day Deborah rose “a mother in Israel.” It names the tribes who came: Ephraim, Benjamin, Zebulun, Issachar, Naphtali. It also names those who stayed home among the sheepfolds and the ships, and it curses the town of Meroz for not helping.\n\nThe battle itself is told in a few lines: kings fought, the stars fought, the river Kishon swept them away. Jael is blessed above women. Then the camera swings to a window, where Sisera’s mother waits, asking why his chariot is so slow, and her ladies say he must be dividing the spoil. The song ends with a prayer, and the land rests forty years."
+        },
+        {
+          "kind": "background",
+          "text": "Many scholars regard this song as one of the oldest pieces of writing in the Bible, though dates are debated. It is poetry, so it speaks in images such as the stars fighting, and the details differ in places from the prose telling in chapter 4. Poems like this celebrated victories; compare Exodus 15. The scene with Sisera’s mother is often noticed for letting the reader see the enemy’s home with something close to sympathy. The next chapter begins another cycle."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "For seven years the Midianites come every harvest. They arrive with their camels like locusts, destroy the crops and leave Israel with nothing, so the people hide in caves and mountain strongholds. Israel cries out, and a prophet reminds them who brought them out of Egypt.\n\nThen the story finds a young man named Gideon beating out wheat in a wine press, to hide it. An angel of the LORD sits under an oak and says, “The LORD is with you, you mighty man of valor!” Gideon answers with his questions: if the LORD is with us, why has all this happened? He says his family is the poorest in Manasseh, and he is the least in his father’s house. He asks for a sign, and fire comes up from a rock.\n\nThat night Gideon pulls down his father’s altar of Baal. He does it by night, because he is afraid, and the town wants him dead. Then, before the battle, he puts out a fleece, twice, and asks God for dew on the wool alone and then on the ground alone."
+        },
+        {
+          "kind": "background",
+          "text": "Midian and Amalek were desert peoples who raided from the east. The cycle begun in Judges 2 comes round again, and this time God’s first answer is a prophet’s rebuke, then a hesitant man. Gideon’s second name, Jerub-Baal, comes from his father’s defense of him. The fleece has been taken in different ways: some see it as a sign of faith, others as a sign of doubt. The text does not say which. Gideon’s call can be compared with Moses in Exodus 3."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Gideon rises early with an army. The LORD says it is too big: if Israel wins with all these men, they will brag that their own hand saved them. So the fearful are told to go home, and twenty-two thousand leave. Ten thousand remain, and the LORD says that is still too many.\n\nAt the water, those who lap like a dog are set apart from those who kneel, and only three hundred remain. That night the LORD tells Gideon, if you are afraid, go down to the enemy camp and listen. He hears a man tell a dream about a loaf of barley bread tumbling into the tent of Midian and flattening it. His friend says it can mean only Gideon’s sword. Gideon bows in worship.\n\nHe divides the three hundred into three companies, each man with a trumpet and a jar with a torch inside. At the edge of the camp they blow, break the jars and shout, “The sword of the LORD and of Gideon!” The Midianite army runs, and the men of Ephraim are called out to cut them off."
+        },
+        {
+          "kind": "background",
+          "text": "The point of the story is the shrinking army: the victory is meant to be the LORD’s. The battle is set in the valley of Jezreel, near the spring of Harod and the hill of Moreh. Trumpets, jars and torches are surprise weapons, used for panic and noise, and not for fighting. Compare the fall of Jericho in Joshua 6, where sound also played a part. Chapter 8 begins with the aftermath, which is less simple than the victory."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Victory does not end Gideon’s troubles. First the men of Ephraim rebuke him sharply for not calling them, and he calms them with a gentle answer about their share in the win. Then, faint but still pursuing, he and his three hundred ask the town of Succoth for bread. The leaders refuse, and so do the men of Penuel. Gideon promises both towns that he will come back, and he does. He catches the two Midianite kings, Zebah and Zalmunna, and punishes the elders of Succoth, and he breaks down the tower of Penuel and kills its men.\n\nThe kings are asked about the men they killed at Tabor, and Gideon says they were his brothers. He kills the kings himself.\n\nThe people then offer him a throne: “Rule over us”. He refuses: “The LORD shall rule over you.” But he asks for gold, and makes an ephod from it, and Israel goes after it. When he dies, they turn to the Baals again."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter shows a hero with real strengths and real flaws. His answer to Ephraim shows wisdom, and his harshness toward Succoth and Penuel is hard to read. The ephod was a priestly garment, and here it becomes a snare; the text uses the language of unfaithfulness. Gideon’s refusal to be king is set against his son Abimelech in chapter 9. Compare the later request for a king in 1 Samuel 8."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Gideon had seventy sons, and one more by a concubine in Shechem: Abimelech. As soon as Gideon is gone, Abimelech goes to his mother’s family in Shechem and asks whether it is better to be ruled by seventy or by one. With silver from the temple of Baal Berith he hires reckless men, goes to his father’s house, and kills his brothers on one stone. Only the youngest, Jotham, hides.\n\nWhen Shechem makes Abimelech king, Jotham climbs Mount Gerizim and tells a story about trees looking for a king. The olive, the fig and the vine all refuse. The bramble accepts. Jotham curses: let fire come out of Abimelech and devour Shechem, and out of Shechem and devour Abimelech.\n\nThree years later the curse begins to come true. Shechem turns against Abimelech, and he destroys the city, burns a tower with about a thousand people inside, and then moves on to Thebez. There a woman drops a millstone on his head. He asks his armor bearer to kill him, so no one can say a woman did it."
+        },
+        {
+          "kind": "background",
+          "text": "This is the darkest chapter in the book. Abimelech is not a judge in the usual sense: he is a self-appointed king who seizes power by murder. Jotham’s fable is one of the oldest in the Bible, and it argues that those fit to rule do not want to. The text says God repaid the wickedness of both Abimelech and the men of Shechem. Shechem was an old center of worship and covenant; see Joshua 24. For another woman and a fatal blow, compare Judges 4."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After Abimelech, the book moves quickly through two quieter judges. Tola, from Issachar, judges twenty-three years. Jair of Gilead judges twenty-two, and has thirty sons who ride thirty donkey colts and rule thirty towns.\n\nThen the old pattern returns. Israel serves the Baals and the Ashtaroth and the gods of Syria, Sidon, Moab, Ammon and the Philistines. The LORD gives them to the Philistines and the Ammonites, who crush Israel for eighteen years. Then the people cry out: “We have sinned against you”.\n\nThe LORD’s first answer is hard. He reminds them of the times he saved them and says: “Go and cry to the gods which you have chosen.” They plead again, “Do to us whatever seems good to you; only deliver us, please, today.” Then they put away the foreign gods. The text says the LORD’s soul was grieved for the misery of Israel. The Ammonites gather in Gilead, and the leaders ask who will lead the fight."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter bridges the story of Abimelech and the story of Jephthah. It lists two judges in a few lines, and the contrast with the long accounts of Gideon and Abimelech is deliberate. The call for help is the same as in earlier cycles, but God’s reply is sharper, as the mood of the book darkens. Readers have taken the phrase about the LORD’s grief as a sign of his patience. Compare the prayer of repentance in 1 Samuel 7. Jephthah follows in chapter 11."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jephthah is a mighty man of valor, and the son of a prostitute. His half brothers drive him out so he will not inherit, and outlaws gather around him in the land of Tob. When the Ammonites attack Gilead, the same elders who rejected him come to ask him to lead. He asks, “Didn’t you hate me”, and they promise to make him head over all.\n\nHe sends the Ammonite king a long message, arguing from Israel’s history that the land is not theirs. The king ignores it. The LORD’s Spirit comes on Jephthah, and he makes a vow: whatever comes out of his house to meet him when he returns in peace will be the LORD’s, and he will offer it as a burnt offering.\n\nHe wins a great victory. When he comes home, the first to come out is his daughter, his only child, dancing with tambourines. He tears his clothes. She says, “do to me according to that which has proceeded out of your mouth,” and asks for two months in the mountains. Then the text says her father did with her according to his vow."
+        },
+        {
+          "kind": "background",
+          "text": "This is one of the most painful stories in the Bible. The text says plainly what Jephthah vowed and what happened. Some readers and traditions understand that he sacrificed his daughter; others, including some ancient and medieval interpreters, read it as lifelong dedication to the LORD in a state of virginity. The law forbids human sacrifice; see Deuteronomy 12 and 18. The text never says the vow was right or that God asked for it."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The victory against Ammon is hardly over when Israel turns on itself. The men of Ephraim confront Jephthah, angry that they were not called, and threaten to burn his house down around him. Jephthah answers that he did call them and they did not come.\n\nThen the Gileadites fight Ephraim and take the fords of the Jordan. Anyone who comes to the river and says “Let me go over” is asked if he is an Ephraimite. If he says no, they tell him to say Shibboleth. An Ephraimite says Sibboleth, because he cannot manage the sound, and he is killed there. The text counts forty-two thousand of Ephraim fallen.\n\nJephthah judges six years and dies. Three more judges are given a few lines each: Ibzan of Bethlehem with thirty sons and thirty daughters, Elon of Zebulun for ten years, and Abdon with forty sons and thirty grandsons on seventy donkey colts."
+        },
+        {
+          "kind": "background",
+          "text": "The quarrel between Ephraim and the tribes east of the Jordan echoes a similar conflict with Gideon in Judges 8, but here it turns to bloodshed. The story of the password gave the English language the word shibboleth, meaning a test of identity. It also shows a people who are fighting among themselves just when they should be united. The short notices about the minor judges show how little is told about most of them. Samson, the next judge, is introduced in chapter 13."
+        }
+      ]
+    },
+    {
+      "id": "ai:judges/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-27",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Israel is in the hands of the Philistines for forty years, and the story narrows to a childless couple in Zorah. Manoah’s wife is barren, and the LORD’s angel appears to her with news: “you shall conceive and bear a son.” He will be a Nazirite to God from the womb, so she must drink no wine and eat nothing unclean, and no razor will touch his head. He will begin to save Israel from the Philistines.\n\nShe tells her husband, and says the visitor looked very awesome. Manoah prays that the man of God will come again and teach them how to raise the child. The angel returns to the woman in the field, and she runs to bring her husband.\n\nManoah offers a young goat on a rock, and the angel goes up in the flame. The couple fall on their faces. Manoah says, “We shall surely die, because we have seen God.” His wife answers that if the LORD wanted to kill them, he would not have accepted their offering. A son is born. They name him Samson."
+        },
+        {
+          "kind": "background",
+          "text": "A Nazirite was a person set apart for a time by a vow, with rules about wine, hair and the dead; see Numbers 6. Samson is a Nazirite from birth, which is unusual. Stories of unexpected births appear throughout the Bible, such as Sarah in Genesis 18 and Hannah in 1 Samuel 1. The woman is not named here, but she appears as the wiser of the two. The angel’s name, called incomprehensible, echoes Genesis 32. The chapter opens the account of Samson that continues through chapter 16."
+        }
+      ]
     }
   ]
 }
