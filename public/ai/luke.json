@@ -81,137 +81,145 @@
       "id": "ai:luke/4",
       "chapter": 4,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-28",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Led by the Spirit into the wilderness, Jesus fasts for forty days and is tempted by the devil. He is told to turn stone into bread, to worship the devil in return for all the kingdoms, and to throw himself from the temple. Each time Jesus answers with a line from Scripture.\n\nHe returns to Galilee and goes to the synagogue in Nazareth, where he reads from Isaiah about good news for the poor and release for captives. He says, “Today, this Scripture has been fulfilled in your hearing.” The crowd is first impressed, then angry when he points to Elijah and Elisha helping foreigners. They drive him out and try to throw him off a cliff, but he walks away.\n\nIn Capernaum he casts an unclean spirit out of a man, heals Simon’s mother-in-law and many others, and says he must preach to other towns too."
+          "text": "Forty days without food, and then a voice says, “If you are the Son of God, command this stone to become bread.” Led by the Spirit into the wilderness, Jesus is tempted three times: to make bread, to take the kingdoms of the world in return for worship, and to throw himself from the temple. Each time he answers with a line from Scripture, and the devil leaves him until another time.\n\nThen he reads in the synagogue at Nazareth from Isaiah, about good news for the poor and release for captives, and says, “Today, this Scripture has been fulfilled in your hearing.” The crowd is first impressed, then angry when he points to Elijah and Elisha helping foreigners. They try to throw him off a cliff, but he walks away.\n\nIn Capernaum he casts an unclean spirit out of a man, heals Simon’s mother-in-law and many others, and says he must preach to other towns too."
         },
         {
           "kind": "background",
           "text": "The forty days recall Israel’s forty years in the wilderness, and Jesus answers with lines from Deuteronomy 8:3, 6:13 and 6:16. The passage he reads is Isaiah 61:1 and 2, with a phrase from Isaiah 58:6, and the acceptable year of the Lord points to the jubilee year in Leviticus 25. Synagogues were local places for Scripture reading and teaching on the Sabbath. The Gospels differ on the order of the temptations; compare Matthew 4. Christians understand the devil’s role in the story in a range of ways."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/5",
       "chapter": 5,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-28",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus teaches the crowd from Simon’s boat, then tells Simon to let down his nets. After a night of catching nothing, they take in so many fish that the nets begin to break. Simon Peter falls at Jesus’s knees and says he is a sinful man, and Jesus tells him he will now catch people. Simon, James and John leave everything and follow him.\n\nJesus touches and cleanses a man with leprosy, and heals a paralyzed man whose friends lowered him through a roof. Jesus first says the man’s sins are forgiven, which makes the scribes and Pharisees object, and then tells him to rise and walk.\n\nHe calls the tax collector Levi, who gives a feast. When the Pharisees complain about eating with sinners, Jesus says he came to call sinners to repentance. He is asked about fasting and answers with images of a bridegroom, a patch and wineskins."
+          "text": "The fishermen have washed their nets, empty after a night of work. Jesus teaches the crowd from Simon’s boat, then tells Simon to put out into the deep. Simon says they caught nothing all night, “but at your word I will let down the net”. The nets begin to break. Simon Peter falls at Jesus’s knees and says he is a sinful man, and Jesus tells him he will now catch people. Simon, James and John leave everything and follow him.\n\nJesus touches a man with leprosy and says, “I want to. Be made clean.” Friends lower a paralyzed man through a roof, and Jesus first forgives his sins, which makes the scribes and Pharisees object, and then tells him to rise and walk.\n\nHe calls the tax collector Levi, who gives a feast. When the Pharisees complain, Jesus says, “I have not come to call the righteous, but sinners, to repentance.” Asked about fasting, he speaks of a bridegroom, a patch and wineskins."
         },
         {
           "kind": "background",
           "text": "The lake of Gennesaret is another name for the Sea of Galilee. Leprosy in the Bible covers several skin conditions, and the law in Leviticus 13 and 14 required people with it to live apart until a priest declared them clean. By touching the man, Jesus crosses a boundary. Tax collectors worked for Rome and were often seen as dishonest collaborators, which is why eating with them caused offense. Levi is usually identified with Matthew. The roofs of the time were often flat with a stairway outside."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/6",
       "chapter": 6,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-28",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "On a Sabbath, the disciples pick grain and Pharisees object. Jesus reminds them of David eating the consecrated bread and says the Son of Man is lord of the Sabbath. On another Sabbath he heals a man’s withered hand, asking whether it is lawful to do good or harm on the Sabbath. His opponents are furious.\n\nAfter a night of prayer, Jesus chooses twelve apostles and teaches a large crowd on a level place. He gives blessings for the poor, the hungry and those who weep, and matching woes for the rich and those who are well fed. He then teaches love for enemies, giving to those who ask, and the rule to treat others as you want to be treated, and mercy as the Father is merciful.\n\nHe warns against judging, speaks of a speck and a beam, a tree and its fruit, and ends with two builders, one on rock and one without a foundation."
+          "text": "The disciples are rubbing heads of grain in their hands on a Sabbath when some Pharisees object. Jesus reminds them of David eating the consecrated bread when he was hungry, and says, “The Son of Man is lord of the Sabbath.” On another Sabbath he asks whether it is lawful to do good or harm, to save a life or to kill, and heals a man’s withered hand. His opponents are filled with rage.\n\nAfter a night of prayer, Jesus chooses twelve apostles. On a level place, with crowds seeking to touch him, he says, “Blessed are you who are poor, for God’s Kingdom is yours.” He sets blessings for the poor, the hungry and those who weep beside matching woes, then teaches them to “love your enemies”, to give, and to be merciful as the Father is merciful.\n\nHe warns against judging, speaks of a speck and a beam, and ends with two builders, one on rock and one without a foundation."
         },
         {
           "kind": "background",
           "text": "This chapter has a counterpart in the Sermon on the Mount in Matthew 5 to 7. Luke’s version is shorter, and it is set on a level place. The Sabbath rest was a core mark of Jewish identity, and debates about what counted as work were common among teachers. The story of David is in 1 Samuel 21:1 to 6. The twelve apostles recall the twelve tribes of Israel. Christians differ on whether sayings such as offering the other cheek call for non-resistance in every case, and the text gives no guidance for situations of abuse."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/7",
       "chapter": 7,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-28",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "In Capernaum a Roman centurion asks Jesus, through Jewish elders and then friends, to heal his dying servant. He says he is not worthy to have Jesus under his roof and that Jesus need only say the word. Jesus is amazed and says he has not found such faith in Israel, and the servant is well.\n\nIn Nain, Jesus meets a funeral procession for a widow’s only son, has compassion on her, and tells the young man to arise. The crowd says God has visited his people.\n\nJohn the Baptist, now in prison, sends two disciples to ask if Jesus is the coming one. Jesus points to what they have seen and heard, and then speaks about John, calling him more than a prophet.\n\nAt a Pharisee’s house a woman known as a sinner weeps on Jesus’s feet, wipes them with her hair and anoints them. Jesus tells a parable of two debtors and tells her that her sins are forgiven."
+          "text": "A centurion in Capernaum has a servant who is dear to him, and the servant is dying. He sends Jewish elders to Jesus, who say he loves their nation and built their synagogue, and then friends, who say he is not worthy to have Jesus under his roof. Jesus need only say the word. Jesus marvels: “I tell you, I have not found such great faith, no, not in Israel.” The servant is well.\n\nAt the gate of Nain a dead man is carried out, the only son of a widow. Jesus has compassion on her, touches the coffin and says, “Young man, I tell you, arise!” The dead man sits up and speaks.\n\nJohn the Baptist, now in prison, sends two disciples to ask if Jesus is the coming one. Jesus points to what they have seen and heard, then calls John more than a prophet.\n\nAt a Pharisee’s table a woman known as a sinner weeps on Jesus’s feet and anoints them. After a parable of two debtors, he tells her, “Your faith has saved you. Go in peace.”"
         },
         {
           "kind": "background",
           "text": "A centurion commanded about a hundred soldiers in the Roman army, and this one is described as a friend to the Jewish community. Luke often highlights outsiders who respond with faith. Nain was a small town near Nazareth. In verse 28 the saying that the least in the Kingdom is greater than John is read in different ways. The woman is not named here, and the text does not say what her sin was. Later tradition sometimes linked her with Mary Magdalene, but the Gospel does not. Compare Isaiah 35:5 and 6 and 61:1."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/8",
       "chapter": 8,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-28",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus travels through towns preaching, with the twelve and with several women who support him from their own means, including Mary Magdalene, Joanna and Susanna. He tells the parable of the sower and explains it: the seed is the word of God, and the soils are different ways of hearing it. He speaks of a lamp that should be seen, and says his mother and brothers are those who hear and do God’s word.\n\nCrossing the lake, Jesus calms a storm. In the country of the Gadarenes he frees a man controlled by many demons. The man is later found clothed and in his right mind. The demons enter a herd of pigs that rush into the lake, and the local people ask Jesus to leave.\n\nBack across the lake, Jairus asks Jesus to heal his dying daughter. On the way, a woman with a twelve-year bleeding is healed by touching his cloak. Jesus then raises Jairus’s daughter."
+          "text": "Jesus goes through towns and villages with the twelve and with women who serve them from their own means, among them Mary Magdalene, Joanna and Susanna. To a great crowd he tells of a farmer sowing seed on the road, on rock, among thorns and in good ground, and explains that the seed is the word of God. He says his mother and brothers are those who hear and do it.\n\nOn the lake a wind storm falls on the boat while he sleeps. The disciples wake him, he rebukes the wind and water, and it is calm. “Where is your faith?” he asks.\n\nAcross the lake a man who lives among the tombs meets him. The man’s name, he says, is “Legion”. The demons enter a herd of pigs that rush into the lake. The man is found clothed and in his right mind, and the people ask Jesus to leave.\n\nBack again, Jairus begs him to come for his dying daughter. A woman with a twelve-year bleeding touches his cloak and is healed. Jesus takes the girl by the hand and says, “Child, arise!”"
         },
         {
           "kind": "background",
           "text": "Luke names women among Jesus’s supporters, which was unusual and shows their role in his ministry. Luke’s account of the parables, the storm and the Gadarene man closely parallels Mark 4 and 5. The abyss in verse 31 is a place of confinement for spirits in Jewish thought. Pigs were unclean animals for Jews, and the herd tells the reader that this was largely non-Jewish territory. Verse 10 draws on Isaiah 6:9 and 10, and Christians read it in different ways."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/9",
       "chapter": 9,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-28",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus sends out the twelve with power over demons and disease, telling them to take nothing for the journey. Herod hears about Jesus and wonders who he is. The apostles return, and Jesus feeds about five thousand with five loaves and two fish.\n\nPeter answers that Jesus is “The Christ of God.” Jesus says the Son of Man must suffer, be rejected, killed and raised, and that followers must take up their cross daily. About eight days later he goes up a mountain to pray with Peter, John and James. His face changes, Moses and Elijah speak with him about his departure, and a voice from the cloud says, “This is my beloved Son. Listen to him!”\n\nHe heals a boy the disciples could not heal, and again speaks of his coming betrayal. The disciples argue about greatness, and Jesus sets a child beside him. He then sets his face toward Jerusalem, rebukes James and John for wanting to call down fire on a Samaritan village, and speaks of the cost of following him."
+          "text": "Jesus sends out the twelve with power over demons and disease, telling them to take nothing for the journey. Herod the tetrarch hears of it and wonders who this can be. About five thousand follow Jesus into a deserted place, and when evening comes the twelve want to send them away. Jesus says, “You give them something to eat.” They have five loaves and two fish. He blesses and breaks them, everyone is filled, and twelve baskets of pieces are left.\n\nAs he is praying alone, he asks who they say he is. Peter answers, “The Christ of God.” Jesus says the Son of Man must suffer, be rejected, killed and raised, and that followers must take up their cross daily.\n\nAbout eight days later, on a mountain, his face changes, and Moses and Elijah speak with him about his departure. From a cloud a voice says, “This is my beloved Son. Listen to him!”\n\nHe heals a boy, sets a child beside him when the disciples argue about greatness, and sets his face toward Jerusalem."
         },
         {
           "kind": "background",
           "text": "The word translated departure in verse 31 is the Greek word exodus, which links Jesus’s coming death to Israel’s escape from Egypt. This is the middle of Luke: from verse 51 a long journey toward Jerusalem begins. Samaritans and Jews had a long history of conflict and mutual distrust, because they worshiped at different places. Elijah called down fire in 2 Kings 1, which is the reference in verse 54. Some manuscripts add words to verses 55 and 56, and many Bibles have a note about this."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/10",
       "chapter": 10,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-28",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus appoints seventy others and sends them in pairs ahead of him to the towns he plans to visit. He tells them to pray for workers, travel light, stay in one house, heal the sick, and announce that God’s Kingdom has come near. He pronounces woes on towns that saw his deeds and did not repent. The seventy return with joy, and Jesus tells them to rejoice that their names are written in heaven.\n\nA lawyer asks what he must do to inherit eternal life. Jesus asks him what the law says, and he names love of God and love of neighbor. When he asks who his neighbor is, Jesus tells the story of a man beaten by robbers. A priest and a Levite pass by, and a Samaritan stops to care for him. Jesus ends by saying, “Go and do likewise.”\n\nAt the home of Martha and Mary, Martha is busy serving while Mary sits listening. Jesus tells Martha that Mary has chosen the good part."
+          "text": "Seventy others are sent ahead of Jesus, two by two, to every town he plans to visit. The harvest is plentiful and the laborers are few, he tells them, and they are to pray for workers, travel light, stay in one house, heal the sick and announce that God’s Kingdom has come near. They come back with joy, and he tells them to rejoice that their names are written in heaven.\n\nThen a lawyer tests him and asks what he must do to inherit eternal life. Jesus asks what the law says, and the lawyer names love of God and love of neighbor. Wanting to justify himself, he asks who his neighbor is. Jesus tells of a man beaten by robbers on the road to Jericho and left half dead. A priest and a Levite pass by on the other side. A Samaritan stops, binds the wounds and pays for the inn. Jesus ends: “Go and do likewise.”\n\nIn Martha’s house, Martha is busy serving while Mary sits at his feet. “Martha, Martha,” he says, and tells her Mary has chosen the good part."
         },
         {
           "kind": "background",
           "text": "The number seventy may recall the seventy elders in Numbers 11 or the seventy nations in Genesis 10, and some manuscripts read seventy-two. The road from Jerusalem to Jericho drops steeply and was known as dangerous. Priests and Levites served in the temple, and a hearer would expect them to help. Samaritans were looked down on by many Jews, which is the point of the story. Verse 19 about serpents and scorpions is read figuratively by many and literally by few. Mary sitting at a teacher’s feet was a place usually kept for male students."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/11",
       "chapter": 11,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-28",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "A disciple asks Jesus to teach them to pray, and he gives a short prayer: for God’s name to be honored, the Kingdom to come, daily bread, forgiveness, and deliverance from the evil one. He tells a story of a friend who knocks at midnight and gets bread because of his persistence, and says to keep asking, seeking and knocking. A father gives good gifts to his children, and the heavenly Father gives the Holy Spirit.\n\nWhen Jesus casts out a mute demon, some say he does it by Beelzebul. He answers that a divided kingdom cannot stand, and that if he casts out demons by God’s finger, the Kingdom has come. He says the sign given to this generation is the sign of Jonah.\n\nAt a Pharisee’s table he pronounces woes on Pharisees and lawyers for neglecting justice and the love of God while attending to small details."
+          "text": "Jesus has finished praying when a disciple says, “Lord, teach us to pray”. He gives them a short prayer: for God’s name to be kept holy, for the Kingdom to come, for daily bread, forgiveness, and deliverance from the evil one. He tells of a friend who knocks at midnight for bread and gets it because of his persistence, and says, “keep asking, and it will be given you”. The heavenly Father, he says, gives the Holy Spirit to those who ask.\n\nThen he casts out a demon, and the mute man speaks. Some say he does it by Beelzebul. He answers that a divided kingdom cannot stand, and that if he casts out demons by God’s finger, then “God’s Kingdom has come to you”. To a crowd asking for a sign he says the only sign will be the sign of Jonah.\n\nAt a Pharisee’s table he speaks woes on Pharisees and lawyers who tithe the smallest herbs and bypass justice and God’s love."
         },
         {
           "kind": "background",
           "text": "This is Luke’s version of what Christians call the Lord’s Prayer; compare Matthew 6:9 to 13. It is shorter than the one in Matthew, and many church traditions add a closing line of praise that does not appear here. Beelzebul was a name connected with a ruler of demons. The sign of Jonah is explained in different ways: Luke ties it to the preaching of Jonah to Nineveh. The woes against Pharisees and lawyers are criticism within Judaism by a Jewish teacher. They have been misused to attack Jews as a people, and that is not what the text says."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/12",
