@@ -22,6 +22,78 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:ruth/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "In the days when the judges ruled, there is a famine in Bethlehem. A man named Elimelech takes his wife Naomi and their two sons to Moab to live. There Elimelech dies. The sons marry Moabite women, Orpah and Ruth. After about ten years, both sons die as well. Naomi is left with no husband and no sons.\n\nShe hears that the LORD has given his people bread in Judah and sets out for home. On the road she tells her daughters-in-law to go back to their mothers’ houses. They weep and refuse. Orpah kisses her and goes. Ruth stays. Naomi tells her to follow her sister-in-law, and Ruth answers, “Your people will be my people, and your God my God.”\n\nThe two reach Bethlehem at the start of the barley harvest, and the whole town stirs. Naomi asks to be called Mara, and says she went out full and came back empty."
+        },
+        {
+          "kind": "background",
+          "text": "The book of Ruth is set in the time of the judges, but it reads as a quiet story about one family after the hard stories at the end of Judges. Ruth is a woman from Moab, outside Israel, who chooses to join her mother-in-law's people and God. The name Naomi means pleasant, and Mara means bitter, as the text itself implies. The story moves toward the barley fields of Bethlehem (see Ruth 2) and toward a line that leads to David (Ruth 4)."
+        }
+      ]
+    },
+    {
+      "id": "ai:ruth/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ruth asks Naomi to let her go to the fields and gather leftover grain behind anyone who will show her favor. Naomi says, “Go, my daughter.” Ruth happens to come to the part of the field that belongs to Boaz, a relative of Elimelech.\n\nBoaz arrives from Bethlehem and greets his workers with a blessing. He hears that this is the Moabite who came back with Naomi. He tells Ruth to stay in his fields, keep close to his young women, and drink from what the men have drawn. He has told the men not to touch her. Ruth bows to the ground and asks why she, a foreigner, should find such favor.\n\nBoaz says he has heard all she has done for her mother-in-law. He prays that the LORD repay her, under whose wings she has come to take refuge. At the meal he gives her bread and grain.\n\nShe brings home about an ephah of barley. When she names Boaz, Naomi says he is a close relative."
+        },
+        {
+          "kind": "background",
+          "text": "Gleaning was a provision in Israel's law: the edges of the field and the dropped grain were left for the poor and the foreigner (see Leviticus 19). Ruth uses this right, and Boaz goes beyond it. Naomi's words show a turn in her mood, as she says the LORD has not abandoned his kindness to the living and to the dead. The phrase near kinsman prepares for the next chapters (see Ruth 3 and 4), where a relative's duty to a family becomes central."
+        }
+      ]
+    },
+    {
+      "id": "ai:ruth/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Naomi has been thinking of Ruth’s future. She tells her that Boaz, their kinsman, will be winnowing barley on the threshing floor that night. Ruth is to wash, dress, and go down, but not make herself known until he has finished eating. When he lies down, she is to uncover his feet and lie down, and he will tell her what to do. Ruth answers, “All that you say, I will do.”\n\nShe does it all. At midnight Boaz wakes startled and finds a woman at his feet. She says she is Ruth, and asks him to spread the corner of his garment over her, since he is a near kinsman.\n\nBoaz blesses her. He says the whole city knows she is a worthy woman. He tells her there is a nearer kinsman, and if that man will not do his duty, he will. She leaves before it is light, and he sends her home with six measures of barley. Naomi says to wait, for the man will not rest until it is settled."
+        },
+        {
+          "kind": "background",
+          "text": "The kinsman had a duty in Israel to protect a family's name and land when a close relative died (see Deuteronomy 25 and Leviticus 25). The scene on the threshing floor is told with restraint, and readers differ over how to read its customs and its risk. The text stresses that Boaz honors Ruth and guards her name, asking that her visit not be known. Boaz speaks of a nearer relative, and the case is settled at the town gate in Ruth 4."
+        }
+      ]
+    },
+    {
+      "id": "ai:ruth/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Boaz goes up to the city gate and sits down. When the nearer kinsman passes, he calls him over and gathers ten elders as witnesses. He says Naomi is selling the land that was Elimelech’s, and offers the man first right to redeem it. The man says he will. Then Boaz adds that whoever buys the field must also take Ruth the Moabitess, the widow of the dead, to raise up his name. The man answers that he cannot, lest he endanger his own inheritance, and passes the right to Boaz, taking off his sandal to seal it, as the writer explains was the custom.\n\nBoaz declares to the elders that he has bought it all, and that he has taken Ruth as his wife. The people say they are witnesses and bless the house. Ruth bears a son. The women tell Naomi that her daughter-in-law is better to her than seven sons. They name the child Obed, the father of Jesse, the father of David."
+        },
+        {
+          "kind": "background",
+          "text": "The book ends with the town gate, where legal matters were settled before elders, and with a genealogy. Obed is the father of Jesse and the grandfather of David. That places a Moabite woman in the line of Israel's greatest king, and Matthew 1 names Ruth in the line of Jesus. The scene of the sandal is explained by the writer, which suggests the custom was no longer practiced when the book was written. Many scholars think the book was set down well after the events."
+        }
+      ]
     }
   ]
 }

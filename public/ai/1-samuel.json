@@ -22,6 +22,330 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:1-samuel/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "In Shiloh, a man named Elkanah has two wives: Peninnah, who has children, and Hannah, who has none. Every year he goes up to worship the LORD of Armies, and each year Hannah is provoked by her rival until she weeps and cannot eat. Her husband asks, “Am I not better to you than ten sons?”\n\nHannah prays in the temple, weeping bitterly. She vows that if the LORD gives her a son, she will give him to the LORD all his days. Eli the priest sees her lips move without a sound and thinks she is drunk. She answers that she is a woman of a sorrowful spirit and has poured out her soul before the LORD. Eli blesses her, and she eats, and her face is no longer sad.\n\nThe LORD remembers her. She bears a son and names him Samuel. When the boy is weaned, she brings him to Eli at Shiloh and says she has given him to the LORD."
+        },
+        {
+          "kind": "background",
+          "text": "The books of Samuel begin at the end of the judges period, at the shrine in Shiloh, where Eli is priest and his sons Hophni and Phinehas also serve. The chapter begins with one woman's grief, not with a king or a battle. Hannah's vow includes that no razor will touch the boy's head, as with a Nazirite (see Numbers 6). Samuel's name sounds like the Hebrew for asked, and the text gives Hannah's reason. Her prayer of thanks follows in 1 Samuel 2."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Hannah prays again, this time with joy. “My heart exults in the LORD!” she says. There is no one as holy as the LORD, and no rock like our God. The bows of the mighty are broken, and the hungry are filled. The LORD raises the poor from the dust, and he will give strength to his king.\n\nThen the scene turns dark. Eli’s sons are wicked men who do not know the LORD. They take the best of the meat before the fat is burned, and by force if they must. Their sin is very great, because they despise the LORD’s offering. Meanwhile the boy Samuel serves in a linen ephod, and each year Hannah brings him a little robe. The LORD gives her three more sons and two daughters.\n\nEli, very old, warns his sons, but they do not listen. A man of God comes to Eli with a word of judgment: Hophni and Phinehas will die in one day, and the LORD will raise up a faithful priest."
+        },
+        {
+          "kind": "background",
+          "text": "Hannah's song is one of the great poems of Samuel, and many readers hear it echoed in Mary's song in Luke 1. It ends by mentioning a king and an anointed one, before Israel has a king. The rest of the chapter sets the faithful boy beside the corrupt priests and prepares for the fall of Eli's house. The judgment on Eli follows from what the priests did with the offerings (see Leviticus 7 for the priests' portions). It is fulfilled in 1 Samuel 4."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The LORD’s word is rare in those days, and visions are few. Eli’s eyes have grown dim. In the temple, the child Samuel lies down near the ark. Then a voice calls his name.\n\nHe runs to Eli. “Here I am; for you called me.” Eli says he did not call and tells him to lie down. It happens again, and then a third time. The text explains that Samuel did not yet know the LORD. Now Eli understands, and he tells the boy that if he is called again he should say, “Speak, LORD; for your servant hears.”\n\nThe LORD comes, stands, and calls Samuel twice. Samuel answers as he was told. The LORD says he will judge Eli’s house for the iniquity Eli knew, because his sons brought a curse on themselves and he did not restrain them.\n\nIn the morning Samuel is afraid to tell Eli. Eli presses him, and Samuel hides nothing. All Israel from Dan to Beersheba comes to know he is a prophet."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter follows the judgment on Eli's house in 1 Samuel 2. A boy who serves under a failing priest becomes the one through whom God speaks. The text says that the word was rare, and then shows it breaking in. Samuel is young, and the text is plain that he did not yet know the LORD. Many readers admire Eli's answer, even as the word is hard. The chapter marks Samuel as a prophet for all Israel."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Israel goes out to fight the Philistines and loses about four thousand men. The elders ask why the LORD has defeated them, and decide to bring the ark of the covenant from Shiloh. Eli’s sons Hophni and Phinehas come with it. When it enters the camp, Israel shouts so that the earth resounds. The Philistines are afraid, and say that God has come into the camp. They steel themselves to fight.\n\nIsrael is beaten again. Thirty thousand footmen fall. The ark is taken, and Hophni and Phinehas are killed.\n\nA man of Benjamin runs to Shiloh with torn clothes and dirt on his head. Eli, ninety-eight and blind, sits by the road, his heart trembling for the ark. When the man tells him, Eli falls backward from his seat, breaks his neck, and dies.\n\nHis daughter-in-law, near to giving birth, hears the news and goes into labor. As she dies she names her son Ichabod, saying, “The glory has departed from Israel!”"
+        },
+        {
+          "kind": "background",
+          "text": "The ark was the sign of God's presence with Israel (see Exodus 25). Israel treats it here as a tool to win a battle, and the text shows that it does not work that way. The judgment on Eli's house, announced in 1 Samuel 2 and 3, is carried out in this chapter. The name Ichabod is given by the dying mother and means, by her own words, that the glory has departed. The next chapters follow the ark among the Philistines."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The Philistines bring God’s ark to Ashdod and set it in the house of their god Dagon, beside his statue. In the morning the people find Dagon fallen on his face before the ark. They set him up again. The next morning he has fallen again, and this time his head and both hands lie cut off on the threshold. Only his torso is left.\n\nThen the LORD’s hand is heavy on Ashdod. The people are struck with tumors. They say the ark of the God of Israel cannot stay with them. The lords of the Philistines send it to Gath, and there too tumors break out on small and great.\n\nSo they send it on to Ekron. The Ekronites cry out that the ark has been brought to kill them and their people. They tell the lords to send it back to its own place. The text says there was a deadly panic through the city, and the cry of the city went up to heaven."
+        },
+        {
+          "kind": "background",
+          "text": "After the defeat in 1 Samuel 4, it might seem the Philistines had won over Israel's God. This chapter says otherwise: the ark goes into the house of Dagon, the Philistines' god, and Dagon falls. The tumors are generally read as a disease, though the text does not say what it was. The ark, lost in battle, does not need Israel to defend it. How the Philistines send it back is told in 1 Samuel 6."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The ark has been in Philistine country seven months. The Philistines call their priests and diviners and ask how to send it back. They are told not to send it empty but to return a trespass offering: five golden tumors and five golden mice, one for each of their five lords.\n\nThe priests propose a test. They are to put the ark on a new cart pulled by two milk cows that have never borne a yoke, and shut up the calves at home. If the cows go straight toward Beth Shemesh, then it was the LORD who struck them. If not, it was a chance.\n\nThe cows go straight along the highway, lowing as they go. The people of Beth Shemesh are reaping wheat in the valley and rejoice to see the ark. They offer the cows as a burnt offering.\n\nBut some men there look into the ark, and the LORD strikes them. The people mourn and ask, “Who is able to stand before the LORD, this holy God?” They send word to Kiriath Jearim to come and take the ark."
+        },
+        {
+          "kind": "background",
+          "text": "The Philistines' priests refer to the plagues of Egypt and to Pharaoh's hardened heart (see Exodus 7 to 12), which shows the story was known beyond Israel. The chapter has two sides: the ark is welcomed with joy, then treated carelessly. The law forbade looking into the ark (see Numbers 4). The number of men struck at Beth Shemesh is given in the text as fifty thousand seventy, and the figure is often questioned by readers and translators. The ark then moves to Kiriath Jearim."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The ark rests in Kiriath Jearim for twenty years, and all the house of Israel laments after the LORD. Then Samuel tells them that if they are returning to the LORD with all their heart, they must put away the foreign gods and serve him only. They remove the Baals and Ashtaroth.\n\nSamuel gathers all Israel at Mizpah. They pour out water before the LORD, fast, and confess their sin. When the Philistines hear of the gathering, they come up, and Israel is afraid. The people beg Samuel not to stop crying to the LORD for them.\n\nSamuel offers a suckling lamb. As he does, the Philistines draw near, and the LORD thunders with a great thunder on them and throws them into confusion. Israel pursues them. Samuel sets up a stone and names it Ebenezer, saying, “The LORD helped us until now.” Israel recovers its cities.\n\nSamuel judges Israel all his life, going on a yearly circuit to Bethel, Gilgal, and Mizpah, and returning to Ramah, where he builds an altar."
+        },
+        {
+          "kind": "background",
+          "text": "Ebenezer was also the name of the place where Israel lost the ark in 1 Samuel 4, and here the same name marks a help from the LORD. The chapter shows Samuel as judge, prophet and intercessor. The Baals and Ashtaroth were gods of the surrounding peoples. After the disaster of the last chapters, Israel returns to God before it fights, and the victory comes by thunder. The next chapter turns to the people's demand for a king."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Samuel is old. He makes his sons Joel and Abijah judges in Beersheba, but they take bribes and pervert justice. The elders of Israel come to Samuel at Ramah and ask him to make them a king to judge them like all the nations.\n\nThe request displeases Samuel, and he prays. The LORD tells him to listen to the people, because they have not rejected him but have rejected the LORD as their king. Samuel is to warn them what a king will do.\n\nHe tells them. A king will take their sons for chariots and war, their daughters as perfumers and cooks and bakers, and their best fields and olive groves. He will take a tenth of their seed and their flocks. When they cry out because of the king they have chosen, the LORD will not answer them.\n\nThe people refuse to listen. They want a king so that they may be like the nations, and so that he may fight their battles. The LORD tells Samuel to listen to their voice and make them a king."
+        },
+        {
+          "kind": "background",
+          "text": "Samuel's sons failed where Samuel had been faithful, and the elders ask for a king in response. Their reason, to be like all the nations, is what grieves Samuel and the LORD. The law had already looked ahead to a king (see Deuteronomy 17), so readers differ on how the text judges kingship itself: as a rejection of God, or as a gift that Israel asks for in the wrong spirit. Both views are held. In 1 Samuel 9 the LORD chooses the first king."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Kish of Benjamin has a son named Saul, an impressive young man, taller than anyone from his shoulders up. Kish’s donkeys are lost, and he sends Saul and a servant to find them. They search hill country after hill country and find nothing. Saul wants to turn back, lest his father worry about them instead. The servant says there is a man of God in the city nearby, and suggests they ask him the way.\n\nThey climb to the city, and there is Samuel coming out. The LORD had told him the day before that he would send a man from Benjamin to be prince over his people. When Samuel sees Saul, the LORD says this is the man.\n\nSamuel tells Saul the donkeys are found. Saul answers that he is from the smallest tribe and the least family. Samuel seats him at the head of thirty guests and gives him the portion set aside for him. At dawn Samuel says he will tell him God’s message."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter turns on an ordinary errand. The text presents Saul as handsome and modest, and as coming from Benjamin, which Judges 19 to 21 left near ruin. The LORD says Saul will save the people from the Philistines because their cry has come to him. The note about seer and prophet is the writer's explanation of an older word. Saul is anointed in 1 Samuel 10."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Samuel takes a vial of oil and pours it on Saul’s head. He kisses him and asks, “Hasn’t the LORD anointed you to be prince over his inheritance?” Then he gives Saul three signs. Men at Rachel’s tomb will say the donkeys are found. Three men at the oak of Tabor will give him two loaves. And at the hill of God he will meet prophets, the Spirit will come mightily on him, and he will be turned into another man.\n\nAs Saul turns to leave, God gives him another heart, and all the signs happen that day. People who knew him see him among the prophets, and it becomes a proverb. Saul does not tell his uncle about the kingdom.\n\nSamuel calls the people to Mizpah. The lot falls on Benjamin, then Kish’s family, then Saul, but he cannot be found. The LORD says he is hiding among the baggage. They bring him out, head and shoulders above the people, and the people shout for the king. Some worthless men despise him. Saul holds his peace."
+        },
+        {
+          "kind": "background",
+          "text": "Saul is chosen in two ways in this chapter: privately by anointing, and publicly by lot. The two accounts both lead to the same man. Samuel also writes the regulations of the kingdom in a book and lays it before the LORD, so the king's power is limited from the start (see Deuteronomy 17). Saul's hiding among the baggage is told without comment. The first test of his reign comes in 1 Samuel 11."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Nahash the Ammonite besieges Jabesh Gilead. The men of the town offer to serve him. Nahash answers that he will make a covenant on one condition: that every right eye be gouged out, to dishonor all Israel. The elders ask for seven days to look for someone to save them.\n\nThe messengers reach Gibeah of Saul, and the people weep. Saul comes in from the field behind his oxen and asks what is wrong. When he hears, God’s Spirit comes mightily on him, and his anger burns hot.\n\nHe cuts a yoke of oxen in pieces and sends them through all Israel with a warning: whoever does not come out after Saul and Samuel, so will it be done to his oxen. The dread of the LORD falls on the people, and they come out as one man.\n\nSaul divides them into three companies and strikes the Ammonites at the morning watch. When some say to put his doubters to death, Saul says, “No man shall be put to death today”. At Gilgal they make him king."
+        },
+        {
+          "kind": "background",
+          "text": "This is Saul's first act as leader, and it shows the best of him: the Spirit comes, he calls the tribes together, and he gives the credit to the LORD and spares those who doubted him. The text takes Nahash's threat seriously. Jabesh Gilead is the same town named in Judges 21, which is why Saul's rescue matters to Benjamin. The kingdom is renewed at Gilgal, and Samuel speaks to the people in 1 Samuel 12."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Samuel stands before all Israel, old and gray, and asks them to bear witness against him if they can. “Whose ox have I taken? Whose donkey have I taken?” he asks. They answer that he has not defrauded or oppressed them.\n\nThen he reminds them of what the LORD has done: he brought their fathers out of Egypt, and, when they forgot him, sold them into enemy hands. When they cried out, he sent Jerubbaal, Bedan, Jephthah and Samuel. Yet when Nahash came against them, they said they wanted a king, when the LORD was their king.\n\nSamuel says there is the king they asked for. If they and the king fear and serve the LORD, it will go well. If they rebel, the LORD’s hand will be against them. To show their wickedness he calls to the LORD, though it is wheat harvest, and the LORD sends thunder and rain. The people are afraid and ask Samuel to pray for them.\n\nSamuel tells them not to be afraid and not to turn away. He will not cease to pray for them."
+        },
+        {
+          "kind": "background",
+          "text": "This is Samuel's farewell speech, the last word of the judges' age as the kingdom begins. He puts his own record before the people and then recounts Israel's history as a cycle of forgetting and rescue, as in the book of Judges. Rain in the wheat harvest was unusual, which is why the sign was striking. The chapter ties the king to the covenant: the king is not above the LORD's command. In 1 Samuel 13 Saul faces his first test."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Saul has reigned for a while, and his son Jonathan strikes a Philistine garrison at Geba. The Philistines gather with thirty thousand chariots, six thousand horsemen, and people like sand on the seashore. The Israelites hide in caves, thickets, rocks, tombs and pits, and Saul waits at Gilgal with a trembling army.\n\nSamuel had set seven days. Samuel does not come, and the people begin to scatter. Saul says to bring him the burnt offering, and offers it himself. As soon as he finishes, Samuel arrives. “What have you done?” Saul explains that the people were scattering and the Philistines were gathering, and that he forced himself.\n\nSamuel tells him he has acted foolishly. If he had kept the LORD’s command, the LORD would have established his kingdom forever. Now it will not continue, and the LORD has sought a man after his own heart.\n\nSamuel leaves. Saul counts about six hundred men. There is no blacksmith in Israel, and only Saul and Jonathan have a sword or spear."
+        },
+        {
+          "kind": "background",
+          "text": "Saul's offering was a priest's task, and he took it on himself when Samuel was late (see 1 Samuel 10 for Samuel's instruction to wait seven days). Christians read this passage as a lesson about obedience under pressure, and some stress how understandable his fear was. Samuel's words about a man after the LORD's own heart prepare for David (see 1 Samuel 16). The note about the blacksmiths explains the odds Israel faced against the Philistines."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jonathan says to the young man who carries his armor, “Come! Let’s go over to the Philistines’ garrison that is on the other side.” He does not tell his father. He says that nothing restrains the LORD from saving by many or by few.\n\nThey climb up on hands and feet and strike down about twenty men. A trembling spreads through the camp, and the earth quakes. Saul’s watchmen see the multitude melting away. Soon the Philistines are striking one another with swords, and the Israelites who hid come out to join the pursuit. The LORD saves Israel that day.\n\nBut Saul had cursed anyone who ate before evening, and the army is faint. Jonathan, who did not hear, tastes honey, and his eyes brighten. When Saul asks God and gets no answer, the lot falls on Jonathan. Jonathan says he must die. The people say, “Far from it!” and rescue him.\n\nThe chapter closes with a summary of Saul’s wars and his family."
+        },
+        {
+          "kind": "background",
+          "text": "Jonathan's act is a model of trust, and the writer sets it beside his father's rash oath. Saul's vow costs the army strength and nearly costs his son's life, and the people stop it. The chapter shows Saul as a capable fighter and a flawed leader. The rule about eating meat with blood is from the law (see Leviticus 17). Saul's list of enemies at the end shows the kingdom's reach before the break with Samuel in 1 Samuel 15."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Samuel brings Saul a command from the LORD of Armies: strike Amalek and utterly destroy all that they have. The LORD remembers what Amalek did to Israel on the way out of Egypt. Saul defeats the Amalekites. But he spares Agag the king and the best of the sheep and cattle, destroying only what is vile and worthless.\n\nThe LORD tells Samuel it grieves him that he made Saul king. Samuel cries to the LORD all night. In the morning Saul says he has performed the commandment of the LORD. Samuel asks what the bleating of the sheep means. Saul says the people spared the best to sacrifice.\n\nSamuel answers, “to obey is better than sacrifice”. Because Saul rejected the LORD’s word, the LORD has rejected him as king. Saul admits his sin. As Samuel turns away, Saul grabs his robe and it tears. Samuel says the LORD has torn the kingdom from him.\n\nSamuel then puts Agag to death. He never sees Saul again, but he mourns for him."
+        },
+        {
+          "kind": "background",
+          "text": "This is a hard chapter. The command to destroy a people utterly, including infants, is among the most troubling in the Bible. Readers have answered in different ways: some say the language belongs to ancient war reports, others stress the judgment on Amalek, others find it hard and say so. Misuse of this passage to justify violence today is a well-known and serious wrong. The chapter's main concern in the text is Saul's disobedience and Samuel's grief. The next chapter turns to David."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The LORD asks Samuel how long he will mourn for Saul. He tells him to fill his horn with oil and go to Jesse of Bethlehem, for he has provided a king among his sons.\n\nAt Jesse’s house Samuel sees the eldest, Eliab, and thinks surely this is the one. But the LORD says not to look at his face or the height of his stature. “For man looks at the outward appearance, but the LORD looks at the heart.” Seven sons pass before Samuel, and none is chosen. Samuel asks whether all his children are here. There remains the youngest, who is keeping the sheep.\n\nHe is brought in, ruddy with a handsome face. The LORD says to anoint him. Samuel does, in the middle of his brothers, and the LORD’s Spirit comes mightily on David from that day.\n\nThe Spirit leaves Saul, and an evil spirit from the LORD troubles him. His servants suggest a harp player, and one names a son of Jesse. David comes to Saul, becomes his armor bearer, and when he plays, Saul is refreshed."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter sets two kings side by side: Saul, whom the LORD has rejected, and David, who is chosen in secret. The phrase an evil spirit from the LORD is hard, and readers differ on how to understand it; the text says only what it says. Samuel's mistake with Eliab shows that even the prophet misjudges by looks. The chapter introduces David as both a shepherd and a musician. Next comes his fight with Goliath in 1 Samuel 17."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The Philistines and Israel face each other across the valley of Elah. A champion named Goliath of Gath comes out morning and evening for forty days, six cubits and a span tall, in bronze armor. He asks Israel to choose a man to fight him. Saul and all Israel are dismayed and afraid.\n\nDavid, the youngest of Jesse’s sons, goes back and forth between Saul’s camp and his father’s sheep. One day his father sends him with bread and cheese for his brothers. He hears the challenge and asks who this uncircumcised Philistine is that he should defy the armies of the living God. His brother Eliab is angry. David is brought before Saul.\n\nSaul says he is only a youth. David tells of the lion and the bear he struck down. Saul offers his armor, but David has not tested it and takes it off. He takes his staff, five smooth stones and his sling.\n\nGoliath mocks him. David answers that he comes in the name of the LORD of Armies, and “the battle is the LORD’s”. A stone sinks into Goliath’s forehead, and he falls."
+        },
+        {
+          "kind": "background",
+          "text": "This is one of the best-known stories in the Bible. The text frames it as a contest of trust: the whole army is afraid, and David speaks of the living God. David uses what he knows, the sling, instead of untested armor. Goliath's size is given in cubits and spans, and manuscripts differ on the figure, which readers note. At the end Saul asks whose son David is, though he had known him in 1 Samuel 16, and readers explain this in several ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-samuel/18",
+      "chapter": 18,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-28",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "When David has finished speaking to Saul, the soul of Jonathan is knit with the soul of David, and Jonathan loves him as his own soul. They make a covenant, and Jonathan gives David his robe, his sword, his bow and his sash. Saul sets David over the men of war, and all the people are glad.\n\nBut as the army returns, the women come out singing and dancing: “Saul has slain his thousands, and David his ten thousands.” Saul is very angry. From that day he watches David. The next day an evil spirit comes on Saul, and while David plays the harp, Saul throws his spear, meaning to pin David to the wall. David escapes twice.\n\nSaul fears David because the LORD is with him. His daughter Michal loves David, and Saul sees a chance to use her as a snare. He asks for a hundred Philistine foreskins as the bride price, hoping the Philistines will kill David. David brings two hundred, and Saul gives him Michal."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter sets David's rise beside Saul's fear. Jonathan, the king's own son and heir, gives David his robe and weapons, which is a striking act of friendship. Saul's jealousy grows from a song. The bride price is a violent request, and the text says plainly that Saul meant it as a trap. David wins in each scene, and the writer says again that the LORD was with him. The conflict between the two men runs through the following chapters."
+        }
+      ]
     }
   ]
 }
