@@ -225,103 +225,109 @@
       "id": "ai:luke/12",
       "chapter": 12,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-29",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "With thousands gathered, Jesus tells his disciples to beware of hypocrisy and not to fear those who can only kill the body. God knows each sparrow and counts the hairs on their heads. Those who acknowledge him before others will be acknowledged before God’s angels, and the Holy Spirit will give words when they are brought before authorities.\n\nWhen a man asks Jesus to settle an inheritance, Jesus warns against greed and tells the story of a rich man who builds bigger barns and dies that night. He tells his disciples not to be anxious about food or clothing, pointing to ravens and lilies, and to seek God’s Kingdom. He tells them to be ready like servants awaiting their master.\n\nHe says he came to bring fire and division, even within families, and urges the crowd to read the present time and settle with an opponent before going to court."
+          "text": "The crowd is so large, many thousands, that people trample each other. Jesus speaks first to his disciples. Beware of hypocrisy, he says, for nothing hidden will stay hidden. Do not fear those who can only kill the body. God does not forget one sparrow, and the very hairs of your head are counted. Whoever acknowledges him before others will be acknowledged before God’s angels, and when they are brought before authorities, the Holy Spirit will give them words.\n\nThen a man calls out, asking Jesus to settle an inheritance. Jesus warns against greed and tells of a rich man who builds bigger barns and dies that night. “Consider the ravens” and “Consider the lilies”, he tells his disciples, so that they will not be anxious about food or clothes, but seek God’s Kingdom. Be ready, like servants awaiting their master. He has come to bring fire and division, even inside families, and he asks the crowd why they cannot read the present time."
         },
         {
           "kind": "background",
-          "text": "The Pharisees were a lay movement known for careful study of the law. Yeast stands here for something small that spreads. Blaspheming the Holy Spirit in verse 10 has been understood in different ways, and the text gives no help for anyone worried about it beyond what it says. The parable of the watchful servants and the thief at night is about readiness, and Christians differ on how it relates to the return of Christ. Verses 51 to 53 describe division and are not a call to break family ties. Gehenna is the valley near Jerusalem used as an image of judgment."
+          "text": "Jesus speaks to a crowd and to his closest followers at once, and the chapter moves between them. The Pharisees were a lay movement known for careful study of the law, and yeast stands here for something small that spreads. Blaspheming the Holy Spirit in verse 10 has been understood in different ways, and the text gives no help for anyone worried about it beyond what it says. The watchful servants and the thief at night speak of readiness, and Christians differ on how that relates to the return of Christ. Verses 51 to 53 describe division and are not a call to break family ties. Gehenna is the valley near Jerusalem used as an image of judgment."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/13",
       "chapter": 13,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-29",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Some people tell Jesus about Galileans killed by Pilate. Jesus says they were not worse sinners than others, and mentions eighteen who died when a tower fell; he says all need to repent. He tells a parable of a fig tree that bears no fruit, and a gardener who asks for one more year.\n\nOn a Sabbath he heals a woman who had been bent over for eighteen years. The synagogue leader objects, and Jesus calls his critics hypocrites, since they untie their animals on the Sabbath, and says she is a daughter of Abraham. He gives two short parables of the Kingdom: a mustard seed and yeast.\n\nAsked whether few will be saved, he tells people to strive to enter the narrow door and says people will come from east and west to sit in the Kingdom. Pharisees warn him that Herod wants to kill him. He replies that he must go on to Jerusalem, and he laments over the city."
+          "text": "Someone brings Jesus bad news: Pilate has killed some Galileans while they were making sacrifices. Jesus does not let the story become a verdict. Those Galileans were no worse than others, he says, and neither were the eighteen who died when a tower fell. Unless all repent, all will perish. Then he tells of a fig tree that has borne nothing for three years. The owner says cut it down. The gardener says, leave it one more year, and I will dig around it.\n\nOn a Sabbath, in a synagogue, a woman who has been bent over for eighteen years is freed. The synagogue leader is indignant. Jesus calls his critics hypocrites, since they untie their animals on the Sabbath, and he calls her a daughter of Abraham. He tells of a mustard seed and of yeast, and says, “Strive to enter in by the narrow door”. When Pharisees warn that Herod wants to kill him, he says he must go on to Jerusalem, and he laments over the city."
         },
         {
           "kind": "background",
-          "text": "The two disasters are not known from other sources, though Pilate is described as harsh by other ancient writers. The text rejects the idea that those who suffer must be worse sinners, which is a point worth noting for readers who face loss. The woman’s healing happens in a synagogue, and Jesus’s title for her echoes Abraham. Verse 34 pictures a hen gathering chicks, a gentle image of protection. The final quotation comes from Psalm 118:26. Christians differ on how verses 24 to 30 relate to who will be saved."
+          "text": "The two disasters at the start are not known from other sources, though other ancient writers describe Pilate as harsh. The text rejects the idea that those who suffer must be worse sinners. The woman is healed inside a synagogue, and the title Jesus gives her echoes Abraham. Verse 34 pictures a hen gathering her chicks, a gentle image of protection. The final quotation comes from Psalm 118:26. Christians differ on how verses 24 to 30 relate to the question of who will be saved."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/14",
       "chapter": 14,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-29",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "On a Sabbath Jesus eats at the house of a leading Pharisee, where a man with swelling in his body stands before him. Jesus asks whether it is lawful to heal on the Sabbath, and when no one answers, he heals the man.\n\nHe sees guests choosing the best seats and tells them to take the lowest place, because those who exalt themselves will be humbled. He tells his host to invite the poor, the crippled and the blind, who cannot repay.\n\nHe then tells a parable of a great supper. The invited guests all make excuses, so the host sends his servant to bring in the poor and those from the roads, until the house is full.\n\nTurning to the crowds, Jesus speaks of the cost of following him. He talks of hating family and one’s own life, carrying a cross, and counting the cost like a builder or a king. He ends with a saying about salt."
+          "text": "It is the Sabbath, and Jesus is a guest at the house of a leading Pharisee. They are watching him. In front of him stands a man with swelling in his body. Is it lawful to heal on the Sabbath? Jesus asks. No one answers, so he heals the man and sends him away.\n\nThen he watches the guests choose the best seats and tells them to take the lowest place instead, because those who exalt themselves will be humbled. He tells his host to invite the poor, the crippled, and the blind, who cannot repay. He follows with a story of a great supper. The invited guests all make excuses, so the host sends his servant out until the house is full, “For many are called, but few are chosen”.\n\nThen he turns to the crowds that follow him and speaks of the cost: hating family and one’s own life, carrying a cross, and how a builder or a king must first “count the cost”. He ends with a saying about salt."
         },
         {
           "kind": "background",
-          "text": "Meals were an important place for status and honor in the ancient world, which is why seating and guest lists matter here. The word disregard in verse 26 translates a Greek word often rendered hate. Most readers take it as strong, deliberate hyperbole meaning that loyalty to Jesus must come first, rather than a command to feel hostility toward family. Christians read the phrase many are called but few are chosen in more than one way. Compare the similar parable in Matthew 22:1 to 14, which differs in details."
+          "text": "Meals were an important place for status and honor in the ancient world, which is why seating and guest lists matter so much here. The word disregard in verse 26 translates a Greek word often rendered hate. Most readers take it as strong, deliberate hyperbole meaning that loyalty to Jesus must come first, rather than a command to feel hostility toward family. Christians read the phrase many are called but few are chosen in more than one way. Compare the similar parable in Matthew 22:1 to 14, which differs in details."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/15",
       "chapter": 15,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-29",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Tax collectors and sinners gather to hear Jesus, and the Pharisees and scribes complain that he welcomes them and eats with them. Jesus answers with three stories about lost things.\n\nA shepherd leaves ninety-nine sheep to find one that is lost, and a woman searches her house for a lost coin. Each calls friends to celebrate, and Jesus says there is joy in heaven over one sinner who repents.\n\nIn the third story a younger son asks for his share of his father’s property, travels far away and wastes it. When a famine comes he ends up feeding pigs and wanting to eat their food. He decides to go home and ask to be a hired servant. While he is still far off, his father sees him, runs to him and embraces him, and throws a feast.\n\nThe older son, who stayed, is angry and refuses to join. His father comes out and tells him, “Son, you are always with me, and all that is mine is yours.”"
+          "text": "The people everyone else avoids are crowding close to hear Jesus. Tax collectors and sinners, the text says. The Pharisees and scribes murmur that he welcomes them and eats with them. So Jesus tells three stories about things that are lost.\n\nA shepherd leaves ninety-nine sheep to find one, carries it home on his shoulders, and calls his neighbors to celebrate. A woman lights a lamp and sweeps her house until she finds one coin, and calls her friends to celebrate. Jesus says there is joy in heaven over one sinner who repents.\n\nThen comes a father with two sons. The younger asks for his share, travels far away, and wastes it. When famine comes he is feeding pigs and wishing for their food. He decides to go home and ask to be a hired servant. But while he is still far off, his father sees him, runs, and kisses him, and a feast begins.\n\nThe older son is angry and will not go in. His father comes out to beg him: “Son, you are always with me, and all that is mine is yours”."
         },
         {
           "kind": "background",
           "text": "The three parables are told in answer to the complaint in verse 2. The third story is the best known of Jesus’s parables and is often called the parable of the prodigal son, though readers also focus on the father or on the older brother. Feeding pigs would have been the lowest work imaginable for a Jewish listener. The story ends without saying whether the older son goes in, which leaves the question open to the Pharisees who are listening. Compare Ezekiel 34 for the image of God as shepherd."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/16",
       "chapter": 16,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-29",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus tells his disciples about a rich man's manager who is accused of wasting his master's goods. Facing dismissal, the manager reduces what several debtors owe, hoping they will take him in. The master commends his shrewdness. Jesus adds sayings about using worldly wealth, being faithful in little things, and the fact that no one can serve both God and money.\n\nThe Pharisees, who love money, scoff. Jesus says God knows their hearts, speaks of the law and the prophets until John, and says it is easier for heaven and earth to pass away than for a stroke of the law to fall. He gives a short saying about divorce.\n\nHe then tells of a rich man who lives in luxury and a poor beggar named Lazarus at his gate. After they die, Lazarus is comforted and the rich man is in torment. Abraham says a great gulf is fixed, and that the rich man’s brothers have Moses and the prophets."
+          "text": "A rich man is about to lose his manager, who has been accused of wasting his possessions. The manager has no strength to dig and is ashamed to beg, so he acts. He calls in his master’s debtors one by one and cuts what each owes, hoping they will take him in. Strangely, the master commends him for his shrewdness. Jesus adds sayings about using worldly wealth, being faithful in little things, and this: “You aren’t able to serve God and Mammon”.\n\nThe Pharisees, who love money, scoff. Jesus says God knows their hearts. He speaks of the law and the prophets until John, says it is easier for heaven and earth to pass away than for a stroke of the law to fall, and gives a short saying about divorce.\n\nThen he tells of a rich man who lives in luxury every day and a beggar named Lazarus at his gate. Both die. Lazarus is comforted, and the rich man is in torment. Abraham says a great gulf is fixed, and that the rich man’s brothers have Moses and the prophets."
         },
         {
           "kind": "background",
           "text": "The parable of the manager is one of the most debated in the Gospels. Readers differ on whether the master praises the manager’s dishonesty or his foresight, and on what the changes to the bills were. The word mammon is an Aramaic word for wealth. The story of the rich man and Lazarus is told as a parable, and Lazarus is the only person named in any of Jesus’s parables. Hades here is the place of the dead, and Christians differ on how this story relates to teaching about the afterlife and judgment."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/17",
       "chapter": 17,
       "model": "Claude Sonnet 5.5",
-      "written": "2026-10-13",
+      "written": "2026-10-29",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Jesus warns that things that make people stumble will come, but woe to those who cause them, especially to little ones. He teaches that a brother who sins should be rebuked, and forgiven if he repents, even seven times in a day. The apostles ask for more faith, and Jesus answers with the picture of a mustard seed, then a short picture of a servant who does his duty.\n\nOn the way to Jerusalem, ten men with leprosy call to him from a distance. He tells them to show themselves to the priests, and they are cleansed as they go. Only one, a Samaritan, returns to give thanks, and Jesus tells him his faith has healed him.\n\nAsked when God’s Kingdom will come, Jesus says it does not come with observation. He then speaks to the disciples of the days of the Son of Man, comparing them to the days of Noah and of Lot, and says to remember Lot’s wife."
+          "text": "Jesus gives his disciples hard sayings first. Stumbling blocks will come, but woe to the one who causes them, especially to little ones. If a brother sins, rebuke him, and if he repents, forgive him, even seven times in a day. The apostles say, “Increase our faith”, and Jesus answers with a mustard seed and a servant who simply does his duty.\n\nOn the road to Jerusalem, ten men with leprosy call to him from a distance. He tells them to show themselves to the priests, and as they go they are cleansed. One of them, a Samaritan, turns back, falls at Jesus’ feet, and thanks him. “But where are the nine?” Jesus asks, and he tells the man that his faith has healed him.\n\nWhen the Pharisees ask when God’s Kingdom will come, he says it does not come with observation. To the disciples he speaks of the days of the Son of Man, like the days of Noah and of Lot. “Remember Lot’s wife!”"
         },
         {
           "kind": "background",
           "text": "Showing themselves to the priests followed the law in Leviticus 14 for those who believed they had been healed of a skin disease. A Samaritan was a double outsider, as a foreigner and a member of a group that many Jews avoided. The phrase in verse 21 is translated within you in some Bibles and among you in others, and Christians differ on which is meant. The sayings about the days of the Son of Man are read in different ways, as are the taken and left in verses 34 and 35. Verse 36 is not in the oldest manuscripts, as the text here notes. See Genesis 6 to 7 and 19."
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:luke/18",

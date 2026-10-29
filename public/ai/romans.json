@@ -152,17 +152,17 @@
     {
       "id": "ai:romans/8",
       "chapter": 8,
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Romans 8 is a high point of Paul’s letter. It opens with “no condemnation” for those who are in Christ Jesus and closes with the assurance that nothing can separate them from God’s love.\n\nIn between, Paul contrasts two ways of living: according to the flesh, meaning human nature turned away from God, and according to the Spirit. Those led by the Spirit are God’s children and can call him “Abba! Father!”\n\nPaul is honest about suffering. The whole creation “groans”, believers groan while they wait, and the Spirit helps in prayer when words fail. Verse 28 belongs with verses 29 and 30: the good that God works toward is that his people become like his Son."
+          "text": "The chapter opens with a sentence like a door opening: there is “no condemnation” for those who are in Christ Jesus. It ends on a promise that nothing, not death, not life, not any created thing, can separate them from God’s love. Paul calls those who hold on “more than conquerors”.\n\nBetween those two verses he sets two ways of living. One follows the flesh, which means human nature turned away from God. The other follows the Spirit. Those led by the Spirit are God’s children, and they can cry, “Abba! Father!”\n\nPaul does not hide that this road includes suffering. The whole creation groans, believers groan while they wait, and when they do not know how to pray, the Spirit helps. Verse 28 belongs with verses 29 and 30. The good God is working toward is that his people become like his Son."
         },
         {
           "kind": "background",
-          "text": "Paul wrote this letter to Christians in Rome, a church he had not yet visited, probably in the mid to late 50s of the first century. The church included both Jewish and non-Jewish believers, and much of the letter deals with how God makes both right with himself.\n\n“Abba” is an Aramaic word for father, from the language Jesus spoke. Mark 14:36 records Jesus using it in prayer. Adoption was familiar in the Roman world: an adopted son received the family name and the full rights of an heir, which is the picture behind verses 15 to 17."
+          "text": "Paul wrote this letter to Christians in Rome, a church he had not yet visited, probably in the mid to late 50s of the first century. The church included both Jewish and non-Jewish believers, and much of the letter deals with how God makes both right with himself.\n\nAbba is an Aramaic word for father, from the language Jesus spoke. Mark 14:36 records Jesus using it in prayer. Adoption was familiar in the Roman world: an adopted son received the family name and the full rights of an heir, which is the picture behind verses 15 to 17."
         },
         {
           "kind": "interpretations",
@@ -198,7 +198,8 @@
             }
           ]
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:romans/9",

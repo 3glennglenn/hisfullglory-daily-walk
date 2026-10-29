@@ -62,17 +62,17 @@
     {
       "id": "ai:john/3",
       "chapter": 3,
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "John 3 has two scenes. In the first (verses 1 to 21) Nicodemus, a Pharisee and a leader, comes to Jesus at night. Jesus tells him that no one can see God’s Kingdom unless he is “born anew”, born “of water and Spirit”. Nicodemus takes this as a second physical birth. Jesus is speaking of a new life that God’s Spirit gives.\n\nJesus then points to the serpent Moses lifted up in the wilderness (Numbers 21). In the same way the Son of Man must be lifted up, so that whoever believes may have eternal life. Verse 16 gives the reason: God loved the world and gave his Son.\n\nIn the second scene (verses 22 to 36) John the Baptist hears that people are now going to Jesus. He answers with joy: “He must increase, but I must decrease.”"
+          "text": "He comes at night. Nicodemus is a Pharisee and a leader, and he has seen enough to say that Jesus must have come from God. Jesus answers with something he did not ask about: no one can see God’s Kingdom unless he is “born anew”. Nicodemus hears a second physical birth and asks how that could be. Jesus is speaking of a new life that God’s Spirit gives.\n\nThen Jesus points back to the serpent Moses lifted up in the wilderness (Numbers 21). In the same way the Son of Man must be lifted up, so that whoever believes may have eternal life. Verse 16 gives the reason: God loved the world and gave his Son.\n\nThe chapter turns to a second scene (verses 22 to 36). John the Baptist hears that people are now going to Jesus instead. He answers with joy: “He must increase, but I must decrease”."
         },
         {
           "kind": "background",
-          "text": "The Pharisees were a group known for careful study and practice of the law. Jesus calls Nicodemus “the teacher of Israel”, so this is a conversation between teachers. Nicodemus returns later in this Gospel: he speaks up for Jesus in chapter 7 and helps to bury him in chapter 19.\n\nThe bronze serpent comes from Israel’s time in the wilderness. People bitten by snakes lived when they looked at the serpent Moses raised on a pole. In John’s Gospel being “lifted up” points to the cross, and beyond it to Jesus being raised and exalted."
+          "text": "The Pharisees were a group known for careful study and practice of the law. Jesus calls Nicodemus “the teacher of Israel”, so this is a conversation between teachers. Nicodemus returns later in this Gospel. He speaks up for Jesus in chapter 7 and helps to bury him in chapter 19.\n\nThe bronze serpent comes from Israel’s time in the wilderness. People bitten by snakes lived when they looked at the serpent Moses raised on a pole. In John’s Gospel being lifted up points to the cross, and beyond it to Jesus being raised and exalted."
         },
         {
           "kind": "interpretations",
@@ -108,7 +108,8 @@
             }
           ]
         }
-      ]
+      ],
+      "voice": "story"
     },
     {
       "id": "ai:john/4",
