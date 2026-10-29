@@ -22,6 +22,312 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:2-samuel/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A man arrives at Ziklag with torn clothes and earth on his head. He has come from Saul’s camp, and he bows low to David. Israel has fled, he says, and Saul and Jonathan are dead. As proof he brings Saul’s crown and bracelet. He claims that Saul, in anguish, asked him to finish him, and he did.\n\nDavid takes hold of his own clothes and tears them, and his men do the same. They mourn, weep, and fast until evening. Then David asks the young man, an Amalekite, why he was not afraid to raise his hand against the LORD’s anointed. He has David's order carried out, and the man is struck down.\n\nThe chapter ends with a poem David teaches Judah, a lament for Saul and Jonathan. It begins, “How the mighty have fallen!” and ends with grief for Jonathan, whose love for him was wonderful."
+        },
+        {
+          "kind": "background",
+          "text": "The messenger's account of Saul's death differs from 1 Samuel 31, where Saul falls on his own sword. Readers explain this in different ways, and many take the Amalekite as someone who hoped for a reward. David's lament is called the song of the bow and is said to be written in the book of Jashar. It is notable that David praises Saul without mentioning the years of pursuit. The kingdom he is promised comes in chapters 2 to 5."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David asks the LORD where to go, and the LORD says Hebron. The men of Judah come and anoint him king over their house. He sends a blessing to the men of Jabesh Gilead for burying Saul.\n\nBut Israel does not follow. Abner, Saul's commander, makes Saul’s son Ishbosheth king over the rest. For seven and a half years, David reigns in Hebron over Judah alone.\n\nThen young men from both sides meet at the pool of Gibeon. Twelve against twelve, they take each other by the head and strike, and all fall together. The battle that follows is severe. Asahel, as light of foot as a gazelle, chases Abner and will not turn aside, even when Abner warns him. Abner strikes him with the back of his spear and he dies. Joab and Abishai pursue Abner until sunset. Abner calls out, “Shall the sword devour forever?” and Joab blows the trumpet to stop."
+        },
+        {
+          "kind": "background",
+          "text": "After the fall of Saul the country splits in two. David has the south, and Abner holds the rest in the name of Saul's house. The chapter introduces the sons of Zeruiah: Joab, Abishai, and Asahel. Their blood feud with Abner shapes the next chapter and reaches as far as 1 Kings 2. The contest at Gibeon shows how quickly a game turned deadly. David's first royal anointing here is by Judah alone, and the whole nation does not follow until 2 Samuel 5."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The war between Saul’s house and David’s house is long, and David grows stronger and stronger. Sons are born to him in Hebron. Meanwhile Abner quarrels with Ishbosheth over Saul’s concubine Rizpah, and in his anger he turns. He sends word to David offering to bring all Israel over. David agrees on one condition: Michal, Saul’s daughter, must be returned to him. Her husband follows her weeping to Bahurim until Abner sends him back.\n\nAbner speaks to the elders of Israel, comes to Hebron, and is feasted by David and sent away in peace. Then Joab returns from a raid, hears of it, and tells David that Abner has come to deceive him. Without David’s knowledge, Joab calls Abner back and kills him at the gate, for the blood of Asahel.\n\nDavid mourns openly, tears his clothes, and fasts. He asks, “Should Abner die as a fool dies?” The people see that the king had no part in it."
+        },
+        {
+          "kind": "background",
+          "text": "Abner's killing could have undone the peace he was building. The text takes care to say how David responded: he cursed Joab’s house, followed the bier, wept at the grave, and refused food. He admits that the sons of Zeruiah are too hard for him, a frank note about the limits of his power. Joab’s deed is not forgotten, and David’s dying instructions about it come in 1 Kings 2. Michal’s earlier marriage is described in 1 Samuel 18 and 25."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "When Ishbosheth hears that Abner is dead, his hands become feeble, and all Israel is troubled. Two captains of raiding bands, Baanah and Rechab, decide to act. They come at the heat of the day, when Ishbosheth is resting at noon, pretend to fetch wheat, and strike him in his bed. They cut off his head and carry it all night to David at Hebron.\n\nThey expect a reward. They say the LORD has avenged the king on Saul and his offspring. David answers them with a story of his own, about the man who thought he brought good news when he announced Saul’s death. David had him killed at Ziklag. How much more, he says, when wicked men kill a righteous person in his own house on his bed. David's young men kill Baanah and Rechab, and display their bodies beside the pool in Hebron. Ishbosheth's head is buried in Abner’s grave.\n\nA short note about Jonathan’s son Mephibosheth, lame since childhood, is set in the middle of the chapter."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter closes the story of Saul's house on the throne, and it does so with a crime. David refuses to profit from it and takes pains to be seen refusing, as he did in 2 Samuel 1 and 3. The note about Mephibosheth seems out of place, but it prepares the ground for 2 Samuel 9, where David remembers his promise to Jonathan. The way the bodies are treated reflects the harsh justice of the age. The text does not comment further."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "At last all the tribes come to David at Hebron. “we are your bone and your flesh”, they say, and they remind him that the LORD told him he would be shepherd of Israel. The elders make a covenant with him and anoint him king over all Israel. He is thirty years old, and he will reign forty years: seven and a half in Hebron, thirty-three in Jerusalem.\n\nHe turns to Jerusalem, where the Jebusites jeer that the blind and the lame could keep him out. David takes the stronghold of Zion anyway and calls it the city of David. Hiram of Tyre sends cedar and craftsmen to build him a house. David perceives that the LORD has established him.\n\nThe Philistines come up twice. Both times David asks the LORD first. The first answer is to go up, and he wins at Baal Perazim. The second is to circle around and wait for the sound of marching in the mulberry trees."
+        },
+        {
+          "kind": "background",
+          "text": "Years pass between Samuel's anointing of David in 1 Samuel 16 and this moment, and the text counts them. Jerusalem becomes the capital in this chapter, and later books treat it as the city of the LORD's house, as in 2 Samuel 7 and 1 Kings 6. David's habit of asking God before each battle, so clear in 1 Samuel 23 and 30, continues here. The people's words about bone and flesh echo the family language used in Genesis 29."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David gathers thirty thousand chosen men to bring the ark of God to Jerusalem. They set it on a new cart, and the whole house of Israel plays before the LORD with harps, tambourines, and cymbals. Then the cattle stumble. Uzzah reaches out and takes hold of the ark, and God strikes him there for his error. David is displeased and afraid. “How could the LORD’s ark come to me?” he asks, and he leaves the ark in the house of Obed-Edom, which is blessed for three months.\n\nDavid then brings the ark up with joy. He sacrifices an ox and a fattened calf and dances before the LORD with all his might, wearing a linen ephod. Michal looks out of a window and despises him in her heart. She greets him with a sharp word about his dignity. David answers that he will celebrate before the LORD, who chose him above her father."
+        },
+        {
+          "kind": "background",
+          "text": "The ark was the sign of God's presence with Israel, and its fate is told earlier in 1 Samuel 4 to 7. The story of Uzzah troubles many readers, and the text gives only a brief reason, an error. Christians and Jews have read the passage in different ways, most often as a warning about the holiness of God. How the ark should be carried is set out in Numbers 4 and 7. The last verse, about Michal's childlessness, is left without explanation."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David is settled in his house and the LORD has given him rest from his enemies. He looks at his cedar palace and then at the ark inside curtains, and tells Nathan the prophet. Nathan says to do all that is in his heart. That night the LORD speaks to Nathan, and the answer is different.\n\nGod has never asked for a house of cedar. Instead, the LORD will make David a house. He took David from the sheep pen to be prince, he has been with him everywhere, and he will give Israel a place where they are not moved. David’s offspring will build a house for God’s name, and his throne will be established forever. “I will be his father, and he will be my son”, God says, and his loving kindness will not depart from him.\n\nDavid goes in and sits before the LORD. His prayer starts with a question: who am I? He ends by asking God to do as he has spoken."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is the base of the promise to David's house, and many later texts return to it, among them Psalm 89 and Psalm 132. Christians usually read it as pointing ahead to Christ, as in Luke 1 and Acts 2, while Jewish readers stress the lasting hope of the Davidic line. The builder of the house is Solomon, as 1 Kings 6 shows. A parallel account is in 1 Chronicles 17. The wordplay on the word house, a palace and a dynasty, runs through the chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "This chapter is a list of David's wars, and it moves quickly. He strikes the Philistines and takes the bridle of their mother city. He defeats Moab, makes the people lie on the ground, and measures them with a line, two lines to put to death and one to keep alive. He defeats Hadadezer of Zobah and the Syrians of Damascus who come to help, lames the chariot horses, and puts garrisons in Syria and in Edom. Wherever he goes, the text says, the LORD gives him victory.\n\nToi, king of Hamath, sends his son with gifts of silver, gold, and bronze, and David dedicates all of it to the LORD. The chapter closes with a quieter note. David reigns over all Israel and executes justice and righteousness for all his people. A list of his officers follows."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter summarizes the reach of David's kingdom after the promise of chapter 7. It tells of conquest, tribute, and the spoils given to the LORD, and it does so briefly. The measuring of the Moabites is one of the hard lines in the book, and it is stated without comment. Readers differ on how to hear it, and the text's focus is on David's rule as a whole. Ruth, David's Moabite great-grandmother, appears in the book of Ruth. The list of officers shows a kingdom with a working government."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David asks a question nobody expected: is there anyone left of Saul’s house, that he may show them kindness for Jonathan’s sake? In the days when a new king usually cleared away the old line, this is remarkable. A servant of Saul’s house named Ziba is called, and he says Jonathan still has a son who is lame in both feet. His name is Mephibosheth, and he is living in Lo Debar.\n\nDavid sends for him. Mephibosheth comes, falls on his face, and expects the worst. David says, “You will eat bread at my table continually.” All of Saul’s land is restored to him, and Ziba and his household are to farm it for him. Mephibosheth calls himself a dead dog. But he lives in Jerusalem and eats at the king’s table like one of the king’s sons. His young son Mica is mentioned too."
+        },
+        {
+          "kind": "background",
+          "text": "David is keeping the promise he made to Jonathan in 1 Samuel 20 and to Saul in 1 Samuel 24. Mephibosheth's lameness is explained in 2 Samuel 4. The kindness of God is named in David's first question, and many readers see in the story a picture of grace shown to someone with no claim. The story is not finished here. Ziba and Mephibosheth appear again in 2 Samuel 16 and 19, and the later chapters complicate the picture."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David hears that the king of the Ammonites has died, and he decides to be kind to the son, Hanun, as the father was kind to him. He sends servants to comfort him. The Ammonite princes whisper that David's men are spies, and Hanun believes them. He shaves off half of each man’s beard and cuts their garments off at the middle, and sends them away.\n\nThe men are greatly ashamed, and David tells them to wait at Jericho until their beards grow. Ammon knows it has made itself odious, and it hires Syrian soldiers. Joab faces enemies in front and behind. He splits the army, with Abishai on one side, and tells his brother to be courageous for the cities of their God and let the LORD do what seems good to him.\n\nThe Syrians flee, and then the Ammonites. The Syrians gather again under Hadadezer. David crosses the Jordan, and the Syrians flee before Israel again and make peace."
+        },
+        {
+          "kind": "background",
+          "text": "A friendly message turns into a war because of a suspicion, and the chapter shows how fast that can happen. Nahash, Hanun's father, is the Ammonite king of 1 Samuel 11. The war it begins is not over: Rabbah is under siege at the start of 2 Samuel 11 and falls in 2 Samuel 12. Joab's speech before the battle is one of the few places where he speaks of the LORD, and it is a plain one."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "It is the time when kings go out to war, and David stays in Jerusalem. One evening he walks on the roof and sees a woman bathing. He asks who she is. He is told she is Bathsheba, the wife of Uriah the Hittite, one of his own soldiers. David sends messengers and takes her. She conceives and sends word: I am with child.\n\nDavid tries to cover it. He calls Uriah home from the front and tells him to go to his house. Uriah will not. The ark and the army are in tents, he says, and he will not eat, drink, or lie with his wife. David makes him drunk, and still he does not go. So David writes a letter to Joab and sends it by Uriah's own hand: put him in the hottest fighting, then pull back.\n\nUriah dies. Bathsheba mourns, and when it is over David brings her to his house. She bears a son. The text ends with one sentence: the thing David had done displeased the LORD."
+        },
+        {
+          "kind": "background",
+          "text": "The text names no excuse for David and offers none. Many readers see in verse 4 the abuse of a king's power over a subject, and note that Bathsheba's own voice is heard only in a few words. The story is one of the hardest in the book, and it is told plainly. Uriah is among David's mighty men in 2 Samuel 23. The consequences begin in 2 Samuel 12, and Psalm 51 is linked in its title to this episode. Matthew 1 names Bathsheba in Jesus' ancestry."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The LORD sends Nathan to David, and Nathan begins with a story. Two men lived in one city, one rich and one poor. The poor man had a single little ewe lamb that ate from his table and lay in his arms like a daughter. When a traveler came, the rich man spared his own flocks and took the poor man’s lamb. David is furious and says the man deserves to die.\n\nNathan says, “You are the man!” He lists what God gave David and what David did with Uriah and Bathsheba. The sword will never leave his house. David says, “I have sinned against the LORD.” Nathan says the LORD has put away his sin, but the child will die.\n\nDavid fasts and lies on the ground for seven days. When the child dies, he washes, worships, and eats. He comforts Bathsheba, and they have another son, Solomon. The LORD loved him. The chapter closes with Joab's victory at Rabbah and David wearing the Ammonite crown."
+        },
+        {
+          "kind": "background",
+          "text": "Nathan appears here as the prophet who speaks to the king without fear, as in 2 Samuel 7. Parable and confession are the heart of the chapter, and Psalm 51 is linked in its title to this moment. The promise that the sword will not leave David's house is fulfilled in the chapters that follow, starting in 2 Samuel 13. Readers differ on how to understand the death of the child, and the text says it was the LORD's doing. David's words about going to him are among the few Old Testament glimpses of hope about the dead."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "This chapter is about a family wounded from the inside, and it is hard to read. David's son Amnon loves his half sister Tamar, so much that he makes himself sick. His friend Jonadab, a very subtle man, suggests a plan. Amnon pretends to be ill and asks the king to send Tamar to make him cakes. David sends her. Amnon sends everyone out of the room, and then he forces her, though she begs him not to and says that nothing like it ought to be done in Israel.\n\nAfterward he hates her more than he loved her, and has her thrown out and the door bolted. Tamar puts ashes on her head, tears her robe, and goes crying aloud. Her brother Absalom takes her in, and tells her to be silent. David is very angry, but the text records no action.\n\nTwo years later Absalom has Amnon killed at a feast. Absalom flees to Geshur, and David mourns every day."
+        },
+        {
+          "kind": "background",
+          "text": "This is one of the hardest chapters in the Bible, and the text takes Tamar's side. It names what was done to her as wrong, and it shows her speaking, grieving, and left desolate. The silence of David and Absalom's long patience set up the revolt of the following chapters. It fits the warning Nathan gave in 2 Samuel 12 that evil would rise from David's own house. The law of Leviticus 18 and Deuteronomy 22 names such acts as forbidden."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Joab sees that the king's heart longs for Absalom, who has been in Geshur for three years. He sends for a wise woman from Tekoa and tells her what to say. She dresses as a mourner and comes before David with a story. She is a widow with two sons. One killed the other in the field, and now the family demands the surviving son’s death, which would leave her husband without a name. David promises that not a hair of her son’s head will fall.\n\nThen she turns the story on him. Why has the king done the same against the people of God, and not brought his banished one home? We all die, she says, “like water spilled on the ground”, but God devises ways for the banished not to be cast out. David guesses that Joab is behind it, and sends Joab to bring Absalom back. But Absalom may not see his face for two years, until Absalom sets Joab's field on fire and gets his audience. David kisses him."
+        },
+        {
+          "kind": "background",
+          "text": "Like Nathan's parable in 2 Samuel 12, this story is told to the king in order to change his mind, and he is caught in his own judgment again. Joab again moves the plot, as in 2 Samuel 3. The woman's speech about God not taking away life but devising means has been quoted often, though in context it pleads for one man's return. The chapter ends with a peace that does not hold, and the trouble it leaves behind comes in 2 Samuel 15."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Absalom is handsome, and now he is also patient and calculating. He gets a chariot, horses, and fifty men to run before him. He rises early and stands by the gate, and when anyone comes with a lawsuit, he agrees that their case is good and wishes aloud that he were judge. He takes them by the hand and kisses them. So “Absalom stole the hearts of the men of Israel”.\n\nAfter four years he asks leave to pay a vow at Hebron. There he sends spies through the tribes, and the cry goes out that Absalom is king. Ahithophel, David's counselor, joins him. A messenger tells David, and David decides to flee at once.\n\nHe leaves with his household and his servants. Ittai of Gath, a foreigner, swears to follow him whether for death or life. David sends the ark back to the city. Barefoot and weeping, he climbs the Mount of Olives, and sends Hushai back as a spy."
+        },
+        {
+          "kind": "background",
+          "text": "The prophecy of 2 Samuel 12 now becomes real: the sword comes from David's own house. The chapter shows David at his weakest, and also at his most trusting. When he sends the ark back, he says that if he finds favor, the LORD will bring him again. Ittai's loyalty is a contrast to the disloyalty of David's own son. David's prayer against Ahithophel is answered in chapter 17. Psalm 3 is linked in its title to this flight."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David is a little past the top of the Mount of Olives when Ziba, the servant of Mephibosheth, meets him with donkeys and food. He says his master is staying in Jerusalem hoping to regain his father's kingdom. David hands Ziba everything that belonged to Mephibosheth.\n\nAt Bahurim, a man of Saul's family named Shimei comes out cursing. He throws stones and dust and calls David a man of blood. Abishai asks to cut off his head. David says no. If the LORD has told him to curse David, who can say why? “let him curse”, David says, and he hopes the LORD will see the wrong done to him.\n\nAbsalom enters Jerusalem, and Hushai comes to him with loud cries of Long live the king. Ahithophel advises Absalom to go in to his father's concubines in the sight of all Israel, and he does. The text notes that Ahithophel’s counsel was valued as if one had inquired at the sanctuary of God."
+        },
+        {
+          "kind": "background",
+          "text": "The scene of Shimei is one of the great moments of David's humility, and it echoes the king's earlier restraint toward Saul in 1 Samuel 24 and 26. The truth about Ziba's story is unclear in this chapter, and 2 Samuel 19 shows the other side. What Ahithophel advises was foretold by Nathan in 2 Samuel 12. The text reports the act without approval. The chapter shows two advisors, Hushai and Ahithophel, whose contest decides the next one."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-29",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ahithophel gives Absalom a sharp plan. Let me take twelve thousand men tonight, he says, and strike David while he is weary and afraid. I will strike the king only. Absalom and the elders like it. Then Absalom asks to hear Hushai too.\n\nHushai says Ahithophel's advice is not good this time. David and his men are fierce, like a bear robbed of her cubs, and an old soldier will not be sleeping with the people. Better to gather all Israel, from Dan to Beersheba, and let Absalom lead in person. The people agree that Hushai’s counsel is better. The text says the LORD had ordained to defeat the good counsel of Ahithophel.\n\nHushai's message reaches David by a servant woman and two young priests, who hide in a well at Bahurim while a woman covers it with grain. David and his people cross the Jordan before morning. Ahithophel sees his advice ignored, goes home, sets his house in order, and hangs himself. David reaches Mahanaim, where local leaders bring food."
+        },
+        {
+          "kind": "background",
+          "text": "David's prayer in 2 Samuel 15, that the LORD would turn Ahithophel's counsel into foolishness, is answered in this chapter. The text credits the LORD with the outcome, while showing the human work of Hushai, the priests' sons, and the woman at Bahurim. Ahithophel's end is one of the few suicides reported in the Bible. Mahanaim is where Ishbosheth reigned in 2 Samuel 2. The gifts of food there show that David still has friends beyond the river."
+        }
+      ]
     }
   ]
 }
