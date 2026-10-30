@@ -26,17 +26,17 @@
     {
       "id": "ai:psalms/23",
       "chapter": 23,
-      "model": "Claude Opus 5.5",
-      "written": "2026-10-12",
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
       "review": "ai draft",
       "sections": [
         {
           "kind": "summary",
-          "text": "Psalm 23 is a short song of trust. In verses 1 to 4 the LORD is a shepherd who feeds, leads, restores and protects. In verses 5 and 6 the picture changes to a host who sets a table, anoints his guest and gives more than enough.\n\nNotice the change of voice. The psalm begins by speaking about God: “He leads me”. In its darkest part it turns to speak to him: “you are with me”. The comfort of the psalm does not come from the absence of danger. The valley and the enemies are still there. What changes things is who is present."
+          "text": "A shepherd, and then a host. Psalm 23 opens with a song of trust: “The LORD is my shepherd”. In verses 1 to 4 he feeds, leads, restores and protects. He makes his sheep lie down in green pastures, leads them beside still waters and guides them in paths of righteousness. In verses 5 and 6 the picture changes. Now God is a host who sets a table, anoints his guest’s head with oil and fills the cup until it runs over, and who gives more than enough.\n\nListen for the change of voice. The psalm begins by speaking about God: “He leads me”. In its darkest part, the valley of the shadow of death, it turns to speak to him: “you are with me.” The comfort does not come from the absence of danger. The valley and the enemies are still there. What changes things is who is present."
         },
         {
           "kind": "background",
-          "text": "The heading in the Hebrew text links this psalm with David, who according to 1 Samuel kept sheep before he became king. In the ancient Near East kings were often called shepherds of their people, so calling the LORD “my shepherd” also says something about who truly rules and provides.\n\nA shepherd’s rod and staff are usually explained as working tools: one to defend the flock, the other to guide it. Anointing a guest’s head with oil and filling the cup were signs of a generous welcome."
+          "text": "David, according to 1 Samuel, kept sheep before he became king, and the heading in the Hebrew text links this psalm with him. In the ancient Near East kings were often called shepherds of their people, so calling the LORD “my shepherd” also says something about who truly rules and provides.\n\nA shepherd’s rod and staff are usually explained as working tools: one to defend the flock, the other to guide it. Anointing a guest’s head with oil and filling the cup were signs of a generous welcome."
         },
         {
           "kind": "interpretations",
@@ -72,7 +72,8 @@
             }
           ]
         }
-      ]
+      ],
+      "voice": "story"
     }
   ]
 }
