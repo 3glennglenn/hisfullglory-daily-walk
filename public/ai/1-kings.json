@@ -22,6 +22,402 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:1-kings/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David is old, and he cannot keep warm. His servants bring a young woman, Abishag the Shunammite, to care for him. Adonijah, a handsome son born after Absalom, says, “I will be king.” He gathers chariots, the priest Abiathar and the commander Joab, and holds a feast by En Rogel. He does not invite Nathan, Benaiah or Solomon.\n\nNathan acts quickly. He tells Bathsheba to remind the king of his oath that Solomon would reign, and promises to come in behind her. David swears again that Solomon will sit on his throne this very day.\n\nSolomon rides the king’s own mule down to Gihon. Zadok anoints him, the trumpet sounds, and the people rejoice until the earth shakes. Adonijah and his guests hear it from their table, and the feast breaks up in fear. Adonijah clings to the horns of the altar. Solomon says that if he proves worthy, not a hair of his will fall."
+        },
+        {
+          "kind": "background",
+          "text": "1 and 2 Kings tell the story of Israel’s kings from Solomon on, and this chapter opens the book at the moment the throne passes from David to his son. The question of who will succeed David has been open since the revolt of Absalom, and the story of David’s family, told since 2 Samuel 9, now comes to its decision. The promise that David’s house would last is in 2 Samuel 7. Chapter 2 follows with David’s last words and the first acts of Solomon’s reign."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David is dying, and his last words to Solomon begin with a charge: be strong, keep the instruction of the LORD, and walk in his ways. Then David gives names. Joab, who killed Abner and Amasa in peacetime, should not go down to the grave in peace. The sons of Barzillai should eat at the king’s table. Shimei, who cursed David, should not be held guiltless. David sleeps with his fathers after reigning forty years.\n\nSolomon’s kingdom is firmly established, but the chapter is one of blood. Adonijah asks Bathsheba to speak to Solomon about marrying Abishag. Solomon hears a claim on the kingdom and has him put to death. Joab flees to the altar and holds its horns, but Solomon sends Benaiah, and Joab dies there.\n\nShimei is told never to cross the brook Kidron. For three years he obeys. Then he goes to Gath after two runaway slaves, and Solomon has him killed."
+        },
+        {
+          "kind": "background",
+          "text": "This is a hard chapter. It shows David’s final advice and Solomon’s use of it, and the text mostly reports without comment. Readers have judged it differently. Some see a king removing real threats and fulfilling a word against Eli’s house, and others see a bloody start to a reign that the next chapter calls wise. Joab’s killings are told in 2 Samuel 3 and 20. Shimei’s curse is in 2 Samuel 16 and his pardon in 2 Samuel 19. The removal of Abiathar is tied by the text to a word spoken in 1 Samuel 2."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Solomon is king, he loves the LORD, and he has married the daughter of Pharaoh. At Gibeon, he offers a thousand burnt offerings. That night God appears to him in a dream and says: “Ask for what I should give you.”\n\nSolomon answers like someone who knows what he does not know. He calls himself a little child and asks for an understanding heart to judge God’s people. Because he did not ask for long life, riches or the life of his enemies, God gives him a wise heart, and riches and honor besides. Solomon wakes. It was a dream.\n\nThen the wisdom is tested. Two women bring one dead baby and one living baby to the king, and each says the living child is hers. Solomon calls for a sword and says to divide the child. One woman cries out, give her the living child! The other says, divide him. Solomon knows who the mother is."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter sets out the picture of Solomon at the start of his reign, before the troubles of chapter 11. The prayer is for the ability to govern, not for personal gain, and the answer shows God giving more than was asked. The story of the two women is the best known example of his wisdom, and it ties in with the account in chapter 4 of the wisdom for which he became known. The text also notes that people still sacrificed at the high places, so even this good beginning is mixed."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Under Solomon, Israel is quiet and full. The chapter opens with a roll of his officials: priests, scribes, a recorder, the commander of the army, and a man over the forced labor. Nothing is lacking at the king’s table.\n\nThe numbers are large. Judah and Israel are as many as the sand by the sea, eating and drinking and making merry. Solomon rules from the River to the border of Egypt, and the people live safely, every man under his vine and under his fig tree, from Dan to Beersheba. He has forty thousand stalls for chariot horses.\n\nBut the chapter is really about wisdom. God gave Solomon breadth of mind like the sand on the seashore, wiser than all the wise men of the east and of Egypt. He spoke three thousand proverbs, and his songs numbered one thousand five. He spoke of trees from the cedar to the hyssop, and of animals, birds, creeping things and fish."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter shows Solomon’s kingdom at its height, a picture of peace and plenty that follows the promises made to Abraham and David. The list of officials and districts shows how the kingdom was run, and the monthly provision hints at the weight on the people, which becomes a complaint in chapter 12. The proverbs and songs link Solomon with the wisdom books, and Proverbs, Ecclesiastes and Song of Solomon are traditionally connected with his name."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Hiram, king of Tyre, hears that Solomon has been anointed, and he sends servants, because he had always loved David. Solomon answers with a plan. His father David could not build a house for the LORD’s name, because wars surrounded him. Now the LORD has given rest on every side, and Solomon intends to build.\n\nHe asks Hiram for cedar from Lebanon, and says nobody among Israel knows how to cut timber like the Sidonians. Hiram rejoices greatly and says, “Blessed is the LORD today, who has given to David a wise son to rule over this great people.” He will bring the timber down to the sea and float it in rafts, and Solomon will give wheat and oil for his household, year by year.\n\nThe chapter ends with the work force. Solomon raises a levy of thirty thousand men, sending ten thousand a month to Lebanon, and many more to carry loads and cut stone."
+        },
+        {
+          "kind": "background",
+          "text": "Here the plans of 2 Samuel 7 begin to be carried out. David wanted to build a house for God, and God said his son would do it. The chapter shows an alliance between Israel and the Phoenician city of Tyre, which supplies timber and skilled labor. The levy of workers, led by Adoniram, is the beginning of a burden that the people remember in 1 Kings 12. Chapters 6 and 7 go on to describe the building itself."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter opens with a date the writer wants remembered: in the four hundred and eightieth year after Israel came out of Egypt, in the fourth year of Solomon’s reign, he began to build the LORD’s house. It is sixty cubits long, twenty wide and thirty high, with a porch in front, lattice windows and side rooms all around.\n\nIt is built of stone prepared at the quarry, so that no hammer or ax or tool of iron is heard in the house while it is going up. At the back is the inner sanctuary, overlaid with pure gold, to hold the ark of the covenant. In it stand two cherubim of olive wood, each ten cubits high, their wings touching the walls and each other in the middle.\n\nIn the middle of the building, the LORD speaks to Solomon: if you walk in my statutes, I will dwell among the children of Israel. Seven years of work."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter describes the first temple in Jerusalem, built by Solomon. The measurements are given in cubits, and the details are meant to show a house prepared with great care for the worship of God. The date at the start has been discussed by scholars, who differ on how to count it. The cherubim and the palm trees recall the tabernacle in Exodus 25 to 27. God’s promise in the middle of the chapter makes the point that the building matters only if the people walk in his ways."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After seven years on the LORD’s house, the chapter turns to the king’s. Solomon spends thirteen years on his own palace, and the text describes it in detail: the House of the Forest of Lebanon with its rows of cedar pillars, a hall of pillars, a porch of judgment where the throne stands, and a house for Pharaoh’s daughter. All of it is built of costly stone, cut to measure.\n\nThen Solomon sends for another Hiram, from Tyre, the son of a widow of Naphtali and of a father from Tyre, a worker in bronze who is filled with wisdom, understanding and skill. He casts two bronze pillars eighteen cubits high and sets them at the porch, naming one Jachin and the other Boaz. He makes the great molten sea, resting on twelve oxen, ten bronze bases on wheels, ten basins, and the pots, the shovels and the bowls.\n\nSo much bronze is used that Solomon leaves it unweighed."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter gives long descriptions, and readers may find it dry, but it makes a point: Solomon’s building was done with great skill and great cost. It shows the king’s own house taking longer than the temple, which some readers have taken as a quiet comment on his priorities, though the text itself does not say so. The furnishings echo the tabernacle in Exodus 25 to 31. Hiram of Tyre the craftsman is a different man from King Hiram of chapter 5."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The temple is finished, and now it must be filled. Solomon gathers the elders of Israel, and the priests carry the ark of the covenant into the inner sanctuary under the wings of the cherubim. When the priests come out, a cloud fills the house, so that they cannot stand to minister, for the LORD’s glory filled the LORD’s house.\n\nSolomon blesses the assembly, then stands before the altar with his hands spread toward heaven and prays. He asks, “will God in very deed dwell on the earth?” Heaven and the heaven of heavens cannot contain him, so how much less this house. He prays through wrong, defeat, drought, famine, plague, war and exile, and each time, when they turn and pray, hear in heaven. He even prays for the foreigner from a far country.\n\nThen the feast, fourteen days, and the people go home joyful and glad in their hearts."
+        },
+        {
+          "kind": "background",
+          "text": "This is the high point of Solomon’s reign, the dedication of the temple. His prayer is one of the longest in the Bible, and it ties the house to the promise made to David. Notice that he does not treat the temple as a box that holds God, and he prays for foreigners as well as Israelites. Many readers see his prayer about exile as looking ahead to the time when the temple would be destroyed, which the later part of the book describes. The vision of the cloud echoes Exodus 40."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The house is finished, and the LORD appears to Solomon a second time, as he had at Gibeon. He has made the house holy, to put his name there forever. Then comes the condition: if Solomon walks before him as David did, the throne will last. But if he or his children turn away and serve other gods, Israel will be cut off from the land, and the house cast out of God’s sight. Everyone who passes it will ask why the LORD did this, and the answer will be that they abandoned the LORD.\n\nThe rest of the chapter reads like a ledger. After twenty years of building, Solomon gives Hiram twenty cities in Galilee, and Hiram does not like them. Solomon makes bondservants of the people left in the land who are not Israelites, but not of the Israelites themselves.\n\nHe also builds a fleet at Ezion Geber, and it brings back gold from Ophir."
+        },
+        {
+          "kind": "background",
+          "text": "God answers Solomon’s prayer of chapter 8 with a promise and a warning. The warning names the possibility of exile and the ruin of the temple, which is where the book ends up. The second half of the chapter shows the cost of the building program: forced labor, gifts to Hiram that do not please him, and the use of non-Israelite people as bondservants. The text states these facts without a verdict. The chapter sets up the decline that follows in chapters 10 and 11."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Far away, the queen of Sheba hears of Solomon’s fame, and she comes to test him with hard questions. She arrives in Jerusalem with a very great caravan of camels, spices and gold, and talks with him about all that is in her heart. Solomon answers everything.\n\nShe sees the wisdom, the house he built, the food of his table, his servants and officials, and the text says there was no more spirit in her. Then she says, “not even half was told me!” She blesses the LORD, who delighted in Solomon and set him on the throne to do justice and righteousness. She gives him a hundred twenty talents of gold and spices never matched since, and he gives her all she asks.\n\nThe rest of the chapter is a long list of wealth: six hundred sixty-six talents of gold in a year, shields of beaten gold, an ivory throne with twelve lions, and silver as common as stones."
+        },
+        {
+          "kind": "background",
+          "text": "The queen of Sheba is usually linked with a kingdom in the south of Arabia, though the text does not say where she is from. Her visit shows Solomon’s fame spreading beyond Israel. Her praise goes to the LORD, and a foreign ruler is the one who names God’s love for Israel. The mention of horses from Egypt is worth noticing, because Deuteronomy 17 warns a king against multiplying horses and gold. Jesus mentions the queen in Matthew 12 and Luke 11."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter that began with Solomon’s greatness ends with his failure. He loved many foreign women, from the very nations God had warned Israel about, saying they would turn his heart after their gods. He had seven hundred wives and three hundred concubines. When Solomon was old, his wives turned his heart after other gods. He built high places for Chemosh and Molech on the mountain before Jerusalem.\n\nThe LORD, who had appeared to him twice, is angry. The kingdom will be torn away, though not in Solomon’s days, for David’s sake, and one tribe will stay with his son. Then Jeroboam, whom Solomon had put in charge of labor, meets the prophet Ahijah on the road. Ahijah tears a new garment into twelve pieces and gives Jeroboam ten. If he walks in God’s ways, God will build him a sure house.\n\nSolomon tries to kill Jeroboam, who escapes to Egypt. His son Rehoboam takes the throne."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is a hard turn in the story. A king praised for wisdom ends by breaking the central command of the covenant. The text links his fall to his foreign marriages, which in that world often came with political treaties and the gods of those nations. It does not describe the women in detail. The promise to David in 2 Samuel 7 still holds, which is why one tribe is kept. The history of the divided kingdom begins in chapter 12."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Rehoboam goes to Shechem to be made king, and the people send for Jeroboam, who has been in Egypt. Their request is plain: your father made our yoke hard, so make it lighter, and we will serve you. \n\nThe old men who served his father say to be a servant to the people and speak good words. The young men who grew up with him tell him to say, “My little finger is thicker than my father’s waist.” He chooses them. The text says the king did not listen to the people, because it was brought about from the LORD to establish his word spoken through Ahijah.\n\nTen tribes break away with a cry: “To your tents, Israel!” Israel makes Jeroboam king. Rehoboam prepares for war, but a prophet stops him: this thing is from me.\n\nJeroboam fears that worship in Jerusalem will pull his people back, so he makes two golden calves, one at Bethel and one at Dan."
+        },
+        {
+          "kind": "background",
+          "text": "The kingdom splits here into Israel in the north and Judah in the south, and the rest of 1 and 2 Kings follows both. The text holds two causes side by side: a king’s choice to ignore wise advice and God’s word through Ahijah in chapter 11. Jeroboam’s calves recall the golden calf in Exodus 32, and the writer of Kings returns again and again to the sin of Jeroboam as the pattern for the northern kings."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jeroboam stands at the altar in Bethel, burning incense, when a man of God comes out of Judah with a word from the LORD. He cries out against the altar. Jeroboam stretches out his hand and shouts, “Seize him!” and the hand dries up. The king asks the man to pray, and his hand is restored. The king offers him a reward, but the LORD told the man to eat no bread, drink no water, and go home another way.\n\nBut an old prophet in Bethel rides after him and says an angel told him to bring the man back to eat. The text says plainly, “He lied to him.” The man goes. At the table the word of the LORD comes through the old prophet: because you disobeyed, your body will not come to the tomb of your fathers. On the road home, a lion kills him. The old prophet buries him in his own grave and says, “Alas, my brother!”"
+        },
+        {
+          "kind": "background",
+          "text": "This is a puzzling story, and readers have long asked why the man of God is punished while the one who lied is not. The text does not explain. Some stress that a clear command of God should not be set aside on the word of another person, and others note the sorrow the old prophet shows. The word about Josiah is fulfilled much later, as 2 Kings 23 records. The chapter shows that Jeroboam’s heart does not change."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jeroboam’s son Abijah is sick, and the king sends his wife to the prophet Ahijah, in disguise so no one knows who she is. As soon as he hears her feet at the door, he says, “Come in, Jeroboam’s wife! Why do you pretend to be another?”\n\nThe news is heavy. Jeroboam was raised from the people to be a prince, yet he has done more evil than all before him and cast God behind his back. His house will be swept away. But the child will die when she steps into the city, and all Israel will mourn him, because in him alone of Jeroboam’s house there is some good thing toward the LORD. As she crosses the threshold at Tirzah, the child dies.\n\nThe chapter then turns to Judah. Shishak king of Egypt comes against Jerusalem and takes the treasures, including Solomon’s gold shields. Rehoboam replaces them with bronze."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter shows the first fruits of the divided kingdom. Ahijah is the same prophet who gave Jeroboam his promise in 1 Kings 11, and his word is now one of judgment. Readers feel the grief of a mother in the middle of a story about kings. The writer notes that the shields of gold, a sign of Solomon’s wealth, become shields of bronze. Shishak’s raid is also recorded in 2 Chronicles 12, and many scholars link it with an Egyptian campaign in the late tenth century BC."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "In Judah, Abijam reigns three years, and his heart is not perfect with the LORD, yet for David’s sake God gives him a lamp in Jerusalem. Then Asa reigns forty-one years and does what is right in the LORD’s eyes. He puts away the idols, and even removes his own mother Maacah from being queen, because she had made an image for Asherah. His heart is perfect with the LORD all his days, although the high places are not taken away.\n\nBut when Baasha of Israel builds Ramah to cut Judah off, Asa takes the silver and gold left in the LORD’s house and sends it to Ben Hadad of Syria to break his treaty with Baasha. Baasha stops, and Asa uses Ramah’s stones to build Geba and Mizpah.\n\nIn the north, Nadab, son of Jeroboam, reigns two years. Baasha kills him and strikes down all of Jeroboam’s house, according to the word of Ahijah."
+        },
+        {
+          "kind": "background",
+          "text": "Kings now alternates between the north and south, dating each reign by the other kingdom’s ruler. The writer judges each king by whether he follows David’s example or the sin of Jeroboam. Asa is among the better kings of Judah, though the text also notes what he left undone. The silver he sent to Syria came from the temple treasury, and 2 Chronicles 16 gives a different view of that decision. This chapter fulfills the word of 1 Kings 14."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The northern throne becomes a place where kings do not last. A word from the LORD comes to the prophet Jehu against Baasha: you walked in the way of Jeroboam, so your house will be swept away like his. Baasha dies and his son Elah reigns two years. Then Elah is drinking himself drunk in Tirzah when his chariot captain Zimri kills him and destroys the house of Baasha.\n\nZimri reigns seven days. The army makes its commander Omri king that day in the camp. Omri besieges Tirzah, and when Zimri sees the city is taken, he burns the king’s house over himself and dies. \n\nOmri buys a hill for two talents of silver and builds Samaria on it. His son Ahab is worse. As if it were a light thing to walk in the sins of Jeroboam, Ahab marries Jezebel, daughter of the king of the Sidonians, and serves Baal, setting up an altar for him in Samaria."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter tracks four kings of Israel in about fifty years, and the writer’s view is that each of them followed the way of Jeroboam. Omri founds Samaria, which stays the capital of the northern kingdom. Ahab’s marriage to Jezebel brings the worship of Baal into the royal house, setting the scene for Elijah in the next chapter. The note about Jericho refers to the curse on its rebuilding in Joshua 6."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Elijah the Tishbite tells King Ahab there will be no dew or rain these years but according to his word. By the brook Cherith, he drinks from the stream, and ravens bring him bread and meat morning and evening. After a while the brook dries up.\n\nThe next word sends him to Zarephath, in Sidon, to a widow. She says she has only a handful of meal and a little oil, and she is gathering two sticks to bake for her son and herself, that they may eat it and die. Elijah says, don’t be afraid, make me a cake first, for the jar of meal will not run out and the jar of oil will not fail. She does it, and it does not.\n\nThen her son stops breathing. Elijah carries the boy upstairs, stretches himself on him three times, and cries to the LORD. The child revives. Elijah gives him to his mother: “your son lives.”"
+        },
+        {
+          "kind": "background",
+          "text": "Elijah is one of the great prophets of the Old Testament, and his story runs through the rest of 1 Kings and into 2 Kings. The drought is a challenge to Baal, who was seen in that world as a god of rain and storms. The widow of Zarephath is outside Israel, and Jesus points to her in Luke 4 as an example of God’s care for outsiders. The revival of the boy is the first account of someone being raised to life in the Bible."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/18",
+      "chapter": 18,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "In the third year of the drought, the word comes to Elijah: show yourself to Ahab. On the road he meets Obadiah, who runs Ahab’s household and hid a hundred prophets in caves when Jezebel was killing them. \n\nAhab calls him a troubler of Israel. Elijah answers that Ahab has troubled Israel by following the Baals, and asks him to gather all Israel on Mount Carmel with the prophets of Baal. There he asks the people, “How long will you waver between the two sides?” They don’t say a word.\n\nThe test is two bulls and no fire. The prophets of Baal call from morning until noon, but nobody answers. At the evening offering, Elijah repairs the LORD’s altar with twelve stones, soaks it with water three times, and prays a short prayer. Fire falls and consumes the offering, the wood, the stones and the dust. The people fall on their faces: “The LORD, he is God!”"
+        },
+        {
+          "kind": "background",
+          "text": "This is the best known chapter about Elijah, and it is a direct contest between the LORD and Baal on Mount Carmel. The ending, in which the prophets of Baal are killed, is violent, and the text reports it without comment. It reflects the law of Deuteronomy 13 and 18 on false prophets, and readers should be careful about drawing lessons from it for how people today treat those of other faiths. The chapter ends the drought announced in chapter 17."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/19",
+      "chapter": 19,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Elijah has just seen fire fall from heaven, and now one threat from one woman sends him running. He flees into the wilderness, sits under a juniper tree and asks to die: “It is enough.”\n\nHe sleeps. An angel touches him and says to get up and eat. In the strength of that food he walks forty days and forty nights to Horeb, God’s mountain.\n\nIn a cave, God asks, “What are you doing here, Elijah?” He answers that he alone is left. A great wind tears the rocks, but the LORD is not in the wind. An earthquake, a fire, and the LORD is not in them. After the fire there is a still small voice. God asks the same question again, and he gives the same answer.\n\nGod sends him back with tasks, and tells him seven thousand in Israel have not bowed to Baal. Elijah finds Elisha plowing and throws his cloak on him."
+        },
+        {
+          "kind": "background",
+          "text": "After the victory on Carmel, this chapter shows the prophet at his lowest. The text does not hide his despair, and it does not scold him. It shows God feeding him, listening to him twice, and giving him work and companions. Horeb is the same mountain as Sinai in other books. The still small voice has been read in different ways, and the translation of the phrase is debated. Elisha, called here, carries on the work in 2 Kings."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/20",
+      "chapter": 20,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ben Hadad, king of Syria, comes up with thirty-two kings and besieges Samaria. He demands Ahab’s silver, gold, wives and children, and Ahab agrees. When he asks for more, the elders say, don’t listen, and Ahab refuses. Ben Hadad threatens the city. Ahab answers, “Don’t let him who puts on his armor brag like he who takes it off.”\n\nA prophet tells Ahab that the LORD will deliver the multitude into his hand. Ben Hadad is routed. The next spring Syria comes again, saying Israel’s god is a god of the hills, and a man of God says the LORD will show that he is God of the valleys too. A hundred thousand Syrians fall.\n\nBen Hadad begs for his life, and Ahab calls him brother and lets him go. A prophet in disguise tells Ahab a parable, then reveals himself: your life will take his place. Ahab goes home sullen and angry."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter shows God acting for Israel even under a king like Ahab, so that Ahab will know that the LORD is God. It also shows Ahab’s choice to make a treaty with an enemy that a prophet saw as a failure to obey. The phrase about a man devoted to destruction refers to a practice in ancient warfare that the text describes elsewhere, for example in Deuteronomy 20. Readers find the chapter’s war violence difficult."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/21",
+      "chapter": 21,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Next to Ahab’s palace in Jezreel is a vineyard that belongs to Naboth. Ahab offers a better vineyard or its worth in money. Naboth says, “May the LORD forbid me, that I should give the inheritance of my fathers to you!” Ahab goes home sullen and angry, and won’t eat.\n\nWhen Jezebel hears, she says, “Do you now govern the kingdom of Israel?” She writes letters in Ahab’s name and tells the elders of Naboth’s city to seat Naboth in front of the people, and bring two wicked men to say he cursed God and the king. They do it. Naboth is stoned to death. Jezebel tells Ahab to take the vineyard.\n\nElijah is sent to meet Ahab in the vineyard: have you killed and also taken possession? Where the dogs licked Naboth’s blood, they will lick yours. Ahab tears his clothes and fasts. The LORD says he has humbled himself, and the evil will come in his son’s day."
+        },
+        {
+          "kind": "background",
+          "text": "The story turns on the law of the land: an inheritance was not to be sold away from the family, as Leviticus 25 and Numbers 36 describe. Naboth refuses on that basis. The chapter shows power used to take what a king cannot buy, through a false trial and the misuse of the courts. Elijah speaks for the one who has no power. The outcome is told in 1 Kings 22 and 2 Kings 9."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-kings/22",
+      "chapter": 22,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After three years of quiet, Ahab asks Jehoshaphat king of Judah to go with him to take Ramoth Gilead. Jehoshaphat says yes, but asks, “Please inquire first for the LORD’s word.” Ahab gathers about four hundred prophets, and all say go up. Jehoshaphat asks for a prophet of the LORD, and Ahab says there is one more, Micaiah, but I hate him, for he prophesies only evil about me. Micaiah says he will speak what the LORD says, and he tells of seeing Israel scattered like sheep with no shepherd, then describes the LORD on his throne and a spirit who will be a lying spirit in the mouth of all Ahab’s prophets. Zedekiah strikes him, and Ahab has him put in prison.\n\nAhab disguises himself and goes into battle. A man draws his bow at random and hits the king between the joints of his armor. Ahab is held up in his chariot until evening, and dies. The dogs lick up his blood, as the LORD had said."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter sets one true prophet against four hundred who say what the king wants to hear. Micaiah’s vision of the heavenly court is a difficult passage, and Christians have read it in different ways, especially the lying spirit and the question of what God permits. What is clear is that the king was warned and went anyway. Ahab’s death fulfills the word of Elijah in chapter 21."
+        }
+      ]
     }
   ]
 }

@@ -22,6 +22,24 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:2-kings/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "King Ahaziah of Israel falls through the lattice in Samaria and is badly hurt. He sends messengers to ask Baal Zebub whether he will recover. But the LORD’s angel sends Elijah to meet them: “Is it because there is no God in Israel” that you go to inquire there? The messengers report back, and the king knows from their description that it is Elijah.\n\nHe sends a captain of fifty to the top of the hill where Elijah sits. Elijah says, if I am a man of God, let fire come down from the sky and consume you and your fifty. Fire falls, and then falls again on a second captain. The third captain falls on his knees and begs for the lives of his men. The angel tells Elijah not to be afraid, and he goes down with him.\n\nElijah tells the king himself: you will surely die. So Ahaziah dies according to the word of the LORD."
+        },
+        {
+          "kind": "background",
+          "text": "2 Kings opens with the same ongoing story that closes 1 Kings: Ahaziah follows the ways of his father Ahab and his mother Jezebel. The captains and the fire are a hard part of the story, and the text does not explain it beyond the claim made by Elijah. The third captain’s approach is different, and the angel’s word to Elijah shows that God judges by it. The chapter introduces the end of Elijah’s work, which continues into chapter 2."
+        }
+      ]
     }
   ]
 }

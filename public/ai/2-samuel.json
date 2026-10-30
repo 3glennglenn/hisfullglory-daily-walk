@@ -328,6 +328,132 @@
           "text": "David's prayer in 2 Samuel 15, that the LORD would turn Ahithophel's counsel into foolishness, is answered in this chapter. The text credits the LORD with the outcome, while showing the human work of Hushai, the priests' sons, and the woman at Bahurim. Ahithophel's end is one of the few suicides reported in the Bible. Mahanaim is where Ishbosheth reigned in 2 Samuel 2. The gifts of food there show that David still has friends beyond the river."
         }
       ]
+    },
+    {
+      "id": "ai:2-samuel/18",
+      "chapter": 18,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David wants to ride into battle with his men. If the army flees, they say, nobody will care, but “you are worth ten thousand of us.” So the king stands beside the gate while hundreds and thousands march past him, and he gives one command in the hearing of every captain: deal gently with the young man Absalom.\n\nThe fighting is in the forest of Ephraim, and the forest takes more lives than the sword. Absalom, riding a mule, is caught by his head in the boughs of a great oak and left hanging. A soldier who sees it refuses to touch him, because he heard the king’s order. Joab does not refuse. Absalom is killed and buried under a heap of stones.\n\nThen comes the waiting. At last the news comes, and the king goes up to the room over the gate and weeps: “I wish I had died instead of you, Absalom, my son, my son!”"
+        },
+        {
+          "kind": "background",
+          "text": "This is the climax of Absalom’s revolt against his father David, told in 2 Samuel 15 to 17. David has fled Jerusalem and now sends out an army without leading it himself. The chapter sets a king’s command against a general’s judgment, and a victory against a father’s grief. The cry at the end is one of the most personal moments in the story of David. Chapter 19 picks up the same scene the next moment."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/19",
+      "chapter": 19,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The war is won, and nobody is celebrating. Joab is told that the king weeps and mourns for Absalom, and the victory of that day turns into mourning. David has covered his face and keeps crying out for his son.\n\nJoab walks in and speaks plainly. The king has shamed the men who saved him, and if he does not go out and speak to them, not one will stay the night. David gets up and sits in the gate, and the people come before him.\n\nThen the long road back begins. Judah brings the king to the Jordan. Shimei, who once cursed him, begs forgiveness, and David swears he will not die. Mephibosheth arrives unwashed and tells his side. Old Barzillai, eighty years old, turns down a place at court and sends Chimham in his place. By the end Judah and Israel are quarreling over who has the stronger claim to the king."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter follows directly on the death of Absalom in chapter 18. David is returning to power after a rebellion that split the tribes, and each meeting at the Jordan shows a person who was affected by the revolt. Shimei’s curse is told in 2 Samuel 16, and Mephibosheth’s story begins in 2 Samuel 9. The closing argument between Judah and Israel prepares for the new revolt in chapter 20, and David’s last advice about Shimei appears in 1 Kings 2."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/20",
+      "chapter": 20,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A man named Sheba blows a trumpet and calls out, “Every man to his tents, Israel!” and the men of Israel leave David, while Judah stays with its king. Back in Jerusalem, David deals with the ten women he had left to keep the house. He puts them in custody and provides for them, and they live as widows to the day they die.\n\nDavid sends Amasa to gather Judah, but Amasa is late, so Abishai and Joab’s men are sent after Sheba. Joab meets Amasa at the great stone in Gibeon, greets him as a brother, takes him by the beard to kiss him, and kills him with a sword Amasa did not watch. \n\nSheba is besieged in the city of Abel. A wise woman calls from the wall, argues for her city, and then speaks to the people herself. Sheba’s head is thrown over the wall, Joab blows the trumpet, and the siege ends."
+        },
+        {
+          "kind": "background",
+          "text": "After Absalom’s revolt, the tribes were still divided over their loyalty to David, and Sheba from the tribe of Benjamin used that. The chapter shows how fragile the kingdom was and how much power Joab held. The killing of Amasa is the second killing of a rival commander by Joab, and David remembers it in 1 Kings 2. The chapter closes with a list of David’s officials, the kind of record that appears in several places in 2 Samuel."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/21",
+      "chapter": 21,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Three years of famine, year after year, and David does what a king should do: he seeks the face of the LORD. The answer is about the past. It is for Saul and his bloody house, because he put the Gibeonites to death. They name their price, and it is not silver or gold. Seven of Saul’s sons are handed over and hanged on the mountain before the LORD at the start of the barley harvest. David spares Mephibosheth, the son of Jonathan, because of the oath between David and Jonathan.\n\nThen Rizpah takes sackcloth and spreads it on the rock. From the beginning of harvest until the rain falls she keeps the birds and the animals away from the bodies. When David hears of it, he gathers the bones of Saul, Jonathan and the seven, and buries them. After that, God answers prayer for the land. The chapter ends with brief accounts of wars against Philistine champions."
+        },
+        {
+          "kind": "background",
+          "text": "This is a hard passage. It describes the execution of seven men for a crime of their father, and the text itself gives no verdict on it beyond the statement that God answered prayer for the land afterward. Readers have read it in different ways, some stressing the seriousness of a broken oath and some the cost to the innocent. Saul’s attack on the Gibeonites is not told earlier in the books. The oath to the Gibeonites is told in Joshua 9. Chapters 21 to 24 are often described as an appendix to 2 Samuel, gathering material outside the main story."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/22",
+      "chapter": 22,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David sings. The song comes from the day the LORD delivered him from all his enemies and out of the hand of Saul, and it opens with pictures: “The LORD is my rock, my fortress, and my deliverer, even mine;” The waves of death surrounded him, the cords of Sheol were around him, and in his distress he called out.\n\nThe answer is told as a great storm. The earth shakes, smoke rises, God bows the heavens and comes down on thick darkness, rides on a cherub, and thunders from heaven. From all of that, God reaches down and draws one man out of many waters.\n\nThe middle of the song speaks of David’s own faithfulness and of God as a shield and a lamp. Then it turns to battle, with enemies pursued and crushed. The song ends with thanks among the nations, and praise for the God who gives great deliverance to his king."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is a psalm placed inside the story of David, and it is almost the same as Psalm 18. That tells the reader that the song was important enough to be kept in both the history and the hymnbook. Its language of storm and battle is poetry and should be read as such. Its claims of David’s righteousness and its words about crushing enemies raise questions that Christians have answered in different ways. The song looks back over David’s whole life, just before his last words in chapter 23."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/23",
+      "chapter": 23,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "These are the last words of David, and he opens them by naming himself in full: the son of Jesse, the man raised on high, the anointed of the God of Jacob, the sweet psalmist of Israel. He says the LORD’s Spirit spoke by him: one who rules righteously, in the fear of God, is like the light of the morning, like a morning without clouds, like grass springing up after rain. He speaks of an everlasting covenant that God made with his house.\n\nThen the chapter becomes a roll of honor. There is Eleazar, whose hand froze to his sword. Three of the mighty men break through the Philistine lines for a drink from the well of Bethlehem that David longed for. David pours it out to the LORD, because it is the blood of men who risked their lives.\n\nThe list ends with the names of thirty-seven, and the last name is Uriah the Hittite."
+        },
+        {
+          "kind": "background",
+          "text": "David’s last words are presented as inspired speech, in the style of a prophecy, and Christians have often read the picture of a righteous ruler as pointing beyond David to a coming king. Jews and Christians read the promise differently. The long list of warriors honors those who stood with him, and it ends with Uriah, whose story is told in 2 Samuel 11. The reader is left to notice the name. Chapter 22 is David’s song of thanks and this chapter is his final word."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-samuel/24",
+      "chapter": 24,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-30",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The LORD’s anger burns against Israel, and David is moved to say to Joab: go and count the people. It takes nine months and twenty days to cover the land from Dan to Beersheba.\n\nThen David’s heart strikes him. He says to the LORD, “I have sinned greatly in that which I have done.” The prophet Gad brings three choices: seven years of famine, three months of fleeing foes, or three days of plague. David chooses to fall into the LORD’s hand, for his mercies are great. A pestilence falls on Israel, and seventy thousand die.\n\nWhen the angel’s hand stretches toward Jerusalem, the LORD relents. David cries out for his people: let your hand be against me. Gad sends him to the threshing floor of Araunah, who offers it free. David refuses to offer burnt offerings that cost him nothing, so he pays fifty shekels of silver, builds an altar there, and the plague is removed."
+        },
+        {
+          "kind": "background",
+          "text": "The census and the plague are a difficult story, and the text says both that the LORD’s anger moved David and that David sinned. Readers differ on how to hold these together. The parallel account in 1 Chronicles 21 tells it differently, and many readers compare the two. The threshing floor of Araunah is the place that later tradition links with the temple in Jerusalem, as 2 Chronicles 3 says. This chapter closes the book of 2 Samuel and the long account of David’s reign."
+        }
+      ]
     }
   ]
 }
