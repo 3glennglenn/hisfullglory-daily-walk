@@ -40,6 +40,438 @@
           "text": "2 Kings opens with the same ongoing story that closes 1 Kings: Ahaziah follows the ways of his father Ahab and his mother Jezebel. The captains and the fire are a hard part of the story, and the text does not explain it beyond the claim made by Elijah. The third captain’s approach is different, and the angel’s word to Elijah shows that God judges by it. The chapter introduces the end of Elijah’s work, which continues into chapter 2."
         }
       ]
+    },
+    {
+      "id": "ai:2-kings/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Three times Elijah tells Elisha to stay behind, and three times Elisha refuses to leave him. From Gilgal to Bethel, to Jericho, to the Jordan, the two walk on, while groups of the sons of the prophets whisper that the LORD will take Elijah that very day. At the river Elijah rolls up his mantle and strikes the water, and they cross on dry ground. Elisha asks for a double portion of Elijah's spirit. Then a chariot of fire and horses of fire come between them, and Elijah goes up in a whirlwind. Elisha tears his clothes, picks up the fallen mantle, and asks where the LORD is. The river parts for him too.\n\nThe chapter ends with a bright gift and a dark one: bad water healed at Jericho, then forty-two youths mauled by bears after they mock Elisha at Bethel."
+        },
+        {
+          "kind": "background",
+          "text": "The books of Kings tell the story of Israel's monarchy, and here the prophet Elijah, who confronted King Ahab, passes his work to Elisha. The crossing of the Jordan echoes Israel's older crossings, see Joshua 3. The bears are among the hardest verses in Kings. The text reports a curse spoken in the LORD's name and gives no further comment, and readers have long wrestled with it. Elisha's ministry fills the next chapters."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Three kings march seven days through the wilderness of Edom and run out of water. Jehoram of Israel, Jehoshaphat of Judah and the king of Edom have come to put down Mesha of Moab, who stopped paying his debt of lambs and wool when Ahab died. Jehoram sees only doom. Jehoshaphat asks whether there is a prophet of the LORD, and Elisha is found. He wants nothing to do with Israel's king and speaks only because of Jehoshaphat. He asks for a musician, and then the word comes: dig trenches, for water will fill the valley without wind or rain. At dawn the country fills with water that looks red as blood in the sun, and the Moabites think the kings have slaughtered each other. They are wrong, and their land is laid waste. Then Mesha offers his eldest son on the wall, and Israel withdraws."
+        },
+        {
+          "kind": "background",
+          "text": "Jehoram, son of Ahab, reigns in Samaria, and Moab was a vassal state of Israel. The story shows Elisha acting as a prophet to kings, in line with what Kings says elsewhere about prophetic words coming true. The ending is dark and puzzling: the text says only that great wrath came against Israel, and readers differ on whose wrath is meant. The chapter does not approve of the child sacrifice."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A widow cries out to Elisha: her husband is dead, and the creditor is coming for her two sons. All she has is a pot of oil. Elisha tells her to borrow empty containers from her neighbors, shut the door and pour. She pours until there is no container left, and the oil stops. Sell it, he says, and live on what remains.\n\nThen comes a woman of Shunem, who builds a small room on her roof for the prophet. He promises her a son, and she says, ‘do not lie to your servant.’ The boy is born, and one day in the fields he cries out about his head and dies on his mother's knees. She says only, ‘It is well,’ and rides to Elisha. He stretches himself over the child, and the boy sneezes seven times and opens his eyes. The chapter closes with poisoned stew and twenty loaves that feed a hundred men."
+        },
+        {
+          "kind": "background",
+          "text": "Elisha's ministry in this chapter is quiet and personal. He cares for a poor widow, a childless woman and a hungry community of prophets. The miracles echo Elijah's, see 1 Kings 17, where a widow's oil and a dead boy also appear. The Shunammite woman acts boldly throughout. She is a person of means who takes the initiative. The feeding of the hundred is sometimes compared by Christian readers with the feeding stories in the Gospels."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Naaman is a great man: commander of Syria's army, a victor, and a man with leprosy. A captive girl from Israel, who waits on his wife, says what no one else dares: if only my lord were with the prophet in Samaria. Naaman rides out with silver, gold and a letter, and the king of Israel tears his clothes, sure it is a trap. Elisha asks that Naaman be sent to him, but does not even come out of the house. He sends word: wash in the Jordan seven times. Naaman storms off in a rage. His servants coax him back, he dips seven times, and his skin is like a child's. He says there is no God in all the earth but in Israel. Elisha refuses every gift. But Gehazi, Elisha's servant, runs after Naaman and takes silver and clothing by a lie, and Elisha sees it all. Naaman's leprosy passes to Gehazi."
+        },
+        {
+          "kind": "background",
+          "text": "Syria and Israel were often enemies in this period, which makes this story of an enemy commander healed by an Israelite prophet remarkable. The nameless girl is a captive and a servant, yet the whole story turns on her words. Christian readers often connect Naaman with Jesus' mention of him in the Gospel of Luke, chapter 4. Naaman's request about the house of Rimmon is left without comment, and readers differ on how to take it."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A borrowed ax head sinks in the Jordan, and the man who lost it cries, ‘it was borrowed.’ Elisha makes the iron float. Then comes war. The king of Syria cannot work out who is leaking his plans, and is told Elisha tells Israel's king even what is said in his bedroom. He sends an army by night to Dothan. In the morning Elisha's servant sees horses and chariots all around and asks what they can do. Elisha prays that his eyes be opened, and he sees the mountain full of horses and chariots of fire. Elisha leads the blinded Syrians to Samaria, and when the king of Israel asks whether he should strike them, Elisha says no and orders a feast. The raids stop.\n\nLater Syria besieges Samaria, and the famine is terrible. A woman tells the king that she and another woman ate her son. The king tears his clothes, and his anger turns on Elisha."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter moves between small kindnesses and national disaster. The siege is one of the darkest scenes in Kings, and the text reports it plainly without celebrating it. The vision at Dothan is often read as a picture of unseen protection, see Psalm 34. The king's blame of Elisha, and Elisha's answer, set up the next chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Samaria is starving, and Elisha announces that by this time tomorrow fine flour will sell cheaply at the city gate. An officer on whom the king leans scoffs: could this happen even if the LORD made windows in heaven? Elisha answers that he will see it but not eat of it.\n\nAt the gate sit four men with leprosy. They reason that they will die if they enter the city, die if they sit still, and might live if they surrender to the Syrians. At twilight they find the enemy camp empty. The Syrians had heard the sound of chariots and horses and had fled. The four eat, drink and hide some treasure. Then they say they are not doing right, and go back to tell the city. Scouts confirm it. The people plunder the camp, and the price falls as Elisha said. The officer is trampled at the gate and dies."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter follows the siege in 2 Kings 6. Rescue comes through people at the edge of society, the four men with leprosy, whom Israel's law kept outside the camp, see Leviticus 13. The text says the LORD caused the Syrians to hear the sound. The officer's death is told as the fulfillment of a spoken word, and the chapter leaves it at that."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The woman whose son Elisha restored to life is told to leave for seven years because of a coming famine, and she does. When she returns she must beg the king for her house and land. At that very moment the king is asking Gehazi to tell him all the great things Elisha has done, and Gehazi is describing the raising of the boy when she walks in. The king orders everything restored to her.\n\nThen Elisha comes to Damascus, where King Benhadad is sick. The king sends Hazael with a present to ask whether he will live. Elisha says to tell him he will recover, though the LORD has shown that he will die. Elisha stares at Hazael until Hazael is ashamed, and the prophet weeps, because he knows the harm Hazael will do to Israel. The next day Hazael smothers the king and takes his throne."
+        },
+        {
+          "kind": "background",
+          "text": "Elisha's ministry now touches the politics of Syria. The text does not say why Elisha tells Hazael to say the king will recover, and readers read the words in different ways. The violence Elisha foresees is described in terrible detail. The summary of Judah's kings links the house of Ahab, ruling in Israel, to Judah through marriage. See also 2 Kings 9 and 11."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Elisha sends a young prophet with a vial of oil to Ramoth Gilead. His orders are exact: find Jehu among the army captains, take him to an inner room, pour the oil, speak the word, and flee without waiting. Jehu is anointed king over Israel and told to strike down the house of Ahab, and that dogs will eat Jezebel at Jezreel. His fellow officers ask why this madman came. Then they hurry to lay their cloaks on the stairs and blow the trumpet, saying Jehu is king.\n\nJehu drives to Jezreel so furiously that the watchman knows him from afar. Two messengers ask whether it is peace, and neither comes back. King Joram meets him on Naboth's land, and Jehu's arrow strikes him through the heart. Ahaziah of Judah is struck down too. At Jezreel Jezebel paints her eyes and looks from her window. Jehu has her thrown down. Soon only her skull, feet and hands are found."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter brings to its end the story begun with Ahab and Jezebel in 1 Kings, including the murder of Naboth in 1 Kings 21. The text presents Jehu's revolution as the fulfillment of Elijah's word. It is also brutal, and the book of Hosea later speaks against the bloodshed at Jezreel. Readers have long debated how far the text approves of Jehu's deeds."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Jehu writes to the leaders of Samaria, where Ahab's seventy sons are being raised: choose the best and fight. The leaders are terrified and give in. A second letter demands the heads of the king's sons. They send them in baskets, and Jehu has them piled in two heaps at the gate. In the morning he tells the people they are righteous and points to the LORD's word spoken through Elijah. He kills the rest of Ahab's house, and forty-two relatives of Ahaziah of Judah.\n\nWith Jehonadab he rides on to Samaria and announces that he will serve Baal much. He calls every worshiper of Baal to a great sacrifice. When all are inside, his guard kills them, and the house of Baal is torn down. The LORD says Jehu's sons will sit on the throne to the fourth generation. Yet Jehu does not walk in the law with all his heart, and Hazael begins to cut Israel back."
+        },
+        {
+          "kind": "background",
+          "text": "This is among the most violent chapters in Kings. The text reports both the LORD's commendation of Jehu for ending Ahab's house and the later judgment that he did not follow the law with all his heart. How these fit is a long-debated question. The prophet Hosea, in Hosea 1, later speaks of punishing the house of Jehu for Jezreel. Jehu is also known from outside the Bible, in Assyrian records, which many scholars date to the ninth century before Christ."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "When Ahaziah dies, his mother Athaliah moves to destroy all the royal offspring. One person stops her: Jehosheba, the king's sister, steals away baby Joash with his nurse and hides him in the LORD's house. He stays hidden six years while Athaliah rules.\n\nIn the seventh year the priest Jehoiada calls the captains of the guard into the temple, makes a covenant with them, and shows them the king's son. He sets them in watches and gives them the spears and shields that had been King David's. Then he brings out the boy and puts on the crown, and the people clap and say, ‘Long live the king!’ Athaliah hears the noise, rushes in, tears her clothes and cries treason. She is led out and killed, though not in the LORD's house. Jehoiada makes a covenant between the LORD, the king and the people, and the house of Baal is broken down. The new king is seven years old."
+        },
+        {
+          "kind": "background",
+          "text": "Athaliah, daughter of Omri's house of Israel and mother of a king of Judah, is the only queen to rule over Judah. Her seizure of power threatened the line of David, to whom the LORD had promised a lamp for his descendants, see 2 Kings 8. The story is told in 2 Chronicles 22 and 23 as well. The covenant Jehoiada makes renews the bond between God, king and people."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Joash is a boy-king, and for as long as the priest Jehoiada teaches him he does what is right. His great project is the temple, which is damaged. He tells the priests to use the money brought into the LORD's house for repairs, but by his twenty-third year nothing has been fixed. So Jehoiada takes a chest, bores a hole in its lid and sets it by the altar. People drop in the money, and when the chest is full the king's scribe and the high priest count it. It is paid to carpenters, builders, masons and stone cutters. No one is asked for an accounting, because they deal faithfully.\n\nThen Hazael of Syria takes Gath and sets his face toward Jerusalem. Joash strips the temple and palace treasuries and sends the gold to Hazael, and the Syrian leaves. In the end Joash's own servants conspire against him and strike him down."
+        },
+        {
+          "kind": "background",
+          "text": "Joash is the child hidden in the temple in 2 Kings 11. The chapter shows his early faithfulness under Jehoiada, and the book notes that the high places were not taken away. The Chronicles tell a fuller and darker story of his later years, see 2 Chronicles 24. The detail of the chest is one of the few vivid scenes of temple money in the Bible, and the text praises the honesty of the workers."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Israel's kings follow one another and keep walking in the sins of Jeroboam. Under Jehoahaz, Syria leaves him only fifty horsemen and ten chariots. He begs the LORD, and the LORD gives Israel a savior, yet the people do not turn from their sins.\n\nThen Elisha falls ill, with the illness of which he will die. King Joash comes down and weeps over him, with the same cry Elisha once made for Elijah. Elisha has him take a bow and arrows, lays his own hands on the king's, and tells him to open the window and shoot. It is the LORD's arrow of victory over Syria. Then he tells the king to strike the ground, and the king strikes three times and stops. Elisha is angry: five or six strikes would have ended Syria. After Elisha is buried, a body is thrown into his tomb as raiders approach. The man touches the bones and stands up alive."
+        },
+        {
+          "kind": "background",
+          "text": "Elisha's last scene is a charge to the king. The arrows are an acted prophecy, common in the prophets. The text says the LORD was gracious to Israel for the sake of his covenant, even in a time of decline. See Genesis 12 for the first covenant promise to Abraham. The tomb story is unusual in the Bible, and the text simply reports it."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Amaziah becomes king of Judah at twenty-five. He does right in the LORD's eyes, though not like David. When he secures his throne he kills the servants who murdered his father, but he spares their children, following the law of Moses that each person dies for his own sin.\n\nThen pride gets the better of him. He sends to Jehoash of Israel: come, let us look one another in the face. Jehoash answers with a parable of a thistle that asked a cedar for a marriage alliance and was trampled by a wild animal. Enjoy your glory, he says, and stay home. Amaziah will not listen. Judah is beaten at Beth Shemesh, part of Jerusalem's wall is broken down, and the temple treasures are carried to Samaria. Amaziah is later killed by conspirators at Lachish. In Israel, Jeroboam son of Joash restores the border according to the word of the prophet Jonah."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter alternates between the kings of Judah and Israel. The law Amaziah follows is the one in Deuteronomy 24, where each person is responsible for their own sin. Jonah the son of Amittai is the prophet whose name is shared with the book of Jonah. The text says the LORD saw how bitter Israel's affliction was and saved them through Jeroboam, even though Jeroboam did evil."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Kings rise and fall in quick succession. In Judah, Azariah reigns fifty-two years and does right, yet the high places remain. The LORD strikes him with leprosy, and his son Jotham runs the household. Jotham also does right.\n\nIn Israel the pace is violent. Zechariah rules six months and is struck down by Shallum. Shallum lasts a month before Menahem kills him. When Pul of Assyria comes against the land, Menahem raises a thousand talents of silver by taxing the wealthy fifty shekels each, and the Assyrian turns back. Pekahiah follows Menahem and is killed by his own captain, Pekah. In Pekah's days Tiglath Pileser of Assyria takes cities and carries people from Galilee and Gilead into captivity. Hoshea conspires against Pekah and kills him. The chapter notes that the word to Jehu, that his sons would reign to the fourth generation, came to pass."
+        },
+        {
+          "kind": "background",
+          "text": "This is the period of chaos in the northern kingdom that led to its fall. Assyria, the great power of the age, now appears for the first time as a force in Israel's affairs. The prophets of this period, such as Amos and Hosea, speak into the same decades. The text says again and again that the kings did not depart from the sins of Jeroboam. See 1 Kings 12 for the origin of those sins."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ahaz becomes king of Judah at twenty, and unlike David he walks in the way of the kings of Israel. He even makes his son pass through the fire, as the nations did whom the LORD drove out. Rezin of Syria and Pekah of Israel march on Jerusalem and cannot overcome it, but Syria retakes Elath. Instead of turning to the LORD, Ahaz sends the silver and gold of the temple and palace to Tiglath Pileser of Assyria and calls himself his servant and son. Assyria takes Damascus and kills Rezin.\n\nAhaz goes to Damascus to meet his new master and sees an altar there. He sends a drawing of it to Urijah the priest, who builds a copy before the king gets back. Ahaz offers on it, moves the bronze altar aside, and cuts up some of the temple's furnishings. Urijah does everything the king commands. Hezekiah his son takes the throne."
+        },
+        {
+          "kind": "background",
+          "text": "Ahaz is one of the worst kings of Judah in the book's judgment, and he is the king to whom Isaiah spoke in Isaiah 7. The turn to Assyria shows a king trusting in a human empire instead of the LORD, and it set Judah on a costly road. The text does not say why Urijah complied. The story of the bronze altar belongs to a long theme in Kings, worship being changed to suit a king's politics."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The northern kingdom ends here. Hoshea reigns in Samaria, pays tribute to Assyria, and then secretly sends to Egypt for help. Assyria seizes him, besieges Samaria three years, and carries Israel away to far-off places.\n\nThen the writer stops and explains why. Israel had sinned against the LORD who brought them out of Egypt. They built high places, set up pillars and Asherah poles, served idols, and caused their sons and daughters to pass through the fire. The LORD had sent prophets and seers to warn them, and they hardened their necks. He removed them from his sight, and only Judah remained, and Judah too walked in Israel's ways.\n\nThe king of Assyria settles people from Babylon and other lands in Samaria. When lions attack the newcomers, a priest is sent to teach them the law of the god of the land. They end up fearing the LORD and also serving their own gods."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is the book's own verdict on the fall of the northern kingdom, usually dated by historians to around 722 before Christ. It draws on the covenant warnings of Deuteronomy, see Deuteronomy 28. The mixed population of Samaria matters for later history, since the Samaritans appear in the New Testament, for instance in John 4. The chapter does not say that every later Samaritan descended from these settlers, and readers should be careful about that."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/18",
+      "chapter": 18,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Hezekiah becomes king of Judah, and this time the book has high praise. He removes the high places, breaks the pillars, and cuts down the Asherah. He even breaks the bronze serpent that Moses made, because people were burning incense to it. He trusts the LORD, and the text says no king after him or before him was like him.\n\nThen Assyria comes. Sennacherib takes the fortified cities of Judah, and Hezekiah pays him all the silver in the temple and strips the gold from its doors. It is not enough. The Assyrian sends his commander Rabshakeh with a great army to stand by the upper pool of Jerusalem. Judah's officials ask him to speak in a language the people on the wall cannot understand, but he shouts in their own. Do not let Hezekiah deceive you, he cries. Which god has ever saved a land from Assyria? The people say nothing, as the king had ordered."
+        },
+        {
+          "kind": "background",
+          "text": "The Assyrian empire was the superpower of the day, and its siege of Judah is also recorded in Assyrian sources, which many scholars date to around 701 before Christ. The bronze serpent comes from Numbers 21. Rabshakeh's speech is a masterclass in psychological warfare, offering peace and a comfortable exile. The question at stake is whether the LORD can deliver."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/19",
+      "chapter": 19,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Hezekiah hears the Assyrian's words, tears his clothes, puts on sackcloth, and goes into the LORD's house. He sends word to Isaiah the prophet: this is a day of trouble, so pray for the remnant. Isaiah says: do not be afraid.\n\nThen a letter arrives from Sennacherib, listing the gods of other nations that failed to save them. Hezekiah takes the letter, goes up to the LORD's house, and spreads it out before the LORD. He prays to the God enthroned above the cherubim, who made heaven and earth: open your eyes and see. Isaiah sends back the LORD's answer: I have heard you. The proud king has defied the Holy One of Israel, and will be turned back the way he came. That night the LORD's angel strikes one hundred eighty-five thousand in the Assyrian camp. Sennacherib goes home to Nineveh; later his sons kill him as he worships."
+        },
+        {
+          "kind": "background",
+          "text": "This is the climax of the Assyrian crisis, also told in Isaiah 36 and 37. Hezekiah's act of spreading the letter before the LORD has become a well-known picture of prayer under pressure. The destruction of the Assyrian army is told as an act of the LORD with no further detail. Assyrian records, which many scholars date to this period, speak of Sennacherib shutting Hezekiah up in Jerusalem but do not claim the city was taken."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/20",
+      "chapter": 20,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Hezekiah is sick and dying, and Isaiah brings him a hard message: set your house in order, for you will not live. Hezekiah turns his face to the wall and prays, and weeps bitterly. Before Isaiah has left the middle of the city, the LORD's word comes again: I have heard your prayer, I have seen your tears, and I will add fifteen years to your days. Hezekiah recovers. For a sign he asks that the shadow on the sundial go back ten steps, and it does.\n\nThen envoys come from Babylon with letters and a gift. Hezekiah shows them everything in his storehouses. Isaiah asks what they saw, and speaks plainly: the days are coming when all of it will be carried to Babylon, and some of Hezekiah's own sons will serve in the palace there. Hezekiah says the word is good, and asks whether there will at least be peace in his days."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter bridges the Assyrian crisis and the Babylonian future. Babylon appears here for the first time as a rising power, and the prophecy anticipates the exile described in 2 Kings 24 and 25. Hezekiah's reply is read in different ways: some readers see humble acceptance, others see a troubling self-concern. The text does not settle the question. The same events are told in Isaiah 38 and 39."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/21",
+      "chapter": 21,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Manasseh is twelve when he becomes king, and he reigns fifty-five years, longer than any other king of Judah. He rebuilds the high places his father Hezekiah destroyed, raises altars for Baal, makes an Asherah, and bows to the army of the sky. He builds altars inside the LORD's house, in the very place the LORD said he would put his name. He makes his own son pass through the fire and practices sorcery. He also sheds a great deal of innocent blood, until Jerusalem is full from one end to the other.\n\nThe LORD speaks through the prophets. Such evil will come on Judah that the ears of all who hear will tingle, and Jerusalem will be wiped like a dish and turned upside down. Manasseh dies and is buried in his garden. His son Amon does the same evil and is killed by his own servants. The people of the land kill the conspirators and make Josiah king."
+        },
+        {
+          "kind": "background",
+          "text": "Manasseh is the pivot of the book's explanation for the exile. Later verses, see 2 Kings 23 and 24, point back to his sins as the reason judgment could not be turned aside. The books of Chronicles tell of a repentance by Manasseh that Kings does not mention, see 2 Chronicles 33. The text does not explain why a king so wicked reigned so long."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/22",
+      "chapter": 22,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Josiah is eight years old when he becomes king, and he does what is right, walking in all the ways of David. In his eighteenth year he sends Shaphan the scribe to the LORD's house to count the money for repairs. There the high priest Hilkiah says, ‘I have found the book of the law in the LORD’s house.’ Shaphan reads it, then reads it to the king. When Josiah hears the words, he tears his clothes.\n\nHe sends a group to inquire of the LORD, and they go to Huldah the prophetess, who lives in Jerusalem. Her answer has two halves. Disaster will come on this place and its people, because they have forsaken the LORD and burned incense to other gods. But because Josiah's heart was tender and he humbled himself, tore his clothes and wept, the LORD has heard him, and he will be gathered to his grave in peace and not see the evil to come."
+        },
+        {
+          "kind": "background",
+          "text": "Many scholars connect the book found here with some form of Deuteronomy, though the text itself says only the book of the law. Josiah turns to a woman prophet for the verdict on the found book, and the text records no hesitation. Her word fits the warnings of Deuteronomy 28. The repairs echo those of Joash in 2 Kings 12, and the honest handling of money is noted again."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/23",
+      "chapter": 23,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Josiah gathers the elders, priests, prophets and people, small and great, and reads aloud the book of the covenant. Standing by the pillar, he makes a covenant before the LORD to follow him with all his heart and soul, and all the people agree.\n\nThen he cleans house. Every vessel made for Baal and Asherah is brought out and burned. He removes the idolatrous priests and defiles Topheth so that no one can again pass a son or daughter through the fire to Molech. He destroys even the altar at Bethel that Jeroboam made. At Bethel he sees a tomb and leaves the bones of the man of God alone. Then he commands the people to keep the Passover, and the text says none like it had been kept since the days of the judges.\n\nYet the LORD does not turn from his anger because of Manasseh. Josiah is killed at Megiddo by Pharaoh Necoh."
+        },
+        {
+          "kind": "background",
+          "text": "Josiah's reforms are usually dated to the late seventh century before Christ. The Bethel scene fulfills a word given in 1 Kings 13. The text praises him as unmatched, and yet it also says the judgment on Judah stands. How these two truths fit together is one of the book's deepest tensions. The chapter reports violence against priests and shrines, as it describes it without softening."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/24",
+      "chapter": 24,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The end of Judah comes in stages. Nebuchadnezzar of Babylon rises, and King Jehoiakim serves him for three years and then rebels. Raiding bands come against Judah. The text says this happened at the LORD's word, because of Manasseh's sins and the innocent blood he shed. Jehoiakim dies, and his son Jehoiachin, eighteen years old, reigns only three months.\n\nBabylon besieges Jerusalem. Jehoiachin goes out to surrender, with his mother, servants, princes and officers. Nebuchadnezzar takes the treasures of the temple and the palace, cuts up the gold vessels Solomon made, and carries off all Jerusalem: the princes, the fighting men, the craftsmen and the smiths. Only the poorest of the land are left behind. Ten thousand captives are taken. In Jehoiachin's place the king of Babylon makes his uncle Mattaniah king and renames him Zedekiah. Zedekiah does evil, and then he rebels against Babylon."
+        },
+        {
+          "kind": "background",
+          "text": "This is the first deportation, usually dated to 597 before Christ. Babylonian records, which many scholars read as confirming these events, also mention the capture of Jerusalem. The prophets Jeremiah and Ezekiel speak into this time, see Jeremiah 24 and Ezekiel 1. The text names rebellion as the immediate cause and the sins of Manasseh as the deeper one."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-kings/25",
+      "chapter": 25,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Zedekiah has rebelled, and Nebuchadnezzar comes with his whole army. The siege of Jerusalem lasts until the eleventh year, and famine grips the city. A breach is made in the wall, and the king flees by night. The Chaldeans overtake him, kill his sons before his eyes, put out his eyes, and take him in chains to Babylon.\n\nA month later Nebuzaradan, captain of the guard, burns the LORD's house, the king's house and every great house in the city. The bronze of the temple is carried off. Leading priests and officials are put to death. Only some of the poorest are left to tend the land. Gedaliah is made governor, but Ishmael kills him, and the people flee to Egypt.\n\nThe book ends on a small note. In the thirty-seventh year of his captivity, Jehoiachin is released from prison and given a seat and a daily allowance for the rest of his life."
+        },
+        {
+          "kind": "background",
+          "text": "Jerusalem fell in 586 before Christ by the usual dating. This ending is the low point of the whole story that began with Joshua. The book closes on the release of Jehoiachin, a son of David's line, and readers have long seen in it a quiet thread of hope. The pain of this moment is voiced in the book of Lamentations. See also Jeremiah 52."
+        }
+      ]
     }
   ]
 }

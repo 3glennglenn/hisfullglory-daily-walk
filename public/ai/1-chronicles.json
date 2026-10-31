@@ -22,6 +22,114 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:1-chronicles/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Chronicles begins with names. Adam, Seth, Enosh, the line runs on to Noah and his three sons, and then the nations spread out: the sons of Japheth, of Ham, of Shem. Cush fathers Nimrod, who begins to be a mighty one on the earth. In Eber's days the earth is divided, and his son is named Peleg for it. The line narrows to Terah, then to Abram, also called Abraham.\n\nThe chapter keeps going. Abraham's sons Isaac and Ishmael are both named, with Ishmael's twelve sons listed, and then the sons of Keturah, including Midian. Isaac has two sons, Esau and Israel, and the chapter lists Esau's line too. It ends in Edom, with the kings who reigned there before Israel had any king, and then the chiefs of Edom.\n\nIt is a long list, but every name is a person. The nations around Israel are placed in the same family tree as Israel itself."
+        },
+        {
+          "kind": "background",
+          "text": "Chronicles was written after the exile, many scholars think, for a community rebuilding its identity in the land. It opens by placing Israel within the story of all humanity, from Adam. Much of this list draws on Genesis, see Genesis 5, 10 and 36. Genealogies in the Bible served to show belonging and inheritance. The reader is invited to see the people of God as part of a larger human family."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The family tree now narrows to Israel's twelve sons: Reuben, Simeon, Levi, Judah, and the rest. The writer then follows Judah more closely than any other. Judah's sons include Er, who was wicked, and Perez and Zerah, born to Tamar. Among Zerah's descendants is Achar, called the troubler of Israel, who took what had been devoted to destruction.\n\nThen the line runs through Hezron, Ram, Amminadab and Nahshon, prince of Judah, to Salma, Boaz, Obed and Jesse. Jesse has seven sons, and David is the seventh. His sisters Zeruiah and Abigail are named, and so are their sons, Joab among them.\n\nThe chapter goes on to other branches of Hezron's family: the lines of Jerahmeel and Caleb. It includes an Egyptian servant, Jarha, who marries his master's daughter, and it names many towns that the families founded or lived in. Bezalel, who made the tabernacle, appears in Hur's line."
+        },
+        {
+          "kind": "background",
+          "text": "Judah comes first among the tribes in this account, because the line of David came from him. David's family is traced here from Judah through Perez, whose line also appears in Ruth 4 and in Matthew 1. The long lists of towns suggest how families and places were tied together for the post-exile community. The chapter is mostly names, and it shows the writer's care for memory and belonging."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "This chapter belongs to David's house. It begins in Hebron, where David reigned seven years and six months, and where six sons were born: Amnon first, then Daniel, Absalom, Adonijah, Shephatiah and Ithream. In Jerusalem, where he reigned thirty-three years, more sons were born, and Solomon is among them, a son of Bathshua. Tamar is named as their sister.\n\nThen the line runs down through the kings of Judah: Solomon's son Rehoboam, then Abijah, Asa, Jehoshaphat, and on through Hezekiah, Manasseh and Josiah. The sons of Josiah are named. After them comes Jeconiah, called the captive, and the line goes on beyond the exile. Shealtiel appears, and Pedaiah, and then Zerubbabel, the name associated with the return from Babylon. The chapter ends with Zerubbabel's descendants, generation after generation, down to the sons of Elioenai."
+        },
+        {
+          "kind": "background",
+          "text": "The writer keeps the line of David alive past the fall of Jerusalem, which is the point of the chapter. The kings listed here are told in detail in the books of Kings, see 2 Samuel 3 and 5 for David's early family. The family of David carried the promise of a lasting house, see 2 Samuel 7. Christian readers connect this line with Matthew 1 and Luke 3, and the two Gospel lists differ in ways readers explain differently."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "More of Judah's families come into view, along with some of Simeon's. The list names craftsmen, potters, families of scribes, and people who worked fine linen. Most are only names, and then one person stops the list: Jabez. He is said to be more honorable than his brothers. His mother named him Jabez, saying, ‘Because I bore him with sorrow.’ He prays to the God of Israel, asking to be blessed, to have his border enlarged, to have God's hand with him, and to be kept from evil so that he will not cause pain. The text says God granted what he asked.\n\nThe chapter closes with Simeon's people. They did not multiply like Judah. They lived in Beersheba and other towns until David's reign, and in the days of Hezekiah some went looking for pasture. They found rich land, wide and quiet, and settled where earlier people had lived. Five hundred went to Mount Seir."
+        },
+        {
+          "kind": "background",
+          "text": "The prayer of Jabez is a rare moment of speech inside a genealogy, and the text gives no more about his life. The tribe of Simeon is a small and fading tribe in the Bible's telling, see Genesis 49. The moves of the Simeonites show how families spread in search of land. The passage about taking the land of earlier peoples is stated in the text without comment."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The writer turns to the tribes east of the Jordan, and begins with an explanation. Reuben was the firstborn, but because he defiled his father's couch, his birthright went to the sons of Joseph. Judah prevailed over his brothers, and from him came the prince.\n\nThe chapter lists Reuben's line and Gad's, along with the half-tribe of Manasseh. They lived in Gilead and Bashan, where their livestock multiplied. In the days of Saul they fought the Hagrites. The writer counts forty-four thousand seven hundred sixty fighting men, skilled with sword and bow. When they went to war they cried to God, and he answered them because they trusted him.\n\nThe chapter ends sadly. The leaders trespassed against the God of their fathers and followed the gods of the peoples of the land. So God stirred up the kings of Assyria, who carried the Reubenites, the Gadites and the half-tribe of Manasseh away to Halah, Habor and the river of Gozan."
+        },
+        {
+          "kind": "background",
+          "text": "The story of Reuben is told in Genesis 35 and 49. Chronicles keeps asking why the tribes lost what they had, and here the answer is unfaithfulness. The exile of these tribes by Assyria matches the account in 2 Kings 15 and 17. The report of the war says the war was of God, a view that appears in other war accounts and that readers approach with care."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-10-31",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "This chapter belongs to the priests and the Levites. It begins with Levi's three sons, Gershon, Kohath and Merari. From Kohath come Amram and the children of Amram: Aaron, Moses and Miriam. The line of the high priests is traced from Aaron through Eleazar, Phinehas and Zadok to Jehozadak, who went into captivity when the LORD carried Judah and Jerusalem away by the hand of Nebuchadnezzar.\n\nThen the writer turns to the singers. David set men over the service of song in the LORD's house after the ark came to rest there. Heman is named, with Asaph on his right hand and Ethan on his left, each with his line back to Levi.\n\nThe chapter ends with where the Levites lived. They had no tribal territory of their own, so cities with pasture lands were given them out of the other tribes, including cities of refuge. Hebron goes to Aaron's sons, though the fields around it belong to Caleb."
+        },
+        {
+          "kind": "background",
+          "text": "The Levites cared for worship, and the post-exile community leaned on that heritage. The singers named here are linked with some of the psalms: Asaph, Heman and Ethan appear in the headings of Psalms 50, 73 to 83, 88 and 89. The cities given to the Levites are also listed in Joshua 21. The listing of the priestly line to the exile shows the writer's concern that worship survived."
+        }
+      ]
     }
   ]
 }
