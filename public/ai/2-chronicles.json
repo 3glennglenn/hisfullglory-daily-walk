@@ -22,6 +22,132 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:2-chronicles/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Solomon begins his reign with a crowd and a sacrifice. He leads all Israel to the high place at Gibeon, where the old Tent of Meeting that Moses made still stands with the bronze altar, and he offers a thousand burnt offerings. That night God appears to him with an open invitation: “Ask for what you want me to give you.” Solomon begins by remembering the kindness shown to his father David. Then he asks for wisdom and knowledge to govern a people as many as the dust of the earth. God is pleased that he did not ask for riches, honor, or the death of his enemies, and grants the wisdom, adding wealth and honor beyond any king before or after. Solomon returns to Jerusalem and reigns. The chapter closes with chariots, horsemen, and so much silver and gold that they are as common as stones."
+        },
+        {
+          "kind": "background",
+          "text": "The scene is also in 1 Kings 3. Chronicles places it at Gibeon because the tent and altar of Moses were there while David's tent for the ark stood in Jerusalem, as chapter 21 of the first book said. Solomon's request fits what David asked of him in 1 Chronicles 22. The horses from Egypt in verse 16 may be read alongside the warning about kings in Deuteronomy 17. The book is usually dated after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-chronicles/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Solomon decides to build, and the planning is as important as the building. He counts out seventy thousand burden bearers, eighty thousand stone cutters in the mountains, and three thousand six hundred overseers. Then he writes to Huram, king of Tyre, and asks for the same help Tyre once gave David: cedar, cypress, skilled metalworkers, and men who can cut timber in Lebanon. In return he will send wheat, barley, wine and oil. He explains his own thinking with some humility, saying, “heaven and the heaven of heavens can’t contain him”, and asks who he is to build God a house, except to burn incense before him. Huram answers in writing with a blessing for the LORD, who made heaven and earth, and he sends Huram-abi, a skilled man whose mother was from Dan and whose father was from Tyre. Solomon puts the foreigners in the land to the work."
+        },
+        {
+          "kind": "background",
+          "text": "The exchange of letters appears in 1 Kings 5, in a shorter form. Huram is called Hiram there. The workforce was drawn from the foreigners living in Israel, counted in a census after the one David took, and readers rightly ask about the fairness of such forced labor, which the text reports without comment. Many scholars think Chronicles was shaped after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-chronicles/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter opens with a place: Solomon begins to build on Mount Moriah, where the LORD appeared to David, on the threshing floor of Ornan the Jebusite. The date is given too, the second day of the second month in the fourth year of his reign. After that the text reads like a builder's account. The house is sixty cubits long and twenty wide. The porch is overlaid with pure gold, the large room is paneled with cypress and fine gold, and carved palm trees and chains decorate it. The most holy place is twenty cubits square, overlaid with six hundred talents of fine gold. Two carved cherubim stand there, their wings reaching twenty cubits in all, and a veil of blue, purple, crimson and fine linen hangs before them. Outside, two bronze pillars stand, one on the right named Jachin and one on the left named Boaz."
+        },
+        {
+          "kind": "background",
+          "text": "The threshing floor links this chapter to 1 Chronicles 21. Mount Moriah is also the name used for the land where Abraham went in Genesis 22, and tradition has long connected the two, though the text here does not say so. The description parallels 1 Kings 6 and 7. The cubit measures and the weights of gold should be taken as the writer gives them. Many scholars date Chronicles after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-chronicles/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The furnishings follow the house. Solomon makes a bronze altar twenty cubits square. Then he casts the molten sea, a huge round basin ten cubits across, resting on twelve bronze oxen that face north, west, south and east, with a rim like the flower of a lily. It holds three thousand baths and is for the priests to wash in. He makes ten basins for the offerings, ten golden lamp stands and ten tables, a hundred golden basins, and a court for the priests with doors overlaid in bronze. The craftsman Huram-abi, whose work is credited to him, makes the pots, shovels and bowls, and the two pillars with their networks and four hundred pomegranates. The metal was cast in the plain of the Jordan, between Succoth and Zeredah, and there was so much bronze that its weight was never worked out. The chapter ends with the golden altar and the table for the bread."
+        },
+        {
+          "kind": "background",
+          "text": "The washing basins echo the tabernacle of Exodus 30 and 38. Chronicles parallels 1 Kings 7 here and describes the temple as built to continue the worship begun in the wilderness, with more of everything. Some details, such as the size of the sea, are discussed by readers because the measurements are rounded. Many scholars think the book was written after the exile for people rebuilding worship."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-chronicles/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The work is done, and Solomon brings in what David had dedicated, the silver, gold and vessels, and puts them in the treasuries. Then he summons Israel to Jerusalem. In the seventh month, at the feast, the elders gather and the Levites take up the ark and bring it into the inner sanctuary, under the wings of the cherubim. So many sheep and cattle are sacrificed that they cannot be counted. The poles of the ark are so long their ends can be seen from the holy place. The text says nothing is in the ark except the two tablets Moses put there at Horeb. The priests come out, the singers stand at the east end of the altar in fine linen, with a hundred twenty priests blowing trumpets. They are as one voice, saying, “For he is good, for his loving kindness endures forever”. Then a cloud fills the house, so that the priests cannot stand to minister, for the glory of the LORD fills it."
+        },
+        {
+          "kind": "background",
+          "text": "This is the dedication scene, also in 1 Kings 8. A cloud as a sign of God's presence recalls the tabernacle in Exodus 40 and the pillar of cloud in the wilderness. The words of praise are a refrain in this book and in the Psalms (see Psalm 136). Many scholars think Chronicles was written after the exile, for a community that needed to know that God's presence did not depend on a king."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-chronicles/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The cloud has filled the house, and Solomon speaks into it. The LORD has said he would dwell in thick darkness, he says, and I have built you a house. He turns and blesses the assembly, then recalls the promise to David, who wanted to build but was told his son would. Then he kneels on a bronze platform in the court, spreads his hands to heaven, and prays. He asks God to keep the promise to David's line. Then he asks the question that sits in the middle of the chapter: “But will God indeed dwell with men on the earth?” Heaven cannot contain God, much less this house. Yet he asks that God's eyes be open toward it. A long run of cases follows: a wrong between neighbors, defeat in war, drought, famine, plague, a foreigner who comes from far away, and exile. In each, he asks God to hear from heaven and forgive."
+        },
+        {
+          "kind": "background",
+          "text": "This prayer parallels 1 Kings 8 and is one of the great prayers of the Bible. Its mention of exile in verses 36 to 39 is striking, since many scholars think the book was written after the exile began and ended. Note the foreigner in verse 32, for whom Solomon asks that God answer so that all peoples may know his name. Readers differ on how the house relates to God's presence, a question the New Testament takes up in places such as Acts 7."
+        }
+      ]
+    },
+    {
+      "id": "ai:2-chronicles/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Solomon has finished praying, and the answer is immediate. Fire comes down from heaven and consumes the sacrifices, and the glory of the LORD fills the house so completely that the priests cannot enter. All Israel sees it. They bow with their faces to the ground, worship, and give thanks. Then the king and the people offer sacrifices, twenty-two thousand cattle and a hundred twenty thousand sheep, and the dedication lasts seven days, followed by the feast, then a solemn assembly. On the twenty-third day Solomon sends the people home, joyful and glad of heart. Then God appears to him by night. He has heard the prayer and chosen the place. Then comes a promise that is often quoted: if his people humble themselves, pray, seek his face and turn from wicked ways, he will hear from heaven, forgive, and “will heal their land.” A warning follows, that if they forsake him, the house itself will become a byword."
+        },
+        {
+          "kind": "background",
+          "text": "The promise in verse 14 was given to Israel at a particular time and place, and readers differ on how far it applies to other nations and eras. The fire from heaven echoes Leviticus 9 and 1 Kings 18. The warning in verses 19 to 22 looks ahead to the fall of Jerusalem, a story told at the end of this book. Many scholars think Chronicles was written after the exile and for people who had lived through it."
+        }
+      ]
     }
   ]
 }

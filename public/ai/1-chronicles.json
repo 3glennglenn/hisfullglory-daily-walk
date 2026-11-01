@@ -130,6 +130,420 @@
           "text": "The Levites cared for worship, and the post-exile community leaned on that heritage. The singers named here are linked with some of the psalms: Asaph, Heman and Ethan appear in the headings of Psalms 50, 73 to 83, 88 and 89. The cities given to the Levites are also listed in Joshua 21. The listing of the priestly line to the exile shows the writer's concern that worship survived."
         }
       ]
+    },
+    {
+      "id": "ai:1-chronicles/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The names keep coming, tribe after tribe, each with its fighting men counted beside it: Issachar, Benjamin, Naphtali, Manasseh, Ephraim, Asher. Most of it is a ledger. Then, in the middle of the list, a father weeps. Two of Ephraim's sons were killed by men of Gath who came to take their livestock, and the text says Ephraim “mourned many days”, while his brothers came to comfort him. A son is born afterward and named Beriah, because there was trouble in the house. A daughter, Sheerah, is remembered as the builder of towns. The line of Ephraim runs on until it reaches Nun and then Joshua. The chapter closes with the lands where Joseph's children lived and the army of Asher."
+        },
+        {
+          "kind": "background",
+          "text": "This is part of the long opening of 1 Chronicles, nine chapters of family lines that many scholars think were gathered for people returning to the land after the exile. The book is usually dated well after the events it tells. Here the writer is showing that each tribe still has a place and a name. The mention of Joshua links to the book of Joshua, and the daughters of Zelophehad in verse 15 link to Numbers 27."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "One family is followed more closely than the rest: Benjamin, the smallest of the tribes that stayed with Judah. The chapter walks through its houses and heads of households, some of them living in Jerusalem, some in Geba, some in Aijalon, where they put the people of Gath to flight. A man named Shaharaim has children in the fields of Moab after he sent his wives away. Then the list narrows to a single line that every reader of the Bible knows. Ner becomes the father of Kish, Kish of Saul, and Saul of Jonathan and his brothers. A grandson, Merib-baal, carries it on. The chapter ends with Azel's six sons, and with archers who had one hundred fifty sons and grandsons."
+        },
+        {
+          "kind": "background",
+          "text": "Benjamin gets this much room because Saul, Israel's first king, came from it, and because Jerusalem lay near its border with Judah. The writer is setting up the next chapter and then the account of Saul's death in chapter 10. Many scholars think the book was shaped after the exile, for a community that needed to know who belonged to whom. Saul's story is told in 1 Samuel."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The long genealogies end here with a look at who actually lived in Jerusalem. The chapter opens with a sorrowful sentence: Judah was carried away captive to Babylon because of disobedience. Then it turns to the first people who settled again in their cities, and it names families from Judah, Benjamin, Ephraim and Manasseh, along with priests and Levites. What follows is surprisingly ordinary and careful. Gatekeepers stand at the four sides of God's house, and their brothers come in every seven days to share the work. Someone counts the vessels in and counts them out. Others prepare the spices and bake the bread. Singers live in the rooms, free from other duties, because they work day and night. The chapter ends by repeating Saul's family line."
+        },
+        {
+          "kind": "background",
+          "text": "The writer is describing a restored community, and many scholars connect this list with the people who came back to Jerusalem after the exile, a list also found in Nehemiah 11. The point is that worship needed ordinary people doing faithful, unnoticed work. The repeated line of Saul in verses 35 to 44 leads directly into his death in the next chapter, where the story proper begins."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After nine chapters of names, the story starts on a battlefield and it is a grim one. The Philistines press Israel on Mount Gilboa, and the men of Israel flee. Saul's three sons are killed. Archers overtake the king, and he is badly distressed. He asks his armor bearer to “Draw your sword” and end it, so the enemy cannot abuse him, but the man is too terrified. Saul falls on his own sword, and his armor bearer does the same. The next day the Philistines strip the bodies and fasten Saul's head in the house of Dagon. Then the valiant men of Jabesh Gilead cross the land, take the bodies, bury the bones under the oak, and fast seven days. The writer gives a plain verdict: Saul did not keep the LORD's word and did not inquire of the LORD."
+        },
+        {
+          "kind": "background",
+          "text": "This is the same event told in 1 Samuel 31, but here it is stripped to its core and used as a doorway. Saul's reign ends so that David's can begin in chapter 11. The text records Saul's death without approving it. Anyone who is struggling with thoughts of self-harm should speak with a doctor, counselor or crisis line, as this text offers no guidance on that. Many scholars think Chronicles was written after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "All Israel comes to Hebron with one sentence: “we are your bone and your flesh.” They remind David that even under Saul it was he who led Israel out and brought it in, and they anoint him king, as the LORD had said through Samuel. Then David goes to Jerusalem, where the Jebusites say, You will not come in here. He takes the stronghold anyway, and it becomes David's city. Joab, the first to strike, becomes chief. The rest of the chapter belongs to the mighty men. One lifted his spear against three hundred. Benaiah went down into a pit on a snowy day to kill a lion. Three men broke through the Philistine camp for water from the well of Bethlehem, because David had longed for it. He would not drink. He poured it out to the LORD, because it was bought with their lives."
+        },
+        {
+          "kind": "background",
+          "text": "The first half parallels 2 Samuel 5 and the list of warriors parallels 2 Samuel 23. Chronicles passes over David's seven years as king of Judah alone and starts with the whole nation united. Many scholars think the writer is speaking to a community after the exile, reminding it of what one people under one king once looked like. Uriah the Hittite appears in the list at verse 41."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David is a fugitive at Ziklag, running from Saul, and still the help keeps arriving. Archers from Saul's own tribe of Benjamin come, able to shoot or sling with either hand. Gadites cross the Jordan when it has overflowed all its banks; their faces are like the faces of lions, and they are swift as gazelles. When others from Benjamin and Judah arrive, David meets them with a careful question: have they come in peace, or to betray him? The Spirit comes on Amasai, who answers, Peace be to you, for your God helps you. Day by day more men come, until the camp is like God's army. The chapter ends at Hebron with the numbers of every tribe, among them Issachar, men with “understanding of the times”, and Zebulun, men “not of double heart.” There is a three-day feast, and joy in Israel."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter bridges David's years of hiding, told in 1 Samuel, and the crowning at Hebron in the previous chapter. The writer shows his kingship as something that grew from many tribes freely choosing it. The large numbers are typical of this book, and many scholars read them as a way of stressing completeness, though readers differ on how to take them. The book is usually dated after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David has a king's city now, and the first thing he wants is the ark of God. He asks the leaders for their view, says that Israel did not seek the ark in Saul's days, and the whole assembly agrees. They go to Kiriath Jearim and bring it out of Abinadab's house on a new cart. There is music of every kind, with songs, harps, tambourines, cymbals and trumpets. Then, at a threshing floor, the oxen stumble. Uzza puts out his hand to steady the ark, and he dies on the spot. The text says the LORD's anger burned against him. David is displeased and then afraid, and he asks how he can bring the ark home. He leaves it at the house of Obed-Edom the Gittite. For three months it stays there, and the LORD blesses that house."
+        },
+        {
+          "kind": "background",
+          "text": "The same episode is told in 2 Samuel 6, and chapter 15 here explains what went wrong: the ark was meant to be carried by the Levites, as the law of Moses commanded (see Numbers 4 and 7). This is one of the hard passages of the Bible. The text itself offers the reason, and readers have long asked what it says about the holiness of God and the cost of doing sacred things carelessly, even with good intentions."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A foreign king sends gifts to David before the Philistines send an army. Hiram of Tyre sends cedar trees, masons and carpenters to build David a house, and David perceives that the LORD has established him. The chapter lists the sons born to him in Jerusalem, Solomon among them. Then comes trouble. The Philistines hear that David has been anointed over all Israel, and they go up to find him, raiding the valley of Rephaim. David does not simply fight. He asks God, and God says go up. At Baal Perazim he wins, and the name of the place means breaking out, like waters. When the Philistines come again, God gives a different answer: do not go straight up, wait among the mulberry trees until you hear marching in the treetops. David obeys, and his fame goes out into all lands."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter parallels 2 Samuel 5. Its lesson is in the two battles, one question and two different answers. The writer wants readers to see that David's victories come from asking God each time rather than repeating what worked before. Many scholars think Chronicles was written for a community after the exile, which was learning how to depend on God without a king. Solomon's birth is mentioned here only briefly."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "This time David prepares. He builds houses in his own city, pitches a tent for the ark, and says, No one ought to carry God's ark but the Levites. He gathers the heads of the Levite families and the priests Zadok and Abiathar, tells them to sanctify themselves, and gives the reason plainly: because they did not carry it at first, the LORD broke out against them. Now the Levites bear the ark on their shoulders with its poles, as Moses commanded. David also appoints singers with harps, lyres and bronze cymbals, with Heman, Asaph and Ethan among them. The procession comes up from Obed-Edom's house with joy, sacrificing seven bulls and seven rams. David wears fine linen and dances. One person watches from a window. Michal, Saul's daughter, “she despised him in her heart.”"
+        },
+        {
+          "kind": "background",
+          "text": "This chapter answers the failure of chapter 13 and parallels 2 Samuel 6. The writer insists that the way of worship matters, with the right people and the right method, the way Moses taught in the law (see Numbers 4). Michal's reaction is told with great restraint, and it points back to the old rivalry between David's house and Saul's. Many scholars read the long Levite lists as part of the book's care for worship after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The ark finally comes in. It is set in the middle of the tent David pitched, and burnt offerings and peace offerings are made before God. David blesses the people in the LORD's name and gives every person, man and woman, a loaf of bread, a portion of meat and a cake of raisins. Then he appoints Levites to thank and praise, with Asaph as chief, and on that day he gives them a psalm to sing. It begins, “Oh give thanks to the LORD.” It remembers the covenant with Abraham, Isaac and Jacob, a small, wandering people whom God protected: “Don’t touch my anointed ones!” It calls the whole earth to sing, and the sea and the field and the trees of the forest to join. All the people say Amen. Priests and singers are left to serve before the ark, and everyone goes home."
+        },
+        {
+          "kind": "background",
+          "text": "Verses 8 to 36 gather lines also found in Psalms 105, 96 and 106, so many readers see them as a hymn made from older worship songs. Asaph is linked by tradition with several psalms. The chapter belongs to the book's long interest in worship, and many scholars think it was written for a community after the exile. At this point the ark and the tabernacle at Gibeon are in different places."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David is settled in his palace and something bothers him. He tells the prophet Nathan, “I live in a cedar house, but the ark of the LORD’s covenant is in a tent.” Nathan tells him to do all that is in his heart. That night God speaks to Nathan, and the answer turns the whole thing around. David will not build God a house. God has never asked for one in all the years he walked with Israel. Instead God reminds David where he started, taken from the sheep pen, and then promises that the LORD will build David a house. A son will come, his throne will be established forever, and God will be his father. David goes in and sits before the LORD. He says, “Who am I, LORD God, and what is my house”, and he asks only that the word be kept."
+        },
+        {
+          "kind": "background",
+          "text": "This is the center of the book. The same promise appears in 2 Samuel 7, and later writers return to it often (see Psalm 89). Christians have long read it as pointing ahead to Jesus, the Son of David, as the New Testament does in places such as Luke 1. Jewish readers have read it as a promise to the line of David. Many scholars think Chronicles was shaped after the exile, when David's line had lost its throne."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/18",
+      "chapter": 18,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "This chapter is a record of David's wars and it does not hide how hard they were. He defeats the Philistines, Moab, and Hadadezer king of Zobah. He takes a thousand chariots and hamstrings the chariot horses, keeping only enough for a hundred. Syrians from Damascus come to help and twenty-two thousand of them fall. Edom is struck in the Valley of Salt. In each place the writer says that the LORD gave David victory wherever he went. A king far away, Tou of Hamath, sends his son with gifts of gold and silver and bronze, and David dedicates all of it to the LORD. Then the chapter turns to the government: Joab over the army, a recorder, priests, a scribe, and Benaiah over the guard. The text says David “executed justice and righteousness for all his people.”"
+        },
+        {
+          "kind": "background",
+          "text": "The chapter parallels 2 Samuel 8. War here is the background to the temple, since the bronze taken from Hadadezer's cities is later used by Solomon for the sea and the pillars. Readers have long wrestled with the violence in these books. The text reports it and credits it to God's help for Israel, and it should not be read as a pattern for anyone today. Many scholars think the book was written after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/19",
+      "chapter": 19,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A kindness goes wrong. Nahash, king of Ammon, has died, and David sends messengers to comfort his son Hanun, because the father once showed him kindness. But the princes of Ammon whisper that these men are spies. Hanun shaves the messengers, cuts their garments off at the middle, and sends them away. David hears that the men are greatly humiliated and tells them to wait at Jericho until their beards have grown. Ammon realizes it has made itself odious and hires chariots and horsemen from Aram for a thousand talents of silver. Joab sees the battle set before and behind him and divides the army with Abishai, saying, Be courageous, and let's be strong for our people and for the cities of our God. May the LORD do what seems good to him. The Syrians flee, and Ammon follows. In the end the Syrians make peace and will not help Ammon again."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter parallels 2 Samuel 10. It shows how a gesture of comfort was read as a threat, and how quickly mistrust can lead to a war. The setting is David's wars with his neighbors east of the Jordan. Joab's words before the battle are a short prayer of trust, given in the middle of the plan. The campaign continues in the next chapter, at Rabbah, the capital of Ammon."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/20",
+      "chapter": 20,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter begins with a phrase that carries its own weight: at the time when kings go out to war, Joab led the army against Ammon and besieged Rabbah, but David stayed at Jerusalem. Joab overthrows the city. David takes the crown from the king's head, finds it weighs a talent of gold, and has it set on his own. The text then says he brought out the people and put them to work or to death with saws, picks and axes. That sentence is hard to read, and readers differ on exactly what it describes. The rest of the chapter turns to the giants of Gath. Sibbecai kills Sippai. Elhanan kills the brother of Goliath, whose spear shaft was like a weaver's beam. A man with twenty-four fingers and toes defies Israel and is killed by David's nephew Jonathan."
+        },
+        {
+          "kind": "background",
+          "text": "The first verse hints at the story Chronicles leaves out: in 2 Samuel 11 and 12, David stays at home while Joab fights, and that is when David wrongs Uriah and Bathsheba. Chronicles does not tell it. The Goliath verse differs in wording from 2 Samuel 21, and Christians have explained that in different ways. Many scholars think the book was written after the exile for a community looking for its roots."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/21",
+      "chapter": 21,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Something moves David to count the people. The chapter opens with a stark sentence: Satan stood up against Israel and moved David to take a census. Joab objects and asks why the king would bring guilt on Israel. The king's word prevails, and Joab brings back the numbers. At once God is displeased, and David says, “I have sinned greatly”. The prophet Gad offers three choices: famine, enemies, or a plague. David chooses to fall into the LORD's hand, for his mercies are very great. The plague falls and seventy thousand die. Then the LORD relents, and David sees the angel with a drawn sword over Jerusalem. He pleads that it be against him and his house, and not these sheep. He is told to build an altar on the threshing floor of Ornan, who offers it free. David answers that he will not give “a burnt offering that costs me nothing”, and he pays full price."
+        },
+        {
+          "kind": "background",
+          "text": "The same story is in 2 Samuel 24, where it begins by saying that the LORD's anger moved David. Christians and Jews have read the two openings in different ways, and the text does not settle it. The threshing floor is the future site of the temple, as chapter 22 and 2 Chronicles 3 say. Many scholars think Chronicles was written after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/22",
+      "chapter": 22,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David stands at the threshing floor and says, This is the house of the LORD God. From that moment he gathers what the building will need: foreigners as stone cutters, iron for nails, bronze beyond weighing, and cedar without number from Sidon and Tyre. He knows his son is young and tender, so he prepares abundantly before he dies. Then he calls Solomon and tells him honestly why he is not the builder. David had it in his heart, but the LORD's word came: you have shed much blood. A son will be born who will be “a man of peace”, named Solomon, and he will build. David gives his blessing, asks that the LORD give him discretion and understanding, and says, Be strong and courageous. He lists his gold and silver and bronze, and he commands the princes of Israel to help."
+        },
+        {
+          "kind": "background",
+          "text": "David's reason for not building is given in the text itself: war and bloodshed. The chapter has no counterpart in the books of Samuel and Kings, and it shows the writer's focus on the temple. Solomon's name is linked with the Hebrew word for peace. The huge sums of gold and silver are given in talents, and readers differ on how to read such numbers. Many scholars date Chronicles after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/23",
+      "chapter": 23,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David is old and full of days, and the first thing he does is make Solomon king. Then he gathers the princes, the priests and the Levites and sets the whole temple service in order before it exists. The Levites are counted, thirty-eight thousand men from thirty years and up. Some oversee the work, some are officers and judges, some are doorkeepers, and some praise the LORD with instruments. They are sorted by family: Gershon, Kohath and Merari. The chapter pauses over Aaron, who was separated to sanctify the most holy things, and over Moses, whose sons are numbered simply among the Levites. Then comes David's reason for the change. The LORD has given rest to his people and dwells in Jerusalem forever, so the Levites no longer need to carry the tabernacle. Their work becomes thanking and praising every morning and evening."
+        },
+        {
+          "kind": "background",
+          "text": "The Levites are the tribe set apart for service in the law of Moses (see Numbers 3 and 4). When the tent stops moving, their work changes. Chronicles gives them a place in music, gate keeping and the care of the house. Many scholars think the book was written after the exile, and that these lists show how valued that service was. The chapter has no parallel in Samuel or Kings."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/24",
+      "chapter": 24,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The priests are given an order. Aaron had four sons, but Nadab and Abihu died before their father and had no children. Only Eleazar and Ithamar were left to serve. David, with Zadok and Ahimelech, divides the priests into twenty-four divisions: sixteen from Eleazar's house and eight from Ithamar's. They do not choose among themselves. They cast lots, and a scribe named Shemaiah writes down the results in front of the king, the princes and the priests. Jehoiarib comes first, then Jedaiah, Harim, and so on to Maaziah, the twenty-fourth. Each division will come into the LORD's house in its turn. The chapter ends with the other Levites, family by family, who cast lots in the same way. The head of a house and his younger brother are treated alike."
+        },
+        {
+          "kind": "background",
+          "text": "The two sons who died are mentioned in Leviticus 10. The lot was a way of putting the choice in God's hands and keeping rivalry out of it. The twenty-four courses of priests appear again in the New Testament: Zechariah, the father of John the Baptist, served in the division of Abijah (see Luke 1). Many scholars think Chronicles was written after the exile. These lists have no parallel in Samuel or Kings."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/25",
+      "chapter": 25,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The music of the temple gets its own chapter. David and the captains of the army set apart the sons of Asaph, Heman and Jeduthun, men who prophesied with harps, stringed instruments and cymbals. Asaph's sons prophesied at the order of the king. Jeduthun's six sons gave thanks and praised the LORD with the harp. Heman was the king's seer, and God gave him fourteen sons and three daughters. All of them were under their fathers for song in the LORD's house. In all, two hundred eighty-eight were trained and skillful. Then they cast lots for their turns, twenty-four divisions of twelve, and the chapter says they did it all alike, the small as well as the great, the teacher as well as the student. Nobody is ranked above the others. Each lot is named in turn."
+        },
+        {
+          "kind": "background",
+          "text": "Asaph, Heman and Jeduthun are linked with several psalms; Asaph's name is on Psalms 50 and 73 to 83, and Heman is named in Psalm 88. Here the word prophesy is used of music, so song is treated as a way of speaking for God. The twenty-four divisions match those of the priests in chapter 24. Many scholars think Chronicles was written after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/26",
+      "chapter": 26,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Someone has to stand at the gates. This chapter assigns the doorkeepers of the house of God and the keepers of its treasures. The gatekeepers come from the Korahites and from Merari, and they include Obed-Edom, whose eight sons are listed with the plain remark, for God blessed him. That is the same Obed-Edom who once kept the ark in his house. Hosah makes his son Shimri chief, though he was not the firstborn. Lots are cast for every gate, the small as well as the great, east, north, south, and the storehouse, watchman opposite watchman. Then come the treasuries. Shebuel, a descendant of Moses, is ruler over them. Gifts from battles were dedicated there, including things given long before by Samuel the seer, by Saul, by Abner and by Joab. The last verses name Levites for outward business, as officers and judges, east and west of the Jordan."
+        },
+        {
+          "kind": "background",
+          "text": "Obed-Edom's earlier story is in chapter 13. His family's blessing is linked to the ark. The Levites here do the practical work of guarding, counting and judging. Many scholars read the chapter as showing that the temple community depended on ordinary roles as much as on priests and singers. The text says Shebuel was a son of Gershom, the son of Moses, so Moses' line is remembered here. The book is usually dated after the exile."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/27",
+      "chapter": 27,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A kingdom is a calendar and a payroll, and this chapter shows both. The army is divided into twelve groups of twenty-four thousand, each serving one month of the year, with a captain named for every month. Benaiah, who once killed a lion in a pit, leads the third. Joab's brother Asahel leads the fourth. Then come the rulers of the tribes, from Reuben to Dan. The writer pauses over the census. David did not count those twenty and under, because the LORD had said he would increase Israel “like the stars of the sky.” Joab began to count but did not finish, and wrath came on Israel. After that the chapter lists the king's property, the stewards over the storehouses, the fields, the vineyards, olive trees, herds, camels, donkeys and flocks. It ends with David's counselors, among them Ahithophel and Hushai."
+        },
+        {
+          "kind": "background",
+          "text": "The census recalls chapter 21. The counselors Ahithophel and Hushai appear again in 2 Samuel 15 to 17, when David's son Absalom rebels. The twelve months and twelve tribes give the list a sense of order, and many scholars think the book reflects the writer's care for how a people holds together. Chronicles is usually dated after the exile. The large numbers are typical of the book."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/28",
+      "chapter": 28,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "David stands up on his feet. He is old, and he calls all the leaders of Israel to Jerusalem, and he tells them what is in his heart. He had wanted to build a house of rest for the ark. But God said, “You shall not build a house for my name, because you are a man of war and have shed blood.” Then David tells them the better news: out of all his sons the LORD has chosen Solomon, and the kingdom will last if he keeps God's commandments. He turns to Solomon and speaks as a father: know the God of your father and serve him with a perfect heart, for the LORD searches all hearts. If you seek him, he will be found. David hands over the plans for the temple, the rooms, the gold and silver by weight, the lamp stands, and the pattern for the cherubim, all that he understood in writing from the LORD's hand. He ends with “Be strong and courageous”."
+        },
+        {
+          "kind": "background",
+          "text": "David's reason echoes chapter 22, and his words to Solomon should be read with 1 Kings 2 and 1 Kings 11, where the condition he states, if he continues to do my commandments, is tested. The idea of a heavenly pattern for a sanctuary goes back to Exodus 25. Many scholars think Chronicles was written after the exile, and that the temple's plans here show how much its worship mattered to the community."
+        }
+      ]
+    },
+    {
+      "id": "ai:1-chronicles/29",
+      "chapter": 29,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-01",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The first book of Chronicles ends with a king giving away his treasure. David tells the assembly that Solomon is young and the work is great, then he gives from his own wealth, gold and silver over and above what he had already stored. Then he asks, Who offers willingly? The princes, the captains and the rulers do, and the people rejoice, because they gave with a perfect heart. David prays before everyone. He says the greatness and the power and the glory are the LORD's, and then he says, “For all things come from you, and we have given you of your own.” He admits that they are strangers and foreigners, and “Our days on the earth are as a shadow”. The next day they offer a thousand bulls, rams and lambs. Solomon is made king a second time. David dies at a good old age, full of days, riches and honor, after reigning forty years."
+        },
+        {
+          "kind": "background",
+          "text": "David's prayer is among the best known in the book and is often used in worship. The first king of Israel, Saul, died in chapter 10, and this chapter closes the story of the second. Verse 29 mentions the histories of Samuel, Nathan and Gad, which readers think were records the writer knew. Many scholars date Chronicles after the exile. Solomon's story continues in 2 Chronicles."
+        }
+      ]
     }
   ]
 }
