@@ -6,12 +6,26 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
+    "build:native": "tsc --noEmit && vite build --mode native",
+    "check:native": "node scripts/native-build-check.mjs",
     "security": "node scripts/security-check.mjs",
     "test:browser": "node scripts/browser-check.mjs",
+    "test:native-browser": "node scripts/native-browser-check.mjs",
     "preview": "vite preview --host 127.0.0.1",
+    "preview:native": "vite preview --outDir dist-native --port 4174 --strictPort --host 127.0.0.1",
     "test": "node --experimental-strip-types --test --test-concurrency=1 \"tests/*.test.ts\" \"tests/*.test.mjs\""
   },
   "dependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/browser": "8.0.5",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/filesystem": "8.1.5",
+    "@capacitor/ios": "8.5.3",
+    "@capacitor/local-notifications": "8.3.1",
+    "@capacitor/share": "8.0.3",
+    "@capacitor/splash-screen": "8.0.2",
+    "@capawesome/capacitor-apple-sign-in": "0.1.4",
     "@fontsource/gelasio": "^5.3.0",
     "@fontsource/literata": "^5.3.0",
     "@fontsource/manrope": "^5.2.8",
@@ -21,6 +35,8 @@
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@capacitor/assets": "3.0.5",
+    "@capacitor/cli": "8.5.3",
     "@electric-sql/pglite": "^0.5.8",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",

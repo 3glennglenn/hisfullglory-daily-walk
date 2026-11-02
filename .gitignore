@@ -7,3 +7,15 @@ dist/
 *.tsbuildinfo
 .vercel
 supabase/.temp/
+dist-native/
+
+# Signing files never enter the repository (store builds, D-03 and D-04). They live only in the
+# founder's own folders and, base64-encoded, in the store-release environment on GitHub.
+*.p12
+*.p8
+*.mobileprovision
+*.cer
+*.csr
+*.key
+*.jks
+*.keystore

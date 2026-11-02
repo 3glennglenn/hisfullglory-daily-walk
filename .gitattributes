@@ -1,0 +1,23 @@
+# The native projects are edited on Windows and built on macOS and Linux runners. Xcode, Gradle and the shell
+# scripts expect LF, whatever core.autocrlf says on the machine that checks them out; Windows batch files keep
+# CRLF. Binary files (images, jars) are left alone.
+ios/**/*.pbxproj text eol=lf
+ios/**/*.plist text eol=lf
+ios/**/*.xcprivacy text eol=lf
+ios/**/*.entitlements text eol=lf
+ios/**/*.swift text eol=lf
+ios/**/*.sh text eol=lf
+ios/**/*.xml text eol=lf
+ios/**/*.json text eol=lf
+ios/**/*.storyboard text eol=lf
+ios/**/*.xcworkspacedata text eol=lf
+ios/**/*.xcscheme text eol=lf
+ios/**/*.xcconfig text eol=lf
+android/**/*.sh text eol=lf
+android/**/*.gradle text eol=lf
+android/**/*.xml text eol=lf
+android/**/gradlew text eol=lf
+android/**/*.bat text eol=crlf
+*.png binary
+*.jpg binary
+*.jar binary
