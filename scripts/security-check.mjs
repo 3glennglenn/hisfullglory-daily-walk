@@ -1,10 +1,11 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 const roots = ["src", "supabase", "scripts", "docs", "tests"];
 let files = 0;
 const failures = [];
 const patterns = [
-  /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
+  /-----BEGIN (?:RSA |EC |OPENSSH |ENCRYPTED )?PRIVATE KEY-----/,
   /\bsk_(?:live|test)_[A-Za-z0-9]{15,}/,
   /\b(?:sb_secret_|ghp_|github_pat_)[A-Za-z0-9_]{20,}/,
   /eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/,
@@ -25,6 +26,42 @@ function scan(dir) {
   }
 }
 for (const root of roots) scan(root);
+// The store builds (D-03, threat T-02-04): the workflows, the Capacitor configuration and the text files of the
+// native projects are scanned too.
+function scanNative(dir) {
+  if (!existsSync(dir)) return;
+  for (const item of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, item.name);
+    if (item.isDirectory()) {
+      if (!["public", "node_modules", "build", "Pods", "DerivedData", "xcuserdata", ".gradle"].includes(item.name)) scanNative(path);
+    } else if (/\.(ya?ml|plist|xcprivacy|entitlements|pbxproj|swift|json|xml|gradle|kts|properties)$/.test(path)) inspect(path);
+  }
+}
+for (const dir of [".github/workflows", "ios", "android"]) scanNative(dir);
+if (existsSync("capacitor.config.ts")) inspect("capacitor.config.ts");
+// Signing files never belong in the repository, whatever .gitignore says: a certificate bundle, an API key,
+// a provisioning profile or a keystore found among the tracked files (or, where git is absent as in a build
+// copy, anywhere outside node_modules) fails the check.
+const signingFile = /\.(p12|p8|mobileprovision|cer|csr|key|jks|keystore)$/i;
+let tracked = null;
+try {
+  tracked = execFileSync("git", ["ls-files", "-z"], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).split("\0").filter(Boolean);
+} catch {
+  tracked = null;
+}
+if (tracked === null) {
+  tracked = [];
+  const walk = (dir) => {
+    for (const item of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, item.name);
+      if (item.isDirectory()) {
+        if (!["node_modules", ".git", "dist", "dist-native", ".astro"].includes(item.name)) walk(path);
+      } else tracked.push(path.replace(/\\/g, "/"));
+    }
+  };
+  walk(".");
+}
+for (const path of tracked) if (signingFile.test(path)) failures.push(path + ": signing file (key, certificate, profile or keystore) in the repository");
 for (const path of [
   "index.html",
   "README.md",
@@ -52,5 +89,5 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(
-  `PASS credential scan of ${files} implementation, SQL, documentation and test files; public-key guard; static-only cache; dependency lockfile.`,
+  `PASS credential scan of ${files} implementation, SQL, documentation, test, workflow and native project files; no signing files; public-key guard; static-only cache; dependency lockfile.`,
 );

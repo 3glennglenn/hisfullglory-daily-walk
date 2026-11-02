@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Export of the App Store archive by .github/workflows/store-ios.yml (D-03): manual signing with the Apple
+     Distribution certificate and the profile "HisFullGlory App Store", uploaded straight to App Store Connect.
+     The build number comes from the workflow run (CURRENT_PROJECT_VERSION), so Xcode must not change it. -->
+<plist version="1.0">
+<dict>
+	<key>destination</key>
+	<string>upload</string>
+	<key>manageAppVersionAndBuildNumber</key>
+	<false/>
+	<key>method</key>
+	<string>app-store-connect</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.hisfullglory.app</key>
+		<string>HisFullGlory App Store</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Distribution</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>teamID</key>
+	<string>5ZYRJ5FZPU</string>
+	<key>uploadSymbols</key>
+	<true/>
+</dict>
+</plist>

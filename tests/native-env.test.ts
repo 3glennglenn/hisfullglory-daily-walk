@@ -41,6 +41,7 @@ test("an address with a path, a query, a fragment, credentials or plain http on 
   bad({ VITE_SUPABASE_URL: URL_OK + "#top", VITE_SUPABASE_ANON_KEY: KEY_OK }, /fragment/);
   bad({ VITE_SUPABASE_URL: "https://user:pw@abcdefghijklmnop.supabase.co", VITE_SUPABASE_ANON_KEY: KEY_OK }, /user name or password/);
   bad({ VITE_SUPABASE_URL: "http://abcdefghijklmnop.supabase.co", VITE_SUPABASE_ANON_KEY: KEY_OK }, /https/);
+  bad({ VITE_SUPABASE_URL: "http://127.0.0.1:54321", VITE_SUPABASE_ANON_KEY: KEY_OK }, /release build/);
   bad({ VITE_SUPABASE_URL: "not a url", VITE_SUPABASE_ANON_KEY: KEY_OK }, /not a valid address/);
 });
 

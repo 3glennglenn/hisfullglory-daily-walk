@@ -28,7 +28,7 @@ function jwtRole(value: string): string | null {
   }
 }
 
-function urlProblems(value: string): string[] {
+function urlProblems(value: string, release: boolean): string[] {
   let u: URL;
   try {
     u = new URL(value);
@@ -37,7 +37,9 @@ function urlProblems(value: string): string[] {
   }
   const problems: string[] = [];
   const local = u.protocol === "http:" && LOCAL_HOSTS.includes(u.hostname);
-  if (u.protocol !== "https:" && !local)
+  if (release && u.protocol !== "https:")
+    problems.push(`${URL_NAME} must use https in a release build; a store app cannot reach a local server.`);
+  else if (u.protocol !== "https:" && !local)
     problems.push(`${URL_NAME} must use https (plain http is allowed only for localhost and 127.0.0.1).`);
   if (u.username || u.password) problems.push(`${URL_NAME} must not carry a user name or password.`);
   if (u.pathname !== "/" && u.pathname !== "")
@@ -65,7 +67,7 @@ export function nativeEnvProblems(env: BuildEnv, { release }: { release: boolean
   if (!url && !key && !release) return problems;
   if (!url) problems.push(`${URL_NAME} is missing.${release ? " A release build needs it." : " Set both values or neither."}`);
   if (!key) problems.push(`${KEY_NAME} is missing.${release ? " A release build needs it." : " Set both values or neither."}`);
-  if (url) problems.push(...urlProblems(url));
+  if (url) problems.push(...urlProblems(url, release));
   if (key) problems.push(...keyProblems(key));
   return problems;
 }

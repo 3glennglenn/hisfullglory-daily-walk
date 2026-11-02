@@ -1,5 +1,5 @@
 # Runs the app's and the site's checks on every pull request to main and on every push to main.
-# It only reports: it blocks no push, deploys nothing and uses no secrets. Vercel builds and
+# It only reports: it blocks no push, deploys nothing and uses no secrets; Vercel builds and
 # deploys main on its own, whatever these checks say. Do not make them "required" in a branch
 # rule for main: the daily AI routine pushes straight to main and would then be refused.
 name: Checks
@@ -31,7 +31,7 @@ jobs:
   app:
     name: App
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -62,12 +62,35 @@ jobs:
             exit 1
           fi
           npm run test:browser 2>&1 | tee browser.log
+      # The store app's bundle (D-02): the same app built in native mode, without a service worker. Built into
+      # dist-native so the web build above stays in dist. No secrets: the Supabase values are left out, which the
+      # store build guard allows outside the hand-run store workflows.
+      - name: Store build (no service worker)
+        run: |
+          npm run build:native -- --outDir dist-native 2>&1 | tee native-build.log
+          npm run check:native -- dist-native 2>&1 | tee -a native-build.log
+      - name: Browser check against the store build
+        env:
+          NATIVE_PREVIEW_URL: http://127.0.0.1:4174
+        run: |
+          npm run preview:native > preview-native.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl -sf "$NATIVE_PREVIEW_URL/" > /dev/null && break
+            sleep 1
+          done
+          if ! curl -sf "$NATIVE_PREVIEW_URL/" > /dev/null; then
+            { echo "Store-build preview server did not start"; cat preview-native.log; } | tee native-browser.log
+            exit 1
+          fi
+          npm run test:native-browser 2>&1 | tee native-browser.log
       - name: Show why it failed
         if: failure()
         run: |
-          node scripts/ci-failure-note.mjs install.log test.log security.log build.log browser.log
+          node scripts/ci-failure-note.mjs install.log test.log security.log build.log browser.log native-build.log native-browser.log
           echo "--- preview server log"
           cat preview.log 2>/dev/null || true
+          echo "--- store-build preview server log"
+          cat preview-native.log 2>/dev/null || true
 
   site:
     # Built the way Vercel builds hisfullglory.com: only the site's own packages are installed.

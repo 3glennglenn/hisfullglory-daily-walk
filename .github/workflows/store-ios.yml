@@ -1,0 +1,138 @@
+# iOS TestFlight (D-03): builds the store app from main or store-shell, archives it with manual App Store signing,
+# and uploads it to App Store Connect, where it appears in TestFlight after Apple has processed it.
+#
+# Runs ONLY by hand: Actions > "iOS TestFlight" > Run workflow > choose the branch. It never runs for a push or for
+# a contribution from a fork, because its job uses the signing material of the store-release environment, which
+# GitHub only releases to the branches main and store-shell. docs/STORE_BUILDS.md lists every value it needs and
+# who sets it (names only, never values).
+#
+# Rules this file keeps (tests/store-workflows.test.ts checks them):
+# - signing material is only ever read into a step's env, never written into a run script;
+# - commands are never traced, and no signing step feeds the failure note;
+# - the last step always deletes the temporary keychain and every decoded file, whatever happened before.
+# Not proven until the first run: the Xcode path, the scheme, manual signing of the SPM project, and the direct
+# upload by xcodebuild (research A2, A4, A11). The fallbacks are in docs/STORE_BUILDS.md.
+name: iOS TestFlight
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # One store build at a time; a running upload is never cancelled halfway.
+  group: store-ios
+  cancel-in-progress: false
+
+defaults:
+  run:
+    # Explicit bash turns on pipefail, so `| tee` keeps a failing command's exit code.
+    shell: bash
+
+jobs:
+  ios:
+    name: Archive and upload to TestFlight
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/store-shell'
+    runs-on: macos-26
+    environment: store-release
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Check the store build values
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+        run: node scripts/store-env-check.mjs 2>&1 | tee build.log
+      - name: Install
+        run: npm ci 2>&1 | tee install.log
+      - name: Store build (no service worker)
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          npm run build:native 2>&1 | tee -a build.log
+          npm run check:native 2>&1 | tee -a build.log
+      - name: Copy the build into the iOS project
+        run: npx cap sync ios 2>&1 | tee -a build.log
+      - name: Select Xcode 26.6
+        run: |
+          XCODE=/Applications/Xcode_26.6.app
+          if [ ! -d "$XCODE" ]; then
+            echo "::error::$XCODE is not on this runner image. Installed Xcode versions:"
+            ls -d /Applications/Xcode*.app
+            exit 1
+          fi
+          sudo xcode-select -s "$XCODE/Contents/Developer"
+          xcodebuild -version
+      - name: Signing setup
+        env:
+          IOS_DIST_CERT_P12: ${{ secrets.IOS_DIST_CERT_P12 }}
+          IOS_DIST_CERT_PASSWORD: ${{ secrets.IOS_DIST_CERT_PASSWORD }}
+          IOS_PROFILE: ${{ secrets.IOS_PROFILE }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: |
+          umask 077
+          # A temporary keychain with a random password that exists only in this step.
+          KEYCHAIN_PASSWORD="$(openssl rand -hex 32)"
+          echo "::add-mask::$KEYCHAIN_PASSWORD"
+          printf '%s' "$IOS_DIST_CERT_P12" | base64 --decode > "$RUNNER_TEMP/dist.p12"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$RUNNER_TEMP/store-signing.keychain-db"
+          security set-keychain-settings -lut 21600 "$RUNNER_TEMP/store-signing.keychain-db"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$RUNNER_TEMP/store-signing.keychain-db"
+          security import "$RUNNER_TEMP/dist.p12" -P "$IOS_DIST_CERT_PASSWORD" -A -t cert -f pkcs12 -k "$RUNNER_TEMP/store-signing.keychain-db"
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$RUNNER_TEMP/store-signing.keychain-db" > /dev/null
+          security list-keychains -d user -s "$RUNNER_TEMP/store-signing.keychain-db" $(security list-keychains -d user | tr -d '"')
+          rm -f "$RUNNER_TEMP/dist.p12"
+          # The App Store profile, under its UUID where Xcode 15 and older (MobileDevice) and Xcode 16 and later
+          # (UserData) look for it.
+          printf '%s' "$IOS_PROFILE" | base64 --decode > "$RUNNER_TEMP/profile.mobileprovision"
+          security cms -D -i "$RUNNER_TEMP/profile.mobileprovision" > "$RUNNER_TEMP/profile.plist"
+          PROFILE_UUID="$(plutil -extract UUID raw "$RUNNER_TEMP/profile.plist")"
+          printf '%s' "$PROFILE_UUID" > "$RUNNER_TEMP/profile-uuid"
+          for dir in "$HOME/Library/MobileDevice/Provisioning Profiles" "$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles"; do
+            mkdir -p "$dir"
+            cp "$RUNNER_TEMP/profile.mobileprovision" "$dir/$PROFILE_UUID.mobileprovision"
+          done
+          # The App Store Connect API key for the upload.
+          printf '%s' "$ASC_KEY_P8" | base64 --decode > "$RUNNER_TEMP/AuthKey.p8"
+          echo "Signing is set up: one certificate in a temporary keychain, one profile, one API key file."
+      - name: Archive
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release \
+            -destination generic/platform=iOS -archivePath "$RUNNER_TEMP/App.xcarchive" \
+            CURRENT_PROJECT_VERSION="$BUILD_NUMBER" archive 2>&1 | tee archive.log
+      - name: Export and upload to App Store Connect
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+        run: |
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/App.xcarchive" \
+            -exportOptionsPlist ios/ExportOptions.plist -exportPath "$RUNNER_TEMP/export" \
+            -authenticationKeyPath "$RUNNER_TEMP/AuthKey.p8" \
+            -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" 2>&1 | tee export.log
+      - name: Show why it failed
+        if: failure()
+        # Only the build, archive and export logs: the signing step writes no log file.
+        run: node scripts/ci-failure-note.mjs install.log build.log archive.log export.log
+      - name: Delete the keychain and the signing files
+        if: always()
+        run: |
+          security delete-keychain "$RUNNER_TEMP/store-signing.keychain-db" 2>/dev/null || true
+          if [ -f "$RUNNER_TEMP/profile-uuid" ]; then
+            PROFILE_UUID="$(cat "$RUNNER_TEMP/profile-uuid")"
+            rm -f "$HOME/Library/MobileDevice/Provisioning Profiles/$PROFILE_UUID.mobileprovision" \
+              "$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles/$PROFILE_UUID.mobileprovision"
+          fi
+          rm -f "$RUNNER_TEMP/dist.p12" "$RUNNER_TEMP/profile.mobileprovision" "$RUNNER_TEMP/profile.plist" \
+            "$RUNNER_TEMP/profile-uuid" "$RUNNER_TEMP/AuthKey.p8"
+          rm -rf "$RUNNER_TEMP/App.xcarchive" "$RUNNER_TEMP/export"
+          echo "Keychain and signing files deleted."
