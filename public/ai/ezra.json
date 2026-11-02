@@ -22,6 +22,24 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:ezra/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-02",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Judah is in exile, and the first word of the book is about a king far from Jerusalem. In the first year of Cyrus king of Persia, the LORD stirs the king’s spirit, so that the word spoken through Jeremiah may be accomplished. Cyrus sends a proclamation throughout his kingdom, in writing too. It says the LORD, the God of heaven, has given him all the kingdoms of the earth and has commanded him to build a house in Jerusalem. Anyone of God’s people may go up, and those who stay behind should help with silver, gold, goods and animals.\n\nPeople respond. The heads of families of Judah and Benjamin, with priests and Levites, all whose spirit God had stirred, rise up to build. Their neighbors strengthen their hands with gifts. Cyrus also brings out the vessels of the LORD’s house that Nebuchadnezzar had taken to the house of his gods, and counts them out to Sheshbazzar the prince of Judah. They total five thousand four hundred, and Sheshbazzar carries them up to Jerusalem."
+        },
+        {
+          "kind": "background",
+          "text": "Ezra opens where 2 Chronicles 36 ends, with the same decree of Cyrus. The book is usually dated to the Persian period, and tradition links its writing to Ezra the priest. Cyrus is shown here as a ruler through whom God works, and the text says so plainly. The returned vessels show that the temple is being given back its worship, and the next chapter lists the people who go up."
+        }
+      ]
     }
   ]
 }
