@@ -1,14 +1,27 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import { assertReleasable } from "./site/src/data/legal.ts";
+import { nativeEnvProblems } from "./src/native/buildGuard.ts";
 
 // A production build of the app is refused while the legal text is unapproved, so the app never
 // links to pages that are not published and never shows placeholder text. Preview and local builds
 // are unaffected. The project has no Node types, hence the narrow cast instead of `process`.
-assertReleasable((globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env?.VERCEL_ENV);
+const VERCEL_ENV = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env?.VERCEL_ENV;
 
-export default defineConfig({
+// `vite build --mode native` (npm run build:native) is the store build (D-02): the same app, bundled into the
+// Capacitor apps, without a service worker. A store binary is slow to replace, so it is always held to the
+// production rules whatever VERCEL_ENV says, and its Supabase values are checked (src/native/buildGuard.ts).
+export default defineConfig(({ mode }) => {
+  const native = mode === "native";
+  if (native) {
+    assertReleasable("production");
+    const problems = nativeEnvProblems(loadEnv(mode, ".", "VITE_"), { release: false });
+    if (problems.length) throw new Error("Store build stopped:\n- " + problems.join("\n- "));
+  } else {
+    assertReleasable(VERCEL_ENV);
+  }
+  return {
   // The app imports a few files from site/src (legal.ts, editorial.ts, sponsor.ts). Vite would look up the
   // closest tsconfig.json for each of them, and site/tsconfig.json extends astro/tsconfigs/strict, which exists
   // only where the site's own packages are installed. The app is built from the root install alone (Vercel, the
@@ -18,6 +31,8 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      // Store builds serve their own files from the app package; a service worker there only adds stale caches.
+      disable: native,
       registerType: "autoUpdate",
       includeAssets: [
         "icon.svg",
@@ -69,4 +84,5 @@ export default defineConfig({
       },
     }),
   ],
+  };
 });

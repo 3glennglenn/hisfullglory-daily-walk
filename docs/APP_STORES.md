@@ -19,9 +19,12 @@ himself (Google 25 USD once, Apple 99 USD a year) and has an Android phone and a
 
 ## Route
 
-The web app at app.hisfullglory.com goes into a native shell (Capacitor) for Android and
-iOS, so there is one app. The iOS build needs a Mac; a cloud build service with Macs will
-do that, chosen on cost before anything is bought. Apple refuses apps that are only a
+The web app goes into a native shell (Capacitor 8) for Android and iOS, so there is one app.
+The store app carries its own copy of the web build (no service worker, no remote start
+address) and is built without a Mac: a hand-run GitHub Actions workflow on a macOS runner
+archives it with manual App Store signing and uploads it to TestFlight (decided 2026-10-27,
+D-03; free on this public repository). How it works, the secret and variable names and the
+fallbacks: [STORE_BUILDS.md](STORE_BUILDS.md). Apple refuses apps that are only a
 website in a wrapper (guideline 4.2), so the shell adds things a website cannot do, starting
 with a daily reminder as a notification.
 
