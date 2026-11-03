@@ -22,6 +22,240 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:nehemiah/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Far from Jerusalem, in the winter palace at Susa, Nehemiah asks a question. His brother Hanani has come with men from Judah, and Nehemiah wants to know about the Jews who escaped and about Jerusalem.\n\nThe answer is hard. The remnant is in great affliction and reproach, the wall of Jerusalem is broken down, and its gates are burned with fire.\n\nNehemiah sits down and weeps. For several days he mourns, fasts and prays to the God of heaven. His prayer begins with who God is, the great and awesome God who keeps covenant. It goes on to confession, and he includes himself and his father’s house. He recalls the promise given through Moses that scattered people who return will be gathered. Then he asks for mercy in the sight of the king, and the chapter ends with one plain fact: he was cup bearer to the king."
+        },
+        {
+          "kind": "background",
+          "text": "Nehemiah speaks in his own voice in the first person, as he does through much of the book. The twentieth year is the twentieth year of King Artaxerxes, usually dated to the middle of the fifth century before Christ. The temple had been rebuilt by then, as Ezra 6 tells, but the city walls remained in ruins. Nehemiah’s prayer draws on the law and the promise of return found in Deuteronomy 30."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "For months Nehemiah has hidden his sorrow, but one day the king sees it. Pouring the wine, Nehemiah has never looked sad before, and the king asks why his face is sad when he is not sick. Nehemiah is very much afraid.\n\nHe tells the king that the city of his fathers’ tombs lies waste. The king asks what he wants. Nehemiah prays to the God of heaven, then asks to be sent to Judah to build. He asks for letters for safe passage and for timber, and the king grants them.\n\nIn Jerusalem he says nothing for three days. Then he rides out at night with a few men and inspects the broken walls. Only afterward does he tell the leaders, “Come, let’s build up the wall of Jerusalem” They answer that they will rise up and build. Sanballat, Tobiah and Geshem mock them."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter shows Nehemiah moving from prayer in Nehemiah 1 to action. The month Nisan comes a few months after the news reached him, and the king’s favor is credited to the good hand of God. Sanballat, Tobiah and Geshem are regional officials who will oppose him through the rest of the book. Nehemiah’s night survey of the walls prepares for the work described in the next chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The wall goes up one section at a time, and the chapter keeps the names. Eliashib the high priest and his brothers build the sheep gate and set up its doors. Next to them the men of Jericho build, then Zaccur, then the sons of Hassenaah, who rebuild the fish gate.\n\nGoldsmiths, perfumers and rulers of districts take their places on the wall. Shallum, ruler of half a district, repairs his portion with his daughters. Many families repair the stretch across from their own houses. Priests, Levites, merchants and temple servants all have a share.\n\nOne note stands out. The Tekoites make repairs, but their nobles did not put their necks to the Lord’s work. Then the Tekoites take a second portion. The chapter circles the city gate by gate until it reaches the sheep gate again."
+        },
+        {
+          "kind": "background",
+          "text": "The list reads like a work plan for the whole circuit of the city wall, and it shows that the labor was shared across ranks and trades. It follows Nehemiah’s call to build in Nehemiah 2. Many of the gates and towers named are known only from this book, and scholars use the list to trace the shape of ancient Jerusalem. The next chapter shows the opposition that grew as the wall rose."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Mockery comes first. Sanballat is angry when he hears the wall is going up, and in front of his brothers and the army of Samaria he asks, “What are these feeble Jews doing?” Tobiah adds that a fox could break down their stone wall.\n\nNehemiah answers with prayer, and the building goes on. The wall is joined to half its height, for the people had a mind to work.\n\nThen the threat grows. The enemies plan to come and fight against Jerusalem. The builders are tired, the rubble is deep, and rumors say attack will come from every side. Nehemiah sets guards with swords, spears and bows, and tells the people not to be afraid and to remember the Lord. From then on, half the men work and half hold weapons. Builders wear a sword at their side, a trumpeter stays near Nehemiah, and no one takes off his clothes except to go to the water."
+        },
+        {
+          "kind": "background",
+          "text": "The setting is the rebuilding of the wall in the time of Artaxerxes, usually dated to the fifth century before Christ. Sanballat governed Samaria, and Tobiah and the others are neighbors who feared a strong Jerusalem. The chapter shows Nehemiah combining prayer with practical defense, a pattern that appears elsewhere in the book. The people’s own troubles, from within, come in the next chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The cry this time comes from inside the walls. Families say they are many and hungry. Some have mortgaged fields, vineyards and houses for grain. Others have borrowed to pay the king’s tribute. Some have even given sons and daughters into bondage, and the text says it was not in their power to help it.\n\nNehemiah is very angry. He calls a great assembly and confronts the nobles and rulers: they are charging interest, each from his brother. He asks them to stop, to restore fields, vineyards, olive groves and houses, and to give back what they have charged. They agree, and the priests take an oath. Nehemiah shakes out his lap as a sign, and the whole assembly says amen and praises the LORD\n\nHe then tells how he lived as governor for twelve years. He did not take the governor’s food allowance, because the bondage was heavy on the people."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter deals with debt and hunger, which the law of Moses addresses in places such as Leviticus 25 and Deuteronomy 15. Nehemiah appeals to the idea that fellow Israelites should not be sold or burdened by their own. The text presents him as setting an example by refusing his allowance, and it ends with his plea to be remembered. Debt and slavery are treated here as injustice within the community, not as an outside threat."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The wall is built, though the gates have no doors yet, and the enemies change tactics. Sanballat and Geshem send an invitation to meet in the plain of Ono, but they mean to harm him. Nehemiah answers that he is doing a great work and will not come down. They ask four times, and he gives the same answer.\n\nThe fifth time comes an open letter claiming he plans to be king. Nehemiah says it is imagined out of their own hearts, and prays, “strengthen my hands.” Then a man named Shemaiah urges him to hide in the temple, but Nehemiah says he will not go in. He sees that the prophecy was hired by Tobiah and Sanballat.\n\nThe wall is finished on the twenty-fifth day of Elul, in fifty-two days. Surrounding nations lose their confidence, though letters between Tobiah and nobles in Judah continue."
+        },
+        {
+          "kind": "background",
+          "text": "Nehemiah faces intimidation by letter and by false prophecy, not by an army this time. The plain of Ono lay outside Jerusalem, and Nehemiah’s refusal to leave the work is the point of the story. A priest or leader entering the temple to hide would have gone against his calling, and he says so. Elul is the sixth month of the Hebrew calendar. The ties between Tobiah and families in Judah matter again in Nehemiah 13."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "With the wall built and the doors hung, Nehemiah turns to the city itself. He appoints gatekeepers, singers and Levites, and puts his brother Hanani and Hananiah in charge of Jerusalem. The gates are not to be opened until the sun is hot, and the people are to stand watch near their own houses.\n\nBut there is a problem. The city is wide and large, and the people are few, and the houses are not built.\n\nSo Nehemiah gathers the nobles, rulers and people to be listed by genealogy. He finds the old register of those who came up first, with Zerubbabel, and copies it. It lists families, priests, Levites, singers, gatekeepers and temple servants, some who could not prove their family line, and the gifts given to the work. The chapter ends with everyone settled in their cities as the seventh month arrives."
+        },
+        {
+          "kind": "background",
+          "text": "The long list repeats most of Ezra 2 with small differences in some numbers and names, and scholars have discussed why. Here its purpose is to count the people for resettling an empty city, which Nehemiah 11 then does by lot. The last verse sets up the gathering of the seventh month in Nehemiah 8, when the law is read to the people."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The people gather in the open space before the water gate, and they ask Ezra to bring the book of the law of Moses. He reads from early morning until midday, men and women and all who could understand, and their ears are attentive.\n\nEzra stands on a wooden platform. When he opens the book, everyone stands. He blesses the LORD, and they answer, “Amen, Amen,” lifting their hands, bowing with their faces to the ground.\n\nLevites help the people understand. They read distinctly and give the sense. Then the people begin to weep as they hear the words. Nehemiah, Ezra and the Levites tell them not to mourn, because the day is holy, and the joy of the LORD is their strength. The people go to eat, drink and send portions, because they understood.\n\nOn the second day they find the command about booths and build shelters, and there is very great gladness."
+        },
+        {
+          "kind": "background",
+          "text": "The scene takes place on the first day of the seventh month, a sacred time in the law of Moses. Ezra, introduced in Ezra 7, reads aloud what he had come to teach. The text stresses understanding as much as hearing. The feast of booths follows Leviticus 23. Many readers see this scene as a model for public reading and teaching of Scripture, and the next chapter turns the joy into confession."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Two days after the feast, the people gather again, but this time with fasting, sackcloth and dirt on their heads. They separate themselves from foreigners, stand and confess their sins and the sins of their fathers. They read the law for a fourth of the day and confess for another fourth.\n\nThen the Levites cry out, “Stand up and bless the LORD your God from everlasting to everlasting!” What follows is a long prayer that tells the whole story: creation, Abram brought out of Ur, the affliction in Egypt, the sea divided, the pillar of cloud and fire, Sinai, manna and water from the rock.\n\nThe prayer turns to a cycle repeated through the land. The people rebelled, were handed to enemies, cried out, and were rescued many times. Through it all God was gracious and merciful. The prayer ends in the present, with the people servants in their own land, and a written covenant sealed by their leaders."
+        },
+        {
+          "kind": "background",
+          "text": "This is one of the longest prayers in the Old Testament, and it retells the history of Israel up to the exile. Many scholars compare its sweep to Psalms 105 and 106, and its confession of mercy and justice goes together. It follows the public reading of the law in Nehemiah 8. The people still live under Persian rule, which the prayer names. The covenant they seal is spelled out in Nehemiah 10."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The covenant is written down, and then it is signed. The seals bear names: Nehemiah the governor first, then the priests, the Levites, and the chiefs of the people, one after another in a long list.\n\nThe rest of the people join in, with their wives, sons and daughters, everyone who had knowledge and understanding. They enter into an oath to walk in God’s law given by Moses, and to keep all his commandments.\n\nThey name particular promises. They will not intermarry with the peoples of the land. They will not buy on the Sabbath. They will let the seventh year rest and forgive debts. They will pay a yearly third of a shekel for the temple service and bring wood, first fruits, the firstborn and tithes. The chapter ends with one line of resolve: they will not forsake the house of their God."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter follows the confession of Nehemiah 9, where the leaders promised to make a sure covenant and write it. The promises touch on the Sabbath, the sabbatical year, the temple, and marriage, all of which are matters the law of Moses addresses. Several of these same issues return in Nehemiah 13, where the community is shown struggling to keep them. The marriage promise belongs with Ezra 9 and 10."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A city with a wall but few people needs people in it. The leaders of the people live in Jerusalem. The rest cast lots, so that one in ten will move to the holy city, and the other nine stay in their towns.\n\nThe chapter adds a note about those who step forward: the people blessed all the men who willingly offered themselves to dwell in Jerusalem.\n\nThen names and numbers fill the page. Families of Judah and Benjamin settle there, four hundred sixty-eight valiant men from Perez and nine hundred twenty-eight from Benjamin. Priests number eight hundred twenty-two in the temple work, and the Levites two hundred eighty-four. Gatekeepers, singers and temple servants each have their places.\n\nThe chapter ends by tracing where the rest lived, in villages from Beersheba to the valley of Hinnom in the south, and from Geba to Ono in the north."
+        },
+        {
+          "kind": "background",
+          "text": "Nehemiah had said in Nehemiah 7 that the city was large but the people few. Casting lots was a recognized way of making a fair decision in the Old Testament, as in Proverbs 16. Settling in Jerusalem was a sacrifice, since it meant leaving family land. The lists tie the people to tribal territories of Judah and Benjamin. They prepare for the dedication of the wall in Nehemiah 12."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Priests and Levites are listed again, this time by generation, from the days of Zerubbabel and Jeshua down through the high priests Joiakim, Eliashib, Joiada, Jonathan and Jaddua. The singers and gatekeepers keep their watch in sections, as David the man of God commanded.\n\nThen the wall is dedicated. Levites are sought out from all their places and brought to Jerusalem to keep the dedication with gladness, thanksgiving and singing, with cymbals, stringed instruments and harps. The priests and Levites purify themselves, the people, the gates and the wall.\n\nNehemiah brings the princes of Judah up on the wall and appoints two great companies to give thanks. They walk in procession in opposite directions, with Ezra the scribe leading one. The two companies meet and stand in God’s house. They offer great sacrifices and rejoice, and the joy of Jerusalem is heard far away."
+        },
+        {
+          "kind": "background",
+          "text": "The lists in this chapter reach into later generations than Ezra and Nehemiah themselves, and many scholars think the book was finished or added to some time after their day. The dedication fulfills what began in Nehemiah 2 and ended with the wall completed in Nehemiah 6. The processions along the wall let readers picture the circuit that Nehemiah 3 described gate by gate. The choice of music follows the pattern of David."
+        }
+      ]
+    },
+    {
+      "id": "ai:nehemiah/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The book ends with Nehemiah finding trouble in a city he had rebuilt. On the day the law is read, the people hear that no Ammonite or Moabite should enter the assembly of God, and they separate the mixed multitude from Israel.\n\nNehemiah had been away at the king’s court. When he returns he finds that Eliashib the priest has given a great room in the temple courts to Tobiah, where offerings and tithes used to be stored. It grieves him severely, and he throws Tobiah’s household things out.\n\nHe finds more. The Levites had not been given their portions and had gone back to their fields. Men are working and trading on the Sabbath, so he shuts the gates at dusk. Some Jews have married women of Ashdod, Ammon and Moab, and he confronts them, and a priest’s son married to Sanballat’s daughter is driven away. After each action Nehemiah prays to be remembered."
+        },
+        {
+          "kind": "background",
+          "text": "Nehemiah returns from his time with the king in the thirty-second year of Artaxerxes. The problems he finds are the same ones the people had promised to keep in Nehemiah 10: the temple, the Levites’ support, the Sabbath and marriage. The chapter reports a harsh response from Nehemiah, and readers today differ in how they judge it. The book ends not with triumph but with unfinished reform and prayer."
+        }
+      ]
     }
   ]
 }

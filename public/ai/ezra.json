@@ -40,6 +40,168 @@
           "text": "Ezra opens where 2 Chronicles 36 ends, with the same decree of Cyrus. The book is usually dated to the Persian period, and tradition links its writing to Ezra the priest. Cyrus is shown here as a ruler through whom God works, and the text says so plainly. The returned vessels show that the temple is being given back its worship, and the next chapter lists the people who go up."
         }
       ]
+    },
+    {
+      "id": "ai:ezra/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Before anyone lays a stone, someone takes a count. The people who left captivity in Babylon are listed by family and by town: the children of Parosh, the men of Bethlehem, the men of Anathoth, the children of Jericho. Then come the priests, the Levites, the singers, the gatekeepers and the temple servants, each group with its number.\n\nSome could not prove their family line, and priests among them were set aside from the priesthood until a priest could serve with Urim and Thummim. The whole assembly comes to forty-two thousand three hundred sixty, with servants, singers and animals counted too. Then the chapter turns. Some heads of households give willingly for God’s house, and the people settle in their cities. A list of names becomes a way of saying that each of them was remembered."
+        },
+        {
+          "kind": "background",
+          "text": "The list stands at the start of the story of the return from exile, after the decree of Cyrus in Ezra 1. It names the leaders who came with Zerubbabel and Jeshua. Nehemiah 7 repeats most of it with small differences in the numbers, and readers have long noted that. Many scholars think such lists were kept so that land, worship and family belonging could be put in order again. The question of priestly records ties into the law of Moses on who may serve."
+        }
+      ]
+    },
+    {
+      "id": "ai:ezra/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The seventh month arrives, and the people gather in Jerusalem as one man. They are afraid of the peoples around them, and still they set up the altar on its old base. Burnt offerings rise morning and evening, and they keep the feast of booths as it is written.\n\nThe temple itself has no foundation yet. In the second year the work begins, with Levites from twenty years old overseeing it, and masons and carpenters paid, and cedar brought from Lebanon by sea. When the foundation is laid, priests stand with trumpets and Levites with cymbals. They sing that the LORD is good and his loving kindness endures forever.\n\nThen the sound splits in two. Old men who had seen the first house weep loudly while others shout for joy, until no one can tell the weeping from the cheering."
+        },
+        {
+          "kind": "background",
+          "text": "The first returned exiles are rebuilding worship in Jerusalem under the permission Cyrus gave in Ezra 1. Zerubbabel the governor and Jeshua the priest lead. The old men who wept remembered the temple Solomon built, which Babylon destroyed. Their grief and the others’ joy stand side by side, and the text does not choose between them. Opposition to the work begins in the next chapter, and the prophets Haggai and Zechariah appear in Ezra 5."
+        }
+      ]
+    },
+    {
+      "id": "ai:ezra/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "An offer arrives that sounds friendly. Neighbors say, “Let us build with you, for we seek your God as you do” Zerubbabel, Jeshua and the family heads refuse, saying the house is theirs to build as Cyrus commanded.\n\nAfter that the people of the land weaken their hands and hire counselors against them. The chapter then jumps through the years. Under later kings, letters are written to Persia. One accuses Jerusalem of being a rebellious city and warns the king of lost tribute. King Artaxerxes has the old records searched, finds that Jerusalem had a history of revolts, and orders the building to stop.\n\nThe officials go to Jerusalem at once and stop the Jews by force of arms. The chapter closes with the work on God’s house halted until the second year of Darius."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is told by theme more than by calendar. It names Cyrus, Ahasuerus, Artaxerxes and Darius, and many scholars think the letter episodes about the city wall come from a later time than the temple dispute that frames them. The conflict is between the returned exiles and the settlers brought into the region by Assyria. The text gives both sides’ stated reasons. Ezra 5 and 6 pick up the temple story again."
+        }
+      ]
+    },
+    {
+      "id": "ai:ezra/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The work has been stopped for years, and then two prophets speak. Haggai and Zechariah prophesy to the Jews in Judah and Jerusalem, and Zerubbabel and Jeshua rise up and begin to build again, with the prophets beside them.\n\nSoon an official arrives. Tattenai, the governor beyond the River, asks who gave a decree for this. The elders are not stopped, because the text says the eye of their God was on them. Tattenai sends a letter to King Darius. It reports that the work is going on with diligence and prospers.\n\nIt also records the elders’ own account. They are servants of the God of heaven and earth, their fathers were taken to Babylon after provoking him, and Cyrus made a decree. The governor asks the king to search the royal records."
+        },
+        {
+          "kind": "background",
+          "text": "The temple work stops at the end of Ezra 4 and resumes in the second year of Darius. Haggai and Zechariah have books of their own in the Old Testament, and this chapter shows them at work in this very moment. The letter to Darius is written in the form of an official report, and the elders defend themselves by pointing to history and to the decree of Cyrus. Ezra 6 gives the answer from Darius."
+        }
+      ]
+    },
+    {
+      "id": "ai:ezra/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A king orders a search, and a scroll turns up in the palace archives at Achmetha. It is the decree of Cyrus, written down long ago: let the house be built, let the cost come from the king’s house, and let the gold and silver vessels Nebuchadnezzar took be returned.\n\nDarius answers the governors plainly. They are to stay away and leave the work alone, and they are to give the Jews what they need, day by day. He adds a warning to anyone who changes his order.\n\nSo the elders build and prosper, with the prophets Haggai and Zechariah speaking. The house is finished on the third day of Adar in the sixth year of Darius. The people dedicate it with joy and offerings, set the priests and Levites in their places, and keep the Passover and seven days of unleavened bread."
+        },
+        {
+          "kind": "background",
+          "text": "Here the stalled project of Ezra 4 and 5 is resolved by a document found in a royal archive. The chapter credits the finished temple to God’s commandment and to the decrees of three Persian kings. Many scholars date the completion to about 516 before Christ. The Passover kept here recalls the exodus from Egypt, which the book of Exodus tells. After this chapter the story skips ahead to Ezra’s own arrival."
+        }
+      ]
+    },
+    {
+      "id": "ai:ezra/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Now a new man steps forward. Ezra comes up from Babylon, and the chapter first walks back through his family line to Aaron, the chief priest. He is a skilled scribe in the law of Moses, and the king grants him all his request, because the hand of the LORD his God was on him.\n\nThe text says Ezra set his heart to seek the law of the LORD, to do it, and to teach statutes and ordinances in Israel. King Artaxerxes sends him with a letter. Any Israelite who wishes may go. Silver and gold are sent for the house of God, supplies are promised from the treasuries, and priests and Levites are freed from tribute. Ezra is to appoint judges and teach those who do not know the law.\n\nEzra closes with praise. God has put this into the king’s heart."
+        },
+        {
+          "kind": "background",
+          "text": "Ezra arrives in the seventh year of Artaxerxes, usually thought to be the fifth century before Christ, though scholars debate which Artaxerxes is meant. Part of the chapter, the king’s letter, is in Aramaic in the original. The letter reveals how the Persian government supported local worship and law. Ezra’s role as priest and scribe leads into his reading of the law in Nehemiah 8."
+        }
+      ]
+    },
+    {
+      "id": "ai:ezra/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ezra counts the people who will travel with him, family by family, and gathers them at the river that runs to Ahava. They camp three days. Then he looks around and sees that no Levites have come.\n\nHe sends leaders to Iddo at Casiphia to ask for ministers for the house of God, and they bring Sherebiah, Hashabiah and others, in all more than two hundred men.\n\nThen comes a hard choice. The road is dangerous, but Ezra is ashamed to ask the king for soldiers, since they had told him that the hand of their God is on all who seek him. So they fast and ask God for a straight way, and he grants it. Ezra weighs out the silver, gold and vessels to twelve priests and charges them to guard them. They set out, are delivered from enemies on the way, reach Jerusalem, weigh everything again, and offer sacrifices."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is Ezra’s own first-person account of the journey, a few months long, from Babylon to Jerusalem. It follows the king’s letter in Ezra 7. The careful weighing of the gifts, once at the river and once in Jerusalem, shows how valuable the offering was and how seriously the group took trust. The conflict over mixed marriages in Ezra 9 follows soon after the arrival."
+        }
+      ]
+    },
+    {
+      "id": "ai:ezra/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Leaders come to Ezra with bad news. The people, the priests and the Levites have not kept themselves apart from the peoples of the lands, and they have taken their daughters as wives for themselves and their sons. The princes and rulers, they say, have led the way.\n\nEzra tears his garment and his robe, pulls out hair from his head and beard, and sits stunned until the evening offering. Then he rises, falls on his knees, and prays.\n\nHis prayer is full of shame. He remembers the guilt of the fathers, the captivity, and the small mercy of a remnant given a place in God’s holy place. The commandments had warned against such marriages, he says, and God has punished them less than their iniquities deserve. He ends by calling the LORD righteous and admitting that no one can stand before him."
+        },
+        {
+          "kind": "background",
+          "text": "The issue is marriage to people of the surrounding nations, which Ezra reads under laws such as those in Deuteronomy 7. The text frames the concern as worship and covenant faithfulness, and the nations listed echo the peoples of the old conquest. Christians and Jews read this passage in different ways, and many today stress that other books, such as Ruth, show foreign women welcomed into Israel. Ezra 10 tells what the community did."
+        }
+      ]
+    },
+    {
+      "id": "ai:ezra/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Ezra is still weeping before the house of God when a very great assembly of men, women and children gathers around him and weeps too. Then Shecaniah speaks. They have trespassed, he says, and yet there is hope for Israel. He proposes a covenant to put away the foreign wives and their children, and he tells Ezra, “Arise, for the matter belongs to you and we are with you.”\n\nEzra makes the leaders swear, then goes into a room and fasts in mourning. A proclamation calls everyone to Jerusalem within three days. They sit in the open in a heavy rain, trembling. The assembly agrees but asks for appointed times and local elders, since the matter is too big for a day or two. Only a few oppose it.\n\nThe chapter closes with a long list of men who had married foreign women."
+        },
+        {
+          "kind": "background",
+          "text": "This is one of the hardest chapters in the Old Testament for readers today. It tells of a decision to send away wives and children, and the text records both the pain of it and a few voices of dissent. Christians differ on how to read it. Some see a painful act of covenant renewal in a fragile community, and others see a warning about excluding people. The book of Ruth offers a different picture of a foreign wife."
+        }
+      ]
     }
   ]
 }

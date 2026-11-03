@@ -22,6 +22,150 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:esther/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A king shows off everything he has. Ahasuerus rules from India to Ethiopia, over one hundred twenty-seven provinces, and in the third year of his reign he holds a feast in Susa. For one hundred eighty days he displays the riches of his kingdom. Then comes a seven day feast for everyone in the palace, with hangings of white and blue, gold and silver couches, and royal wine. Vashti the queen holds a feast for the women.\n\nOn the seventh day, merry with wine, the king commands that Vashti be brought wearing the royal crown to show her beauty. Vashti refuses. The king is very angry.\n\nHis counselors, led by Memucan, warn that her deed will make wives despise their husbands. They advise that Vashti never come before the king again, and a decree goes out to every province that every man should rule his own house."
+        },
+        {
+          "kind": "background",
+          "text": "The book of Esther is set in the Persian empire. Ahasuerus is usually identified with Xerxes, who ruled in the early fifth century before Christ. The book does not mention God by name, and readers have long discussed how its story shows hidden providence. This opening chapter sets up the vacancy that Esther will later fill. The text reports the decree without any comment, and what it says about women has drawn many readings."
+        }
+      ]
+    },
+    {
+      "id": "ai:esther/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "When the king’s anger cools, his servants propose a search. Beautiful young women are to be gathered in Susa under the care of Hegai, and the one who pleases the king will be queen in place of Vashti.\n\nIn the citadel lives a Jew named Mordecai, descended from those carried away from Jerusalem. He has raised his cousin Hadassah, who is also called Esther, because she has neither father nor mother. She is taken into the king’s house. Hegai favors her. Mordecai has told her not to make her people known, and he walks every day near the court to learn how she is.\n\nAfter twelve months of preparation, she goes in to the king, who loves her more than all the others. He sets the royal crown on her head.\n\nLater Mordecai learns of a plot by two doorkeepers against the king, and tells Esther, who informs the king in Mordecai’s name. It is written in the chronicles."
+        },
+        {
+          "kind": "background",
+          "text": "Esther’s two names suggest a Jewish and a Persian identity at once. She does not tell her people’s identity, at Mordecai’s instruction, and that hidden detail drives much of the plot. The text describes women taken into the palace under royal command, and readers today often note the lack of choice involved. The recorded plot against the king matters again in Esther 6. Esther becomes queen in the seventh year of the king’s reign."
+        }
+      ]
+    },
+    {
+      "id": "ai:esther/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The king promotes a man named Haman and sets his seat above all the other princes. Everyone at the king’s gate bows to him. Mordecai does not.\n\nThe servants ask him daily why he disobeys, and when he does not listen, they tell Haman. Mordecai had told them he was a Jew. Haman fills with wrath, and he is not content to deal with Mordecai alone. He decides to destroy all the Jews throughout the kingdom.\n\nThey cast Pur, the lot, to choose a day, and it falls on the twelfth month, Adar. Haman tells the king that a certain people scattered through the provinces keeps different laws, and he offers ten thousand talents of silver. The king gives him his ring and the people with it.\n\nLetters go out by couriers to destroy, kill and cause to perish all Jews, young and old, women and little children, on one day. The king and Haman sit down to drink, but the city of Susa is perplexed."
+        },
+        {
+          "kind": "background",
+          "text": "Haman is called an Agagite, a name some readers connect to Agag, the king of Amalek, in 1 Samuel 15, though the text does not explain the link. The chapter tells of a plan to destroy a whole people, and it is one of the best-known examples of such hatred in Scripture. The feast of Purim, which Esther 9 explains, takes its name from the lot, called Pur. The decree sealed with the king’s ring cannot be taken back, which shapes the rest of the story."
+        }
+      ]
+    },
+    {
+      "id": "ai:esther/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "When Mordecai learns of the decree, he tears his clothes, puts on sackcloth and ashes, and goes into the middle of the city, wailing loudly and bitterly. In every province where the decree reaches, the Jews mourn, fast and weep.\n\nEsther hears of it through her maidens and is exceedingly grieved. She sends clothing, but Mordecai refuses it. She sends Hathach to find out what is happening, and Mordecai sends back the facts, a copy of the decree, and a plea that she go to the king for her people.\n\nEsther answers that anyone who comes to the king uncalled is put to death unless he holds out the golden scepter, and she has not been called for thirty days. Mordecai replies that she will not escape in the king’s house, and asks, “Who knows if you haven’t come to the kingdom for such a time as this?” Esther asks for a three day fast. Then she will go in, and, she says, “if I perish, I perish.”"
+        },
+        {
+          "kind": "background",
+          "text": "This is the turning point of the book. Esther has kept her identity hidden since Esther 2, and now Mordecai asks her to risk it. Mordecai speaks of deliverance coming from another place, a line many readers take as a quiet reference to God, who is not named in the book. The three day fast shows the Jews of Susa taking part. Whether Esther could have refused is left open by the text."
+        }
+      ]
+    },
+    {
+      "id": "ai:esther/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "On the third day, Esther puts on her royal clothing and stands in the inner court. The king sees her, and she obtains favor in his sight. He holds out the golden scepter, and she comes near and touches its top.\n\nHe asks what she wants, even to the half of the kingdom. She does not ask for that. Instead she invites the king and Haman to a banquet she has prepared. At the banquet he asks again, and again she asks only that they come to a second banquet the next day.\n\nHaman goes out joyful and glad. Then he sees Mordecai at the king’s gate, who does not stand or move for him, and he fills with wrath. At home he boasts to his friends and his wife Zeresh of his riches and his honors, but says all this means nothing while he sees Mordecai the Jew at the gate. They tell him to build a gallows fifty cubits high, and Haman has it made."
+        },
+        {
+          "kind": "background",
+          "text": "Esther’s delay in naming her request builds suspense, and the text does not say why she waits. Some readers see careful strategy, and others see fear. Haman’s boasting and his plan to hang Mordecai set up the reversal of the coming chapters. The gallows stands ready as the chapter ends. A cubit is roughly the length of a forearm, so the structure was meant to be very tall and public."
+        }
+      ]
+    },
+    {
+      "id": "ai:esther/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "That night, the king could not sleep. He asks for the book of the chronicles to be read to him, and in it is the record of Mordecai exposing the plot of two doorkeepers. The king asks what honor was given. His servants answer that nothing has been done for him.\n\nAt that moment Haman stands in the outer court, come to ask about hanging Mordecai. The king calls him in and asks, “What shall be done to the man whom the king delights to honor?” Haman says in his heart that it must be himself, and describes the royal clothing, the king’s horse with a crown, and a parade through the city square.\n\nThe king tells him to do all that for Mordecai the Jew. Haman does it, and then hurries home mourning with his head covered. His wise men and his wife say that if Mordecai is of Jewish descent, Haman will surely fall before him. Then the king’s eunuchs arrive to bring him to Esther’s banquet."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter turns on a sleepless night and a record that was written years earlier in Esther 2. The text does not credit God by name, but many readers see providence in the timing. Haman’s own words become the pattern of his humiliation. His advisers’ warning is the first time in the book that anyone predicts his fall. The second banquet comes next."
+        }
+      ]
+    },
+    {
+      "id": "ai:esther/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "At the second banquet the king asks once more, as he had before, what Esther wants, even to the half of the kingdom. This time she answers.\n\nShe asks that her life be given her, and her people. She says they have been sold to be destroyed, slain and made to perish. If it had only been slavery she would have kept silent, she says. The king asks who would dare do such a thing, and Esther answers, “An adversary and an enemy, even this wicked Haman!”\n\nThe king rises in wrath and goes out to the palace garden. Haman stays to beg Esther for his life and falls on the couch where she is. The king returns and sees it. Harbonah, one of the eunuchs, mentions the gallows fifty cubits high that Haman has made for Mordecai. The king says to hang Haman on it, and they do. Then the king’s wrath is pacified."
+        },
+        {
+          "kind": "background",
+          "text": "Esther at last reveals her people and names the man behind the decree. Her words about being sold echo Haman’s offer of silver in Esther 3. The story reverses the earlier scene of the gallows. Readers note that the king, who gave the order, never takes blame himself in the text. The decree, though, is still in force when this chapter ends, and Esther 8 deals with that."
+        }
+      ]
+    },
+    {
+      "id": "ai:esther/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-03",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "On the same day, the king gives Haman’s house to Esther, and Mordecai comes before the king, who gives him the ring he had taken from Haman. Esther sets Mordecai over Haman’s house.\n\nBut the decree is still in force. Esther falls at the king’s feet and begs with tears for the plan of Haman to be undone. The king holds out the golden scepter again, and she says, “For how can I endure to see the evil that would come to my people?”\n\nA decree sealed with the king’s ring cannot be reversed, so the king tells them to write a second one as they please. Scribes write in every language to every province, from India to Ethiopia, and couriers ride out on royal horses. The new letters allow the Jews to gather and defend their lives on the appointed day.\n\nMordecai leaves the king in royal clothing, and Susa shouts and is glad. The Jews have light, gladness, joy and honor, and many from the peoples of the land become Jews."
+        },
+        {
+          "kind": "background",
+          "text": "Persian law as described here could not be revoked, so the solution is a second decree rather than a repeal. The text describes the right of the Jews to defend themselves, and the language about plunder and the killing of attackers has been read in different ways. The day named is the thirteenth of Adar, the same day Haman’s decree set. Esther 9 tells what happened and how Purim began."
+        }
+      ]
     }
   ]
 }
