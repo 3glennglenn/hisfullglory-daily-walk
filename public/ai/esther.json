@@ -166,6 +166,42 @@
           "text": "Persian law as described here could not be revoked, so the solution is a second decree rather than a repeal. The text describes the right of the Jews to defend themselves, and the language about plunder and the killing of attackers has been read in different ways. The day named is the thirteenth of Adar, the same day Haman’s decree set. Esther 9 tells what happened and how Purim began."
         }
       ]
+    },
+    {
+      "id": "ai:esther/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The day the enemies had hoped for arrives, and everything is turned around. On the thirteenth of Adar, the day the decree allowed Haman’s side to strike, the Jews gather in their cities and defend themselves. No one can stand against them. Even the governors and officials of the provinces help them, because the fear of Mordecai has fallen on them.\n\nIn Susa the fighting is reported to the king. He tells Esther what has happened and asks what more she wants. She asks for one more day in Susa, and for Haman’s ten sons to be hanged. The king agrees. Three times the text says the Jews did not lay their hands on the plunder.\n\nThen comes rest, feasting and gifts of food. Mordecai writes to every province, and a yearly celebration is set: “Purim”, named for the lot Haman cast. Esther and Mordecai confirm it in writing."
+        },
+        {
+          "kind": "background",
+          "text": "The chapter closes the story of a plot that began in chapter 3, when Haman cast lots to choose a day to destroy the Jews of the empire. Because a royal decree could not simply be cancelled, a second decree let the Jews defend themselves (chapter 8). Today this is the day both decrees meet. This is a hard chapter, with large numbers of dead, and it says plainly that the Jews acted in defense of their lives. Its aim is to explain where the festival of Purim comes from, which Jewish communities have kept ever since. Many scholars see the book as written long after the events in Persia."
+        }
+      ]
+    },
+    {
+      "id": "ai:esther/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The story ends quietly. King Ahasuerus lays a tribute on the land and on the islands of the sea, and the writer points readers to the royal chronicles of Media and Persia for the full record of his power. The book that began with a banquet and a feud ends with an accounting.\n\nBut the last word does not go to the king. It goes to Mordecai the Jew. He stands next to the king, and he is great among his own people and accepted by the multitude of his brothers. The two things the text says about him are simple. He seeks the good of his people, and he speaks peace to all his descendants.\n\nA man who once sat at the king’s gate in sackcloth now has the king’s ear, and he spends it on others."
+        },
+        {
+          "kind": "background",
+          "text": "This is the shortest chapter of the book, a closing note. Mordecai’s rise follows his promotion in chapter 8, after Haman’s fall. The book never names God, yet it ends with a picture of a leader who uses power for the good of a people who were nearly destroyed. The reference to the chronicles of Media and Persia is how the writer points beyond the book to a wider public record. Readers who want the whole story can follow it from chapter 1. Esther 9 explains the yearly festival that these events gave rise to."
+        }
+      ]
     }
   ]
 }

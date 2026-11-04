@@ -22,6 +22,510 @@
         }
       ],
       "voice": "story"
+    },
+    {
+      "id": "ai:job/1",
+      "chapter": 1,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "There was a man in the land of Uz named Job, and the text says at once what kind of man he was: “blameless and upright”. He had seven sons, three daughters and more livestock than anyone in the east. Whenever his children held a feast, Job offered sacrifices for them, in case they had sinned.\n\nThen the scene shifts to heaven. God’s sons come before the LORD, and Satan is among them. The LORD points to Job as a man like no other. Satan asks the question the whole book turns on: does Job fear God for nothing? God allows him to take what Job has, but not to touch Job himself.\n\nIn one day four messengers arrive, each still speaking when the next comes in. Raiders, fire from the sky and a great wind take the animals, the servants and all ten children. Job tears his robe and falls to the ground. He worships."
+        },
+        {
+          "kind": "background",
+          "text": "Job is a book of wisdom and poetry, and it opens with a prose story set in a faraway land called Uz. Nothing in the text says who wrote it or when. The question Satan raises is whether faith survives when the rewards of faith are gone. Chapter 1 sets up that test and gives the reader something Job never gets, which is a look behind the curtain. Job and his friends will spend the rest of the book trying to understand what happened without knowing about this scene in heaven."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/2",
+      "chapter": 2,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The scene in heaven repeats. Again Satan comes among God’s sons, and again the LORD speaks of Job, who still holds on to his integrity. Satan answers: “Skin for skin.” A man will give anything to save his own life, so touch Job’s body and he will curse God. God says Job is in his hand, but his life is to be spared.\n\nJob is struck with painful sores from head to foot. He sits among the ashes and scrapes himself with a piece of broken pottery. His wife tells him to renounce God and die. Job answers that they receive good from God, so shall they not receive evil? The text says he did not sin with his lips.\n\nThree friends hear the news and come to comfort him. They hardly recognize him. They weep, and then they sit with him on the ground for seven days and seven nights without a word."
+        },
+        {
+          "kind": "background",
+          "text": "Chapter 2 is the second round of the test begun in chapter 1. This time it reaches Job’s own body. His wife is the only person in the chapter who tells him to let go, and the text gives her a single sentence. Eliphaz, Bildad and Zophar are named here for the first time; they will do most of the talking from chapter 4 on. Their seven days of silence are a mourning custom still seen in the Bible elsewhere, and many readers find them at their best here, before they open their mouths."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/3",
+      "chapter": 3,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After seven days of silence, Job speaks, and what comes out is a curse on the day he was born. “Let the day perish in which I was born”. He wants it dark, with no light on it, never counted in the months of the year. He does not curse God. He curses the day that let him live.\n\nThen the questions come. Why did he not die in the womb? Why were there knees to receive him and a breast to nurse him? He pictures the grave as a place where the wicked stop troubling and the weary are at rest, where prisoners are at ease and servants are free from their masters.\n\nHe asks why light is given to those who long for death, who dig for it more than for hidden treasure. The chapter ends with a hard sentence: the thing he feared has come on him, and there is no rest, only trouble."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is where the book turns from prose to poetry, and it is one of the rawest passages in the Bible. Job speaks to no one in particular. His friends have not yet said a word, and God is not addressed. Job’s words are not given as advice. They are given as a cry, and the Bible lets them stand. Many readers have found in Job 3 a permission to say plainly how bad things are. The speeches of the friends begin in chapter 4 and answer him."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/4",
+      "chapter": 4,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Eliphaz speaks first, and he begins gently. Will Job be grieved if someone tries to talk with him? Job has taught many and strengthened weak hands. Now trouble has touched him, and he faints. Doesn’t his piety give him confidence?\n\nThen Eliphaz makes his argument. Who ever perished being innocent? As he has seen, those who plow iniquity and sow trouble reap the same. So Job’s suffering must have a cause.\n\nHe tells of a night vision. A whisper came, fear made his bones shake, a spirit passed before his face, and he could not make out its shape. Then a voice asked: can a mortal be more just than God, or purer than his Maker? If God does not trust his servants, how much less those who live in houses of clay? People perish between morning and evening, and no one notices."
+        },
+        {
+          "kind": "background",
+          "text": "Eliphaz the Temanite is the first of three friends, and he speaks as one who has watched life and drawn a rule from it: the innocent do not perish, the wicked do. The reader knows from chapter 1 that this rule does not fit Job’s case. This is why the book is read as a long argument about suffering and justice. What the friends say is not always wrong, and the book is careful about this; later, in chapter 42, God says they have not spoken rightly. Christians and Jews have read the friends’ speeches as a warning against easy answers to another person’s pain."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/5",
+      "chapter": 5,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Eliphaz goes on. Resentment kills the foolish, he says, and he has seen the foolish take root and then seen their homes cursed. Trouble does not spring out of the ground. But people are born to trouble as sparks fly upward.\n\nThen he turns to what he himself would do: seek God and commit his cause to God. He praises a God who does great things that cannot be fathomed, who sends rain, who lifts up the lowly, brings the plans of the crafty to nothing and saves the needy from the mighty.\n\nHe says “happy is the man whom God corrects”. God wounds and binds up. Eliphaz promises that God will deliver Job in six troubles, and in seven no evil will touch him, and he paints a picture of peace, a full age and many descendants. He ends by saying that he and his friends have looked into it and it is so."
+        },
+        {
+          "kind": "background",
+          "text": "This is the second half of Eliphaz’s first speech. He offers Job a way back: take your suffering as correction from God and trust that he will heal. It is meant kindly, and parts of it are beautiful. Verse 13 is quoted by Paul in 1 Corinthians 3. But Eliphaz assumes he knows why Job is suffering, and the story told in chapters 1 and 2 shows that his assumption is wrong. The chapter is a good example of words that are true in general and cruel when applied to one person’s grief."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/6",
+      "chapter": 6,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job answers, and the first thing he asks for is a scale. If only his anguish could be weighed, it would be heavier than the sand of the seas. That is why his words have been rash. He says the arrows of the Almighty are in him, and the terrors of God are lined up against him.\n\nHe wishes that God would simply crush him and cut him off, and he adds that he has not denied the words of the Holy One. Where is his strength to go on waiting? Is his flesh bronze?\n\nThen he turns on his friends. They have been as unreliable as streams that run in winter and vanish in the heat, and caravans that turn toward them in the dry season die in the waste. He asks them to show him his error if there is one. Words of honesty are forceful, he says, but what does their reproof prove?"
+        },
+        {
+          "kind": "background",
+          "text": "Job speaks to the friends in this chapter, and he is hurt that they are not helping. The comparison to a seasonal stream was strong for readers who knew a land where a riverbed could be full in the rain and bare in summer. Job does not claim to be sinless; he asks them to show him his mistake. Verse 10 shows that even in despair he holds on to his loyalty to God. Readers have long seen in this chapter how much a suffering person needs a friend who is steady, not a speech."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/7",
+      "chapter": 7,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job turns from his friends and talks about life as he now knows it. A person’s time on earth is hard labor, like a hired worker waiting for pay. His own nights are long. He lies down and asks when morning will come, and tosses until dawn. His skin breaks open, and his days run faster than a weaver’s shuttle and end without hope.\n\nThen he speaks straight to God. Remember that “my life is a breath”. He says he will not keep quiet. Am I the sea, or a sea monster, that you set a guard over me?\n\nThe question that follows is one of the most famous in the book: what is man, that God would magnify him and test him every moment? If he has sinned, what does that do to God? Why not pardon him? Soon he will lie in the dust, and God will look for him, and he will not be."
+        },
+        {
+          "kind": "background",
+          "text": "Job’s speech here becomes a prayer, though not a polite one. He addresses God directly and accuses him of watching too closely. Verse 17 echoes Psalm 8, which asks the same question with wonder: what is man, that God thinks of him? Job asks it with exhaustion. Many readers see in this a sign of how faith can sound when it is in pain, with questions and complaints that still turn toward God instead of away from him."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/8",
+      "chapter": 8,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Bildad takes his turn, and he is sharper than Eliphaz. How long will Job go on talking? Does God pervert justice? He says that if Job’s children sinned, God handed them over to their sin. Bildad does not hesitate to say it. He then tells Job that if he is pure and upright, God will wake up for him and restore him, and what began small will grow great.\n\nBildad leans on the past. Ask earlier generations, he says, because we are of yesterday and know nothing. Then he gives two pictures from nature. A papyrus plant cannot grow without water, and it withers first. A spider’s web cannot hold weight. So it is with the godless.\n\nHe ends with what he thinks is comfort. God will not cast away a blameless man, and he will not uphold evildoers. He will fill Job’s mouth with laughter again, while those who hate Job will be clothed in shame."
+        },
+        {
+          "kind": "background",
+          "text": "Bildad the Shuhite stands for tradition. His appeal to past generations means that the wisdom of the elders is enough, and Job should just accept it. The cruel part is verse 4, where he treats the death of Job’s children as proof of their guilt. The book gives the reader the opposite view. The reader has heard in chapter 1 how those children died. Bildad’s two images, the dry papyrus and the web, are about false hope. The chapter shows how a doctrine can be right in the abstract and hurtful in the room where someone is grieving."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/9",
+      "chapter": 9,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job agrees with part of what Bildad said, but he asks the question that matters: how can a man be right before God? If God chose to argue with him, Job could not answer one charge in a thousand. Then he describes that God. He moves mountains without their knowing, shakes the earth, commands the sun and stretches out the heavens alone. He made the Bear, Orion and the Pleiades.\n\nThat is the problem. This God goes by him and he cannot see. If he snatches away, who can stop him? Even if Job were righteous, he would only beg mercy from his judge.\n\nHe feels that God destroys the blameless and the wicked alike. If he washed himself with snow, God would still plunge him in a ditch. There is no umpire between them, no one to lay a hand on both. If only God’s terror could be taken away, he would speak without fear."
+        },
+        {
+          "kind": "background",
+          "text": "The big question of this chapter is whether anyone can take God to court. Job uses legal language throughout: a case, an answer, a judge, an umpire. The umpire in verse 33 is someone who could stand between two parties and bring them together, and Job says there is no such person. Christians have often read this wish alongside passages like 1 Timothy 2 about one mediator between God and humanity, while Jewish readers have usually kept the focus on the honesty of the complaint. Job’s picture of God here is partial, and God will answer it later in the book."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/10",
+      "chapter": 10,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job says his soul is weary of life, so he will let his complaint run free. He turns to God and says, do not condemn me, but show me why you contend with me. Is it good to you to oppress, to despise the work of your hands? Do you see as people see?\n\nThen comes a tender and bitter memory. God’s hands shaped Job like clay, clothed him with skin and flesh and knit him with bones and sinews. God granted him life and loving kindness. Job cannot understand how the same hands now seem to destroy him. If he sins, God marks it. If he is righteous, he still cannot lift his head.\n\nHe asks why he was brought out of the womb at all. His days are few, so he asks to be left alone for a little comfort before he goes to the land of darkness from which no one returns."
+        },
+        {
+          "kind": "background",
+          "text": "This chapter ends Job’s first round of replies. It is one of the clearest places where Job argues that God made him with care and then seems to turn on him. The picture of being formed like clay and knit together in the womb is close to the way Psalm 139 speaks of God’s care, but Job turns it into a reproach. Many readers hear in it how closely complaint and trust can sit together. The land without return in verses 21 and 22 is the Old Testament word picture for the realm of the dead."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/11",
+      "chapter": 11,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Zophar, the third friend, has been holding back, and now he does not. Shouldn’t this flood of words be answered? He accuses Job of saying his doctrine is pure and that he is clean in God’s eyes. Zophar wishes that God would speak and show Job the secrets of wisdom. He says God exacts less from Job than his iniquity deserves.\n\nThen he sets out the size of God. Can you fathom the mystery of God? His height is higher than heaven and his depth is deeper than Sheol, longer than the earth and broader than the sea. Who can oppose him?\n\nZophar ends with advice. Set your heart right, stretch out your hands to God, and put away iniquity. Then you will lift up your face without blemish, forget your misery and sleep without fear. Life will be brighter than noon. But the eyes of the wicked will fail, and their hope will be their last breath."
+        },
+        {
+          "kind": "background",
+          "text": "Zophar the Naamathite is the bluntest of the three, and he does not even pretend sympathy. His claim that Job gets less than he deserves is the hardest thing any friend says so far. Yet what he says about the size of God is true, and God himself will say something similar at the end of the book. Zophar is right about God’s mystery and wrong in using it against Job. In this book wisdom is something that no one has fully, and the friends come close to forgetting that."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/12",
+      "chapter": 12,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job answers with biting irony. No doubt you are the people, and wisdom will die with you. But I have understanding too, and who does not know such things? He says he is a joke to his neighbors, he who called on God and was answered. The tents of robbers prosper, and those who provoke God are secure.\n\nThen he turns the friends’ own argument around. Ask the animals, the birds, the earth and the fish. Who does not know that the LORD’s hand has done this, the hand that holds the life of every living thing?\n\nWith God are wisdom and might. What he breaks down cannot be rebuilt. He leads counselors away stripped and makes judges fools. He loosens the bonds of kings. He makes nations great and destroys them. He takes understanding from leaders and sends them wandering in a trackless waste, groping in the dark and staggering like drunk men."
+        },
+        {
+          "kind": "background",
+          "text": "Job does not dispute that God is powerful and wise. His point in this chapter is that this very power is the problem, because it falls on everyone without regard for who deserves it. The friends spoke of a God who rewards the good, and Job points to a God who also topples kings and judges. Readers disagree on how much of this is bitterness and how much is simple observation. Either way, the chapter shows Job claiming the same knowledge his friends have, and then pushing it somewhere they did not want it to go."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/13",
+      "chapter": 13,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job tells his friends he has seen and heard all this, and what they know, he knows. He wants to speak to the Almighty and reason with God. As for them, they smear him with lies and are doctors of no value. He wishes they would be completely silent, which would be the wise thing.\n\nThen he asks two sharp questions. Will you speak unrighteously for God? Will you talk deceitfully for him? He warns that God will correct them if they show partiality in secret. Their wise sayings are proverbs of ashes.\n\nNow Job says, let me speak. He believes God will kill him, he has no hope, and yet he will maintain his ways before him. He asks God for two things: take your hand off me and do not terrify me. Then call and I will answer. He asks to be told his sins. Why does God hide his face and treat him as an enemy?"
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is a turning point. Job decides to stop talking to his friends and to take his case straight to God. Verse 15 is one of the best known and most debated lines in the book, because the Hebrew can be read in more than one way: as hope, or as a statement that he has none and will speak anyway. Readers differ, and the notes at the foot of many Bibles say so. Either way, Job puts his trust in the idea that an honest case, honestly spoken, deserves a hearing."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/14",
+      "chapter": 14,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job reflects on how short a human life is. A person born of a woman has few days and many troubles. Job asks God to look away from him and let him rest like a hired worker at the end of the day.\n\nThen he looks at a tree. If a tree is cut down, there is hope that it will sprout again, and even if its stump dies in the ground, the scent of water makes it bud. But a person dies and is laid low, and where is he? As water fails from the sea, so people lie down and do not rise.\n\nThen comes a daring wish. Job asks God to hide him in Sheol until his wrath is past, and then remember him. “If a man dies, will he live again?” He would wait for his release. But the chapter ends in sadness: mountains wear away, and so God destroys human hope."
+        },
+        {
+          "kind": "background",
+          "text": "Job 14 asks whether death is the end, long before the Bible says much about resurrection. Job wants it to be otherwise, and he does not claim that it is. Later Jewish and Christian readers have heard in verse 14 a longing that other passages answer, such as Daniel 12 and 1 Corinthians 15. In its own place the chapter is a question held open, and the grief in it is plain. The tree that can grow again is a picture of what Job wishes for people too."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/15",
+      "chapter": 15,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The second round of speeches begins, and Eliphaz is no longer gentle. Should a wise man answer with empty knowledge and fill himself with the east wind? He says Job’s own mouth condemns him, not Eliphaz. Are you the first man born? Have you listened in on God’s council? What do you know that we do not? Are the consolations of God too small for you?\n\nHe repeats what he said in chapter 4: no one is clean before God, not even the heavens. Then he tells what wise men have handed down. The wicked man writhes in pain all his days. Terrors sound in his ears. He stretched out his hand against God and charged at him with a thick shield.\n\nThe wicked will not be rich, his branches will dry up, and he will go by the breath of God’s mouth. Eliphaz closes with a warning against trusting in emptiness."
+        },
+        {
+          "kind": "background",
+          "text": "In the second round the friends grow angrier, and the speeches become less about comforting Job and more about defending a belief. Eliphaz now draws on the tradition he received from older men, and he all but names Job as the wicked man he describes, although he never says so. The list of what happens to the wicked is long and vivid. Readers are meant to notice that none of it matches what the reader knows about Job from chapter 1. The chapter shows how a sound principle becomes unfair when it is aimed at one suffering person."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/16",
+      "chapter": 16,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job says he has heard many such things and calls the friends miserable comforters. He could speak as they do if they were in his place. But he would strengthen them with his mouth.\n\nThen his grief pours out. God has worn him out. His leanness stands up as a witness against him. God has torn him and handed him over to the wicked. “I was at ease, and he broke me apart.” He pictures God’s archers around him. He has sewn sackcloth on his skin, and his face is red from weeping, though there is no violence in his hands and his prayer is pure.\n\nThen a different note. “Earth, don’t cover my blood.” Even now, he says, his witness is in heaven. The one who vouches for him is on high. His eyes pour tears to God, and he asks that someone plead for a man with God as a person pleads for a neighbor."
+        },
+        {
+          "kind": "background",
+          "text": "Job’s grief is so great here that he speaks of God as an enemy. But in the middle of it he reaches for a witness in heaven, someone who will vouch for him. Readers have debated who this witness is: God himself against God, an angel, or an unnamed advocate. Many Christians connect this longing with Christ as advocate, while others read it simply as Job’s faith in God’s own justice, set against what God seems to be doing. The call to the earth not to cover his blood echoes Genesis 4, where Abel’s blood cries out."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/17",
+      "chapter": 17,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job’s spirit is consumed, his days are used up, and the grave is waiting. Mockers surround him. He is a byword among the people, and they spit in his face. His eye is dim from sorrow, and his limbs are like a shadow.\n\nHe asks God to put up a pledge for him, to be his guarantor. Who else will shake hands with him? Upright people will be astonished at what has happened to him.\n\nYet there is a thin line of steadiness. The righteous will hold to his way, and the one with clean hands will grow stronger. Job invites his friends to come back and try again, but he says he will not find a wise man among them.\n\nThe chapter ends with a bleak question. His days are over, his plans are broken, and he is looking at Sheol as his house. If so, where is his hope? Will it go down with him to the dust?"
+        },
+        {
+          "kind": "background",
+          "text": "This short chapter shows Job at the edge. He has lost his family, his health and his friends’ trust, and he now speaks as someone near death. The strange request in verse 3, that God would be his guarantor, means that Job believes only God can guarantee Job’s innocence, even against God’s own apparent action. Readers have found it a daring prayer. The chapter ends on a question and does not answer it, and the next speaker, Bildad, will not either."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/18",
+      "chapter": 18,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Bildad speaks again, and he is stung. How long will you hunt for words? You tear yourself in your anger, but will the earth be forsaken for you?\n\nThen comes a long description of what happens to the wicked, in pictures that pile up. His light is put out, and the lamp in his tent goes dark. His own plans bring him down. He is caught in a net by his own feet, a snare takes him by the heel, a noose is hidden in the ground. Terrors chase him on every side.\n\nHe is torn from his tent and brought to the king of terrors. His roots dry up below and his branch is cut off above. His memory perishes from the earth, and he has no son or grandson among his people. Bildad ends: such are the homes of the unrighteous, the place of one who does not know God."
+        },
+        {
+          "kind": "background",
+          "text": "Bildad’s second speech is a long picture of ruin, and the picture is close to Job’s own situation: lost children, lost tent, lost name. Bildad does not say that Job is the man he describes, but the reader can feel that he means it. The phrase king of terrors is a picture of death itself. The chapter belongs to the book’s main argument about whether suffering shows guilt. The writer lets Bildad speak at full strength, and then lets Job answer in the next chapter."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/19",
+      "chapter": 19,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job’s answer starts with a plain question. How long will you torment me and crush me with words? You have reproached me ten times, and you are not ashamed.\n\nHe cries out of wrong, but no one hears. God has walled up his way, stripped him of his glory and taken the crown from his head. His brothers are far away, his friends forget him, his servants will not answer, and his breath is offensive to his wife. “Have pity on me, you my friends,” he says, for the hand of God has touched me.\n\nThen, in the middle of this, he wishes his words were written in a book or carved in rock. And the chapter rises: “I know that my Redeemer lives.” In the end he will stand on the earth, and after his skin is destroyed, Job will see God in his flesh, on his side."
+        },
+        {
+          "kind": "background",
+          "text": "Job 19:25 to 27 is among the best known passages in the Bible, and it is hard to translate. The word redeemer, or goel, means a family protector who buys back or avenges. Many Christians hear Christ and the resurrection in it, which is why it is read at funerals and in Handel’s Messiah. Many Jewish readers and many scholars take it as Job’s confidence that God will in the end defend him, whether in this life or after. The Hebrew of verses 26 and 27 is difficult, and Bibles disagree on details. The chapter shows hope growing out of loneliness."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/20",
+      "chapter": 20,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Zophar answers in haste, and he says so. He tells Job a thing he says is known from old times: the triumph of the wicked is short and the joy of the godless lasts only a moment. Even if he climbs to the heavens, he will perish like his own dung, and those who saw him will ask where he is. He will fly away like a dream.\n\nThen Zophar uses an image of food. Wickedness is sweet in his mouth, but in his stomach it turns to cobra venom. He swallowed riches and will vomit them up. Zophar says it is because the man oppressed and abandoned the poor and seized a house he did not build.\n\nThe wicked will not enjoy what he has gotten. God will send his anger on him while he eats. The heavens reveal his guilt and the earth rises against him. This is the share God gives the wicked."
+        },
+        {
+          "kind": "background",
+          "text": "Zophar’s second speech is one long warning, and he gives Job a rule about the wicked that readers know is too neat. The picture of food that turns to poison is memorable, and the charge about the poor in verse 19 is a first hint of the accusations Eliphaz will make outright in chapter 22. Job had not done these things, according to chapter 1. Zophar’s argument is that suffering follows sin. Job will reply in chapter 21 by pointing to the world as he finds it."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/21",
+      "chapter": 21,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job asks the friends to listen, and says that this will be their comfort. After he has spoken, they can mock.\n\nThen he asks a question that cuts against everything they have said. Why do the wicked live, grow old and become mighty? Their children are with them, their houses are safe, their herds do not miscarry, their children dance to tambourine and harp. They spend their days in prosperity. Yet they say to God, depart from us.\n\nHow often is the lamp of the wicked put out, he asks. You say God stores up a man’s guilt for his children. Let it fall on the man himself! One dies strong and at ease, another dies in bitterness, never having tasted good, and both lie in the dust. The wicked man is carried to his grave, and a watch is kept at his tomb. So how can they comfort Job with nonsense when only falsehood is left in their answers?"
+        },
+        {
+          "kind": "background",
+          "text": "Job 21 is a direct reply to the friends’ claim that the wicked always suffer. Job names what many people have seen: that some who do wrong live comfortably. The Bible also asks this question elsewhere, in Psalm 73 and Jeremiah 12, so Job is not alone in asking it. The chapter does not say the wicked will never face judgment. It says the friends’ simple rule is not true to life. Readers who feel the unfairness of the world have often found in this chapter a voice for it."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/22",
+      "chapter": 22,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Eliphaz speaks for the third time, and now he accuses Job outright. Is it for your piety that he reproves you? No: isn’t your wickedness great, with no end to your sins?\n\nThen he lists crimes. You took pledges from your brother for nothing and stripped the naked of their clothing. You gave no water to the weary and held back bread from the hungry. You sent widows away empty and broke the arms of the fatherless.\n\nHe says Job claims that God cannot see through thick clouds, and warns him not to take the old way of wicked men.\n\nThen his tone changes to an invitation. Get to know God and be at peace. Put away unrighteousness, lay your gold in the dust, and the Almighty will be your treasure. You will pray and he will hear you. Light will shine on your ways. He will save the humble."
+        },
+        {
+          "kind": "background",
+          "text": "This is the point where Eliphaz moves from hints to open charges against Job. Nothing in the book supports the charges, and chapter 1 says the opposite. They show what happens when a belief is held so firmly that it needs a crime to match the pain. The last section, though, holds beautiful advice about returning to God, and it is a reminder that the friends are not villains. Their mistake is to apply a true idea to a person it does not fit. Job will answer by speaking of God, not of himself."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/23",
+      "chapter": 23,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job answers, and his complaint is still bitter. God’s hand is heavy on him in spite of his groaning. But now he longs for something: “Oh that I knew where I might find him!” He would go to God’s seat, set out his case and fill his mouth with arguments. Would God overpower him? No, Job says, he would listen.\n\nBut he cannot find him. East, west, north, south, God is not there. Even so, Job says something steady: God knows the way that he takes, and when he has tested him, he will come out like gold. His foot has held to God’s steps. He has treasured God’s words more than his daily bread.\n\nYet fear returns. God stands alone, and who can turn him? Job is terrified at his presence and his heart has grown faint. Yet he was not silenced by the darkness."
+        },
+        {
+          "kind": "background",
+          "text": "Job 23 is a quiet chapter in a loud book. Job is no longer shouting at his friends. He is longing for a courtroom where God would hear him. The words about coming out like gold are among the best known in the book and are often quoted for comfort, though Job says them in the middle of fear. Job’s picture of a God he cannot find turns around later in the book, when God answers out of a whirlwind in chapter 38."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/24",
+      "chapter": 24,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job asks why the Almighty does not set times of judgment, and why those who know him do not see his days. Then he describes the world as it is. People move boundary stones. They steal flocks. They drive off the donkey of the fatherless and take the widow’s ox as a pledge. The needy are pushed off the road, and the poor of the land hide.\n\nHe pictures the poor like wild donkeys in the desert, out looking for food. They lie all night without clothing in the cold and cling to rocks for shelter. They carry sheaves while hungry and tread winepresses while thirsty.\n\nThen he turns to murderers, thieves and adulterers who work in the dark. God preserves the mighty by his power. They are lifted up for a little while, then gone like grain heads cut off. If it is not so, he asks, who will prove him a liar?"
+        },
+        {
+          "kind": "background",
+          "text": "Chapter 24 widens Job’s complaint beyond himself. He now speaks for the poor, the widow and the orphan, who suffer and seem unnoticed. This theme is found in the Law and the Prophets too, which command care for these groups (see Exodus 22 and Isaiah 1). Some scholars think parts of chapters 24 to 27 may have been mixed up in copying, because the speakers seem to shift, but the text as it stands is clear enough. Its main point is that evil goes on in the world and that God does not seem to stop it."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/25",
+      "chapter": 25,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Bildad speaks for the last time, and this is the shortest speech in the book. He says dominion and fear belong to God. He makes peace in his high places. Can his armies be counted? On whom does his light not rise?\n\nThen comes the question that sums up the friends’ case. How can a man be right with God, or one born of a woman be clean? Even the moon has no brightness and the stars are not pure in his sight. How much less a person, who is a maggot, a son of man, who is a worm.\n\nThere is no reply to Job’s demands, no talk of the wicked, no comfort and no call to repent. Bildad has run out of arguments. All he has left is the greatness of God and the smallness of people, and he says it as if it ends the matter."
+        },
+        {
+          "kind": "background",
+          "text": "The friends stop speaking after this chapter. Bildad’s final words are about the gap between God and humanity, and the smallness of a person by comparison. Many readers feel the speech is true as far as it goes but is not an answer to Job. The Bible elsewhere says the same about human frailty with a different tone, as in Psalm 8, which marvels that God would care for such small beings. Here the point is used to shut Job up, and it fails to do so."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/26",
+      "chapter": 26,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job answers with biting sarcasm. How you have helped the powerless! How you have counseled the one without wisdom and displayed sound knowledge in abundance! Whose spirit spoke through you?\n\nThen he turns to the greatness of God, as if to show he knows it better than they do. The departed spirits tremble under the waters. Sheol is naked before God, and Abaddon has no covering. He stretches the north over empty space and hangs the earth on nothing. He wraps up the waters in his clouds, and the clouds do not burst. He has drawn a boundary on the face of the waters, at the edge of light and darkness.\n\nThe pillars of heaven tremble at his rebuke. By his power he stirs the sea and strikes down Rahab. And Job closes with humility: these are only the edges of his ways. What a small whisper we hear of him. Who can understand the thunder of his power?"
+        },
+        {
+          "kind": "background",
+          "text": "This chapter is Job’s answer to Bildad’s short speech, and it does what Bildad did not: it describes God’s power in wonder, not as a weapon. The language of verse 7 about the earth hanging on nothing is striking for an ancient poem. Rahab is a sea monster in the poetry of the Old Testament, standing for chaos that God subdues. The last verse is a quiet moment of awe. It prepares for the ending of the book, in which God himself speaks of creation to Job."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/27",
+      "chapter": 27,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job takes up his speech again. “As God lives”, he begins, and he swears by the one he says has taken away his right and made his soul bitter. As long as there is breath in him, his lips will not speak wrongly. He refuses to say the friends are right. Until he dies, he will not give up his integrity.\n\nThen he turns to his enemies. What hope has the godless when God takes his life? Will God hear his cry? Will he delight in the Almighty or call on God at all times?\n\nJob says he will teach them about the hand of God. And then he lists what happens to the wicked: his children are for the sword, his survivors are buried in death. He may heap up silver like dust, but the just will wear his clothes. He lies down rich, and is gone by morning. A storm steals him away in the night."
+        },
+        {
+          "kind": "background",
+          "text": "There is a puzzle in this chapter. After arguing in chapter 21 that the wicked often prosper, Job here sounds like his friends in saying what happens to them. Readers explain this in different ways. Some think the speech belongs to one of the friends, and others see Job quoting their view or saying that the wicked do face an end in God’s time. What is not in doubt is verses 2 to 6, where Job swears that he will keep his integrity. That oath ties back to the way chapters 1 and 2 describe him."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/28",
+      "chapter": 28,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-04",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The poem opens with a picture of miners. There is a mine for silver and a place where gold is refined. People cut a shaft far from where people live, hang from ropes and swing back and forth. Sapphires come out of the rock. No bird of prey knows that path and no lion has walked it.\n\nThen the question that turns the poem: “But where will wisdom be found?” People cannot find it by digging. The deep says it is not in me, and the sea says it is not with me. It cannot be bought with gold or silver. Even Destruction and Death have only heard a rumor.\n\nGod alone knows the way to it. He sees to the ends of the earth, weighs the wind and measures the waters. And to humankind he said that the fear of the Lord is wisdom, and to depart from evil is understanding."
+        },
+        {
+          "kind": "background",
+          "text": "Job 28 is a poem about wisdom that reads almost like a pause in the argument. It is not clear who is speaking: the text places it inside Job’s speech, but many readers hear the voice of the narrator or hear a calmer Job. Its answer is that wisdom cannot be dug up by human skill, however clever, and that it belongs to God. The last verse joins the book to the wider wisdom tradition, as in Proverbs 1 and Psalm 111. It sets up God’s own speeches near the end of the book."
+        }
+      ]
     }
   ]
 }
