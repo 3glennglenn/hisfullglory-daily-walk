@@ -128,6 +128,11 @@ test("the links page leads to the app, the shop, the website, the Bible, every a
   assert.equal(filled.length, 1, "one filled link");
   assert.ok(filled[0].includes(`href="${appUrl}"`), "the filled link is the app");
   assert.ok(/<h1[^>]*>HisFullGlory<\/h1>/.test(main), "the page's h1 is the name");
+  // The accounts marked onTop (YouTube, founder 2026-11-05) follow the app at the top.
+  const order = [...main.matchAll(/<a\b[^>]*class="link[ "][^>]*>/g)].map(([tag]) => tag.match(/href="([^"]*)"/)?.[1]);
+  const onTop = socialLinks.filter((account) => account.onTop).map((account) => account.href);
+  assert.ok(onTop.length > 0, "at least one account is on top");
+  assert.deepEqual(order.slice(0, 1 + onTop.length), [appUrl, ...onTop], "the app, then the accounts on top");
 });
 
 // The theme and Lamplight switch in the footer, and the saved choice applied before the page is

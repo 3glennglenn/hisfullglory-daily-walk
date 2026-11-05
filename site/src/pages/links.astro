@@ -1,14 +1,32 @@
 ---
 // /links: every HisFullGlory address on one short page, for the link in a social media bio
-// (founder, 2026-11-05). The app first, then the shop, this website and the Bible, then our
-// accounts and the study Bibles from the shop. The accounts come from `socialLinks` in
-// src/config.ts and the Bibles from src/data/resources.ts, so this page never keeps its own copy.
+// (founder, 2026-11-05). The app first, then the accounts marked `onTop` (YouTube), the shop,
+// this website and the Bible, then the other accounts and the study Bibles from the shop. The
+// accounts come from `socialLinks` in src/config.ts and the Bibles from src/data/resources.ts,
+// so this page never keeps its own copy.
 import { appUrl, shopUrl, site, socialLinks } from "../config";
 import { resources } from "../data/resources";
 import Base from "../layouts/Base.astro";
 
-type Icon = "app" | "shop" | "site" | "bible";
-const mainLinks: { title: string; text: string; href: string; icon: Icon; filled?: boolean }[] = [
+// Line icons, drawn on a 24 by 24 grid with the stroke set in the styles below.
+const icons = {
+  app: '<rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/>',
+  shop: '<path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/>',
+  site: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/>',
+  bible: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M12 6.5v6M9.5 8.8h5"/>',
+  Instagram: '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="dot" cx="17" cy="7" r=".6"/>',
+  YouTube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="dot" d="m10.2 9.3 4.6 2.7-4.6 2.7V9.3Z"/>',
+  X: '<path d="M5 4.5 19 19.5M19 4.5 5 19.5"/>',
+};
+
+type Entry = { title: string; text: string; href: string; icon: keyof typeof icons; filled?: boolean };
+const account = (item: (typeof socialLinks)[number]): Entry => ({
+  title: item.label,
+  text: item.handle,
+  href: item.href,
+  icon: item.label,
+});
+const mainLinks: Entry[] = [
   {
     title: "Daily Walk app",
     text: "A daily rhythm with God: Scripture, reflection and five-day plans.",
@@ -16,6 +34,7 @@ const mainLinks: { title: string; text: string; href: string; icon: Icon; filled
     icon: "app",
     filled: true,
   },
+  ...socialLinks.filter((item) => item.onTop).map(account),
   { title: "Shop", text: "Study Bibles and Christian essentials.", href: shopUrl, icon: "shop" },
   {
     title: "Website",
@@ -25,6 +44,7 @@ const mainLinks: { title: string; text: string; href: string; icon: Icon; filled
   },
   { title: "Read the Bible", text: "The World English Bible, book by book.", href: "/bible", icon: "bible" },
 ];
+const followLinks = socialLinks.filter((item) => !item.onTop).map(account);
 ---
 
 <Base
@@ -46,18 +66,7 @@ const mainLinks: { title: string; text: string; href: string; icon: Icon; filled
             <li>
               <a class:list={["link", { filled: link.filled }]} href={link.href}>
                 <span class="icon" aria-hidden="true">
-                  {link.icon === "app" && (
-                    <svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3" /><path d="M10.5 18.5h3" /></svg>
-                  )}
-                  {link.icon === "shop" && (
-                    <svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z" /><path d="M9 10V6.5a3 3 0 0 1 6 0V10" /></svg>
-                  )}
-                  {link.icon === "site" && (
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" /></svg>
-                  )}
-                  {link.icon === "bible" && (
-                    <svg viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z" /><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3" /><path d="M12 6.5v6M9.5 8.8h5" /></svg>
-                  )}
+                  <svg viewBox="0 0 24 24" set:html={icons[link.icon]} />
                 </span>
                 <span class="text">
                   <span class="title">
@@ -76,33 +85,29 @@ const mainLinks: { title: string; text: string; href: string; icon: Icon; filled
         The app opens in your browser. Versions for the App Store and Google Play are on the way.
       </p>
 
-      <h2 id="follow">Follow along</h2>
-      <ul class="links" aria-labelledby="follow">
-        {
-          socialLinks.map((account) => (
-            <li>
-              <a class="link" href={account.href}>
-                <span class="icon" aria-hidden="true">
-                  {account.label === "Instagram" && (
-                    <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" /><circle cx="12" cy="12" r="4" /><circle class="dot" cx="17" cy="7" r=".6" /></svg>
-                  )}
-                  {account.label === "YouTube" && (
-                    <svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4" /><path class="dot" d="m10.2 9.3 4.6 2.7-4.6 2.7V9.3Z" /></svg>
-                  )}
-                  {account.label === "X" && (
-                    <svg viewBox="0 0 24 24"><path d="M5 4.5 19 19.5M19 4.5 5 19.5" /></svg>
-                  )}
-                </span>
-                <span class="text">
-                  <span class="title">{account.label}</span>
-                  <span class="sub">{account.handle}</span>
-                </span>
-                <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      {
+        followLinks.length > 0 && (
+          <>
+            <h2 id="follow">Follow along</h2>
+            <ul class="links" aria-labelledby="follow">
+              {followLinks.map((link) => (
+                <li>
+                  <a class="link" href={link.href}>
+                    <span class="icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" set:html={icons[link.icon]} />
+                    </span>
+                    <span class="text">
+                      <span class="title">{link.title}</span>
+                      <span class="sub">{link.text}</span>
+                    </span>
+                    <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
 
       <h2 id="study-bibles">Study Bibles in the shop</h2>
       <ul class="products" aria-labelledby="study-bibles">
@@ -189,7 +194,8 @@ const mainLinks: { title: string; text: string; href: string; icon: Icon; filled
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-  .icon .dot {
+  /* The shapes inside come from set:html, so they carry no scope attribute. */
+  .icon :global(.dot) {
     fill: currentColor;
   }
   .text {

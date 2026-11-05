@@ -20,11 +20,13 @@ export const shopUrl = "https://shop.hisfullglory.com";
 
 // HisFullGlory's own accounts, listed on /links (founder, 2026-11-05). Each host is also in
 // outboundHosts (site/src/data/legal.ts), which tests/third-parties.test.ts enforces.
-export const socialLinks = [
+// `onTop` puts an account in the page's first list, right after the app: the founder wants
+// YouTube at the top ("zet de youtube ook bovenaan", 2026-11-05).
+export const socialLinks: { label: "Instagram" | "YouTube" | "X"; handle: string; href: string; onTop?: boolean }[] = [
+  { label: "YouTube", handle: "@hisfullglory", href: "https://www.youtube.com/@hisfullglory", onTop: true },
   { label: "Instagram", handle: "@hisfullglory", href: "https://www.instagram.com/hisfullglory" },
-  { label: "YouTube", handle: "@hisfullglory", href: "https://www.youtube.com/@hisfullglory" },
   { label: "X", handle: "@hisfullglory", href: "https://x.com/hisfullglory" },
-] as const;
+];
 
 export type NavItem = { label: string; href: string; ready: boolean };
 
