@@ -18,6 +18,16 @@ export const appUrl = "https://app.hisfullglory.com";
 // addresses on hisfullglory.com are sent here by the redirects in vercel.json.
 export const shopUrl = "https://shop.hisfullglory.com";
 
+// HisFullGlory's own accounts, listed on /links (founder, 2026-11-05). Each host is also in
+// outboundHosts (site/src/data/legal.ts), which tests/third-parties.test.ts enforces.
+// `onTop` puts an account in the page's first list, right after the app: the founder wants
+// YouTube at the top ("zet de youtube ook bovenaan", 2026-11-05).
+export const socialLinks: { label: "Instagram" | "YouTube" | "X"; handle: string; href: string; onTop?: boolean }[] = [
+  { label: "YouTube", handle: "@hisfullglory", href: "https://www.youtube.com/@hisfullglory", onTop: true },
+  { label: "Instagram", handle: "@hisfullglory", href: "https://www.instagram.com/hisfullglory" },
+  { label: "X", handle: "@hisfullglory", href: "https://x.com/hisfullglory" },
+];
+
 export type NavItem = { label: string; href: string; ready: boolean };
 
 // `ready` turns true in the build step that adds the page, so the header never links to a

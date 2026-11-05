@@ -18,6 +18,7 @@ const fixedPages = [
   "/resources",
   "/about",
   "/beta",
+  "/links",
   ...(approved ? gatedLegalPages : []),
 ];
 

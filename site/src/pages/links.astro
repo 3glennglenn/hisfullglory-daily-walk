@@ -1,0 +1,288 @@
+---
+// /links: every HisFullGlory address on one short page, for the link in a social media bio
+// (founder, 2026-11-05). The app first, then the accounts marked `onTop` (YouTube), the shop,
+// this website and the Bible, then the other accounts and the study Bibles from the shop. The
+// accounts come from `socialLinks` in src/config.ts and the Bibles from src/data/resources.ts,
+// so this page never keeps its own copy.
+import { appUrl, shopUrl, site, socialLinks } from "../config";
+import { resources } from "../data/resources";
+import Base from "../layouts/Base.astro";
+
+// Line icons, drawn on a 24 by 24 grid with the stroke set in the styles below.
+const icons = {
+  app: '<rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/>',
+  shop: '<path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/>',
+  site: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/>',
+  bible: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M12 6.5v6M9.5 8.8h5"/>',
+  Instagram: '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="dot" cx="17" cy="7" r=".6"/>',
+  YouTube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="dot" d="m10.2 9.3 4.6 2.7-4.6 2.7V9.3Z"/>',
+  X: '<path d="M5 4.5 19 19.5M19 4.5 5 19.5"/>',
+};
+
+type Entry = { title: string; text: string; href: string; icon: keyof typeof icons; filled?: boolean };
+const account = (item: (typeof socialLinks)[number]): Entry => ({
+  title: item.label,
+  text: item.handle,
+  href: item.href,
+  icon: item.label,
+});
+const mainLinks: Entry[] = [
+  {
+    title: "Daily Walk app",
+    text: "A daily rhythm with God: Scripture, reflection and five-day plans.",
+    href: appUrl,
+    icon: "app",
+    filled: true,
+  },
+  ...socialLinks.filter((item) => item.onTop).map(account),
+  { title: "Shop", text: "Study Bibles and Christian essentials.", href: shopUrl, icon: "shop" },
+  {
+    title: "Website",
+    text: "Read Scripture, understand its context and discuss it together.",
+    href: "/",
+    icon: "site",
+  },
+  { title: "Read the Bible", text: "The World English Bible, book by book.", href: "/bible", icon: "bible" },
+];
+const followLinks = socialLinks.filter((item) => !item.onTop).map(account);
+---
+
+<Base
+  title="Links"
+  description="The HisFullGlory app, shop, website and accounts in one place."
+>
+  <section class="section">
+    <div class="wrap links-page">
+      <header class="intro">
+        <img class="mark" src="/icon.svg" alt="" width="88" height="88" />
+        <h1>{site.name}</h1>
+        <p class="tagline">{site.tagline}</p>
+        <p class="positioning">{site.positioning}</p>
+      </header>
+
+      <ul class="links" aria-label="HisFullGlory">
+        {
+          mainLinks.map((link) => (
+            <li>
+              <a class:list={["link", { filled: link.filled }]} href={link.href}>
+                <span class="icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" set:html={icons[link.icon]} />
+                </span>
+                <span class="text">
+                  <span class="title">
+                    {link.title}
+                    {link.filled && <span class="badge">Beta</span>}
+                  </span>
+                  <span class="sub">{link.text}</span>
+                </span>
+                <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="note">
+        The app opens in your browser. Versions for the App Store and Google Play are on the way.
+      </p>
+
+      {
+        followLinks.length > 0 && (
+          <>
+            <h2 id="follow">Follow along</h2>
+            <ul class="links" aria-labelledby="follow">
+              {followLinks.map((link) => (
+                <li>
+                  <a class="link" href={link.href}>
+                    <span class="icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" set:html={icons[link.icon]} />
+                    </span>
+                    <span class="text">
+                      <span class="title">{link.title}</span>
+                      <span class="sub">{link.text}</span>
+                    </span>
+                    <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      <h2 id="study-bibles">Study Bibles in the shop</h2>
+      <ul class="products" aria-labelledby="study-bibles">
+        {
+          resources.map((resource) => (
+            <li>
+              <a class="product" href={`${shopUrl}/products/${resource.handle}`}>
+                <span>{resource.title}</span>
+                <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .links-page {
+    max-width: 30rem;
+  }
+  .intro {
+    text-align: center;
+    margin-bottom: var(--space-7);
+  }
+  .mark {
+    display: block;
+    width: 88px;
+    height: 88px;
+    margin: 0 auto var(--space-4);
+    border-radius: 22px;
+    box-shadow: 0 6px 18px var(--shadow);
+  }
+  .tagline {
+    margin: var(--space-2) 0 0;
+    font-weight: 600;
+    color: var(--link);
+  }
+  .positioning {
+    margin: var(--space-2) 0 0;
+    color: var(--muted);
+  }
+
+  .links,
+  .products {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 68px;
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+  }
+  .link:hover {
+    border-color: var(--muted);
+  }
+  .icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    color: var(--link);
+  }
+  .icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  /* The shapes inside come from set:html, so they carry no scope attribute. */
+  .icon :global(.dot) {
+    fill: currentColor;
+  }
+  .text {
+    flex: 1;
+    min-width: 0;
+  }
+  .title {
+    display: block;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .sub {
+    display: block;
+    margin-top: 2px;
+    font-size: var(--text-footnote);
+    line-height: 1.45;
+    color: var(--muted);
+  }
+  .badge {
+    display: inline-block;
+    margin-left: var(--space-2);
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-footnote);
+    font-weight: 600;
+    background: var(--surface-2);
+    color: var(--link);
+  }
+  .chev {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* The one filled link on the page: the app (UI-SPEC 5.2, one filled "Open the app" at most). */
+  .link.filled {
+    background: var(--button);
+    border-color: var(--button);
+    color: var(--on-button);
+  }
+  .link.filled:hover {
+    filter: brightness(0.96);
+  }
+  .link.filled .icon,
+  .link.filled .badge {
+    background: color-mix(in srgb, var(--on-button) 18%, transparent);
+    color: var(--on-button);
+  }
+  .link.filled .sub {
+    color: var(--on-button);
+    opacity: 0.86;
+  }
+  .link.filled .chev {
+    stroke: var(--on-button);
+  }
+
+  .note {
+    margin: var(--space-3) 0 0;
+    text-align: center;
+    font-size: var(--text-footnote);
+    color: var(--muted);
+  }
+  h2 {
+    margin: var(--space-8) 0 var(--space-3);
+    text-align: center;
+    font-size: var(--text-title);
+  }
+  .product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 52px;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .product:hover {
+    border-color: var(--muted);
+    background: var(--surface);
+  }
+</style>
