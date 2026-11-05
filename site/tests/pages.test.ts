@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
-import { mainNav, shopUrl } from "../src/config.ts";
+import { appUrl, mainNav, shopUrl, socialLinks } from "../src/config.ts";
 import { resources } from "../src/data/resources.ts";
 
 /** Where a site address lives in the build: "/" and "/bible" are both an index.html. */
@@ -22,7 +22,7 @@ function htmlFiles(dir: string): string[] {
 const pages = htmlFiles("dist");
 
 test("the pages outside the Bible exist", () => {
-  for (const address of ["/", "/about", "/beta", "/resources", "/styleguide"])
+  for (const address of ["/", "/about", "/beta", "/links", "/resources", "/styleguide"])
     assert.ok(existsSync(builtFile(address)), `${address} page`);
 });
 
@@ -62,7 +62,7 @@ test("navigation items marked ready have a page, and the rest are not links", ()
 
 test("site copy follows the copy rules it can be checked against", () => {
   // The Bible pages carry the WEB text, which is not ours to edit, so they are left out.
-  for (const address of ["/", "/about", "/beta", "/resources"]) {
+  for (const address of ["/", "/about", "/beta", "/links", "/resources"]) {
     const text = read(address).replace(/<style[\s\S]*?<\/style>/g, "").replace(/<[^>]+>/g, " ");
     assert.ok(!text.includes("—"), `${address}: no em dashes`);
     assert.ok(!/download (the|our) app/i.test(text), `${address}: the app is a web app`);
@@ -113,6 +113,21 @@ test("every resource shows its picture from the shop, with a description", () =>
     assert.ok(html.includes(resource.image.src), `${resource.title}: picture`);
     assert.ok(html.includes(`alt="${resource.image.alt}"`), `${resource.title}: description of the picture`);
   }
+});
+
+// The page for the link in a social media bio (founder, 2026-11-05): every address of
+// HisFullGlory, the app first and as the page's one filled link.
+test("the links page leads to the app, the shop, the website, the Bible, every account and every study Bible", () => {
+  const html = read("/links");
+  const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
+  for (const href of [appUrl, shopUrl, "/", "/bible", ...socialLinks.map((account) => account.href)])
+    assert.ok(main.includes(`href="${href}"`), `links to ${href}`);
+  for (const resource of resources)
+    assert.ok(main.includes(`href="${shopUrl}/products/${resource.handle}"`), `${resource.title} links to the shop`);
+  const filled = [...main.matchAll(/<a\b[^>]*class="link filled[^"]*"[^>]*>/g)].map(([tag]) => tag);
+  assert.equal(filled.length, 1, "one filled link");
+  assert.ok(filled[0].includes(`href="${appUrl}"`), "the filled link is the app");
+  assert.ok(/<h1[^>]*>HisFullGlory<\/h1>/.test(main), "the page's h1 is the name");
 });
 
 // The theme and Lamplight switch in the footer, and the saved choice applied before the page is

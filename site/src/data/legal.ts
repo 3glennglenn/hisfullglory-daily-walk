@@ -326,6 +326,9 @@ export const outboundHosts: OutboundHost[] = [
   { host: "www.facebook.com", purpose: "Share to X from the website.", kind: "link you click" },
   { host: "wa.me", purpose: "WhatsApp share link on the website.", kind: "link you click" },
   { host: "twitter.com", purpose: "Share to X from the website.", kind: "link you click" },
+  { host: "www.instagram.com", purpose: "Our Instagram account, on the website's links page.", kind: "link you click" },
+  { host: "www.youtube.com", purpose: "Our YouTube channel, on the website's links page.", kind: "link you click" },
+  { host: "x.com", purpose: "Our account on X, on the website's links page.", kind: "link you click" },
   { host: "www.sitemaps.org", purpose: "The XML namespace of the sitemap. It is a name, not an address anyone visits.", kind: "no request" },
 ];
 

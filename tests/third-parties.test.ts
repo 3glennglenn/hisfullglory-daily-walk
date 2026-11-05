@@ -177,12 +177,15 @@ test("today's outside addresses are all accounted for", () => {
       "www.happierlivesinstitute.org",
       "www.hollows.org",
       "www.ijm.org",
+      "www.instagram.com",
       "www.medicalteams.org",
       "www.shrimpwelfareproject.org",
       "www.sitemaps.org",
       "www.thelifeyoucansave.org",
       "www.wildanimalinitiative.org",
       "www.worldvision.org",
+      "www.youtube.com",
+      "x.com",
     ],
   );
 });

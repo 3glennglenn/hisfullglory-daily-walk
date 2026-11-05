@@ -18,6 +18,14 @@ export const appUrl = "https://app.hisfullglory.com";
 // addresses on hisfullglory.com are sent here by the redirects in vercel.json.
 export const shopUrl = "https://shop.hisfullglory.com";
 
+// HisFullGlory's own accounts, listed on /links (founder, 2026-11-05). Each host is also in
+// outboundHosts (site/src/data/legal.ts), which tests/third-parties.test.ts enforces.
+export const socialLinks = [
+  { label: "Instagram", handle: "@hisfullglory", href: "https://www.instagram.com/hisfullglory" },
+  { label: "YouTube", handle: "@hisfullglory", href: "https://www.youtube.com/@hisfullglory" },
+  { label: "X", handle: "@hisfullglory", href: "https://x.com/hisfullglory" },
+] as const;
+
 export type NavItem = { label: string; href: string; ready: boolean };
 
 // `ready` turns true in the build step that adds the page, so the header never links to a

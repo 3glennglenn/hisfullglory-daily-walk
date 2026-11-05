@@ -176,6 +176,10 @@ This file adds the current state and how to work with the founder. Last updated 
 - `bible-speaker-labels` (2026-10-14): shows those labels apart from the text, above or
   inside the verse, in the Reader and on the site, as the founder decided. Waits for his
   merge.
+- `links-page` (2026-11-05): `hisfullglory.com/links`, one page with the app, the shop, the
+  website, the Bible, the accounts (`socialLinks` in `site/src/config.ts`) and the study Bibles,
+  for the link in a social media bio. The YouTube and X handles are assumed to be
+  `@hisfullglory` until the founder confirms them. Waits for the founder's merge.
 - `context-check-routine` (2026-10-16): labelled AI-unreviewed context checks on the site,
   the `scripts/context-checks.mjs` command with its online source and quote checks, and the
   routine prompt. Waits for the founder's merge.
