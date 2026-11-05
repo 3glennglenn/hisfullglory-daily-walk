@@ -1,0 +1,135 @@
+{
+  "slug": "genesis-1-1",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-11-05",
+  "verse": {
+    "book": "genesis",
+    "chapter": 1,
+    "start": 1,
+    "end": 1
+  },
+  "hook": "You know the first verse of the Bible. But did you know three men read it aloud from orbit around the Moon on Christmas Eve, 1968?",
+  "story": "On Christmas Eve, 1968, three men were farther from home than any human beings had ever been. Frank Borman, Jim Lovell and Bill Anders were the first people to orbit another world, and NASA says millions around the world were watching and listening. It had been one of the most turbulent and tragic years in American history.\n\nThe crew had been told that they would have the largest audience that had ever listened to a human voice, and the only instruction from NASA was to do something appropriate. Lovell later recalled that they first wondered about changing the words of a Christmas poem, then thought about a carol, and neither sounded right. Lovell recalled that a NASA contact turned to a newspaper friend in Washington, who sat up late with nothing coming. Then his wife came down the stairs, asked what he was doing, and said, as Lovell tells it, to have them read the first ten verses of Genesis, because that tells everything.\n\nSo, from lunar orbit, the three men took turns reading from Genesis. Astronomy magazine counts it as the first ten verses. It begins with the sentence in front of you now, here in the World English Bible: “In the beginning, God created the heavens and the earth.” They closed with a wish for everyone on Earth.\n\nLovell added that the first ten verses of Genesis are the foundation of many of the world’s religions, not only the Christian one, which made them fitting for a worldwide audience. Borman said that they had been told theirs would be the largest audience that had ever listened to a human voice.\n\nThe same mission gave us the photograph called Earthrise, which Anders took. He has said that after all the training for exploring the Moon, the crew ended up discovering Earth.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "NASA, Apollo 8: Christmas at the Moon",
+      "url": "https://www.nasa.gov/missions/apollo/apollo-8-christmas-at-the-moon"
+    },
+    {
+      "title": "Astronomy magazine, Dec. 24, 1968: Apollo 8 broadcasts from the Moon",
+      "url": "https://www.astronomy.com/today-in-the-history-of-astronomy/dec-24-1968-apollo-8-broadcasts-from-the-moon/"
+    },
+    {
+      "title": "Augustine, Confessions, Book XI (New Advent)",
+      "url": "https://www.newadvent.org/fathers/110111.htm"
+    },
+    {
+      "title": "Basil of Caesarea, Hexaemeron, Homily 1 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/32011.htm"
+    },
+    {
+      "title": "Wikipedia: Enuma Elish",
+      "url": "https://en.wikipedia.org/wiki/Enuma_Elish"
+    }
+  ],
+  "voices": [
+    {
+      "id": "augustine-made",
+      "name": "Augustine of Hippo",
+      "about": "bishop in North Africa, in Book XI of his Confessions, a long meditation on the first words of Genesis",
+      "words": "Behold, the heaven and earth are; they proclaim that they were made, for they are changed and varied.",
+      "source": {
+        "title": "Augustine, Confessions, Book XI (New Advent)",
+        "url": "https://www.newadvent.org/fathers/110111.htm"
+      }
+    },
+    {
+      "id": "augustine-before",
+      "name": "Augustine of Hippo",
+      "about": "in the same book, answering the old question of what God was doing before creation",
+      "words": "That before God made heaven and earth, He made not anything.",
+      "source": {
+        "title": "Augustine, Confessions, Book XI (New Advent)",
+        "url": "https://www.newadvent.org/fathers/110111.htm"
+      }
+    },
+    {
+      "id": "basil",
+      "name": "Basil of Caesarea",
+      "about": "bishop in Cappadocia, in his first homily on the six days of creation",
+      "words": "Do not then imagine, O man! That the visible world is without a beginning",
+      "source": {
+        "title": "Basil of Caesarea, Hexaemeron, Homily 1 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/32011.htm"
+      }
+    }
+  ],
+  "moment": "Read it slowly, and it is a very strange sentence to find at the start of a book. It does not argue that God exists. It does not describe where God came from. It simply begins with God already acting: he creates, and the heavens and the earth are the result.\n\nThe next verses fill in the picture. The earth is “formless and empty”, with darkness on the surface of the deep and God’s Spirit hovering over the waters. Then God speaks: “Let there be light,” and there was light. By the sixth day, “God saw everything that he had made, and, behold, it was very good.”\n\nOne way readers have seen the weight of this: the oldest complete Babylonian creation story we have, the Enuma Elish, is named for its opening words, which mean When on High, and it tells of a battle between gods and of people made for the service of the gods. Genesis tells of one God who speaks the world into being, calls it good, and says of the first man and woman that he made them “in his own image”. Setting the two side by side is a modern reader’s comparison, not something the Bible itself says, so treat it as a reading and not as the text.",
+  "around": "The verse is the doorway to everything that follows. The first chapter of the Bible gives the pattern of evening and morning for six days. Centuries later, John would start his Gospel with the same two words in the same place: “In the beginning was the Word”, and say that through him “All things were made”. The Letter to the Hebrews adds that “the universe has been framed by the word of God”. The first verse is quoted, echoed and built on throughout Scripture.",
+  "after": "In the Bible itself, the first verse keeps being answered. The psalmists sing that the heavens declare God’s glory and that they were made by his word. John opens his Gospel by returning to the beginning, and Hebrews says that faith is how we understand that the universe was framed by the word of God.\n\nThe church kept coming back to it too. Basil of Caesarea gave a series of homilies on the six days of creation, and he began by walking through the different senses of the word beginning. Augustine of Hippo gave a whole book of his Confessions to the question of what it means that God made heaven and earth in the beginning, and what time itself is.\n\nOn the Apollo 8 mission, the story went on. On Christmas morning, mission control waited anxiously to hear whether the engine burn that would take the crew out of lunar orbit had worked. When it did, Lovell radioed back that there was, after all, a Santa Claus.",
+  "readings": "A first question is what beginning means. Basil of Caesarea went through the different senses of the word and concluded that you can find all of them here: the first moment of time, the foundation, and the purpose behind the order of the visible world. He wanted his hearers to see that the world was not made by chance and without reason.\n\nA second question is how far to press the details. Basil himself thought that digging into the essence of every created thing would take too many words and would not build up the church, and he preferred to say with Moses that God created the heavens and the earth.\n\nA third is how this text sits beside the creation stories of the ancient world. Since the Babylonian tablets were recovered in 1849, scholars have noticed similarities with biblical accounts of creation, while others stress the differences. The verse itself invites wonder first, and the comparison is left to the reader.",
+  "argued": "Two of the great teachers of the early church loved this verse and read it with different questions in mind.\n\nBasil, preaching on the six days, argued against the idea that the visible world has no beginning: [[basil]]\n\nAugustine, writing his Confessions, heard the heavens and the earth themselves testifying: [[augustine-made]] He also took up the old challenge, what was God doing before he made heaven and earth, and refused to joke about it. His answer was that creation includes time: [[augustine-before]]\n\nBoth men agree on the main point: the world is not self-made and not eternal, and the first verse of the Bible is where that is said.",
+  "point": "Genesis 1:1 is not mainly an argument. It is an opening line that puts God first, and everything that follows in the Bible is read in its light. The three men who read it from the Moon on Christmas Eve chose the Bible’s opening words to speak to the whole world.",
+  "lesson": "If you have ever felt like an accident, or like the world is just a pile of events with nothing behind it, this verse offers another way to start. It does not begin with you, or with your problems, or even with humanity. It begins with God, who makes things on purpose and calls them good.\n\nThat does not answer every question you have, and it does not ask you to pretend that it does. Basil and Augustine, two great teachers of the early church, both kept asking questions. What this verse invites you to do is smaller and bigger than winning an argument. It invites you to look up.\n\nTonight you could step outside and look at the sky, and then read Genesis 1 slowly, as if for the first time. If you do not share this faith, you can still notice something true about people: when three astronauts needed words for an audience of the whole world, these are the words they read.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 19,
+        "start": 1,
+        "end": 1
+      },
+      "note": "The psalmist answers Genesis with praise: “The heavens declare the glory of God.” The sky is not only there, it speaks."
+    },
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 33,
+        "start": 6,
+        "end": 6
+      },
+      "note": "This psalm sings of how it happened: “By the LORD’s word, the heavens were made”. It matches Genesis 1, where God speaks and the world appears."
+    },
+    {
+      "ref": {
+        "book": "john",
+        "chapter": 1,
+        "start": 1,
+        "end": 3
+      },
+      "note": "John deliberately opens his Gospel in the same words: “In the beginning was the Word”. He says that through the Word “All things were made”."
+    },
+    {
+      "ref": {
+        "book": "hebrews",
+        "chapter": 11,
+        "start": 3,
+        "end": 3
+      },
+      "note": "The letter says it is by faith that we understand that “the universe has been framed by the word of God”, the same truth the first verse of the Bible opens with."
+    }
+  ],
+  "basis": [
+    {
+      "book": "genesis",
+      "chapter": 1,
+      "start": 2,
+      "end": 10
+    },
+    {
+      "book": "genesis",
+      "chapter": 1,
+      "start": 26,
+      "end": 27
+    },
+    {
+      "book": "genesis",
+      "chapter": 1,
+      "start": 31,
+      "end": 31
+    }
+  ]
+}
