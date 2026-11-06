@@ -526,6 +526,258 @@
           "text": "Job 28 is a poem about wisdom that reads almost like a pause in the argument. It is not clear who is speaking: the text places it inside Job’s speech, but many readers hear the voice of the narrator or hear a calmer Job. Its answer is that wisdom cannot be dug up by human skill, however clever, and that it belongs to God. The last verse joins the book to the wider wisdom tradition, as in Proverbs 1 and Psalm 111. It sets up God’s own speeches near the end of the book."
         }
       ]
+    },
+    {
+      "id": "ai:job/29",
+      "chapter": 29,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job looks back, and it hurts to look. He remembers months when God watched over him, when a lamp shone on his head and he walked through darkness by its light. His children were around him. When he went out to the city gate, the young men saw him and stepped aside, and the old rose to their feet. Princes put a hand over their mouths while he spoke.\n\nHe does not only remember being honored. He remembers what he did with that honor. He rescued the poor who cried out and the fatherless with no one to help. He was eyes to the blind and feet to the lame. The widow’s heart sang because of him.\n\nIn those days he made himself a promise: he would die in his own house, surrounded by what he had built. The chapter ends on a king among his troops and a comforter of those who mourn."
+        },
+        {
+          "kind": "background",
+          "text": "Job has been answering his friends in long speeches, and here he speaks alone, remembering. This chapter opens his last long speech, which runs through chapter 31. Remembered honor sets up the sharp turn in chapter 30. The reader knows from chapters 1 and 2 what has happened to him since. The chapter also shows how the book measures a good life: by justice for the poor, the widow and the fatherless, a concern found across the Law and the Prophets."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/30",
+      "chapter": 30,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The chapter begins with one word that undoes the last: but now. The man who was honored at the city gate is mocked, and by people younger than he is, whose fathers he once would not have set with his sheep dogs. Job describes them as people pushed to the edge of society, hungry, living in holes in the ground. Now they sing about him. They spit in his face.\n\nThen his words turn from people to God. Terrors chase him. Pain gnaws at him in the night. He says, “I cry to you, and you do not answer me.” He feels lifted up and driven like something on the wind. He had wept for others in trouble, he says, and when he looked for good, evil came.\n\nThe chapter closes with music gone silent: his harp has turned to mourning."
+        },
+        {
+          "kind": "background",
+          "text": "This is the second part of Job’s final speech. It is built as a mirror of chapter 29: honor there, contempt here. The language is that of lament, close to the complaints found in the Psalms. Job speaks to God directly, and does not hide the anger. The book lets him say this at length, and the friends and the reader are left to weigh it. God’s own reply comes much later, in chapter 38."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/31",
+      "chapter": 31,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job now lays out his case like a man opening his accounts. Again and again he says, if I have done this, then let the consequence fall on me. He says he made a covenant with his eyes. He names falsehood, adultery, and contempt for the claims of his servants, and he gives a reason for fair treatment: the one who made him in the womb also made them.\n\nHe has not kept food for himself while the fatherless went hungry. He has not turned away anyone without clothing. He has not trusted gold, or rejoiced at an enemy’s fall, and his doors have been open to the traveler.\n\nThen comes the cry that carries the whole speech: “Let the Almighty answer me!” He is ready to sign his name to every claim. The chapter ends with the plain words: the words of Job are ended."
+        },
+        {
+          "kind": "background",
+          "text": "This is the end of Job’s defense and of his dialogue with the three friends. The oaths are in the form of self-curses, a way of swearing innocence that was known in the ancient world. Job does not claim to be sinless in general. He denies the particular sins his friends have accused him of, and he asks to bring his case before God. Many readers also notice how high his standard of conduct is, including toward servants."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/32",
+      "chapter": 32,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "A new voice enters, and the chapter wants us to know exactly who he is. The three friends fall silent because Job is righteous in his own eyes. Then Elihu, son of Barachel the Buzite, burns with anger. He is angry at Job for justifying himself rather than God. He is angry at the three friends too, who found no answer and yet condemned Job.\n\nHe has been waiting politely because he is the youngest. Now he stops waiting. Years do not make people wise, he says, but the Spirit of the Almighty gives understanding.\n\nHe describes himself as new wine with no vent, a wineskin about to burst. He must speak, and he promises no flattery to anyone. The chapter is only his opening, but it sets the scene for four chapters of speech."
+        },
+        {
+          "kind": "background",
+          "text": "Elihu appears nowhere in the opening chapters of Job, and he is not mentioned again in the later parts of the book, including God’s reply and the ending. Scholars differ about whether his speeches belong to the original book or were added, and about how to judge him: some read him as a wise correction, others as another voice that misses the point. The text itself sets him up as a younger man who offers a new argument."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/33",
+      "chapter": 33,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Elihu speaks to Job by name, and he says he is no different. He too is formed out of clay, so Job need not fear him. Then he repeats what he heard Job say: I am clean, I am innocent, God counts me his enemy.\n\nHis answer is that God is greater than man, and that God does speak, once and twice, even when no one listens. God speaks in dreams and visions of the night. God also speaks through pain: a sick bed, a body wasting away, a soul near the pit.\n\nIf an angel, an interpreter, one among a thousand, stands beside such a person, God is gracious. A ransom is found. The sick one’s flesh becomes fresh again and he prays and is accepted. Elihu closes with an invitation: if Job has anything to say, speak; for “I desire to justify you.”"
+        },
+        {
+          "kind": "background",
+          "text": "Elihu’s first speech answers Job’s complaint that God does not reply. His claim is that God replies in several ways and that suffering itself can be a warning meant to turn a person back from the pit. Like the friends before him, he links suffering with correction. Yet the book as a whole, as chapters 1 and 2 show, gives a reason for Job’s suffering that none of the speakers know."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/34",
+      "chapter": 34,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Elihu now turns from Job to a wider audience. He calls to the wise men and asks them to test his words as the palate tastes food. Then he quotes what he says Job has said: I am righteous, God has taken away my right.\n\nElihu answers sharply. Job, he says, drinks scorn like water and seems to walk with the wicked. At the center of the chapter is a plain conviction: God will not do wickedly, and the Almighty will not pervert justice. Who put God in charge of the earth? If he drew back his breath, all flesh would perish together.\n\nGod sees every step, and no gloom hides anyone from him. He sets down the mighty and cares for the cry of the poor. Elihu ends by hoping that Job will be tried to the end, because, he says, Job adds rebellion to his sin."
+        },
+        {
+          "kind": "background",
+          "text": "This is Elihu’s second speech and the most openly harsh toward Job. He defends God’s justice, which is also the aim of the three friends, but he argues from God’s greatness over the whole world and its rulers. Christians and Jews have long read Job with this tension in view: the speakers defend God, and the book itself, at the end of chapter 42, says that God was displeased with the friends and not with Job."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/35",
+      "chapter": 35,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Elihu asks Job a question about the sky. Elihu points upward: “Look to the skies, and see.” Then he asks what Job’s sin or Job’s goodness can do to One so far above. If you sin, what do you do to him? If you are righteous, what do you give him?\n\nHis point is that human good and harm land on other human beings: your wickedness may hurt a man like you, and your righteousness may help a son of man.\n\nThen he takes up the cry of the oppressed. People cry out under the arm of the mighty, he says, but no one asks where God their Maker is, who gives songs in the night. Their cry is empty because it is proud.\n\nHe closes with a sharp verdict: Job opens his mouth with empty talk and multiplies words without knowledge."
+        },
+        {
+          "kind": "background",
+          "text": "This is Elihu’s third speech and the shortest. It answers a saying he attributes to Job, that there is no profit in innocence. The argument here is that God is not made richer or poorer by people’s conduct, so the weight of right and wrong falls on neighbors. Readers have often asked whether Elihu hears Job’s real grief. The text lets his words stand, and God’s reply comes in chapter 38."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/36",
+      "chapter": 36,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Elihu asks for a little more patience; he still has something to say on God’s behalf. He begins with God’s character. God is mighty and despises no one. He does not keep the wicked alive but gives justice to the afflicted. When people are bound in fetters, he shows them their pride and opens their ears to instruction. If they listen, they prosper. If they do not, they die without knowledge.\n\nThen the speech lifts toward wonder. God is exalted in his power, and who is a teacher like him? “God is great, and we don’t know him.” Elihu turns to what anyone can see: drops of water drawn up and poured out as rain, the spreading of clouds, thunder in God’s pavilion, lightning in his hands.\n\nThe chapter ends in the sound of the storm."
+        },
+        {
+          "kind": "background",
+          "text": "This is the fourth and longest of Elihu’s speeches. It runs from the claim that suffering can teach to a hymn to God’s greatness in the weather. The turn toward storm and rain prepares the way for what follows. In chapter 38 God answers Job out of a whirlwind, and many readers hear Elihu’s closing images as a distant echo of that voice."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/37",
+      "chapter": 37,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The storm Elihu has been describing is now close, and his heart trembles. Hear, oh hear, the noise of God’s voice, he says: thunder under the whole sky, lightning to the ends of the earth. God says to the snow, fall on the earth. The animals take cover. Ice forms by the breath of God. Clouds turn at his guidance to do whatever he commands, whether for correction, for his land, or for loving kindness.\n\nThen he speaks to Job. Stand still, he says, and consider the wondrous works of God. Do you know how he controls the clouds? Can you spread out the sky?\n\nElihu’s last words are about distance. “We can’t reach the Almighty.” He is exalted in power, and in justice and great righteousness he will not oppress. So people revere him."
+        },
+        {
+          "kind": "background",
+          "text": "This ends Elihu’s speeches and the human voices in the book’s long debate. His closing thoughts are about awe: God cannot be reached or fully understood, yet is just. The next words in the book come from God. Several readers note that Job has asked for an answer from God more than once, and that the answer, in chapter 38, begins with a storm."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/38",
+      "chapter": 38,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "After chapters of human voices, the LORD answers Job out of the whirlwind. His first words are a challenge: “Who is this who darkens counsel by words without knowledge?” Brace yourself, he says, for I will question you.\n\nThe questions then pour out, one picture after another. Where were you when I laid the foundations of the earth, when the morning stars sang together and all the sons of God shouted for joy? Who shut up the sea with doors? Have you commanded the morning? Have you walked in the recesses of the deep? Where do light and darkness live?\n\nHe asks about snow, hail, lightning, rain falling on a land where no one lives, ice and frost. He asks about the Pleiades and Orion. He ends with the lioness and the raven, and who provides for them.\n\nNone of the questions answers Job’s case. They show the size of the world he stands in."
+        },
+        {
+          "kind": "background",
+          "text": "This is the turning point of the book. God speaks directly after Job’s many appeals, and the speech has been read in different ways. Some read it as a rebuke of Job’s presumption, others as an invitation to see how much lies beyond human view, and others as a sign that God cares for creation, including places no person enters. The chapter does not explain Job’s suffering, and it does not accuse him of the sins his friends named."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/39",
+      "chapter": 39,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The questions go on, and now the animals take the stage. Do you know when the mountain goats give birth? Can you count the months until the doe bears her fawns? They bear their young, the young grow strong, and they go out and do not return.\n\nWho set the wild donkey free and made the wilderness its home? Will the wild ox serve you and stay by your feeding trough? The ostrich waves her wings proudly and seems careless with her eggs, but also scorns the horse and its rider.\n\nThe horse is the most vivid of all: its neck clothed with a quivering mane, leaping like a locust, laughing at fear, snorting “Aha!” at the trumpet and smelling battle from afar. The chapter ends with the hawk and the eagle, who nests on the cliff and sees prey from far away."
+        },
+        {
+          "kind": "background",
+          "text": "This is the second part of God’s first speech. The animals named are wild, free and beyond human control, and many interpreters read them as a picture of creation that God cares for apart from any human use. Some of the details, such as the ostrich lacking wisdom, are part of the poem’s ancient way of describing animals. The speech does not try to settle Job’s case directly, and it leaves the reader to ask what it does mean."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/40",
+      "chapter": 40,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The LORD pauses and puts a question that holds everything: “Shall he who argues contend with the Almighty?” Job’s answer is short. He is of small account, he says, and he lays his hand on his mouth. He has spoken once, even twice, and will go no further.\n\nBut the LORD speaks again out of the whirlwind. Will you annul my judgment? Will you condemn me so that you may be justified? He invites Job to take the role of judge for a moment: let him bring the proud low and crush the wicked, and then God will admit that Job’s own right hand can save him.\n\nThen he points at a creature: behold behemoth, which I made as well as you. It eats grass like an ox, yet its bones are like bronze, and when the river swells it does not tremble."
+        },
+        {
+          "kind": "background",
+          "text": "The LORD’s second speech begins here. The identity of the behemoth is debated: many readers have thought of the hippopotamus, others of a larger, mythic creature. The text itself does not say. What it does make clear is that this being is made by God, as Job is. Job’s short reply shows that the long speech has had an effect, but the chapter ends without resolving it."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/41",
+      "chapter": 41,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "The second speech turns to a still greater creature. Can you draw out Leviathan with a fish hook? Can you put a rope in his nose or pierce his jaw with a hook? Will he make a covenant with you? Will you play with him as with a bird?\n\nThe poem describes the creature piece by piece: scales shut together so no air comes between them, eyes like the eyelids of the morning, fire and smoke from the mouth, a heart as firm as a stone. Swords and spears, arrows and sling stones are nothing to him. The deep boils like a pot where he moves.\n\nThe point is stated midway: if no one dares to stir him up, who can stand before God? The LORD says, “Everything under the heavens is mine.” The chapter ends with Leviathan as king over all the sons of pride."
+        },
+        {
+          "kind": "background",
+          "text": "Leviathan appears elsewhere in the Bible as a symbol of the forces of chaos, and many scholars read the description here as partly drawn from that picture and partly from real animals such as the crocodile. The text does not say which. The effect is that of a creature no person can tame, set beside the claim that God can. Christians and Jews have read this as an image of God’s rule over what frightens us."
+        }
+      ]
+    },
+    {
+      "id": "ai:job/42",
+      "chapter": 42,
+      "model": "Claude Sonnet 5.5",
+      "written": "2026-11-06",
+      "review": "ai draft",
+      "voice": "story",
+      "sections": [
+        {
+          "kind": "summary",
+          "text": "Job answers the LORD at last, and his words are quiet. I know that you can do all things. I spoke of what I did not understand, things too wonderful for me. Then comes the line that many readers hold on to: “I had heard of you by the hearing of the ear, but now my eye sees you.” He repents in dust and ashes.\n\nThen the LORD turns to Eliphaz. His wrath is kindled against the three friends, for they have not spoken of him the thing that is right, as his servant Job has. They must bring seven bulls and seven rams, and Job will pray for them.\n\nThey do it, and the LORD accepts Job and restores him. His family and acquaintances come and eat with him and comfort him. He receives twice as much as before, seven sons and three daughters, named, and an inheritance for the daughters. Job lives a hundred forty years and dies old and full of days."
+        },
+        {
+          "kind": "background",
+          "text": "The book that began with a test of Job’s faith ends here. Readers differ on how to take the ending. Some see in it a restoration that shows God’s faithfulness, others feel that no new family can replace the lost one, and some note the surprise that the daughters are named and given an inheritance. God’s verdict that Job spoke rightly stands out, given how much Job complained. Many Christians also link Job’s prayer for his friends to the theme of mercy toward those who wronged us."
+        }
+      ]
     }
   ]
 }
