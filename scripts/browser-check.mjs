@@ -24,6 +24,7 @@ import {checkGoogle} from "../tests/google.browser.mjs";
 import {checkPushedScreens,checkSurfaces,checkTextSweep} from "../tests/remaining.browser.mjs";
 import {checkGive} from "../tests/give.browser.mjs";
 import {checkShop} from "../tests/shop.browser.mjs";
+import {checkNavigation} from "../tests/navigation.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 // Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
 const contentDir = "site/content/context-checks";
@@ -67,8 +68,16 @@ page.on("console",message=>{if(message.type()==="error")consoleErrors.push(messa
 page.on("requestfailed",request=>networkFailures.push(new URL(request.url()).pathname));
 page.on("pageerror", (e) => errors.push(e.message));
 let checks = 0;
+let skipped = 0;
+// CHECK_ONLY="<regular expression>" runs only the checks whose label matches (case-insensitive) and counts the others as
+// skipped: a focused run while working on one screen. The full run (no variable) is the one that counts.
+const only = process.env.CHECK_ONLY ? new RegExp(process.env.CHECK_ONLY, "i") : null;
 page.setDefaultTimeout(10000);
 async function check(label, fn) {
+  if (only && !only.test(label)) {
+    skipped++;
+    return;
+  }
   await fn();
   checks++;
   console.log("PASS", label);
@@ -1022,106 +1031,7 @@ try {
       });
     },
   );
-  await check(
-    "five tabs are links with aria-current; no brand header or settings heart; /more lands on /you; You shows its sections",
-    async () => {
-      await page.setViewportSize({ width: 390, height: 844 });
-      await go("/");
-      const nav = page.getByRole("navigation", { name: "Main navigation" });
-      assert.equal(await nav.count(), 1, "one main navigation");
-      assert.deepEqual(await nav.getByRole("link").allInnerTexts(), ["Today", "Bible", "Pray", "Community", "You"]);
-      assert.equal(await nav.getByRole("button").count(), 0, "tabs are links, not buttons");
-      const hrefs = await nav.getByRole("link").evaluateAll((list) => list.map((a) => a.getAttribute("href")));
-      assert.deepEqual(hrefs, ["/", "/bible", "/pray", "/community", "/you"]);
-      assert.equal(await page.locator("header.brand, .brand-name").count(), 0, "no wordmark-and-slogan header");
-      assert.equal(await page.getByRole("button", { name: "Open settings" }).count(), 0, "no heart button that opens settings");
-      assert.equal(await page.getByText("JESUS AT THE CENTER").count(), 0, "no slogan row");
-      // The selected tab is the only one marked, for the route and for the screens pushed from it.
-      const selected = async () => nav.locator('a[aria-current="page"]').allInnerTexts();
-      for (const [path, tab] of [
-        ["/", "Today"],
-        ["/bible/psalms/23", "Bible"],
-        ["/pray", "Pray"],
-        ["/community", "Community"],
-        ["/community/circles", "Community"],
-        ["/you", "You"],
-        ["/profile", "You"],
-        ["/settings", "You"],
-        ["/settings/reminders", "You"],
-        ["/my-walk", "You"],
-        ["/journal", "You"],
-        ["/grow", "You"],
-        ["/give", "You"],
-        ["/shop", "You"],
-      ]) {
-        await go(path);
-        assert.deepEqual(await selected(), [tab], path);
-      }
-      // A tap on a tab navigates without a page load, and the selection follows.
-      await go("/");
-      await nav.getByRole("link", { name: "Bible", exact: true }).click();
-      await page.waitForURL("**/bible");
-      assert.deepEqual(await selected(), ["Bible"]);
-      await nav.getByRole("link", { name: "You", exact: true }).click();
-      await page.waitForURL("**/you");
-      assert.deepEqual(await selected(), ["You"]);
-      // An old /more link is replaced by /you in place, so Back does not return to it.
-      await page.goto(base + "/");
-      await page.goto(base + "/more");
-      await page.locator("main h1").first().waitFor();
-      assert.equal(new URL(page.url()).pathname, "/you");
-      assert.equal(await page.locator("main h1").innerText(), "You");
-      await page.goBack();
-      assert.equal(new URL(page.url()).pathname, "/", "Back from /you returns to where the old link was opened, not to /more");
-      // The sub-path allowlist: anything else is not found.
-      await go("/settings/other");
-      assert.equal(await page.locator("main h1").innerText(), "Page not found");
-      // You: the sections of UI-SPEC A12, in order, and one way to each screen.
-      await go("/you");
-      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Give where it helps most", "Study Bibles for your walk", "Your walk", "Settings", "About"]);
-      assert.match(await page.locator("main").innerText(), /Sign in\s+Join the community and keep your account safe\./);
-      assert.match(await page.locator("main").innerText(), /Days walked\s+\d+/);
-      assert.match(await page.locator("main").innerText(), /Daily reminder\s+Off/);
-      assert.match(await page.locator("main").innerText(), /Scripture: World English Bible, public domain\./);
-      for (const [name, path] of [
-        ["Sign in", "/profile"],
-        ["My Walk", "/my-walk"],
-        ["Journal", "/journal"],
-        ["Grow", "/grow"],
-        ["Daily rhythm", "/settings"],
-        ["Daily reminder", "/settings/reminders"],
-        ["Privacy and your data", "/settings#privacy"],
-        ["See where to give", "/give"],
-        ["Visit the shop", "/shop"],
-      ]) {
-        const row = page.getByRole("link", { name: new RegExp("^" + name) }).first();
-        assert.equal(await row.getAttribute("href"), path, name);
-        const box = await row.boundingBox();
-        assert.ok(box && box.height >= 52, name + " row is at least 52px tall");
-      }
-      assert.equal(await page.getByRole("link", { name: /^Privacy policy/ }).count(), 1, "the PR 27 legal links sit under About");
-      // Account and Settings are named for what they are, with the sections of UI-SPEC A12.
-      await go("/profile");
-      assert.equal(await page.locator("main h1").innerText(), "Account");
-      assert.ok((await page.locator("main h2").allInnerTexts()).includes("Account and privacy"));
-      assert.equal(await page.getByText("daily walks completed").count(), 0, "the stats card left Account");
-      await go("/settings");
-      assert.equal(await page.locator("main h1").innerText(), "Settings");
-      const settingsSections = await page.locator("main h2").allInnerTexts();
-      for (const name of ["Daily rhythm", "Privacy and your data", "About and legal"]) assert.ok(settingsSections.includes(name), name);
-      assert.equal(await page.getByText("Your rhythm, your settings.").count(), 0);
-      assert.equal(await page.getByText(/Browser storage\s+is unencrypted/).count(), 0, "the long privacy paragraph is gone");
-      assert.equal(await page.getByText("Your journal, prayers and reading progress stay on this device.").count(), 1);
-      // /settings/reminders opens the Reminders screen under a way back to You.
-      await go("/settings/reminders");
-      assert.equal(await page.locator("main h1").innerText(), "Daily reminder");
-      // Privacy and your data is reached from You and scrolls into view.
-      await go("/you");
-      await page.getByRole("link", { name: /^Privacy and your data/ }).click();
-      await page.waitForURL("**/settings#privacy");
-      await page.locator("#privacy").waitFor();
-    },
-  );
+  await check("three tabs, the You button and You as a sheet or a page; old addresses still work (01.2 D-01 to D-03)", () => checkNavigation(browser, base, published));
   await check(
     "primary routes fit 375/390/768/1280px in both themes with accessible controls",
     async () => {
@@ -1806,7 +1716,7 @@ try {
   assert.deepEqual(consoleWarnings, [], "no unexpected main-page console warnings");
   assert.deepEqual(networkFailures, [], "no unexpected main-page network failures");
   console.log(
-    `${checks} browser flow checks passed; no page/console errors/warnings or unexpected main-page network failures; no screenshots captured.`,
+    `${checks} browser flow checks passed${skipped ? ` (${skipped} skipped by CHECK_ONLY)` : ""}; no page/console errors/warnings or unexpected main-page network failures; no screenshots captured.`,
   );
 } finally {
   await browser.close();

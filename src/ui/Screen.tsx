@@ -1,10 +1,46 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
+import { CircleUser } from "lucide-react";
 import { navigate } from "../platform/router";
 
 // The screen's one h1 in the Large Title style (UI-SPEC 6.2). The shell pads the top safe area once,
 // so the first title area of every screen starts below the notch (UI-SPEC 7.5).
 export function LargeTitle({ children }: { children: ReactNode }) {
   return <h1 className="large-title">{children}</h1>;
+}
+
+// The round You button (01.2 N-02): 44 x 44, at the trailing end of the title row of each tab's root screen, never on a
+// pushed screen or in a full-screen flow. It is a link to /you, like the tab links: a plain left click goes through the
+// router (without scrolling the page behind the sheet), modifier and middle clicks are left to the browser.
+export function YouButton() {
+  return (
+    <a
+      className="you-button"
+      href="/you"
+      aria-label="You"
+      draggable={false}
+      onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        navigate("/you", { keepScroll: true });
+      }}
+    >
+      <CircleUser aria-hidden="true" focusable="false" size={22} strokeWidth={1.75} />
+    </a>
+  );
+}
+
+// The title row of a tab's root screen (01.2 N-02): the Large Title, then the screen's own actions (a search button)
+// and the You button, aligned with the title's first line.
+export function TitleRow({ title, className, actions }: { title: ReactNode; className?: string; actions?: ReactNode }) {
+  return (
+    <div className={className ? `title-row ${className}` : "title-row"}>
+      <LargeTitle>{title}</LargeTitle>
+      <div className="title-actions">
+        {actions}
+        <YouButton />
+      </div>
+    </div>
+  );
 }
 
 // A sticky toolbar of 52px (UI-SPEC 7.1, 8.2): Back shows "‹ {parent}" and is named "Back to {parent}",

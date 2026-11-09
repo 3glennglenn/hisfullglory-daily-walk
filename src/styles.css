@@ -1299,13 +1299,13 @@ button.danger {
 }
 
 /* ==== TabBar (UI-SPEC 7.3, 7.6, 8.1; src/ui/TabBar.tsx) ====
-   A floating capsule 12px off the edges on a phone, a 280px sidebar from 768px. Labels never wrap or
+   A floating capsule 40px off the edges on a phone (three tabs, 01.2 N-01), a 280px sidebar from 768px. Labels never wrap or
    truncate; they grow with the text size only up to 16px, icons are in em of the label (24px at 13px). */
 .tabbar {
   position: fixed;
   z-index: var(--z-bar);
-  left: max(12px, env(safe-area-inset-left));
-  right: max(12px, env(safe-area-inset-right));
+  left: max(40px, env(safe-area-inset-left));
+  right: max(40px, env(safe-area-inset-right));
   bottom: max(12px, env(safe-area-inset-bottom));
   max-width: 456px;
   margin-inline: auto;
@@ -1369,6 +1369,10 @@ button.danger {
 .tab-label {
   white-space: nowrap;
 }
+/* You is a sidebar item only (01.2 N-01): on a phone it is the round button in the title row. */
+.tabbar li.tab-sidebar-only {
+  display: none;
+}
 .tab[aria-current="page"] {
   color: var(--link);
 }
@@ -1418,6 +1422,9 @@ button.danger {
   }
   .tabbar li {
     min-width: 0;
+  }
+  .tabbar li.tab-sidebar-only {
+    display: flex;
   }
   .tab {
     flex-direction: row;
@@ -1489,6 +1496,70 @@ html[data-text="large"] main {
   line-height: 1.2;
   letter-spacing: normal;
   overflow-wrap: anywhere;
+}
+
+/* ==== TitleRow and You button (01.2 N-02; src/ui/Screen.tsx) ====
+   The title row of a tab's root screen: the Large Title takes the free width, the actions (a search button, on Today the
+   shop bag until plan 06) and the round You button stand at its trailing end, centred on the title's first line. In
+   large-text mode the actions may wrap below the title; nothing is clipped. */
+.title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-3);
+  margin: var(--space-2) 0 var(--space-4);
+}
+.title-row .large-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+}
+.title-actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: calc(1.2 * var(--text-large-title));
+  margin-inline-start: auto;
+}
+.you-button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--link);
+  text-decoration: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.you-button:hover {
+  background: var(--surface);
+}
+/* The You sheet and page (D-02): the sheet's body spaces the groups like a screen; the footnote is Footnote 13 --muted. */
+.you-sheet-body > .group:first-child {
+  margin-top: var(--space-2);
+}
+/* A row with a value keeps its title whole and gives the rest to the value, which wraps (today's Appearance reads
+   "Cover and story, Automatic"); the title never breaks inside a word. */
+.you-sheet .list-row-text:has(+ .list-row-value),
+.you-page .list-row-text:has(+ .list-row-value) {
+  flex: 0 0 auto;
+}
+.you-sheet .list-row-text + .list-row-value,
+.you-page .list-row-text + .list-row-value {
+  flex: 1 1 0;
+}
+.you-footnote {
+  margin: var(--space-5) var(--space-5) 0;
+  color: var(--muted);
+  font-size: var(--text-footnote);
+  line-height: 1.38;
 }
 
 /* ==== GroupedList and Row (UI-SPEC 7.1, A12; src/ui/List.tsx) ==== */
@@ -1589,23 +1660,8 @@ html[data-text="large"] .list-row-value {
   text-align: left;
 }
 
-/* ==== You (UI-SPEC A12) ==== */
-.you-footer {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  margin: var(--space-6) var(--space-5) 0;
-  color: var(--muted);
-  font-size: var(--text-footnote);
-  line-height: 1.38;
-}
-.you-footer img {
-  flex: none;
-}
-.you-footer p {
-  margin: 0;
-  font-size: var(--text-footnote);
-}
+/* ==== You (UI-SPEC A12; 01.2 D-02) ====
+   The contents are rows of the shared groups; the footnote is under TitleRow and You button. */
 /* The links of the About group are rows too (PR #27 markup, restyled). */
 .group .legal-links ul {
   margin: 0;
@@ -2340,20 +2396,8 @@ html[data-text="large"] .segmented-scroll [role="radio"] {
 /* ==== Today and the cover (UI-SPEC 2, A1; src/features/Today.tsx, src/ui/Cover.tsx, src/ui/Badges.tsx) ====
    Structure and type of the signature block; the drawing of each look (gilt rule and ornaments, ribbon, lamp
    glow) follows in the next section. Only tokens: the two looks and the two modes change the colours. */
-/* The title row of Today: the large title and, at its trailing end, the shop bag (founder, 2026-10-22). The bag is a
-   44x44 target tinted --link like the toolbar's Back; its negative block margin cancels the 4px it is taller than the
-   title, so neither the title nor the context check below moves. The icon's edge lines up with the page margin. */
-.today-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  margin: var(--space-2) 0 var(--space-4);
-}
-.today-head .large-title {
-  margin: 0;
-  min-width: 0;
-}
+/* The title row of Today is a TitleRow (class today-head); the shop's quiet door (founder, 2026-10-22) is the bag in its
+   actions, before the You button, a 44x44 target tinted --link like the toolbar's Back. Plan 06 replaces it (D-04). */
 .shop-bag {
   flex: none;
   display: inline-flex;
@@ -2361,8 +2405,6 @@ html[data-text="large"] .segmented-scroll [role="radio"] {
   justify-content: center;
   width: 44px;
   height: 44px;
-  margin-block: calc((1.2 * var(--text-large-title) - 44px) / 2);
-  margin-inline-end: calc(-1 * var(--space-2) - 2px);
   border-radius: var(--radius-md);
   color: var(--link);
 }
@@ -3710,19 +3752,6 @@ html[data-text="large"] .reader-toolbar .rt-more {
 }
 
 /* -- The library, /bible (A2) and the passage picker -- */
-.library-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-3);
-}
-.library-head .large-title {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-.library-head .tool-button {
-  margin-top: var(--space-2);
-}
 .picker .segmented {
   margin: 0 0 var(--space-4);
 }
@@ -4882,41 +4911,6 @@ html[data-text="large"] .around-capsule {
 :root[data-mode="lamplight"] .give-tabs,
 :root[data-mode="lamplight"] .give-tabs [role="tab"],
 :root[data-mode="lamplight"] .give-card .give-button {
-  border-radius: var(--radius-pill);
-}
-
-/* The Give card on You: directly under the large title, the one prominent element on that screen. */
-.give-feature {
-  margin: 0 0 var(--space-6);
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-}
-.give-feature > h2 {
-  margin: 0;
-  font-size: var(--text-title);
-  font-weight: 600;
-  line-height: 1.25;
-  overflow-wrap: anywhere;
-}
-.give-feature > p {
-  margin: var(--space-2) 0 0;
-  overflow-wrap: anywhere;
-}
-.give-feature > p.give-feature-names {
-  color: var(--muted);
-  font-size: var(--text-footnote);
-  line-height: 1.38;
-}
-.give-feature > .button {
-  display: flex;
-  width: 100%;
-  margin-top: var(--space-4);
-  min-height: 52px;
-  border-radius: var(--radius-md);
-  text-align: center;
-}
-:root[data-mode="lamplight"] .give-feature > .button {
   border-radius: var(--radius-pill);
 }
 

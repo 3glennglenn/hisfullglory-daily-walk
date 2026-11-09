@@ -5,7 +5,7 @@ import { navigate } from "../platform/router";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle, Toolbar } from "../ui/Screen";
 
-// My Walk (UI-SPEC D-10, plan 11): a pushed screen of You. Same words as before; the cards became grouped
+// My walk (UI-SPEC D-10, plan 11): a pushed screen of You. Same words as before; the cards became grouped
 // sections and the list-like ones became rows. "Private · this local profile" carries information (what kind
 // of page this is), so it stays as a 13px muted line instead of an uppercase eyebrow.
 export function MyWalk() {
@@ -15,7 +15,7 @@ export function MyWalk() {
   return (
     <section className="grouped-screen">
       <Toolbar back="You" to="/you" />
-      <LargeTitle>My Walk</LargeTitle>
+      <LargeTitle>My walk</LargeTitle>
       <p className="screen-meta">Private · this local profile</p>
       <p className="screen-lede">
         A place to return, not a measure of spiritual maturity. Nothing on this page is a public profile.

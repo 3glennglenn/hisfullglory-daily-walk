@@ -11,7 +11,7 @@ import "@fontsource/literata/latin-400-italic.css";
 import "./styles.css";
 import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
-import { currentRoute, navigate } from "./platform/router";
+import { cameFrom, currentRoute, navigate } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
 import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
@@ -26,7 +26,7 @@ import { ContextCheck } from "./context/ContextCheck";
 import { ContextChecks } from "./context/ContextChecks";
 import { JournalLibrary } from "./features/Journal";
 import { Settings, Profile } from "./features/Settings";
-import { You } from "./features/You";
+import { YouSheet } from "./features/You";
 import { Appearance } from "./features/Appearance";
 import { Reminders } from "./features/Reminders";
 import { Give, GivingPolicy } from "./giving/Give";
@@ -34,7 +34,7 @@ import { Community } from "./community";
 import { TopicHub } from "./social/TopicHub";
 import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
-import { TabBar, tabFor } from "./ui/TabBar";
+import { TabBar, activeTab } from "./ui/TabBar";
 import { LamplightNotice, noticeText } from "./ui/LamplightNotice";
 import { LargeTitle, Toolbar } from "./ui/Screen";
 import { config, products } from "./config";
@@ -79,6 +79,16 @@ function RemindersScreen() {
       {supabase ? <Reminders /> : <p>Reminders are not available yet.</p>}
     </section>
   );
+}
+// Done, Escape and a swipe close the You sheet: back through history when the reader came from Today, otherwise the
+// entry is replaced by Today (a /you opened directly), so Back never returns to a closed sheet.
+function closeYou() {
+  if (cameFrom() === "/") {
+    history.back();
+    return;
+  }
+  history.replaceState({}, "", "/");
+  window.dispatchEvent(new PopStateEvent("popstate"));
 }
 function App() {
   const { state, notice, update } = usePlatform();
@@ -126,6 +136,7 @@ function App() {
   const welcome = welcomeOpen && page === "home";
   const flow = welcome || page === "walk" || (page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id));
   let content: ReactNode;
+  let youSheet: ReactNode = null;
   switch (page) {
     case "my-walk":
       content = <MyWalk />;
@@ -161,7 +172,9 @@ function App() {
       content = <GivingPolicy />;
       break;
     case "you":
-      content = <You />;
+      // You opens as a sheet over the tab root the reader was on (N-03); Today until Task 2 remembers the others.
+      content = <Today key={date} />;
+      youSheet = <YouSheet onClose={closeYou} />;
       break;
     case "profile":
       content = <Profile />;
@@ -209,6 +222,7 @@ function App() {
         </section>
       );
   }
+  const tab = activeTab(page, false, "today");
   return (
     <div className="shell" data-flow={flow ? "true" : undefined}>
       <a className="skip-link" href="#main">
@@ -227,6 +241,7 @@ function App() {
       </div>
       <main id="main" tabIndex={-1}>
         {content}
+        {youSheet}
         {install && !state.local.installDismissed && (
           <aside className="install-offer">
             <h2>Keep your daily walk close</h2>
@@ -260,9 +275,9 @@ function App() {
             <small role="status">{installStatus}</small>
           </aside>
         )}
-        <LamplightNotice tab={tabFor(page)} path={location.pathname} />
+        <LamplightNotice tab={tab} path={location.pathname} />
       </main>
-      {!flow && <TabBar active={tabFor(page)} />}
+      {!flow && <TabBar active={tab} />}
     </div>
   );
 }

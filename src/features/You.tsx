@@ -6,10 +6,8 @@ import { useAuth } from "../platform/auth";
 import { supabase } from "../supabase";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle } from "../ui/Screen";
-import { GiveFeature } from "../giving/GiveFeature";
-import { ShopFeature } from "./ShopFeature";
+import { Sheet } from "../ui/Sheet";
 import { dailyReminderOn } from "./Reminders";
-import { LegalLinks } from "./Settings";
 
 // The signed-in reader's own display name, shown on the account row. Nothing else about the account
 // is read here (T-01.1-08).
@@ -37,18 +35,18 @@ function useDisplayName(userId: string | undefined) {
   return name;
 }
 
-// You (UI-SPEC A12): everything that used to be behind More, in one grouped list.
-export function You() {
+// What You holds (01.2 D-02, in this order): the account, Your walk, Give, Settings, one help row and the Scripture line.
+// No shop and no giving card: those are rows or live elsewhere (D-10). It is the same on the sheet (a phone) and on the
+// page (from 768px).
+export function YouContent() {
   const { session } = useAuth();
   const { state } = usePlatform();
   const { look, lamplight } = useAppearance();
   const name = useDisplayName(session?.user.id);
   const reminder = state.notifications["Daily Walk"] === true || dailyReminderOn();
+  const days = state.local.completedDates.length;
   return (
-    <section className="grouped-screen">
-      <LargeTitle>You</LargeTitle>
-      <GiveFeature />
-      <ShopFeature />
+    <>
       <GroupedList>
         {session ? (
           <Row title={name || "Account"} detail={name ? "Account" : undefined} href="/profile" chevron />
@@ -57,11 +55,17 @@ export function You() {
         )}
       </GroupedList>
       <GroupedList title="Your walk">
-        <Row title="Days walked" value={state.local.completedDates.length} />
-        <Row title="Your shelf" value={`${state.shelf.length} read`} href="/shelf" chevron />
-        <Row title="My Walk" href="/my-walk" chevron />
+        <Row title="My walk" value={`${days} ${days === 1 ? "day" : "days"}`} href="/my-walk" chevron />
+        <Row title="My prayers" href="/pray" chevron />
         <Row title="Journal" href="/journal" chevron />
-        <Row title="Grow" href="/grow" chevron />
+      </GroupedList>
+      <GroupedList>
+        <Row
+          title="Give where it helps most"
+          detail="Charities chosen by independent evaluators"
+          href="/give"
+          chevron
+        />
       </GroupedList>
       <GroupedList title="Settings">
         <Row
@@ -70,25 +74,42 @@ export function You() {
           href="/settings/appearance"
           chevron
         />
-        <Row
-          title="Daily rhythm"
-          value={`${state.preferences.minutes} minutes, ${state.preferences.time}`}
-          href="/settings"
-          chevron
-        />
         <Row title="Daily reminder" value={reminder ? "On" : "Off"} href="/settings/reminders" chevron />
         <Row title="Privacy and your data" href="/settings#privacy" chevron />
       </GroupedList>
-      <GroupedList title="About" plain>
-        <LegalLinks />
+      <GroupedList>
+        <Row title="Help, privacy and terms" href="/settings#about" chevron />
       </GroupedList>
-      <footer className="you-footer">
-        <img src="/icon.svg" alt="" width="24" height="24" />
-        <div>
-          <p>HisFullGlory Daily Walk</p>
-          <p>Scripture: World English Bible, public domain.</p>
-        </div>
-      </footer>
+      <p className="you-footnote">Scripture: World English Bible, public domain.</p>
+    </>
+  );
+}
+
+// You as a sheet over the tab the reader was on (a phone, N-03): the existing Sheet at the large detent, with a Done button.
+// Focus goes back to the You button when it closes.
+export function YouSheet({ onClose }: { onClose: () => void }) {
+  return (
+    <Sheet
+      title="You"
+      detent="large"
+      done
+      className="you-sheet"
+      returnFocus={() => document.querySelector<HTMLElement>(".you-button")}
+      onClose={onClose}
+    >
+      <div className="grouped-screen you-sheet-body">
+        <YouContent />
+      </div>
+    </Sheet>
+  );
+}
+
+// You as a page in the content column (from 768px), under the sidebar's marked You item.
+export function YouPage() {
+  return (
+    <section className="grouped-screen you-page">
+      <LargeTitle>You</LargeTitle>
+      <YouContent />
     </section>
   );
 }

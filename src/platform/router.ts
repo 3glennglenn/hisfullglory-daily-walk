@@ -83,13 +83,14 @@ export const cameFrom = (): string => {
 };
 export const passagePath = (book: string, chapter: number, verse?: number) =>
   `/bible/${book}/${chapter}${verse ? `/${verse}` : ""}`;
-export function navigate(path: string) {
+/** `keepScroll`: the page stays where it is (the You button opens a sheet over a tab root that must not jump). */
+export function navigate(path: string, options: { keepScroll?: boolean } = {}) {
   if (window.location.pathname + window.location.search !== path) {
     // The screen the reader came from is kept with the history entry, so a screen reached from two places (Your
     // shelf, from Today or from You) can name the right one on its Back button, also after a reload.
     history.pushState({ from: window.location.pathname }, "", path);
     window.dispatchEvent(new PopStateEvent("popstate"));
-    window.scrollTo(0, 0);
+    if (!options.keepScroll) window.scrollTo(0, 0);
   }
 }
 // The route for the address bar. An old "/more" link is replaced by "/you" in place (T-01.1-07: the

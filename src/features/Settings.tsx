@@ -187,7 +187,7 @@ export function Settings() {
         />
       </GroupedList>
       <BlockedAuthors />
-      <GroupedList title="About and legal" plain>
+      <GroupedList title="About and legal" id="about" plain>
         <LegalLinks />
       </GroupedList>
       {confirmRecover && (
