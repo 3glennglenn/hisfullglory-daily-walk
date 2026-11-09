@@ -1,6 +1,6 @@
 ---
-// The reader's own choice of theme (Cover and story, Marked page) and of Lamplight (the dark
-// appearance), kept on this device only (UI-SPEC 3.4, W8). Used once, in the footer.
+// The reader's own choice of theme (Cover and story, Marked page) and of Night light (the dark
+// appearance; stored as hfg-lamplight), kept on this device only (UI-SPEC 3.4, W8). Used once, in the footer.
 ---
 
 <!-- Shown by the script below; without JavaScript the group stays hidden and the page follows
@@ -15,11 +15,11 @@
     </div>
   </div>
   <div class="group" role="group" aria-labelledby="lamplight-label">
-    <p class="group-label" id="lamplight-label">Lamplight</p>
+    <p class="group-label" id="lamplight-label">Night light</p>
     <div class="pills">
       <button type="button" data-lamplight-choice="auto" aria-pressed="true">Automatic</button>
-      <button type="button" data-lamplight-choice="on" aria-pressed="false">On</button>
-      <button type="button" data-lamplight-choice="off" aria-pressed="false">Off</button>
+      <button type="button" data-lamplight-choice="off" aria-pressed="false">Day</button>
+      <button type="button" data-lamplight-choice="on" aria-pressed="false">Night light</button>
     </div>
   </div>
   <p class="effect" role="status" data-lamplight-status></p>
@@ -64,6 +64,12 @@
     var stored = read("hfg-lamplight");
     var lamplight = stored === "on" || stored === "off" ? stored : "auto";
     var colors = { cover: ["#F3F1EE", "#1A120E"], marked: ["#FFFDF9", "#1A120E"] };
+    /* One line under the switch says what the current choice does. */
+    var hints = {
+      auto: "Follows your device: Night light when it is dark.",
+      off: "Always the light pages.",
+      on: "Always Night light: warm and dim for reading at night."
+    };
 
     function dark() {
       return lamplight === "on" || (lamplight === "auto" && query.matches);
@@ -85,12 +91,7 @@
         button.setAttribute("aria-pressed", String(button.dataset.lamplightChoice === lamplight));
       });
       var status = section.querySelector("[data-lamplight-status]");
-      status.textContent =
-        lamplight !== "auto"
-          ? ""
-          : dark()
-            ? "On now, because your device is set to dark."
-            : "Off now, because your device is set to light.";
+      status.textContent = hints[lamplight];
     }
 
     section.querySelectorAll("[data-look-choice]").forEach(function (button) {

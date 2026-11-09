@@ -196,62 +196,67 @@ try {
     await context.close();
   });
 
-  await check("the Appearance group: choosing Marked page and On applies at once and survives a reload", async () => {
+  await check("the Appearance group: choosing Marked page and Night light applies at once and survives a reload", async () => {
     const { context, page } = await open("/", { width: 390 });
     const group = page.locator("[data-appearance]");
     await group.waitFor({ state: "visible" });
     assert.equal(await group.locator("h2").innerText(), "Appearance");
     assert.equal(await group.getByRole("group", { name: "Theme" }).count(), 1);
-    assert.equal(await group.getByRole("group", { name: "Lamplight" }).count(), 1);
+    assert.equal(await group.getByRole("group", { name: "Night light" }).count(), 1);
+    // The pills read Automatic, Day, Night light, in that order, and the group has no pill named On or Off.
+    assert.deepEqual(await group.getByRole("group", { name: "Night light" }).locator("button").allInnerTexts(), ["Automatic", "Day", "Night light"]);
+    assert.equal(await group.getByRole("button", { name: "On", exact: true }).count() + (await group.getByRole("button", { name: "Off", exact: true }).count()), 0);
     for (const button of await group.locator("button").all())
       assert.ok((await button.boundingBox()).height >= 44, `${await button.innerText()} is 44px or taller`);
     assert.deepEqual(await attrs(page), { look: "cover", mode: "light", color: "#F3F1EE" });
     await group.getByRole("button", { name: "Marked page", exact: true }).click();
-    await group.getByRole("button", { name: "On", exact: true }).click();
+    await group.getByRole("button", { name: "Night light", exact: true }).click();
     const now = await attrs(page);
     assert.equal(now.look, "marked");
     assert.equal(now.mode, "lamplight");
     assert.equal(now.color, "#1A120E", "theme-color follows the look and mode");
     assert.equal(await group.getByRole("button", { name: "Marked page", exact: true }).getAttribute("aria-pressed"), "true");
     assert.equal(await group.getByRole("button", { name: "Cover and story", exact: true }).getAttribute("aria-pressed"), "false");
-    assert.equal(await group.getByRole("button", { name: "On", exact: true }).getAttribute("aria-pressed"), "true");
+    assert.equal(await group.getByRole("button", { name: "Night light", exact: true }).getAttribute("aria-pressed"), "true");
     assert.equal(await stored(page, "hfg-look"), "marked");
     assert.equal(await stored(page, "hfg-lamplight"), "on");
-    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "", "the effect line is empty unless Automatic");
+    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "Always Night light: warm and dim for reading at night.");
     await page.reload();
     await group.waitFor({ state: "visible" });
     const after = await attrs(page);
     assert.deepEqual(after, { look: "marked", mode: "lamplight", color: "#1A120E" });
     assert.equal(await group.getByRole("button", { name: "Marked page", exact: true }).getAttribute("aria-pressed"), "true");
-    assert.equal(await group.getByRole("button", { name: "On", exact: true }).getAttribute("aria-pressed"), "true");
-    // The page really is dark: the root background is the Lamplight page colour.
+    assert.equal(await group.getByRole("button", { name: "Night light", exact: true }).getAttribute("aria-pressed"), "true");
+    // The page really is dark: the root background is the Night light page colour.
     assert.equal(await page.evaluate(() => getComputedStyle(document.body).backgroundColor), "rgb(26, 18, 14)");
     await context.close();
   });
 
-  await check("Automatic shows the current effect: dark device, then light device", async () => {
+  await check("Automatic, Day and Night light each show their hint line; Automatic follows the device", async () => {
     let { context, page } = await open("/", { width: 390, colorScheme: "dark" });
     let group = page.locator("[data-appearance]");
     await group.waitFor({ state: "visible" });
     await group.getByRole("button", { name: "Automatic", exact: true }).click();
-    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "On now, because your device is set to dark.");
+    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "Follows your device: Night light when it is dark.");
     assert.equal((await attrs(page)).mode, "lamplight");
     assert.equal(await group.locator("[data-lamplight-status]").getAttribute("role"), "status");
     // Following the device while Automatic: the device turns light.
     await page.emulateMedia({ colorScheme: "light" });
     await page.waitForFunction(() => document.documentElement.dataset.mode === "light");
-    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "Off now, because your device is set to light.");
-    await group.getByRole("button", { name: "Off", exact: true }).click();
+    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "Follows your device: Night light when it is dark.", "the same hint on a light device");
+    await group.getByRole("button", { name: "Day", exact: true }).click();
     await page.emulateMedia({ colorScheme: "dark" });
     await page.waitForTimeout(200);
-    assert.equal((await attrs(page)).mode, "light", "Off ignores the device");
-    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "");
+    assert.equal((await attrs(page)).mode, "light", "Day ignores the device");
+    assert.equal(await stored(page, "hfg-lamplight"), "off");
+    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "Always the light pages.");
     await context.close();
     ({ context, page } = await open("/", { width: 390, colorScheme: "light" }));
     group = page.locator("[data-appearance]");
     await group.waitFor({ state: "visible" });
     await group.getByRole("button", { name: "Automatic", exact: true }).click();
-    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "Off now, because your device is set to light.");
+    assert.equal(await group.locator("[data-lamplight-status]").innerText(), "Follows your device: Night light when it is dark.");
+    assert.equal((await attrs(page)).mode, "light", "Automatic on a light device shows the light pages");
     await context.close();
   });
 
@@ -261,7 +266,7 @@ try {
     assert.equal((await attrs(page)).mode, "lamplight", "the legacy choice applied at first paint");
     assert.equal(await stored(page, "hfg-lamplight"), "on");
     assert.equal(await stored(page, "hfg-theme"), null);
-    assert.equal(await page.getByRole("button", { name: "On", exact: true }).getAttribute("aria-pressed"), "true");
+    assert.equal(await page.locator("[data-appearance]").getByRole("button", { name: "Night light", exact: true }).getAttribute("aria-pressed"), "true");
     await context.close();
   });
 
