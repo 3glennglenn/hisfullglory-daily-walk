@@ -1,7 +1,7 @@
 import { useId, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { GroupedList, Row } from "../ui/List";
-import { LargeTitle } from "../ui/Screen";
+import { TitleRow } from "../ui/Screen";
 import { Sheet } from "../ui/Sheet";
 import { contextChecks } from "../context/data";
 import { usePlatform } from "../platform/store";
@@ -29,19 +29,21 @@ export function Library({ data, failed, onRetry }: { data: BibleData | null; fai
   const checks = contextChecks.length;
   return (
     <section className="library">
-      <div className="library-head">
-        <LargeTitle>Bible</LargeTitle>
-        <button
-          type="button"
-          className="tool-button"
-          aria-label="Search the Bible"
-          ref={searchButton}
-          disabled={!data}
-          onClick={() => setSheet("search")}
-        >
-          <Search size={22} aria-hidden="true" focusable="false" />
-        </button>
-      </div>
+      <TitleRow
+        title="Bible"
+        actions={
+          <button
+            type="button"
+            className="tool-button"
+            aria-label="Search the Bible"
+            ref={searchButton}
+            disabled={!data}
+            onClick={() => setSheet("search")}
+          >
+            <Search size={22} aria-hidden="true" focusable="false" />
+          </button>
+        }
+      />
       {state.lastChapter && (
         <GroupedList>
           <Row title="Continue reading" detail={referenceFromPath(data, state.lastChapter)} href={state.lastChapter} chevron />

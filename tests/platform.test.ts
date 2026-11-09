@@ -11,7 +11,15 @@ import {
   V2_KEY,
   type StorageLike,
 } from "../src/platform/persistence.ts";
-import { parseRoute, resolveTheme } from "../src/platform/router.ts";
+import {
+  currentRoute,
+  lastTabRoot,
+  parseRoute,
+  rememberTabRoot,
+  resolveTheme,
+  tabRootPaths,
+} from "../src/platform/router.ts";
+import { activeTab, rootTabOf, tabFor } from "../src/ui/tabs.ts";
 import {
   detectCapabilities,
   nativeGivingAllowed,
@@ -235,6 +243,112 @@ test("You replaces More: /you parses, /settings takes only the sub-paths appeara
     assert.equal(parseRoute(path).page, "not-found", path);
   // The shell replaces "/more" with "/you" through history.replaceState; the router keeps parsing it.
   assert.equal(parseRoute("/more").page, "more");
+});
+test("the last tab root is remembered in memory only, and only the three roots are remembered (01.2 D-03, T-01.2-02)", () => {
+  assert.deepEqual(tabRootPaths, ["/", "/bible", "/community"]);
+  assert.equal(lastTabRoot(), "/", "Today until a root was seen");
+  rememberTabRoot(parseRoute("/bible"));
+  assert.equal(lastTabRoot(), "/bible");
+  // A book, a topic, a pushed screen, a flow or an unknown address leaves it unchanged.
+  for (const path of [
+    "/bible/john/3",
+    "/bible/john/3/16",
+    "/community/grief",
+    "/community/circles",
+    "/you",
+    "/settings",
+    "/my-walk",
+    "/shop",
+    "/pray",
+    "/walk",
+    "/shelf",
+    "/context",
+    "/context/psalm-23-1",
+    "/no-such-page",
+  ]) {
+    rememberTabRoot(parseRoute(path));
+    assert.equal(lastTabRoot(), "/bible", path);
+  }
+  rememberTabRoot(parseRoute("/community"));
+  assert.equal(lastTabRoot(), "/community");
+  rememberTabRoot(parseRoute("/community/grief"));
+  assert.equal(lastTabRoot(), "/community");
+  rememberTabRoot(parseRoute("/"));
+  assert.equal(lastTabRoot(), "/");
+  assert.ok(tabRootPaths.includes(lastTabRoot()));
+  assert.equal(rootTabOf("/"), "today");
+  assert.equal(rootTabOf("/bible"), "bible");
+  assert.equal(rootTabOf("/community"), "community");
+  assert.equal(rootTabOf("/anything-else"), "today", "anything but a root falls back to Today");
+});
+test("every page has its tab: three tabs, the screens of You, and no tab for an unknown page (01.2 D-01, D-03)", () => {
+  const table: Record<string, string | null> = {
+    home: "today",
+    walk: "today",
+    bible: "bible",
+    context: "bible",
+    shelf: "bible",
+    community: "community",
+    circles: "community",
+    you: "you",
+    profile: "you",
+    settings: "you",
+    "my-walk": "you",
+    journal: "you",
+    grow: "you",
+    give: "you",
+    "giving-policy": "you",
+    shop: "you",
+    pray: "you",
+    "not-found": null,
+    more: null,
+  };
+  for (const [page, tab] of Object.entries(table)) assert.equal(tabFor(page), tab, page);
+  // A phone: a screen of You keeps the tab of the root the reader was on. From 768px it marks You.
+  for (const page of ["you", "profile", "settings", "my-walk", "journal", "grow", "give", "giving-policy", "shop", "pray"]) {
+    assert.equal(activeTab(page, false, "bible"), "bible", page + " on a phone");
+    assert.equal(activeTab(page, false, "community"), "community", page + " on a phone");
+    assert.equal(activeTab(page, true, "bible"), "you", page + " wide");
+  }
+  // The tab roots and what belongs to a tab are the same on both.
+  for (const wide of [false, true]) {
+    assert.equal(activeTab("home", wide, "community"), "today");
+    assert.equal(activeTab("bible", wide, "today"), "bible");
+    assert.equal(activeTab("shelf", wide, "today"), "bible");
+    assert.equal(activeTab("circles", wide, "today"), "community");
+    assert.equal(activeTab("not-found", wide, "bible"), null);
+  }
+});
+test("/more and /circles are replaced in place by fixed internal targets (01.2 D-03, T-01.2-01)", () => {
+  const holder = globalThis as unknown as { location?: unknown; history?: unknown };
+  const replaced: string[] = [];
+  const at = (pathname: string, search = "") => {
+    replaced.length = 0;
+    holder.location = { pathname, search };
+    holder.history = { replaceState: (_state: unknown, _title: string, url: string) => replaced.push(url) };
+    return currentRoute();
+  };
+  try {
+    assert.equal(at("/more").page, "you");
+    assert.deepEqual(replaced, ["/you"]);
+    const circles = at("/circles");
+    assert.equal(circles.page, "circles");
+    assert.equal(circles.id, undefined);
+    assert.deepEqual(replaced, ["/community/circles"]);
+    assert.equal(at("/circles/").page, "circles");
+    assert.deepEqual(replaced, ["/community/circles"]);
+    // Nothing is taken from the address: a query or a longer path is not carried over.
+    at("/circles", "?thread=../../x");
+    assert.deepEqual(replaced, ["/community/circles"]);
+    assert.equal(at("/circles/private-walk").page, "not-found", "only the exact old address is replaced");
+    assert.deepEqual(replaced, []);
+    assert.equal(at("/you").page, "you");
+    assert.equal(at("/community/circles").page, "circles");
+    assert.deepEqual(replaced, [], "the current addresses are left alone");
+  } finally {
+    delete holder.location;
+    delete holder.history;
+  }
 });
 test("theme follows live system changes and capabilities never enable unconfigured services", () => {
   assert.equal(resolveTheme("system", true), "dark");

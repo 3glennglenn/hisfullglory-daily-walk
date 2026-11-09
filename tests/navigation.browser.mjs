@@ -252,8 +252,205 @@ async function carriedOver(browser, base) {
   }
 }
 
+const marked = (page) => page.locator('nav.tabbar a[aria-current="page"]').allInnerTexts();
+const youLinks = (page) => page.locator("a.you-button").count();
+
+// Roots and Back (D-02, D-03): the You button is on the root of each tab and nowhere else; on a phone the sheet stands
+// over the tab the reader was on, a screen reached from it keeps that tab marked, and Back and Done return there.
+async function rootsAndBack(browser, base, published) {
+  const { context, page, problems } = await open(browser, base, "/bible");
+  try {
+    for (const [path, name] of [["/bible", "Bible"], ["/community", "Community"]]) {
+      await page.goto(base + path);
+      await page.locator("main h1").first().waitFor();
+      assert.equal(await page.locator("main .title-row").getByRole("link", { name: "You", exact: true }).count(), 1, `${path}: one You link in the title row`);
+      assert.equal(await page.locator("main h1").innerText(), name);
+      const box = await page.locator("main .title-row a.you-button").boundingBox();
+      assert.ok(box.width >= 44 && box.height >= 44, `${path}: the You button is at least 44 x 44`);
+    }
+    // Pushed screens and the full-screen flows have none.
+    const newest = published[0].slug;
+    for (const path of ["/bible/john/3", "/community/grief", "/community/circles", "/settings", "/my-walk", "/walk", "/context/" + newest]) {
+      await page.goto(base + path);
+      await page.locator("main h1").first().waitFor();
+      assert.equal(await youLinks(page), 0, `${path}: no You button`);
+    }
+    for (const path of ["/walk", "/context/" + newest]) {
+      await page.goto(base + path);
+      await page.locator("main h1").first().waitFor();
+      assert.equal(await page.getByRole("navigation", { name: "Main navigation" }).count(), 0, `${path}: no tab bar`);
+    }
+
+    // A phone: the sheet over the tab the reader was on, with that tab marked; the same from Bible and from Community.
+    for (const [path, tab] of [["/bible", "Bible"], ["/community", "Community"]]) {
+      await page.goto(base + path);
+      await page.locator("main h1").first().waitFor();
+      const sheet = await openYou(page);
+      assert.equal(await page.locator("main h1").innerText(), tab, `the sheet stands over ${tab}`);
+      assert.deepEqual(await marked(page), [tab], `${tab} stays marked under the sheet`);
+      await sheet.getByRole("link", { name: /^My walk/ }).click();
+      await page.waitForURL("**/my-walk");
+      await page.locator("main h1", { hasText: "My walk" }).waitFor();
+      assert.deepEqual(await marked(page), [tab], `${tab} stays marked on a screen reached from You`);
+      await page.getByRole("button", { name: "Back to You", exact: true }).click();
+      await page.waitForURL("**/you");
+      await youSheet(page).waitFor();
+      assert.equal(await page.locator("main h1").innerText(), tab, `Back to You returns to the sheet over ${tab}`);
+      await sheet.getByRole("button", { name: "Done, close You", exact: true }).click();
+      await assertClosed(page, path, `Done over ${tab}`);
+      assert.deepEqual(await marked(page), [tab]);
+    }
+    // Tapping another tab with the sheet closed still works, and the next sheet stands over the new tab.
+    await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Today", exact: true }).click();
+    await page.waitForURL((url) => url.pathname === "/");
+    await openYou(page);
+    assert.equal(await page.locator("main h1").innerText(), "Today");
+    assert.deepEqual(problems, [], "no page errors");
+  } finally {
+    await context.close();
+  }
+}
+
+// From 768px You is a page in the sidebar layout (N-01, N-03); a resize across the width swaps page and sheet.
+async function widePage(browser, base) {
+  for (const [width, height] of [[768, 1024], [1180, 820]]) {
+    const { context, page, problems } = await open(browser, base, "/community", { width, height });
+    try {
+      const nav = page.getByRole("navigation", { name: "Main navigation" });
+      assert.deepEqual(await nav.getByRole("link").allInnerTexts(), ["Today", "Bible", "Community", "You"], `${width}px: four sidebar links`);
+      assert.deepEqual(await marked(page), ["Community"]);
+      // The You button opens the page, not a sheet.
+      await page.locator("main .title-row a.you-button").click();
+      await page.waitForURL("**/you");
+      await page.locator("main h1", { hasText: "You" }).waitFor();
+      assert.equal(await page.getByRole("dialog").count(), 0, `${width}px: no dialog`);
+      assert.equal(await page.locator("main h1").innerText(), "You");
+      assert.deepEqual(await marked(page), ["You"], `${width}px: You is the marked sidebar item`);
+      assert.equal(await nav.locator('a[aria-current="page"]').getAttribute("href"), "/you");
+      const main = await page.locator("main").boundingBox();
+      assert.ok(main.width <= 681, `${width}px: the content column is at most 680px (${main.width})`);
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `${width}px: no sideways scroll`);
+      assert.match(await page.locator("main").innerText(), /Sign in[\s\S]*Your walk[\s\S]*My walk[\s\S]*Give where it helps most[\s\S]*Settings[\s\S]*Help, privacy and terms[\s\S]*World English Bible/);
+      assert.equal(await page.locator("main .you-page .title-row").count(), 0, "the You page has no You button of its own");
+      // The sidebar's own You item opens the same page from another tab.
+      await nav.getByRole("link", { name: "Bible", exact: true }).click();
+      await page.waitForURL("**/bible");
+      await nav.getByRole("link", { name: "You", exact: true }).click();
+      await page.waitForURL("**/you");
+      assert.equal(await page.locator("main h1").innerText(), "You");
+      assert.equal(await page.getByRole("dialog").count(), 0);
+      // A screen reached from You marks You, and Back returns to the page.
+      await page.getByRole("link", { name: /^My walk/ }).click();
+      await page.waitForURL("**/my-walk");
+      assert.deepEqual(await marked(page), ["You"]);
+      await page.getByRole("button", { name: "Back to You", exact: true }).click();
+      await page.waitForURL("**/you");
+      assert.equal(await page.locator("main h1").innerText(), "You");
+      if (width === 1180) {
+        // Resizing across 768px swaps the page for the sheet over the last tab root, without a reload.
+        await page.setViewportSize({ width: 390, height: 844 });
+        await youSheet(page).waitFor();
+        assert.equal(await page.locator("main h1").innerText(), "Bible", "the sheet stands over the last tab root");
+        assert.deepEqual(await marked(page), ["Bible"]);
+        await page.setViewportSize({ width: 1180, height: 820 });
+        await youSheet(page).waitFor({ state: "detached" });
+        assert.equal(await page.locator("main h1").innerText(), "You", "and back to the page");
+        assert.deepEqual(await marked(page), ["You"]);
+      }
+      assert.deepEqual(problems, [], `${width}px: no page errors`);
+    } finally {
+      await context.close();
+    }
+  }
+}
+
+// d: /circles is replaced in place by /community/circles.
+async function oldCircles(browser, base) {
+  const { context, page, problems } = await open(browser, base, "/");
+  try {
+    await page.goto(base + "/circles");
+    await page.locator("main h1").first().waitFor();
+    assert.equal(pathOf(page), "/community/circles");
+    assert.deepEqual(await marked(page), ["Community"]);
+    await page.goBack();
+    assert.equal(pathOf(page), "/", "Back does not return to /circles");
+    assert.deepEqual(problems, [], "no page errors");
+  } finally {
+    await context.close();
+  }
+}
+
+// e: every current address opens at three widths, with one main h1, no page error and the right tab marked.
+async function addressSweep(browser, base, published) {
+  const newest = published[0].slug;
+  // [path, what is marked: a tab, "you" (a screen reached from You: the tab of the last root on a phone, You when wide),
+  //  "none" (no tab) or "flow" (no tab bar at all)]
+  const addresses = [
+    ["/", "Today"],
+    ["/walk", "flow"],
+    ["/bible", "Bible"],
+    ["/bible/john/3", "Bible"],
+    ["/bible/john/3/16", "Bible"],
+    ["/bible/john/3?tab=context", "Bible"],
+    ["/context", "Bible"],
+    ["/context/" + newest, "flow"],
+    ["/shelf", "Bible"],
+    ["/pray", "you"],
+    ["/community", "Community"],
+    ["/community/grief", "Community"],
+    ["/community/circles", "Community"],
+    ["/you", "you"],
+    ["/profile", "you"],
+    ["/settings", "you"],
+    ["/settings/appearance", "you"],
+    ["/settings/reminders", "you"],
+    ["/my-walk", "you"],
+    ["/journal", "you"],
+    ["/grow", "you"],
+    ["/grow/anxiety", "you"],
+    ["/give", "you"],
+    ["/giving-policy", "you"],
+    ["/shop", "you"],
+    ["/more", "you"],
+    ["/circles", "Community"],
+    ["/no-such-page", "none"],
+  ];
+  const backToYou = new Set(["/profile", "/settings", "/settings/appearance", "/settings/reminders", "/my-walk", "/journal", "/grow", "/give"]);
+  for (const [width, height] of [[390, 844], [768, 1024], [1180, 820]]) {
+    const { context, page, problems } = await open(browser, base, "/", { width, height });
+    try {
+      for (const [path, expected] of addresses) {
+        await page.goto(base + path);
+        await page.locator("main h1").first().waitFor();
+        const where = `${path} at ${width}px`;
+        assert.equal(await page.locator("main h1").count(), 1, `${where}: exactly one main h1`);
+        const nav = page.getByRole("navigation", { name: "Main navigation" });
+        if (expected === "flow") {
+          assert.equal(await nav.count(), 0, `${where}: no tab bar`);
+          assert.equal(await youLinks(page), 0, `${where}: no You button`);
+          continue;
+        }
+        const want = expected === "none" ? [] : expected === "you" ? [width >= 768 ? "You" : "Today"] : [expected];
+        assert.deepEqual(await marked(page), want, `${where}: tab marked`);
+        if (backToYou.has(path)) assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1, `${where}: Back to You`);
+        if (path === "/you") {
+          if (width >= 768) assert.equal(await page.getByRole("dialog").count(), 0, `${where}: a page`);
+          else await youSheet(page).waitFor();
+        }
+      }
+      assert.deepEqual(problems, [], `${width}px: no page errors`);
+    } finally {
+      await context.close();
+    }
+  }
+}
+
 export async function checkNavigation(browser, base, published) {
   await phoneTabsAndSheet(browser, base);
   await directYou(browser, base);
   await carriedOver(browser, base);
+  await rootsAndBack(browser, base, published);
+  await widePage(browser, base);
+  await oldCircles(browser, base);
+  await addressSweep(browser, base, published);
 }

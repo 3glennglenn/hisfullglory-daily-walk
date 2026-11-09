@@ -8,7 +8,7 @@ import { findTopic, launchTopics, topicGraph } from "../topics/graph";
 import { SafetyControls } from "./safety";
 import { Feed, postTypes } from "./Feed";
 import { safeSourceUrl } from "./sources";
-import { LargeTitle } from "../ui/Screen";
+import { TitleRow } from "../ui/Screen";
 import { GroupedList, Row } from "../ui/List";
 import { Segmented } from "../ui/Segmented";
 import { ConfirmDialog } from "../ui/ConfirmDialog";
@@ -88,7 +88,7 @@ export function TopicHub({id,thread}: {id?:string;thread?:string}) {
     const saved=state.savedDiscussions.filter(id=>state.savedDiscussionTopics[id]);
     const topics=(tab==="Following"?topicGraph:launchTopics).filter(t=>(tab!=="Following"||state.followedTopics.includes(t.id))&&t.label.toLowerCase().includes(query.toLowerCase()));
     return <section className="grouped-screen community">
-      <LargeTitle>Community</LargeTitle>
+      <TitleRow title="Community" />
       <p className="community-intro">Scripture, practical help and encouragement. Community experience and reputation are not verified expertise.</p>
       <GroupedList><Row title="Circles" href="/community/circles" chevron/></GroupedList>
       <Segmented scroll label="Community sections" value={tab} onChange={setTab} options={communityTabs.map(t=>({value:t,label:t}))}/>

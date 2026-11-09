@@ -11,7 +11,7 @@ import "@fontsource/literata/latin-400-italic.css";
 import "./styles.css";
 import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
-import { cameFrom, currentRoute, navigate } from "./platform/router";
+import { cameFrom, currentRoute, lastTabRoot, navigate, parseRoute, rememberTabRoot } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
 import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
@@ -26,7 +26,7 @@ import { ContextCheck } from "./context/ContextCheck";
 import { ContextChecks } from "./context/ContextChecks";
 import { JournalLibrary } from "./features/Journal";
 import { Settings, Profile } from "./features/Settings";
-import { YouSheet } from "./features/You";
+import { YouPage, YouSheet } from "./features/You";
 import { Appearance } from "./features/Appearance";
 import { Reminders } from "./features/Reminders";
 import { Give, GivingPolicy } from "./giving/Give";
@@ -34,7 +34,8 @@ import { Community } from "./community";
 import { TopicHub } from "./social/TopicHub";
 import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
-import { TabBar, activeTab } from "./ui/TabBar";
+import { TabBar } from "./ui/TabBar";
+import { activeTab, rootTabOf } from "./ui/tabs";
 import { LamplightNotice, noticeText } from "./ui/LamplightNotice";
 import { LargeTitle, Toolbar } from "./ui/Screen";
 import { config, products } from "./config";
@@ -80,14 +81,29 @@ function RemindersScreen() {
     </section>
   );
 }
-// Done, Escape and a swipe close the You sheet: back through history when the reader came from Today, otherwise the
-// entry is replaced by Today (a /you opened directly), so Back never returns to a closed sheet.
+// From 768px the sidebar layout is on and You is a page; below it You is a sheet (N-03). Follows a resize without a reload.
+function useWide() {
+  const query = "(min-width: 768px)";
+  const [wide, setWide] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    const change = () => setWide(media.matches);
+    media.addEventListener("change", change);
+    change();
+    return () => media.removeEventListener("change", change);
+  }, []);
+  return wide;
+}
+// Done, Escape and a swipe close the You sheet: back through history when the reader came from the tab root behind it,
+// otherwise (a /you opened directly, or after a resize) the entry is replaced by that root, so Back never returns to a
+// closed sheet.
 function closeYou() {
-  if (cameFrom() === "/") {
+  const root = lastTabRoot();
+  if (cameFrom() === root) {
     history.back();
     return;
   }
-  history.replaceState({}, "", "/");
+  history.replaceState({}, "", root);
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
 function App() {
@@ -131,13 +147,19 @@ function App() {
   // Sets data-text="large" on <html> while the system text size is 150 % or more (UI-SPEC 6.3).
   useEffect(() => watchTextSize(document.documentElement), []);
   const page = route.page;
+  const wide = useWide();
+  // The tab root the reader saw last is what the You sheet stands over on a phone (D-03); kept in memory only.
+  rememberTabRoot(route);
+  // On a phone /you renders the screen of the last tab root (the same elements and keys, so it stays mounted and keeps
+  // the You button as the place focus returns to) with the sheet over it; from 768px /you is a page of its own.
+  const shown = page === "you" && !wide ? parseRoute(lastTabRoot()) : route;
   // The story and Today's walk are full-screen flows (UI-SPEC A5, A7, 8.1): the tab bar is covered while one is open
   // and "‹ Today" is the way out. A slug that names no published check is the error state, which keeps the tab bar.
   const welcome = welcomeOpen && page === "home";
   const flow = welcome || page === "walk" || (page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id));
   let content: ReactNode;
   let youSheet: ReactNode = null;
-  switch (page) {
+  switch (shown.page) {
     case "my-walk":
       content = <MyWalk />;
       break;
@@ -151,16 +173,16 @@ function App() {
       content = <YourShelf />;
       break;
     case "bible":
-      content = <Reader route={route} />;
+      content = <Reader route={shown} />;
       break;
     case "pray":
       content = <Pray />;
       break;
     case "context":
-      content = route.id ? <ContextCheck key={route.id} slug={route.id} /> : <ContextChecks />;
+      content = shown.id ? <ContextCheck key={shown.id} slug={shown.id} /> : <ContextChecks />;
       break;
     case "grow":
-      content = <Grow id={route.id} />;
+      content = <Grow id={shown.id} />;
       break;
     case "journal":
       content = <JournalLibrary />;
@@ -172,24 +194,22 @@ function App() {
       content = <GivingPolicy />;
       break;
     case "you":
-      // You opens as a sheet over the tab root the reader was on (N-03); Today until Task 2 remembers the others.
-      content = <Today key={date} />;
-      youSheet = <YouSheet onClose={closeYou} />;
+      content = <YouPage />;
       break;
     case "profile":
       content = <Profile />;
       break;
     case "settings":
       content =
-        route.id === "reminders" ? <RemindersScreen /> : route.id === "appearance" ? <Appearance /> : <Settings />;
+        shown.id === "reminders" ? <RemindersScreen /> : shown.id === "appearance" ? <Appearance /> : <Settings />;
       break;
     case "circles":
-      content = <Circles key={route.id ?? "discovery"} slug={route.id} thread={route.thread}/>;
+      content = <Circles key={shown.id ?? "discovery"} slug={shown.id} thread={shown.thread}/>;
       break;
     case "community":
       content = (
         <>
-          <TopicHub id={route.id} thread={route.thread} />
+          <TopicHub id={shown.id} thread={shown.thread} />
           <details className="group-disclosure">
             <summary>Live chat and the original prayer wall</summary>
             <Community verse={contentFor(date)} online={online} />
@@ -222,7 +242,8 @@ function App() {
         </section>
       );
   }
-  const tab = activeTab(page, false, "today");
+  if (page === "you" && !wide) youSheet = <YouSheet onClose={closeYou} />;
+  const tab = activeTab(page, wide, rootTabOf(lastTabRoot()));
   return (
     <div className="shell" data-flow={flow ? "true" : undefined}>
       <a className="skip-link" href="#main">
