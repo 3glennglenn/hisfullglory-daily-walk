@@ -195,7 +195,7 @@ try {
   await check("Today at 200 % text on 390 and 320px: no sideways scroll, nothing clipped, the button and the last row above the tab bar, tab labels on one line", () => checkTodayLargeText(browser, base, published));
   await check("sponsor slot: nothing at any of the six places while no sponsor is set; a fixture sponsor shows only where it is listed, as a sponsored link without a query string", () => checkSponsor(browser, base));
   await check("context-check story: a full-screen flow with named steps that puts a finished story on the shelf once, and says so only when it was saved (UI-SPEC A7)", () => checkStoryFlow(browser, base, published));
-  await check("Your shelf: spines on boards (7 at 390px), AI badges and legend, tomorrow place, empty and large-text states, Back and the You row (UI-SPEC A9)", () => checkShelfScreen(browser, base, published));
+  await check("Your shelf: spines on boards (7 at 390px), AI badges and legend, tomorrow place, empty and large-text states, and its Back button (UI-SPEC A9)", () => checkShelfScreen(browser, base, published));
   await check("Context checks list newest first with its marks and AI labels; an unknown check shows two ways on (UI-SPEC A8, A16)", () => checkContextList(browser, base, published));
   await check("story end: the shelf moment settles once (none under Reduce Motion), the AI line, no sponsor, and the label on the share picture and the share text (UI-SPEC A7, D-06)", () => checkStoryEnd(browser, base, published));
   await check(
@@ -275,7 +275,7 @@ try {
     },
   );
   await check("the reader puts Scripture first: sticky toolbar, verses as text with one Tab stop, a heading per look (UI-SPEC A3)", () => checkReaderText(browser, base));
-  await check("the Bible library: context checks first, saved passages, testaments, books, chapter grids, Continue reading, the download states (UI-SPEC A2, A16)", () => checkLibrary(browser, base));
+  await check("the Bible library: context checks, saved passages, testaments, books, chapter grids, Continue reading, the download states (UI-SPEC A2, A16; 01.2 D-05)", () => checkLibrary(browser, base));
   await check("the title opens the picker, search sits behind More or an icon, sheets keep focus and swipe (UI-SPEC A3, A4)", () => checkReaderSheets(browser, base));
   await check("the end of the chapter: one filled Next, Mark as read, questions to carry, topics, the WEB line (UI-SPEC A3)", () => checkChapterEnd(browser, base));
   await check("Listen plays in a mini player above the tab bar, the spoken verse is gold, Stop gives focus back (UI-SPEC A3)", () => checkListen(browser, base));
@@ -692,9 +692,11 @@ try {
   await check(
     "You, Appearance: theme and Lamplight apply at once, survive a reload, and Automatic follows the device",
     async () => {
-      // The row on You names the current choice; Settings no longer has a Theme select.
+      // The row in the You sheet names the current choice; Settings no longer has a Theme select.
       await go("/you");
-      const row = page.getByRole("link", { name: /^Appearance/ });
+      const sheet = page.getByRole("dialog", { name: "You", exact: true });
+      await sheet.waitFor();
+      const row = sheet.getByRole("link", { name: /^Appearance/ });
       assert.equal(await row.locator(".list-row-value").innerText(), "Cover and story, Automatic");
       assert.equal(await row.getAttribute("href"), "/settings/appearance");
       await go("/settings");
@@ -940,7 +942,7 @@ try {
       // Escape acts only while focus is inside the card, closes it and leaves it unanswered.
       await withNotice({}, async (p) => {
         await card(p).waitFor();
-        await p.getByRole("link", { name: "Pray", exact: true }).focus();
+        await p.getByRole("link", { name: "Bible", exact: true }).focus();
         await p.keyboard.press("Escape");
         assert.equal(await card(p).count(), 1, "Escape elsewhere does not dismiss the notice");
         await card(p).getByRole("button", { name: "Keep Lamplight" }).focus();
@@ -1066,7 +1068,8 @@ try {
                 .getByRole("navigation", { name: "Main navigation" })
                 .getByRole("link")
                 .count(),
-              5,
+              width >= 768 ? 4 : 3,
+              `${path} ${width}: three tabs on a phone, four links (You too) in the sidebar`,
             );
             const invalidControls = await page
               .locator(
@@ -1118,7 +1121,8 @@ try {
           const plain = (b) => ({ left: b.left, right: b.right, top: b.top, bottom: b.bottom, width: b.width, height: b.height });
           const nav = document.querySelector("nav.tabbar");
           const bar = nav.getBoundingClientRect();
-          const items = [...nav.querySelectorAll("a")].map((a) => {
+          // You is a sidebar item only: below 768px it is not displayed and is not measured.
+          const items = [...nav.querySelectorAll("a")].filter((a) => a.offsetParent !== null).map((a) => {
             const label = a.querySelector(".tab-label");
             const style = getComputedStyle(label);
             return {
@@ -1146,7 +1150,7 @@ try {
           await go(path);
           const m = await measure();
           const where = `${path} at ${width}px`;
-          assert.deepEqual(m.items.map((i) => i.text), ["Today", "Bible", "Pray", "Community", "You"], where);
+          assert.deepEqual(m.items.map((i) => i.text), width >= 768 ? ["Today", "Bible", "Community", "You"] : ["Today", "Bible", "Community"], where);
           for (const item of m.items) {
             assert.ok(item.labelBox.height <= item.line + 0.5, `${where}: "${item.text}" is on one line (${item.labelBox.height} > ${item.line})`);
             assert.ok(item.box.left >= m.bar.left - 0.5 && item.box.right <= m.bar.right + 0.5, `${where}: "${item.text}" stays inside the bar`);
@@ -1157,8 +1161,8 @@ try {
           assert.ok(m.scrollWidth <= m.width, `${where}: no sideways scroll`);
           if (width < 768) {
             assert.equal(Math.round(m.bar.height), 64, `${where}: the capsule is 64px tall`);
-            assert.equal(Math.round(m.bar.left), 12, `${where}: 12px off the left edge`);
-            assert.equal(Math.round(m.width - m.bar.right), 12, `${where}: 12px off the right edge`);
+            assert.equal(Math.round(m.bar.left), 40, `${where}: 40px off the left edge`);
+            assert.equal(Math.round(m.width - m.bar.right), 40, `${where}: 40px off the right edge`);
             assert.equal(Math.round(m.height - m.bar.bottom), 12, `${where}: 12px above the bottom edge`);
             assert.ok(m.items.every((i) => i.size === m.items[0].size && Math.abs(i.size - 13) < 0.1), `${where}: labels are 13px`);
             assert.ok(m.items.every((i) => Math.abs(i.iconBox.width - 24) < 0.6), `${where}: icons are 24px`);
@@ -1168,7 +1172,7 @@ try {
           } else {
             assert.equal(Math.round(m.bar.width), 280, `${where}: a 280px sidebar`);
             assert.equal(Math.round(m.bar.left), 0);
-            assert.equal(await nav.getByRole("link").count(), 5, `${where}: five links in the sidebar`);
+            assert.equal(await nav.getByRole("link").count(), 4, `${where}: four links in the sidebar, You among them`);
             for (let i = 1; i < m.items.length; i++) assert.ok(m.items[i].box.top >= m.items[i - 1].box.bottom - 0.5, `${where}: the items are stacked`);
             for (const item of m.items) assert.ok(item.iconBox.right <= item.labelBox.left + 0.5, `${where}: "${item.text}" label sits beside its icon`);
             assert.ok(m.main.left >= 280 && m.main.width <= 680.5, `${where}: the content column is at most 680px, right of the sidebar (${m.main.left}, ${m.main.width})`);
@@ -1259,9 +1263,9 @@ try {
             const nav = document.querySelector("nav.tabbar");
             const bar = nav.getBoundingClientRect();
             return {
-              labels: [...nav.querySelectorAll(".tab-label")].map((l) => ({ text: l.textContent, height: l.getBoundingClientRect().height, line: parseFloat(getComputedStyle(l).lineHeight), size: parseFloat(getComputedStyle(l).fontSize) })),
-              icons: [...nav.querySelectorAll(".tab-icon")].map((i) => i.getBoundingClientRect().width),
-              items: [...nav.querySelectorAll("a")].map((a) => a.getBoundingClientRect()).map((b) => ({ left: b.left, right: b.right })),
+              labels: [...nav.querySelectorAll(".tab-label")].filter((l) => l.offsetParent !== null).map((l) => ({ text: l.textContent, height: l.getBoundingClientRect().height, line: parseFloat(getComputedStyle(l).lineHeight), size: parseFloat(getComputedStyle(l).fontSize) })),
+              icons: [...nav.querySelectorAll(".tab-icon")].filter((i) => i.offsetParent !== null).map((i) => i.getBoundingClientRect().width),
+              items: [...nav.querySelectorAll("a")].filter((a) => a.offsetParent !== null).map((a) => a.getBoundingClientRect()).map((b) => ({ left: b.left, right: b.right })),
               bar: { left: bar.left, right: bar.right, height: bar.height },
               overflows: nav.scrollWidth > nav.clientWidth,
               scrollWidth: document.documentElement.scrollWidth,
@@ -1324,7 +1328,8 @@ try {
         // Landscape: the side safe areas push the content in.
         await session.send("Emulation.setSafeAreaInsetsOverride", { insets: { top: 0, bottom: 21, left: 44, right: 44 } });
         await page.setViewportSize({ width: 700, height: 390 });
-        await go("/you");
+        // /settings, not /you: on a phone the h1 of /you is the tab root's, under the sheet.
+        await go("/settings");
         const side = await page.evaluate(() => {
           const h = document.querySelector("main h1").getBoundingClientRect();
           const bar = document.querySelector("nav.tabbar").getBoundingClientRect();
@@ -1706,9 +1711,9 @@ try {
   await check("Circles public/private lifecycle, roles, privacy, errors and responsive UI (controlled SDK)",()=>checkCircles(browser,base));
   await check("report dialog states, focus and sizes (controlled SDK)",()=>checkSafety(browser,base));
   await check("dialogs that replaced browser pop-ups: public contributions, public prayer updates, support requests (controlled SDK)",()=>checkDialogs(browser,base));
-  await check("Journal, My Walk and Grow are pushed screens of You: Back to You, one large title, no eyebrow, no uppercase text (UI-SPEC D-10, A12)",()=>checkPushedScreens(browser,base));
-  await check("Give: the card on You opens /give on page 1; the six pages change by tab, swipe and arrow keys; a card opens the outbound dialog with its host; nothing is loaded from the charities; 200 % text, the wide grid and Lamplight render",()=>checkGive(browser,base));
-  await check("Shop: the bag on Today and the card on You open the Shop screen; product links go to shop.hisfullglory.com/products/<handle>; both looks, Lamplight, 200 % text, no sideways scroll; nothing on Pray or Community links to the shop",()=>checkShop(browser,base));
+  await check("Journal, My walk and Grow are pushed screens of You: Back to You, one large title, no eyebrow, no uppercase text (UI-SPEC D-10, A12)",()=>checkPushedScreens(browser,base));
+  await check("the Give row in the You sheet opens /give on page 1; the six pages change by tab, swipe and arrow keys; a card opens the outbound dialog with its host; nothing is loaded from the charities; 200 % text, the wide grid and Lamplight render",()=>checkGive(browser,base));
+  await check("Shop: the bag on Today opens the Shop screen; the You sheet holds no shop; product links go to shop.hisfullglory.com/products/<handle>; both looks, Lamplight, 200 % text, no sideways scroll; nothing on Pray or Community links to the shop",()=>checkShop(browser,base));
   await check("Give and its policy, the Shop screen, Circles, the not-found and crash screens and the install offer: shared primitives, one filled button, the words of A16 (UI-SPEC A12, A16, 9.3)",()=>checkSurfaces(browser,base));
   await check("200 % text sweep over every app route at 390 and 320px: no sideways scroll, nothing clipped, controls 44px, tab labels on one line, the first screen holds the title and content, no bare Cancel, OK, Done or Close button (UI-SPEC 15.4, 15.9)",()=>checkTextSweep(browser,base,published));
   assert.deepEqual(errors, []);

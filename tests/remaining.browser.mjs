@@ -14,12 +14,12 @@ async function open(browser, base, path, viewport = { width: 390, height: 844 })
   return { context, page, problems };
 }
 
-// Task 1: Journal, My Walk and Grow are pushed screens of You: Back to You, one h1 in the large title style and no
+// Task 1: Journal, My walk and Grow are pushed screens of You: Back to You, one h1 in the large title style and no
 // uppercase text anywhere on the screen.
 export async function checkPushedScreens(browser, base) {
   for (const [path, title] of [
     ["/journal", "Your journal."],
-    ["/my-walk", "My Walk"],
+    ["/my-walk", "My walk"],
     ["/grow", "Room to grow."],
   ]) {
     const { context, page, problems } = await open(browser, base, path);
@@ -279,7 +279,7 @@ export async function checkTextSweep(browser, base, published) {
     ["/pray", null],
     ["/community", null],
     ["/community/circles", null],
-    ["/you", ".give-feature"], // the Give card now leads You (quick 261020-give); the rows follow it
+    ["/you", ".you-sheet .group"], // You is a sheet on a phone (01.2 N-03): the first group inside the open sheet
     ["/profile", null],
     ["/settings", null],
     ["/settings/appearance", null],

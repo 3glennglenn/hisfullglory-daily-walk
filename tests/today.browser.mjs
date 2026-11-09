@@ -425,10 +425,13 @@ export async function checkTodayLargeText(browser, base, published) {
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, "no horizontal scroll " + where);
       assert.equal(await page.locator(".cover").evaluate((el) => el.scrollWidth === el.clientWidth), true, "the hook is not clipped " + where);
       assert.equal(await page.locator(".cover").evaluate((el) => getComputedStyle(el).paddingTop), "16px", "16px padding in large-text mode " + where);
+      // Three tabs on a phone (01.2 D-01); You is a sidebar item only and is not displayed here.
       const labels = await page.locator(".tab-label").evaluateAll((list) =>
-        list.map((l) => ({ text: l.textContent, height: l.getBoundingClientRect().height, line: parseFloat(getComputedStyle(l).lineHeight) })),
+        list
+          .filter((l) => l.offsetParent !== null)
+          .map((l) => ({ text: l.textContent, height: l.getBoundingClientRect().height, line: parseFloat(getComputedStyle(l).lineHeight) })),
       );
-      assert.equal(labels.length, 5);
+      assert.equal(labels.length, 3);
       for (const label of labels) assert.ok(label.height <= label.line * 1.2, label.text + " stays on one line " + where + ": " + JSON.stringify(label));
       // The button can be reached: brought into view, it sits above the tab bar.
       await page.locator(".cover-button").focus();

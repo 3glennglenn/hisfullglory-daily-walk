@@ -208,7 +208,8 @@ export async function checkShelfScreen(browser, base, published) {
     }
   }
 
-  // Where the shelf is opened from decides what Back says; You has the row with the count.
+  // The shelf opens from Today's row and Back names Today, also after a reload. The You sheet has no Your shelf row any
+  // more (01.2 D-04: the shelf moves to Bible, Study; plan 04 moves this case there).
   {
     const { context, page, problems } = await open(browser, base, "/", { width: 390, height: 844 });
     try {
@@ -221,19 +222,17 @@ export async function checkShelfScreen(browser, base, published) {
       await page.locator('.today a[href="/shelf"]').click();
       await page.waitForURL("**/shelf");
       assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "from Today, Back names Today");
+      await page.reload();
+      await page.locator("main h1").waitFor();
+      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "after a reload too");
       await page.getByRole("button", { name: "Back to Today", exact: true }).click();
       await page.waitForURL(base + "/");
       await page.goto(base + "/you");
-      await page.locator("main h1").waitFor();
-      const row = page.locator('a[href="/shelf"]');
-      assert.equal(await row.locator(".list-row-title").innerText(), "Your shelf");
-      assert.equal(await row.locator(".list-row-value").innerText(), `${nine.length} read`);
-      await row.click();
-      await page.waitForURL("**/shelf");
-      assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1, "from You, Back names You");
-      await page.reload();
-      await page.locator("main h1").waitFor();
-      assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1, "after a reload too");
+      const sheet = page.getByRole("dialog", { name: "You", exact: true });
+      await sheet.waitFor();
+      assert.equal(await sheet.locator('a[href="/shelf"]').count(), 0, "the You sheet has no link to the shelf");
+      assert.equal(await sheet.getByText("Your shelf").count(), 0, "and no Your shelf row");
+      assert.equal(await sheet.getByText(/\d+ read/).count(), 0, "and no count of what was read");
       assert.deepEqual(problems, []);
     } finally {
       await context.close();
