@@ -21,11 +21,15 @@ import {
 } from "../src/platform/persistence.ts";
 import {
   LAMPLIGHT_KEY,
+  LAMPLIGHT_NAMES,
   LOOK_KEY,
+  LOOK_NAMES,
+  MODE_ORDER,
   NOTICE_KEY,
   escape,
   keep,
   migrateAppearance,
+  modeHint,
   readLamplight,
   readNotice,
   recordShown,
@@ -234,6 +238,39 @@ test("the shelf is in the backup export, goes with the account's keys, and guest
   assert.ok(forgetAccount(memory, "user-a") >= 1);
   assert.ok(![...memory.data.values()].some((value) => value.includes("account-story")));
   assert.deepEqual(loadPlatform(guest).state.shelf, [{ slug: "guest-story", finishedOn: "2026-10-05" }]);
+});
+
+// ---- Night light: the words (01.2 D-08, UI-SPEC 3) ------------------------------------------------------------
+
+test("the mode control reads Automatic, Day, Night light, in that order, over the unchanged stored values", () => {
+  assert.deepEqual(MODE_ORDER, ["auto", "off", "on"]);
+  assert.deepEqual(
+    MODE_ORDER.map((value) => LAMPLIGHT_NAMES[value]),
+    ["Automatic", "Day", "Night light"],
+  );
+  // Day writes "off" and Night light writes "on": what earlier versions stored still means the same thing.
+  const memory = new Memory();
+  writeLamplight("off", memory);
+  assert.equal(memory.getItem(LAMPLIGHT_KEY), "off");
+  writeLamplight("on", memory);
+  assert.equal(memory.getItem(LAMPLIGHT_KEY), "on");
+  assert.deepEqual(LOOK_NAMES, { cover: "Cover and story", marked: "Marked page" });
+  for (const name of [...Object.values(LAMPLIGHT_NAMES), ...Object.values(LOOK_NAMES)]) assert.doesNotMatch(name, /lamplight/i);
+});
+
+test("modeHint: one line per choice; Automatic names the iPhone only on an iPhone", () => {
+  const iPhone = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148";
+  const android = "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36";
+  const desktop = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
+  const iPad = "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148";
+  assert.equal(modeHint("auto", iPhone), "Follows your iPhone: Night light when it is dark.");
+  for (const agent of [android, desktop, iPad, ""])
+    assert.equal(modeHint("auto", agent), "Follows your device: Night light when it is dark.", agent);
+  for (const agent of [iPhone, android, desktop]) {
+    assert.equal(modeHint("off", agent), "Always the light pages.");
+    assert.equal(modeHint("on", agent), "Always Night light: warm and dim for reading at night.");
+  }
+  for (const choice of MODE_ORDER) assert.doesNotMatch(modeHint(choice, iPhone), /lamplight/i);
 });
 
 // ---- migrateAppearance ----------------------------------------------------------------------------------

@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
+import { Moon } from "lucide-react";
 import { usePlatform } from "../platform/store";
-import { LAMPLIGHT_NAMES, LOOK_NAMES } from "../platform/appearance";
+import { LOOK_NAMES } from "../platform/appearance";
 import { useAppearance } from "../platform/AppearanceProvider";
 import { useAuth } from "../platform/auth";
 import { supabase } from "../supabase";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle } from "../ui/Screen";
 import { Sheet } from "../ui/Sheet";
+import { ModeControl } from "./Appearance";
 import { dailyReminderOn } from "./Reminders";
 
 // The signed-in reader's own display name, shown on the account row. Nothing else about the account
@@ -35,13 +37,15 @@ function useDisplayName(userId: string | undefined) {
   return name;
 }
 
-// What You holds (01.2 D-02, in this order): the account, Your walk, Give, Settings, one help row and the Scripture line.
+// What You holds (01.2 D-02, in this order): the account, Your walk, Give, Settings (the Night light control with its hint,
+// then the Theme row to the Appearance screen, the reminder and privacy), one help row and the Scripture line.
 // No shop and no giving card: those are rows or live elsewhere (D-10). It is the same on the sheet (a phone) and on the
 // page (from 768px).
 export function YouContent() {
   const { session } = useAuth();
   const { state } = usePlatform();
-  const { look, lamplight } = useAppearance();
+  const { look } = useAppearance();
+  const modeLabel = useId();
   const name = useDisplayName(session?.user.id);
   const reminder = state.notifications["Daily Walk"] === true || dailyReminderOn();
   const days = state.local.completedDates.length;
@@ -68,12 +72,14 @@ export function YouContent() {
         />
       </GroupedList>
       <GroupedList title="Settings">
-        <Row
-          title="Appearance"
-          value={`${LOOK_NAMES[look]}, ${LAMPLIGHT_NAMES[lamplight]}`}
-          href="/settings/appearance"
-          chevron
-        />
+        <li className="mode-item">
+          <span className="mode-item-label" id={modeLabel}>
+            <Moon className="mode-item-icon" size={20} aria-hidden="true" focusable="false" />
+            Appearance
+          </span>
+          <ModeControl labelledBy={modeLabel} />
+        </li>
+        <Row title="Theme" value={LOOK_NAMES[look]} href="/settings/appearance" chevron />
         <Row title="Daily reminder" value={reminder ? "On" : "Off"} href="/settings/reminders" chevron />
         <Row title="Privacy and your data" href="/settings#privacy" chevron />
       </GroupedList>

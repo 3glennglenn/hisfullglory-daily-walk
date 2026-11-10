@@ -1545,15 +1545,51 @@ html[data-text="large"] main {
 .you-sheet-body > .group:first-child {
   margin-top: var(--space-2);
 }
-/* A row with a value keeps its title whole and gives the rest to the value, which wraps (today's Appearance reads
-   "Cover and story, Automatic"); the title never breaks inside a word. */
-.you-sheet .list-row-text:has(+ .list-row-value),
-.you-page .list-row-text:has(+ .list-row-value) {
-  flex: 0 0 auto;
+/* The mode control inline in Settings (UI-SPEC 2.4; the canvas "You" sheet): the Moon icon and "Appearance", then
+   Automatic | Day | Night light on a pill track, then one hint line. Canvas values to tokens: 14px type is
+   --text-footnote (13px, the scale has no 14); the 4px gaps and track padding are --space-1; the 10px spacing is
+   --space-3; the pill is --radius-pill; the track is --surface-2 and the chosen option the shared Segmented state
+   (--surface with the 2px --focus edge, which keeps the choice clear without a shade of grey); options are 44px
+   high, not 38px. The Moon is --link, and --gilt in Cover Night light, where the canvas draws it. */
+.mode-item {
+  padding: var(--space-3) var(--space-5);
 }
-.you-sheet .list-row-text + .list-row-value,
-.you-page .list-row-text + .list-row-value {
-  flex: 1 1 0;
+.mode-item-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.47;
+}
+.mode-item-icon {
+  flex: none;
+  color: var(--link);
+}
+:root:not([data-look="marked"])[data-mode="lamplight"] .mode-item-icon {
+  color: var(--gilt);
+}
+.mode-item .segmented {
+  border-radius: var(--radius-pill);
+}
+.mode-item .segmented [role="radio"] {
+  padding-inline: var(--space-1);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  line-height: 1.38;
+}
+html[data-text="large"] .mode-item .segmented {
+  border-radius: var(--radius-md);
+}
+html[data-text="large"] .mode-item .segmented [role="radio"] {
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-body);
+}
+.mode-item .appearance-hint {
+  margin: var(--space-3) 0 0;
 }
 .you-footnote {
   margin: var(--space-5) var(--space-5) 0;
@@ -2068,20 +2104,11 @@ html[data-mode="lamplight"] .mini-cover::after {
 [data-look-mini="marked"] .mini-bar:nth-child(2) { top: 20px; width: 56%; }
 [data-look-mini="marked"] .mini-bar:nth-child(3) { top: 32px; width: 48%; }
 [data-look-mini="marked"] .mini-bar:nth-child(4) { top: 44px; width: 52%; }
-.appearance-hint,
-.appearance-now {
-  margin: var(--space-3) var(--space-5) 0;
-  font-size: var(--text-body);
-  line-height: 1.47;
-}
 .appearance-hint {
+  margin: var(--space-3) var(--space-5) 0;
   color: var(--muted);
-}
-.appearance-now {
-  color: var(--ink);
-}
-.appearance-now:empty {
-  margin: 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
 }
 
 /* ==== Lamplight notice (UI-SPEC 4; src/ui/LamplightNotice.tsx) ====

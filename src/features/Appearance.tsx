@@ -1,16 +1,13 @@
-import { useRef, type KeyboardEvent } from "react";
-import { LAMPLIGHT_NAMES, LOOK_NAMES, type Lamplight, type Look } from "../platform/appearance";
+import { useId, useRef, type KeyboardEvent } from "react";
+import { LAMPLIGHT_NAMES, LOOK_NAMES, MODE_ORDER, modeHint, type Look } from "../platform/appearance";
 import { useAppearance } from "../platform/AppearanceProvider";
 import { Toolbar } from "../ui/Screen";
 import { Segmented, radioKeyTarget } from "../ui/Segmented";
 
-// You, Appearance (UI-SPEC A13): the theme and Lamplight, in one place, applied the moment they are
+// You, Appearance (UI-SPEC A13, 01.2 D-08): the theme and Night light, in one place, applied the moment they are
 // chosen. Nothing here is saved to an account; the choice lives in two keys on this device.
 const looks: readonly Look[] = ["cover", "marked"];
-const lamplightOptions = (["auto", "on", "off"] as const satisfies readonly Lamplight[]).map((value) => ({
-  value,
-  label: LAMPLIGHT_NAMES[value],
-}));
+const modeOptions = MODE_ORDER.map((value) => ({ value, label: LAMPLIGHT_NAMES[value] }));
 
 // A drawing of Today in a look, with no text: the cover block (Cover) or the ribbon (Marked) above three
 // bars. It is drawn in the current mode, so the two tiles show what each look would be right now.
@@ -34,11 +31,25 @@ function Tick() {
   );
 }
 
-export const LAMPLIGHT_HINT =
-  "Lamplight dims the page to warm browns for reading at night. Automatic follows your device.";
+// The mode control, Automatic | Day | Night light, with the one line that says what the choice does (UI-SPEC 2.4, 3).
+// It is used on the Appearance screen and inline in the You sheet; `labelledBy` is the id of the visible name that
+// the group takes ("Night light" on the screen, "Appearance" in the sheet). Choosing applies at once and nothing
+// else happens: no card, no announcement, no focus change (D-09).
+export function ModeControl({ labelledBy }: { labelledBy: string }) {
+  const { lamplight, setLamplight } = useAppearance();
+  const hint = useId();
+  return (
+    <>
+      <Segmented labelledBy={labelledBy} describedBy={hint} value={lamplight} options={modeOptions} onChange={setLamplight} />
+      <p className="appearance-hint" id={hint}>
+        {modeHint(lamplight, navigator.userAgent)}
+      </p>
+    </>
+  );
+}
 
 export function Appearance() {
-  const { look, lamplight, deviceDark, setLook, setLamplight } = useAppearance();
+  const { look, setLook } = useAppearance();
   const tiles = useRef<HTMLDivElement>(null);
   function onTileKeys(event: KeyboardEvent<HTMLDivElement>) {
     const next = radioKeyTarget(event.key, looks, look);
@@ -76,18 +87,10 @@ export function Appearance() {
         </div>
       </section>
       <section className="group">
-        <h2 className="group-title" id="appearance-lamplight">
-          Lamplight
+        <h2 className="group-title" id="appearance-mode">
+          Night light
         </h2>
-        <Segmented labelledBy="appearance-lamplight" value={lamplight} options={lamplightOptions} onChange={setLamplight} />
-        <p className="appearance-hint">{LAMPLIGHT_HINT}</p>
-        <p className="appearance-now" role="status">
-          {lamplight === "auto"
-            ? deviceDark
-              ? "On now, because your device is set to dark."
-              : "Off now, because your device is set to light."
-            : ""}
-        </p>
+        <ModeControl labelledBy="appearance-mode" />
       </section>
     </section>
   );

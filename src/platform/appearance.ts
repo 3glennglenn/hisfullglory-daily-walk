@@ -12,9 +12,26 @@ export type Look = "cover" | "marked";
 export type Lamplight = "auto" | "on" | "off";
 export type Mode = "light" | "lamplight";
 
-/** The words the reader sees for each look and Lamplight setting (UI-SPEC 9.1: "theme", "Lamplight"). */
+/**
+ * The words the reader sees for each look and mode (01.2 D-08, UI-SPEC 3): "Theme" for the look, "Night light" for the
+ * dark mode. The stored values stay auto, on and off: Day is off, Night light is on.
+ */
 export const LOOK_NAMES: Record<Look, string> = { cover: "Cover and story", marked: "Marked page" };
-export const LAMPLIGHT_NAMES: Record<Lamplight, string> = { auto: "Automatic", on: "On", off: "Off" };
+export const LAMPLIGHT_NAMES: Record<Lamplight, string> = { auto: "Automatic", off: "Day", on: "Night light" };
+/** The order of the mode control: Automatic, Day, Night light. */
+export const MODE_ORDER: readonly Lamplight[] = ["auto", "off", "on"];
+
+/**
+ * The one line under the mode control (UI-SPEC 2.4 and 3). Automatic names the iPhone only when the user agent says
+ * iPhone (the store app and Safari on an iPhone); on Android, the web and an iPad it says "device", as the website does.
+ */
+export function modeHint(choice: Lamplight, userAgent: string = typeof navigator === "undefined" ? "" : navigator.userAgent): string {
+  if (choice === "off") return "Always the light pages.";
+  if (choice === "on") return "Always Night light: warm and dim for reading at night.";
+  return /iPhone/.test(userAgent)
+    ? "Follows your iPhone: Night light when it is dark."
+    : "Follows your device: Night light when it is dark.";
+}
 
 type Reader = Pick<Storage, "getItem">;
 

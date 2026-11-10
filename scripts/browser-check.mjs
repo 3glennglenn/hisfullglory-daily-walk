@@ -740,41 +740,13 @@ try {
     },
   );
   await check(
-    "You, Appearance: theme and Lamplight apply at once, survive a reload, and Automatic follows the device",
+    "You and Appearance: theme and Night light apply at once, survive a reload, and Automatic follows the device (01.2 D-08)",
     async () => {
-      // The row in the You sheet names the current choice; Settings no longer has a Theme select.
-      await go("/you");
-      const sheet = page.getByRole("dialog", { name: "You", exact: true });
-      await sheet.waitFor();
-      const row = sheet.getByRole("link", { name: /^Appearance/ });
-      assert.equal(await row.locator(".list-row-value").innerText(), "Cover and story, Automatic");
-      assert.equal(await row.getAttribute("href"), "/settings/appearance");
-      await go("/settings");
-      assert.equal(await page.getByLabel("Theme", { exact: true }).count(), 0, "no Theme select in Settings");
-      await go("/settings/appearance");
-      assert.equal(await page.locator("main h1").innerText(), "Appearance");
-      const themes = page.getByRole("radiogroup", { name: "Theme", exact: true });
-      const lamplight = page.getByRole("radiogroup", { name: "Lamplight", exact: true });
-      assert.deepEqual(await themes.getByRole("radio").allInnerTexts(), ["Cover and story", "Marked page"]);
-      assert.deepEqual(await lamplight.getByRole("radio").allInnerTexts(), ["Automatic", "On", "Off"]);
-      assert.equal(await themes.getByRole("radio", { name: "Cover and story" }).getAttribute("aria-checked"), "true");
-      assert.equal(await lamplight.getByRole("radio", { name: "Automatic" }).getAttribute("aria-checked"), "true");
-      assert.equal(await page.getByRole("button", { name: /save/i }).count(), 0, "no Save button");
-      assert.ok(
-        await page
-          .getByText("Lamplight dims the page to warm browns for reading at night. Automatic follows your device.", { exact: true })
-          .isVisible(),
-      );
-      // The tiles are at least 152 x 176 and the segments 44px tall.
-      for (const tile of await themes.getByRole("radio").all()) {
-        const box = await tile.boundingBox();
-        assert.ok(box.width >= 152 && box.height >= 176, "tile size " + JSON.stringify(box));
-      }
-      for (const segment of await lamplight.getByRole("radio").all())
-        assert.ok((await segment.boundingBox()).height >= 43.9, "segment is 44px tall");
-      // Choosing applies at once, with no Save.
-      await themes.getByRole("radio", { name: "Marked page" }).click();
-      await lamplight.getByRole("radio", { name: "On", exact: true }).click();
+      const hints = {
+        auto: "Follows your device: Night light when it is dark.",
+        off: "Always the light pages.",
+        on: "Always Night light: warm and dim for reading at night.",
+      };
       const seen = () =>
         page.evaluate(() => ({
           look: document.documentElement.dataset.look,
@@ -784,40 +756,105 @@ try {
           stored: [localStorage.getItem("hfg-look"), localStorage.getItem("hfg-lamplight")],
           themeColor: document.querySelector('meta[name="theme-color"]').getAttribute("content"),
         }));
+      // In the You sheet: the mode control inline, with one hint line, then the Theme row to the Appearance screen.
+      await go("/you");
+      const sheet = page.getByRole("dialog", { name: "You", exact: true });
+      await sheet.waitFor();
+      const inline = sheet.getByRole("radiogroup", { name: "Appearance", exact: true });
+      assert.deepEqual(await inline.getByRole("radio").allInnerTexts(), ["Automatic", "Day", "Night light"]);
+      assert.equal(await inline.getByRole("radio", { name: "Automatic" }).getAttribute("aria-checked"), "true");
+      const hintId = await inline.getAttribute("aria-describedby");
+      assert.ok(hintId, "the radiogroup is described by its hint");
+      const hintLine = sheet.locator('[id="' + hintId + '"]');
+      assert.equal(await hintLine.innerText(), hints.auto);
+      assert.equal(await sheet.locator(".appearance-hint").count(), 1, "one hint line");
+      for (const segment of await inline.getByRole("radio").all())
+        assert.ok((await segment.boundingBox()).height >= 43.9, "inline segment is 44px tall");
+      const theme = sheet.getByRole("link", { name: /^Theme/ });
+      assert.equal(await theme.locator(".list-row-value").innerText(), "Cover and story");
+      assert.equal(await theme.getAttribute("href"), "/settings/appearance");
+      assert.equal(await sheet.getByRole("link", { name: /^Appearance/ }).count(), 0, "Appearance is a control now, not a row");
+      // Choosing there applies at once, changes the hint and leaves the sheet and the focus where they are.
+      await inline.getByRole("radio", { name: "Night light", exact: true }).click();
+      assert.deepEqual(
+        await seen(),
+        { look: "cover", mode: "lamplight", color: "rgb(246, 240, 231)", background: "rgb(26, 18, 14)", stored: [null, "on"], themeColor: "#1A120E" },
+        "Night light in the sheet applies at once",
+      );
+      assert.equal(await hintLine.innerText(), hints.on);
+      assert.equal(await page.evaluate(() => document.activeElement?.textContent), "Night light", "focus stays on the choice");
+      assert.ok(await sheet.isVisible(), "the sheet stays open");
+      await inline.getByRole("radio", { name: "Day", exact: true }).click();
+      assert.equal(await page.evaluate(() => localStorage.getItem("hfg-lamplight")), "off", "Day is stored as off");
+      assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
+      assert.equal(await hintLine.innerText(), hints.off);
+      await inline.getByRole("radio", { name: "Automatic", exact: true }).click();
+      assert.equal(await hintLine.innerText(), hints.auto);
+      // The Theme row leads to the Appearance screen.
+      await theme.click();
+      await page.waitForURL((url) => url.pathname === "/settings/appearance");
+      await go("/settings");
+      assert.equal(await page.getByLabel("Theme", { exact: true }).count(), 0, "no Theme select in Settings");
+      await go("/settings/appearance");
+      assert.equal(await page.locator("main h1").innerText(), "Appearance");
+      const themes = page.getByRole("radiogroup", { name: "Theme", exact: true });
+      const mode = page.getByRole("radiogroup", { name: "Night light", exact: true });
+      assert.deepEqual(await themes.getByRole("radio").allInnerTexts(), ["Cover and story", "Marked page"]);
+      assert.deepEqual(await mode.getByRole("radio").allInnerTexts(), ["Automatic", "Day", "Night light"]);
+      assert.equal(await themes.getByRole("radio", { name: "Cover and story" }).getAttribute("aria-checked"), "true");
+      assert.equal(await mode.getByRole("radio", { name: "Automatic" }).getAttribute("aria-checked"), "true");
+      assert.equal(await page.getByRole("button", { name: /save/i }).count(), 0, "no Save button");
+      const screenHint = page.locator("main .appearance-hint");
+      assert.equal(await screenHint.count(), 1, "one hint line on the screen");
+      assert.equal(await screenHint.innerText(), hints.auto);
+      assert.equal(await page.locator(".appearance-now").count(), 0, "no current-effect line any more");
+      // The tiles are at least 152 x 176 and the segments 44px tall.
+      for (const tile of await themes.getByRole("radio").all()) {
+        const box = await tile.boundingBox();
+        assert.ok(box.width >= 152 && box.height >= 176, "tile size " + JSON.stringify(box));
+      }
+      for (const segment of await mode.getByRole("radio").all())
+        assert.ok((await segment.boundingBox()).height >= 43.9, "segment is 44px tall");
+      // Choosing applies at once, with no Save.
+      await themes.getByRole("radio", { name: "Marked page" }).click();
+      await mode.getByRole("radio", { name: "Night light", exact: true }).click();
       const marked = { look: "marked", mode: "lamplight", color: "rgb(246, 240, 231)", background: "rgb(26, 18, 14)", stored: ["marked", "on"], themeColor: "#1A120E" };
-      assert.deepEqual(await seen(), marked, "Marked page and Lamplight On apply at once");
+      assert.deepEqual(await seen(), marked, "Marked page and Night light apply at once");
+      assert.equal(await screenHint.innerText(), hints.on);
       assert.equal(await themes.getByRole("radio", { name: "Marked page" }).getAttribute("aria-checked"), "true");
       await page.reload();
       await page.locator("main h1").waitFor();
       assert.deepEqual(await seen(), marked, "both choices survive a reload");
-      assert.equal(await lamplight.getByRole("radio", { name: "On", exact: true }).getAttribute("aria-checked"), "true");
+      assert.equal(await mode.getByRole("radio", { name: "Night light", exact: true }).getAttribute("aria-checked"), "true");
       // The old key is not written any more.
       assert.equal(await page.evaluate(() => localStorage.getItem("hfg-appearance")), null);
       // Arrow keys move the choice within a group, and only the chosen option is in the Tab order.
-      await lamplight.getByRole("radio", { name: "On", exact: true }).focus();
+      await mode.getByRole("radio", { name: "Night light", exact: true }).focus();
       await page.keyboard.press("ArrowRight");
-      assert.equal(await lamplight.getByRole("radio", { name: "Off", exact: true }).getAttribute("aria-checked"), "true");
-      assert.equal(await page.evaluate(() => document.activeElement.textContent), "Off");
+      assert.equal(await mode.getByRole("radio", { name: "Automatic", exact: true }).getAttribute("aria-checked"), "true", "the arrow wraps to Automatic");
+      await page.keyboard.press("ArrowRight");
+      assert.equal(await mode.getByRole("radio", { name: "Day", exact: true }).getAttribute("aria-checked"), "true");
+      assert.equal(await page.evaluate(() => document.activeElement.textContent), "Day");
       assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
+      assert.equal(await screenHint.innerText(), hints.off);
       assert.deepEqual(
-        await lamplight.getByRole("radio").evaluateAll((list) => list.map((r) => r.tabIndex)),
-        [-1, -1, 0],
+        await mode.getByRole("radio").evaluateAll((list) => list.map((r) => r.tabIndex)),
+        [-1, 0, -1],
       );
-      // Automatic follows the device while the app is open, and says what it does now.
+      // Automatic follows the device while the app is open.
       await themes.getByRole("radio", { name: "Cover and story" }).click();
-      await lamplight.getByRole("radio", { name: "Automatic" }).click();
+      await mode.getByRole("radio", { name: "Automatic" }).click();
       await page.emulateMedia({ colorScheme: "light" });
       assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
-      assert.equal(await page.getByRole("status").filter({ hasText: "Off now" }).innerText(), "Off now, because your device is set to light.");
       await page.emulateMedia({ colorScheme: "dark" });
       await page.waitForFunction(() => document.documentElement.dataset.mode === "lamplight");
-      assert.equal(await page.getByRole("status").filter({ hasText: "On now" }).innerText(), "On now, because your device is set to dark.");
       assert.equal(await page.evaluate(() => document.documentElement.dataset.look), "cover");
-      // On and Off say nothing about the device.
-      await lamplight.getByRole("radio", { name: "Off", exact: true }).click();
-      assert.equal(await page.locator("p.appearance-now").innerText(), "");
+      assert.equal(await screenHint.innerText(), hints.auto, "Automatic keeps its hint on a dark device");
+      // Day holds whatever the device does.
+      await mode.getByRole("radio", { name: "Day", exact: true }).click();
+      assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
       // Back to the state the other checks expect: Cover and story, Automatic, a light device.
-      await lamplight.getByRole("radio", { name: "Automatic" }).click();
+      await mode.getByRole("radio", { name: "Automatic" }).click();
       await page.emulateMedia({ colorScheme: "light" });
       await page.waitForFunction(() => document.documentElement.dataset.mode === "light");
     },
