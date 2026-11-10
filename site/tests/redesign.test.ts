@@ -250,11 +250,17 @@ test("the legal pages keep their gate: approved means no draft banner and no noi
   }
 });
 
-test("the privacy page lists the new on-device keys and the shelf, and no longer the old two (UI-SPEC 16)", () => {
-  const text = textOf(mainOf(read("/privacy")));
-  for (const key of ["hfg-look", "hfg-lamplight", "hfg-lamplight-notice"]) assert.ok(text.includes(key), key);
-  assert.ok(text.includes("the older keys hfg-theme and hfg-appearance are read once and then removed") || text.includes("older keys hfg-theme and hfg-appearance are read once and then removed"));
-  assert.ok(!mainOf(read("/privacy")).includes("<strong>hfg-theme</strong>"), "hfg-theme is not a listed key any more");
+test("the privacy page lists the on-device keys with the Night light wording, the shelf, and no longer the old keys (UI-SPEC 16, 01.2 D-08, D-09)", () => {
+  const main = mainOf(read("/privacy"));
+  const text = textOf(main);
+  for (const key of ["hfg-look", "hfg-lamplight"]) assert.ok(text.includes(key), key);
+  assert.ok(text.includes("Night light setting"), "the setting is named Night light");
+  assert.ok(text.includes("older keys hfg-theme and hfg-appearance are read once and then removed"));
+  assert.ok(!main.includes("<strong>hfg-theme</strong>"), "hfg-theme is not a listed key any more");
+  // hfg-lamplight-notice is no longer a listed key; it appears only in the sentence about its removal.
+  assert.ok(!main.includes("<strong>hfg-lamplight-notice</strong>"), "hfg-lamplight-notice is not a listed key any more");
+  assert.equal(count(text, "hfg-lamplight-notice"), 1, "the old notice key is named once");
+  assert.ok(text.includes("the older key hfg-lamplight-notice is removed the next time the app opens"), "its removal is stated");
   assert.ok(text.includes("your shelf of the context checks you have read to the end"), "the shelf is among the private data");
 });
 
@@ -262,13 +268,48 @@ test("the privacy page lists the new on-device keys and the shelf, and no longer
 test("the style guide shows the four colour blocks with their contrast pairs and the type scale (W7)", () => {
   const html = read("/styleguide");
   const words = textOf(mainOf(html));
-  for (const name of ["Cover Light", "Cover Lamplight", "Marked Light", "Marked Lamplight"]) assert.ok(words.includes(name), name);
+  for (const name of ["Cover Light", "Cover Night light", "Marked Light", "Marked Night light"]) assert.ok(words.includes(name), name);
   assert.equal(count(html, 'class="panel"'), 4, "four colour panels");
   assert.ok(words.includes("ink on bg") && words.includes("on-sig on sig (the hook)"), "the contrast pairs");
   // Every pair printed passes its need in all four blocks (the same numbers tests/tokens-contrast.test.ts proves in the app).
   assert.equal(count(words, "below"), 0, "no pair is below its need");
   for (const size of ["34px", "28px", "20px", "17px", "13px"]) assert.ok(words.includes(size), `${size} in the scale`);
   assert.ok(html.includes('content="noindex"'), "not indexed");
+});
+
+/** Every built page under dist (every index.html), as [path, html]. */
+function builtPages(dir = "dist"): [string, string][] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) return builtPages(path);
+    return entry.name === "index.html" ? [[path.replaceAll("\\", "/"), readFileSync(path, "utf8")] as [string, string]] : [];
+  });
+}
+
+// 01.2 D-08: the dark mode is called Night light wherever a visitor reads it. Data attributes, class
+// names and code comments keep the internal name and are not read by visitors. Two things are not
+// the mode's name and stay out of the check: the storage keys the privacy page must list
+// (hfg-lamplight, hfg-lamplight-notice), and the ordinary English word "lamplight" in written
+// content (the AI explanation of Revelation 18 uses it); on the pages whose <main> is written
+// content (Bible chapters, context checks, articles, topics) only the page around <main> is read.
+const oldName = /(?<![\w-])lamplight(?![\w-])/i;
+const writtenContent = /^dist\/(bible|context-checks|articles|topics)\//;
+test("no page shows the old name of the mode", () => {
+  const pages = builtPages();
+  assert.ok(pages.length > 100, "the walker found the built pages");
+  for (const [path, html] of pages) {
+    let shown = html
+      .replace(/<style[\s\S]*?<\/style>/g, "")
+      .replace(/<script[\s\S]*?<\/script>/g, "")
+      .replace(/<!--[\s\S]*?-->/g, "");
+    if (writtenContent.test(path)) shown = shown.replace(/<main[\s\S]*?<\/main>/g, "");
+    assert.ok(!oldName.test(textOf(shown)), `${path}: the visible text names the old mode`);
+    // What a reader or a screen reader gets from attributes: alt, title, aria-label, and the hint text of a field.
+    for (const [, name, a, b, c] of shown.matchAll(/\s(alt|title|aria-label|aria-description|placeholder)=(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g))
+      assert.ok(!oldName.test(a ?? b ?? c ?? ""), `${path}: ${name} names the old mode`);
+  }
+  // The check can fail: the switch of an unchanged page would be caught (the word as a label).
+  assert.ok(oldName.test("Lamplight") && oldName.test("the Lamplight switch") && !oldName.test("hfg-lamplight"), "the pattern reads the word, not the keys");
 });
 
 /** Every .astro and .css file under site/src, as [path, text]. */

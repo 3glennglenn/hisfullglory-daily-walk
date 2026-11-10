@@ -1,7 +1,7 @@
 ---
 // Internal reference page for the house style (UI-SPEC W7). Not linked in the navigation and not
-// indexed. It shows the four colour blocks side by side (Cover Light, Cover Lamplight, Marked Light,
-// Marked Lamplight), each with its swatches and the main contrast pairs of UI-SPEC 5.4, computed
+// indexed. It shows the four colour blocks side by side (Cover Light, Cover Night light, Marked Light,
+// Marked Night light), each with its swatches and the main contrast pairs of UI-SPEC 5.4, computed
 // here at build time from the hex values the app's stylesheet gives (tokens.generated.json), and the
 // type scale: five sizes and the Marked numeral.
 import Base from "../layouts/Base.astro";
@@ -9,9 +9,9 @@ import tokens from "../styles/tokens.generated.json";
 
 const blocks = [
   { key: "coverLight", name: "Cover Light" },
-  { key: "coverLamplight", name: "Cover Lamplight" },
+  { key: "coverLamplight", name: "Cover Night light" },
   { key: "markedLight", name: "Marked Light" },
-  { key: "markedLamplight", name: "Marked Lamplight" },
+  { key: "markedLamplight", name: "Marked Night light" },
 ] as const;
 
 type Row = (typeof tokens)[number];
@@ -78,7 +78,7 @@ const scale = [
       <h2>Colours</h2>
       <p class="muted">
         The four blocks side by side: two themes, Cover and story and Marked page, each in Light and
-        in Lamplight. Contrast is computed from the hex values; the need is 4.5 for text and 3 for
+        in Night light. Contrast is computed from the hex values; the need is 4.5 for text and 3 for
         graphics.
       </p>
       <div class="blocks">
