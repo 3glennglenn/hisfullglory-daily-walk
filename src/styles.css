@@ -2313,6 +2313,7 @@ html[data-text="large"] .sheet-actions-split {
 
 /* ==== Pray and Community (UI-SPEC A10, A11; src/features/Pray.tsx, src/social/TopicHub.tsx) ==== */
 .pray > .segmented,
+.library > .segmented,
 .community > .segmented {
   margin: 0 0 var(--space-6);
 }
@@ -3751,7 +3752,7 @@ html[data-text="large"] .reader-toolbar .rt-more {
   }
 }
 
-/* -- The library, /bible (A2) and the passage picker -- */
+/* -- The library, /bible (A2; 01.2 D-05) and the passage picker -- */
 .picker .segmented {
   margin: 0 0 var(--space-4);
 }

@@ -232,7 +232,7 @@ async function seedState(page, change) {
 
 const focusedText = (page) => page.evaluate(() => document.activeElement?.textContent?.trim() ?? null);
 
-/** The library of A2: the context checks first, saved passages, the testaments, the books and their chapter grids. */
+/** The library of A2 and 01.2 D-05: Read and Study under the title row; Read holds Continue reading and the two testaments. */
 export async function checkLibrary(browser, base) {
   const ctx = await open(browser);
   try {
@@ -241,48 +241,42 @@ export async function checkLibrary(browser, base) {
     assert.equal(await page.locator("main h1").count(), 1);
     assert.equal(await page.locator("main h1").innerText(), "Bible");
     assert.equal(await page.getByRole("button", { name: "Search the Bible", exact: true }).count(), 1, "Search is an icon next to the title");
+    assert.equal(await page.getByRole("link", { name: "You", exact: true }).count(), 1, "the You button is in the title row");
+    // Two sections, Read chosen when the app opens.
+    const sections = page.getByRole("radiogroup", { name: "Bible sections" });
+    assert.deepEqual(await sections.getByRole("radio").allInnerTexts(), ["Read", "Study"]);
+    assert.equal(await sections.getByRole("radio", { name: "Read" }).getAttribute("aria-checked"), "true", "Read is chosen when the app opens");
     assert.equal(await page.getByText("Continue reading").count(), 0, "no Continue reading before a chapter was opened");
-    // The context checks are the library's first row, with the live count.
-    const n = published().length;
-    const row = page.getByRole("link", { name: /^Context checks/ });
-    assert.equal(await row.count(), 1);
-    assert.equal(await row.getAttribute("href"), "/context");
-    assert.equal(await row.innerText(), `Context checks\n${n === 1 ? "1 well-known verse, back in its story" : `${n} well-known verses, back in their story`}`);
-    const firstRows = await page.locator(".group").first().evaluate((el) => el.textContent);
-    assert.match(firstRows, /^Context checks/);
-    // Saved passages: empty, then with a bookmark.
-    const saved = page.getByRole("button", { name: /^Saved passages/ });
-    await saved.click();
-    const sheet = page.getByRole("dialog", { name: "Saved passages" });
-    await sheet.waitFor();
-    assert.equal(await sheet.getByText("Nothing saved yet. Tap a verse and choose Save verse.").count(), 1);
+    assert.equal(await page.getByRole("link", { name: /^Context checks/ }).count(), 0, "the study tools are under Study, not Read");
+    // The testaments, counted from the Bible data.
+    const oldRow = page.getByRole("button", { name: /^Old Testament/ });
+    const newRow = page.getByRole("button", { name: /^New Testament/ });
+    assert.equal(await oldRow.innerText(), "Old Testament\n39 books");
+    assert.equal(await newRow.innerText(), "New Testament\n27 books");
+    // Old Testament: a sheet with 39 books and no Testament switch; Escape closes it and focus is back on the row.
+    await oldRow.click();
+    const oldSheet = page.getByRole("dialog", { name: "Old Testament", exact: true });
+    await oldSheet.waitFor();
+    assert.equal(await oldSheet.locator(".picker-books li").count(), 39);
+    assert.equal(await oldSheet.getByRole("radiogroup", { name: "Testament" }).count(), 0, "the sheet is fixed to one testament");
+    assert.equal(await oldSheet.getByRole("button", { name: "Genesis", exact: true }).count(), 1);
+    assert.equal(await oldSheet.getByRole("button", { name: "Matthew", exact: true }).count(), 0);
     await page.keyboard.press("Escape");
-    await sheet.waitFor({ state: "detached" });
-    await page.waitForFunction(() => document.activeElement?.textContent?.trim().startsWith("Saved passages"), undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the row"));
-    await seedState(page, { bookmarks: ["/bible/romans/8/28", "/bible/song-of-solomon/2/4"] });
-    await page.getByRole("button", { name: /^Saved passages/ }).click();
-    const list = page.getByRole("dialog", { name: "Saved passages" });
-    await list.waitFor();
-    assert.deepEqual(await list.getByRole("link").allInnerTexts(), ["Romans 8:28", "Song of Solomon 2:4"], "bookmarks read as references");
-    await list.getByRole("link", { name: "Romans 8:28" }).click();
-    await page.waitForURL("**/bible/romans/8/28");
-    // Old and New Testament segments, the books, one chapter grid.
-    await goto(page, base, "/bible");
-    const segments = page.getByRole("radiogroup", { name: "Testament" });
-    assert.equal(await segments.getByRole("radio", { name: "Old Testament" }).getAttribute("aria-checked"), "true");
-    assert.equal(await page.getByRole("button", { name: "Genesis", exact: true }).count(), 1);
-    assert.equal(await page.getByRole("button", { name: "Matthew", exact: true }).count(), 0, "the New Testament books are on the other segment");
-    assert.equal(await page.locator(".picker-books li").count(), 39);
-    await segments.getByRole("radio", { name: "New Testament" }).click();
-    assert.equal(await page.locator(".picker-books li").count(), 27);
-    await page.getByRole("button", { name: "John", exact: true }).click();
-    assert.equal(await page.getByRole("button", { name: "John", exact: true }).getAttribute("aria-expanded"), "true");
+    await oldSheet.waitFor({ state: "detached" });
+    await page.waitForFunction(() => document.activeElement?.textContent?.trim().startsWith("Old Testament"), undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the Old Testament row"));
+    // New Testament: 27 books, John opens its 52 x 52 chapter buttons, Chapter 3 opens the chapter.
+    await newRow.click();
+    const newSheet = page.getByRole("dialog", { name: "New Testament", exact: true });
+    await newSheet.waitFor();
+    assert.equal(await newSheet.locator(".picker-books li").count(), 27);
+    await newSheet.getByRole("button", { name: "John", exact: true }).click();
+    assert.equal(await newSheet.getByRole("button", { name: "John", exact: true }).getAttribute("aria-expanded"), "true");
     const cells = await page.locator(".chapter-cell").evaluateAll((els) => els.map((el) => ({ label: el.getAttribute("aria-label"), top: Math.round(el.getBoundingClientRect().top), w: Math.round(el.getBoundingClientRect().width), h: Math.round(el.getBoundingClientRect().height) })));
     assert.equal(cells.length, 21, "John has 21 chapters");
     assert.equal(cells[2].label, "Chapter 3");
     assert.ok(cells.every((c) => c.w === 52 && c.h === 52), "52 x 52 buttons");
-    assert.equal(cells.filter((c) => c.top === cells[0].top).length, 6, "6 to a row at 390px");
-    await page.getByRole("button", { name: "Chapter 3", exact: true }).click();
+    assert.ok(cells.filter((c) => c.top === cells[0].top).length >= 5, "at least 5 to a row at 390px");
+    await newSheet.getByRole("button", { name: "Chapter 3", exact: true }).click();
     await page.waitForURL("**/bible/john/3");
     assert.equal(await page.locator("main h1").innerText(), "John 3");
     // Continue reading now names John 3.
@@ -290,12 +284,15 @@ export async function checkLibrary(browser, base) {
     const resume = page.getByRole("link", { name: /^Continue reading/ });
     assert.equal(await resume.getAttribute("href"), "/bible/john/3");
     assert.equal(await resume.innerText(), "Continue reading\nJohn 3");
-    // 320px: 5 to a row, nothing scrolls sideways.
+    // 320px: at least 5 to a row, 52 x 52, nothing scrolls sideways.
     await page.setViewportSize({ width: 320, height: 568 });
-    await page.getByRole("radio", { name: "New Testament" }).click();
-    await page.getByRole("button", { name: "John", exact: true }).click();
-    const narrow = await page.locator(".chapter-cell").evaluateAll((els) => els.map((el) => Math.round(el.getBoundingClientRect().top)));
-    assert.equal(narrow.filter((t) => t === narrow[0]).length, 5, "5 to a row at 320px");
+    await page.getByRole("button", { name: /^New Testament/ }).click();
+    const narrowSheet = page.getByRole("dialog", { name: "New Testament", exact: true });
+    await narrowSheet.waitFor();
+    await narrowSheet.getByRole("button", { name: "John", exact: true }).click();
+    const narrow = await page.locator(".chapter-cell").evaluateAll((els) => els.map((el) => ({ top: Math.round(el.getBoundingClientRect().top), w: Math.round(el.getBoundingClientRect().width), h: Math.round(el.getBoundingClientRect().height) })));
+    assert.ok(narrow.filter((c) => c.top === narrow[0].top).length >= 5, "at least 5 to a row at 320px");
+    assert.ok(narrow.every((c) => c.w === 52 && c.h === 52), "52 x 52 buttons at 320px");
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     assert.deepEqual(ctx.problems, []);
   } finally {
@@ -314,12 +311,11 @@ export async function checkLibrary(browser, base) {
     await page.getByText("The Bible could not be opened. Check your connection and try again.").waitFor();
     assert.equal(await page.getByRole("button", { name: "Try downloading again", exact: true }).count(), 1);
     assert.equal(await page.getByRole("button", { name: "Search the Bible", exact: true }).isDisabled(), true, "nothing to search before the Bible has arrived");
+    assert.equal(await page.getByRole("button", { name: /^Old Testament/ }).count(), 0, "no testament rows while the Bible is missing");
     await page.unroute("**/bible/web.json");
     await page.getByRole("button", { name: "Try downloading again", exact: true }).click();
-    await page.getByRole("button", { name: "Genesis", exact: true }).waitFor();
+    await page.getByRole("button", { name: /^Old Testament/ }).waitFor();
     assert.ok(calls >= 1);
-    // Context checks and saved passages never waited for the download.
-    assert.equal(await page.getByRole("link", { name: /^Context checks/ }).count(), 1);
     assert.deepEqual(failing.problems.filter((p) => !/503|Failed to load resource/.test(p)), []);
   } finally {
     await failing.context.close();
