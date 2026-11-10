@@ -20,12 +20,13 @@ export function YourShelf() {
   const count = shelf.length;
   const aiPublished = new Set(checks.filter((check) => check.review === "ai-unreviewed").map((check) => check.slug));
   const anyAi = shelf.some((entry) => aiPublished.has(entry.slug));
-  // Back names the screen the reader came from: You, or Today when the shelf was opened from Today or directly.
-  const fromYou = cameFrom() === "/you";
+  // Back names the screen the reader came from: Today when the shelf was opened from Today; otherwise Bible, the
+  // shelf's home (Bible, Study), also when it was opened directly or after a reload (01.2 D-03, D-04).
+  const fromToday = cameFrom() === "/";
   const todays = todaysCheck(checks, shelf, localDate())?.check;
   return (
     <section className="grouped-screen shelf-screen">
-      <Toolbar back={fromYou ? "You" : "Today"} to={fromYou ? "/you" : "/"} />
+      <Toolbar back={fromToday ? "Today" : "Bible"} to={fromToday ? "/" : "/bible"} />
       <LargeTitle>Your shelf</LargeTitle>
       {count > 0 ? (
         <p className="shelf-count">

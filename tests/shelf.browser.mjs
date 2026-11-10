@@ -48,7 +48,7 @@ export async function checkShelfScreen(browser, base, published) {
       const where = " at " + width + "px";
       assert.equal(await page.locator("main h1").innerText(), "Your shelf");
       assert.equal(await page.locator(".shelf-count").innerText(), `${nine.length} context checks read. Your shelf only grows.`);
-      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "opened directly, Back names Today");
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "opened directly, Back names Bible (its home)");
 
       const links = page.locator('ul[aria-label="Your shelf"] a');
       assert.equal(await links.count(), nine.length, "one link per finished check" + where);
@@ -208,8 +208,8 @@ export async function checkShelfScreen(browser, base, published) {
     }
   }
 
-  // The shelf opens from Today's row and Back names Today, also after a reload. The You sheet has no Your shelf row any
-  // more (01.2 D-04: the shelf moves to Bible, Study; plan 04 moves this case there).
+  // The shelf opens from Bible, Study and Back names Bible and returns to Study, also after a reload; the You sheet has no
+  // Your shelf row (01.2 D-04: the shelf lives in Bible, Study).
   {
     const { context, page, problems } = await open(browser, base, "/", { width: 390, height: 844 });
     try {
@@ -217,16 +217,34 @@ export async function checkShelfScreen(browser, base, published) {
         page,
         nine.map((n) => n.entry),
       );
-      await page.goto(base + "/");
+      await page.goto(base + "/bible");
       await page.locator("main h1").waitFor();
-      await page.locator('.today a[href="/shelf"]').click();
+      await page.getByRole("radio", { name: "Study" }).click();
+      const shelfRow = page.getByRole("link", { name: /^Your shelf/ });
+      assert.equal(await shelfRow.locator(".list-row-value").innerText(), `${nine.length} read`, "the row counts the seeded shelf");
+      assert.equal(await shelfRow.locator(".mini-shelf").count(), 1, "the mini shelf is the row's picture once something stands on the shelf");
+      await shelfRow.click();
       await page.waitForURL("**/shelf");
-      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "from Today, Back names Today");
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "from Bible, Back names Bible");
+      await page.getByRole("button", { name: "Back to Bible", exact: true }).click();
+      await page.waitForURL("**/bible");
+      await page.locator("main h1").waitFor();
+      assert.equal(await page.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true", "Back returns to the library with Study chosen");
+      // Opened again, then reloaded: the entry remembers where it came from.
+      await page.getByRole("link", { name: /^Your shelf/ }).click();
+      await page.waitForURL("**/shelf");
       await page.reload();
       await page.locator("main h1").waitFor();
-      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "after a reload too");
-      await page.getByRole("button", { name: "Back to Today", exact: true }).click();
-      await page.waitForURL(base + "/");
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "after a reload too");
+      // Opened from Today (its row stays until the Today plan removes it), Back still names Today.
+      await page.goto(base + "/");
+      await page.locator("main h1").waitFor();
+      const todayRow = page.locator('.today a[href="/shelf"]');
+      if (await todayRow.count()) {
+        await todayRow.click();
+        await page.waitForURL("**/shelf");
+        assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "from Today, Back names Today");
+      }
       await page.goto(base + "/you");
       const sheet = page.getByRole("dialog", { name: "You", exact: true });
       await sheet.waitFor();

@@ -26,7 +26,7 @@ export async function checkContextList(browser, base, published) {
     const { context, page, problems } = await open(browser, base, "/context");
     try {
       assert.equal(await page.locator("main h1").innerText(), "Context checks");
-      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "opened directly, Back names Today");
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "opened directly, Back names Bible (its home)");
       const rows = page.locator(".group-list > li > a");
       assert.equal(await rows.count(), published.length, "every published check is listed");
       for (let i = 0; i < published.length; i++) {
@@ -44,6 +44,24 @@ export async function checkContextList(browser, base, published) {
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, "no horizontal scroll");
       await rows.first().click();
       await page.waitForURL("**/context/" + published[0].slug);
+      assert.deepEqual(problems, []);
+    } finally {
+      await context.close();
+    }
+  }
+
+  // ---- opened from Bible, Study: Back names Bible and returns to Study ---------------------------------------------
+  {
+    const { context, page, problems } = await open(browser, base, "/bible");
+    try {
+      await page.getByRole("radio", { name: "Study" }).click();
+      await page.getByRole("link", { name: /^Context checks/ }).click();
+      await page.waitForURL("**/context");
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "from Study, Back names Bible");
+      await page.getByRole("button", { name: "Back to Bible", exact: true }).click();
+      await page.waitForURL("**/bible");
+      await page.locator("main h1").waitFor();
+      assert.equal(await page.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true", "Back returns to the library with Study chosen");
       assert.deepEqual(problems, []);
     } finally {
       await context.close();

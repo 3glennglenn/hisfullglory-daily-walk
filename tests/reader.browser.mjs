@@ -366,7 +366,7 @@ export async function checkLibrary(browser, base) {
     const shelfRow = page.getByRole("link", { name: /^Your shelf/ });
     assert.equal(await shelfRow.getAttribute("href"), "/shelf");
     assert.equal(await shelfRow.locator(".list-row-value").innerText(), "0 read");
-    assert.equal(await shelfRow.locator(".mini-shelf").count(), 1, "the mini shelf is the row's picture");
+    assert.equal(await shelfRow.locator(".mini-shelf").count(), 0, "an empty shelf draws no picture, so the title lines up with the other rows");
     const bibles = page.getByRole("link", { name: /^Study Bibles/ });
     assert.equal(await bibles.getAttribute("href"), "/shop");
     assert.equal(await bibles.innerText(), "Study Bibles\nHand-picked, from the HisFullGlory shop");

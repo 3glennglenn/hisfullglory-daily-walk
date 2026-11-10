@@ -147,7 +147,8 @@ export function Library({ data, failed, onRetry }: { data: BibleData | null; fai
             <Row
               href="/shelf"
               chevron
-              leading={<MiniShelf shelf={state.shelf} checks={contextChecks} />}
+              // Nothing to draw on an empty shelf: the title then lines up with the rows above and below it.
+              leading={onShelf > 0 ? <MiniShelf shelf={state.shelf} checks={contextChecks} /> : undefined}
               title="Your shelf"
               value={`${onShelf} read`}
               detail={
