@@ -1,30 +1,41 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { Search } from "lucide-react";
 import { supabase } from "../supabase";
 import { useAuth } from "../platform/auth";
 import { postError } from "./blockedLanguage";
 import { usePlatform } from "../platform/store";
 import { navigate } from "../platform/router";
 import { findTopic, launchTopics, topicGraph } from "../topics/graph";
+import { Community } from "../community";
+import { contentFor, type DailyContent } from "../data";
+import { localDate } from "../storage";
+import { CircleRows } from "./CircleRows";
 import { SafetyControls } from "./safety";
 import { Feed, postTypes } from "./Feed";
 import { safeSourceUrl } from "./sources";
 import { TitleRow } from "../ui/Screen";
 import { GroupedList, Row } from "../ui/List";
 import { Segmented } from "../ui/Segmented";
+import { Sheet } from "../ui/Sheet";
 import { ConfirmDialog } from "../ui/ConfirmDialog";
-const communityTabs = ["Topics", "Following", "Saved", "Testimonies", "Community feed"] as const;
-type CommunityTab = (typeof communityTabs)[number];
+// The three segments of Community (01.2 D-06). The last one is kept in module memory while the app stays open, so Back
+// from a Circle lands on Circles; it is never written to the device.
+const segments = [
+  { value: "topics", label: "Topics" },
+  { value: "circles", label: "Circles" },
+  { value: "prayer", label: "Prayer wall" },
+] as const;
+type Segment = (typeof segments)[number]["value"];
+let lastSegment: Segment = "topics";
 interface Discussion {
   id:string; display_name:string; body:string; post_type:string; created_at:string;
   is_owner:boolean; score:number; upvotes:number; voted:boolean; helped:number;
   reputation:number|null; replies:number; sources:{title:string;url:string}[];
 }
-export function TopicHub({id,thread}: {id?:string;thread?:string}) {
+export function TopicHub({id,thread,verse,online}: {id?:string;thread?:string;verse?:DailyContent;online?:boolean}) {
   const {state,update}=usePlatform();
   const {session,accepted}=useAuth();
-  const [tab,setTab]=useState<CommunityTab>("Topics");
   const [deleting,setDeleting]=useState<string|null>(null);
-  const [query,setQuery]=useState("");
   const [sorting,setSorting]=useState("newest");
   const [posts,setPosts]=useState<Discussion[]>([]);
   const [root,setRoot]=useState<Discussion|null>(null);
@@ -84,26 +95,7 @@ export function TopicHub({id,thread}: {id?:string;thread?:string}) {
     setStatus("Saved.");setRevision(n=>n+1);return true;
   }
   if(id && !topic) return <section><h1>Topic not found</h1><button onClick={()=>navigate("/community")}>Browse topics</button></section>;
-  if(!topic) {
-    const saved=state.savedDiscussions.filter(id=>state.savedDiscussionTopics[id]);
-    const topics=(tab==="Following"?topicGraph:launchTopics).filter(t=>(tab!=="Following"||state.followedTopics.includes(t.id))&&t.label.toLowerCase().includes(query.toLowerCase()));
-    return <section className="grouped-screen community">
-      <TitleRow title="Community" />
-      <p className="community-intro">Scripture, practical help and encouragement. Community experience and reputation are not verified expertise.</p>
-      <GroupedList><Row title="Circles" href="/community/circles" chevron/></GroupedList>
-      <Segmented scroll label="Community sections" value={tab} onChange={setTab} options={communityTabs.map(t=>({value:t,label:t}))}/>
-      {tab==="Saved"?<>
-        <p>Private links on this device. Opening a saved thread rechecks its visibility; removed or blocked content is unavailable.</p>
-        {!!saved.length&&<GroupedList>{saved.map(id=><Row key={id} title={"Saved discussion · "+findTopic(state.savedDiscussionTopics[id])?.label} href={"/community/"+state.savedDiscussionTopics[id]+"?thread="+id} chevron/>)}</GroupedList>}
-        {!state.savedDiscussions.length&&<p>No saved discussions yet.</p>}
-      </>:tab==="Community feed"?<Feed/>:tab==="Testimonies"?<Feed initialKind="testimony"/>:<>
-        <label>Search topics<input type="search" value={query} onChange={e=>setQuery(e.target.value)}/></label>
-        {tab==="Following" && <p>Topics you chose to follow in this private local profile. Following does not publish membership.</p>}
-        {!!topics.length&&<GroupedList>{topics.map(t=><Row key={t.id} title={t.label} href={"/community/"+t.id} chevron/>)}</GroupedList>}
-        {tab==="Following"&&!state.followedTopics.length&&<p>No followed topics yet.</p>}
-      </>}
-    </section>;
-  }
+  if(!topic) return <CommunityRoot verse={verse??contentFor(localDate())} online={online??navigator.onLine}/>;
   const member=memberships.includes(topic.id);
   return <section><button className="text-button" onClick={()=>navigate("/community")}>← Topics</button><h1>{topic.label}</h1>
     <p>Share only what you want public. If you are in immediate danger, contact local emergency services or someone who can help you reach safety. Community advice does not replace appropriate professional or pastoral support.</p>
@@ -137,4 +129,81 @@ export function TopicHub({id,thread}: {id?:string;thread?:string}) {
       </form>}
     </>}
   </section>;
+}
+
+// The root of Community (no topic): the title row with Search topics and You, three segments, and the footnote.
+function CommunityRoot({verse,online}: {verse:DailyContent;online:boolean}) {
+  const {state}=usePlatform();
+  const {session}=useAuth();
+  const [segment,setSegmentState]=useState<Segment>(lastSegment);
+  const [sheet,setSheet]=useState<"search"|"following"|"saved"|null>(null);
+  const searchButton=useRef<HTMLButtonElement>(null);
+  const setSegment=(next:Segment)=>{lastSegment=next;setSegmentState(next);};
+  const saved=state.savedDiscussions.filter(id=>state.savedDiscussionTopics[id]);
+  const followed=topicGraph.filter(t=>state.followedTopics.includes(t.id));
+  const mine=!!session||!!state.followedTopics.length||!!state.savedDiscussions.length;
+  return <section className="grouped-screen community">
+    <TitleRow title="Community" actions={<button type="button" className="tool-button" aria-label="Search topics" ref={searchButton} onClick={()=>setSheet("search")}><Search size={22} aria-hidden="true" focusable="false"/></button>}/>
+    <Segmented label="Community sections" value={segment} onChange={setSegment} options={segments}/>
+    {segment==="topics"?<>
+      <h2 className="sr-only">Topics</h2>
+      {mine&&<GroupedList>
+        <Row title="Following" value={state.followedTopics.length} chevron onClick={()=>setSheet("following")}/>
+        <Row title="Saved" value={saved.length} chevron onClick={()=>setSheet("saved")}/>
+      </GroupedList>}
+      <GroupedList>{launchTopics.map(t=><Row key={t.id} title={t.label} href={"/community/"+t.id} chevron/>)}</GroupedList>
+      <details className="group-disclosure">
+        <summary>Live chat</summary>
+        <Community only="chat" verse={verse} online={online}/>
+      </details>
+    </>:segment==="circles"?<>
+      <h2 className="sr-only">Circles</h2>
+      <CircleRows/>
+    </>:<>
+      <h2 className="sr-only">Prayer wall</h2>
+      <Feed initialKind="prayer" composerType="prayer" heading="Prayer and praise"/>
+      <details className="group-disclosure">
+        <summary>The original prayer wall</summary>
+        <Community only="prayer" verse={verse} online={online}/>
+      </details>
+    </>}
+    <p className="screen-meta">Scripture, practical help and encouragement. Experience shared here is not verified expertise.</p>
+    {sheet==="search"&&<TopicSearchSheet followed={followed} returnFocus={()=>searchButton.current} onClose={()=>setSheet(null)}/>}
+    {sheet==="following"&&<Sheet title="Following" detent="large" onClose={()=>setSheet(null)}>
+      <p className="sheet-body-text">Topics you chose to follow in this private local profile. Following does not publish membership.</p>
+      {followed.length?<GroupedList>{followed.map(t=><Row key={t.id} title={t.label} href={"/community/"+t.id} chevron/>)}</GroupedList>:<p className="sheet-body-text">No followed topics yet.</p>}
+    </Sheet>}
+    {sheet==="saved"&&<Sheet title="Saved" detent="large" onClose={()=>setSheet(null)}>
+      <p className="sheet-body-text">Private links on this device. Opening a saved thread rechecks its visibility; removed or blocked content is unavailable.</p>
+      {saved.length?<GroupedList>{saved.map(id=><Row key={id} title={"Saved discussion · "+findTopic(state.savedDiscussionTopics[id])?.label} href={"/community/"+state.savedDiscussionTopics[id]+"?thread="+id} chevron/>)}</GroupedList>:<p className="sheet-body-text">No saved discussions yet.</p>}
+    </Sheet>}
+  </section>;
+}
+
+// Search topics: a sheet with one labelled field, as the Bible's search (UI-SPEC A2, A3). It looks through the launch
+// topics and the topics the reader follows, in memory on this device; nothing is sent anywhere. The other topics stay
+// resolvable by address but unlisted (CLAUDE.md).
+function TopicSearchSheet({followed,returnFocus,onClose}: {followed:readonly {id:string;label:string}[];returnFocus:()=>HTMLElement|null;onClose:()=>void}) {
+  const id=useId();
+  const [text,setText]=useState("");
+  const [searched,setSearched]=useState<string|null>(null);
+  const query=(searched??"").trim().toLowerCase();
+  const pool=[...launchTopics,...followed.filter(f=>!launchTopics.some(l=>l.id===f.id))];
+  const results=query?pool.filter(t=>t.label.toLowerCase().includes(query)):[];
+  return <Sheet title="Search topics" detent="large" onClose={onClose} returnFocus={returnFocus}>
+    <form className="search-form" role="search" onSubmit={e=>{e.preventDefault();setSearched(text);}}>
+      <label htmlFor={id+"-field"} className="sheet-label">Words to find</label>
+      <div className="search-line">
+        <input id={id+"-field"} type="search" enterKeyHint="search" autoComplete="off" autoCapitalize="none" spellCheck={false} value={text} aria-describedby={id+"-hint"} onChange={e=>setText(e.target.value)}/>
+        <button type="submit">Search</button>
+      </div>
+      <p id={id+"-hint"} className="sheet-hint">Looks through the topics on this list and the ones you follow. The search runs on this device.</p>
+    </form>
+    <div role="status" className="search-status">
+      {searched!==null&&!query?"Type a word to search.":null}
+      {query&&!results.length?`No topics found for “${searched!.trim()}”. Check the spelling, or try one word.`:null}
+      {results.length?`${results.length===1?"1 topic":results.length+" topics"} with “${searched!.trim()}”.`:null}
+    </div>
+    {results.length>0&&<GroupedList>{results.map(t=><Row key={t.id} title={t.label} href={"/community/"+t.id} chevron/>)}</GroupedList>}
+  </Sheet>;
 }

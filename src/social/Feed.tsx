@@ -125,11 +125,14 @@ export function Feed({
   composer = true,
   initialKind = "all",
   composerType = "reflection",
+  heading,
 }: {
   source?: string;
   composer?: boolean;
   initialKind?: string;
   composerType?: string;
+  /** Replaces the section's heading (Community's Prayer wall calls it "Prayer and praise"). */
+  heading?: string;
 }) {
   const { session } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
@@ -212,7 +215,7 @@ export function Feed({
   }
   return (
     <section>
-      <h2>{source ? "Community reflections" : "Faith in everyday life"}</h2>
+      <h2>{heading ?? (source ? "Community reflections" : "Faith in everyday life")}</h2>
       {composer && (
         <ShareForm
           initialType={composerType}

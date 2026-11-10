@@ -30,7 +30,6 @@ import { YouPage, YouSheet } from "./features/You";
 import { Appearance } from "./features/Appearance";
 import { Reminders } from "./features/Reminders";
 import { Give, GivingPolicy } from "./giving/Give";
-import { Community } from "./community";
 import { TopicHub } from "./social/TopicHub";
 import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
@@ -207,15 +206,7 @@ function App() {
       content = <Circles key={shown.id ?? "discovery"} slug={shown.id} thread={shown.thread}/>;
       break;
     case "community":
-      content = (
-        <>
-          <TopicHub id={shown.id} thread={shown.thread} />
-          <details className="group-disclosure">
-            <summary>Live chat and the original prayer wall</summary>
-            <Community verse={contentFor(date)} online={online} />
-          </details>
-        </>
-      );
+      content = <TopicHub id={shown.id} thread={shown.thread} verse={contentFor(date)} online={online} />;
       break;
     case "shop":
       content = (

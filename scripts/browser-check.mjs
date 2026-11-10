@@ -1538,66 +1538,138 @@ try {
     await go("/my-walk");assert.match(await page.locator("main").innerText(),/Grief/);
   });
   await check(
-    "Community is one calm screen: large title, the sentence, a Circles row, five sub-tabs in one scrolling row, topics without the repeated subtitle, the original chat as a disclosure row (UI-SPEC A11)",
+    "Community: Topics, Circles and Prayer wall, the footnote, search, Following and Saved, the live chat (01.2 D-06)",
     async () => {
+      const key = "hfg-daily-walk:v3";
+      const original = await page.evaluate((k) => JSON.parse(localStorage.getItem(k)), key);
+      const seed = (patch) =>
+        page.evaluate(([k, p]) => {
+          const s = JSON.parse(localStorage.getItem(k));
+          localStorage.setItem(k, JSON.stringify({ ...s, ...p }));
+        }, [key, patch]);
+      const footnote = "Scripture, practical help and encouragement. Experience shared here is not verified expertise.";
       try {
-        await page.setViewportSize({ width: 320, height: 568 });
+        for (const size of [{ width: 320, height: 568 }, { width: 390, height: 844 }]) {
+          await page.setViewportSize(size);
+          // A guest who follows and saves nothing sees no Following or Saved row.
+          await seed({ followedTopics: [], savedDiscussions: [], savedDiscussionTopics: {} });
+          await go("/community");
+          assert.equal(await page.locator("main h1").count(), 1);
+          assert.equal(await page.locator("main h1").innerText(), "Community");
+          assert.equal(await page.locator("main h1").getAttribute("class"), "large-title");
+          const search = page.getByRole("button", { name: "Search topics", exact: true });
+          const you = page.getByRole("link", { name: "You", exact: true });
+          for (const control of [search, you]) {
+            const box = await control.boundingBox();
+            assert.ok(box.width >= 44 && box.height >= 44, "Search topics and You are 44px targets at " + size.width);
+          }
+          // Three segments in one row that does not scroll sideways; Topics is chosen when the app opens.
+          const row = page.getByRole("radiogroup", { name: "Community sections", exact: true });
+          assert.deepEqual(await row.getByRole("radio").allInnerTexts(), ["Topics", "Circles", "Prayer wall"]);
+          assert.equal(await row.getByRole("radio", { name: "Topics", exact: true }).getAttribute("aria-checked"), "true");
+          const shape = await row.evaluate((el) => ({
+            scrolls: el.scrollWidth > el.clientWidth + 1,
+            tops: [...el.querySelectorAll('[role="radio"]')].map((r) => Math.round(r.getBoundingClientRect().top)),
+            heights: [...el.querySelectorAll('[role="radio"]')].map((r) => r.getBoundingClientRect().height),
+            page: document.documentElement.scrollWidth <= innerWidth + 1,
+          }));
+          assert.equal(shape.scrolls, false, "three segments fit " + size.width + "px without scrolling");
+          assert.equal(new Set(shape.tops).size, 1, "no segment wraps onto a second line");
+          for (const h of shape.heights) assert.ok(h >= 44, "segment height " + h);
+          assert.ok(shape.page, "the page does not scroll sideways");
+          // Topics: the eight launch topics as one grouped list, each only its name.
+          const names = await page.locator('main .group a.list-row[href^="/community/"]').allInnerTexts();
+          assert.equal(names.length, 8, "the eight launch topics");
+          for (const name of names) assert.ok(!name.includes("·") && !name.includes("Scripture"), "no repeated subtitle: " + name);
+          assert.equal(await page.getByRole("button", { name: /^(Following|Saved)\b/ }).count(), 0, "no Following or Saved row for a guest with nothing");
+          // The footnote is the last thing in the Community section, once.
+          assert.equal(await page.getByText(footnote, { exact: true }).count(), 1);
+          assert.equal(await page.evaluate(() => document.querySelector("main > section.community").lastElementChild.textContent), footnote);
+          // Live chat: the last row of the list, a closed disclosure.
+          const chat = page.locator("details.group-disclosure");
+          assert.equal(await chat.locator("summary").innerText(), "Live chat");
+          assert.equal(await chat.evaluate((el) => el.open), false);
+          assert.ok((await chat.locator("summary").evaluate((el) => el.getBoundingClientRect().height)) >= 52);
+          await chat.locator("summary").click();
+          await chat.getByLabel("Conversation room").waitFor();
+          assert.equal(await chat.getByRole("heading", { name: "Live chat", exact: true }).count(), 1);
+          await chat.locator("summary").click();
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+          // Following and Saved rows appear once the reader follows and saves; each opens a sheet with what the old sections showed.
+          const id = "a0000000-0000-4000-8000-000000000001";
+          await seed({ followedTopics: ["anxiety"], savedDiscussions: [id], savedDiscussionTopics: { [id]: "grief" } });
+          await go("/community");
+          const following = page.getByRole("button", { name: /^Following\b/ });
+          const saved = page.getByRole("button", { name: /^Saved\b/ });
+          assert.equal((await following.innerText()).replace(/\s+/g, " "), "Following 1");
+          assert.equal((await saved.innerText()).replace(/\s+/g, " "), "Saved 1");
+          for (const control of [following, saved]) assert.ok((await control.evaluate((el) => el.getBoundingClientRect().height)) >= 52);
+          assert.equal(await page.locator('main .group a.list-row[href^="/community/"]').count(), 8, "the rows do not add topics");
+          await following.click();
+          const sheetOne = page.getByRole("dialog", { name: "Following", exact: true });
+          await sheetOne.waitFor();
+          assert.equal(await sheetOne.getByText("Topics you chose to follow in this private local profile. Following does not publish membership.", { exact: true }).count(), 1);
+          assert.deepEqual(await sheetOne.locator("a.list-row").allInnerTexts(), ["Anxiety"]);
+          assert.equal(await sheetOne.locator("a.list-row").getAttribute("href"), "/community/anxiety");
+          await page.keyboard.press("Escape");
+          await sheetOne.waitFor({ state: "detached" });
+          await page.waitForTimeout(100);
+          assert.equal(await page.evaluate(() => document.activeElement?.innerText?.replace(/\s+/g, " ").trim()), "Following 1", "focus returns to the row");
+          await saved.click();
+          const sheetTwo = page.getByRole("dialog", { name: "Saved", exact: true });
+          await sheetTwo.waitFor();
+          assert.equal(await sheetTwo.getByText("Private links on this device. Opening a saved thread rechecks its visibility; removed or blocked content is unavailable.", { exact: true }).count(), 1);
+          assert.deepEqual(await sheetTwo.locator("a.list-row").allInnerTexts(), ["Saved discussion · Grief"]);
+          assert.equal(await sheetTwo.locator("a.list-row").getAttribute("href"), "/community/grief?thread=" + id);
+          await page.keyboard.press("Escape");
+          await sheetTwo.waitFor({ state: "detached" });
+          // Nothing followed or saved: the sheets say so. (Seeded back to empty with the account-less rows kept by a followed topic.)
+          await seed({ followedTopics: ["anxiety"], savedDiscussions: [], savedDiscussionTopics: {} });
+          await go("/community");
+          await page.getByRole("button", { name: /^Saved\b/ }).click();
+          await page.getByRole("dialog", { name: "Saved", exact: true }).getByText("No saved discussions yet.", { exact: true }).waitFor();
+          await page.keyboard.press("Escape");
+        }
+        // Search topics: a sheet with one labelled field; Anxiety for "anx"; its row opens the topic; Back keeps the segment.
+        await seed({ followedTopics: [], savedDiscussions: [], savedDiscussionTopics: {} });
         await go("/community");
-        assert.equal(await page.locator("main h1").count(), 1);
-        assert.equal(await page.locator("main h1").innerText(), "Community");
-        assert.equal(await page.locator("main h1").getAttribute("class"), "large-title");
-        assert.equal(
-          await page.getByText("Scripture, practical help and encouragement. Community experience and reputation are not verified expertise.", { exact: true }).count(),
-          1,
-        );
-        const circles = page.getByRole("link", { name: "Circles", exact: true });
-        assert.equal(await circles.getAttribute("href"), "/community/circles");
-        assert.ok((await circles.evaluate((el) => el.getBoundingClientRect().height)) >= 52);
-        // The five sections: one row that scrolls sideways and never wraps; the page itself does not.
         const row = page.getByRole("radiogroup", { name: "Community sections", exact: true });
-        assert.deepEqual(await row.getByRole("radio").allInnerTexts(), ["Topics", "Following", "Saved", "Testimonies", "Community feed"]);
-        const shape = await row.evaluate((el) => ({
-          scrolls: el.scrollWidth > el.clientWidth + 1,
-          overflowX: getComputedStyle(el).overflowX,
-          tops: [...el.querySelectorAll('[role="radio"]')].map((r) => Math.round(r.getBoundingClientRect().top)),
-          heights: [...el.querySelectorAll('[role="radio"]')].map((r) => r.getBoundingClientRect().height),
-          page: document.documentElement.scrollWidth <= innerWidth + 1,
-        }));
-        assert.ok(shape.scrolls, "five sections need more than 320px");
-        assert.equal(shape.overflowX, "auto");
-        assert.equal(new Set(shape.tops).size, 1, "no section wraps onto a second line");
-        for (const h of shape.heights) assert.ok(h >= 44, "section height " + h);
-        assert.ok(shape.page, "the page does not scroll sideways");
-        // The current section is brought into view; the edge shadow shows on the side with more to see.
-        await row.getByRole("radio", { name: "Community feed", exact: true }).click();
-        const seen = await row.evaluate((el) => {
-          const r = el.getBoundingClientRect();
-          const q = el.querySelector('[aria-checked="true"]').getBoundingClientRect();
-          return { inside: q.left >= r.left - 1 && q.right <= r.right + 1, label: el.querySelector('[aria-checked="true"]').textContent };
-        });
-        assert.equal(seen.label, "Community feed");
-        assert.ok(seen.inside, "the chosen section is scrolled into view");
-        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
-        await row.getByRole("radio", { name: "Topics", exact: true }).click();
-        // Topics: a grouped list of rows, each only its name.
-        const names = await page.locator('main .group a.list-row[href^="/community/"]:not([href="/community/circles"])').allInnerTexts();
-        assert.equal(names.length, 8, "the eight launch topics");
-        for (const name of names) assert.ok(!name.includes("·") && !name.includes("Scripture"), "no repeated subtitle: " + name);
-        assert.equal((await page.locator("main").innerText()).includes("practical encouragement"), false);
-        // The original chat and prayer wall is the last row, closed.
-        const chat = page.locator("details.group-disclosure");
-        assert.equal(await chat.locator("summary").innerText(), "Live chat and the original prayer wall");
-        assert.equal(await chat.evaluate((el) => el.open), false);
-        assert.ok((await chat.locator("summary").evaluate((el) => el.getBoundingClientRect().height)) >= 52);
-        assert.equal(await page.evaluate(() => document.querySelector("main").lastElementChild.tagName), "DETAILS");
-        // The Circles row goes to Circles and back.
-        await circles.click();
-        await page.waitForURL("**/community/circles");
+        await row.getByRole("radio", { name: "Circles", exact: true }).click();
+        assert.equal(await row.getByRole("radio", { name: "Circles", exact: true }).getAttribute("aria-checked"), "true");
+        const searchButton = page.getByRole("button", { name: "Search topics", exact: true });
+        await searchButton.click();
+        const dialog = page.getByRole("dialog", { name: "Search topics", exact: true });
+        await dialog.waitFor();
+        const field = dialog.getByLabel("Words to find", { exact: true });
+        await field.fill("   ");
+        await dialog.getByRole("button", { name: "Search", exact: true }).click();
+        assert.match(await dialog.getByRole("status").innerText(), /Type a word/);
+        await field.fill("zzzz");
+        await dialog.getByRole("button", { name: "Search", exact: true }).click();
+        assert.match(await dialog.getByRole("status").innerText(), /No topics found/);
+        await page.keyboard.press("Escape");
+        await dialog.waitFor({ state: "detached" });
+        await page.waitForTimeout(100);
+        assert.equal(await page.evaluate(() => document.activeElement?.getAttribute("aria-label")), "Search topics", "focus returns to the button");
+        await searchButton.click();
+        await dialog.waitFor();
+        await field.fill("anx");
+        await field.press("Enter");
+        assert.deepEqual(await dialog.locator("a.list-row").allInnerTexts(), ["Anxiety"]);
+        await dialog.locator("a.list-row").click();
+        await page.waitForURL("**/community/anxiety");
+        await page.getByRole("heading", { name: "Anxiety", exact: true }).waitFor();
         await page.goBack();
         await page.locator("main h1").waitFor();
         assert.equal(await page.locator("main h1").innerText(), "Community");
+        assert.equal(
+          await page.getByRole("radiogroup", { name: "Community sections", exact: true }).getByRole("radio", { name: "Circles", exact: true }).getAttribute("aria-checked"),
+          "true",
+          "Back shows Community on the segment chosen before",
+        );
       } finally {
         await page.setViewportSize({ width: 375, height: 812 });
+        await page.evaluate(([k, s]) => localStorage.setItem(k, JSON.stringify(s)), [key, original]);
       }
     },
   );
@@ -1617,7 +1689,7 @@ try {
   await check("saved thread links persist locally and route through visibility checks",async()=>{
     const id="a0000000-0000-4000-8000-000000000001";
     await page.evaluate(id=>{const s=JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));s.savedDiscussions=[id];s.savedDiscussionTopics={[id]:"grief"};localStorage.setItem("hfg-daily-walk:v3",JSON.stringify(s));},id);
-    await go("/community");await page.getByRole("radio",{name:"Saved",exact:true}).click();
+    await go("/community");await page.getByRole("button",{name:/^Saved\b/}).click();
     await page.getByRole("link",{name:"Saved discussion · Grief",exact:true}).click();
     assert.equal(new URL(page.url()).searchParams.get("thread"),id);
     assert.match(await page.locator("main").innerText(),/not configured/);
