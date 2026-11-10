@@ -1,17 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { MAX_STARS, skyLine, starPositions } from "../src/ui/stars.ts";
+import { MAX_STARS, starPositions } from "../src/ui/stars.ts";
 
 // The sky of Lamplight (plan 16, direction B): one star per walked day, scattered by the dates, never a grid.
 const day = (n: number) => new Date(Date.UTC(2026, 0, 1 + n)).toISOString().slice(0, 10);
 const days = (count: number, from = 0) => Array.from({ length: count }, (_, i) => day(from + i));
-
-test("the line under the sky says it in words, with no zero to beat and no run to break", () => {
-  assert.equal(skyLine(0), "Today's walk lights your first star.");
-  assert.equal(skyLine(1), "1 day walked. It stays.");
-  assert.equal(skyLine(12), "12 days walked. Each one stays.");
-  for (const n of [0, 1, 2, 19, 365]) assert.ok(!/[—!]/.test(skyLine(n)), skyLine(n));
-});
 
 test("every walked day is a star; today's place is an empty ring until today's walk is done", () => {
   const walked = days(12);

@@ -2339,21 +2339,7 @@ html[data-text="large"] .segmented-scroll [role="radio"] {
 /* ==== Today and the cover (UI-SPEC 2, A1; src/features/Today.tsx, src/ui/Cover.tsx, src/ui/Badges.tsx) ====
    Structure and type of the signature block; the drawing of each look (gilt rule and ornaments, ribbon, lamp
    glow) follows in the next section. Only tokens: the two looks and the two modes change the colours. */
-/* The title row of Today is a TitleRow (class today-head); the shop's quiet door (founder, 2026-10-22) is the bag in its
-   actions, before the You button, a 44x44 target tinted --link like the toolbar's Back. Plan 06 replaces it (D-04). */
-.shop-bag {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  color: var(--link);
-}
-.shop-bag:hover {
-  background: var(--surface-2);
-}
+/* The title row of Today is a TitleRow (class today-head): the title and the You button, nothing else (01.2 D-04). */
 .today-date {
   margin: calc(-1 * var(--space-2)) 0 var(--space-5);
   font-size: var(--text-footnote);
@@ -2646,17 +2632,25 @@ html[data-text="large"] .cover {
 :root[data-look="marked"] .mini-spine-ai {
   box-shadow: none;
 }
-/* Narrow screens and large text: the picture takes its own line, so the words keep their width. */
-@media (max-width: 359px) {
-  .today .list-row:has(.list-row-leading) {
-    flex-wrap: wrap;
-  }
-  .today .list-row-leading {
-    flex-basis: 100%;
-  }
+/* Today's walk row (01.2 D-04; canvas Today2): a 44px tile (--surface-2, the canvas's #33251E) with the footprints in
+   --link, or --gilt on Cover Night light where the canvas draws #E8C892 (gilt fails 3:1 on the light surfaces, so only
+   there). "Start" is a --link word at weight 600, the canvas's #E2AE96 at 15px; the type scale has 13 and 17, so 17. */
+.walk-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--link);
 }
-html[data-text="large"] .today .list-row-leading {
-  flex-basis: 100%;
+:root:not([data-look="marked"])[data-mode="lamplight"] .walk-tile {
+  color: var(--gilt);
+}
+.walk-start {
+  color: var(--link);
+  font-weight: 600;
 }
 
 /* ==== Sponsor row (UI-SPEC 13, D-13; src/ui/SponsorRow.tsx) ====
@@ -5053,8 +5047,7 @@ html[data-text="large"] .around-capsule {
   padding-right: 0;
 }
 /* The sky: drawn in Lamplight only (the light modes keep their quiet page). Stars are placed by the dates, never a grid. */
-.sky,
-.sky-caption {
+.sky {
   display: none;
 }
 :root[data-mode="lamplight"] .sky {
@@ -5107,12 +5100,5 @@ html[data-text="large"] .around-capsule {
   .star.star-lit {
     animation: none;
   }
-}
-:root[data-mode="lamplight"] .sky-caption {
-  display: block;
-  margin: var(--space-1) 0 var(--space-5);
-  font-size: var(--text-body);
-  line-height: 1.47;
-  color: var(--muted);
 }
 

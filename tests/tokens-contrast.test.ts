@@ -265,6 +265,8 @@ const rows: Row[] = [
   // The eyebrow of Bible, Study's featured card: --link on the light surfaces, where --gilt falls short (1.73 and 3.13),
   // --gilt on the Lamplight surface (src/styles.css, .featured-eyebrow).
   { label: "featured card eyebrow / surface", fg: ["--link", "--gilt", "--link", "--gilt"], bg: "--surface", need: 4.5, expected: [5.57, 10.68, 4.92, 4.83] },
+  // The footprints of Today's walk row: --gilt on Cover Night light (the canvas's #E8C892), --link elsewhere (src/styles.css, .walk-tile).
+  { label: "walk row icon / surface-2", fg: ["--link", "--gilt", "--link", "--link"], bg: "--surface-2", need: 3, expected: [4.54, 9.2, 4.59, 7.53] },
   // The check icon on the signature block: gilt on the Cover's leather, success on the Marked page.
   { label: "check icon / sig", fg: ["--gilt", "--gilt", "--success", "--success"], bg: "--sig", need: 3, expected: [5.39, 6.23, 6.52, 9.43] },
   { label: "ink / highlight-gold", fg: "--ink", bg: "--highlight-gold", need: 4.5, expected: [12.94, 8.26, 12.94, 8.26] },
@@ -520,7 +522,7 @@ test("Lamplight (direction B): both Lamplight modes draw the cover without a sla
   for (const selector of rules) {
     if (/^(from|to)$/.test(selector)) continue;
     assert.ok(
-      selector.split(",").every((part) => part.includes('[data-mode="lamplight"]') || /^\.(sky|sky-caption|star)(\.[\w-]+)?$/.test(part.trim())),
+      selector.split(",").every((part) => part.includes('[data-mode="lamplight"]') || /^\.(sky|star)(\.[\w-]+)?$/.test(part.trim())),
       `${selector} touches only Lamplight or the star field`,
     );
   }
@@ -529,7 +531,7 @@ test("Lamplight (direction B): both Lamplight modes draw the cover without a sla
   assert.match(css, /radial-gradient\(closest-side, rgb\(240 201 135 \/ 0\.17\), transparent\)/);
   assert.match(css, /:root\[data-mode="lamplight"\] \.cover \.cover-button \{[^}]*background: var\(--button\);[^}]*color: var\(--on-button\)/);
   // The sky is not drawn in the light modes.
-  assert.match(css, /\.sky,\s*\.sky-caption \{\s*display: none;/);
+  assert.match(css, /\.sky \{\s*display: none;/);
   const site = readFileSync("site/src/components/Cover.astro", "utf8").replace(/\r\n/g, "\n");
   assert.match(site, /:global\(:root\[data-mode="lamplight"\]\) \.cover \{[^}]*background: transparent/);
   assert.match(site, /radial-gradient\(closest-side, rgb\(240 201 135 \/ 0\.17\), transparent\)/);

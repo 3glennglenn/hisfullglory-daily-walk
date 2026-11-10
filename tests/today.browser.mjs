@@ -2,7 +2,8 @@ import { build } from "esbuild";
 import assert from "node:assert/strict";
 import { aiUnreviewedCardLabel, refLabel } from "../src/context/checks.ts";
 
-// Today in a real browser (UI-SPEC A1): every state, the walk and shelf rows, and what each look draws. The first
+// Today in a real browser (UI-SPEC A1; 01.2 D-04): every state, the walk row, what is gone from Today (the bag, the
+// shelf row, the star line) and what each look draws. The first
 // half runs against the built app with a state seeded for each case; the second half renders the real Today screen
 // on a list of checks the test supplies, for the cases the live content folder cannot be made to show (no
 // published check, an AI-written newest check whatever the folder holds, a broken file).
@@ -26,6 +27,12 @@ const filledButtons = (page) =>
   );
 const walkRow = (page) => page.locator('.today a[href="/walk"]');
 const shelfRow = (page) => page.locator('.today a[href="/shelf"]');
+/** Today has no shelf row, no mini shelf, no count of what was read and no AI shelf line (01.2 D-04: the shelf lives in Bible, Study). */
+async function assertNoShelfOnToday(page, where) {
+  assert.equal(await shelfRow(page).count(), 0, where + ": no link to the shelf on Today");
+  assert.equal(await page.locator("main .mini-shelf, main .mini-spine, main .row-ai").count(), 0, where + ": no mini shelf and no AI shelf line");
+  assert.equal(await page.getByText(/context checks? read|Your shelf|with context written by AI\./).count(), 0, where + ": no shelf words on Today");
+}
 
 /** Writes a state into the page's private storage and reloads. "TODAY" stands for the page's own local date. */
 async function seed(page, wanted) {
@@ -90,8 +97,7 @@ export async function checkToday(browser, base, published) {
     assert.equal(await button.innerText(), "Read it again");
     assert.equal(await button.getAttribute("aria-label"), "Read it again: " + ref);
     assert.deepEqual(await filledButtons(page), [], "Read it again is the secondary style: no filled button");
-    assert.match(await shelfRow(page).innerText(), /1 context check read/);
-    assert.equal(await shelfRow(page).locator(".row-ai").count(), newest.review === "ai-unreviewed" ? 1 : 0);
+    await assertNoShelfOnToday(page, "a check finished today");
   });
 
   await withToday(
@@ -103,28 +109,38 @@ export async function checkToday(browser, base, published) {
       assert.equal(await block.locator(".cover-ref").innerText(), ref, "every check finished earlier: the newest in its finished state");
       assert.equal(await block.locator(".cover-status").innerText(), "On your shelf since March 4");
       assert.equal(await block.getByRole("button").innerText(), "Read it again");
-      assert.match(await shelfRow(page).innerText(), new RegExp(`${published.length} context checks? read`));
+      await assertNoShelfOnToday(page, "every check finished");
     },
   );
 
-  // ---- Today's walk and Your shelf ---------------------------------------------------------------------------
+  // ---- Today's walk -------------------------------------------------------------------------------------------
   await withToday(browser, base, {}, async (page) => {
     assert.equal(await walkRow(page).locator(".list-row-title").innerText(), "Today's walk");
-    assert.match(await walkRow(page).locator(".list-row-detail").innerText(), /^[A-Z][A-Za-z ]+ \d+:\d+\. Read, reflect and pray, 5 minutes\.$/);
-    assert.equal(await shelfRow(page).locator(".list-row-title").innerText(), "Your shelf");
-    assert.equal(await shelfRow(page).locator(".list-row-detail").innerText(), "Nothing on it yet");
-    assert.equal(await page.locator(".mini-spine").count(), 0, "an empty shelf draws no spines");
-    assert.equal(await page.locator(".row-ai").count(), 0, "no AI line on an empty shelf");
+    assert.match(await walkRow(page).locator(".list-row-detail").innerText(), /^.+ \d+:\d+.* \u00b7 read, reflect, pray$/, "the reference, then 'read, reflect, pray' (UI-SPEC 2.1)");
+    assert.equal(await walkRow(page).locator(".list-row-value").innerText(), "Start");
+    assert.equal(await walkRow(page).locator(".list-row-chevron").count(), 0, "the word Start, as the canvas draws it, needs no chevron");
+    assert.equal(await walkRow(page).locator(".walk-tile").getAttribute("aria-hidden"), "true", "the footprints are decoration");
+    assert.equal(await walkRow(page).locator(".walk-tile svg").count(), 1);
+    await assertNoShelfOnToday(page, "a fresh Today");
     // The sponsor slot is built and empty (D-13): not an element, not a word, at the end of Today.
     assert.equal(await page.locator('[data-slot="sponsor"]').count(), 0, "no sponsor slot on Today");
     assert.equal(await page.locator("main").getByText(/sponsor/i).count(), 0, "no word Sponsor on Today");
     assert.equal(await page.locator("main h2:not(.sr-only)").count(), 0, "no group headings: one quiet list");
-    // The block reads as one section named by its hidden heading; the list follows it.
+    // The title row holds the You button and nothing else: no bag, no Shop (the card carries the shop link, 01.2 D-04).
+    assert.deepEqual(await page.locator(".today-head a, .today-head button").evaluateAll((list) => list.map((el) => el.getAttribute("aria-label") ?? el.textContent.trim())), ["You"], "the title row holds one control, You");
+    assert.equal(await page.locator('.today-head a[href="/shop"], .shop-bag').count(), 0, "no bag in the title row");
+    assert.equal(await page.locator(".today .sky-caption").count(), 0, "no line counts the days on Today");
+    // The block reads as one section named by its hidden heading; the walk row's list follows it.
     const order = await page.evaluate(() => {
       const c = document.querySelector(".cover-wrap"), l = document.querySelector(".today .group");
       return !!(c.compareDocumentPosition(l) & Node.DOCUMENT_POSITION_FOLLOWING);
     });
     assert.ok(order, "the list is under the block");
+    const first = await page.evaluate(() => {
+      const c = document.querySelector(".cover-wrap"), row = document.querySelector(".today .list-row");
+      return !!(c.compareDocumentPosition(row) & Node.DOCUMENT_POSITION_FOLLOWING) && row.getAttribute("href") === "/walk";
+    });
+    assert.ok(first, "the first list row after the block is the walk row");
   });
   await withToday(browser, base, { wanted: { walkStep: 2 } }, async (page) => {
     assert.equal(await walkRow(page).locator(".list-row-title").innerText(), "Continue today's walk");
@@ -138,7 +154,8 @@ export async function checkToday(browser, base, published) {
     assert.equal(await icon.evaluate((el) => getComputedStyle(el).color), await colour(page, "--success"));
   });
 
-  // The shelf row: the count, the mini shelf, and the AI line whenever the shelf holds an AI-written check.
+  // The shelf has left Today: whatever stands on it, Today shows no shelf row, and the AI line lives on Bible, Study's
+  // Your shelf row (01.2 D-04, D-05).
   const ai = published.find((c) => c.review === "ai-unreviewed");
   const approved = published.filter((c) => c.review === "approved");
   await withToday(
@@ -146,34 +163,29 @@ export async function checkToday(browser, base, published) {
     base,
     { wanted: { shelf: [approved[0], approved[1], ...(ai ? [ai] : [approved[2]])].map((c, i) => ({ slug: c.slug, finishedOn: "2026-01-0" + (i + 2) })) } },
     async (page) => {
-      const row = shelfRow(page);
-      assert.match(await row.locator(".list-row-detail .row-line").first().innerText(), /^3 context checks read$/);
-      const mini = row.locator(".mini-shelf");
-      assert.equal(await mini.getAttribute("aria-hidden"), "true", "the mini shelf is a picture");
-      const spines = mini.locator(".mini-spine");
-      assert.equal(await spines.count(), 3);
-      for (const box of await spines.evaluateAll((list) => list.map((s) => ({ w: s.getBoundingClientRect().width, h: s.getBoundingClientRect().height })))) {
-        assert.equal(box.w, 8, "spines are 8px wide");
-        assert.ok(box.h >= 24 && box.h <= 40, "spines are 24 to 40px tall");
-      }
+      await assertNoShelfOnToday(page, "three on the shelf");
+      await page.goto(base + "/bible");
+      await page.locator("main h1").waitFor();
+      await page.getByRole("radio", { name: "Study" }).click();
+      const row = page.getByRole("link", { name: /^Your shelf/ });
+      assert.equal(await row.locator(".list-row-value").innerText(), "3 read");
+      assert.equal(await row.locator(".mini-shelf").getAttribute("aria-hidden"), "true", "the mini shelf is a picture");
+      assert.equal(await row.locator(".mini-spine").count(), 3);
       if (ai) {
         assert.equal(await row.locator(".row-ai").innerText(), "AI\n1 with context written by AI.");
         assert.equal(await row.locator(".row-ai").evaluate((el) => getComputedStyle(el).color), await colour(page, "--ai"));
-        // Newest on the right: the AI spine, finished last, is the last one, filled --ai.
-        assert.equal(await spines.last().evaluate((el) => getComputedStyle(el).backgroundColor), await colour(page, "--ai"));
-        assert.notEqual(await spines.first().evaluate((el) => getComputedStyle(el).backgroundColor), await colour(page, "--ai"));
+        assert.equal(await row.locator(".mini-spine").last().evaluate((el) => getComputedStyle(el).backgroundColor), await colour(page, "--ai"), "newest on the right, filled --ai");
         assert.match(await row.innerText(), /with context written by AI/, "the words carry the label, not the colour");
       } else assert.equal(await row.locator(".row-ai").count(), 0);
     },
   );
-  // More than twelve: the twelve newest stand on the mini shelf, the count says all.
+  // More than twelve on the shelf: still nothing on Today.
   await withToday(
     browser,
     base,
     { wanted: { shelf: Array.from({ length: 13 }, (_, i) => ({ slug: "check-" + (i + 1), finishedOn: "2026-01-02" })) } },
     async (page) => {
-      assert.match(await shelfRow(page).locator(".row-line").first().innerText(), /^13 context checks read$/);
-      assert.equal(await page.locator(".mini-spine").count(), 12);
+      await assertNoShelfOnToday(page, "thirteen on the shelf");
     },
   );
 
@@ -343,7 +355,7 @@ export async function checkTodayFixture(browser, base) {
       assert.equal(await block.getByRole("button").innerText(), "Begin today's walk");
       assert.deepEqual(await filledButtons(page), ["Begin today's walk"]);
       assert.equal(await walkRow(page).count(), 0, "the walk row leaves the list");
-      assert.equal(await shelfRow(page).count(), 1);
+      assert.equal(await shelfRow(page).count(), 0, "no shelf row on Today");
       assert.equal(await page.locator(".cover-ai").count(), 0);
       assert.deepEqual(problems, []);
     } finally {
@@ -399,7 +411,8 @@ export async function checkTodayFixture(browser, base) {
       const block = next.page.getByRole("region", { name: TITLE, exact: true });
       assert.equal(await block.locator(".cover-ref").innerText(), "John 3:16");
       assert.equal(await block.locator(".cover-ai").count(), 0, "an approved check shows no label row");
-      assert.match(await shelfRow(next.page).innerText(), /1 with context written by AI\./, "the shelf row says it");
+      assert.equal(await shelfRow(next.page).count(), 0, "the shelf row, with its AI line, lives on Bible, Study now");
+      assert.equal(await next.page.locator(".row-ai").count(), 0);
     } finally {
       await next.context.close();
     }
@@ -448,7 +461,7 @@ export async function checkTodayLargeText(browser, base, published) {
         last: [...document.querySelectorAll(".today .list-row")].at(-1).getBoundingClientRect().bottom,
         bar: document.querySelector("nav.tabbar").getBoundingClientRect().top,
       }));
-      assert.ok(end.last <= end.bar, "the last row is above the tab bar " + where + ": " + JSON.stringify(end));
+      assert.ok(end.last <= end.bar, "the last row (the walk row) is above the tab bar " + where + ": " + JSON.stringify(end));
     });
   }
 }

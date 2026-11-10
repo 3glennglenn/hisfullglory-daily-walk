@@ -236,15 +236,11 @@ export async function checkShelfScreen(browser, base, published) {
       await page.reload();
       await page.locator("main h1").waitFor();
       assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "after a reload too");
-      // Opened from Today (its row stays until the Today plan removes it), Back still names Today.
+      // Today has no shelf row any more (01.2 D-04): the shelf is reached from Bible, Study only.
       await page.goto(base + "/");
       await page.locator("main h1").waitFor();
-      const todayRow = page.locator('.today a[href="/shelf"]');
-      if (await todayRow.count()) {
-        await todayRow.click();
-        await page.waitForURL("**/shelf");
-        assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "from Today, Back names Today");
-      }
+      assert.equal(await page.locator('.today a[href="/shelf"]').count(), 0, "Today has no shelf row");
+      assert.equal(await page.locator(".today .mini-shelf").count(), 0, "and no mini shelf");
       await page.goto(base + "/you");
       const sheet = page.getByRole("dialog", { name: "You", exact: true });
       await sheet.waitFor();

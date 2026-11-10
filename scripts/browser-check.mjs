@@ -129,6 +129,23 @@ try {
         (list) => list.filter((b) => getComputedStyle(b).backgroundColor !== "rgba(0, 0, 0, 0)").map((b) => b.getAttribute("aria-label") ?? b.textContent),
       );
       assert.deepEqual(filled, ["Read the story: " + refLabel(expected.verse)], "exactly one filled button in main");
+      // Three things, no more (01.2 D-04): the title row holds one link, "You", and no "Shop"; the first list row after the
+      // cover is the walk row.
+      assert.deepEqual(
+        await page.locator(".today-head a, .today-head button").evaluateAll((list) => list.map((el) => el.getAttribute("aria-label") ?? el.textContent.trim())),
+        ["You"],
+        "the title row holds one control, You, and no Shop",
+      );
+      assert.equal(await page.locator('.today-head [aria-label="Shop"]').count(), 0, "no bag in the title row");
+      assert.equal(
+        await page.evaluate(() => {
+          const c = document.querySelector(".cover-wrap"), row = document.querySelector(".today .list-row");
+          return !!(c.compareDocumentPosition(row) & Node.DOCUMENT_POSITION_FOLLOWING) && row.getAttribute("href") === "/walk";
+        }),
+        true,
+        "the first list row after the cover is the walk row",
+      );
+      assert.equal(await page.locator('.today a[href="/shelf"]').count(), 0, "no shelf row on Today");
       assert.equal(await cover.getByRole("button").innerText(), "Read the story");
       // The old Home furniture is gone.
       for (const gone of ["Walk with Jesus", "Welcome to your daily walk", "A gentle rhythm", "Read Scripture", "Bring a prayer", "Reflect privately"])
@@ -189,10 +206,10 @@ try {
     },
   );
   await check("welcome questionnaire: once, on the first open of the app, five screens with Back and Skip for now, saved choices, never again, no hold on a deep link, both looks and modes, 200 % text", () => checkWelcome(browser, base));
-  await check("Lamplight is direction B's room: no leather slab, one pool of lamp light, the salmon pill, a sky with a star for each day walked and its line, the walk finish with today's star lit, the light modes unchanged, 200 % text", () => checkLamplight(browser, base));
-  await check("Today: its states, the walk and shelf rows, and what each look draws (UI-SPEC A1)", () => checkToday(browser, base, published));
+  await check("Night light is direction B's room: no leather slab, one pool of lamp light, the salmon pill, a sky with a star for each day walked (no line on Today), the walk finish with today's star lit, the light modes unchanged, 200 % text", () => checkLamplight(browser, base));
+  await check("Today: the newest context check, the walk row and the Study Bibles card; no bag, no shelf row, no star line (01.2 D-04); its states and what each look draws (UI-SPEC A1)", () => checkToday(browser, base, published));
   await check("Today on controlled content: no published check, an AI-written newest check, files the app cannot read", () => checkTodayFixture(browser, base));
-  await check("Today at 200 % text on 390 and 320px: no sideways scroll, nothing clipped, the button and the last row above the tab bar, tab labels on one line", () => checkTodayLargeText(browser, base, published));
+  await check("Today at 200 % text on 390 and 320px: no sideways scroll, nothing clipped, the button and the walk row above the tab bar, tab labels on one line", () => checkTodayLargeText(browser, base, published));
   await check("sponsor slot: nothing at any of the six places while no sponsor is set; a fixture sponsor shows only where it is listed, as a sponsored link without a query string", () => checkSponsor(browser, base));
   await check("context-check story: a full-screen flow with named steps that puts a finished story on the shelf once, and says so only when it was saved (UI-SPEC A7)", () => checkStoryFlow(browser, base, published));
   await check("Your shelf: spines on boards (7 at 390px), AI badges and legend, tomorrow place, empty and large-text states, and its Back button (UI-SPEC A9)", () => checkShelfScreen(browser, base, published));
