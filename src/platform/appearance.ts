@@ -1,12 +1,14 @@
 // How the app looks, per device and without an account (UI-SPEC 3.2): a look ("cover" or
-// "marked") and a Lamplight setting ("auto", "on" or "off"). The values sit in two plain
-// localStorage keys and reach <html> as data-look and data-mode. index.html sets both before
-// anything paints; this module is the same logic for the app once it runs.
+// "marked") and the Night light setting ("auto", "on" or "off"; the reader sees Automatic, Night light and Day). The
+// values sit in two plain localStorage keys and reach <html> as data-look and data-mode. index.html sets both before
+// anything paints; this module is the same logic for the app once it runs. Nothing here ever interrupts the reader
+// about appearance (01.2 D-09): a dark device turns Night light on silently.
 // Every storage access is guarded: a blocked or unreadable store means Cover and Automatic.
 
 export const LOOK_KEY = "hfg-look";
 export const LAMPLIGHT_KEY = "hfg-lamplight";
-export const NOTICE_KEY = "hfg-lamplight-notice";
+/** The key the removed appearance notice used (01.1); it is deleted once when the app starts (01.2 D-09). */
+export const LEGACY_NOTICE_KEY = "hfg-lamplight-notice";
 
 export type Look = "cover" | "marked";
 export type Lamplight = "auto" | "on" | "off";
@@ -96,66 +98,19 @@ export function writeLamplight(lamp: Lamplight, storage: Writer | undefined = sa
   }
 }
 
-// ---- The Lamplight notice (UI-SPEC 4): the rules, apart from the screen --------------------------------------
-
-/** What is kept about the notice: how often it appeared and whether the reader has answered it. */
-export interface NoticeState {
-  shown: number;
-  done: boolean;
-}
-/** The notice appears at most this many times, answered or not (UI-SPEC 4). */
-export const NOTICE_LIMIT = 3;
-const freshNotice = (): NoticeState => ({ shown: 0, done: false });
-
-/** The stored counters. Anything unreadable, or out of range, reads as the default (T-01.1-13). */
-export function readNotice(storage: Reader | undefined = safeStorage()): NoticeState {
-  try {
-    const raw = storage?.getItem(NOTICE_KEY);
-    if (!raw) return freshNotice();
-    const value = JSON.parse(raw) as Partial<NoticeState> | null;
-    if (
-      value &&
-      typeof value === "object" &&
-      Number.isInteger(value.shown) &&
-      (value.shown as number) >= 0 &&
-      (value.shown as number) <= NOTICE_LIMIT &&
-      typeof value.done === "boolean"
-    )
-      return { shown: value.shown as number, done: value.done };
-  } catch {
-    /* unreadable: the default */
-  }
-  return freshNotice();
-}
-
-export function writeNotice(notice: NoticeState, storage: Writer | undefined = safeStorage()): boolean {
-  try {
-    storage?.setItem(NOTICE_KEY, JSON.stringify({ shown: notice.shown, done: notice.done }));
-    return !!storage;
-  } catch {
-    return false;
-  }
-}
+// ---- The old appearance notice is gone (01.2 D-09) -----------------------------------------------------------
 
 /**
- * Lamplight turned on by itself: the setting is Automatic and the device is dark, the reader has not answered
- * and the notice has appeared fewer than three times. On or Off, which the reader chose, never show it.
+ * Removes the counters the old notice kept (hfg-lamplight-notice), and nothing else. Done once per page load at start.
+ * A blocked or unwritable storage changes nothing and throws nothing.
  */
-export function shouldShowNotice(lamplight: Lamplight, deviceDark: boolean, notice: NoticeState): boolean {
-  return lamplight === "auto" && deviceDark && !notice.done && notice.shown < NOTICE_LIMIT;
+export function forgetNoticeKey(storage: Pick<Storage, "removeItem"> | undefined = safeStorage()): void {
+  try {
+    storage?.removeItem(LEGACY_NOTICE_KEY);
+  } catch {
+    /* Blocked storage: the old key stays, it does no harm. */
+  }
 }
-
-/** One more showing. Counted once per showing, not per screen. */
-export const recordShown = (notice: NoticeState): NoticeState => ({ ...notice, shown: notice.shown + 1 });
-/** "Keep Lamplight": answered, never shown again. */
-export const keep = (notice: NoticeState): NoticeState => ({ ...notice, done: true });
-/** "Turn off": answered, and the Lamplight setting becomes Off. */
-export const turnOff = (notice: NoticeState): { notice: NoticeState; lamplight: "off" } => ({
-  notice: { ...notice, done: true },
-  lamplight: "off",
-});
-/** Escape inside the notice closes it like Keep but leaves it unanswered (a later automatic switch may show it again). */
-export const escape = (notice: NoticeState): NoticeState => ({ ...notice });
 
 /** The key the app wrote its old theme choice to (UI-SPEC 3.2). It is read once, moved and removed. */
 export const OLD_APPEARANCE_KEY = "hfg-appearance";

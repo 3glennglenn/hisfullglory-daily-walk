@@ -1,5 +1,6 @@
-// Phase 01.1, plan 04: the forward step for lamplight, shelf and lastChapter, the one-time move of the old
-// appearance key, and the rules of the Lamplight notice. Storage and matchMedia are mocked.
+// Phase 01.1, plan 04 and phase 01.2, plan 05: the forward step for lamplight, shelf and lastChapter, the one-time move
+// of the old appearance key, the words of Night light, and the removal of the old appearance notice (D-09). Storage and
+// matchMedia are mocked.
 // Run from the project root: node --experimental-strip-types --test tests/appearance.test.ts
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -22,23 +23,18 @@ import {
 import {
   LAMPLIGHT_KEY,
   LAMPLIGHT_NAMES,
+  LEGACY_NOTICE_KEY,
   LOOK_KEY,
   LOOK_NAMES,
   MODE_ORDER,
-  NOTICE_KEY,
-  escape,
-  keep,
+  forgetNoticeKey,
   migrateAppearance,
   modeHint,
   readLamplight,
-  readNotice,
-  recordShown,
-  shouldShowNotice,
-  turnOff,
+  effectiveMode,
   watchDevice,
   writeLamplight,
   writeLook,
-  writeNotice,
 } from "../src/platform/appearance.ts";
 
 class Memory {
@@ -362,8 +358,8 @@ test("look and Lamplight stay outside private state: not in the backup export, n
   };
   assert.equal(writeLook("cover", full), false);
   assert.equal(writeLamplight("off", full), false);
-  // The provider and the notice never write to an account, a server, a cookie or analytics.
-  for (const file of ["src/platform/AppearanceProvider.tsx", "src/ui/LamplightNotice.tsx", "src/platform/appearance.ts"]) {
+  // The provider never writes to an account, a server, a cookie or analytics.
+  for (const file of ["src/platform/AppearanceProvider.tsx", "src/platform/appearance.ts"]) {
     let source = "";
     try {
       source = readFileSync(file, "utf8");
@@ -376,7 +372,7 @@ test("look and Lamplight stay outside private state: not in the backup export, n
   }
 });
 
-// ---- the Lamplight notice (UI-SPEC 4) -----------------------------------------------------------------------
+// ---- no appearance notice (01.2 D-09) -------------------------------------------------------------------------
 
 /** A matchMedia stand-in whose change listeners the test fires. */
 function fakeDevice(dark: boolean) {
@@ -400,103 +396,92 @@ function fakeDevice(dark: boolean) {
   };
 }
 
-test("the notice is due only for Automatic on a dark device with no answer yet and fewer than three showings", () => {
-  const fresh = { shown: 0, done: false };
-  assert.equal(shouldShowNotice("auto", true, fresh), true);
-  assert.equal(shouldShowNotice("auto", false, fresh), false, "a light device");
-  assert.equal(shouldShowNotice("on", true, fresh), false, "the reader chose On");
-  assert.equal(shouldShowNotice("off", true, fresh), false, "the reader chose Off");
-  assert.equal(shouldShowNotice("auto", true, { shown: 1, done: true }), false, "already answered");
-  assert.equal(shouldShowNotice("auto", true, { shown: 2, done: false }), true, "one more showing is allowed");
-  assert.equal(shouldShowNotice("auto", true, { shown: 3, done: false }), false, "three showings are enough");
+/** Source with its comments removed: comments may name what the code does not do. */
+function codeOf(file: string): string {
+  return readFileSync(file, "utf8")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\/\/.*$/gm, "");
+}
+
+test("forgetNoticeKey removes hfg-lamplight-notice and nothing else, private data included", () => {
+  const memory = new Memory();
+  const others: Record<string, string> = {
+    [LOOK_KEY]: "marked",
+    [LAMPLIGHT_KEY]: "on",
+    "hfg-appearance": "dark",
+    "hfg-theme": "light",
+    "hfg-reminder": "{}",
+    [V3_KEY]: "{}",
+    "hfg-private:user-a:journal": "[]",
+    "hfg-lamplight-notice-extra": "keep",
+  };
+  for (const [key, value] of Object.entries(others)) memory.setItem(key, value);
+  for (const old of ['{"shown":2,"done":false}', '{"shown":3,"done":true}', "garbage", ""]) {
+    memory.setItem(LEGACY_NOTICE_KEY, old);
+    forgetNoticeKey(memory);
+    assert.equal(memory.getItem(LEGACY_NOTICE_KEY), null, JSON.stringify(old) + " is gone");
+    assert.deepEqual(Object.fromEntries(memory.data), others, "every other key is untouched");
+  }
+  assert.equal(LEGACY_NOTICE_KEY, "hfg-lamplight-notice");
+  // Absent key: nothing happens, twice in a row.
+  forgetNoticeKey(memory);
+  assert.deepEqual(Object.fromEntries(memory.data), others);
 });
 
-test("each showing counts once; Keep and Turn off answer; Escape leaves the notice open to a later showing", () => {
-  const fresh = { shown: 0, done: false };
-  const once = recordShown(fresh);
-  assert.deepEqual(once, { shown: 1, done: false });
-  assert.deepEqual(fresh, { shown: 0, done: false }, "the input is not changed");
-  assert.deepEqual(keep(once), { shown: 1, done: true });
-  assert.equal(shouldShowNotice("auto", true, keep(once)), false);
-  const off = turnOff(once);
-  assert.deepEqual(off.notice, { shown: 1, done: true });
-  assert.equal(off.lamplight, "off");
-  const escaped = escape(once);
-  assert.deepEqual(escaped, { shown: 1, done: false });
-  assert.equal(shouldShowNotice("auto", true, escaped), true, "it may show again at the next automatic switch");
-  // Three showings, answered or not, are the most there are.
-  let notice = fresh;
-  let showings = 0;
-  while (shouldShowNotice("auto", true, notice)) {
-    notice = escape(recordShown(notice));
-    showings++;
-  }
-  assert.equal(showings, 3);
-});
-
-test("a device change from light to dark makes the notice due with Automatic, never with On or Off", () => {
-  for (const [lamplight, due] of [
-    ["auto", true],
-    ["on", false],
-    ["off", false],
-  ] as const) {
-    const device = fakeDevice(false);
-    let dark = device.media.matches;
-    const stop = watchDevice(device.media, (next) => {
-      dark = next;
-    });
-    assert.equal(shouldShowNotice(lamplight, dark, readNotice(new Memory())), false, lamplight + ": light device");
-    device.switchTo(true);
-    assert.equal(shouldShowNotice(lamplight, dark, readNotice(new Memory())), due, lamplight + ": device turned dark");
-    device.switchTo(false);
-    assert.equal(shouldShowNotice(lamplight, dark, readNotice(new Memory())), false, lamplight + ": device turned light");
-    stop();
-    assert.equal(device.listeners.size, 0, "the listener is removed");
-  }
-});
-
-test("an unreadable or out-of-range hfg-lamplight-notice value reads as the default", () => {
-  const fresh = { shown: 0, done: false };
-  for (const raw of [
-    "not json",
-    "null",
-    "7",
-    '"x"',
-    "[]",
-    "{}",
-    '{"shown":"2","done":false}',
-    '{"shown":-1,"done":false}',
-    '{"shown":1.5,"done":false}',
-    '{"shown":99,"done":false}',
-    '{"shown":1,"done":"yes"}',
-    '{"shown":1}',
-  ]) {
-    const memory = new Memory();
-    memory.setItem(NOTICE_KEY, raw);
-    assert.deepEqual(readNotice(memory), fresh, raw);
-  }
-  assert.deepEqual(readNotice(new Memory()), fresh, "absent");
-  const unreadable = {
-    getItem() {
+test("forgetNoticeKey with a storage that throws, or none at all, changes nothing and throws nothing", () => {
+  const removed: string[] = [];
+  const blocked = {
+    removeItem(key: string) {
+      removed.push(key);
       throw new Error("blocked");
     },
   };
-  assert.deepEqual(readNotice(unreadable), fresh, "storage that throws");
-  const memory = new Memory();
-  memory.setItem(NOTICE_KEY, '{"shown":2,"done":true}');
-  assert.deepEqual(readNotice(memory), { shown: 2, done: true });
+  assert.doesNotThrow(() => forgetNoticeKey(blocked));
+  assert.deepEqual(removed, [LEGACY_NOTICE_KEY], "it only tried the one key");
+  assert.doesNotThrow(() => forgetNoticeKey({ removeItem: undefined } as unknown as Pick<Storage, "removeItem">));
+  assert.doesNotThrow(() => forgetNoticeKey(undefined));
 });
 
-test("the notice counters are stored as {shown, done} under hfg-lamplight-notice and survive a failed write", () => {
+test("the provider removes the old key once at start and the app writes it nowhere", () => {
+  const provider = codeOf("src/platform/AppearanceProvider.tsx");
+  assert.match(provider, /forgetNoticeKey\(\)/, "the provider removes the old key at start");
+  assert.match(provider, /if \(moved\) return;\s*moved = true;/, "once per page load");
+  for (const file of ["src/platform/AppearanceProvider.tsx", "src/platform/appearance.ts"]) {
+    const code = codeOf(file);
+    assert.doesNotMatch(code, /setItem\(\s*(NOTICE_KEY|LEGACY_NOTICE_KEY|"hfg-lamplight-notice")/, file + " never writes the old key");
+  }
+  assert.ok(!readFileSync("src/platform/appearance.ts", "utf8").includes("export function writeNotice"), "writeNotice is gone");
+  // The backup export never held it and still does not.
   const memory = new Memory();
-  assert.equal(writeNotice({ shown: 1, done: false }, memory), true);
-  assert.equal(memory.getItem(NOTICE_KEY), '{"shown":1,"done":false}');
-  assert.deepEqual(readNotice(memory), { shown: 1, done: false });
-  const full = new Memory();
-  full.setItem = () => {
-    throw new Error("full");
-  };
-  assert.equal(writeNotice({ shown: 1, done: false }, full), false);
-  // The notice state is not private state and not in the export.
+  memory.setItem(LEGACY_NOTICE_KEY, '{"shown":1,"done":false}');
   assert.ok(!backupData(memory).includes("hfg-lamplight-notice"));
+});
+
+test("nothing can interrupt the reader about appearance: no notice file, state, status region or announcement", () => {
+  assert.throws(() => readFileSync("src/ui/LamplightNotice.tsx", "utf8"), /ENOENT/, "the notice component is deleted");
+  const provider = codeOf("src/platform/AppearanceProvider.tsx");
+  assert.doesNotMatch(provider.replace(/forgetNoticeKey|LEGACY_NOTICE_KEY/g, ""), /notice|aria-live|role="status"|focus\(/i, "the provider shows, says and focuses nothing");
+  const shell = codeOf("src/platformApp.tsx");
+  assert.doesNotMatch(shell, /LamplightNotice|noticeText|lamplight-status/, "the shell has no appearance region");
+  for (const file of ["src/features/Appearance.tsx", "src/features/You.tsx"]) {
+    assert.doesNotMatch(codeOf(file), /role="status"|aria-live/, file + " announces nothing about the mode");
+  }
+});
+
+test("a dark device turns Night light on by itself under Automatic, and never under Day or Night light choices", () => {
+  assert.equal(effectiveMode("auto", true), "lamplight");
+  assert.equal(effectiveMode("auto", false), "light");
+  assert.equal(effectiveMode("off", true), "light", "Day holds on a dark device");
+  assert.equal(effectiveMode("on", false), "lamplight", "Night light holds on a light device");
+  const device = fakeDevice(false);
+  let dark = device.media.matches;
+  const stop = watchDevice(device.media, (next) => {
+    dark = next;
+  });
+  device.switchTo(true);
+  assert.equal(effectiveMode("auto", dark), "lamplight");
+  device.switchTo(false);
+  assert.equal(effectiveMode("auto", dark), "light");
+  stop();
+  assert.equal(device.listeners.size, 0, "the listener is removed");
 });

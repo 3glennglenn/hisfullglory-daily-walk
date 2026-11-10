@@ -13,7 +13,7 @@ import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
 import { cameFrom, currentRoute, lastTabRoot, navigate, parseRoute, rememberTabRoot } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
-import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider";
+import { AppearanceProvider } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
 import { Walk } from "./features/Walk";
 import { Today } from "./features/Today";
@@ -35,7 +35,6 @@ import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
 import { TabBar } from "./ui/TabBar";
 import { activeTab, rootTabOf } from "./ui/tabs";
-import { LamplightNotice, noticeText } from "./ui/LamplightNotice";
 import { LargeTitle, Toolbar } from "./ui/Screen";
 import { config, products } from "./config";
 import { contentFor } from "./data";
@@ -107,7 +106,6 @@ function closeYou() {
 }
 function App() {
   const { state, notice, update } = usePlatform();
-  const lamplightNotice = useAppearance().notice;
   const [route, setRoute] = useState(currentRoute);
   // The welcome questionnaire takes over once, when the app opens on Today ("/") and has never been answered. A deep link
   // (a chapter, a context check from the website or a share) is never held back: the choice is made at the start, so a
@@ -246,11 +244,6 @@ function App() {
             "You’re offline. Downloaded Scripture and your private walk remain available. Community needs a connection."}
         </aside>
       )}
-      {/* Always in the page, empty until the Lamplight notice shows (UI-SPEC 4): text written into a region that
-          already exists is announced; a region inserted together with its text often is not. */}
-      <div role="status" aria-live="polite" id="lamplight-status" className="sr-only">
-        {noticeText(lamplightNotice?.variant)}
-      </div>
       <main id="main" tabIndex={-1}>
         {content}
         {youSheet}
@@ -287,7 +280,6 @@ function App() {
             <small role="status">{installStatus}</small>
           </aside>
         )}
-        <LamplightNotice tab={tab} path={location.pathname} />
       </main>
       {!flow && <TabBar active={tab} />}
     </div>
