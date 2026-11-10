@@ -1667,6 +1667,46 @@ try {
           "true",
           "Back shows Community on the segment chosen before",
         );
+        // Circles: an honest line while no community service is configured, and always the way to start or join one.
+        const circlesRow = page.getByRole("radiogroup", { name: "Community sections", exact: true });
+        assert.equal(await page.getByText("Walk together around Scripture and shared encouragement.", { exact: true }).count(), 1);
+        assert.equal(await page.getByText("Circles are not available right now.", { exact: true }).count(), 1, "the preview has no community service");
+        assert.equal(await page.getByRole("heading", { name: "Circles", exact: true }).count(), 1);
+        assert.equal(await page.getByText(footnote, { exact: true }).count(), 1);
+        assert.equal(await page.evaluate(() => document.querySelector("main > section.community").lastElementChild.textContent), footnote);
+        const start = page.getByRole("link", { name: "Start or join a Circle", exact: true });
+        assert.equal(await start.getAttribute("href"), "/community/circles");
+        assert.ok((await start.evaluate((el) => el.getBoundingClientRect().height)) >= 52);
+        await start.click();
+        await page.waitForURL("**/community/circles");
+        await page.getByRole("button", { name: "Back to Community", exact: true }).click();
+        await page.locator("main h1").filter({ hasText: "Community" }).waitFor();
+        assert.equal(await circlesRow.getByRole("radio", { name: "Circles", exact: true }).getAttribute("aria-checked"), "true", "Back to Community lands on Circles");
+        // Prayer wall: the public prayers and praise, every kind in the Show filter, and the original prayer wall, closed.
+        await circlesRow.getByRole("radio", { name: "Prayer wall", exact: true }).click();
+        await page.getByRole("heading", { name: "Prayer and praise", exact: true }).waitFor();
+        const show = page.getByRole("combobox", { name: /^Show/ });
+        assert.deepEqual(await show.evaluate((el) => [...el.options].map((o) => o.textContent)), ["All contributions", "reflection", "testimony", "memory", "encouragement", "prayer", "chat"]);
+        assert.equal(await show.inputValue(), "prayer", "the feed opens on prayers");
+        const wall = page.locator("details.group-disclosure");
+        assert.equal(await wall.locator("summary").innerText(), "The original prayer wall");
+        assert.equal(await wall.evaluate((el) => el.open), false);
+        assert.ok((await wall.locator("summary").evaluate((el) => el.getBoundingClientRect().height)) >= 52);
+        assert.equal(await page.getByText(footnote, { exact: true }).count(), 1);
+        assert.equal(await page.evaluate(() => document.querySelector("main > section.community").lastElementChild.textContent), footnote);
+        await wall.locator("summary").click();
+        await wall.getByRole("heading", { name: "Prayer Wall", exact: true }).waitFor();
+        assert.equal(await wall.getByRole("heading", { name: "Community", exact: true }).count(), 0, "the original wall keeps no second Community heading");
+        // The shop and Give are never placed on Community (CLAUDE.md, 01.2 D-10), on any segment.
+        for (const segment of ["Topics", "Circles", "Prayer wall"]) {
+          await circlesRow.getByRole("radio", { name: segment, exact: true }).click();
+          assert.equal(
+            await page.locator('main a[href*="/shop"], main a[href*="shop.hisfullglory.com"], main a[href*="/give"]').count(),
+            0,
+            "no shop or Give link on " + segment,
+          );
+          assert.ok(!/study bibles|give with intention/i.test(await page.locator("main").innerText()), "no shop or Give words on " + segment);
+        }
       } finally {
         await page.setViewportSize({ width: 375, height: 812 });
         await page.evaluate(([k, s]) => localStorage.setItem(k, JSON.stringify(s)), [key, original]);
