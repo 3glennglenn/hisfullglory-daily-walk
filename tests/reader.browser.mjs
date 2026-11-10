@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { build } from "esbuild";
 import { readdirSync, readFileSync } from "node:fs";
-import { publishedChecks } from "../src/context/checks.ts";
+import { aiUnreviewedCardLabel, publishedChecks, refLabel } from "../src/context/checks.ts";
 
 // The Bible reader in a real browser (UI-SPEC A2, A3, A4, A16). Each check opens its own context so a seeded
 // look, a text size or a stubbed browser API never leaks into the next one. They run against the built app.
@@ -298,6 +298,89 @@ export async function checkLibrary(browser, base) {
   } finally {
     await ctx.context.close();
   }
+  // Study: the study tools in one list, every count read from the app's data and files (UI-SPEC 2.2, D-05, D-10).
+  const study = await open(browser);
+  try {
+    const { page } = study;
+    await goto(page, base, "/bible");
+    const sections = page.getByRole("radiogroup", { name: "Bible sections" });
+    await sections.getByRole("radio", { name: "Study" }).click();
+    assert.equal(await sections.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true");
+    assert.deepEqual(
+      await page.locator(".library .list-row-title").allInnerTexts(),
+      ["Context checks", "Study notes", "Saved passages", "Your shelf", "Study Bibles"],
+      "the study tools in the order of the spec",
+    );
+    // Context checks: the count and the newest reference from the published checks, and the AI label when it applies.
+    const checks = published();
+    const newest = checks[0];
+    const contextRow = page.getByRole("link", { name: /^Context checks/ });
+    assert.equal(await contextRow.getAttribute("href"), "/context");
+    const n = checks.length;
+    const detail = n === 1 ? "1 well-known verse, back in its story" : `${n} well-known verses, back in their story`;
+    const contextText = await contextRow.innerText();
+    assert.ok(contextText.startsWith(`Context checks\n${detail}\nNewest: ${refLabel(newest.verse)}`), "the count and the newest reference: " + contextText);
+    assert.equal(contextText.includes(aiUnreviewedCardLabel), newest.review === "ai-unreviewed", "the AI label shows exactly when the newest check was written by AI");
+    // Study notes: one row per file in public/study; John opens its first chapter at Context.
+    const files = readdirSync("public/study").filter((f) => f.endsWith(".json"));
+    await page.getByRole("button", { name: /^Study notes/ }).click();
+    const notes = page.getByRole("dialog", { name: "Study notes", exact: true });
+    await notes.waitFor();
+    assert.equal(await notes.getByRole("link").count(), files.length, "one row per study file");
+    const johnRow = notes.getByRole("link", { name: /^John/ });
+    assert.equal(await johnRow.getAttribute("href"), "/bible/john/1?tab=context");
+    await johnRow.click();
+    await page.waitForURL("**/bible/john/1?tab=context");
+    await page.getByRole("dialog", { name: "Around John 1" }).waitFor();
+    assert.equal(await page.locator('article[data-layer="sourced"]').count() > 0, true, "the book note shows at Context");
+    // Back from the chapter keeps Study chosen.
+    await page.goBack();
+    await page.locator("main h1").waitFor();
+    assert.equal(await page.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true", "Back keeps Study chosen");
+    await page.getByRole("link", { name: /^Context checks/ }).click();
+    await page.waitForURL("**/context");
+    await page.goBack();
+    await page.locator("main h1").waitFor();
+    assert.equal(await page.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true", "Back from the context checks keeps Study chosen");
+    // Saved passages: the empty sentence, focus back on the row, two bookmarks as references, a link opens the verse.
+    const saved = page.getByRole("button", { name: /^Saved passages/ });
+    assert.equal(await saved.innerText(), "Saved passages\nWhat you marked while reading");
+    await saved.click();
+    const sheet = page.getByRole("dialog", { name: "Saved passages" });
+    await sheet.waitFor();
+    assert.equal(await sheet.getByText("Nothing saved yet. Tap a verse and choose Save verse.").count(), 1);
+    await page.keyboard.press("Escape");
+    await sheet.waitFor({ state: "detached" });
+    await page.waitForFunction(() => document.activeElement?.textContent?.trim().startsWith("Saved passages"), undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the row"));
+    await seedState(page, { bookmarks: ["/bible/romans/8/28", "/bible/song-of-solomon/2/4"] });
+    await page.getByRole("radio", { name: "Study" }).click();
+    await page.getByRole("button", { name: /^Saved passages/ }).click();
+    const list = page.getByRole("dialog", { name: "Saved passages" });
+    await list.waitFor();
+    assert.deepEqual(await list.getByRole("link").allInnerTexts(), ["Romans 8:28", "Song of Solomon 2:4"], "bookmarks read as references");
+    await list.getByRole("link", { name: "Romans 8:28" }).click();
+    await page.waitForURL("**/bible/romans/8/28");
+    // Your shelf and Study Bibles.
+    await goto(page, base, "/bible");
+    await page.getByRole("radio", { name: "Study" }).click();
+    const shelfRow = page.getByRole("link", { name: /^Your shelf/ });
+    assert.equal(await shelfRow.getAttribute("href"), "/shelf");
+    assert.equal(await shelfRow.locator(".list-row-value").innerText(), "0 read");
+    assert.equal(await shelfRow.locator(".mini-shelf").count(), 1, "the mini shelf is the row's picture");
+    const bibles = page.getByRole("link", { name: /^Study Bibles/ });
+    assert.equal(await bibles.getAttribute("href"), "/shop");
+    assert.equal(await bibles.innerText(), "Study Bibles\nHand-picked, from the HisFullGlory shop");
+    assert.equal(await page.locator('main a[href="/shop"]').count(), 1, "the one shop row of this screen (D-10)");
+    // Nothing in Read, or in the reader, links to the shop.
+    await page.getByRole("radio", { name: "Read" }).click();
+    assert.equal(await page.locator('main a[href="/shop"]').count(), 0, "no shop link in Read");
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-1").waitFor();
+    assert.equal(await page.locator('main a[href="/shop"]').count(), 0, "no shop link in the reader");
+    assert.deepEqual(study.problems, []);
+  } finally {
+    await study.context.close();
+  }
   // The first open: the failure with its way out.
   const failing = await open(browser);
   try {
@@ -316,6 +399,9 @@ export async function checkLibrary(browser, base) {
     await page.getByRole("button", { name: "Try downloading again", exact: true }).click();
     await page.getByRole("button", { name: /^Old Testament/ }).waitFor();
     assert.ok(calls >= 1);
+    // Context checks never waited for the download.
+    await page.getByRole("radio", { name: "Study" }).click();
+    assert.equal(await page.getByRole("link", { name: /^Context checks/ }).count(), 1);
     assert.deepEqual(failing.problems.filter((p) => !/503|Failed to load resource/.test(p)), []);
   } finally {
     await failing.context.close();
@@ -1095,6 +1181,7 @@ export async function checkChapterSheet(browser, base) {
     await page.waitForFunction(() => document.activeElement?.classList.contains("around-capsule"), undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the capsule"));
     // The saved chapter shows in the library.
     await goto(page, base, "/bible");
+    await page.getByRole("radio", { name: "Study" }).click();
     await page.getByRole("button", { name: /^Saved passages/ }).click();
     assert.deepEqual(await page.getByRole("dialog", { name: "Saved passages" }).getByRole("link").allInnerTexts(), ["John 3"]);
 

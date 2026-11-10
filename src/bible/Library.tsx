@@ -2,13 +2,19 @@ import { useId, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { GroupedList, Row } from "../ui/List";
 import { TitleRow } from "../ui/Screen";
+import { AiBadge } from "../ui/Badges";
 import { Segmented } from "../ui/Segmented";
+import { MiniShelf } from "../ui/Shelf";
 import { Sheet } from "../ui/Sheet";
 import { contextChecks } from "../context/data";
+import { aiUnreviewedCardLabel, refLabel } from "../context/checks";
+import { shelfSummary } from "../context/shelf";
 import { usePlatform } from "../platform/store";
 import { navigate } from "../platform/router";
 import { PassagePicker } from "./PassagePicker";
-import { oldTestamentBooks, referenceFromPath } from "./passages";
+import { oldTestamentBooks, referenceFromPath, slugWords } from "./passages";
+import { STUDY_BOOKS } from "./studyBooks";
+import { scopeLabel } from "./knowledge";
 import { searchBible, type BibleData } from "./provider";
 
 export const BIBLE_ERROR = "The Bible could not be opened. Check your connection and try again.";
@@ -32,7 +38,7 @@ let lastSection: Section = "read";
 
 export const booksLabel = (n: number) => (n === 1 ? "1 book" : `${n} books`);
 
-type LibrarySheet = "search" | "saved" | "old" | "new" | null;
+type LibrarySheet = "search" | "saved" | "notes" | "old" | "new" | null;
 
 export function Library({ data, failed, onRetry }: { data: BibleData | null; failed: boolean; onRetry: () => void }) {
   const { state } = usePlatform();
@@ -41,6 +47,10 @@ export function Library({ data, failed, onRetry }: { data: BibleData | null; fai
   const searchButton = useRef<HTMLButtonElement>(null);
   const opener = useRef<HTMLElement | null>(null);
   const checks = contextChecks.length;
+  const newest = contextChecks[0];
+  const { count: onShelf, ai: aiOnShelf } = shelfSummary(state.shelf, contextChecks);
+  // The names of the books with study notes: the Bible's own names once it is loaded, else the slugs written out.
+  const studyName = (slug: string) => data?.books.find((book) => book.slug === slug)?.name ?? slugWords(slug);
   const setSection = (value: Section) => {
     lastSection = value;
     setSectionState(value);
@@ -99,9 +109,57 @@ export function Library({ data, failed, onRetry }: { data: BibleData | null; fai
       ) : (
         <>
           <h2 className="sr-only">Study</h2>
+          {newest && (
+            <GroupedList>
+              <Row
+                title="Context checks"
+                href="/context"
+                chevron
+                detail={
+                  <>
+                    <span className="row-line">{contextChecksDetail(checks)}</span>
+                    <span className="row-line">Newest: {refLabel(newest.verse)}</span>
+                    {newest.review === "ai-unreviewed" && (
+                      <span className="row-line row-ai">
+                        <AiBadge />
+                        <span>{aiUnreviewedCardLabel}</span>
+                      </span>
+                    )}
+                  </>
+                }
+              />
+            </GroupedList>
+          )}
           <GroupedList>
-            {checks > 0 && <Row title="Context checks" detail={contextChecksDetail(checks)} href="/context" chevron />}
-            <Row title="Saved passages" value={state.bookmarks.length || undefined} chevron onClick={() => openFrom("saved")} />
+            <Row
+              title="Study notes"
+              detail={STUDY_BOOKS.map(studyName).join(", ")}
+              chevron
+              onClick={() => openFrom("notes")}
+            />
+            <Row
+              title="Saved passages"
+              detail="What you marked while reading"
+              value={state.bookmarks.length || undefined}
+              chevron
+              onClick={() => openFrom("saved")}
+            />
+            <Row
+              href="/shelf"
+              chevron
+              leading={<MiniShelf shelf={state.shelf} checks={contextChecks} />}
+              title="Your shelf"
+              value={`${onShelf} read`}
+              detail={
+                aiOnShelf > 0 && (
+                  <span className="row-line row-ai">
+                    <AiBadge />
+                    <span>{aiOnShelf} with context written by AI.</span>
+                  </span>
+                )
+              }
+            />
+            <Row title="Study Bibles" detail="Hand-picked, from the HisFullGlory shop" href="/shop" chevron />
           </GroupedList>
         </>
       )}
@@ -131,6 +189,15 @@ export function Library({ data, failed, onRetry }: { data: BibleData | null; fai
               navigate(path);
             }}
           />
+        </Sheet>
+      )}
+      {sheet === "notes" && (
+        <Sheet title="Study notes" detent="large" returnFocus={() => opener.current} onClose={() => setSheet(null)}>
+          <GroupedList>
+            {STUDY_BOOKS.map((slug) => (
+              <Row key={slug} title={studyName(slug)} detail={scopeLabel.book} href={`/bible/${slug}/1?tab=context`} chevron />
+            ))}
+          </GroupedList>
         </Sheet>
       )}
       {sheet === "saved" && (
