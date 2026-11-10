@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
-import { STUDY_BOOKS } from "../src/bible/studyBooks.ts";
+import { STUDY_BOOKS, STUDY_BOOKS_SHOWN } from "../src/bible/studyBooks.ts";
 import { parseRoute } from "../src/platform/router.ts";
 import type { BibleData } from "../src/bible/provider.ts";
 
@@ -23,6 +23,13 @@ test("STUDY_BOOKS follows the order of the Bible and names real books", () => {
   const at = STUDY_BOOKS.map((slug) => order.indexOf(slug));
   assert.ok(at.every((i) => i >= 0), "every slug is a book of the WEB");
   assert.deepEqual([...at].sort((a, b) => a - b), at, "canonical order");
+});
+
+test("STUDY_BOOKS_SHOWN is the canvas order: the Gospels first, then the rest in Bible order, the same books", () => {
+  assert.deepEqual([...STUDY_BOOKS_SHOWN].sort(), [...STUDY_BOOKS].sort(), "the same books, none lost or doubled");
+  const gospels = ["matthew", "mark", "luke", "john"].filter((slug) => STUDY_BOOKS.includes(slug));
+  assert.deepEqual(STUDY_BOOKS_SHOWN.slice(0, gospels.length), gospels, "the Gospels come first, in Gospel order");
+  assert.deepEqual(STUDY_BOOKS_SHOWN.slice(gospels.length), STUDY_BOOKS.filter((slug) => !gospels.includes(slug)), "then the others in Bible order");
 });
 
 test("every slug opens the book's first chapter at Context through the router", () => {

@@ -3,6 +3,7 @@ import { Search } from "lucide-react";
 import { GroupedList, Row } from "../ui/List";
 import { TitleRow } from "../ui/Screen";
 import { AiBadge } from "../ui/Badges";
+import { openInApp } from "../ui/internalLink";
 import { Segmented } from "../ui/Segmented";
 import { MiniShelf } from "../ui/Shelf";
 import { Sheet } from "../ui/Sheet";
@@ -13,7 +14,7 @@ import { usePlatform } from "../platform/store";
 import { navigate } from "../platform/router";
 import { PassagePicker } from "./PassagePicker";
 import { oldTestamentBooks, referenceFromPath, slugWords } from "./passages";
-import { STUDY_BOOKS } from "./studyBooks";
+import { STUDY_BOOKS_SHOWN } from "./studyBooks";
 import { scopeLabel } from "./knowledge";
 import { searchBible, type BibleData } from "./provider";
 
@@ -110,30 +111,23 @@ export function Library({ data, failed, onRetry }: { data: BibleData | null; fai
         <>
           <h2 className="sr-only">Study</h2>
           {newest && (
-            <GroupedList>
-              <Row
-                title="Context checks"
-                href="/context"
-                chevron
-                detail={
-                  <>
-                    <span className="row-line">{contextChecksDetail(checks)}</span>
-                    <span className="row-line">Newest: {refLabel(newest.verse)}</span>
-                    {newest.review === "ai-unreviewed" && (
-                      <span className="row-line row-ai">
-                        <AiBadge />
-                        <span>{aiUnreviewedCardLabel}</span>
-                      </span>
-                    )}
-                  </>
-                }
-              />
-            </GroupedList>
+            // The featured card of the canvas: its own block above the list, one link to all the checks.
+            <a className="featured-check" href="/context" onClick={openInApp("/context")}>
+              <span className="featured-eyebrow">Context checks</span>
+              <span className="featured-count">{contextChecksDetail(checks)}</span>
+              <span className="featured-newest">Newest: {refLabel(newest.verse)}</span>
+              {newest.review === "ai-unreviewed" && (
+                <span className="check-row-ai">
+                  <AiBadge />
+                  <span>{aiUnreviewedCardLabel}</span>
+                </span>
+              )}
+            </a>
           )}
           <GroupedList>
             <Row
               title="Study notes"
-              detail={STUDY_BOOKS.map(studyName).join(", ")}
+              detail={STUDY_BOOKS_SHOWN.map(studyName).join(", ")}
               chevron
               onClick={() => openFrom("notes")}
             />
@@ -195,7 +189,7 @@ export function Library({ data, failed, onRetry }: { data: BibleData | null; fai
       {sheet === "notes" && (
         <Sheet title="Study notes" detent="large" returnFocus={() => opener.current} onClose={() => setSheet(null)}>
           <GroupedList>
-            {STUDY_BOOKS.map((slug) => (
+            {STUDY_BOOKS_SHOWN.map((slug) => (
               <Row key={slug} title={studyName(slug)} detail={scopeLabel.book} href={`/bible/${slug}/1?tab=context`} chevron />
             ))}
           </GroupedList>

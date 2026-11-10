@@ -306,10 +306,12 @@ export async function checkLibrary(browser, base) {
     const sections = page.getByRole("radiogroup", { name: "Bible sections" });
     await sections.getByRole("radio", { name: "Study" }).click();
     assert.equal(await sections.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true");
+    // The featured card comes first, in its own block above the list; the list starts with Study notes.
+    assert.equal(await page.locator(".library > .featured-check + .group").count(), 1, "the card stands right above the list");
     assert.deepEqual(
       await page.locator(".library .list-row-title").allInnerTexts(),
-      ["Context checks", "Study notes", "Saved passages", "Your shelf", "Study Bibles"],
-      "the study tools in the order of the spec",
+      ["Study notes", "Saved passages", "Your shelf", "Study Bibles"],
+      "the list under the card, in the order of the spec; Context checks is not listed twice",
     );
     // Context checks: the count and the newest reference from the published checks, and the AI label when it applies.
     const checks = published();
@@ -318,15 +320,41 @@ export async function checkLibrary(browser, base) {
     assert.equal(await contextRow.getAttribute("href"), "/context");
     const n = checks.length;
     const detail = n === 1 ? "1 well-known verse, back in its story" : `${n} well-known verses, back in their story`;
-    const contextText = await contextRow.innerText();
-    assert.ok(contextText.startsWith(`Context checks\n${detail}\nNewest: ${refLabel(newest.verse)}`), "the count and the newest reference: " + contextText);
-    assert.equal(contextText.includes(aiUnreviewedCardLabel), newest.review === "ai-unreviewed", "the AI label shows exactly when the newest check was written by AI");
+    assert.equal(await contextRow.getAttribute("class"), "featured-check", "the card is the one link");
+    const contextLines = await contextRow.evaluate((el) => [...el.children].map((child) => child.textContent));
+    assert.deepEqual(
+      contextLines.slice(0, 3),
+      ["Context checks", detail, `Newest: ${refLabel(newest.verse)}`],
+      "the eyebrow, the count and the newest reference",
+    );
+    assert.equal(contextLines[3] ?? null, newest.review === "ai-unreviewed" ? "AI" + aiUnreviewedCardLabel : null, "the AI label shows exactly when the newest check was written by AI");
+    const card = await contextRow.evaluate((el) => {
+      const eyebrow = getComputedStyle(el.querySelector(".featured-eyebrow"));
+      const root = getComputedStyle(document.documentElement);
+      const css = getComputedStyle(el);
+      return { weight: eyebrow.fontWeight, eyebrowColour: eyebrow.color, face: getComputedStyle(el.querySelector(".featured-count")).fontFamily, radius: css.borderRadius, padding: css.padding, gap: css.rowGap, background: css.backgroundColor, surface: root.getPropertyValue("--surface").trim() };
+    });
+    assert.equal(card.weight, "700");
+    assert.equal(card.radius, "20px", "the grouped list's radius");
+    assert.equal(card.padding, "20px");
+    assert.equal(card.gap, "8px");
+    assert.ok(card.face.startsWith("Gelasio"), "the count line is in the scripture face: " + card.face);
+    assert.equal(card.eyebrowColour, "rgb(141, 92, 75)", "--link on the light surface, where --gilt falls short");
+    assert.equal(card.background, "rgb(255, 255, 255)", "the grouped list's surface");
     // Study notes: one row per file in public/study; John opens its first chapter at Context.
     const files = readdirSync("public/study").filter((f) => f.endsWith(".json"));
-    await page.getByRole("button", { name: /^Study notes/ }).click();
+    // The notes read in the canvas order: the Gospels first, in Gospel order, then the other books in Bible order.
+    const slugs = files.map((f) => f.replace(/\.json$/, ""));
+    const gospels = ["matthew", "mark", "luke", "john"].filter((g) => slugs.includes(g));
+    const shown = [...gospels, ...["psalms", "romans"].filter((b) => slugs.includes(b))];
+    const bookName = (slug) => slug[0].toUpperCase() + slug.slice(1);
+    const notesRow = page.getByRole("button", { name: /^Study notes/ });
+    assert.equal(await notesRow.locator(".list-row-detail").innerText(), shown.map(bookName).join(", "), "the row names the books in the canvas order");
+    await notesRow.click();
     const notes = page.getByRole("dialog", { name: "Study notes", exact: true });
     await notes.waitFor();
     assert.equal(await notes.getByRole("link").count(), files.length, "one row per study file");
+    assert.deepEqual(await notes.getByRole("link").evaluateAll((els) => els.map((el) => el.getAttribute("href"))), shown.map((slug) => `/bible/${slug}/1?tab=context`), "the sheet follows the same order");
     const johnRow = notes.getByRole("link", { name: /^John/ });
     assert.equal(await johnRow.getAttribute("href"), "/bible/john/1?tab=context");
     await johnRow.click();
@@ -380,6 +408,20 @@ export async function checkLibrary(browser, base) {
     assert.deepEqual(study.problems, []);
   } finally {
     await study.context.close();
+  }
+  // The featured card in Night light: --gilt on the same surface, as the canvas draws it.
+  const night = await open(browser, { colorScheme: "dark", lamplight: "on" });
+  try {
+    const { page } = night;
+    await goto(page, base, "/bible");
+    await page.getByRole("radio", { name: "Study" }).click();
+    const colours = await page.locator(".featured-eyebrow").evaluate((el) => ({ eyebrow: getComputedStyle(el).color, card: getComputedStyle(el.parentElement).backgroundColor }));
+    assert.equal(colours.eyebrow, "rgb(232, 200, 146)", "--gilt (#E8C892) in Night light");
+    assert.equal(colours.card, "rgb(37, 25, 20)", "the same surface as the grouped list (#251914)");
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.deepEqual(night.problems, []);
+  } finally {
+    await night.context.close();
   }
   // The first open: the failure with its way out.
   const failing = await open(browser);

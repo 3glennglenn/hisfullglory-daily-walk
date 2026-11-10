@@ -3753,6 +3753,53 @@ html[data-text="large"] .reader-toolbar .rt-more {
 }
 
 /* -- The library, /bible (A2; 01.2 D-05) and the passage picker -- */
+/* Bible, Study: Context checks as the featured card of the canvas (01.2 D-05, D-11). Its own block above the grouped
+   list, on the same surface and with the same radius as the list, the whole card one link. The eyebrow is --gilt in
+   Night light, as drawn; on the two light surfaces --gilt falls short of 4.5:1 (1.73 and 3.13), so there it is --link,
+   which holds 5.57 and 4.92 (tests/tokens-contrast.test.ts). The count line is the scripture face, as the canvas draws it.
+   The canvas sets the eyebrow in tracked capitals; 01.1 removed every uppercase tracked eyebrow and tests/design-gates.test.ts
+   keeps them out, so it is the same size, weight and colour in sentence case. */
+.featured-check {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-6);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+}
+a.featured-check:active {
+  background: var(--bg);
+}
+.featured-check:focus-visible {
+  outline-offset: -3px;
+}
+.featured-eyebrow {
+  font-size: var(--text-footnote);
+  font-weight: 700;
+  line-height: 1.38;
+  color: var(--link);
+}
+:root[data-mode="lamplight"] .featured-eyebrow {
+  color: var(--gilt);
+}
+.featured-count {
+  font-family: var(--font-scripture);
+  font-size: var(--text-title);
+  line-height: 1.45;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.featured-newest {
+  font-size: var(--text-body);
+  line-height: 1.47;
+  color: var(--muted);
+}
+.featured-check .check-row-ai {
+  margin-top: 0;
+}
 .picker .segmented {
   margin: 0 0 var(--space-4);
 }

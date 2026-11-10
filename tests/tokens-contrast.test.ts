@@ -262,6 +262,9 @@ const rows: Row[] = [
   { label: "community / surface-2 (sheet over sheet)", fg: "--community", bg: "--surface-2", need: 4.5, expected: [5.46, 7.79, 5.53, 7.79] },
   { label: "danger / surface-2 (sheet over sheet)", fg: "--danger", bg: "--surface-2", need: 4.5, expected: [6.15, 7.46, 6.22, 7.46] },
   { label: "success / surface-2 (sheet over sheet)", fg: "--success", bg: "--surface-2", need: 4.5, expected: [5.39, 7.53, 5.46, 7.53] },
+  // The eyebrow of Bible, Study's featured card: --link on the light surfaces, where --gilt falls short (1.73 and 3.13),
+  // --gilt on the Lamplight surface (src/styles.css, .featured-eyebrow).
+  { label: "featured card eyebrow / surface", fg: ["--link", "--gilt", "--link", "--gilt"], bg: "--surface", need: 4.5, expected: [5.57, 10.68, 4.92, 4.83] },
   // The check icon on the signature block: gilt on the Cover's leather, success on the Marked page.
   { label: "check icon / sig", fg: ["--gilt", "--gilt", "--success", "--success"], bg: "--sig", need: 3, expected: [5.39, 6.23, 6.52, 9.43] },
   { label: "ink / highlight-gold", fg: "--ink", bg: "--highlight-gold", need: 4.5, expected: [12.94, 8.26, 12.94, 8.26] },
