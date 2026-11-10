@@ -33,15 +33,11 @@
   --dur-spine: 360ms;
   --dur-sheet: 280ms;
   --dur-segment: 150ms;
-  --dur-notice: 150ms;
   --ease-spine: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-sheet: cubic-bezier(0.2, 0, 0, 1);
   --z-bar: 10;
-  --z-notice: 20;
   --z-sheet: 30;
   --z-skip: 100;
-  /* Height of the Lamplight notice plus its gap while it shows; src/ui/LamplightNotice.tsx sets it on <html>. */
-  --notice-h: 0px;
 }
 :root:not([data-look="marked"]) {
   color-scheme: light;
@@ -259,7 +255,7 @@ html {
    64px is the toolbar plus its gap, the bottom value is the tab bar, its gap and the page's own gap. */
 html {
   scroll-padding-top: calc(64px + env(safe-area-inset-top));
-  scroll-padding-bottom: calc(64px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
+  scroll-padding-bottom: calc(64px + 12px + 24px + env(safe-area-inset-bottom));
 }
 * {
   box-sizing: border-box;
@@ -357,7 +353,7 @@ main:focus {
 }
 /* The floating tab bar is 64px tall and 12px off the edge: the last content scrolls clear of it. */
 main {
-  padding-bottom: calc(64px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
+  padding-bottom: calc(64px + 24px + env(safe-area-inset-bottom));
 }
 h1,
 h2,
@@ -1460,7 +1456,7 @@ button.danger {
     margin-inline: auto;
   }
   main {
-    padding-bottom: calc(var(--space-8) + var(--notice-h));
+    padding-bottom: var(--space-8);
   }
 }
 /* Large text (150 % and up, plan 01 sets data-text on <html>): the bar keeps its single-line labels, adds
@@ -1469,7 +1465,7 @@ html[data-text="large"] .tab {
   padding: 9px 4px;
 }
 html[data-text="large"] main {
-  padding-bottom: calc(83px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
+  padding-bottom: calc(83px + 12px + 24px + env(safe-area-inset-bottom));
 }
 @media (max-width: 359px) {
   html[data-text="large"] .tabbar {
@@ -1481,7 +1477,7 @@ html[data-text="large"] main {
 }
 @media (min-width: 768px) {
   html[data-text="large"] main {
-    padding-bottom: calc(var(--space-8) + var(--notice-h));
+    padding-bottom: var(--space-8);
   }
   html[data-text="large"] .tab {
     padding: var(--space-3) var(--space-4);
@@ -1565,6 +1561,8 @@ html[data-text="large"] main {
 }
 .mode-item-icon {
   flex: none;
+  width: 1.1765em;
+  height: 1.1765em;
   color: var(--link);
 }
 :root:not([data-look="marked"])[data-mode="lamplight"] .mode-item-icon {
@@ -2109,89 +2107,6 @@ html[data-mode="lamplight"] .mini-cover::after {
   color: var(--muted);
   font-size: var(--text-footnote);
   line-height: 1.38;
-}
-
-/* ==== Lamplight notice (UI-SPEC 4; src/ui/LamplightNotice.tsx) ====
-   A floating card above the tab bar: 20px from the screen edges, 12px above the bar, --surface with the
-   --elev-float ring (the 1px --line) and a 150ms fade (the global reduced-motion reset removes it). While it
-   shows, main's bottom padding grows by --notice-h so the last content scrolls clear of it. From 768px the
-   tab bar is a sidebar, so the card sits at the bottom of the content column instead. */
-.lamplight-notice {
-  position: fixed;
-  z-index: var(--z-notice);
-  left: max(20px, env(safe-area-inset-left));
-  right: max(20px, env(safe-area-inset-right));
-  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px);
-  max-width: 456px;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-3);
-  align-items: start;
-  padding: var(--space-4);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  color: var(--ink);
-  box-shadow: var(--elev-float);
-  animation: lamplight-notice-in var(--dur-notice) ease-out;
-}
-@keyframes lamplight-notice-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-html[data-text="large"] .lamplight-notice {
-  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px);
-}
-.lamplight-notice-icon {
-  flex: none;
-  margin-top: 2px;
-  color: var(--brand);
-}
-.lamplight-notice-text {
-  margin: 0;
-  font-size: var(--text-body);
-  line-height: 1.47;
-  color: var(--ink);
-}
-.lamplight-notice-actions {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-.lamplight-notice button {
-  min-height: 44px;
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: var(--text-body);
-  font-weight: 600;
-  line-height: 1.47;
-}
-.lamplight-keep {
-  background: var(--surface);
-  color: var(--ink);
-  border: 1px solid var(--muted);
-}
-.lamplight-plain {
-  background: none;
-  color: var(--link);
-  border: 1px solid transparent;
-}
-@media (min-width: 768px) {
-  .lamplight-notice {
-    left: 280px;
-    right: 0;
-    bottom: max(var(--space-3), env(safe-area-inset-bottom));
-    width: min(680px, calc(100% - 280px - 64px));
-    max-width: none;
-  }
-  html[data-text="large"] .lamplight-notice {
-    bottom: max(var(--space-3), env(safe-area-inset-bottom));
-  }
 }
 
 /* ==== Sheets and confirmations (UI-SPEC 7.2 to 7.5, A14, A15; src/ui/ConfirmDialog.tsx, src/ui/TextSheet.tsx) ====
@@ -2770,10 +2685,7 @@ html[data-text="large"] .today .list-row-leading {
    A story (and, in plan 08, the walk) covers the tab bar: the shell is marked data-flow, the bar is not drawn and
    the page's bottom padding is the plain one. Buttons are 48px and named after what they do. */
 .shell[data-flow] main {
-  padding-bottom: calc(var(--space-8) + env(safe-area-inset-bottom) + var(--notice-h));
-}
-.shell[data-flow] .lamplight-notice {
-  bottom: max(var(--space-3), env(safe-area-inset-bottom));
+  padding-bottom: calc(var(--space-8) + env(safe-area-inset-bottom));
 }
 @media (min-width: 768px) {
   .shell[data-flow] {
@@ -4195,7 +4107,7 @@ html[data-text="large"] .end-pair {
   z-index: var(--z-bar);
   left: max(20px, env(safe-area-inset-left));
   right: max(20px, env(safe-area-inset-right));
-  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px + var(--notice-h));
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px);
   max-width: 456px;
   margin-inline: auto;
   display: flex;
@@ -4216,7 +4128,7 @@ html[data-text="large"] .end-pair {
   }
 }
 html[data-text="large"] .mini-player {
-  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px + var(--notice-h));
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px);
 }
 .mini-player .mini-button {
   flex: none;
@@ -4245,12 +4157,12 @@ html[data-text="large"] .mini-player {
   .mini-player {
     left: 280px;
     right: 0;
-    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+    bottom: max(var(--space-3), env(safe-area-inset-bottom));
     width: min(456px, calc(100% - 280px - 64px));
     max-width: none;
   }
   html[data-text="large"] .mini-player {
-    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+    bottom: max(var(--space-3), env(safe-area-inset-bottom));
   }
 }
 
@@ -4571,15 +4483,14 @@ html[data-text="large"] .verse-actions {
   box-shadow: none;
 }
 
-/* -- The "Around {chapter}" capsule (UI-SPEC A3, 6.3): 44px, --bar, a pill, floating 12px above the tab bar and
-   above the Lamplight notice's space while that shows (--notice-h). Listen's mini player replaces it. In large text
-   it becomes a full-width button above the tab bar. -- */
+/* -- The "Around {chapter}" capsule (UI-SPEC A3, 6.3): 44px, --bar, a pill, floating 12px above the tab bar. Listen's
+   mini player replaces it. In large text it becomes a full-width button above the tab bar. -- */
 .around-capsule {
   position: fixed;
   z-index: var(--z-bar);
   left: 50%;
   transform: translateX(-50%);
-  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px + var(--notice-h));
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px + 12px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4605,7 +4516,7 @@ html[data-text="large"] .verse-actions {
   }
 }
 html[data-text="large"] .around-capsule {
-  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px + var(--notice-h));
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 83px + 12px);
   left: max(20px, env(safe-area-inset-left));
   right: max(20px, env(safe-area-inset-right));
   max-width: none;
@@ -4618,12 +4529,12 @@ html[data-text="large"] .around-capsule {
   /* The tab bar is a sidebar from here: the capsule sits at the bottom of the content column. */
   .around-capsule {
     left: calc(280px + (100% - 280px) / 2);
-    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+    bottom: max(var(--space-3), env(safe-area-inset-bottom));
   }
   html[data-text="large"] .around-capsule {
     left: calc(280px + max(32px, env(safe-area-inset-left)));
     right: max(32px, env(safe-area-inset-right));
-    bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + var(--notice-h));
+    bottom: max(var(--space-3), env(safe-area-inset-bottom));
   }
 }
 /* The page makes room for it, and a focused element is never left under it (2.4.11). */
@@ -4631,7 +4542,7 @@ html[data-text="large"] .around-capsule {
   padding-bottom: calc(var(--space-9) + var(--space-2));
 }
 :root:has(.around-capsule) {
-  scroll-padding-bottom: calc(64px + 12px + 44px + 12px + 24px + env(safe-area-inset-bottom) + var(--notice-h));
+  scroll-padding-bottom: calc(64px + 12px + 44px + 12px + 24px + env(safe-area-inset-bottom));
 }
 
 /* ==== Plan 11: the remaining screens on the shared primitives (UI-SPEC D-10, 6.2, A12; Journal, My Walk, Grow, Give, Circles, Resources, chat) ====

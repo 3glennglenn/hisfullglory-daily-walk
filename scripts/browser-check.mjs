@@ -24,7 +24,7 @@ import {checkGoogle} from "../tests/google.browser.mjs";
 import {checkPushedScreens,checkSurfaces,checkTextSweep} from "../tests/remaining.browser.mjs";
 import {checkGive} from "../tests/give.browser.mjs";
 import {checkShop} from "../tests/shop.browser.mjs";
-import {checkNavigation} from "../tests/navigation.browser.mjs";
+import {checkNavigation,checkNoOldModeName} from "../tests/navigation.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 // Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
 const contentDir = "site/content/context-checks";
@@ -282,7 +282,7 @@ try {
   await check("a verse opens one sheet: highlight, save, journal, copy and share; a tap or a number opens it, a selection or a long press does not (UI-SPEC A4)", () => checkVerseSheet(browser, base));
   await check("the layers around a verse: Context, AI explanation, Community in a fixed order, each apart by words, icon, frame and colour; loading, none and failure say so (UI-SPEC 5.3, A4, A16)", () => checkLayers(browser, base));
   await check("the Community layer on a controlled service: its row, its page, its words offline (UI-SPEC A4, A16)", () => checkLayersCommunity(browser, base));
-  await check("the chapter sheet and its capsule: above the tab bar and the Lamplight notice, the old ?tab= links land in the right place, no unavailable feature is announced (UI-SPEC A3, A4, 8.2)", () => checkChapterSheet(browser, base));
+  await check("the chapter sheet and its capsule: above the tab bar, the old ?tab= links land in the right place, no unavailable feature is announced (UI-SPEC A3, A4, 8.2)", () => checkChapterSheet(browser, base));
   await check("?tab=community opens the chapter sheet at Community on a controlled service", () => checkCommunityLink(browser, base));
   await check(
     "private prayer lifecycle creates an answered journal without automatic publishing",
@@ -902,29 +902,26 @@ try {
     },
   );
   await check(
-    "Lamplight notice: says why, is announced once without moving focus, offers Keep or Turn off, steps aside, and never shows when the reader chose On or Off",
+    "No floating appearance notice (01.2 D-09): a dark device turns Night light on silently",
     async () => {
-      const sentence = "Lamplight is on, because your device is set to dark.";
-      const turnedOff = "Lamplight is off. You can turn it on in You, Appearance.";
-      // A new context per case: nothing stored unless the case presets it (only when absent, so a reload keeps
-      // what the app wrote). The status region is watched from the first moment it exists.
-      async function withNotice(options, run) {
+      // A new context per case: nothing stored unless the case presets it (only when absent, so a reload keeps what the
+      // app wrote). Every change of the page that could announce or show something is recorded from the first moment.
+      async function withApp(options, run) {
         const { store = {}, scheme = "dark", width = 390, path = "/" } = options;
         const c = await browser.newContext({ viewport: { width, height: 844 }, colorScheme: scheme, serviceWorkers: "block" });
         const p = await c.newPage();
         p.setDefaultTimeout(10000);
         await p.addInitScript((pairs) => {
           for (const [key, value] of pairs) if (localStorage.getItem(key) === null) localStorage.setItem(key, value);
-          window.__status = [];
-          let last;
+          // Anything that could carry a notice: a region, a live region with text, a card or a dialog added to the page.
+          window.__announced = [];
           new MutationObserver(() => {
-            const region = document.getElementById("lamplight-status");
-            if (!region) return;
-            if (region.textContent !== last) {
-              last = region.textContent;
-              window.__status.push(last);
+            for (const el of document.querySelectorAll('[role="status"], [role="alert"], [aria-live], [role="region"], dialog, .lamplight-notice')) {
+              const text = (el.textContent || "").trim();
+              if (/night light|lamplight/i.test(text) || el.classList.contains("lamplight-notice") || el.id === "lamplight-status")
+                window.__announced.push(el.tagName + "#" + el.id + "." + el.className + ": " + text);
             }
-          }).observe(document, { childList: true, subtree: true, characterData: true });
+          }).observe(document, { childList: true, subtree: true, characterData: true, attributes: true });
         }, Object.entries(store));
         try {
           await p.goto(base + path);
@@ -934,192 +931,90 @@ try {
           await c.close();
         }
       }
-      const card = (p) => p.getByRole("region", { name: "Lamplight", exact: true });
       const noticeKey = (p) => p.evaluate(() => localStorage.getItem("hfg-lamplight-notice"));
-      // Longer than the notice's own start delay, so "never" means never.
+      const mode = (p) => p.evaluate(() => document.documentElement.dataset.mode);
+      const quiet = async (p, why) => {
+        assert.equal(await p.locator(".lamplight-notice").count(), 0, why + ": no notice card");
+        assert.equal(await p.locator("#lamplight-status").count(), 0, why + ": no status region of the notice");
+        assert.equal(await p.getByRole("region", { name: /lamplight|night light/i }).count(), 0, why + ": no region named after the mode");
+        assert.equal(await p.getByRole("button", { name: /keep|turn off|hide notice/i }).count(), 0, why + ": no notice buttons");
+        assert.deepEqual(await p.evaluate(() => window.__announced), [], why + ": nothing was shown or announced about the mode");
+      };
+      // Longer than the old notice's start delay, so "never" means never.
       const settle = (p) => p.waitForTimeout(1000);
 
-      // Shows with the sentence, announced once through the pre-rendered region, focus untouched, 44px buttons.
-      await withNotice({}, async (p) => {
-        const focusBefore = await p.evaluate(() => document.activeElement?.tagName);
-        await card(p).waitFor();
-        assert.equal(await card(p).locator("p").innerText(), sentence);
-        assert.deepEqual(await p.evaluate(() => window.__status), ["", sentence], "the region exists empty first, then holds the sentence once");
-        assert.equal(await p.locator("#lamplight-status").getAttribute("aria-live"), "polite");
-        assert.equal(await p.locator("#lamplight-status").getAttribute("role"), "status");
-        assert.equal(await p.evaluate(() => document.activeElement?.tagName), focusBefore, "focus is not moved");
-        assert.equal(await card(p).evaluate((el) => el.contains(document.activeElement)), false);
-        assert.deepEqual(await card(p).getByRole("button").allInnerTexts(), ["Keep Lamplight", "Turn off"]);
-        for (const button of await card(p).getByRole("button").all())
-          assert.ok((await button.boundingBox()).height >= 43.9, "button is 44px tall");
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}', "one showing is counted");
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight");
-        // Above the tab bar, 20px from the edges, nothing covered, nothing wider than the screen.
-        const geometry = await p.evaluate(() => {
-          const box = (el) => el.getBoundingClientRect();
-          const c = box(document.querySelector(".lamplight-notice"));
-          return {
-            card: { left: c.left, right: c.right, bottom: c.bottom, top: c.top },
-            bar: box(document.querySelector("nav.tabbar")).top,
-            width: innerWidth,
-            scrolls: document.documentElement.scrollWidth > innerWidth,
-            padding: parseFloat(getComputedStyle(document.querySelector("main")).paddingBottom),
-            variable: document.documentElement.style.getPropertyValue("--notice-h"),
-          };
-        });
-        assert.equal(geometry.card.left, 20);
-        assert.equal(geometry.width - geometry.card.right, 20);
-        assert.ok(geometry.card.bottom <= geometry.bar - 11.9, "12px above the tab bar: " + JSON.stringify(geometry));
-        assert.equal(geometry.scrolls, false);
-        assert.match(geometry.variable, /^\d+px$/);
-        // Main's bottom padding grows by the card while it shows, and shrinks back after.
-        await card(p).getByRole("button", { name: "Keep Lamplight" }).click();
-        const after = await p.evaluate(() => parseFloat(getComputedStyle(document.querySelector("main")).paddingBottom));
-        assert.ok(geometry.padding - after >= geometry.card.bottom - geometry.card.top, "padding grew by at least the card's height");
-        assert.equal(await p.evaluate(() => document.documentElement.style.getPropertyValue("--notice-h")), "");
-        assert.deepEqual(await p.evaluate(() => window.__status), ["", sentence, ""], "the region is emptied when the card closes");
-      });
-
-      // Turn off: Light at once, the key written, the second sentence and one button; gone after a reload.
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await card(p).getByRole("button", { name: "Turn off" }).click();
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "light");
-        assert.equal(await p.evaluate(() => localStorage.getItem("hfg-lamplight")), "off");
-        assert.equal(await card(p).locator("p").innerText(), turnedOff);
-        assert.deepEqual(await card(p).getByRole("button").allInnerTexts(), ["Hide notice"]);
-        assert.equal((await p.evaluate(() => window.__status)).at(-1), turnedOff, "the second sentence is announced too");
-        assert.equal(await p.evaluate(() => document.activeElement?.textContent), "Hide notice", "the pressed button's place is taken, focus is not lost");
-        assert.equal(await noticeKey(p), '{"shown":1,"done":true}');
-        await p.reload();
-        await p.locator("main h1").waitFor();
+      // A dark device at start with nothing stored: Night light on, silently; focus and address stay where they were.
+      await withApp({}, async (p) => {
+        const before = await p.evaluate(() => ({ url: location.href, focus: document.activeElement?.tagName }));
         await settle(p);
-        assert.equal(await card(p).count(), 0, "no card after a reload");
-      });
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await card(p).getByRole("button", { name: "Turn off" }).click();
-        await card(p).getByRole("button", { name: "Hide notice" }).click();
-        assert.equal(await card(p).count(), 0);
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "light");
-      });
-      // After Turn off the card also leaves on the next navigation.
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await card(p).getByRole("button", { name: "Turn off" }).click();
-        await card(p).getByRole("button", { name: "Hide notice" }).waitFor();
-        await p.getByRole("link", { name: "Bible", exact: true }).click();
-        await card(p).waitFor({ state: "detached" });
-      });
-
-      // Keep closes, keeps Automatic, and a reload shows nothing.
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await card(p).getByRole("button", { name: "Keep Lamplight" }).click();
-        assert.equal(await card(p).count(), 0);
-        assert.equal(await noticeKey(p), '{"shown":1,"done":true}');
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight", "Lamplight stays on");
+        assert.equal(await mode(p), "lamplight");
         assert.equal(await p.evaluate(() => localStorage.getItem("hfg-lamplight")), "auto", "the setting stays Automatic");
-        await p.reload();
-        await p.locator("main h1").waitFor();
-        await settle(p);
-        assert.equal(await card(p).count(), 0);
+        assert.deepEqual(await p.evaluate(() => ({ url: location.href, focus: document.activeElement?.tagName })), before, "focus and address are unchanged");
+        await quiet(p, "dark device at start");
+        assert.equal(await noticeKey(p), null, "nothing is written about a notice");
       });
 
-      // Escape acts only while focus is inside the card, closes it and leaves it unanswered.
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await p.getByRole("link", { name: "Bible", exact: true }).focus();
-        await p.keyboard.press("Escape");
-        assert.equal(await card(p).count(), 1, "Escape elsewhere does not dismiss the notice");
-        await card(p).getByRole("button", { name: "Keep Lamplight" }).focus();
-        await p.keyboard.press("Escape");
-        assert.equal(await card(p).count(), 0);
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}', "shown 1, still unanswered");
-        await p.waitForFunction(() => document.activeElement?.closest("nav.tabbar"));
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight");
-      });
-      // Unanswered and under three showings, it comes back at the next start.
-      await withNotice({ store: { "hfg-lamplight-notice": '{"shown":2,"done":false}' } }, async (p) => {
-        await card(p).waitFor();
-        assert.equal(await noticeKey(p), '{"shown":3,"done":false}');
+      // The device switches to dark and back while the app is open: the mode follows, nothing appears or is announced.
+      await withApp({ scheme: "light" }, async (p) => {
+        await settle(p);
+        assert.equal(await mode(p), "light");
+        const before = await p.evaluate(() => ({ url: location.href, focus: document.activeElement?.tagName }));
+        await p.emulateMedia({ colorScheme: "dark" });
+        await p.waitForFunction(() => document.documentElement.dataset.mode === "lamplight");
+        await settle(p);
+        await quiet(p, "device turned dark");
+        await p.emulateMedia({ colorScheme: "light" });
+        await p.waitForFunction(() => document.documentElement.dataset.mode === "light");
+        await settle(p);
+        await quiet(p, "device turned light");
+        assert.deepEqual(await p.evaluate(() => ({ url: location.href, focus: document.activeElement?.tagName })), before, "focus and address are unchanged");
+        assert.equal(await noticeKey(p), null);
       });
 
-      // Three showings are the most there are; an answer ends it; unreadable values count as none.
-      await withNotice({ store: { "hfg-lamplight-notice": '{"shown":3,"done":false}' } }, async (p) => {
-        await settle(p);
-        assert.equal(await card(p).count(), 0, "after three showings");
-      });
-      await withNotice({ store: { "hfg-lamplight-notice": '{"shown":0,"done":true}' } }, async (p) => {
-        await settle(p);
-        assert.equal(await card(p).count(), 0, "after an answer");
-      });
-      await withNotice({ store: { "hfg-lamplight-notice": "garbage" } }, async (p) => {
-        await card(p).waitFor();
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}');
-      });
-
-      // Never when the reader chose On or Off, and nothing is written about the notice then.
-      for (const choice of ["on", "off"]) {
-        await withNotice({ store: { "hfg-lamplight": choice } }, async (p) => {
+      // Night light and Day hold whatever the device does.
+      for (const [stored, want] of [["on", "lamplight"], ["off", "light"]]) {
+        await withApp({ store: { "hfg-lamplight": stored } }, async (p) => {
           await settle(p);
-          assert.equal(await card(p).count(), 0, "Lamplight " + choice);
+          assert.equal(await mode(p), want, stored + " on a dark device");
+          await quiet(p, stored);
+          await p.emulateMedia({ colorScheme: stored === "on" ? "light" : "dark" });
+          await settle(p);
+          assert.equal(await mode(p), want, stored + " holds when the device switches");
+          await quiet(p, stored + " after a switch");
           assert.equal(await noticeKey(p), null);
-          assert.deepEqual(await p.evaluate(() => window.__status), [""], "the region stayed empty");
         });
       }
-      // Nor on a light device at start.
-      await withNotice({ scheme: "light" }, async (p) => {
-        await settle(p);
-        assert.equal(await card(p).count(), 0);
-        // The device switches to dark while the app is open: the card appears, and closes silently when it turns light.
-        await p.emulateMedia({ colorScheme: "dark" });
-        await card(p).waitFor();
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight");
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}');
-        await p.emulateMedia({ colorScheme: "light" });
-        await card(p).waitFor({ state: "detached" });
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "light");
-        assert.equal((await p.evaluate(() => window.__status)).at(-1), "", "the region is empty again");
-      });
 
-      // Ignored: it stays while the reader stays, and goes when another tab is opened (for this session).
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await p.waitForTimeout(600);
-        assert.equal(await card(p).count(), 1, "no timer takes it away");
-        await p.getByRole("link", { name: "Bible", exact: true }).click();
-        await card(p).waitFor({ state: "detached" });
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}');
-        await p.getByRole("link", { name: "Today", exact: true }).click();
-        await settle(p);
-        assert.equal(await card(p).count(), 0, "it does not come back during the session");
-      });
+      // The old notice key, with any content, is removed once the app has started; nothing writes it again.
+      for (const old of ['{"shown":2,"done":false}', '{"shown":3,"done":false}', '{"shown":0,"done":true}', "garbage"]) {
+        await withApp({ store: { "hfg-lamplight-notice": old, "hfg-look": "marked" } }, async (p) => {
+          await p.waitForFunction(() => localStorage.getItem("hfg-lamplight-notice") === null);
+          await settle(p);
+          assert.equal(await noticeKey(p), null, "the old key " + old + " is gone");
+          assert.equal(await p.evaluate(() => localStorage.getItem("hfg-look")), "marked", "nothing else is removed");
+          await quiet(p, "old key " + old);
+          // Not written again by a switch of the device, a reload or a change of the choice.
+          await p.emulateMedia({ colorScheme: "light" });
+          await p.reload();
+          await p.locator("main h1").waitFor();
+          await settle(p);
+          assert.equal(await noticeKey(p), null);
+        });
+      }
 
-      // Large text on a narrow screen: the card stacks, stays above the tab bar and the page does not scroll sideways.
-      await withNotice({ width: 320 }, async (p) => {
-        await card(p).waitFor();
+      // 200 % text on 390px: no card, nothing sideways.
+      await withApp({ width: 390 }, async (p) => {
         await p.evaluate(() => {
           document.documentElement.style.fontSize = "34px";
           window.dispatchEvent(new Event("resize"));
         });
-        const geometry = await p.evaluate(() => {
-          const c = document.querySelector(".lamplight-notice").getBoundingClientRect();
-          return {
-            bottom: c.bottom,
-            left: c.left,
-            right: c.right,
-            bar: document.querySelector("nav.tabbar").getBoundingClientRect().top,
-            scrolls: document.documentElement.scrollWidth > innerWidth,
-            width: innerWidth,
-          };
-        });
-        assert.ok(geometry.bottom <= geometry.bar, "above the tab bar at 200 % text: " + JSON.stringify(geometry));
-        assert.ok(geometry.left >= 0 && geometry.right <= geometry.width);
-        assert.equal(geometry.scrolls, false);
+        await settle(p);
+        await quiet(p, "200 % text");
+        assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, "no sideways scroll");
       });
     },
   );
+  await check("a reader never sees the old name of the mode (01.2 D-08)", () => checkNoOldModeName(browser, base, published));
   await check("three tabs, the You button and You as a sheet or a page; old addresses still work (01.2 D-01 to D-03)", () => checkNavigation(browser, base, published));
   await check(
     "primary routes fit 375/390/768/1280px in both themes with accessible controls",

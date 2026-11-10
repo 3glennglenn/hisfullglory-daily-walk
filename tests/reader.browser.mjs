@@ -1283,20 +1283,27 @@ export async function checkChapterSheet(browser, base) {
     await ctx.context.close();
   }
 
-  // Dark device: the Lamplight notice shows; the capsule sits above it and neither covers the other.
+  // Dark device: Night light is on, silently. The capsule sits 12px above the tab bar and nothing else floats there.
   const dark = await open(browser, { colorScheme: "dark" });
   try {
     const { page } = dark;
     await goto(page, base, "/bible/john/3");
     await page.locator("#verse-1").waitFor();
-    await page.locator(".lamplight-notice").waitFor();
+    await page.waitForFunction(() => document.documentElement.dataset.mode === "lamplight");
+    // Longer than the old notice's start delay, so "nothing else" includes anything that arrives late.
+    await page.waitForTimeout(1000);
+    assert.equal(await page.locator(".lamplight-notice").count(), 0, "no notice element");
+    assert.equal(await page.locator("#lamplight-status").count(), 0, "no status region of a notice");
     const rects = await page.evaluate(() => {
       const r = (s) => document.querySelector(s).getBoundingClientRect().toJSON();
-      return { capsule: r(".around-capsule"), notice: r(".lamplight-notice"), tab: r("nav.tabbar") };
+      const floating = [...document.querySelectorAll("body *")]
+        .filter((el) => getComputedStyle(el).position === "fixed" && el.getBoundingClientRect().height > 0)
+        .map((el) => el.className || el.tagName);
+      return { capsule: r(".around-capsule"), tab: r("nav.tabbar"), floating };
     });
-    assert.ok(rects.capsule.bottom <= rects.notice.top, `the capsule is above the notice (${rects.capsule.bottom} <= ${rects.notice.top})`);
-    assert.ok(rects.notice.bottom <= rects.tab.top, "the notice is above the tab bar");
-    assert.equal(Math.round(rects.notice.top - rects.capsule.bottom), 12, "12px between them");
+    assert.ok(rects.capsule.bottom <= rects.tab.top, "the capsule is above the tab bar");
+    assert.ok(Math.abs(rects.tab.top - rects.capsule.bottom - 12) <= 1, `the capsule sits 12px above the tab bar (${rects.tab.top - rects.capsule.bottom})`);
+    assert.ok(rects.floating.every((name) => /around-capsule|tabbar|tab-bar|skip/i.test(String(name))), "nothing else floats: " + JSON.stringify(rects.floating));
     assert.deepEqual(dark.problems, []);
   } finally {
     await dark.context.close();

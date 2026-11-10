@@ -463,6 +463,8 @@ test("nothing can interrupt the reader about appearance: no notice file, state, 
   assert.doesNotMatch(provider.replace(/forgetNoticeKey|LEGACY_NOTICE_KEY/g, ""), /notice|aria-live|role="status"|focus\(/i, "the provider shows, says and focuses nothing");
   const shell = codeOf("src/platformApp.tsx");
   assert.doesNotMatch(shell, /LamplightNotice|noticeText|lamplight-status/, "the shell has no appearance region");
+  const css = readFileSync("src/styles.css", "utf8");
+  assert.doesNotMatch(css, /lamplight-notice|--z-notice|--dur-notice|--notice-h/, "no styles or variables for it");
   for (const file of ["src/features/Appearance.tsx", "src/features/You.tsx"]) {
     assert.doesNotMatch(codeOf(file), /role="status"|aria-live/, file + " announces nothing about the mode");
   }

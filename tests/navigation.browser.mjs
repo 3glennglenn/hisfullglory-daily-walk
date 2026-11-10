@@ -386,12 +386,10 @@ async function oldCircles(browser, base) {
   }
 }
 
-// e: every current address opens at three widths, with one main h1, no page error and the right tab marked.
-async function addressSweep(browser, base, published) {
-  const newest = published[0].slug;
-  // [path, what is marked: a tab, "you" (a screen reached from You: the tab of the last root on a phone, You when wide),
-  //  "none" (no tab) or "flow" (no tab bar at all)]
-  const addresses = [
+// [path, what is marked: a tab, "you" (a screen reached from You: the tab of the last root on a phone, You when wide),
+//  "none" (no tab) or "flow" (no tab bar at all)]
+function addressList(newest) {
+  return [
     ["/", "Today"],
     ["/walk", "flow"],
     ["/bible", "Bible"],
@@ -421,6 +419,11 @@ async function addressSweep(browser, base, published) {
     ["/circles", "Community"],
     ["/no-such-page", "none"],
   ];
+}
+
+// e: every current address opens at three widths, with one main h1, no page error and the right tab marked.
+async function addressSweep(browser, base, published) {
+  const addresses = addressList(published[0].slug);
   const backToYou = new Set(["/profile", "/settings", "/settings/appearance", "/settings/reminders", "/my-walk", "/journal", "/grow", "/give"]);
   for (const [width, height] of [[390, 844], [768, 1024], [1180, 820]]) {
     const { context, page, problems } = await open(browser, base, "/", { width, height });
@@ -459,4 +462,65 @@ export async function checkNavigation(browser, base, published) {
   await widePage(browser, base);
   await oldCircles(browser, base);
   await addressSweep(browser, base, published);
+}
+
+/**
+ * A reader never sees the old name of the mode (01.2 D-08): on every address of the sweep, in Day and in Night light, and in
+ * the You sheet opened once on "/", the visible text, the page title and every aria-label, title, alt and field hint
+ * (placeholder, aria-placeholder, the text an aria-describedby points to) have no match for /lamplight/i. A page is read
+ * only after its main heading is there; the reader was seeded as one who already answered the welcome questions.
+ */
+export async function checkNoOldModeName(browser, base, published) {
+  const addresses = addressList(published[0].slug);
+  const everythingAReaderSees = () => {
+    const attributes = [];
+    for (const element of document.querySelectorAll("*")) {
+      for (const name of ["aria-label", "title", "alt", "placeholder", "aria-placeholder", "aria-description", "aria-roledescription", "value"]) {
+        const value = element.getAttribute(name);
+        if (value) attributes.push(element.tagName.toLowerCase() + "[" + name + "]=" + value);
+      }
+      const described = element.getAttribute("aria-describedby");
+      if (described)
+        for (const id of described.split(/\s+/)) {
+          const text = document.getElementById(id)?.textContent;
+          if (text) attributes.push(element.tagName.toLowerCase() + "[describedby]=" + text);
+        }
+    }
+    return [document.title, document.body.innerText, ...attributes].join("\n");
+  };
+  const seen = [];
+  for (const [stored, name] of [["off", "Day"], ["on", "Night light"]]) {
+    const context = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      serviceWorkers: "block",
+      timezoneId: "Europe/Amsterdam",
+      colorScheme: stored === "on" ? "dark" : "light",
+    });
+    await context.addInitScript((value) => localStorage.setItem("hfg-lamplight", value), stored);
+    const page = await context.newPage();
+    const problems = [];
+    page.on("pageerror", (e) => problems.push(e.message));
+    try {
+      await page.goto(base + "/");
+      await page.locator("main h1").first().waitFor();
+      const mode = await page.evaluate(() => document.documentElement.dataset.mode);
+      assert.equal(mode, stored === "on" ? "lamplight" : "light", name + ": the mode is the one stored");
+      // The You sheet, opened once from Today.
+      await page.locator("main .title-row").getByRole("link", { name: "You", exact: true }).click();
+      await youSheet(page).waitFor();
+      seen.push([name + ": the You sheet", await page.evaluate(everythingAReaderSees)]);
+      await page.goBack();
+      await youSheet(page).waitFor({ state: "detached" });
+      for (const [path] of addresses) {
+        await page.goto(base + path);
+        await page.locator("main h1").first().waitFor();
+        seen.push([name + ": " + path, await page.evaluate(everythingAReaderSees)]);
+      }
+      assert.deepEqual(problems, [], name + ": no page errors");
+    } finally {
+      await context.close();
+    }
+  }
+  assert.ok(seen.length >= 2 * (addresses.length + 1), "every address was read in both modes");
+  for (const [where, text] of seen) assert.doesNotMatch(text, /lamplight/i, where + " names the old mode: " + text.match(/.{0,40}lamplight.{0,40}/i)?.[0]);
 }
