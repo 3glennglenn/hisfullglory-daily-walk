@@ -42,19 +42,14 @@ export function MyWalk() {
           <Row key={status} title={status} value={state.prayers.filter((p) => p.status === status).length} />
         ))}
         <Row title="Private journal entries" value={state.entries.length} />
-        <Row title="Open private prayers" href="/pray" chevron />
+        <Row title="My prayers" href="/pray" chevron />
         <Row title="Open private journal" href="/journal" chevron />
       </GroupedList>
-      <GroupedList title="Your journeys" plain={!Object.keys(state.devotionalProgress).length}>
-        {Object.keys(state.devotionalProgress).length ? (
-          Object.entries(state.devotionalProgress).map(([id, days]) => (
-            <Row key={id} title={id.replaceAll("-", " ")} value={`${days.length}/5`} href={"/grow/" + id} chevron />
-          ))
-        ) : (
-          <div className="group-pad">
-            <p>No journey progress yet.</p>
-          </div>
-        )}
+      <GroupedList title="Your journeys" note={Object.keys(state.devotionalProgress).length ? undefined : "No journey progress yet."}>
+        <Row title="Grow" detail="Journeys, paths and challenges" href="/grow" chevron />
+        {Object.entries(state.devotionalProgress).map(([id, days]) => (
+          <Row key={id} title={id.replaceAll("-", " ")} value={`${days.length}/5`} href={"/grow/" + id} chevron />
+        ))}
       </GroupedList>
       {(answered.length > 0 || recentDays.length > 0) && (
         <GroupedList title="Your story">

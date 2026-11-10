@@ -161,6 +161,7 @@ function CommunityRoot({verse,online}: {verse:DailyContent;online:boolean}) {
       <CircleRows/>
     </>:<>
       <h2 className="sr-only">Prayer wall</h2>
+      <p className="screen-lede">Share a prayer request with the community and pray for others. Your private prayers stay under You.</p>
       <Feed initialKind="prayer" composerType="prayer" heading="Prayer and praise"/>
       <details className="group-disclosure">
         <summary>The original prayer wall</summary>

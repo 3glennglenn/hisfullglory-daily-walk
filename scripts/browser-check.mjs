@@ -288,13 +288,12 @@ try {
     "private prayer lifecycle creates an answered journal without automatic publishing",
     async () => {
       await go("/pray");
-      await page.getByLabel("Title", { exact: true }).fill("A private prayer");
-      await page
-        .getByLabel("Prayer", { exact: true })
-        .fill("Please guide this ordinary day.");
-      await page
-        .getByRole("button", { name: "Save private prayer", exact: true })
-        .click();
+      await page.getByRole("button", { name: "New prayer", exact: true }).click();
+      const newPrayer = page.getByRole("dialog", { name: "New prayer", exact: true });
+      await newPrayer.getByLabel("Title", { exact: true }).fill("A private prayer");
+      await newPrayer.getByLabel("Prayer", { exact: true }).fill("Please guide this ordinary day.");
+      await newPrayer.getByRole("button", { name: "Save private prayer", exact: true }).click();
+      await newPrayer.waitFor({ state: "detached" });
       await page.getByLabel("Move to").selectOption("Waiting");
       await page.getByLabel("Move to").selectOption("Answered");
       await page
@@ -318,7 +317,7 @@ try {
     },
   );
   await check(
-    "Pray is one quiet screen; updates and edits of a private prayer use a text sheet, deletion a confirmation (UI-SPEC A10, A15, E18)",
+    "My prayers opens with the list; New prayer in a sheet; updates and edits in a text sheet, deletion in a confirmation (01.2 D-07, UI-SPEC A15)",
     async () => {
       const browserDialogs = [];
       const onDialog = (d) => {
@@ -329,24 +328,74 @@ try {
       const prayers = () =>
         page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")).prayers);
       try {
+        const emptySentence = "Your prayers stay on this device. Write the first one when you are ready.";
+        const filled = () =>
+          page.evaluate(() =>
+            [...document.querySelectorAll("main button")]
+              .filter((b) => !b.classList.contains("secondary") && !b.classList.contains("toolbar-back") && b.getAttribute("role") !== "radio")
+              .map((b) => b.textContent.trim()),
+          );
+        // Nothing may leave the device while a prayer is written: no request to another origin, none that sends a body.
+        const leaving = [];
+        const onRequest = (request) => {
+          if (new URL(request.url()).origin !== new URL(base).origin || !["GET", "HEAD", "OPTIONS"].includes(request.method())) leaving.push(request.method() + " " + request.url());
+        };
+        page.on("request", onRequest);
+        // A reader with no prayers yet.
+        await page.evaluate(() => {
+          const s = JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));
+          localStorage.setItem("hfg-daily-walk:v3", JSON.stringify({ ...s, prayers: [] }));
+        });
         await go("/pray");
         assert.equal(await page.locator("main h1").count(), 1);
-        assert.equal(await page.locator("main h1").innerText(), "Pray");
-        const segments = page.getByRole("radiogroup", { name: "Prayer views", exact: true });
-        assert.deepEqual(await segments.getByRole("radio").allInnerTexts(), ["Private prayers", "Prayer and praise"]);
-        assert.equal(await segments.getByRole("radio", { name: "Private prayers" }).getAttribute("aria-checked"), "true");
-        assert.deepEqual(
-          await page.evaluate(() =>
-            [...document.querySelectorAll("main button")]
-              .filter((b) => !b.classList.contains("secondary") && b.getAttribute("role") !== "radio")
-              .map((b) => b.textContent.trim()),
-          ),
-          ["Save private prayer"],
-          "the only filled button on the private view",
-        );
+        assert.equal(await page.locator("main h1").innerText(), "My prayers");
+        assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1);
+        assert.equal(await page.getByRole("radiogroup", { name: "Prayer views", exact: true }).count(), 0, "the public view left this screen");
+        assert.equal(await page.getByText(emptySentence, { exact: true }).count(), 1);
+        assert.equal(await page.getByRole("radiogroup", { name: "Prayer filter", exact: true }).count(), 0, "no filter before the first prayer");
+        assert.deepEqual(await filled(), ["New prayer"], "the only filled button of the empty state");
         const mainText = await page.locator("main").innerText();
-        assert.ok(!/Resources|shop|study bibles/i.test(mainText), "no Resources or shop link on Pray");
-        assert.equal(await page.locator('main a[href*="shop"]').count(), 0);
+        assert.ok(!/Resources|shop|study bibles/i.test(mainText), "no Resources or shop link on My prayers");
+        assert.equal(await page.locator('main a[href*="shop"], main a[href*="/give"]').count(), 0);
+
+        // New prayer opens the form in a sheet; Escape keeps the typed words while the screen stays open; saving writes locally only.
+        const newButton = page.getByRole("button", { name: "New prayer", exact: true });
+        const form = page.getByRole("dialog", { name: "New prayer", exact: true });
+        await newButton.click();
+        await form.waitFor();
+        assert.equal(await form.getByLabel("Title", { exact: true }).getAttribute("maxlength"), "120");
+        assert.equal(await form.getByLabel("Prayer", { exact: true }).getAttribute("maxlength"), "10000");
+        await form.getByLabel("Title", { exact: true }).fill("A half-written title");
+        await page.keyboard.press("Escape");
+        await form.waitFor({ state: "detached" });
+        assert.equal((await prayers()).length, 0, "Escape saved nothing");
+        await newButton.click();
+        await form.waitFor();
+        assert.equal(await form.getByLabel("Title", { exact: true }).inputValue(), "A half-written title", "the words are kept while the screen is open");
+        await form.getByLabel("Title", { exact: true }).fill("A private prayer");
+        await form.getByLabel("Prayer", { exact: true }).fill("Please guide this ordinary day.");
+        await form.getByRole("button", { name: "Save private prayer", exact: true }).click();
+        await form.waitFor({ state: "detached" });
+        await page.getByText("Saved privately on this device.", { exact: true }).waitFor();
+        await page.waitForTimeout(100);
+        assert.equal(await page.evaluate(() => document.activeElement?.textContent?.trim()), "New prayer", "focus returns to New prayer");
+        assert.equal((await prayers()).length, 1);
+        assert.equal((await prayers())[0].title, "A private prayer");
+        assert.deepEqual(leaving, [], "saving a prayer sent nothing anywhere");
+        page.off("request", onRequest);
+        // The list: a filter, the prayer, the privacy line under it.
+        assert.deepEqual(await filled(), ["New prayer"], "still one filled button");
+        assert.equal(await page.getByText(emptySentence, { exact: true }).count(), 0);
+        assert.equal(await page.getByText("Your prayers can stay entirely private. Nothing is uploaded automatically.", { exact: true }).count(), 1);
+        const filter = page.getByRole("radiogroup", { name: "Prayer filter", exact: true });
+        assert.deepEqual(await filter.getByRole("radio").allInnerTexts(), ["All", "Active", "Waiting", "Answered"]);
+        assert.equal(await filter.getByRole("radio", { name: "All", exact: true }).getAttribute("aria-checked"), "true");
+        assert.equal(await page.locator("main article").count(), 1);
+        await filter.getByRole("radio", { name: "Answered", exact: true }).click();
+        assert.equal(await page.locator("main article").count(), 0, "an Active prayer is not under Answered");
+        await filter.getByRole("radio", { name: "Active", exact: true }).click();
+        assert.equal(await page.locator("main article").count(), 1);
+        await filter.getByRole("radio", { name: "All", exact: true }).click();
 
         // An update, in a sheet.
         const update = page.getByRole("dialog", { name: "A private prayer update", exact: true });
@@ -452,6 +501,7 @@ try {
         await del.getByRole("button", { name: "Delete prayer", exact: true }).click();
         await del.waitFor({ state: "detached" });
         assert.equal((await prayers()).length, 0);
+        assert.equal(await page.getByText(emptySentence, { exact: true }).count(), 1, "with no prayer left the invitation is back");
         assert.deepEqual(browserDialogs, [], "no browser pop-up appeared");
       } finally {
         page.off("dialog", onDialog);
@@ -1685,6 +1735,11 @@ try {
         // Prayer wall: the public prayers and praise, every kind in the Show filter, and the original prayer wall, closed.
         await circlesRow.getByRole("radio", { name: "Prayer wall", exact: true }).click();
         await page.getByRole("heading", { name: "Prayer and praise", exact: true }).waitFor();
+        assert.equal(
+          await page.getByText("Share a prayer request with the community and pray for others. Your private prayers stay under You.", { exact: true }).count(),
+          1,
+          "the Prayer wall says what it is for and where the private prayers are",
+        );
         const show = page.getByRole("combobox", { name: /^Show/ });
         assert.deepEqual(await show.evaluate((el) => [...el.options].map((o) => o.textContent)), ["All contributions", "reflection", "testimony", "memory", "encouragement", "prayer", "chat"]);
         assert.equal(await show.inputValue(), "prayer", "the feed opens on prayers");
@@ -1725,6 +1780,32 @@ try {
     assert.equal(await page.getByRole("button",{name:"Practice complete",exact:true}).isDisabled(),true);
     const state=await page.evaluate(()=>JSON.parse(localStorage.getItem("hfg-daily-walk:v3")));
     assert.deepEqual(state.pathProgress["return-to-scripture"],[0]);assert.deepEqual(state.challengeProgress["seven-days-in-scripture"],[0]);
+    // Grow is a row of My walk (01.2 D-03): Back names My walk when it was opened from there.
+    await go("/my-walk");
+    const growRow = page.getByRole("link", { name: /^Grow\b/ });
+    assert.equal(await growRow.getAttribute("href"), "/grow");
+    assert.match(await growRow.innerText(), /Journeys, paths and challenges/);
+    assert.equal(await page.getByRole("link", { name: /^My prayers\b/ }).getAttribute("href"), "/pray");
+    assert.equal(await page.getByRole("link", { name: /Open private prayers/ }).count(), 0, "the row reads My prayers now");
+    await growRow.click();
+    await page.waitForURL("**/grow");
+    await page.getByRole("button", { name: "Back to My walk", exact: true }).click();
+    await page.waitForURL("**/my-walk");
+    // My prayers names where it was opened from: My walk, and the walk's prayer step.
+    await page.getByRole("link", { name: /^My prayers\b/ }).click();
+    await page.waitForURL("**/pray");
+    await page.getByRole("button", { name: "Back to My walk", exact: true }).waitFor();
+    await page.evaluate(() => {
+      const s = JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));
+      localStorage.setItem("hfg-daily-walk:v3", JSON.stringify({ ...s, local: { ...s.local, completedDates: [] } }));
+    });
+    await go("/walk");
+    for (let i = 0; i < 6 && !(await page.getByRole("button", { name: "Save a private prayer", exact: true }).count()); i++)
+      await page.getByRole("button", { name: /^Continue to / }).click();
+    await page.getByRole("button", { name: "Save a private prayer", exact: true }).click();
+    await page.waitForURL("**/pray");
+    await page.getByRole("button", { name: "Back to Today's walk", exact: true }).click();
+    await page.waitForURL("**/walk");
   });
   await check("saved thread links persist locally and route through visibility checks",async()=>{
     const id="a0000000-0000-4000-8000-000000000001";
