@@ -78,7 +78,7 @@ export function TopicHub({id,thread,verse,online}: {id?:string;thread?:string;ve
     const {data,error}=await supabase.rpc("read_topic_discussions",{selected_topic:topic.id,reply_to:thread??null,sorting,before_score:last?.score??null,before_time:last?.created_at??null,before_id:last?.id??null});
     if(request!==sequence.current) return;
     setBusy(false);
-    if(error){setPosts([]);setMore(false);setStatus("Topic discussions are unavailable. Check your connection or ask the operator about migration 005.");return;}
+    if(error){setPosts([]);setMore(false);setStatus("Topic discussions are unavailable. Check your connection and try again in a moment.");return;}
     const rows=(data??[]) as Discussion[];
     setPosts(previous=>append?[...previous,...rows.filter(p=>!previous.some(old=>old.id===p.id))]:rows);setMore(rows.length===20);
   }

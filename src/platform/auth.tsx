@@ -224,11 +224,11 @@ export function AuthPanel() {
       <section className="card">
         <h2>Continue as a guest</h2>
         <p>
-          Your private walk, Bible, journal and prayers work on this device.
-          Community publishing and support requests become available after the
-          operator configures Supabase.
+          Your private walk, Bible, journal and prayers stay on this device.
+          Sharing with the community and sending a support request are not
+          available right now.
         </p>
-        <small>Google, Apple, cloud sync and push are not configured.</small>
+        <small>Signing in is not available right now.</small>
       </section>
     );
   return (
