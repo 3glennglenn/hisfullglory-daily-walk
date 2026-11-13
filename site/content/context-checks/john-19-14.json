@@ -1,0 +1,247 @@
+{
+  "slug": "john-19-14",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-13",
+  "verse": {
+    "book": "john",
+    "chapter": 19,
+    "start": 14,
+    "end": 14
+  },
+  "hook": "You know Jesus was crucified at Passover. But did you know Mark and John seem to place it on different days, and at different hours?",
+  "story": "Mark and John both mark the hours of Jesus’ last day. Set their clocks side by side, and they do not obviously match.\n\nFirst the day. In Mark, the Last Supper is the Passover meal. “On the first day of unleavened bread, when they sacrificed the Passover,” the disciples ask where to prepare it, and that evening Jesus eats it with the twelve. In John, the supper takes place “before the feast of the Passover”. The next morning the men who bring Jesus to Pilate will not go into the governor’s headquarters, “that they might not be defiled, but might eat the Passover.” Their Passover meal is still ahead of them. And when Pilate takes his seat to pass sentence, John notes that “it was the Preparation Day of the Passover”.\n\nThen the hour. Mark says, “It was the third hour when they crucified him.” That is about nine in the morning. John says Pilate was still on the judgment seat “at about the sixth hour”, around noon.\n\nThe two agree on a great deal. Jesus died at Passover time, on the day before the Sabbath, and was buried before the Sabbath began. What they seem to disagree on is how that Friday lines up with the Passover meal, and when the sentence fell.\n\nJohn’s timing also paints a picture. At the start of his Gospel, John the Baptist points to Jesus and says, “Behold, the Lamb of God”. On John’s calendar Jesus is condemned around noon on the day of preparation and dies that afternoon, the hours when the Passover lambs were slaughtered in the temple. And John notes that the soldiers did not break his legs, so that the Scripture was fulfilled: “A bone of him will not be broken.”",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Augustine, The Harmony of the Gospels, Book III, chapter 13: the third hour and the sixth (New Advent)",
+      "url": "https://www.newadvent.org/fathers/1602313.htm"
+    },
+    {
+      "title": "John Chrysostom, Homily 83 on the Gospel of John (New Advent)",
+      "url": "https://www.newadvent.org/fathers/240183.htm"
+    },
+    {
+      "title": "Pope Benedict XVI, homily at the Mass of the Lord’s Supper, 5 April 2007 (Vatican)",
+      "url": "https://www.vatican.va/content/benedict-xvi/en/homilies/2007/documents/hf_ben-xvi_hom_20070405_coena-domini.html"
+    },
+    {
+      "title": "Joshua Schachterle, What Day Did Jesus Die? The Good Friday Controversy (bartehrman.com, 2023)",
+      "url": "https://www.bartehrman.com/what-day-did-jesus-die/"
+    },
+    {
+      "title": "Eusebius, Church History, Book V, chapters 23 to 25: the question of the Passover (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250105.htm"
+    },
+    {
+      "title": "Wikipedia: Chronology of Jesus",
+      "url": "https://en.wikipedia.org/wiki/Chronology_of_Jesus"
+    },
+    {
+      "title": "Wikipedia: Last Supper",
+      "url": "https://en.wikipedia.org/wiki/Last_Supper"
+    }
+  ],
+  "voices": [
+    {
+      "id": "chrysostom",
+      "name": "John Chrysostom",
+      "about": "preacher and bishop, in his Homilies on the Gospel of John, on John 18:28",
+      "words": "Either he calls the whole feast the Passover, or means, that they were then keeping the Passover, while He delivered it to His followers one day sooner, reserving His own Sacrifice for the Preparation-day, when also of old the Passover was celebrated.",
+      "source": {
+        "title": "John Chrysostom, Homily 83 on the Gospel of John (New Advent)",
+        "url": "https://www.newadvent.org/fathers/240183.htm"
+      }
+    },
+    {
+      "id": "augustine",
+      "name": "Augustine of Hippo",
+      "about": "bishop in North Africa, in The Harmony of the Gospels, on the third hour and the sixth",
+      "words": "For, to make a frank acknowledgment, we cannot get over the statement of the sixth hour in John’s narrative; and Mark records the third hour",
+      "source": {
+        "title": "Augustine, The Harmony of the Gospels, Book III, chapter 13: the third hour and the sixth (New Advent)",
+        "url": "https://www.newadvent.org/fathers/1602313.htm"
+      }
+    },
+    {
+      "id": "augustine-more",
+      "name": "Augustine of Hippo",
+      "about": "in the same chapter, after offering his own solution",
+      "words": "And I could wish, indeed, that more methods of clearing up this problem might be discovered by others.",
+      "source": {
+        "title": "Augustine, The Harmony of the Gospels, Book III, chapter 13: the third hour and the sixth (New Advent)",
+        "url": "https://www.newadvent.org/fathers/1602313.htm"
+      }
+    },
+    {
+      "id": "benedict",
+      "name": "Pope Benedict XVI",
+      "about": "in his homily at the Mass of the Lord’s Supper on Holy Thursday, 5 April 2007",
+      "words": "We can now say that John's account is historically precise.",
+      "source": {
+        "title": "Pope Benedict XVI, homily at the Mass of the Lord’s Supper, 5 April 2007 (Vatican)",
+        "url": "https://www.vatican.va/content/benedict-xvi/en/homilies/2007/documents/hf_ben-xvi_hom_20070405_coena-domini.html"
+      }
+    },
+    {
+      "id": "ehrman",
+      "name": "Bart Ehrman",
+      "about": "New Testament scholar, quoted in an article on his website about the day Jesus died",
+      "words": "Perhaps John (or his source) made a change in the day and hour of Jesus’ death precisely to reinforce this theological point.",
+      "source": {
+        "title": "Joshua Schachterle, What Day Did Jesus Die? The Good Friday Controversy (bartehrman.com, 2023)",
+        "url": "https://www.bartehrman.com/what-day-did-jesus-die/"
+      }
+    },
+    {
+      "name": "Polycrates",
+      "about": "leader of the bishops of Asia, in a letter to Victor of Rome kept by Eusebius, on the bishops before him",
+      "words": "All these observed the fourteenth day of the passover according to the Gospel, deviating in no respect, but following the rule of faith.",
+      "source": {
+        "title": "Eusebius, Church History, Book V, chapters 23 to 25: the question of the Passover (New Advent)",
+        "url": "https://www.newadvent.org/fathers/250105.htm"
+      }
+    },
+    {
+      "name": "Irenaeus",
+      "about": "bishop in Gaul, writing to Victor of Rome about the dispute over the date and the fast, as Eusebius records",
+      "words": "Yet all of these lived none the less in peace, and we also live in peace with one another; and the disagreement in regard to the fast confirms the agreement in the faith.",
+      "source": {
+        "title": "Eusebius, Church History, Book V, chapters 23 to 25: the question of the Passover (New Advent)",
+        "url": "https://www.newadvent.org/fathers/250105.htm"
+      }
+    }
+  ],
+  "moment": "It is early morning in Jerusalem. John puts it in three words: “It was early”. Jesus has been questioned through the night, and now he is brought to the Roman governor. His accusers stay outside, and Pilate goes back and forth between them and the prisoner inside.\n\nWhat follows takes time. Pilate questions Jesus, goes out, comes back. He has him flogged, and the soldiers crown him with thorns. He brings him out: “Behold, the man!” He goes in again and asks, “Where are you from?” Three times he says he finds no basis for a charge against him.\n\nAt last Pilate brings Jesus out and sits down on the judgment seat at a place called “The Pavement”, in Hebrew “Gabbatha.” Here John stops the story to give the day and the hour: “Now it was the Preparation Day of the Passover, at about the sixth hour.” Then Pilate says, “Behold, your King!” Only after that does he hand Jesus over to be crucified.\n\nMark tells the same morning in fewer words. Pilate asks, the crowd shouts, and then: “It was the third hour when they crucified him.” Darkness falls at “the sixth hour”, and Jesus cries out at “the ninth hour”.",
+  "around": "John prepares for this hour long before it comes. His last supper is held “before the feast of the Passover”. When Judas leaves the table, some of the disciples think Jesus has told him, “Buy what things we need for the feast,” which fits a feast that has not yet begun.\n\nAfter the death, John returns to the calendar. The bodies must not stay on the cross over the Sabbath, “for that Sabbath was a special one”. In John’s count, it seems, the Passover and the Sabbath fell on the same day that year.\n\nMark’s frame is different. He sets the supper on the day the lambs were sacrificed, and over the cup Jesus speaks of “my blood of the new covenant”. Mark also says Jesus died on “the Preparation Day, that is, the day before the Sabbath”. So both Gospels end the day the same way, with a hurried burial before the Sabbath. The difference lies in where the Passover meal falls.",
+  "after": "The lamb picture did not stay inside John’s Gospel. Paul calls Christ our Passover, sacrificed in our place, and a letter in Peter’s name speaks of a lamb without blemish.\n\nIn the second century the calendar became a church quarrel. The churches of Asia kept their Easter feast on the fourteenth day of the month, the day on which, as Eusebius puts it, the Jews were commanded to sacrifice the lamb, whatever day of the week that was. Their leader Polycrates wrote to Victor, bishop of Rome, that John, who had leaned on the Lord’s breast, and Polycarp of Smyrna had kept that same day. The other churches kept the feast on the Sunday of the resurrection. Victor tried to cut the churches of Asia off. Irenaeus wrote to stop him, and reminded him that Polycarp and Anicetus of Rome had once disagreed on this very custom, shared the Eucharist anyway, and parted in peace. The historian Eusebius kept the letters.\n\nThe question never went away. Around the year 200 a Christian writer named Hippolytus insisted that Jesus could not have eaten a Passover meal, because he was the sacrifice. And in 2007 Pope Benedict XVI told a congregation on Holy Thursday that, in his view, John had the date right and Jesus kept the Passover early, with himself in place of the lamb.",
+  "readings": "People have answered the puzzle in several ways.\n\nSome read John’s words more broadly. Already John Chrysostom suggested that John calls the whole festival the Passover, so the meal the accusers wanted to eat could be one of the later meals of the week. D. A. Carson argues that the Preparation Day of the Passover can refer to a day within Passover week, here its Friday. Read this way, John and Mark need not disagree about the day.\n\nSome propose two calendars. In 1957 Annie Jaubert suggested that Jesus kept the Passover by the solar calendar known from Qumran, days before the temple’s date. Pope Benedict XVI found that plausible; Colin Humphreys rejects Jaubert’s version and argues for another calendar instead.\n\nOn the hour, some point out that people then told time roughly, often to the nearest three-hour mark, and John himself says about the sixth hour. Augustine made a similar point: Scripture usually gives round numbers. Others have suggested that John started the day at midnight, the Roman way, though that Roman reckoning was used only for dating contracts and leases.\n\nSome read John’s timing as a deliberate picture. William Barclay and Bart Ehrman think John placed the death at the hour of the lambs to show Jesus as the true Passover lamb.\n\nAnd some, like Raymond Brown after weighing these proposals, conclude that the accounts cannot easily be reconciled.\n\nEach answer takes the same texts seriously. They differ on what the writers meant to do with time.",
+  "argued": "Christians have argued over this since the early centuries. John Chrysostom offered two answers in one breath: [[chrysostom]]\n\nAugustine worked through the hour at length in his Harmony of the Gospels. He proposed that Mark’s third hour marks the moment the shout “Crucify him!” first went up, and John’s sixth hour the moment, two hours later, when Pilate gave in. But he did not pretend it was easy: [[augustine]] And he left the door open: [[augustine-more]]\n\nIn 2007 Pope Benedict XVI took a side. Preaching on Holy Thursday, he called the problem an apparent discrepancy and said that most exegetes had thought John chose a symbolic date. Then, drawing on the Qumran scrolls, he argued that Jesus kept the Passover early with his disciples and died at the hour of the lambs: [[benedict]]\n\nBart Ehrman reads the same evidence the other way. For him the picture came first and the date followed: [[ehrman]]\n\nSo one detail in John is read by one side as precise history and by the other as theology shaping the story. Both start from the same observation: in John, Jesus dies as the lambs are killed.",
+  "point": "Mark and John agree that Jesus died at Passover, on the day before the Sabbath. They give different signals about how that day relates to the Passover meal and about the hour of the sentence, and Christians have read those signals differently since at least the second century. What John’s timing makes hard to miss is the picture he wants you to see: Jesus condemned and killed while the Passover lambs were being prepared.",
+  "lesson": "The early church argued over the date of Easter, which hangs on this same Passover calendar, and once a bishop of Rome tried to cut off whole churches over it. What kept them together was not a perfect timeline. Irenaeus reminded that bishop that two bishops who disagreed on the date had still shared the Eucharist and parted in peace.\n\nYou will meet Christians who read these chapters differently from you, and you may be someone with doubts because of passages like this one. Either way, the passage points you where John points: to “the Lamb of God, who takes away the sin of the world”.\n\nRead John 18 and 19 one evening with the clock in mind, and then read Exodus 12. Ask what John wanted you to notice. And if you do not share this faith, you can still respect writers who left the hours in plain sight, and readers who for centuries have argued over them in the open.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "exodus",
+        "chapter": 12,
+        "start": 46,
+        "end": 46
+      },
+      "note": "The law for the Passover lamb says, “Do not break any of its bones.” John saw it fulfilled when the soldiers did not break Jesus’ legs."
+    },
+    {
+      "ref": {
+        "book": "1-corinthians",
+        "chapter": 5,
+        "start": 7,
+        "end": 7
+      },
+      "note": "Paul says outright what John shows with the clock: “For indeed Christ, our Passover, has been sacrificed in our place.”"
+    },
+    {
+      "ref": {
+        "book": "1-peter",
+        "chapter": 1,
+        "start": 19,
+        "end": 19
+      },
+      "note": "A letter in Peter’s name speaks of being set free “with precious blood, as of a lamb without blemish or spot, the blood of Christ”."
+    },
+    {
+      "ref": {
+        "book": "romans",
+        "chapter": 14,
+        "start": 5,
+        "end": 5
+      },
+      "note": "On disputes over sacred days, Paul writes: “Let each man be fully assured in his own mind.” The early church needed that advice when it argued over the date of Easter."
+    }
+  ],
+  "basis": [
+    {
+      "book": "john",
+      "chapter": 19,
+      "start": 1,
+      "end": 13
+    },
+    {
+      "book": "john",
+      "chapter": 19,
+      "start": 15,
+      "end": 16
+    },
+    {
+      "book": "john",
+      "chapter": 18,
+      "start": 28,
+      "end": 40
+    },
+    {
+      "book": "john",
+      "chapter": 13,
+      "start": 1,
+      "end": 1
+    },
+    {
+      "book": "john",
+      "chapter": 13,
+      "start": 27,
+      "end": 30
+    },
+    {
+      "book": "john",
+      "chapter": 19,
+      "start": 31,
+      "end": 36
+    },
+    {
+      "book": "john",
+      "chapter": 19,
+      "start": 42,
+      "end": 42
+    },
+    {
+      "book": "john",
+      "chapter": 1,
+      "start": 29,
+      "end": 29
+    },
+    {
+      "book": "mark",
+      "chapter": 14,
+      "start": 12,
+      "end": 17
+    },
+    {
+      "book": "mark",
+      "chapter": 14,
+      "start": 22,
+      "end": 24
+    },
+    {
+      "book": "mark",
+      "chapter": 15,
+      "start": 12,
+      "end": 15
+    },
+    {
+      "book": "mark",
+      "chapter": 15,
+      "start": 25,
+      "end": 25
+    },
+    {
+      "book": "mark",
+      "chapter": 15,
+      "start": 33,
+      "end": 34
+    },
+    {
+      "book": "mark",
+      "chapter": 15,
+      "start": 42,
+      "end": 42
+    }
+  ]
+}

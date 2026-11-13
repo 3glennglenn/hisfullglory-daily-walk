@@ -1,0 +1,161 @@
+{
+  "slug": "2-kings-8-26",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-13",
+  "verse": {
+    "book": "2-kings",
+    "chapter": 8,
+    "start": 26,
+    "end": 26
+  },
+  "hook": "You know the Bible was copied by hand for centuries. But did you know King Ahaziah is twenty-two in 2 Kings and forty-two in 2 Chronicles?",
+  "story": "Two books of the Bible tell the reign of the same young king of Judah, and both open it with the same kind of sentence.\n\n2 Kings: “Ahaziah was twenty-two years old when he began to reign; and he reigned one year in Jerusalem.”\n\n2 Chronicles: “Ahaziah was forty-two years old when he began to reign, and he reigned one year in Jerusalem.”\n\nOne word apart, and twenty years. The difference is real, and it is not a slip of an English translator. The Hebrew text of Chronicles that has come down to us reads forty and two, and so do the World English Bible, the King James Bible of 1611 and the Latin Vulgate.\n\nThen look at the family. His father Jehoram “was thirty-two years old when he began to reign, and he reigned in Jerusalem eight years.” Chronicles says it twice. So Jehoram died at about forty. If his son was forty-two when he took the throne, the son was two years older than his own father. And Chronicles itself says that the people of Jerusalem made Ahaziah king as “his youngest son”, because raiders had killed all the older ones.\n\nSo the two numbers cannot both be a true age. The question is which one is, and how the other got into the text.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "2 Chronicles 22:2 side by side: Hebrew, Septuagint, King James Bible of 1611, Vulgate and others (Open Bible Data)",
+      "url": "https://freely-given.org/OBD/par/CH2/C22V2.htm"
+    },
+    {
+      "title": "Commentaries on 2 Chronicles 22:2: Ellicott, Keil and Delitzsch, Poole, Matthew Henry and others (Bible Hub)",
+      "url": "https://biblehub.com/commentaries/2_chronicles/22-2.htm"
+    },
+    {
+      "title": "Augustine, Reply to Faustus, Book XI (New Advent)",
+      "url": "https://www.newadvent.org/fathers/140611.htm"
+    },
+    {
+      "title": "The Chicago Statement on Biblical Inerrancy, 1978 (Ligonier Ministries)",
+      "url": "https://learn.ligonier.org/articles/chicago-statement"
+    }
+  ],
+  "voices": [
+    {
+      "id": "augustine",
+      "name": "Augustine of Hippo",
+      "about": "bishop in North Africa, in his Reply to Faustus, Book XI",
+      "words": "If we are perplexed by an apparent contradiction in Scripture, it is not allowable to say, The author of this book is mistaken; but either the manuscript is faulty, or the translation is wrong, or you have not understood.",
+      "source": {
+        "title": "Augustine, Reply to Faustus, Book XI (New Advent)",
+        "url": "https://www.newadvent.org/fathers/140611.htm"
+      }
+    },
+    {
+      "id": "keil-delitzsch",
+      "name": "Keil and Delitzsch",
+      "about": "in their Biblical Commentary on the Old Testament, on 2 Chronicles 22:2",
+      "words": "The number 42 is an orthographical error for 22",
+      "source": {
+        "title": "Commentaries on 2 Chronicles 22:2: Ellicott, Keil and Delitzsch, Poole, Matthew Henry and others (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/2_chronicles/22-2.htm"
+      }
+    },
+    {
+      "id": "poole",
+      "name": "Matthew Poole",
+      "about": "in his commentary, answering those who said this verse overthrows the authority of Scripture",
+      "words": "the question here is not whether this text be true, but which is the true reading of the text",
+      "source": {
+        "title": "Commentaries on 2 Chronicles 22:2: Ellicott, Keil and Delitzsch, Poole, Matthew Henry and others (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/2_chronicles/22-2.htm"
+      }
+    },
+    {
+      "name": "Matthew Henry",
+      "about": "in his Concise Commentary, on the baby Joash hidden from Athaliah",
+      "words": "The whole truth of the prophecies that the Messiah was to come from David, and thereby the salvation of the world, appeared to be now hung upon the brittle thread of the life of a single infant",
+      "source": {
+        "title": "Commentaries on 2 Chronicles 22:2: Ellicott, Keil and Delitzsch, Poole, Matthew Henry and others (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/2_chronicles/22-2.htm"
+      }
+    }
+  ],
+  "moment": "Ahaziah came to a throne that had been emptied by violence. His father Jehoram, when he became king, had “killed all his brothers with the sword”. Later, raiders from the Philistines and the Arabians broke into Judah and carried off the king’s sons, “so that there was no son left to him except Jehoahaz, the youngest of his sons.” Then Jehoram died after two years of an incurable disease, and Chronicles adds a bleak line: “He departed with no one’s regret.”\n\nSo the youngest son became king. His mother was Athaliah, of the royal house of Ahab in Israel, and Chronicles names who shaped him: “his mother was his counselor in acting wickedly.” The house of Ahab, the Chronicler says, were his counselors “after the death of his father, to his destruction.”\n\nThe writers of Kings and Chronicles are not writing a birthday list. They are telling a story in which the house of David nearly comes to an end. The age of the king is one line in that story, and it is the line where the two books part ways.",
+  "around": "The family dates stand only a few verses away in both books. Kings says of Jehoram, “He was thirty-two years old when he began to reign. He reigned eight years in Jerusalem.” Chronicles says the same in chapter 21, twice. Both books give Ahaziah one year.\n\nThere is a second small puzzle in the same verse, and it shows how these records speak. Both books call his mother “the daughter of Omri”, yet Kings says that Jehoram “married Ahab’s daughter”. Ahab was Omri’s son. The commentators on Bible Hub explain that in the Bible a granddaughter is often called a daughter. Not every difference is an error.\n\nThe age is different. Here the books do not use two ways of speaking about one fact. One of the numbers cannot be the age of a man whose father died at about forty.",
+  "after": "Ahaziah’s one year ended in blood. He went to visit his wounded uncle, King Joram of Israel, at Jezreel, just as Jehu rode in to overthrow the house of Ahab. Joram turned to flee and cried to his nephew, “This is treason, Ahaziah!” Jehu shot Joram, and his men pursued Ahaziah: “They struck him at the ascent of Gur”. Kings says he fled to Megiddo and died there, and his servants carried him home to be buried in David’s city.\n\nThen his mother turned on her own family. Kings says that “when Athaliah the mother of Ahaziah saw that her son was dead, she arose and destroyed all the royal offspring.” But Ahaziah’s sister Jehosheba took his infant son Joash and hid him, first in a bedroom and then for six years in the house of the LORD. In the seventh year the priest Jehoiada brought the boy out, crowned him, and the people “clapped their hands” and cried, “Long live the king!” The line of David went on through one hidden child.\n\nThe number had its own afterlife. The main Greek text of Chronicles reads twenty, some Greek manuscripts and the Syriac read twenty-two, and the Hebrew kept forty-two. Matthew Poole reported that Archbishop Ussher had an ancient Syriac copy from Antioch transcribed at his own expense and found twenty-two there. Today some English Bibles print twenty-two with a note that the Hebrew has forty-two, and others, the World English Bible among them, print the Hebrew number as it stands.",
+  "readings": "Readers have explained the two numbers in more than one way.\n\nMost of the commentators gathered on Bible Hub see a copying error in Chronicles. Ellicott calls it an error of transcription, Barnes says to read twenty-two, and Keil and Delitzsch call it an orthographical error. Their evidence is the father’s age, the words youngest son, the number in Kings, and the Greek and Syriac copies that read twenty-two. Poole adds that some explained it by Hebrew numeral letters for twenty-two and forty-two that look much alike.\n\nOthers have tried to keep forty-two as it stands. Poole’s first answer was that the Hebrew phrase need not mean the king’s age at all. It could count the years of the royal house of Omri, his mother’s family: Omri six years, Ahab twenty-two, Ahaziah of Israel two and Joram twelve, which together make forty-two. The commentary of Jamieson, Fausset and Brown passes on the same idea from Lightfoot. Most of the other commentators on the page do not follow it.\n\nA third group draws a larger conclusion. In Poole’s day some argued that such a slip overthrows the authority of the Bible, and Poole wrote against them. Christians who hold that Scripture is without error answer as the Chicago Statement on Biblical Inerrancy of 1978 does: inspiration, strictly speaking, belongs to the original text, and copies and translations are the Word of God to the extent that they faithfully represent the original. Whatever view a reader holds, the facts on the page are the same: the copies differ here, and the father’s age shows which number can be an age.",
+  "argued": "The question is older than any printed Bible. Augustine of Hippo, answering a teacher named Faustus who set one passage of Paul against another, laid down a rule for every such case: [[augustine]] The first of his three possibilities is the one this verse falls under.\n\nCenturies later, the commentators weighed the evidence one by one. Keil and Delitzsch were blunt: [[keil-delitzsch]] Matthew Poole, after offering a way to keep forty-two, also faced people who said a mistake like this made the whole Bible untrustworthy. He answered that this is a matter of history, not of the teaching on faith and life, and that [[poole]]\n\nThe Chicago Statement made the same distinction in 1978. It also denies that any essential element of the Christian faith is affected by the loss of the original manuscripts. Not everyone accepts that answer, but on this verse believers and skeptics read the same evidence.",
+  "point": "Read alone, 2 Kings 8:26 is one line in a royal record. Read beside Chronicles, it shows how the Bible reached us: copied by hand for centuries, in copies that can be laid side by side. Inside Chronicles itself, the father’s age and the words youngest son already point to twenty-two, and Kings, some Greek copies and the Syriac agree. Most of the commentators cited here see a copyist’s slip in the Hebrew of Chronicles; a few have read forty-two another way. Either way, both books tell the same short and violent reign.",
+  "lesson": "You do not have to be afraid of a hard verse. The Bible has come to us through many hands, and its own copies sometimes differ. People who love it have known that for a very long time, and they have not hidden it. They laid the copies side by side and asked which reading is true.\n\nYou can do the same. Read 2 Kings 8 and 2 Chronicles 21 and 22 next to each other, slowly. Notice what the two books agree on, and what they do not. That kind of careful reading is not a lack of faith. It is how many believers have taken the text seriously.\n\nAnd look at the king himself. Chronicles says he listened to counselors who led him “to his destruction.” Whose voice do you listen to when you decide how to live? That question does not depend on any number in any copy.\n\nIf you do not share this faith, the passage still offers something worth noticing: a book whose keepers left the difficult reading on the page, and let readers see it for themselves.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "acts",
+        "chapter": 17,
+        "start": 11,
+        "end": 11
+      },
+      "note": "The people of Berea are praised for “examining the Scriptures daily to see whether these things were so.” Careful checking of the text is counted as noble, not as doubt."
+    },
+    {
+      "ref": {
+        "book": "proverbs",
+        "chapter": 25,
+        "start": 2,
+        "end": 2
+      },
+      "note": "“the glory of kings is to search out a matter.” Laying copies side by side to find the true reading is that kind of searching."
+    },
+    {
+      "ref": {
+        "book": "proverbs",
+        "chapter": 13,
+        "start": 20,
+        "end": 20
+      },
+      "note": "“One who walks with wise men grows wise, but a companion of fools suffers harm.” Ahaziah’s short reign is the second half of that verse told as a life."
+    }
+  ],
+  "basis": [
+    {
+      "book": "2-kings",
+      "chapter": 8,
+      "start": 16,
+      "end": 25
+    },
+    {
+      "book": "2-kings",
+      "chapter": 8,
+      "start": 27,
+      "end": 29
+    },
+    {
+      "book": "2-chronicles",
+      "chapter": 22,
+      "start": 1,
+      "end": 12
+    },
+    {
+      "book": "2-chronicles",
+      "chapter": 21,
+      "start": 4,
+      "end": 6
+    },
+    {
+      "book": "2-chronicles",
+      "chapter": 21,
+      "start": 16,
+      "end": 20
+    },
+    {
+      "book": "2-kings",
+      "chapter": 9,
+      "start": 21,
+      "end": 28
+    },
+    {
+      "book": "2-kings",
+      "chapter": 11,
+      "start": 1,
+      "end": 4
+    },
+    {
+      "book": "2-kings",
+      "chapter": 11,
+      "start": 12,
+      "end": 12
+    }
+  ]
+}

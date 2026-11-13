@@ -1,0 +1,254 @@
+{
+  "slug": "mark-2-26",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-13",
+  "verse": {
+    "book": "mark",
+    "chapter": 2,
+    "start": 26,
+    "end": 26
+  },
+  "hook": "You know Jesus defended his hungry disciples with a story about David. But did you know Mark names a different priest than 1 Samuel does?",
+  "story": "One Sabbath Jesus was walking through the grain fields, and his disciples began “to pluck the ears of grain.” The Pharisees challenged him: “Behold, why do they do that which is not lawful on the Sabbath day?” Jesus answered with a story from Scripture. David, hungry and on the run, had eaten the holy bread that only priests were allowed to eat. In Mark, Jesus also says when it happened: “at the time of Abiathar the high priest”.\n\nNow turn back to the story itself, in 1 Samuel 21. “Then David came to Nob to Ahimelech the priest.” Ahimelech is the one who talks with David, and in the end “the priest gave him holy bread”. Abiathar does not appear in that chapter. He comes in the next one, after King Saul had the priests of Nob killed: “One of the sons of Ahimelech the son of Ahitub, named Abiathar, escaped and fled after David.”\n\nSo this is what differs, and only this. Mark links the scene to Abiathar and calls him high priest. 1 Samuel names Abiathar’s father, Ahimelech, as the priest who handed over the bread. Everything else agrees: David, his hunger, the men with him, and the bread that was “not lawful to eat except for the priests”.\n\nMatthew and Luke tell the same exchange in almost the same words, and neither of them names a priest at all (Matthew 12:3-4, Luke 6:3-4).\n\nThe question is old. In a letter written in the year 395, Jerome sent his readers to the books of Samuel, where the priest is Ahimelech. A few ancient copies of Mark leave the phrase out. And in his 2005 book Misquoting Jesus, Bart Ehrman told how this one verse became a turning point for him when he was a student at Princeton Theological Seminary.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Jerome, Letter 57, To Pammachius on the Best Method of Translating, A.D. 395 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/3001057.htm"
+    },
+    {
+      "title": "Daniel B. Wallace, The Problem of Abiathar in Mark 2.26 (Credo House)",
+      "url": "https://credohouse.org/blog/the-problem-of-abiathar-in-mark-2-26"
+    },
+    {
+      "title": "Julie M. Smith, Is There a Mistake in Mark 2:26? (BYU New Testament Commentary)",
+      "url": "https://www.byunewtestamentcommentary.com/is-there-a-mistake-in-mark-226/"
+    },
+    {
+      "title": "Bart D. Ehrman, How I First Realized There Are Mistakes in the Bible (The Bart Ehrman Blog)",
+      "url": "https://ehrmanblog.org/how-i-first-realized-there-are-mistakes-in-the-bible/"
+    },
+    {
+      "title": "Edward D. Andrews, Maybe the Gospel Writer Mark Was Just Wrong, quoting Ehrman’s Misquoting Jesus, pages 9-10",
+      "url": "https://uasvbible.org/2022/01/18/nttc-mark-226-maybe-the-gospel-writer-mark-was-just-wrong/"
+    },
+    {
+      "title": "Mark 2:26 in the Greek text, word by word (Bible Hub)",
+      "url": "https://biblehub.com/text/mark/2-26.htm"
+    },
+    {
+      "title": "Mark 12:26 in the Greek text, word by word (Bible Hub)",
+      "url": "https://biblehub.com/text/mark/12-26.htm"
+    },
+    {
+      "title": "Older commentaries on Mark 2:26, among them Barnes and the Geneva notes (Bible Hub)",
+      "url": "https://biblehub.com/commentaries/mark/2-26.htm"
+    }
+  ],
+  "voices": [
+    {
+      "id": "jerome",
+      "name": "Jerome",
+      "about": "in a letter of A.D. 395 on how to translate, after quoting Mark 2:25-26",
+      "words": "we shall find there that the highpriest's name was not Abiathar but Ahimelech",
+      "source": {
+        "title": "Jerome, Letter 57, To Pammachius on the Best Method of Translating, A.D. 395 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/3001057.htm"
+      }
+    },
+    {
+      "id": "ehrman-turning",
+      "name": "Bart D. Ehrman",
+      "about": "on his student years at Princeton Theological Seminary, from his 2005 book Misquoting Jesus, reproduced on his blog",
+      "words": "A turning point came in my second semester, in a course I was taking with a much revered and pious professor named Cullen Story.",
+      "source": {
+        "title": "Bart D. Ehrman, How I First Realized There Are Mistakes in the Bible (The Bart Ehrman Blog)",
+        "url": "https://ehrmanblog.org/how-i-first-realized-there-are-mistakes-in-the-bible/"
+      }
+    },
+    {
+      "id": "ehrman-paper",
+      "name": "Bart D. Ehrman",
+      "about": "describing his own seminary paper on Mark 2:26, in Misquoting Jesus, page 9",
+      "words": "the event took place in the part of the scriptural text that has Abiathar as one of the main characters",
+      "source": {
+        "title": "Edward D. Andrews, Maybe the Gospel Writer Mark Was Just Wrong, quoting Ehrman’s Misquoting Jesus, pages 9-10",
+        "url": "https://uasvbible.org/2022/01/18/nttc-mark-226-maybe-the-gospel-writer-mark-was-just-wrong/"
+      }
+    },
+    {
+      "id": "story",
+      "name": "Cullen Story",
+      "about": "professor at Princeton Theological Seminary, in his one-line comment on Ehrman’s paper, as Ehrman tells it",
+      "words": "Maybe Mark just made a mistake.",
+      "source": {
+        "title": "Edward D. Andrews, Maybe the Gospel Writer Mark Was Just Wrong, quoting Ehrman’s Misquoting Jesus, pages 9-10",
+        "url": "https://uasvbible.org/2022/01/18/nttc-mark-226-maybe-the-gospel-writer-mark-was-just-wrong/"
+      }
+    },
+    {
+      "id": "ehrman-floodgates",
+      "name": "Bart D. Ehrman",
+      "about": "on what followed, in Misquoting Jesus, page 10",
+      "words": "For if there could be one little, picayune mistake in Mark 2, maybe there could be mistakes in other places as well",
+      "source": {
+        "title": "Edward D. Andrews, Maybe the Gospel Writer Mark Was Just Wrong, quoting Ehrman’s Misquoting Jesus, pages 9-10",
+        "url": "https://uasvbible.org/2022/01/18/nttc-mark-226-maybe-the-gospel-writer-mark-was-just-wrong/"
+      }
+    },
+    {
+      "id": "wallace",
+      "name": "Daniel B. Wallace",
+      "about": "weighing the five kinds of answer in his paper on Mark 2:26",
+      "words": "It must be admitted that views 2-5 all have a certain plausibility.",
+      "source": {
+        "title": "Daniel B. Wallace, The Problem of Abiathar in Mark 2.26 (Credo House)",
+        "url": "https://credohouse.org/blog/the-problem-of-abiathar-in-mark-2-26"
+      }
+    },
+    {
+      "id": "wallace-plea",
+      "name": "Daniel B. Wallace",
+      "about": "in the same paper, to readers who conclude that Jesus, Mark or Mark’s source made a mistake",
+      "words": "If you were to decide to opt for 2, 3, or 4, I would simply plead with you not to abandon Christ.",
+      "source": {
+        "title": "Daniel B. Wallace, The Problem of Abiathar in Mark 2.26 (Credo House)",
+        "url": "https://credohouse.org/blog/the-problem-of-abiathar-in-mark-2-26"
+      }
+    },
+    {
+      "id": "ehrman-god",
+      "name": "Bart D. Ehrman",
+      "about": "answering a reader on his blog in May 2017, years after he left the faith",
+      "words": "the accuracy of the Bible has no relation to whether God exists or not.",
+      "source": {
+        "title": "Bart D. Ehrman, How I First Realized There Are Mistakes in the Bible (The Bart Ehrman Blog)",
+        "url": "https://ehrmanblog.org/how-i-first-realized-there-are-mistakes-in-the-bible/"
+      }
+    }
+  ],
+  "moment": "Mark tells this scene as one of a run of clashes. Jesus ate with tax collectors and sinners, and the scribes asked why. His disciples did not fast, and people asked why. Now they were plucking grain on the Sabbath. Jesus answers with Scripture: “Did you never read what David did when he had need and was hungry”.\n\nThe story he points to is a dark one. David was fleeing from King Saul. At Nob, the town of the priests, Ahimelech came to meet him “trembling”, and gave him the holy bread and the sword of Goliath. One of Saul’s men was there that day, “and his name was Doeg the Edomite”. When Saul heard, he summoned Ahimelech and “all his father’s house”. His own guards refused to strike the priests of the LORD. Doeg did not refuse. He killed eighty-five priests that day, and then struck the whole town of Nob.\n\nOne son of Ahimelech got away, and his name was Abiathar. When he reached David and told him, David said, “I am responsible for the death of all the persons of your father’s house.” Then he took him in: “Stay with me. Don’t be afraid, for he who seeks my life seeks your life. You will be safe with me.”\n\nSo the name in Mark’s verse belongs to the son who escaped from Nob, the one whose father’s house was killed after David came there for bread.",
+  "around": "Right after the story of David, Jesus draws his conclusion: “The Sabbath was made for man, not man for the Sabbath.” In the next scene, on another Sabbath, he heals a man with a withered hand and asks, “Is it lawful on the Sabbath day to do good or to do harm?” Matthew’s telling of the grain fields adds a line from the prophet Hosea: “I desire mercy, and not sacrifice”.\n\nThat is the weight of the passage. Jesus’ argument rests on what David did when he was hungry, not on who was serving as priest.\n\nElsewhere in Mark, Jesus points to Scripture in a similar way. Asked about the resurrection, he says, “haven’t you read in the book of Moses about the Bush”, meaning the passage about the burning bush. In the Greek, Mark uses the same small word, epi, there and in our verse.",
+  "after": "Abiathar stayed with David. When David was at Keilah, “Abiathar the son of Ahimelech fled to David to Keilah”, bringing the ephod with him, and later David called on him: “Please bring the ephod here to me.” When David was king, the list of his officials says simply, “Zadok and Abiathar were priests”. His service ended under Solomon, who sent him home to Anathoth and spared his life “because you bore the Lord GOD’s ark before David my father, and because you were afflicted in all in which my father was afflicted.”\n\nThe verse had a history of its own. Some ancient copyists left the phrase out. Others added a small word, so that it read: in the days of Abiathar the high priest. Daniel Wallace thinks both changes came from scribes who wanted to protect the text. In 1883 the scholar Thomas M. Lindsay wrote that none of the explanations offered was very satisfactory. Wallace, quoting him over a century later, said Lindsay would repeat his complaint word for word.\n\nFor Bart Ehrman, the verse was where he first allowed that the Bible might contain mistakes. Years later a reader on his blog suggested that it was suffering in the world, not mistakes in the Bible, that had changed his mind about God, and Ehrman agreed.",
+  "readings": "People have answered the puzzle in several ways, and none has won everyone over.\n\nIn the days of Abiathar. Abiathar belonged to the priestly house at Nob when David came, and he became the priest best known from David’s reign. On this reading Mark marks the time by its best-known priest, the way we speak of King David in the years when he still “went back and forth from Saul to feed his father’s sheep at Bethlehem.” Albert Barnes compared it to calling Washington General in a story from years before he held that rank. Daniel Wallace leans this way, tentatively. He also admits that he has not yet found a clear example of the Greek phrase used in this looser way.\n\nIn the passage about Abiathar. Because Mark uses the same word for “about the Bush”, some scholars read the phrase as pointing to the part of Scripture where Abiathar appears. Most are not convinced: Abiathar enters the story only a chapter later, and the phrase stands far from “Did you never read”.\n\nTwo names that were mixed up. The Old Testament has the names both ways round. A list of David’s officials calls a priest “Ahimelech the son of Abiathar”. Some older interpreters concluded that father and son bore both names. Others think the copies became confused.\n\nA copying question. A few ancient copies leave the phrase out, and some scholars have suspected that a copyist added it. Wallace answers that the phrase is surely what Mark wrote.\n\nA real slip. Many scholars, believers among them, conclude that Mark or his source named the wrong priest. Wallace calls this probably the most popular view among critical scholars.",
+  "argued": "The problem was noticed early, and not by an enemy of the faith. In the year 395 Jerome, defending his own way of translating, showed that the Gospel writers often gave the sense of Scripture rather than its exact words. Of this verse he wrote: [[jerome]] He added that he was not accusing the evangelists of falsifying anything.\n\nCenturies later a young man arrived at Princeton Theological Seminary committed, as he later wrote, to the Bible as the inerrant word of God. Bart Ehrman remembered: [[ehrman-turning]] In a paper for that course he argued, at length, that Mark meant [[ehrman-paper]] His professor read it and wrote one line at the end: [[story]] Ehrman thought it over and concluded that Mark might indeed have made a mistake. Then, he wrote, the floodgates opened: [[ehrman-floodgates]]\n\nThe evangelical scholar Daniel Wallace went through the main answers one by one. He leans toward the time reading, but he holds it loosely: [[wallace]] To readers who conclude that someone along the way made a mistake, he made a plea: [[wallace-plea]]\n\nAnd Ehrman himself, long after he left the faith, told a reader that this question and the question of God are two different things: [[ehrman-god]]",
+  "point": "The difference is real, and it is small: one name in a passing reference, in a story Matthew and Luke tell without any name at all. Believers and skeptics have argued over it for centuries, and honest scholars still differ.\n\nWhat the context adds is the weight around that name. Abiathar is the son who escaped the massacre at Nob, the man David took in, and the priest who shared David’s hardships. And the argument Jesus makes does not stand or fall with the name. A hungry man was fed with holy bread, and Jesus concludes that the Sabbath was made for people.",
+  "lesson": "You do not have to look away from a hard verse. Jerome, writing as a believer, set this one side by side with 1 Samuel and said plainly what he found. Believing scholars and skeptical ones have done the same ever since, and they have not all landed in the same place.\n\nSo do what they did. Read Mark 2 and 1 Samuel 21 and 22 for yourself. Notice what is certain and what is still debated. Let a question stay open while you keep reading, the way you would with a friend whose story has one detail you cannot place.\n\nAnd do not miss what Jesus was saying while people argue about the name. He told men who cared more about a rule than about hungry people, “The Sabbath was made for man, not man for the Sabbath.” If you have ever been made to feel that a rule mattered more than you did, these words are for you. If you do not share this faith, the passage still asks a fair question: which matters more, keeping a rule or caring for the person in front of you?",
+  "echoes": [
+    {
+      "ref": {
+        "book": "hosea",
+        "chapter": 6,
+        "start": 6,
+        "end": 6
+      },
+      "note": "God says through Hosea, “For I desire mercy, and not sacrifice”. In Matthew’s telling of the grain fields, Jesus quotes this line to the same critics."
+    },
+    {
+      "ref": {
+        "book": "mark",
+        "chapter": 3,
+        "start": 4,
+        "end": 4
+      },
+      "note": "On the next Sabbath in Mark, Jesus asks, “Is it lawful on the Sabbath day to do good or to do harm?” The same question that stands behind the story of David and the bread."
+    },
+    {
+      "ref": {
+        "book": "isaiah",
+        "chapter": 58,
+        "start": 7,
+        "end": 7
+      },
+      "note": "Through Isaiah, God says the fast he wants is this: “Isn’t it to distribute your bread to the hungry”. Worship that feeds the hungry, as the holy bread fed David."
+    }
+  ],
+  "basis": [
+    {
+      "book": "mark",
+      "chapter": 2,
+      "start": 15,
+      "end": 28
+    },
+    {
+      "book": "mark",
+      "chapter": 3,
+      "start": 1,
+      "end": 6
+    },
+    {
+      "book": "matthew",
+      "chapter": 12,
+      "start": 1,
+      "end": 8
+    },
+    {
+      "book": "luke",
+      "chapter": 6,
+      "start": 1,
+      "end": 5
+    },
+    {
+      "book": "1-samuel",
+      "chapter": 21,
+      "start": 1,
+      "end": 9
+    },
+    {
+      "book": "1-samuel",
+      "chapter": 22,
+      "start": 9,
+      "end": 23
+    },
+    {
+      "book": "1-samuel",
+      "chapter": 17,
+      "start": 15,
+      "end": 15
+    },
+    {
+      "book": "mark",
+      "chapter": 12,
+      "start": 26,
+      "end": 26
+    },
+    {
+      "book": "2-samuel",
+      "chapter": 8,
+      "start": 17,
+      "end": 17
+    },
+    {
+      "book": "2-samuel",
+      "chapter": 20,
+      "start": 25,
+      "end": 25
+    },
+    {
+      "book": "1-chronicles",
+      "chapter": 18,
+      "start": 16,
+      "end": 16
+    },
+    {
+      "book": "1-samuel",
+      "chapter": 23,
+      "start": 6,
+      "end": 6
+    },
+    {
+      "book": "1-samuel",
+      "chapter": 30,
+      "start": 7,
+      "end": 7
+    },
+    {
+      "book": "1-kings",
+      "chapter": 2,
+      "start": 26,
+      "end": 27
+    }
+  ]
+}

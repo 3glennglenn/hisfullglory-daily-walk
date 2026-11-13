@@ -1,0 +1,193 @@
+{
+  "slug": "matthew-20-30",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-13",
+  "verse": {
+    "book": "matthew",
+    "chapter": 20,
+    "start": 30,
+    "end": 30
+  },
+  "hook": "You know Jesus healed blind Bartimaeus at Jericho. But did you know Matthew has two blind men, and Luke puts the healing on the way into the city?",
+  "story": "Jesus was on his last road to Jerusalem, with a great crowd behind him. At Jericho, three Gospels tell of a blind man, or two, by the road calling out to him as “son of David”. Set side by side, the accounts differ in two ways.\n\nHow many men? Matthew: “Behold, two blind men sitting by the road”. Mark has one, and gives his name: “the son of Timaeus, Bartimaeus, a blind beggar, was sitting by the road.” Luke also has one, without a name: “a certain blind man sat by the road, begging.”\n\nWhere? Matthew: “As they went out from Jericho”. Mark: “As he went out from Jericho”. Luke: “As he came near Jericho”. And Luke goes on, after the healing, to say that Jesus “entered and was passing through Jericho”, where he met Zacchaeus.\n\nEverything else runs closely together. The cry for mercy to the son of David. The crowd telling them to be quiet. The cry again, louder. Jesus standing still and asking almost the same question in all three: “What do you want me to do for you?” Sight given at once, and the healed man following Jesus.\n\nSo the difference is real, and it is limited: one man or two, and the way out of Jericho or the way in.",
+  "storyStatus": "scripture",
+  "sources": [
+    {
+      "title": "Augustine, The Harmony of the Gospels, Book II, chapter 65 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/1602265.htm"
+    },
+    {
+      "title": "John Calvin, Commentary on a Harmony of the Evangelists, on Matthew 20:29-34 and its parallels (CCEL)",
+      "url": "https://ccel.org/ccel/calvin/calcom32/calcom32.ii.lxxvii.html"
+    },
+    {
+      "title": "John Chrysostom, Homily 66 on the Gospel of Matthew (New Advent)",
+      "url": "https://www.newadvent.org/fathers/200166.htm"
+    },
+    {
+      "title": "Older commentaries on Luke 18:35, among them the Cambridge Bible, the Pulpit Commentary and Jamieson-Fausset-Brown (Bible Hub)",
+      "url": "https://biblehub.com/commentaries/luke/18-35.htm"
+    },
+    {
+      "title": "Wikipedia: Healing the blind near Jericho",
+      "url": "https://en.wikipedia.org/wiki/Healing_the_blind_near_Jericho"
+    },
+    {
+      "title": "Wikipedia: Hasmonean and Herodian royal winter palaces (Tulul Abu el-Alayiq)",
+      "url": "https://en.wikipedia.org/wiki/Tulul_Abu_el-Alayiq"
+    },
+    {
+      "title": "Wikipedia: Tell es-Sultan",
+      "url": "https://en.wikipedia.org/wiki/Tell_es-Sultan"
+    }
+  ],
+  "voices": [
+    {
+      "id": "augustine-note",
+      "name": "Augustine of Hippo",
+      "about": "in The Harmony of the Gospels, on why Mark names only Bartimaeus",
+      "words": "one of them was of pre-eminent note and repute in that city",
+      "source": {
+        "title": "Augustine, The Harmony of the Gospels, Book II, chapter 65 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/1602265.htm"
+      }
+    },
+    {
+      "id": "augustine",
+      "name": "Augustine of Hippo",
+      "about": "in the same chapter, on Luke’s account of a healing as Jesus came near Jericho",
+      "words": "Now the name of the city, and the resemblance in the deed, favour the supposition that there was but one such occurrence.",
+      "source": {
+        "title": "Augustine, The Harmony of the Gospels, Book II, chapter 65 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/1602265.htm"
+      }
+    },
+    {
+      "id": "calvin-puzzle",
+      "name": "John Calvin",
+      "about": "in his Commentary on a Harmony of the Evangelists, on the three accounts",
+      "words": "But there is a puzzling contradiction in this respect",
+      "source": {
+        "title": "John Calvin, Commentary on a Harmony of the Evangelists, on Matthew 20:29-34 and its parallels (CCEL)",
+        "url": "https://ccel.org/ccel/calvin/calcom32/calcom32.ii.lxxvii.html"
+      }
+    },
+    {
+      "id": "calvin",
+      "name": "John Calvin",
+      "about": "in the same comment, offering his own explanation",
+      "words": "My conjecture is, that, while Christ was approaching to the city, the blind man cried out, but that, as he was not heard on account of the noise, he placed himself in the way, as they were departing from the city",
+      "source": {
+        "title": "John Calvin, Commentary on a Harmony of the Evangelists, on Matthew 20:29-34 and its parallels (CCEL)",
+        "url": "https://ccel.org/ccel/calvin/calcom32/calcom32.ii.lxxvii.html"
+      }
+    },
+    {
+      "id": "jfb",
+      "name": "Jamieson, Fausset and Brown",
+      "about": "in their Bible commentary, on Luke 18:35",
+      "words": "Perhaps, if we knew all the facts, we should see no difficulty",
+      "source": {
+        "title": "Older commentaries on Luke 18:35, among them the Cambridge Bible, the Pulpit Commentary and Jamieson-Fausset-Brown (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/luke/18-35.htm"
+      }
+    },
+    {
+      "name": "John Chrysostom",
+      "about": "preaching on the two blind men of Matthew 20:29-34",
+      "words": "let us listen to these blind men, who were better than many that see.",
+      "source": {
+        "title": "John Chrysostom, Homily 66 on the Gospel of Matthew (New Advent)",
+        "url": "https://www.newadvent.org/fathers/200166.htm"
+      }
+    }
+  ],
+  "moment": "Jesus was going up to Jerusalem, and he knew what waited for him there. On the way he took the twelve aside and told them: “Behold, we are going up to Jerusalem, and the Son of Man will be delivered to the chief priests and scribes, and they will condemn him to death”. Then two of the disciples asked, through their mother, for the seats at his right and left. Jesus answered that “the Son of Man came not to be served, but to serve, and to give his life as a ransom for many.”\n\nThen, as they went out from Jericho with a great crowd following, they passed blind men by the roadside, men who could not see who was passing, only hear it. They shouted. The crowd tried to silence them: “The multitude rebuked them, telling them that they should be quiet, but they cried out even more”.\n\nJesus stopped. He asked what they wanted and let them say it themselves: “Lord, that our eyes may be opened.” Matthew gives the reason he acted: “Jesus, being moved with compassion, touched their eyes”. Mark remembers the beggar throwing off his cloak and springing up. All three end the same way: they could see, and they followed him.",
+  "around": "Matthew tells of two blind men twice. Earlier, in Galilee, “two blind men followed him, calling out and saying” the same words, son of David. He also has two men possessed by demons where Mark has one: “two people possessed by demons met him there”, against Mark’s “a man with an unclean spirit met him”. Scholars notice that pattern.\n\nIn Matthew, the very next scene is the entry into Jerusalem, where the crowds shout, “Hosanna to the son of David!” The blind men by the road had just used that title.\n\nIn Luke, the healing comes before Jericho, and right after it comes Zacchaeus, the rich tax collector who climbed a tree to see Jesus, and the line: “For the Son of Man came to seek and to save that which was lost.”",
+  "after": "Mark ends with a small phrase that carries weight: “Immediately he received his sight and followed Jesus on the way.” The way went up to Jerusalem, to the cheering crowds and then to the cross. Luke adds that the man followed “glorifying God”, and that “All the people, when they saw it, praised God.”\n\nOf Bartimaeus himself nothing more is told. Mark names him and his father, and he is one of the few people healed in the Gospels whose name we know. Augustine took that as a sign that the man was well known. Some scholars today agree that the name points to a real person. Others see a symbolic meaning in it.\n\nThe question of one man or two, the way in or the way out, was taken up by Augustine, and it has been answered in different ways ever since. Archaeology has added a piece. The main town of Jesus’ day stood not on the old mound of the ancient city but at a site a short way off, where the Hasmonean kings and Herod built winter palaces. That site is often called New Testament Jericho.",
+  "readings": "Readers have explained the differences in several ways, and none has convinced everyone.\n\nTwo healings. Augustine held that Matthew and Mark tell of the healing as Jesus left Jericho, and Luke of a similar healing as he came near. Others later multiplied the men further. Calvin thought one event was plainly being told.\n\nOne healing that began on the way in. Calvin, and later the Pulpit Commentary, suggested that the blind man cried out as Jesus entered the town, could not make himself heard over the crowd, and was healed as Jesus left.\n\nTwo Jerichos. The Cambridge Bible for Schools and Colleges suggested, with a careful possibly, that Jesus was leaving the old town and coming near the new one. The two sites are real. The old mound, though, had been abandoned as a place of settlement not long after the Persian period.\n\nOne man or two. Augustine and Calvin both thought Mark and Luke name only the man who was well known, while Matthew counts both. The Cambridge Bible adds that a blind man would hardly have been sitting quite alone.\n\nThe writers’ own shaping. Many scholars think Matthew and Luke both used Mark’s account and shaped it. Matthew tends to double a figure where the other Gospels have one, and Luke puts the healing on the approach so that it leads into the story of Zacchaeus. On this view the differences come from the writers, not from the road.",
+  "argued": "Augustine faced the differences head on. Mark names only Bartimaeus, he reasoned, because [[augustine-note]] For Luke he chose two separate miracles, though he admitted what pulls the other way: [[augustine]]\n\nCalvin read the same chapters and did not hide the problem either: [[calvin-puzzle]] He dismissed Osiander, who had made four blind men out of the accounts, and gave his own guess instead: [[calvin]]\n\nOthers have been content to leave it open. The commentary of Jamieson, Fausset and Brown notes the many attempts and then says: [[jfb]] The Cambridge Bible went further, and said the discrepancy would in any case be unimportant. Many modern scholars answer differently again, and see in it the hand of each Gospel writer shaping the story he had received.",
+  "point": "The difference is real, and small: whether one man or two were healed, and whether it happened as Jesus entered Jericho or as he left it. Augustine, Calvin and others have offered ways to fit the accounts together. Many scholars think the writers simply shaped one story in different ways.\n\nWhat the context adds is what all three agree on. On his way to die, with a crowd around him, Jesus stopped for people the crowd wanted silenced, asked them what they wanted, and gave them their sight. And the one thing every account says they did next is follow him.",
+  "lesson": "The crowd around Jesus that day thought the blind men were in the way. Jesus thought they were the reason to stop.\n\nMaybe you have been told, in one way or another, to be quiet: that your need is too loud, your questions too much, your life too far off the road. The men at Jericho did not stop calling. They cried out even more. And Jesus stood still.\n\nYou can call out too, in your own words, as plainly as they did. When Jesus asked them what they wanted, they did not make a speech. They said what they needed. Read the three accounts in Matthew 20, Mark 10 and Luke 18 side by side. Notice how much they share. Then ask what you would say if he asked you the same question.\n\nIf you do not share this faith, the story still holds something worth keeping: the people a crowd wants silenced are often the ones most worth stopping for.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "isaiah",
+        "chapter": 35,
+        "start": 5,
+        "end": 5
+      },
+      "note": "Isaiah looked ahead to a day when “the eyes of the blind will be opened”. Calling Jesus son of David, the blind men at Jericho asked for exactly that."
+    },
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 146,
+        "start": 8,
+        "end": 8
+      },
+      "note": "The psalm says, “The LORD opens the eyes of the blind. The LORD raises up those who are bowed down.” At Jericho, Jesus did what the psalm says the LORD does."
+    },
+    {
+      "ref": {
+        "book": "john",
+        "chapter": 9,
+        "start": 25,
+        "end": 25
+      },
+      "note": "Another man Jesus healed could not answer every question about it, but said, “One thing I do know: that though I was blind, now I see.”"
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 20,
+      "start": 17,
+      "end": 34
+    },
+    {
+      "book": "mark",
+      "chapter": 10,
+      "start": 46,
+      "end": 52
+    },
+    {
+      "book": "luke",
+      "chapter": 18,
+      "start": 31,
+      "end": 43
+    },
+    {
+      "book": "luke",
+      "chapter": 19,
+      "start": 1,
+      "end": 10
+    },
+    {
+      "book": "matthew",
+      "chapter": 9,
+      "start": 27,
+      "end": 31
+    },
+    {
+      "book": "matthew",
+      "chapter": 8,
+      "start": 28,
+      "end": 28
+    },
+    {
+      "book": "mark",
+      "chapter": 5,
+      "start": 1,
+      "end": 2
+    },
+    {
+      "book": "matthew",
+      "chapter": 21,
+      "start": 9,
+      "end": 9
+    }
+  ]
+}
