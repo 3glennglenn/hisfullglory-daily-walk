@@ -230,7 +230,7 @@ export async function checkShop(browser, base) {
     const { context, page, problems } = await open(browser, base, "/shop", { look, lamplight });
     try {
       assert.equal(await page.locator("main h1").innerText(), "Shop");
-      assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1);
+      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, name + ": opened directly, Back names Today");
       assert.equal(
         await page.locator(".screen-lede").innerText(),
         "Study Bibles we recommend. Price, stock and checkout are on the HisFullGlory shop.",

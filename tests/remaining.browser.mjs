@@ -77,7 +77,7 @@ export async function checkSurfaces(browser, base) {
   for (const [path, back] of [
     ["/give", "You"],
     ["/giving-policy", "Give"],
-    ["/shop", "You"],
+    ["/shop", "Today"],
     ["/community/circles", "Community"],
   ]) {
     const { context, page, problems } = await open(browser, base, path);
@@ -91,6 +91,36 @@ export async function checkSurfaces(browser, base) {
       );
       assert.equal(uppercase, 0, path + ": no uppercase text");
       assert.deepEqual(problems, [], path + ": no page errors");
+    } finally {
+      await context.close();
+    }
+  }
+  // The Shop screen's Back names where the reader came from (01.2 D-03): Today when opened directly or from Today's
+  // card, Bible when opened from Bible, Study's row, and Back returns to the library.
+  {
+    const { context, page, problems } = await open(browser, base, "/bible");
+    try {
+      await page.getByRole("radio", { name: "Study" }).click();
+      await page.getByRole("link", { name: /^Study Bibles/ }).click();
+      await page.waitForURL("**/shop");
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "from Bible, Study: Back to Bible");
+      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 0);
+      await page.reload();
+      await page.locator("main h1").waitFor();
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "also after a reload");
+      await page.getByRole("button", { name: "Back to Bible", exact: true }).click();
+      await page.waitForURL("**/bible");
+      await page.locator("main h1").waitFor();
+      assert.equal(await page.locator("main h1").innerText(), "Bible");
+      // From Today's card: Back to Today, and it returns to Today.
+      await page.goto(base + "/");
+      await page.locator(".study-card-shop").click();
+      await page.waitForURL("**/shop");
+      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "from Today's card: Back to Today");
+      await page.getByRole("button", { name: "Back to Today", exact: true }).click();
+      await page.waitForURL(base + "/");
+      assert.equal(await page.locator("main h1").innerText(), "Today");
+      assert.deepEqual(problems, []);
     } finally {
       await context.close();
     }

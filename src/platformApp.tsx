@@ -206,10 +206,12 @@ function App() {
     case "community":
       content = <TopicHub id={shown.id} thread={shown.thread} verse={contentFor(date)} online={online} />;
       break;
-    case "shop":
+    case "shop": {
+      // Back names where the reader came from (01.2 D-03): Bible from Bible, Study's row, otherwise Today, the card's home.
+      const fromBible = cameFrom().startsWith("/bible");
       content = (
         <section className="grouped-screen">
-          <Toolbar back="You" to="/you" />
+          <Toolbar back={fromBible ? "Bible" : "Today"} to={fromBible ? "/bible" : "/"} />
           <LargeTitle>Shop</LargeTitle>
           <p className="screen-lede">Study Bibles we recommend. Price, stock and checkout are on the HisFullGlory shop.</p>
           {products.map((p) => (
@@ -221,6 +223,7 @@ function App() {
         </section>
       );
       break;
+    }
     default:
       content = (
         <section className="grouped-screen">
