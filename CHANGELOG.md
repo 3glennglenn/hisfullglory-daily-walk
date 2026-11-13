@@ -1,5 +1,18 @@
 # Changelog
 
+## Calmer navigation: three tabs and Night light: branch `calm-nav` (2026-11-09)
+- Founder, after TestFlight build 1: the app felt "te cluttered", "overloaded met paginas", and the study Bibles and the community were hard to find. Decided on 2026-11-09 (option 2): three tabs, You behind a button, the dark mode renamed.
+- Three tabs, Today, Bible and Community. You opens from a round button at the top right of each tab's root, as a sheet on a phone and as a page from 768px (D-01 to D-03). Back names where it goes; `/circles` and `/you` still resolve.
+- Today shows three things: the newest context check, Today's walk, and the "Study Bibles for your walk" card with a Shop link, a lowest price computed from the products and covers drawn on the device (D-04, D-10). The bag, the shelf row, the Shop card on You and the star line are gone; the sky of stars stays in Night light.
+- Bible has Read and Study. Read: Continue reading and the two testaments, each in a sheet with the chapter grids. Study: Context checks as the featured card, Study notes, Saved passages, Your shelf and a Study Bibles row (D-05).
+- Community has Topics, Circles and Prayer wall. Search topics, Following and Saved are sheets; Testimonies and the community feed live in the Prayer wall feed; the live chat is the last row of Topics; the original prayer wall is the last row of Prayer wall (D-06).
+- My prayers (`/pray`) opens with the list and writes a new prayer in a sheet that stays on the device; Grow is a row of My walk (D-07).
+- Night light: the mode is Automatic, Day, Night light, with one hint line, inline in the You sheet, on the Appearance screen and in the website footer. The floating notice is gone and its old key `hfg-lamplight-notice` is removed the next time the app opens. Stored choices and code names (`hfg-lamplight`, `data-mode` "lamplight") are kept (D-08, D-09).
+- Privacy wording: Shopify pictures load only on the website home, the Shop page and the app's Shop screen; the Night light setting and the removed notice key are described.
+- Rule files and docs follow: CLAUDE.md, AGENTS.md, docs/ARCHITECTURE.md, docs/APP_STORES.md, docs/PRIVACY_DATA_FLOW.md.
+- Tests rewritten for the new navigation, none deleted: `tests/navigation.browser.mjs` (two taps to every destination at 390, 768 and 1180px, every Back name), `tests/study-books.test.ts`, `tests/study-bibles.test.ts`, the design-gates rule-file test, the appearance tests and every older browser check.
+- Open for the founder: the sign-in sentence that stayed, the Circles intro, the new Prayer wall line and the privacy date (see the pull request).
+
 ## Context checks tell the whole arc: branch `context-story-arc` (2026-10-27)
 - Founder, after his John 21 video: "ik wil dat je dit ook in de context beschrijvingen zet en zo uitschrijft met de emotionele pull en lessen en refrences naar andere verses naast de andere manieren hoe we de context maken voeg dit ook toe daarnaast".
 - Every context check gains three parts next to the existing ones: `after` ("What happened next"), `lesson` ("What it means for you") and `echoes` ("Other verses that say it too": 2 to 4 short passages, shown with their WEB text and a note). The site requires them (`site/src/lib/content.ts`); the app shows them as screens when a file has them. Order: story, moment, around (site), what happened next, readings, argued, point, what it means for you, other verses.
