@@ -7,6 +7,7 @@ import { refLabel, todaysCheck } from "../context/checks";
 import { contextChecks } from "../context/data";
 import { monthDay } from "../context/shelf";
 import { Cover, CoverAiRow, CoverHook } from "../ui/Cover";
+import { StudyBiblesCard } from "./ShopFeature";
 import { GroupedList, Row } from "../ui/List";
 import { TitleRow } from "../ui/Screen";
 import { SponsorRow } from "../ui/SponsorRow";
@@ -107,6 +108,8 @@ export function Today() {
         </Cover>
       )}
       {found && <GroupedList>{walkRow}</GroupedList>}
+      {/* The shop's one place on Today (01.2 D-10): under the walk row, never next to the walk flow or prayers. */}
+      <StudyBiblesCard />
       {/* The sponsor slot: nothing is rendered while no sponsor is set (D-13). */}
       <SponsorRow place="today-end" />
     </section>

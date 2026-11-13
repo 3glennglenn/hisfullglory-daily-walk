@@ -125,7 +125,13 @@ export async function checkToday(browser, base, published) {
     // The sponsor slot is built and empty (D-13): not an element, not a word, at the end of Today.
     assert.equal(await page.locator('[data-slot="sponsor"]').count(), 0, "no sponsor slot on Today");
     assert.equal(await page.locator("main").getByText(/sponsor/i).count(), 0, "no word Sponsor on Today");
-    assert.equal(await page.locator("main h2:not(.sr-only)").count(), 0, "no group headings: one quiet list");
+    assert.deepEqual(await page.locator("main h2:not(.sr-only)").allInnerTexts(), ["Study Bibles for your walk"], "no group headings; the one visible h2 is the card's (01.2 D-04)");
+    // The card is the third thing: after the walk row, before the sponsor slot (which is empty).
+    const third = await page.evaluate(() => {
+      const walk = document.querySelector('.today a[href="/walk"]'), card = document.querySelector(".today .study-card");
+      return !!(walk.compareDocumentPosition(card) & Node.DOCUMENT_POSITION_FOLLOWING) && card.parentElement.lastElementChild === card;
+    });
+    assert.ok(third, "the Study Bibles card follows the walk row and ends Today");
     // The title row holds the You button and nothing else: no bag, no Shop (the card carries the shop link, 01.2 D-04).
     assert.deepEqual(await page.locator(".today-head a, .today-head button").evaluateAll((list) => list.map((el) => el.getAttribute("aria-label") ?? el.textContent.trim())), ["You"], "the title row holds one control, You");
     assert.equal(await page.locator('.today-head a[href="/shop"], .shop-bag').count(), 0, "no bag in the title row");
@@ -355,6 +361,7 @@ export async function checkTodayFixture(browser, base) {
       assert.equal(await block.getByRole("button").innerText(), "Begin today's walk");
       assert.deepEqual(await filledButtons(page), ["Begin today's walk"]);
       assert.equal(await walkRow(page).count(), 0, "the walk row leaves the list");
+      assert.equal(await page.locator(".today .study-card").count(), 1, "the Study Bibles card stays under the walk's block");
       assert.equal(await shelfRow(page).count(), 0, "no shelf row on Today");
       assert.equal(await page.locator(".cover-ai").count(), 0);
       assert.deepEqual(problems, []);

@@ -4583,7 +4583,7 @@ html[data-text="large"] .around-capsule {
   margin: var(--space-4) 0;
 }
 .grouped-screen .day-picker button {
-  flex: 1 1 5.5rem;
+  flex: 1 1 4.5rem;
 }
 .group-disclosure > :not(summary) {
   overflow-wrap: anywhere;
@@ -4894,69 +4894,96 @@ html[data-text="large"] .around-capsule {
   border-radius: var(--radius-pill);
 }
 
-/* The Shop card on You, directly under the Give card (founder, 2026-10-22). Same surface and rhythm as the Give card,
-   but its button is the outlined secondary one, so Give keeps the only filled button on the screen. The covers sit on
-   a light tile in every mode: a book photo is shot on white and must not be multiplied into the night page. */
-.shop-feature {
+/* ==== Study Bibles card (01.2 D-04, D-10; src/features/ShopFeature.tsx; canvas Today2, "Study Bibles") ====
+   A section on the grouped-list surface under Today's walk row. Canvas to token: radius 22 -> --radius-lg (20, the
+   grouped list's own, so card and list match); padding 18/20 -> --space-4/--space-5; gap 14 -> --space-3; the title 17/700
+   -> --text-body, 700; "Shop" 15/600, 44px high -> --text-body, 600, --link, 44px; covers 56x76 with a 3px/7px radius,
+   Gelasio 10px in #E8C892, a 4px dark hinge -> the spine tokens (the canvas's #5A3B2F, #6A4536, #4A3026 and #E8C892 are
+   --spine-1, -2, -3 and --spine-ink in Cover Night light), the scripture face, 13px (the floor of 01.1; 10px is below it),
+   a hinge of --shadow at half strength (the canvas's #00000033); 64 wide so the longest word fits at 13px (it grows with
+   the text size); the price line 14/19 -> --text-footnote, --muted. The covers are drawn here: no picture, no request. */
+.study-card {
   margin: 0 0 var(--space-6);
-  padding: var(--space-5);
+  padding: var(--space-4) var(--space-5);
   border-radius: var(--radius-lg);
   background: var(--surface);
 }
-.shop-feature > h2 {
-  margin: 0;
-  font-size: var(--text-title);
-  font-weight: 600;
-  line-height: 1.25;
-  overflow-wrap: anywhere;
-}
-.shop-feature > p {
-  margin: var(--space-2) 0 0;
-  overflow-wrap: anywhere;
-}
-.shop-feature-thumbs {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.study-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--space-3);
-  margin: var(--space-4) 0 0;
+}
+.study-card-head h2 {
+  margin: 0;
+  font-size: var(--text-body);
+  font-weight: 700;
+  line-height: 1.47;
+  overflow-wrap: anywhere;
+}
+.study-card-shop {
+  flex: none;
+  display: flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  font-size: var(--text-body);
+  font-weight: 600;
+  text-decoration: none;
+}
+.study-card-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-1);
+}
+.study-covers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: 0;
   padding: 0;
   list-style: none;
 }
-.shop-feature-thumb {
+.study-cover {
+  box-sizing: border-box;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  aspect-ratio: 3 / 4;
-  padding: var(--space-2);
-  border-radius: var(--radius-sm);
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1px var(--line);
-  overflow: hidden;
-}
-.shop-feature-thumb img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.shop-feature-thumb .book-placeholder {
-  min-height: 0;
-  gap: var(--space-1);
-  text-align: center;
+  width: 4.9em;
+  min-height: 5.85em;
+  padding: 0 2px var(--space-2);
+  border-radius: 3px 7px 7px 3px;
+  background: var(--spine-1);
+  box-shadow: inset 4px 0 0 color-mix(in srgb, var(--shadow) 50%, transparent);
+  color: var(--spine-ink);
+  font-family: var(--font-scripture);
   font-size: var(--text-footnote);
-  color: #675a52;
-}
-.shop-feature > .button {
-  display: flex;
-  width: 100%;
-  margin-top: var(--space-4);
-  min-height: 52px;
-  border-radius: var(--radius-md);
+  line-height: 1.2;
   text-align: center;
+  text-decoration: none;
+  overflow-wrap: anywhere;
 }
-:root[data-mode="lamplight"] .shop-feature > .button {
-  border-radius: var(--radius-pill);
-  background: transparent;
+.study-cover-2 {
+  background: var(--spine-2);
+}
+.study-cover-3 {
+  background: var(--spine-3);
+}
+:root[data-look="marked"] .study-cover {
+  box-shadow: inset 4px 0 0 color-mix(in srgb, var(--shadow) 50%, transparent), inset 0 0 0 1px var(--line);
+}
+.study-cover:focus-visible {
+  outline-offset: 3px;
+}
+.study-card-note {
+  flex: 1 1 4.5rem;
+  min-width: 4.75rem;
+  margin: 0;
+  font-size: var(--text-footnote);
+  line-height: 1.38;
+  color: var(--muted);
 }
 
 /* The Shop screen: the product image sits on the same light tile, and "Visit the full shop" closes the list as a
