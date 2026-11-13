@@ -17,6 +17,7 @@ import {
   parseRoute,
   rememberTabRoot,
   resolveTheme,
+  seenTabRoot,
   tabRootPaths,
 } from "../src/platform/router.ts";
 import { activeTab, rootTabOf, tabFor } from "../src/ui/tabs.ts";
@@ -247,8 +248,12 @@ test("You replaces More: /you parses, /settings takes only the sub-paths appeara
 test("the last tab root is remembered in memory only, and only the three roots are remembered (01.2 D-03, T-01.2-02)", () => {
   assert.deepEqual(tabRootPaths, ["/", "/bible", "/community"]);
   assert.equal(lastTabRoot(), "/", "Today until a root was seen");
+  assert.equal(seenTabRoot(), false, "nothing was seen yet, as after opening /pray by its address");
+  rememberTabRoot(parseRoute("/pray"));
+  assert.equal(seenTabRoot(), false, "a screen of You is not a tab root");
   rememberTabRoot(parseRoute("/bible"));
   assert.equal(lastTabRoot(), "/bible");
+  assert.equal(seenTabRoot(), true);
   // A book, a topic, a pushed screen, a flow or an unknown address leaves it unchanged.
   for (const path of [
     "/bible/john/3",
@@ -309,6 +314,11 @@ test("every page has its tab: three tabs, the screens of You, and no tab for an 
     assert.equal(activeTab(page, false, "bible"), "bible", page + " on a phone");
     assert.equal(activeTab(page, false, "community"), "community", page + " on a phone");
     assert.equal(activeTab(page, true, "bible"), "you", page + " wide");
+  }
+  // Opened by its address, with no root seen, a phone marks no tab (a screen of You has no root behind it).
+  for (const page of ["profile", "settings", "my-walk", "journal", "grow", "give", "giving-policy", "shop", "pray"]) {
+    assert.equal(activeTab(page, false, null), null, page + " opened by its address marks no tab");
+    assert.equal(activeTab(page, true, null), "you", page + " wide still marks You");
   }
   // The tab roots and what belongs to a tab are the same on both.
   for (const wide of [false, true]) {

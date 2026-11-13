@@ -1180,7 +1180,10 @@ try {
             assert.ok(Math.abs(gapLeft - gapRight) <= 40, `${where}: the column is centred in the rest (${gapLeft} / ${gapRight})`);
             assert.ok(m.main.width >= Math.min(680, m.width - 280 - 64) - 1, `${where}: the column uses the room it has`);
           }
-          assert.equal(await nav.locator('a[aria-current="page"]').count(), 1, `${where}: one selected tab`);
+          // /settings opened by its address on a phone has no tab root behind it, so it marks no tab (01.2 D-03); /you is the
+          // sheet over Today, and from 768px every screen of You marks You.
+          const wantSelected = path === "/settings" && width < 768 ? 0 : 1;
+          assert.equal(await nav.locator('a[aria-current="page"]').count(), wantSelected, `${where}: ${wantSelected} selected tab`);
         }
       }
       await page.setViewportSize(original);

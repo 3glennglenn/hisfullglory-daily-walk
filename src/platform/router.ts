@@ -80,12 +80,17 @@ export function parseRoute(path: string, search = ""): Route {
 // always one of these; the memory is a variable in this module, never stored, and a fresh load starts on Today.
 export const tabRootPaths: readonly string[] = ["/", "/bible", "/community"];
 let tabRoot = "/";
+let tabRootSeen = false;
 /** Remembers a tab root: Today, the Bible library (no book) or Community (no topic). Every other route is ignored. */
 export function rememberTabRoot(route: Route): void {
   if (route.page === "home") tabRoot = "/";
   else if (route.page === "bible" && !route.book) tabRoot = "/bible";
   else if (route.page === "community" && !route.id) tabRoot = "/community";
+  else return;
+  tabRootSeen = true;
 }
+/** True once the reader has seen a tab root in this page load (a screen opened by its address has not). */
+export const seenTabRoot = (): boolean => tabRootSeen;
 /** The last tab root the reader saw: "/", "/bible" or "/community" ("/" until one was seen). */
 export function lastTabRoot(): string {
   return tabRootPaths.includes(tabRoot) ? tabRoot : "/";

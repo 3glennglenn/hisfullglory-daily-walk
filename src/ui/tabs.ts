@@ -25,8 +25,9 @@ const tabByPage: Record<string, TabId> = {
 };
 export const tabFor = (page: string): TabId | null => tabByPage[page] ?? null;
 
-/** The tab to mark: on a phone a screen of You keeps the tab of the root the reader came from (rootTab), wide it marks You. */
-export function activeTab(page: string, wide: boolean, rootTab: TabId): TabId | null {
+/** The tab to mark: on a phone a screen of You keeps the tab of the root the reader came from (rootTab, null when none was
+ * seen, as after opening /pray by its address: then no tab is marked), wide it marks You. */
+export function activeTab(page: string, wide: boolean, rootTab: TabId | null): TabId | null {
   const tab = tabFor(page);
   return tab === "you" && !wide ? rootTab : tab;
 }

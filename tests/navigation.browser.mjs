@@ -387,7 +387,8 @@ async function oldCircles(browser, base) {
 }
 
 // [path, what is marked: a tab, "you" (a screen reached from You: the tab of the last root on a phone, You when wide),
-//  "none" (no tab) or "flow" (no tab bar at all)]
+//  "none" (no tab) or "flow" (no tab bar at all); on a phone an address of You opened directly has no tab root behind it
+//  and marks no tab, except /you and /more, which are the sheet over Today]
 function addressList(newest) {
   return [
     ["/", "Today"],
@@ -439,7 +440,8 @@ async function addressSweep(browser, base, published) {
           assert.equal(await youLinks(page), 0, `${where}: no You button`);
           continue;
         }
-        const want = expected === "none" ? [] : expected === "you" ? [width >= 768 ? "You" : "Today"] : [expected];
+        const sheetOverToday = path === "/you" || path === "/more";
+        const want = expected === "none" ? [] : expected === "you" ? (width >= 768 ? ["You"] : sheetOverToday ? ["Today"] : []) : [expected];
         assert.deepEqual(await marked(page), want, `${where}: tab marked`);
         if (backToYou.has(path)) assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1, `${where}: Back to You`);
         if (path === "/you") {

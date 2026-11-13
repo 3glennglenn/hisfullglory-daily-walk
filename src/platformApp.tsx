@@ -11,7 +11,7 @@ import "@fontsource/literata/latin-400-italic.css";
 import "./styles.css";
 import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
-import { cameFrom, currentRoute, lastTabRoot, navigate, parseRoute, rememberTabRoot } from "./platform/router";
+import { cameFrom, currentRoute, lastTabRoot, navigate, parseRoute, rememberTabRoot, seenTabRoot } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
 import { AppearanceProvider } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
@@ -235,7 +235,9 @@ function App() {
       );
   }
   if (page === "you" && !wide) youSheet = <YouSheet onClose={closeYou} />;
-  const tab = activeTab(page, wide, rootTabOf(lastTabRoot()));
+  // /you on a phone stands over the last root (Today when none was seen); another screen of You opened by its address
+  // has no root behind it, so it marks no tab (D-03).
+  const tab = activeTab(page, wide, page === "you" || seenTabRoot() ? rootTabOf(lastTabRoot()) : null);
   return (
     <div className="shell" data-flow={flow ? "true" : undefined}>
       <a className="skip-link" href="#main">
