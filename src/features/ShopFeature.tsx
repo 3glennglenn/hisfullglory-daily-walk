@@ -4,8 +4,6 @@ import { track } from "../analytics";
 import { navigate } from "../platform/router";
 import { lowestPrice } from "../shopPrice";
 
-export { lowestPrice };
-
 // The Study Bibles card on Today (01.2 D-04, D-10; canvas "Optie 2 · Today"): under the walk row, the shop's one
 // place on Today. The title, a Shop link to /shop, three covers that each open the product on the shop, and one muted
 // line with the lowest price. The covers are drawn on the device from the spine tokens (the canvas draws them so);
