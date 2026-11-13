@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { products } from "../src/config.ts";
 
 // Phase 01.2, plan 01: the navigation, in a real browser (D-01 to D-03, N-01 to N-03). Three tabs (Today, Bible,
 // Community) in the floating capsule, the round You button in the title row of each tab's root, You as a sheet over
@@ -525,4 +526,314 @@ export async function checkNoOldModeName(browser, base, published) {
   }
   assert.ok(seen.length >= 2 * (addresses.length + 1), "every address was read in both modes");
   for (const [where, text] of seen) assert.doesNotMatch(text, /lamplight/i, where + " names the old mode: " + text.match(/.{0,40}lamplight.{0,40}/i)?.[0]);
+}
+
+// ---- CALM-08: every destination is at most two taps from a tab root or from the open You sheet or page --------------------
+
+const WIDTHS = [[390, 844], [768, 1024], [1180, 820]];
+const SEED_TOPIC = "anxiety";
+const SEED_THREAD = "11111111-1111-4111-8111-111111111111";
+const STATE_KEY = "hfg-daily-walk:v3";
+
+/** Patches the stored private state of the reader of this page (the origin is already loaded). */
+const seed = (page, patch) =>
+  page.evaluate(
+    ([key, p]) => {
+      const s = JSON.parse(localStorage.getItem(key));
+      localStorage.setItem(key, JSON.stringify({ ...s, ...p }));
+    },
+    [STATE_KEY, patch],
+  );
+const NOTHING_FOLLOWED = { followedTopics: [], savedDiscussions: [], savedDiscussionTopics: {} };
+const SOMETHING_FOLLOWED = { followedTopics: [SEED_TOPIC], savedDiscussions: [SEED_THREAD], savedDiscussionTopics: { [SEED_THREAD]: SEED_TOPIC } };
+
+/** A tap is one real click or one choice in a menu; the counter is what the two-tap rule is measured with. */
+function taps() {
+  const counter = { n: 0, log: [] };
+  counter.click = async (locator, what) => {
+    await locator.click();
+    counter.n++;
+    counter.log.push(what);
+  };
+  counter.choose = async (locator, value, what) => {
+    await locator.selectOption(value);
+    counter.n++;
+    counter.log.push(what);
+  };
+  return counter;
+}
+
+/** Opens You from the button of the tab root the page is on (the button itself is not counted) and waits until it is settled. */
+async function openYouAnywhere(page, width) {
+  await page.locator("main .title-row").getByRole("link", { name: "You", exact: true }).click();
+  await page.waitForURL("**/you");
+  if (width < 768) {
+    await youSheet(page).waitFor();
+    await page.waitForFunction(() => document.getAnimations().length === 0);
+    return youSheet(page);
+  }
+  await page.locator("main h1", { hasText: "You" }).waitFor();
+  return page.locator("main");
+}
+
+const heading = (page, text) => page.locator("main h1", { hasText: text }).waitFor();
+const pathIs = (page, path) => page.waitForURL((url) => url.pathname === path);
+const studyRadio = (page) => page.getByRole("radio", { name: "Study", exact: true });
+const sections = (page, name) => page.getByRole("radiogroup", { name: "Community sections", exact: true }).getByRole("radio", { name, exact: true });
+const dialogNamed = (page, name) => page.getByRole("dialog", { name, exact: true });
+
+/** The place a destination is reached from: a tab root, or You (a sheet on a phone, a page from 768px). */
+async function startAt(page, width, from, extra = {}) {
+  const origin = new URL(page.url()).origin;
+  await seed(page, extra.following ? SOMETHING_FOLLOWED : NOTHING_FOLLOWED);
+  if (from === "bible-after-a-chapter") {
+    await page.goto(origin + "/bible/john/3");
+    await page.locator("main h1").first().waitFor();
+    await page.waitForFunction((key) => JSON.parse(localStorage.getItem(key)).lastChapter === "/bible/john/3", STATE_KEY);
+  }
+  const path = from === "today" || from === "you" ? "/" : from === "community" ? "/community" : "/bible";
+  await page.goto(origin + path);
+  await page.locator("main h1").first().waitFor();
+  if (from === "you") return openYouAnywhere(page, width);
+  return page.locator("main");
+}
+
+/**
+ * Every destination, with the taps that reach it: [name, start, steps, expected, options]. steps(scope, page, t) makes the
+ * real taps (t.click, t.choose) and expected(page, scope) says what must be there afterwards.
+ */
+function destinations(published) {
+  const newest = published[0].slug;
+  const link = (scope, name) => scope.getByRole("link", { name });
+  const button = (scope, name) => scope.getByRole("button", { name });
+  const summary = (scope, text) => scope.locator("details.group-disclosure > summary", { hasText: text });
+  const disclosureOpen = (page) => page.waitForFunction(() => document.querySelector("details.group-disclosure")?.open === true);
+  return [
+    // Today
+    ["Today: the story of the newest check", "today", (s, p, t) => t.click(button(s, /^(Read the story|Read it again)/), "Read the story"), (p) => pathIs(p, "/context/" + newest)],
+    ["Today: the walk", "today", (s, p, t) => t.click(s.locator('a[href="/walk"]'), "Today's walk"), (p) => pathIs(p, "/walk")],
+    ["Today: the Shop screen", "today", (s, p, t) => t.click(s.locator(".study-card a.study-card-shop"), "Shop"), (p) => pathIs(p, "/shop")],
+    [
+      "Today: a product link (read, not followed)",
+      "today",
+      async () => {},
+      async (p, s) => {
+        const hrefs = await s.locator(".study-covers a").evaluateAll((links) => links.map((a) => a.href));
+        assert.equal(hrefs.length, products.length, "one link for each product");
+        for (const href of hrefs) {
+          const url = new URL(href);
+          assert.equal(url.origin, "https://shop.hisfullglory.com", "a product link goes to the shop: " + href);
+          assert.match(url.pathname, /^\/products\/[a-z0-9-]+$/);
+        }
+      },
+    ],
+    // Bible
+    ["Bible: Continue reading", "bible-after-a-chapter", (s, p, t) => t.click(link(s, /^Continue reading/), "Continue reading"), (p) => pathIs(p, "/bible/john/3")],
+    ["Bible: a testament sheet", "bible", (s, p, t) => t.click(button(s, /^Old Testament/), "Old Testament"), (p) => dialogNamed(p, "Old Testament").waitFor()],
+    ["Bible: the search sheet", "bible", (s, p, t) => t.click(button(s, "Search the Bible"), "Search"), (p) => p.getByRole("dialog").waitFor()],
+    ["Bible, Study: the context checks", "bible", async (s, p, t) => { await t.click(studyRadio(p), "Study"); await t.click(link(s, /^Context checks/), "Context checks"); }, (p) => pathIs(p, "/context")],
+    ["Bible, Study: the study-notes sheet", "bible", async (s, p, t) => { await t.click(studyRadio(p), "Study"); await t.click(button(s, /^Study notes/), "Study notes"); }, (p) => dialogNamed(p, "Study notes").waitFor()],
+    ["Bible, Study: the saved-passages sheet", "bible", async (s, p, t) => { await t.click(studyRadio(p), "Study"); await t.click(button(s, /^Saved passages/), "Saved passages"); }, (p) => dialogNamed(p, "Saved passages").waitFor()],
+    ["Bible, Study: your shelf", "bible", async (s, p, t) => { await t.click(studyRadio(p), "Study"); await t.click(link(s, /^Your shelf/), "Your shelf"); }, (p) => pathIs(p, "/shelf")],
+    ["Bible, Study: the Shop screen", "bible", async (s, p, t) => { await t.click(studyRadio(p), "Study"); await t.click(link(s, /^Study Bibles/), "Study Bibles"); }, (p) => pathIs(p, "/shop")],
+    // Community
+    [
+      "Community: a launch topic",
+      "community",
+      (s, p, t) => t.click(s.locator('.group a.list-row[href^="/community/"]').first(), "a topic"),
+      (p) => p.waitForURL((u) => /^\/community\/[a-z0-9-]+$/.test(u.pathname) && u.pathname !== "/community/circles"),
+    ],
+    ["Community: the search sheet", "community", (s, p, t) => t.click(button(s, "Search topics"), "Search topics"), (p) => dialogNamed(p, "Search topics").waitFor()],
+    ["Community: the Following sheet (seeded)", "community", (s, p, t) => t.click(button(s, /^Following/), "Following"), (p) => dialogNamed(p, "Following").waitFor(), { following: true }],
+    ["Community: the Saved sheet (seeded)", "community", (s, p, t) => t.click(button(s, /^Saved/), "Saved"), (p) => dialogNamed(p, "Saved").waitFor(), { following: true }],
+    [
+      "Community: the live chat",
+      "community",
+      (s, p, t) => t.click(summary(s, "Live chat"), "Live chat"),
+      async (p, s) => {
+        await disclosureOpen(p);
+        await s.getByLabel("Conversation room").waitFor();
+      },
+    ],
+    [
+      "Community, Circles: start or join a Circle",
+      "community",
+      async (s, p, t) => { await t.click(sections(p, "Circles"), "Circles"); await t.click(link(s, /^Start or join a Circle/), "Start or join a Circle"); },
+      (p) => pathIs(p, "/community/circles"),
+    ],
+    ["Community, Prayer wall: the Prayer and praise feed", "community", (s, p, t) => t.click(sections(p, "Prayer wall"), "Prayer wall"), (p) => p.getByRole("heading", { name: "Prayer and praise", exact: true }).waitFor()],
+    [
+      "Community, Prayer wall: the original prayer wall",
+      "community",
+      async (s, p, t) => { await t.click(sections(p, "Prayer wall"), "Prayer wall"); await t.click(summary(s, "The original prayer wall"), "The original prayer wall"); },
+      async (p, s) => {
+        await disclosureOpen(p);
+        await s.getByRole("heading", { name: "Prayer Wall", exact: true }).waitFor();
+      },
+    ],
+    [
+      "Community, Prayer wall: the testimony filter",
+      "community",
+      async (s, p, t) => { await t.click(sections(p, "Prayer wall"), "Prayer wall"); await t.choose(s.getByRole("combobox", { name: /^Show/ }), "testimony", "Show: testimony"); },
+      async (p, s) => assert.equal(await s.getByRole("combobox", { name: /^Show/ }).inputValue(), "testimony"),
+    ],
+    // You
+    ["You: the profile", "you", (s, p, t) => t.click(link(s, /^Sign in/), "Sign in"), (p) => pathIs(p, "/profile")],
+    ["You: My walk", "you", (s, p, t) => t.click(link(s, /^My walk/), "My walk"), (p) => pathIs(p, "/my-walk")],
+    ["You: My prayers", "you", (s, p, t) => t.click(link(s, /^My prayers/), "My prayers"), (p) => pathIs(p, "/pray")],
+    ["You: the journal", "you", (s, p, t) => t.click(link(s, /^Journal/), "Journal"), (p) => pathIs(p, "/journal")],
+    ["You: Give", "you", (s, p, t) => t.click(link(s, /^Give where it helps most/), "Give"), (p) => pathIs(p, "/give")],
+    [
+      "You, Give: the giving policy",
+      "you",
+      async (s, p, t) => { await t.click(link(s, /^Give where it helps most/), "Give"); await t.click(link(p, /^Read the giving policy/), "Read the giving policy"); },
+      (p) => pathIs(p, "/giving-policy"),
+    ],
+    ["You: Appearance (the Theme row)", "you", (s, p, t) => t.click(link(s, /^Theme/), "Theme"), (p) => pathIs(p, "/settings/appearance")],
+    ["You: the daily reminder", "you", (s, p, t) => t.click(link(s, /^Daily reminder/), "Daily reminder"), (p) => pathIs(p, "/settings/reminders")],
+    [
+      "You: privacy and your data",
+      "you",
+      (s, p, t) => t.click(link(s, /^Privacy and your data/), "Privacy and your data"),
+      (p) => p.waitForURL((u) => u.pathname === "/settings" && u.hash === "#privacy"),
+    ],
+    [
+      "You, Help: a legal link of the site (read, not followed)",
+      "you",
+      (s, p, t) => t.click(link(s, /^Help, privacy and terms/), "Help, privacy and terms"),
+      async (p) => {
+        await p.waitForURL((u) => u.pathname === "/settings" && u.hash === "#about");
+        const privacy = p.getByRole("link", { name: /^Privacy policy/ });
+        await privacy.waitFor();
+        assert.match(await privacy.getAttribute("href"), /\/privacy$/);
+        assert.equal(await privacy.getAttribute("target"), "_blank", "the site opens in a new tab");
+      },
+    ],
+    [
+      "You, My walk: Grow",
+      "you",
+      async (s, p, t) => { await t.click(link(s, /^My walk/), "My walk"); await t.click(link(p, /^Grow/), "Grow"); },
+      (p) => pathIs(p, "/grow"),
+    ],
+  ];
+}
+
+/** The Back table: each screen reached by clicks, its Back button named for where it goes, and Back going there. */
+function backTable(page, width, base) {
+  const landedOnYou = async (where) => {
+    await pathIs(page, "/you");
+    if (width < 768) {
+      await youSheet(page).waitFor();
+      assert.equal(await page.locator("main h1").innerText(), "Today", where + ": on a phone the sheet stands over the tab it came from");
+    } else await heading(page, "You");
+  };
+  const fromYou = (path, label) => ({
+    name: path + " from You",
+    reach: async () => { const sheet = await startAt(page, width, "you"); await sheet.getByRole("link", { name: label }).click(); },
+    back: "Back to You",
+    landed: landedOnYou,
+    path,
+  });
+  const fromBibleStudy = (path, label) => ({
+    name: path + " from Bible, Study",
+    reach: async () => { const s = await startAt(page, width, "bible"); await studyRadio(page).click(); await s.getByRole("link", { name: label }).click(); },
+    back: "Back to Bible",
+    landed: async () => {
+      await pathIs(page, "/bible");
+      if (path === "/shelf") assert.equal(await studyRadio(page).getAttribute("aria-checked"), "true", "Back to Bible brings back Study");
+    },
+    path,
+  });
+  return [
+    fromYou("/pray", /^My prayers/),
+    fromYou("/profile", /^Sign in/),
+    fromYou("/settings/appearance", /^Theme/),
+    fromYou("/settings/reminders", /^Daily reminder/),
+    fromYou("/settings", /^Privacy and your data/),
+    fromYou("/my-walk", /^My walk/),
+    fromYou("/journal", /^Journal/),
+    fromYou("/give", /^Give where it helps most/),
+    {
+      name: "/pray from the walk",
+      reach: async () => {
+        await startAt(page, width, "today");
+        await page.goto(base + "/walk");
+        const prayer = page.getByRole("button", { name: "Save a private prayer" });
+        for (let i = 0; i < 6 && !(await prayer.count()); i++) await page.locator(".flow-actions .flow-button:not(.flow-button-secondary)").click();
+        await prayer.click();
+      },
+      back: "Back to Today's walk",
+      landed: () => pathIs(page, "/walk"),
+      path: "/pray",
+    },
+    {
+      name: "/grow from My walk",
+      reach: async () => {
+        const sheet = await startAt(page, width, "you");
+        await sheet.getByRole("link", { name: /^My walk/ }).click();
+        await page.getByRole("link", { name: /^Grow/ }).click();
+      },
+      back: "Back to My walk",
+      landed: () => pathIs(page, "/my-walk"),
+      path: "/grow",
+    },
+    fromBibleStudy("/shelf", /^Your shelf/),
+    fromBibleStudy("/context", /^Context checks/),
+    fromBibleStudy("/shop", /^Study Bibles/),
+    {
+      name: "/shop from Today",
+      reach: async () => { const s = await startAt(page, width, "today"); await s.locator(".study-card a.study-card-shop").click(); },
+      back: "Back to Today",
+      landed: () => pathIs(page, "/"),
+      path: "/shop",
+    },
+    {
+      name: "/community/circles from Community",
+      reach: async () => { const s = await startAt(page, width, "community"); await sections(page, "Circles").click(); await s.getByRole("link", { name: /^Start or join a Circle/ }).click(); },
+      back: "Back to Community",
+      landed: () => pathIs(page, "/community"),
+      path: "/community/circles",
+    },
+    {
+      name: "/giving-policy from Give",
+      reach: async () => { const s = await startAt(page, width, "you"); await s.getByRole("link", { name: /^Give where it helps most/ }).click(); await page.getByRole("link", { name: /^Read the giving policy/ }).click(); },
+      back: "Back to Give",
+      landed: () => pathIs(page, "/give"),
+      path: "/giving-policy",
+    },
+  ];
+}
+
+/**
+ * CALM-08 and D-03, proven by real clicks at 390, 768 and 1180px in fresh contexts. Every destination is reached from a tab
+ * root or from the open You sheet (a phone) or page (from 768px) with at most two taps, the Back button of every pushed screen
+ * is named for where it goes, and Back goes there.
+ */
+export async function checkTwoTaps(browser, base, published) {
+  for (const [width, height] of WIDTHS) {
+    const { context, page, problems } = await open(browser, base, "/", { width, height });
+    try {
+      const table = destinations(published);
+      for (const [name, from, steps, expected, extra] of table) {
+        const scope = await startAt(page, width, from, extra);
+        const t = taps();
+        await steps(scope, page, t);
+        await expected(page, scope);
+        assert.ok(t.n <= 2, name + " at " + width + "px needed " + t.n + " taps: " + t.log.join(" > "));
+      }
+      assert.ok(table.length >= 32, "every destination of the table was measured at " + width + "px (" + table.length + ")");
+      for (const entry of backTable(page, width, base)) {
+        await entry.reach();
+        await pathIs(page, entry.path);
+        await page.locator("main h1").first().waitFor();
+        const back = page.getByRole("button", { name: entry.back, exact: true });
+        assert.equal(await back.count(), 1, entry.name + " at " + width + "px: the Back button is named " + entry.back);
+        await back.click();
+        await entry.landed(entry.name + " at " + width + "px");
+      }
+      assert.deepEqual(problems, [], width + "px: no page errors");
+    } finally {
+      await context.close();
+    }
+  }
 }

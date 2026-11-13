@@ -24,7 +24,7 @@ import {checkGoogle} from "../tests/google.browser.mjs";
 import {checkPushedScreens,checkSurfaces,checkTextSweep} from "../tests/remaining.browser.mjs";
 import {checkGive} from "../tests/give.browser.mjs";
 import {checkShop} from "../tests/shop.browser.mjs";
-import {checkNavigation,checkNoOldModeName} from "../tests/navigation.browser.mjs";
+import {checkNavigation,checkNoOldModeName,checkTwoTaps} from "../tests/navigation.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 // Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
 const contentDir = "site/content/context-checks";
@@ -1033,6 +1033,7 @@ try {
   );
   await check("a reader never sees the old name of the mode (01.2 D-08)", () => checkNoOldModeName(browser, base, published));
   await check("three tabs, the You button and You as a sheet or a page; old addresses still work (01.2 D-01 to D-03)", () => checkNavigation(browser, base, published));
+  await check("every destination is at most two taps from a tab or You, at 390, 768 and 1180px, and every Back names where it goes (01.2 D-03, CALM-08)", () => checkTwoTaps(browser, base, published));
   await check(
     "primary routes fit 375/390/768/1280px in both themes with accessible controls",
     async () => {
