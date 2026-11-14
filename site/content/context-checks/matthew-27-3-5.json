@@ -1,0 +1,210 @@
+{
+  "slug": "matthew-27-3-5",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-13",
+  "verse": {
+    "book": "matthew",
+    "chapter": 27,
+    "start": 3,
+    "end": 5
+  },
+  "hook": "You know Judas betrayed Jesus for thirty pieces of silver. But did you know the New Testament tells his death in two different ways?",
+  "story": "Two books of the New Testament tell how Judas died, and they do not tell it the same way.\n\nMatthew tells it on the morning Jesus is handed over to Pilate. When Judas sees that Jesus is condemned, he “felt remorse”. He takes the thirty pieces of silver back to the chief priests and elders and says, “I have sinned in that I betrayed innocent blood.” They answer, “What is that to us? You see to it.” He throws the silver down in the sanctuary, leaves, and “hanged himself.” The priests will not put blood money into the treasury, so they buy “the potter’s field” with it as a place to bury strangers, and it comes to be called “The Field of Blood”.\n\nLuke tells it in Acts, weeks later, when Peter stands up among about a hundred and twenty believers to choose someone to take Judas’s place. There Judas “obtained a field with the reward for his wickedness; and falling headlong, his body burst open and all his intestines gushed out.” Everyone in Jerusalem heard of it, and in their own language they called the place Akeldama, the field of blood.\n\nSo what differs? In Matthew the priests buy the field; in Acts Judas obtains it. In Matthew he hangs himself; in Acts he falls headlong and bursts open. In Matthew the name comes from the price of blood paid for Jesus; in Acts it seems to come from Judas’s own death. And Matthew tells of his remorse, while Acts says nothing about it.\n\nWhat agrees? A field connected with the betrayal money, the name that stuck to it, the Field of Blood, and a death that came soon after the betrayal. And of the four Gospels, only Matthew tells Judas’s end at all.",
+  "storyStatus": "scripture",
+  "sources": [
+    {
+      "title": "Fragments of Papias, fragment 3, on the death of Judas (New Advent)",
+      "url": "https://www.newadvent.org/fathers/0125.htm"
+    },
+    {
+      "title": "John Chrysostom, Homily 3 on the Acts of the Apostles (New Advent)",
+      "url": "https://www.newadvent.org/fathers/210103.htm"
+    },
+    {
+      "title": "John Chrysostom, Homily 85 on the Gospel of Matthew (New Advent)",
+      "url": "https://www.newadvent.org/fathers/200185.htm"
+    },
+    {
+      "title": "John Calvin, Commentary on Acts, on Acts 1:15-22 (Christian Classics Ethereal Library)",
+      "url": "https://ccel.org/ccel/calvin/calcom36/calcom36.viii.vi.html"
+    },
+    {
+      "title": "Augustine, The Harmony of the Gospels, Book III, chapter 7: Judas and the words ascribed to Jeremiah (New Advent)",
+      "url": "https://www.newadvent.org/fathers/1602307.htm"
+    },
+    {
+      "title": "Bart Ehrman, The Death of Judas in the NT (The Bart Ehrman Blog, 2015)",
+      "url": "https://ehrmanblog.org/the-death-of-judas-in-the-nt/"
+    },
+    {
+      "title": "Simon Greenleaf, An Examination of the Testimony of the Four Evangelists, 1847, note on Matthew 27:9 (Project Gutenberg)",
+      "url": "https://www.gutenberg.org/cache/epub/34989/pg34989-images.html"
+    },
+    {
+      "title": "Wikipedia: Judas Iscariot",
+      "url": "https://en.wikipedia.org/wiki/Judas_Iscariot"
+    },
+    {
+      "title": "Wikipedia: Akeldama",
+      "url": "https://en.wikipedia.org/wiki/Akeldama"
+    },
+    {
+      "title": "988 Suicide and Crisis Lifeline",
+      "url": "https://988lifeline.org/"
+    }
+  ],
+  "voices": [
+    {
+      "id": "papias",
+      "name": "Papias of Hierapolis",
+      "about": "early Christian writer, in a fragment of his lost Expositions of the Sayings of the Lord",
+      "words": "Judas walked about in this world a sad example of impiety; for his body having swollen to such an extent that he could not pass where a chariot could pass easily, he was crushed by the chariot, so that his bowels gushed out.",
+      "source": {
+        "title": "Fragments of Papias, fragment 3, on the death of Judas (New Advent)",
+        "url": "https://www.newadvent.org/fathers/0125.htm"
+      }
+    },
+    {
+      "id": "chrysostom",
+      "name": "John Chrysostom",
+      "about": "preacher and bishop, in his homilies on Acts, on how Peter speaks of Judas",
+      "words": "how he does not mention him with scorn, nor say, that wretch, that miscreant: but simply states the fact",
+      "source": {
+        "title": "John Chrysostom, Homily 3 on the Acts of the Apostles (New Advent)",
+        "url": "https://www.newadvent.org/fathers/210103.htm"
+      }
+    },
+    {
+      "id": "calvin",
+      "name": "John Calvin",
+      "about": "in his commentary on Acts, on the field Judas obtained",
+      "words": "And he speaketh after this sort, not because Judas had the use of the field, or that he himself did buy it, seeing it was bought after his death.",
+      "source": {
+        "title": "John Calvin, Commentary on Acts, on Acts 1:15-22 (Christian Classics Ethereal Library)",
+        "url": "https://ccel.org/ccel/calvin/calcom36/calcom36.viii.vi.html"
+      }
+    },
+    {
+      "id": "ehrman",
+      "name": "Bart Ehrman",
+      "about": "New Testament scholar, on his blog, introducing the accounts of Judas’s death",
+      "words": "Many people don’t realize that Judas’s death, after he betrayed Jesus, is not mentioned in three of our Gospels: Mark, Luke, and John.",
+      "source": {
+        "title": "Bart Ehrman, The Death of Judas in the NT (The Bart Ehrman Blog, 2015)",
+        "url": "https://ehrmanblog.org/the-death-of-judas-in-the-nt/"
+      }
+    },
+    {
+      "name": "John Chrysostom",
+      "about": "in his homilies on Matthew, on Judas after he returned the silver",
+      "words": "For neither could he bear his conscience scourging him.",
+      "source": {
+        "title": "John Chrysostom, Homily 85 on the Gospel of Matthew (New Advent)",
+        "url": "https://www.newadvent.org/fathers/200185.htm"
+      }
+    }
+  ],
+  "moment": "Only days before, Judas had gone to the chief priests himself and asked, “What are you willing to give me if I deliver him to you?” They weighed out thirty pieces of silver. At supper Jesus said that one of the twelve would betray him, and Judas asked, “It isn’t me, is it, Rabbi?” That night in the garden he came with a crowd carrying swords and clubs and greeted Jesus with a kiss. Jesus answered him: “Friend, why are you here?”\n\nThe same night Peter failed too. He denied Jesus three times, heard the rooster, and “wept bitterly.” Matthew sets the two failures next to each other. In the morning the council hands Jesus over to Pilate, and in the very next verse Judas sees that Jesus is condemned.\n\nHe goes back to the men who paid him. He does not defend himself or ask for anything. He names his sin and calls Jesus innocent. And they turn him away.",
+  "around": "Right after his death Matthew shows the chief priests at work. They will not put the silver in the treasury, “since it is the price of blood”, though it was their own payment. They buy the potter’s field with it, to bury strangers in.\n\nMatthew then says the purchase fulfilled what was spoken “through Jeremiah the prophet”. The words he quotes are closest to Zechariah, where thirty pieces of silver are thrown “to the potter in the LORD’s house”. Augustine already knew copies of Matthew that named no prophet here. He thought Jeremiah’s name had come to Matthew’s mind instead of Zechariah’s, in a recollection he believed the Holy Spirit directed, and others have suggested a later copyist added it. Some scholars think Matthew joined Zechariah’s words to Jeremiah, who also bought a field.\n\nIn Acts, Peter reads Judas’s end through the Psalms and ends with the line that matters for the church: “Let another take his office.” The believers pray and draw lots, and the lot falls on Matthias.",
+  "after": "Acts gives Judas’s story its last line in the prayer of the believers: he turned away from the work of an apostle “that he might go to his own place.” Matthias took his seat among the twelve.\n\nThe early church kept telling the story, and not only one way. Papias, whose book was probably written around the year 100, passed on a third account, in which Judas’s body swelled until he was crushed by a chariot. That version was well known in antiquity and was often told in competition with the two in the New Testament.\n\nThe field outlived them all. Matthew says it was called the Field of Blood “to this day”, and the place still bears that name. Tradition places Akeldama on the south side of the Hinnom valley in Jerusalem. It went on doing what Matthew says it was bought for: it was a burial place for strangers, used for non-Jews up to the early nineteenth century. In the Crusades the Knights Hospitaller buried the patients of their Jerusalem hospital there. In 1892 the Greek Orthodox Church built the monastery of Saint Onuphrius on the site, and archaeologists have found first-century tombs cut into the rock nearby.",
+  "readings": "Readers have handled the two accounts in several ways.\n\nThe most common is harmonization. Judas hanged himself, and later the rope gave way or the body fell, and it burst open. Many have read Matthew and Acts that way, from Augustine on. For the field, John Calvin argued that Acts says Judas obtained it only because it was bought with his money after his death.\n\nA second reading looks at what each writer is doing. Matthew presents the death and the field as Scripture fulfilled, and he alone tells of Judas’s remorse. Acts tells it inside the choice of a new apostle, as the end of a man who fell away. Some scholars, David Reed among them, think Matthew shaped the story around the prophets.\n\nA third reading looks at the words of Acts. The classicist Glenn Most suggests that the Greek usually rendered falling headlong means that the body went prone, and that Luke pictured Judas dying like a snake: an image rather than a report of a fall.\n\nAnd many modern scholars hold that the two accounts simply differ, as ancient historians differ over other deaths: Tacitus, Suetonius and Plutarch tell the death of Otho in different ways. Arie Zwiep argues that neither story was meant to be read in the light of the other. C. S. Lewis named this pair as one reason he did not think every statement in Scripture must be historical fact.\n\nEach reading accepts the same core: Judas died soon after the betrayal, and the betrayal money became the Field of Blood.",
+  "argued": "The difference was noticed early. Papias, the early Christian writer, told a version that matches neither book: [[papias]]\n\nJohn Chrysostom, preaching on Acts, was struck less by the details than by the tone. He noticed how Peter speaks of the man who had betrayed his Lord: [[chrysostom]]\n\nJohn Calvin took up the question of the field and answered it this way: [[calvin]] For him the field’s common name, the Field of Blood, became a lasting mark of shame for the priests who bought it.\n\nBart Ehrman starts from a fact many readers miss: [[ehrman]] He finds the two accounts at odds with each other, though he grants they share striking similarities. Others, like Arie Zwiep, argue that the two were never meant to be read together at all.\n\nSo the same few verses are read by some as two angles on one grim event, and by others as two traditions that grew apart. On every side the people arguing agree on the weight of it: the betrayal ended in a death and in a field that still carries the name Field of Blood.",
+  "point": "Matthew and Acts agree that Judas died soon after the betrayal and that the money ended up in a field called the Field of Blood. They differ on how he died and on who bought the field, and readers still weigh that difference in different ways. Only Matthew adds the remorse: before he died, Judas said out loud that he had sinned and that Jesus was innocent.",
+  "lesson": "Matthew sets two men side by side on the same night. Peter denied Jesus three times and wept bitterly. Judas betrayed him and “felt remorse”. Both were sorry. Peter was later met by Jesus and restored. Judas took his sorrow to the men who had paid him, and they told him, “You see to it.” They left him alone with it.\n\nPaul names the difference: there is a sorrow that leads to repentance and salvation, and a sorrow that leads to death. The difference is not how great the failure was. It is where the sorrow goes.\n\nIf you carry something you cannot undo, you do not have to take it to people who will say “What is that to us?” You can bring it to the one Judas betrayed, who even in the garden called him “Friend”. And if the weight ever feels too heavy to live with, please tell someone today: a pastor, a friend, a doctor, or in the United States the 988 Suicide and Crisis Lifeline, by call or text. If you do not share this faith, the passage still says something true: remorse was never meant to be carried alone.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "2-corinthians",
+        "chapter": 7,
+        "start": 10,
+        "end": 10
+      },
+      "note": "Paul tells two kinds of sorrow apart: “godly sorrow produces repentance leading to salvation, which brings no regret. But the sorrow of the world produces death.”"
+    },
+    {
+      "ref": {
+        "book": "luke",
+        "chapter": 22,
+        "start": 61,
+        "end": 62
+      },
+      "note": "Peter’s failure the same night ends differently: “The Lord turned and looked at Peter.” He went out and wept. His sorrow became the road back."
+    },
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 51,
+        "start": 17,
+        "end": 17
+      },
+      "note": "David, after his own great sin, prays: “O God, you will not despise a broken and contrite heart.” Remorse brought to God is not turned away."
+    },
+    {
+      "ref": {
+        "book": "1-john",
+        "chapter": 1,
+        "start": 9,
+        "end": 9
+      },
+      "note": "The priests had no answer for Judas’s guilt. John writes of God: “If we confess our sins, he is faithful and righteous to forgive us the sins”."
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 27,
+      "start": 1,
+      "end": 2
+    },
+    {
+      "book": "matthew",
+      "chapter": 27,
+      "start": 6,
+      "end": 10
+    },
+    {
+      "book": "acts",
+      "chapter": 1,
+      "start": 15,
+      "end": 26
+    },
+    {
+      "book": "matthew",
+      "chapter": 26,
+      "start": 14,
+      "end": 16
+    },
+    {
+      "book": "matthew",
+      "chapter": 26,
+      "start": 21,
+      "end": 25
+    },
+    {
+      "book": "matthew",
+      "chapter": 26,
+      "start": 47,
+      "end": 50
+    },
+    {
+      "book": "matthew",
+      "chapter": 26,
+      "start": 69,
+      "end": 75
+    },
+    {
+      "book": "zechariah",
+      "chapter": 11,
+      "start": 12,
+      "end": 13
+    },
+    {
+      "book": "jeremiah",
+      "chapter": 32,
+      "start": 6,
+      "end": 9
+    }
+  ]
+}

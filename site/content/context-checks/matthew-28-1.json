@@ -1,0 +1,237 @@
+{
+  "slug": "matthew-28-1",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-13",
+  "verse": {
+    "book": "matthew",
+    "chapter": 28,
+    "start": 1,
+    "end": 1
+  },
+  "hook": "You know women found the tomb empty on Easter morning. But did you know the Gospels name different women, and give one angel or two?",
+  "story": "All four Gospels tell the story of the same morning, and if you lay them side by side, the differences jump out.\n\nWhen did the women go? Matthew says it was “as it began to dawn on the first day of the week”. Mark: “Very early on the first day of the week, they came to the tomb when the sun had risen.” Luke: “at early dawn”. John: Mary Magdalene “went early, while it was still dark, to the tomb”.\n\nWho went? Matthew names “Mary Magdalene and the other Mary”. Mark names three: Mary Magdalene, Mary the mother of James, and Salome. Luke names Mary Magdalene, Joanna, and Mary the mother of James, and adds “The other women with them”. John names only Mary Magdalene.\n\nSo the lists differ, and the hour sounds different too: dark in John, sunrise in Mark. But notice what none of them says. None says Mary Magdalene came alone. None says that the women it names were the only ones there. And John leaves a small clue. When Mary runs back to Simon Peter and the other disciple, her words are: “They have taken away the Lord out of the tomb, and we don’t know where they have laid him!” We, not I. In John’s own story she speaks for more than herself.\n\nUnder the differences, the four agree on the core. Early on the first day of the week Mary Magdalene came to the tomb, with other women in three of the accounts and that we in the fourth. The stone had been moved. The body was gone.",
+  "storyStatus": "scripture",
+  "sources": [
+    {
+      "title": "Augustine, Reply to Faustus, Book XI (New Advent)",
+      "url": "https://www.newadvent.org/fathers/140611.htm"
+    },
+    {
+      "title": "Augustine, The Harmony of the Gospels, Book III, chapter 24 (New Advent)",
+      "url": "https://www.newadvent.org/fathers/1602324.htm"
+    },
+    {
+      "title": "Simon Greenleaf, An Examination of the Testimony of the Four Evangelists, 1847, with Robinson’s note on the resurrection (Project Gutenberg)",
+      "url": "https://www.gutenberg.org/cache/epub/34989/pg34989-images.html"
+    },
+    {
+      "title": "Wikipedia: Edward Robinson (scholar)",
+      "url": "https://en.wikipedia.org/wiki/Edward_Robinson_(scholar)"
+    },
+    {
+      "title": "Why Don’t the Gospel Writers Tell the Same Story? Interview with Michael Licona (Christianity Today, 2017)",
+      "url": "https://www.christianitytoday.com/?p=202554"
+    },
+    {
+      "title": "Bart Ehrman, Fuller Account of Resurrection Discrepancies (The Bart Ehrman Blog, 2013)",
+      "url": "https://ehrmanblog.org/fuller-account-of-resurrection-discrepancies/"
+    },
+    {
+      "title": "Joshua Schachterle, Guards, Visitors, and Angels: Does the Story of Jesus’ Tomb Contain Contradictions? (bartehrman.com)",
+      "url": "https://www.bartehrman.com/contradictions-in-jesus-tomb-story/"
+    },
+    {
+      "title": "How does Mark 16:1 align with the resurrection accounts in other Gospels? (Bible Hub)",
+      "url": "https://biblehub.com/q/Mark_16_1_vs_other_Gospels_resurrection.htm"
+    },
+    {
+      "title": "Wikipedia: Mark 16",
+      "url": "https://en.wikipedia.org/wiki/Mark_16"
+    },
+    {
+      "title": "Wikipedia: Mary Magdalene",
+      "url": "https://en.wikipedia.org/wiki/Mary_Magdalene"
+    },
+    {
+      "title": "Wikipedia: Myrrhbearers",
+      "url": "https://en.wikipedia.org/wiki/Myrrhbearers"
+    }
+  ],
+  "voices": [
+    {
+      "id": "augustine-faustus",
+      "name": "Augustine of Hippo",
+      "about": "bishop in North Africa, in his Reply to Faustus, Book XI",
+      "words": "If we are perplexed by an apparent contradiction in Scripture, it is not allowable to say, The author of this book is mistaken; but either the manuscript is faulty, or the translation is wrong, or you have not understood.",
+      "source": {
+        "title": "Augustine, Reply to Faustus, Book XI (New Advent)",
+        "url": "https://www.newadvent.org/fathers/140611.htm"
+      }
+    },
+    {
+      "id": "augustine-harmony",
+      "name": "Augustine of Hippo",
+      "about": "in The Harmony of the Gospels, on the four accounts of the resurrection morning",
+      "words": "unless we submit the whole to a careful examination, there may easily appear to be contradictions here between the several narratives.",
+      "source": {
+        "title": "Augustine, The Harmony of the Gospels, Book III, chapter 24 (New Advent)",
+        "url": "https://www.newadvent.org/fathers/1602324.htm"
+      }
+    },
+    {
+      "id": "robinson",
+      "name": "Edward Robinson",
+      "about": "American Bible scholar, in his 1845 harmony of the resurrection accounts, as abridged by Simon Greenleaf",
+      "words": "Indeed, the very words which John puts into the mouth of Mary Magdalene, (v. 2), presupposes the fact, that others had gone with her to the sepulchre.",
+      "source": {
+        "title": "Simon Greenleaf, An Examination of the Testimony of the Four Evangelists, 1847, with Robinson’s note on the resurrection (Project Gutenberg)",
+        "url": "https://www.gutenberg.org/cache/epub/34989/pg34989-images.html"
+      }
+    },
+    {
+      "id": "greenleaf",
+      "name": "Simon Greenleaf",
+      "about": "Dane Professor of Law at Harvard, examining the Gospels by the rules of evidence (1847 edition)",
+      "words": "is enough of discrepancy to show that there could have been no previous concert among them; and at the same time such substantial agreement as to show that they all were independent narrators of the same great transaction, as the events actually occurred.",
+      "source": {
+        "title": "Simon Greenleaf, An Examination of the Testimony of the Four Evangelists, 1847, with Robinson’s note on the resurrection (Project Gutenberg)",
+        "url": "https://www.gutenberg.org/cache/epub/34989/pg34989-images.html"
+      }
+    },
+    {
+      "id": "licona",
+      "name": "Michael Licona",
+      "about": "New Testament scholar, in an interview with Christianity Today about his book on ancient biography (2017)",
+      "words": "Literary spotlighting is when an author mentions only one person performing an action, even when he is aware of several characters who are involved.",
+      "source": {
+        "title": "Why Don’t the Gospel Writers Tell the Same Story? Interview with Michael Licona (Christianity Today, 2017)",
+        "url": "https://www.christianitytoday.com/?p=202554"
+      }
+    },
+    {
+      "id": "ehrman",
+      "name": "Bart Ehrman",
+      "about": "New Testament scholar, on his blog, answering the view that the women met two angels",
+      "words": "You are certainly free to write your own Gospel if that’s what you want to do, but I wonder if that is the best way to interpret the Gospels that you already have.",
+      "source": {
+        "title": "Bart Ehrman, Fuller Account of Resurrection Discrepancies (The Bart Ehrman Blog, 2013)",
+        "url": "https://ehrmanblog.org/fuller-account-of-resurrection-discrepancies/"
+      }
+    }
+  ],
+  "moment": "Two days earlier these same women had watched him die. Matthew, Mark and Luke all place women at the cross, watching from a distance, and Matthew says that after the burial “Mary Magdalene was there, and the other Mary, sitting opposite the tomb.” Luke adds that they “saw the tomb and how his body was laid”, went home, prepared spices and ointments, and rested on the Sabbath, as the law commanded.\n\nSo in Mark and Luke they come on Sunday morning carrying spices for a body. Mark says they had bought them “that they might come and anoint him”, and on the way they talked about a practical problem: “Who will roll away the stone from the door of the tomb for us?”\n\nWhat they found frightened them. In Luke they were “greatly perplexed” and then terrified. In Mark “trembling and astonishment had come on them”. In Matthew they ran off “with fear and great joy”. And in John, Mary stands outside the tomb weeping, and tells the two figures inside why: “Because they have taken away my Lord, and I don’t know where they have laid him.”",
+  "around": "Then come the messengers, and here the four differ most. Matthew has “an angel of the Lord” who rolls back the stone and sits on it, outside. Mark has “a young man sitting on the right side, dressed in a white robe”, inside the tomb, and never calls him an angel. Luke has “two men” who “stood by them in dazzling clothing”, and later in the same chapter two travelers on the road to Emmaus say the women “had also seen a vision of angels”. John mentions no one at the tomb on Mary’s first visit. Only when she comes back and looks in does she see “two angels in white sitting, one at the head and one at the feet, where the body of Jesus had lain.”\n\nOne or two? Sitting or standing? Outside or inside? Each writer tells it his own way. In Matthew, Mark and Luke the messengers bring the same news, and Matthew’s angel says it in one line: “He is not here, for he has risen, just like he said.” In John the news comes from Jesus himself, who calls Mary by her name.",
+  "after": "The first reaction was disbelief. Luke says the women’s words “seemed to them to be nonsense, and they didn’t believe them.” Peter ran to the tomb anyway and found the strips of linen lying by themselves. In John, Mary Magdalene stayed, met Jesus in the garden, and went to tell the disciples “that she had seen the Lord”.\n\nWhen Paul later sums up the witnesses of the risen Jesus, he starts with Cephas, that is Peter: “he appeared to Cephas, then to the twelve.” He does not name the women. The church remembered them anyway. Because she was the first to see the risen Jesus, some Christian traditions call Mary Magdalene the apostle to the apostles, and the Eastern Orthodox churches call the third Sunday of Pascha the Sunday of the Myrrhbearers, after the women who came to the tomb with spices.\n\nThe differences between the accounts were noticed early and discussed openly. Augustine of Hippo wrote a whole book, The Harmony of the Gospels, to set the four side by side, and he gave a long chapter to this morning, under a title that promises to show the absence of all discrepancies in the four accounts. In the 1847 edition of his book, Simon Greenleaf, a professor of law at Harvard, printed an abridged harmony of the resurrection accounts by Edward Robinson of Union Theological Seminary. Readers have been laying these four pages next to each other ever since.",
+  "readings": "Christians and their critics have read these differences in several ways.\n\nThe classic answer is harmonization: fit the accounts into one longer morning. Augustine suggested that the women saw angels at different moments: one outside on the stone, another inside, and later two standing, as Luke says. He thought John named only Mary Magdalene because her love stood out among the women who were with her. Edward Robinson argued the same way, with a rule he took from the scholar Le Clerc: a writer who mentions fewer people does not deny the others.\n\nOn the hour, one harmony reads John’s darkness as the time Mary set out and Mark’s sunrise as the time the group arrived. Augustine and Robinson held instead that Mark’s sunrise means the first light of dawn.\n\nA third reading looks at how ancient biographies were written. Michael Licona, who compared the Gospels with the Lives of Plutarch, calls the device spotlighting: a writer shines his light on one person while knowing that others were there.\n\nA fourth is about copying. The two oldest manuscripts of Mark end at 16:8, with the women saying nothing to anyone because they were afraid. Most modern translations print the longer ending, verses 9 to 20, in brackets or with a note that it was not part of the original text; the World English Bible prints it.\n\nAnd some scholars think the accounts really differ. Bart Ehrman, for one, holds that some of the differences can scarcely be reconciled, and an article on his website argues that each writer relied on stories passed down over generations, which changed in the telling.\n\nNone of these readings changes what all four report: Mary Magdalene came early, the stone was moved, and the body was gone.",
+  "argued": "The argument is old. Augustine of Hippo once answered a teacher named Faustus, who argued that two passages in Paul’s letters contradicted each other, so one of them was either spurious or a view Paul later dropped. Augustine’s rule was blunt: [[augustine-faustus]]\n\nWhen he came to Easter morning in his Harmony of the Gospels, he did not pretend the problem was small: [[augustine-harmony]] Then he worked through it, angel by angel.\n\nIn the nineteenth century Edward Robinson made the case for the women from John’s own wording: [[robinson]] Simon Greenleaf, a Harvard law professor who wrote a treatise on the law of evidence, read the four as he would read witnesses in court, and judged that there [[greenleaf]] Most scholars today add a caution: Matthew and Luke drew on Mark, so the four are not fully independent witnesses.\n\nMichael Licona gives the old harmonizers’ point a name taken from ancient biography: [[licona]] He notes that some scholars think Luke and John added a second angel to the story, but finds spotlighting the better explanation.\n\nBart Ehrman is not persuaded. To say the women met two angels, he argues, is to tell a story that none of the Gospels tells: [[ehrman]]\n\nSo the four texts stand as they are, and believers and skeptics still read them side by side, agreeing on what they say and differing on what the differences mean.",
+  "point": "The four accounts of Easter morning really do differ on the hour, the names and the number of messengers, and readers still disagree about what that means. They do not differ on what the women found. Early on the first day of the week Mary Magdalene came to the tomb, with other women beside her in three accounts and a telling we in the fourth. The stone was moved, and the body was gone.",
+  "lesson": "If a list of Bible contradictions has ever made you put the Bible down, try this instead. Read Matthew 28, Mark 16, Luke 24 and John 20 in one sitting, slowly, the way you would read four letters from four friends about the same night. Notice where they differ. Then notice where they agree.\n\nAnd notice who is there. Not the leaders, not the twelve, but a handful of women carrying spices, asking each other who would move a heavy stone. The first news of Easter came to people who had come to care for a body. If you feel you have only grief to bring, that is where this story starts too.\n\nThe angel in Matthew says to the women, “Come, see the place where the Lord was lying.” You can take that invitation as it stands: come and look for yourself. If you do not share this faith, the accounts still deserve an honest reading, differences and all, because their writers did not smooth them away.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "deuteronomy",
+        "chapter": 19,
+        "start": 15,
+        "end": 15
+      },
+      "note": "The law of Moses never rested a case on one voice: “At the mouth of two witnesses, or at the mouth of three witnesses, shall a matter be established.” Easter morning has four accounts, and they agree on the matter."
+    },
+    {
+      "ref": {
+        "book": "luke",
+        "chapter": 1,
+        "start": 2,
+        "end": 3
+      },
+      "note": "Luke says he wrote from what eyewitnesses handed down, “having traced the course of all things accurately from the first”. A careful writer still chooses what to tell."
+    },
+    {
+      "ref": {
+        "book": "john",
+        "chapter": 21,
+        "start": 25,
+        "end": 25
+      },
+      "note": "John admits his book leaves things out: “if they would all be written, I suppose that even the world itself wouldn’t have room for the books”. Every Gospel is a selection, Easter morning included."
+    },
+    {
+      "ref": {
+        "book": "1-corinthians",
+        "chapter": 15,
+        "start": 3,
+        "end": 4
+      },
+      "note": "Paul passes on the core the four accounts share: “that he was buried, that he was raised on the third day according to the Scriptures”."
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 28,
+      "start": 2,
+      "end": 10
+    },
+    {
+      "book": "mark",
+      "chapter": 16,
+      "start": 1,
+      "end": 8
+    },
+    {
+      "book": "luke",
+      "chapter": 24,
+      "start": 1,
+      "end": 12
+    },
+    {
+      "book": "luke",
+      "chapter": 24,
+      "start": 22,
+      "end": 24
+    },
+    {
+      "book": "john",
+      "chapter": 20,
+      "start": 1,
+      "end": 18
+    },
+    {
+      "book": "matthew",
+      "chapter": 27,
+      "start": 55,
+      "end": 56
+    },
+    {
+      "book": "matthew",
+      "chapter": 27,
+      "start": 61,
+      "end": 61
+    },
+    {
+      "book": "mark",
+      "chapter": 15,
+      "start": 40,
+      "end": 41
+    },
+    {
+      "book": "luke",
+      "chapter": 23,
+      "start": 49,
+      "end": 49
+    },
+    {
+      "book": "luke",
+      "chapter": 23,
+      "start": 55,
+      "end": 56
+    },
+    {
+      "book": "1-corinthians",
+      "chapter": 15,
+      "start": 5,
+      "end": 8
+    }
+  ]
+}

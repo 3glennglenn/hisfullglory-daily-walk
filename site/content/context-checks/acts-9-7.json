@@ -1,0 +1,194 @@
+{
+  "slug": "acts-9-7",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-13",
+  "verse": {
+    "book": "acts",
+    "chapter": 9,
+    "start": 7,
+    "end": 7
+  },
+  "hook": "You know Paul met Jesus on the road to Damascus. But did you know the Greek of Acts says his companions heard the voice, and later that they did not?",
+  "story": "Saul of Tarsus was on his way to Damascus with letters from the high priest. Anyone he found there “who were of the Way” he meant to bring back to Jerusalem bound. Near the city “suddenly a light from the sky shone around him.” He fell to the ground and heard a voice: “Saul, Saul, why do you persecute me?”\n\nLuke tells this moment three times in Acts: once as the narrator in chapter 9, and twice in Paul’s own speeches, in chapters 22 and 26. On one point the first two seem to part ways. Here are the men who were with him, in the World English Bible:\n\nActs 9:7: “The men who traveled with him stood speechless, hearing the sound, but seeing no one.”\n\nActs 22:9: “Those who were with me indeed saw the light and were afraid, but they didn’t understand the voice of him who spoke to me.”\n\nRead like that, there is no clash. But the World English Bible has already made a choice for you. In the Greek, the noun is the same word both times, phone, which can mean a voice or a sound. The verb is the same word both times too, akouo, to hear. Word for word, 9:7 says the men were hearing the voice, and 22:9 says the voice they did not hear. That is the whole difference, and it turns on what hearing means.\n\nThe third telling adds one more small difference. In chapter 9 the men “stood speechless”. In chapter 26 Paul says, “When we had all fallen to the earth”.\n\nOn the heart of it the tellings agree: the light from the sky, the voice calling his name twice, and Saul’s question, “Who are you, Lord?”",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Barclay M. Newman and Eugene A. Nida, translation commentary on Acts 9:7, from A Handbook on the Acts of the Apostles, 1972 (TIPs)",
+      "url": "https://tips.translation.bible/story/translation-commentary-on-acts-97/"
+    },
+    {
+      "title": "Acts 9:7 in the Greek text, word by word (Bible Hub)",
+      "url": "https://biblehub.com/text/acts/9-7.htm"
+    },
+    {
+      "title": "Acts 22:9 in the Greek text, word by word (Bible Hub)",
+      "url": "https://biblehub.com/text/acts/22-9.htm"
+    },
+    {
+      "title": "1 Corinthians 14:2 in the Greek text, word by word (Bible Hub)",
+      "url": "https://biblehub.com/text/1_corinthians/14-2.htm"
+    },
+    {
+      "title": "Strong’s Greek 5456, phone: voice, sound (Bible Hub)",
+      "url": "https://biblehub.com/greek/5456.htm"
+    },
+    {
+      "title": "Strong’s Greek 191, akouo: to hear, to understand, with Thayer’s lexicon (Bible Hub)",
+      "url": "https://biblehub.com/greek/191.htm"
+    },
+    {
+      "title": "A. T. Robertson, Word Pictures in the New Testament, on Acts 22:9 (Bible Tools)",
+      "url": "https://www.bibletools.org/index.cfm/fuseaction/Bible.show/sVerseID/27714/eVerseID/27716/RTD/rwpnt"
+    },
+    {
+      "title": "John Chrysostom, Homily 47 on the Acts of the Apostles (New Advent)",
+      "url": "https://www.newadvent.org/fathers/210147.htm"
+    },
+    {
+      "title": "John Calvin, Commentary on Acts, Acts 9:6-9 (Christian Classics Ethereal Library)",
+      "url": "https://ccel.org/ccel/calvin/calcom36/calcom36.xvi.ii.html"
+    },
+    {
+      "title": "Older commentaries on Acts 9:7, among them Meyer and Jamieson-Fausset-Brown (Bible Hub)",
+      "url": "https://biblehub.com/commentaries/acts/9-7.htm"
+    },
+    {
+      "title": "Catholic Encyclopedia, St. John Chrysostom (New Advent)",
+      "url": "https://www.newadvent.org/cathen/08452b.htm"
+    }
+  ],
+  "voices": [
+    {
+      "id": "chrysostom",
+      "name": "John Chrysostom",
+      "about": "preaching on Acts 22:9 and setting it beside Acts 9:7",
+      "words": "It is not at variance: no, there were two voices, that of Paul and the Lord's voice: in that place, the writer means Paul's voice",
+      "source": {
+        "title": "John Chrysostom, Homily 47 on the Acts of the Apostles (New Advent)",
+        "url": "https://www.newadvent.org/fathers/210147.htm"
+      }
+    },
+    {
+      "id": "calvin",
+      "name": "John Calvin",
+      "about": "in his commentary on Acts, on verse 7, after noting that it seems not to agree with Acts 22:9",
+      "words": "I think that it is no hard matter to answer it; because it may be that they heard the sound of the voice, yet did they not discern either who it was that spake, or what was spoken.",
+      "source": {
+        "title": "John Calvin, Commentary on Acts, Acts 9:6-9 (Christian Classics Ethereal Library)",
+        "url": "https://ccel.org/ccel/calvin/calcom36/calcom36.xvi.ii.html"
+      }
+    },
+    {
+      "id": "newman-case",
+      "name": "Barclay M. Newman and Eugene A. Nida",
+      "about": "in their 1972 handbook for Bible translators, on the argument from the Greek cases",
+      "words": "this conclusion is judged by most scholars as invalid",
+      "source": {
+        "title": "Barclay M. Newman and Eugene A. Nida, translation commentary on Acts 9:7, from A Handbook on the Acts of the Apostles, 1972 (TIPs)",
+        "url": "https://tips.translation.bible/story/translation-commentary-on-acts-97/"
+      }
+    },
+    {
+      "id": "newman-nida",
+      "name": "Barclay M. Newman and Eugene A. Nida",
+      "about": "in the same handbook, on the three accounts of Paul’s conversion",
+      "words": "The contradiction must remain, as must the statement in this chapter that Saul’s companions remained standing, whereas in 26.14 it is said that they all fell to the ground.",
+      "source": {
+        "title": "Barclay M. Newman and Eugene A. Nida, translation commentary on Acts 9:7, from A Handbook on the Acts of the Apostles, 1972 (TIPs)",
+        "url": "https://tips.translation.bible/story/translation-commentary-on-acts-97/"
+      }
+    },
+    {
+      "id": "robertson",
+      "name": "A. T. Robertson",
+      "about": "in his Word Pictures in the New Testament, on Acts 22:9",
+      "words": "It is one of the evidences of the genuineness of this report of Paul's speech that Luke did not try to smooth out apparent discrepancies in details between the words of Paul and his own record already in ch. 9.",
+      "source": {
+        "title": "A. T. Robertson, Word Pictures in the New Testament, on Acts 22:9 (Bible Tools)",
+        "url": "https://www.bibletools.org/index.cfm/fuseaction/Bible.show/sVerseID/27714/eVerseID/27716/RTD/rwpnt"
+      }
+    }
+  ],
+  "moment": "Saul was not looking for Jesus when the light fell. Acts first shows him at the stoning of Stephen: “Saul was consenting to his death.” Then: “Saul ravaged the assembly, entering into every house and dragged both men and women off to prison.” He set out for Damascus “still breathing threats and slaughter against the disciples of the Lord”.\n\nActs does not name the men who traveled with him. They saw the light. They saw no one speaking. In Paul’s own telling, they “were afraid”. Then they took him by the hand: “They led him by the hand and brought him into Damascus.” For three days he could not see, “and neither ate nor drank.”\n\nOnly Saul was called by name, and only he was told what to do next: “rise up and enter into the city, then you will be told what you must do.”",
+  "around": "The two verses stand in very different settings. Acts 9 is Luke’s own account, told as the story unfolds. Acts 22 is Paul speaking much later in Jerusalem, from the stairs of the barracks, to a crowd that had just been beating him. He spoke to them “in the Hebrew language” and began, “Brothers and fathers, listen to the defense which I now make to you.” Acts 26 is a third telling, before King Agrippa, and there Paul adds that the voice spoke to him “in the Hebrew language” too.\n\nEach time, the story serves Paul’s defense, and each time the point is the same: Jesus spoke to him, and he could not stay the man he had been. “I was not disobedient to the heavenly vision,” he tells the king.\n\nPaul uses the same verb for hearing in his letters. Writing about speaking in other languages in church, he says such a speaker talks to God, “for no one understands”. In the Greek, that is the verb to hear.",
+  "after": "The men on the road disappear from the story. Saul does not. In Damascus, a disciple named Ananias laid his hands on him, and “Immediately something like scales fell from his eyes, and he received his sight.” He was baptized, and “Immediately in the synagogues he proclaimed the Christ”. People could hardly take it in: “Isn’t this he who in Jerusalem made havoc of those who called on this name?”\n\nWhen he came to Jerusalem, the disciples “were all afraid of him, not believing that he was a disciple.” It took Barnabas to bring him to the apostles and tell them “how he had seen the Lord on the way, and that he had spoken to him”.\n\nFrom then on, Saul, called Paul, kept telling what had happened on that road: to a hostile crowd in Jerusalem, and later before King Agrippa. In his own letters he says it in one line: “he appeared to me also.” And readers have kept setting his accounts side by side ever since, as the next part shows.",
+  "readings": "Readers have explained the difference in several ways.\n\nThey heard a sound but not the words. The Greek verb for hearing can also mean to understand. Thayer’s lexicon gives that sense for 1 Corinthians 14:2, where the World English Bible has “no one understands”. On this reading the men heard the voice as a sound, but only Saul could make out what it said. The World English Bible translates both verses this way. Some compare the crowd in John 12, who heard a voice from the sky and said “that it had thundered”.\n\nTwo voices. Some early readers thought the men in 9:7 heard Paul’s voice as he answered someone they could not see, while in 22:9 they did not hear the Lord’s.\n\nThe Greek cases. In 9:7 the word for voice stands in the genitive case, in 22:9 in the accusative. Some grammarians have argued that the case marks the difference between hearing a sound and hearing words. Most scholars do not think the case alone carries that meaning, because Luke does not use the cases consistently.\n\nA copying slip. Calvin reports that some in his day thought a copyist had put the word not in the wrong place. He did not think that was needed.\n\nA real difference, told freely. Other scholars think Luke simply told the story three times and let small details differ. On this view the two verses do not fully agree, and Luke was free to let them differ.",
+  "argued": "Readers noticed the difference early. John Chrysostom, the preacher who became bishop of Constantinople and died in 407, set the two verses side by side in his sermons on Acts and answered: [[chrysostom]] Later commentators were not persuaded. Meyer’s New Testament commentary calls that reading against the context.\n\nJohn Calvin knew of a sharper answer: some in his day thought a copyist had misplaced the word not. Calvin thought there was no need for that: [[calvin]]\n\nThen came the grammar. A. T. Robertson thought the different cases allow a distinction between hearing a sound and understanding words, though he added that Luke does not always keep it. Indeed in 22:7, as Robertson notes, Paul uses the genitive for the voice that spoke to him, and he plainly heard its words. The 1972 handbook for Bible translators by Barclay Newman and Eugene Nida weighed the case argument and wrote that [[newman-case]]\n\nThey drew a plain conclusion: [[newman-nida]] Luke, they wrote, told the same story three times and should be allowed to vary the details.\n\nRobertson, who spoke of only apparent discrepancies, saw the same roughness as a mark of honesty: [[robertson]]",
+  "point": "The difference is real in the Greek, and small: did the men hear the voice or not? If hear means hear and understand, as it can, the two verses agree, and the World English Bible translates them that way. If hear means only that sound reached their ears, they differ, and some careful scholars accept that Luke let the difference stand.\n\nWhat the context adds is what all three tellings share. The light was seen by everyone. The words were for one man. The others could only lead him by the hand.",
+  "lesson": "The men on that road were close. They saw the light. They heard something. But the words were spoken to one man, by name.\n\nYou may have stood near the faith for a long time in the same way: hearing about Jesus, seeing what he did for others, without the words ever seeming to be for you. Acts does not promise you a light on the road. It does show that Jesus spoke to the man who was walking the other way, and called him by name.\n\nIf that is where you are, read Acts 9, 22 and 26 side by side, slowly. Notice what changes and what never changes. Ask honestly what the voice said, and to whom. And if you already believe, be patient with people who have only heard the sound so far. Saul’s companions could do no more than take his hand and walk him into the city.\n\nIf you do not share this faith, the passage still shows a writer who told one story three times and did not smooth out his own differences. You can weigh that for yourself.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "john",
+        "chapter": 12,
+        "start": 29,
+        "end": 29
+      },
+      "note": "When a voice came from the sky for Jesus, the crowd heard something, but not the words: some said “that it had thundered.” Commentators have long set this beside the road to Damascus."
+    },
+    {
+      "ref": {
+        "book": "deuteronomy",
+        "chapter": 4,
+        "start": 12,
+        "end": 12
+      },
+      "note": "At Sinai, Moses reminds Israel, “you heard the voice of words, but you saw no form”. On the road the men also heard and saw no one: God speaks without being seen."
+    },
+    {
+      "ref": {
+        "book": "1-corinthians",
+        "chapter": 15,
+        "start": 8,
+        "end": 8
+      },
+      "note": "Paul’s own shortest account of that road: “he appeared to me also.” He names no witnesses. He speaks of what happened to him."
+    }
+  ],
+  "basis": [
+    {
+      "book": "acts",
+      "chapter": 9,
+      "start": 1,
+      "end": 27
+    },
+    {
+      "book": "acts",
+      "chapter": 22,
+      "start": 1,
+      "end": 21
+    },
+    {
+      "book": "acts",
+      "chapter": 26,
+      "start": 9,
+      "end": 20
+    },
+    {
+      "book": "acts",
+      "chapter": 21,
+      "start": 30,
+      "end": 40
+    },
+    {
+      "book": "acts",
+      "chapter": 8,
+      "start": 1,
+      "end": 3
+    },
+    {
+      "book": "1-corinthians",
+      "chapter": 14,
+      "start": 2,
+      "end": 2
+    },
+    {
+      "book": "john",
+      "chapter": 12,
+      "start": 27,
+      "end": 30
+    }
+  ]
+}

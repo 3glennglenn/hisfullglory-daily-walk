@@ -1,0 +1,218 @@
+{
+  "slug": "matthew-1-16",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-13",
+  "verse": {
+    "book": "matthew",
+    "chapter": 1,
+    "start": 16,
+    "end": 16
+  },
+  "hook": "You know Matthew and Luke both give Jesus a family tree. But did you know they name different fathers for Joseph, Jacob in one and Heli in the other?",
+  "story": "Two Gospels give the family line of Jesus, and one step past Joseph they part ways.\n\nMatthew begins with Abraham and walks forward, generation by generation, until he reaches this verse: “Jacob became the father of Joseph, the husband of Mary, from whom was born Jesus, who is called Christ.”\n\nLuke begins with Jesus and walks back, all the way to Adam. Jesus was “the son (as was supposed) of Joseph, the son of Heli”.\n\nSo Joseph’s father is Jacob in Matthew and Heli in Luke. And the difference runs further than one name. From David down to Joseph the lists take two different roads. Matthew follows the kings: “David the king became the father of Solomon”. Luke follows another son of David: “the son of Nathan, the son of David”. Between David and Joseph the two roads cross only at Shealtiel and Zerubbabel, and then part again. Above David, back to Abraham, they run side by side.\n\nNeither writer was careless about Joseph. Matthew breaks his own pattern at the last step. Every man before “became the father of” the next, but Jesus was born of Mary: “from whom was born Jesus”. Luke adds a small parenthesis, “as was supposed”. Both Gospels tell that Mary conceived as a virgin, so neither presents Joseph as the father of Jesus by birth. Both still trace the line through him.\n\nChristians noticed the two lists very early. In the third century a Christian writer named Julius Africanus wrote a letter about them, and the historian Eusebius later copied his answer into his history of the church.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Eusebius, Church History, Book I, chapter 7, quoting Julius Africanus, Letter to Aristides (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250101.htm"
+    },
+    {
+      "title": "Augustine, Reply to Faustus the Manichaean (Contra Faustum), Book III (New Advent)",
+      "url": "https://www.newadvent.org/fathers/140603.htm"
+    },
+    {
+      "title": "Anthony Maas, Genealogy of Christ, Catholic Encyclopedia, 1909 (New Advent)",
+      "url": "https://www.newadvent.org/cathen/06410a.htm"
+    },
+    {
+      "title": "John Calvin, Commentary on a Harmony of the Evangelists, Matthew 1:1-17 and Luke 3:23-38 (Christian Classics Ethereal Library)",
+      "url": "https://ccel.org/ccel/calvin/calcom31/calcom31.ix.xiv.html"
+    },
+    {
+      "title": "Philip Schaff, History of the Christian Church, volume 2, on Tatian and the Diatessaron (Christian Classics Ethereal Library)",
+      "url": "https://ccel.org/ccel/schaff/hcc2/hcc2.v.xv.xvi.html"
+    },
+    {
+      "title": "Luke 3:23 in the Greek text, word by word (Bible Hub)",
+      "url": "https://biblehub.com/text/luke/3-23.htm"
+    },
+    {
+      "title": "Wikipedia: Genealogy of Jesus",
+      "url": "https://en.wikipedia.org/wiki/Genealogy_of_Jesus"
+    },
+    {
+      "title": "Wikipedia: Diatessaron",
+      "url": "https://en.wikipedia.org/wiki/Diatessaron"
+    }
+  ],
+  "voices": [
+    {
+      "id": "faustus",
+      "name": "Faustus",
+      "about": "a Manichaean, explaining why he did not believe in the birth of Christ, as Augustine quotes him in Reply to Faustus, Book III",
+      "words": "the discrepancy in the genealogies of Luke and Matthew stumbled me, as I knew not which to follow.",
+      "source": {
+        "title": "Augustine, Reply to Faustus the Manichaean (Contra Faustum), Book III (New Advent)",
+        "url": "https://www.newadvent.org/fathers/140603.htm"
+      }
+    },
+    {
+      "id": "augustine",
+      "name": "Augustine of Hippo",
+      "about": "in his reply to Faustus, Book III",
+      "words": "Any one can see as well as you that Joseph has one father in Matthew and another in Luke, and so with the grandfather and with all the rest up to David.",
+      "source": {
+        "title": "Augustine, Reply to Faustus the Manichaean (Contra Faustum), Book III (New Advent)",
+        "url": "https://www.newadvent.org/fathers/140603.htm"
+      }
+    },
+    {
+      "id": "augustine-adoption",
+      "name": "Augustine of Hippo",
+      "about": "in the same book, on his own answer, that Joseph had one father by birth and another by adoption",
+      "words": "this double fatherhood of nature and adoption removes the difficulty arising from the discrepancy of the genealogies",
+      "source": {
+        "title": "Augustine, Reply to Faustus the Manichaean (Contra Faustum), Book III (New Advent)",
+        "url": "https://www.newadvent.org/fathers/140603.htm"
+      }
+    },
+    {
+      "id": "africanus",
+      "name": "Julius Africanus",
+      "about": "Christian writer of the third century, in his Letter to Aristides, as Eusebius quotes it",
+      "words": "Thus neither of the gospels is in error, for one reckons by nature, the other by law.",
+      "source": {
+        "title": "Eusebius, Church History, Book I, chapter 7, quoting Julius Africanus, Letter to Aristides (New Advent)",
+        "url": "https://www.newadvent.org/fathers/250101.htm"
+      }
+    },
+    {
+      "id": "calvin",
+      "name": "John Calvin",
+      "about": "in his Commentary on a Harmony of the Evangelists, on the two genealogies",
+      "words": "Matthew and Luke unquestionably do not observe the same order; for immediately after David the one puts Solomon, and the other, Nathan; which makes it perfectly clear that they follow different lines.",
+      "source": {
+        "title": "John Calvin, Commentary on a Harmony of the Evangelists, Matthew 1:1-17 and Luke 3:23-38 (Christian Classics Ethereal Library)",
+        "url": "https://ccel.org/ccel/calvin/calcom31/calcom31.ix.xiv.html"
+      }
+    },
+    {
+      "id": "theodoret-cut",
+      "name": "Theodoret of Cyrrhus",
+      "about": "bishop in Syria in the fifth century, on Tatian’s Diatessaron, as Wikipedia translates him",
+      "words": "cutting out the genealogies, and the other things which show the Lord born according to the flesh from the seed of David.",
+      "source": {
+        "title": "Wikipedia: Diatessaron",
+        "url": "https://en.wikipedia.org/wiki/Diatessaron"
+      }
+    },
+    {
+      "id": "theodoret-found",
+      "name": "Theodoret of Cyrrhus",
+      "about": "in the same passage, on what he did with the copies",
+      "words": "And I myself found more than two hundred such books held in honor in the churches in our area, and having collected them all, I put them away, and I substituted the Gospels of the four evangelists.",
+      "source": {
+        "title": "Wikipedia: Diatessaron",
+        "url": "https://en.wikipedia.org/wiki/Diatessaron"
+      }
+    },
+    {
+      "id": "brown",
+      "name": "Raymond E. Brown",
+      "about": "New Testament scholar, as Wikipedia quotes him on the genealogies",
+      "words": "tell us nothing certain about his grandparents or his great-grand-parents",
+      "source": {
+        "title": "Wikipedia: Genealogy of Jesus",
+        "url": "https://en.wikipedia.org/wiki/Genealogy_of_Jesus"
+      }
+    }
+  ],
+  "moment": "Each writer put his list in a different place, and that already says something.\n\nMatthew opens his whole Gospel with it: “The book of the genealogy of Jesus Christ, the son of David, the son of Abraham.” He arranges it in three sets of fourteen generations: from Abraham to David, from David to the exile in Babylon, and from the exile to the Christ. To keep that pattern he leaves names out. Where Matthew says “Joram became the father of Uzziah”, the books of Chronicles list three more kings in between. His list also names women, among them Tamar and Ruth.\n\nLuke waits until Jesus is grown. At his baptism the sky opens and a voice says, “You are my beloved Son. In you I am well pleased.” Then, as Jesus begins his work, “about thirty years old”, Luke gives his list, and he runs it past David and Abraham to the very beginning: “the son of Adam, the son of God.”\n\nOne list presents the heir of David and Abraham. The other ends where the voice at the baptism began, with God.",
+  "around": "Right after Matthew’s list comes the story that explains its last line. Joseph learns that Mary is pregnant and, “being a righteous man”, plans to send her away quietly. An angel stops him with words that echo the whole list: “Joseph, son of David, don’t be afraid to take to yourself Mary as your wife”. Joseph takes her home, and when the child is born, “He named him Jesus.”\n\nThe law of Moses knew another way a man could be counted as someone’s son. If a man died without a son, his brother was to marry the widow, and “the firstborn whom she bears shall succeed in the name of his brother who is dead, that his name not be blotted out of Israel.” In Jesus’ own day the Sadducees asked him about this very law, quoting Moses: “his brother should take his wife and raise up offspring for his brother.”\n\nMatthew’s list itself names two women whose stories turn on raising up a name for the dead. Judah told his son Onan to take Tamar, his dead brother’s wife, and “raise up offspring for your brother”. Boaz married Ruth “to raise up the name of the dead on his inheritance”.",
+  "after": "The Gospels keep giving Jesus the title both lists support. Blind men at Jericho cry out, “Lord, have mercy on us, you son of David!” Paul writes that Jesus “was born of the offspring of David according to the flesh”.\n\nThe lists themselves had an eventful history. In the second century Tatian wove the four Gospels into one continuous story, the Diatessaron, and he left both genealogies out. In the fifth century Theodoret, bishop of Cyrrhus in Syria, who faulted Tatian for cutting out the genealogies, found more than two hundred copies in use in his churches, removed them, and put the four Gospels back. In 546 Victor of Capua found a Latin harmony of the same kind, corrected it, and restored the two genealogies side by side. That book, the Codex Fuldensis, survives in the monastic library at Fulda.\n\nThe explanations kept coming too. In 1498 Annius of Viterbo revived the reading that Luke gives the line of Mary, and it quickly grew popular. Both lists still stand in the Bible, where Tatian had once taken them out.",
+  "readings": "Christians and scholars have read the two lists in several ways, and each has thoughtful defenders.\n\nNature and law. The oldest answer, from Julius Africanus, says both lists belong to Joseph. Jacob and Heli were half-brothers: they had the same mother and different fathers, one descended from David through Solomon, the other through Nathan. Heli died childless, and Jacob married his widow to raise up a son for him. Joseph was Jacob’s son by birth and Heli’s by law. Africanus passed this on as a tradition and admitted he could not prove it. Some have asked whether the custom ever applied to brothers who shared only a mother.\n\nThe king’s line and the family line. Calvin also held that both lists belong to Joseph. He thought Matthew follows the right to David’s throne through Solomon, and Luke the family descent through Nathan.\n\nMary’s line. Many teachers have read Luke’s list as Mary’s family, with Heli as her father and Joseph named in her place as his son-in-law. A fifth-century text mentions this as an opinion held by many, and it was revived in 1498. Others, Calvin among them, answer that Luke names Joseph, not Mary, and early tradition calls Mary’s father Joachim.\n\nTwo purposes. Whatever the family facts, each writer shaped his list. Matthew builds three fourteens to show the heir of David and Abraham. Luke climbs to Adam and to God. Even the Catholic Encyclopedia of 1909, which defends the harmony of the lists, points out how carefully both are built.\n\nLists that say who Jesus is. Many modern critical scholars think neither list rests on family records. They read both as built to state a belief: that Jesus is the son of David.",
+  "argued": "The two lists have troubled honest readers. Faustus, a Manichaean whom Augustine answered in a long book, gave them as his reason for not believing that Christ was born: [[faustus]] He turned instead to Mark and John, which have no family tree, and said he would yield if anyone could harmonize the accounts.\n\nAugustine did not deny the difference: [[augustine]] He pointed out that many learned readers had seen the difference and still trusted both Gospels. His own answer was adoption: a man can have one father who begot him and another who adopted him, and [[augustine-adoption]]. Later he gave that idea up, once he had read an older answer.\n\nThat answer came from Julius Africanus. He found the explanations of his day forced, and offered his own, which he said he had received from tradition. He summed it up in one line: [[africanus]] And he was honest about how far it went: he admitted that he could bring no testimony to support it.\n\nJohn Calvin kept Joseph in both lists and saw at once where they divide: [[calvin]]\n\nNot everyone wanted two lists at all. In the second century Tatian blended the Gospels into one, and Theodoret later described what that harmony had done: [[theodoret-cut]] So he made his choice: [[theodoret-found]]\n\nModern critical scholars have been more doubtful about the lists as history. Raymond E. Brown wrote that the genealogies [[brown]] Others, from Africanus to teachers today, think the two lists can be read together. The argument is now almost eighteen centuries old, and both lists are still in the Bible.",
+  "point": "The difference is real, and it is bigger than one name. Joseph’s father differs, and nearly every name between David and Joseph differs too. Christians have known this since ancient times and kept both lists anyway. Ancient readers offered a family explanation that fits a law of Moses. Others read Luke as Mary’s line. Many scholars today think the lists were built to proclaim, not to record.\n\nWhat the context adds is that both writers say plainly that Joseph was not the father of Jesus by birth, and both still trace the line through him. By different roads, both lists arrive at David.",
+  "lesson": "Notice what the early church did with two lists that did not match. It did not throw one away. When a popular book left both out, a bishop took it out of his churches and put the four Gospels back. The church kept the hard thing in plain view and kept talking about it.\n\nYou can do the same. Read Matthew 1 and Luke 3 side by side. Notice where they agree and where they part. You do not have to settle every question to see what both writers wanted you to see: that Jesus came from a real line of people, kings and unknown men, with Tamar and Ruth in it, and that both writers saw God keeping his word to David through it.\n\nAnd if your own family story is complicated, with adoptions, second marriages or names no one talks about, look again at Joseph. He was not the father of Jesus by birth. Yet both Gospels trace the line through him, and Matthew tells how he took Mary home and named the child.\n\nIf you do not share this faith, the two lists still show something worth weighing: the first Christians kept documents that seem to disagree, side by side, rather than tidy them away.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "ruth",
+        "chapter": 4,
+        "start": 10,
+        "end": 10
+      },
+      "note": "Boaz married Ruth “to raise up the name of the dead on his inheritance”. Their son Obed stands in both Matthew’s and Luke’s lists. In Israel a family line could run by law as well as by birth."
+    },
+    {
+      "ref": {
+        "book": "2-samuel",
+        "chapter": 7,
+        "start": 12,
+        "end": 12
+      },
+      "note": "God promised David, “I will set up your offspring after you”. By different roads, both genealogies of Jesus lead back to that promise."
+    },
+    {
+      "ref": {
+        "book": "romans",
+        "chapter": 1,
+        "start": 3,
+        "end": 3
+      },
+      "note": "Paul sums up what both lists claim, in one line: Jesus “was born of the offspring of David according to the flesh”."
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 1,
+      "start": 1,
+      "end": 25
+    },
+    {
+      "book": "luke",
+      "chapter": 3,
+      "start": 21,
+      "end": 38
+    },
+    {
+      "book": "luke",
+      "chapter": 1,
+      "start": 34,
+      "end": 35
+    },
+    {
+      "book": "1-chronicles",
+      "chapter": 3,
+      "start": 10,
+      "end": 12
+    },
+    {
+      "book": "deuteronomy",
+      "chapter": 25,
+      "start": 5,
+      "end": 6
+    },
+    {
+      "book": "mark",
+      "chapter": 12,
+      "start": 18,
+      "end": 23
+    },
+    {
+      "book": "genesis",
+      "chapter": 38,
+      "start": 6,
+      "end": 8
+    },
+    {
+      "book": "matthew",
+      "chapter": 20,
+      "start": 29,
+      "end": 31
+    }
+  ]
+}
