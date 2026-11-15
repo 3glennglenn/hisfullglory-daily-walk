@@ -1,0 +1,146 @@
+{
+  "slug": "hebrews-11-1",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-11-14",
+  "verse": {
+    "book": "hebrews",
+    "chapter": 11,
+    "start": 1,
+    "end": 1
+  },
+  "hook": "You know this famous line about faith. But did you know nobody knows who wrote it, and it was first aimed at people who had lost their things?",
+  "story": "Whoever wrote these words was not writing a definition for a classroom. He was writing to people who had already paid for what they believed.\n\nThe letter reminds its readers of “the former days, in which, after you were enlightened, you endured a great struggle with sufferings”. Some had been “exposed to both reproaches and oppressions”. Some had stood beside others who were treated that way, and had “joyfully accepted the plundering of your possessions, knowing that you have for yourselves a better possession and an enduring one in the heavens”. Then comes the push: “Therefore don’t throw away your boldness, which has a great reward.” And a few lines later, the verse: “Now faith is assurance of things hoped for, proof of things not seen.”\n\nSo faith here is not a mood. It is what a person stands on when the possessions are gone and the promise has not yet arrived. The chapter that follows walks through the people who stood there before them: Abel, Noah, Abraham, Sarah, Moses, Rahab. It says Abraham “went out, not knowing where he went”. It says of the whole line that they “died in faith, not having received the promises, but having seen them and embraced them from afar”.\n\nAnd the letter itself has no name on it. The earliest readers who wrote about it could not say whose it was. The historian Eusebius, around 325, passed on the verdict of the scholar Origen from a century earlier. Eusebius also noted that some rejected the letter, and that the church in Rome disputed it on the ground that Paul had not written it.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Eusebius, Church History, Book VI (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250106.htm"
+    },
+    {
+      "title": "Eusebius, Church History, Book III (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250103.htm"
+    },
+    {
+      "title": "Tyndale New Testament, Hebrews 11, William Tyndale 1526 (Faith of God)",
+      "url": "https://faithofgod.net/WTNT/hebrews_11.html"
+    },
+    {
+      "title": "William Tyndale (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/William_Tyndale"
+    },
+    {
+      "title": "Epistle to the Hebrews (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Epistle_to_the_Hebrews"
+    }
+  ],
+  "voices": [
+    {
+      "id": "eusebius",
+      "name": "Eusebius of Caesarea",
+      "about": "church historian, writing around 325 and passing on what Origen had written about the letter's author",
+      "words": "But who wrote the epistle, in truth, God knows.",
+      "source": {
+        "title": "Eusebius, Church History, Book VI (New Advent)",
+        "url": "https://www.newadvent.org/fathers/250106.htm"
+      }
+    },
+    {
+      "id": "tyndale",
+      "name": "William Tyndale",
+      "about": "English translator, in his New Testament of 1526, on this verse",
+      "words": "Faith is a sure confidence of things which are hoped for, and a certainty of things which are not seen.",
+      "source": {
+        "title": "Tyndale New Testament, Hebrews 11, William Tyndale 1526 (Faith of God)",
+        "url": "https://faithofgod.net/WTNT/hebrews_11.html"
+      }
+    }
+  ],
+  "moment": "Hebrews 10 ends on a fork. One road is to “shrink back”. The other is to be among “those who have faith to the saving of the soul”. Then, with no break, chapter 11 opens by saying what faith is, and goes straight to examples.\n\nThe examples are not all victories. Some “stopped the mouths of lions” and “quenched the power of fire”. Others “were tortured, not accepting their deliverance”, and “They were stoned. They were sawn apart.” The writer puts both groups under the same word, faith, and ends the list with a surprise: “These all, having been commended for their faith, didn’t receive the promise”. The reader is told that the people on the list did not yet hold what they hoped for, and that the story is not finished without them or without the reader.",
+  "around": "Right after the list, chapter 12 opens: “seeing we are surrounded by so great a cloud of witnesses, lay aside every weight and the sin which so easily entangles us, and let’s run with perseverance the race that is set before us, looking to Jesus, the author and perfecter of faith”. The long line of names ends in a person: faith is aimed at Jesus, not at itself.\n\nThe letter also tells its readers, “You have not yet resisted to blood”, which suggests the worst had not yet come for them.",
+  "after": "The letter’s hope was that its readers would not drift. Whether they did, we do not know. The Bible does not say who they were or what became of them.\n\nWhat became of the letter is easier to follow. It was copied and argued over. Eusebius records that Rome disputed it because it was not clearly by Paul, and that Origen, while doubting the style was Paul’s, valued its thoughts. Eventually it was accepted as Scripture, and for centuries the church largely counted it as Paul’s fourteenth letter. Modern scholarship does not ascribe it to Paul and the author remains unknown.\n\nIn 1526 it appeared in English in a printed New Testament by William Tyndale, a full edition printed at Worms. Copies were hidden in other books to be carried into England, and that October a bishop had the copies he could buy burned in public. He was seized in Antwerp in 1535, convicted of heresy, and in 1536 strangled at the stake and then burned. Foxe’s Book of Martyrs, in 1563, reports his last words as a prayer for the king of England to have his eyes opened. That detail comes from one early source, so hold it loosely.",
+  "readings": "The World English Bible says assurance and proof. Tyndale, five hundred years ago, said confidence and certainty. The two wordings show that the line is hard to put into one English word: is faith a firm footing, or a kind of seeing?\n\nSome readers take the verse as a definition of what faith is. Others think it describes what faith does, since the chapter that follows is all examples and no argument. Both can be held together: the chapter shows by example what the sentence says.\n\nAnother question is what “things not seen” covers. Within the chapter it includes a future country (“they desire a better country, that is, a heavenly one”), a promised city, and even the origin of the universe (“By faith we understand that the universe has been framed by the word of God”). The verse does not shrink to one of these.",
+  "argued": "Two voices show how old the questions about this verse are. On who wrote the letter, Eusebius of Caesarea, writing around 325, quoted the verdict of Origen from a century earlier: [[eusebius]]\n\nAnd on the verse itself, William Tyndale printed it in English in 1526 like this: [[tyndale]] Where the World English Bible says assurance and proof, Tyndale said confidence and certainty. Both are honest attempts at a hard Greek line.",
+  "point": "Read alone, this verse can sound like a slogan about believing hard. Read in its place, it is a line written to tired people who had lost possessions and been told to hold on. Faith here is a held promise, and the chapter surrounds it with people who held on without seeing the end.",
+  "lesson": "If you have ever tried to hold on to something you could not yet see, this verse was written for people like you.\n\nNotice what it does not say. It does not say that faith feels strong, or that doubt is a failure. The people in the list set out without knowing where they were going, were mocked and imprisoned, and died with the promise unfulfilled. The writer calls them witnesses, not winners.\n\nThe invitation in the chapter is gentle but plain: you are not the first to wait, and you are not waiting alone. If you want to test it, read Hebrews 11 slowly, one name at a time, and ask what each of them was holding on to. If you do not share this faith, the passage may still show you something true about hope: people often keep going on the strength of what they cannot yet prove.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "john",
+        "chapter": 20,
+        "start": 29,
+        "end": 29
+      },
+      "note": "Jesus says to Thomas, “Blessed are those who have not seen and have believed.” Thomas wanted to see; this verse speaks of those who trust without it."
+    },
+    {
+      "ref": {
+        "book": "2-corinthians",
+        "chapter": 5,
+        "start": 7,
+        "end": 7
+      },
+      "note": "Paul puts it short: “for we walk by faith, not by sight.” It reads like a plain restatement of the verse in a letter to a church."
+    },
+    {
+      "ref": {
+        "book": "romans",
+        "chapter": 8,
+        "start": 24,
+        "end": 25
+      },
+      "note": "Paul links hope and patience: “But if we hope for that which we don’t see, we wait for it with patience.” Hope that is already seen would not be hope."
+    }
+  ],
+  "basis": [
+    {
+      "book": "hebrews",
+      "chapter": 10,
+      "start": 32,
+      "end": 39
+    },
+    {
+      "book": "hebrews",
+      "chapter": 11,
+      "start": 3,
+      "end": 3
+    },
+    {
+      "book": "hebrews",
+      "chapter": 11,
+      "start": 8,
+      "end": 8
+    },
+    {
+      "book": "hebrews",
+      "chapter": 11,
+      "start": 13,
+      "end": 13
+    },
+    {
+      "book": "hebrews",
+      "chapter": 11,
+      "start": 16,
+      "end": 16
+    },
+    {
+      "book": "hebrews",
+      "chapter": 11,
+      "start": 33,
+      "end": 39
+    },
+    {
+      "book": "hebrews",
+      "chapter": 12,
+      "start": 1,
+      "end": 2
+    },
+    {
+      "book": "hebrews",
+      "chapter": 12,
+      "start": 4,
+      "end": 4
+    }
+  ]
+}
