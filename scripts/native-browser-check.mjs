@@ -1,6 +1,6 @@
 // Browser check of the store build (D-02, STORE-03), against npm run preview:native (dist-native on port 4174).
 // The store app serves itself from its own files, so every request to another host is aborted and recorded, and
-// the check fails if one was made. It opens Today and the Bible, and proves that no service worker is registered.
+// the check fails if one was made. It opens Today and the Bible, opens and closes the You sheet, and proves that no service worker is registered.
 // Later store plans extend this scaffold (native sign-in, giving hidden, back button stubs).
 // DOM and behaviour only; no screenshots.
 import { chromium } from "playwright";
@@ -65,6 +65,18 @@ try {
     const verse = page.locator('[data-verse="16"]').first();
     await verse.waitFor();
     assert.match(await verse.innerText(), /For God so loved the world/);
+  });
+  await page.goto(base + "/");
+  await page.locator("main h1").first().waitFor();
+  await check("the You button opens the You sheet from the store bundle and Done closes it", async () => {
+    await page.locator("main .title-row").getByRole("link", { name: "You", exact: true }).click();
+    const sheet = page.getByRole("dialog", { name: "You", exact: true });
+    await sheet.waitFor();
+    assert.equal(new URL(page.url()).pathname, "/you");
+    await sheet.getByRole("button", { name: "Done, close You", exact: true }).click();
+    await sheet.waitFor({ state: "detached" });
+    assert.equal(new URL(page.url()).pathname, "/", "Done returns to Today");
+    assert.equal(await page.locator("main h1").innerText(), "Today");
   });
   await check("nothing was fetched from another host and no page error occurred", async () => {
     assert.deepEqual(offHost, [], "requests that left the preview's host");

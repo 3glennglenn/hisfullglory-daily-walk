@@ -53,11 +53,11 @@ const style = (locator, property, pseudo) => locator.evaluate((el, [p, ps]) => g
 export async function checkLamplight(browser, base) {
   // ---- the cover is not a block any more: both looks, 0, 1, 12 and 60 days -------------------------------------------------
   for (const look of ["cover", "marked"]) {
-    for (const [count, line, stars] of [
-      [0, "Today's walk lights your first star.", 1],
-      [1, "1 day walked. It stays.", 2],
-      [12, "12 days walked. Each one stays.", 13],
-      [60, "60 days walked. Each one stays.", 40],
+    for (const [count, stars] of [
+      [0, 1],
+      [1, 2],
+      [12, 13],
+      [60, 40],
     ]) {
       const name = `${look} Lamplight, ${count} days`;
       const { context, page, problems } = await openApp(browser, base, "/", { look, count });
@@ -68,8 +68,9 @@ export async function checkLamplight(browser, base) {
       assert.equal(await sky.getAttribute("aria-hidden"), "true", name + ": decoration only");
       assert.equal(await sky.locator(".star").count(), stars, name + ": a star for each day walked, at most 40, and today's ring");
       assert.equal(await sky.locator(".star-today:not(.star-walked)").count(), 1, name + ": today's place is an empty ring until today's walk is done");
-      assert.equal(await page.locator(".today .sky-caption").innerText(), line, name + ": the line says it in words");
-      assert.equal(await page.locator(".today .sky-caption").evaluate((el) => getComputedStyle(el).color), await colour(page, "--muted"), name + ": the line is --muted");
+      // No line counts the days on Today (01.2 D-04): the sky is decoration; My walk and the walk's finish say it in words.
+      assert.equal(await page.locator(".today .sky-caption").count(), 0, name + ": no line under the sky");
+      assert.equal(await page.locator("main").getByText(/days? walked|lights your first star|Each one stays|It stays/).count(), 0, name + ": no words count the days on Today");
       const inside = await sky.locator(".star").evaluateAll((list, box) => list.every((s) => { const r = s.getBoundingClientRect(); return r.left >= box.left - 8 && r.right <= box.right + 8 && r.top >= box.top - 8 && r.bottom <= box.bottom + 8; }), await sky.evaluate((el) => { const r = el.getBoundingClientRect(); return { left: r.left, right: r.right, top: r.top, bottom: r.bottom }; }));
       assert.equal(inside, true, name + ": every star is inside the sky");
       assert.equal(await page.evaluate(() => document.getAnimations().length), 0, name + ": nothing moves on Today");
@@ -123,7 +124,7 @@ export async function checkLamplight(browser, base) {
     await page.locator(".today .sky").waitFor();
     assert.equal(await page.locator(".today .sky .star").count(), 5);
     assert.equal(await page.locator(".today .sky .star-today:not(.star-walked)").count(), 0, "no empty ring once today is walked");
-    assert.equal(await page.locator(".today .sky-caption").innerText(), "5 days walked. Each one stays.");
+    assert.equal(await page.locator(".today .sky-caption").count(), 0, "no line under the sky");
     await context.close();
   }
 
@@ -132,7 +133,7 @@ export async function checkLamplight(browser, base) {
     const { context, page } = await openApp(browser, base, "/", { look, mode: "light", count: 12 });
     await page.locator(".today .cover-wrap").waitFor();
     assert.equal(await style(page.locator(".today .sky"), "display"), "none", look + " Light: no sky");
-    assert.equal(await style(page.locator(".today .sky-caption"), "display"), "none", look + " Light: no sky line");
+    assert.equal(await page.locator(".today .sky-caption").count(), 0, look + " Light: no sky line");
     if (look === "cover") {
       assert.equal(await style(page.locator(".today .cover"), "backgroundColor"), await colour(page, "--sig"), "Cover Light keeps the leather block");
       assert.equal(await page.locator(".today .cover-orn").first().evaluate((el) => getComputedStyle(el).display), "block", "and its ornaments");
@@ -179,7 +180,7 @@ export async function checkLamplight(browser, base) {
     await context.close();
   }
 
-  // ---- 200 % text: the sky, the line and the pill do not clip ----------------------------------------------------------------
+  // ---- 200 % text: the sky and the pill do not clip ----------------------------------------------------------------
   for (const width of [390, 320]) {
     const { context, page } = await openApp(browser, base, "/", { count: 12, width, height: 640 });
     await page.evaluate(() => {
@@ -189,7 +190,6 @@ export async function checkLamplight(browser, base) {
     await page.waitForFunction(() => document.documentElement.dataset.text === "large");
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `no horizontal scroll at ${width}px, 200 %`);
     assert.equal(await page.locator(".today .cover").evaluate((el) => el.scrollWidth <= el.clientWidth + 1), true, "the hook is not clipped");
-    assert.equal(await page.locator(".today .sky-caption").evaluate((el) => el.scrollWidth <= el.clientWidth + 1), true, "the sky line is not clipped");
     const pill = await page.locator(".today .cover-button").boundingBox();
     assert.ok(pill.width <= width, "the pill fits the screen");
     await context.close();

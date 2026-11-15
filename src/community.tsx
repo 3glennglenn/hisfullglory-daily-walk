@@ -154,12 +154,16 @@ function Guidelines({ close }: { close: () => void }) {
 export function Community({
   verse,
   online,
+  only,
 }: {
   verse: DailyContent;
   online: boolean;
+  /** Show just the live chat or just the original prayer wall (01.2 D-06): the segments of Community hold them apart. */
+  only?: "chat" | "prayer";
 }) {
   const { accepted } = useAuth();
-  const [view, setView] = useState<"chat" | "prayer">("chat");
+  const [chosen, setView] = useState<"chat" | "prayer">("chat");
+  const view = only ?? chosen;
   const [session, setSession] = useState<Session | null>(null);
   const [authLoading, setAuthLoading] = useState(!!supabase);
   const [profile, setProfile] = useState("");
@@ -312,11 +316,11 @@ export function Community({
     !profileLoading &&
     online;
   return (
-    <section aria-labelledby="community-title">
+    <section aria-labelledby={only === "prayer" ? undefined : "community-title"} aria-label={only === "prayer" ? "The original prayer wall" : undefined}>
       {!accepted && <AuthPanel />}
       <div className="section-head">
         <div>
-          <h2 id="community-title">Community</h2>
+          {only !== "prayer" && <h2 id="community-title">{only === "chat" ? "Live chat" : "Community"}</h2>}
         </div>
         <button
           className="icon-button"
@@ -428,19 +432,21 @@ export function Community({
           )}
         </div>
       )}
-      <div className="segments" aria-label="Community view">
-        <button aria-pressed={view === "chat"} onClick={() => setView("chat")}>
-          <MessageCircle size={17} />
-          Community Chat
-        </button>
-        <button
-          aria-pressed={view === "prayer"}
-          onClick={() => setView("prayer")}
-        >
-          <Heart size={17} />
-          Prayer Wall
-        </button>
-      </div>
+      {!only && (
+        <div className="segments" aria-label="Community view">
+          <button aria-pressed={view === "chat"} onClick={() => setView("chat")}>
+            <MessageCircle size={17} />
+            Community Chat
+          </button>
+          <button
+            aria-pressed={view === "prayer"}
+            onClick={() => setView("prayer")}
+          >
+            <Heart size={17} />
+            Prayer Wall
+          </button>
+        </div>
+      )}
       {view === "chat" ? (
         <Chat
           verse={verse}

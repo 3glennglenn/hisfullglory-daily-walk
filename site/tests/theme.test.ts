@@ -59,11 +59,11 @@ const cases: [string, Scenario, string, string, string][] = [
   ["marked page, light device", { stored: { "hfg-look": "marked" } }, "marked", "light", "#FFFDF9"],
   ["marked page, dark device", { stored: { "hfg-look": "marked" }, dark: true }, "marked", "lamplight", "#1A120E"],
   ["an unknown look falls back to Cover", { stored: { "hfg-look": "gothic" } }, "cover", "light", "#F3F1EE"],
-  ["Lamplight on, light device", { stored: { "hfg-lamplight": "on" } }, "cover", "lamplight", "#1A120E"],
-  ["Lamplight off, dark device", { stored: { "hfg-lamplight": "off" }, dark: true }, "cover", "light", "#F3F1EE"],
-  ["Lamplight automatic, dark device", { stored: { "hfg-lamplight": "auto" }, dark: true }, "cover", "lamplight", "#1A120E"],
-  ["an unknown Lamplight value follows the device", { stored: { "hfg-lamplight": "sepia" }, dark: false }, "cover", "light", "#F3F1EE"],
-  ["marked page with Lamplight on", { stored: { "hfg-look": "marked", "hfg-lamplight": "on" } }, "marked", "lamplight", "#1A120E"],
+  ["Night light on, light device", { stored: { "hfg-lamplight": "on" } }, "cover", "lamplight", "#1A120E"],
+  ["Day chosen, dark device", { stored: { "hfg-lamplight": "off" }, dark: true }, "cover", "light", "#F3F1EE"],
+  ["Automatic, dark device", { stored: { "hfg-lamplight": "auto" }, dark: true }, "cover", "lamplight", "#1A120E"],
+  ["an unknown Night light value follows the device", { stored: { "hfg-lamplight": "sepia" }, dark: false }, "cover", "light", "#F3F1EE"],
+  ["marked page with Night light on", { stored: { "hfg-look": "marked", "hfg-lamplight": "on" } }, "marked", "lamplight", "#1A120E"],
   ["old hfg-theme dark, light device", { stored: { "hfg-theme": "dark" } }, "cover", "lamplight", "#1A120E"],
   ["old hfg-theme light, dark device", { stored: { "hfg-theme": "light" }, dark: true }, "cover", "light", "#F3F1EE"],
   ["hfg-lamplight wins over an old hfg-theme", { stored: { "hfg-theme": "dark", "hfg-lamplight": "off" } }, "cover", "light", "#F3F1EE"],
@@ -106,12 +106,19 @@ test("every page sets the look in the head, before its styles, and has one theme
   }
 });
 
-test("every page offers the Theme and Lamplight switch, hidden until its script runs", () => {
+test("every page offers the Theme and Night light switch, hidden until its script runs", () => {
   for (const file of pages) {
     const html = readFileSync(file, "utf8");
     assert.match(html, /<section[^>]*data-appearance[^>]*\shidden/, `${file}: hidden switch`);
-    for (const label of ["Appearance", "Theme", "Lamplight", "Cover and story", "Marked page", "Automatic"])
+    for (const label of ["Appearance", "Theme", "Night light", "Cover and story", "Marked page", "Automatic", "Day"])
       assert.ok(html.includes(`>${label}<`), `${file}: ${label}`);
+    // The Night light group lists Automatic, Day, Night light, in that order (D-08).
+    const switchHtml = html.slice(html.indexOf("data-appearance"));
+    const order = ["Automatic</button>", "Day</button>", "Night light</button>"].map((text) =>
+      switchHtml.indexOf(text, switchHtml.indexOf('id="lamplight-label"')),
+    );
+    assert.ok(order[0] > 0 && order[0] < order[1] && order[1] < order[2], `${file}: Automatic, Day, Night light in order`);
+    assert.ok(!html.includes(">Lamplight<") && !html.includes(">On<") && !html.includes(">Off<"), `${file}: the old pill words are gone`);
     for (const choice of ['data-look-choice="cover"', 'data-look-choice="marked"', 'data-lamplight-choice="auto"', 'data-lamplight-choice="on"', 'data-lamplight-choice="off"'])
       assert.ok(html.includes(choice), `${file}: ${choice}`);
     assert.ok(html.includes('role="status"'), `${file}: current-effect line`);

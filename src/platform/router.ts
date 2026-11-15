@@ -76,6 +76,25 @@ export function parseRoute(path: string, search = ""): Route {
   }
   return { page, id: parts[1], tab: "read" };
 }
+// The three tab roots (01.2 D-03). The You sheet stands over the last one the reader saw, so the screen behind it is
+// always one of these; the memory is a variable in this module, never stored, and a fresh load starts on Today.
+export const tabRootPaths: readonly string[] = ["/", "/bible", "/community"];
+let tabRoot = "/";
+let tabRootSeen = false;
+/** Remembers a tab root: Today, the Bible library (no book) or Community (no topic). Every other route is ignored. */
+export function rememberTabRoot(route: Route): void {
+  if (route.page === "home") tabRoot = "/";
+  else if (route.page === "bible" && !route.book) tabRoot = "/bible";
+  else if (route.page === "community" && !route.id) tabRoot = "/community";
+  else return;
+  tabRootSeen = true;
+}
+/** True once the reader has seen a tab root in this page load (a screen opened by its address has not). */
+export const seenTabRoot = (): boolean => tabRootSeen;
+/** The last tab root the reader saw: "/", "/bible" or "/community" ("/" until one was seen). */
+export function lastTabRoot(): string {
+  return tabRootPaths.includes(tabRoot) ? tabRoot : "/";
+}
 /** The path of the screen the reader came from inside the app, or "" when this entry was opened directly. */
 export const cameFrom = (): string => {
   const from = (history.state as { from?: unknown } | null)?.from;
@@ -83,18 +102,25 @@ export const cameFrom = (): string => {
 };
 export const passagePath = (book: string, chapter: number, verse?: number) =>
   `/bible/${book}/${chapter}${verse ? `/${verse}` : ""}`;
-export function navigate(path: string) {
+/** `keepScroll`: the page stays where it is (the You button opens a sheet over a tab root that must not jump). */
+export function navigate(path: string, options: { keepScroll?: boolean } = {}) {
   if (window.location.pathname + window.location.search !== path) {
     // The screen the reader came from is kept with the history entry, so a screen reached from two places (Your
     // shelf, from Today or from You) can name the right one on its Back button, also after a reload.
     history.pushState({ from: window.location.pathname }, "", path);
     window.dispatchEvent(new PopStateEvent("popstate"));
-    window.scrollTo(0, 0);
+    if (!options.keepScroll) window.scrollTo(0, 0);
   }
 }
-// The route for the address bar. An old "/more" link is replaced by "/you" in place (T-01.1-07: the
-// target is the fixed internal path, never taken from the address), so Back does not return to it.
+// The route for the address bar. Two old addresses are replaced in place by their new home (T-01.1-07, T-01.2-01: the
+// target is a fixed internal path, never taken from the address), so Back does not return to them: "/more" by "/you",
+// "/circles" by "/community/circles".
 export function currentRoute(): Route {
+  const path = location.pathname === "/circles/" ? "/circles" : location.pathname;
+  if (path === "/circles") {
+    history.replaceState({}, "", "/community/circles");
+    return parseRoute("/community/circles");
+  }
   const route = parseRoute(location.pathname, location.search);
   if (route.page !== "more") return route;
   history.replaceState({}, "", "/you");

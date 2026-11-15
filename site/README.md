@@ -181,11 +181,14 @@ stops the build.
   A navigation item gets `ready: true` in the same change that adds its page, so the site
   never links to a page that does not exist.
 - `/styleguide` is an internal reference page: not in the navigation, not indexed.
-- Two themes (Cover and story, the default; Marked page) with Light and Lamplight modes. The
+- Two themes (Cover and story, the default; Marked page) with Light and Night light modes. The
   modes follow the visitor's device unless they pick one with the switch in the footer
-  (Theme: Cover and story, Marked page; Lamplight: Automatic, On, Off). The choices are kept
+  (Theme: Cover and story, Marked page; Night light: Automatic, Day, Night light), with one
+  hint line under it that says what the current choice does. The choices are kept
   in the browser as `hfg-look` and `hfg-lamplight` (the older `hfg-theme` is read once and
-  removed) and applied in the page head, before the page is drawn. Without JavaScript the
+  removed); the stored values of `hfg-lamplight` (`auto`, `on`, `off`) did not change when
+  the mode was renamed, so an earlier choice still applies (Day writes `off`, Night light
+  writes `on`), and the page's `data-mode` is still `lamplight` or `light`. The choices are applied in the page head, before the page is drawn. Without JavaScript the
   switch stays hidden and the page follows the device.
 - The home opens on the newest published context check (`featuredChecks()` in
   `src/lib/content.ts`, AI-unreviewed ones included and labelled), with a bookcase of the six

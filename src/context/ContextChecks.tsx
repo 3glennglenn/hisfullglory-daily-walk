@@ -16,9 +16,10 @@ export function ContextChecks() {
   const { state } = usePlatform();
   const unpublished = new URLSearchParams(location.search).get("unpublished") === "1";
   const finished = new Set(state.shelf.map((entry) => entry.slug));
-  // Back names the screen the reader came from: the shelf, the Bible library, or Today.
+  // Back names the screen the reader came from: the shelf, the Bible library, or Today; opened directly it is Bible,
+  // the list's home (Bible, Study) (01.2 D-03, D-04).
   const from = cameFrom();
-  const back = from === "/shelf" ? { name: "Your shelf", to: "/shelf" } : from.startsWith("/bible") ? { name: "Bible", to: "/bible" } : { name: "Today", to: "/" };
+  const back = from === "/shelf" ? { name: "Your shelf", to: "/shelf" } : from === "/" ? { name: "Today", to: "/" } : { name: "Bible", to: "/bible" };
   return (
     <section className="grouped-screen">
       <Toolbar back={back.name} to={back.to} />

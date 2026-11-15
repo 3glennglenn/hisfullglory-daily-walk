@@ -27,6 +27,7 @@ export function radioKeyTarget<T extends string>(key: string, values: readonly T
 export function Segmented<T extends string>({
   label,
   labelledBy,
+  describedBy,
   value,
   options,
   scroll = false,
@@ -36,6 +37,8 @@ export function Segmented<T extends string>({
   label?: string;
   /** The id of the visible heading that names the group. */
   labelledBy?: string;
+  /** The id of the line that says what the chosen option does. */
+  describedBy?: string;
   value: T;
   options: readonly SegmentedOption<T>[];
   /** One row that scrolls sideways instead of sharing the width. */
@@ -67,6 +70,7 @@ export function Segmented<T extends string>({
       role="radiogroup"
       aria-label={label}
       aria-labelledby={labelledBy}
+      aria-describedby={describedBy}
       onKeyDown={onKeyDown}
     >
       {options.map((option) => (

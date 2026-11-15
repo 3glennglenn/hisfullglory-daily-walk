@@ -48,7 +48,7 @@ export async function checkShelfScreen(browser, base, published) {
       const where = " at " + width + "px";
       assert.equal(await page.locator("main h1").innerText(), "Your shelf");
       assert.equal(await page.locator(".shelf-count").innerText(), `${nine.length} context checks read. Your shelf only grows.`);
-      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "opened directly, Back names Today");
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "opened directly, Back names Bible (its home)");
 
       const links = page.locator('ul[aria-label="Your shelf"] a');
       assert.equal(await links.count(), nine.length, "one link per finished check" + where);
@@ -208,7 +208,8 @@ export async function checkShelfScreen(browser, base, published) {
     }
   }
 
-  // Where the shelf is opened from decides what Back says; You has the row with the count.
+  // The shelf opens from Bible, Study and Back names Bible and returns to Study, also after a reload; the You sheet has no
+  // Your shelf row (01.2 D-04: the shelf lives in Bible, Study).
   {
     const { context, page, problems } = await open(browser, base, "/", { width: 390, height: 844 });
     try {
@@ -216,24 +217,36 @@ export async function checkShelfScreen(browser, base, published) {
         page,
         nine.map((n) => n.entry),
       );
-      await page.goto(base + "/");
+      await page.goto(base + "/bible");
       await page.locator("main h1").waitFor();
-      await page.locator('.today a[href="/shelf"]').click();
+      await page.getByRole("radio", { name: "Study" }).click();
+      const shelfRow = page.getByRole("link", { name: /^Your shelf/ });
+      assert.equal(await shelfRow.locator(".list-row-value").innerText(), `${nine.length} read`, "the row counts the seeded shelf");
+      assert.equal(await shelfRow.locator(".mini-shelf").count(), 1, "the mini shelf is the row's picture once something stands on the shelf");
+      await shelfRow.click();
       await page.waitForURL("**/shelf");
-      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, "from Today, Back names Today");
-      await page.getByRole("button", { name: "Back to Today", exact: true }).click();
-      await page.waitForURL(base + "/");
-      await page.goto(base + "/you");
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "from Bible, Back names Bible");
+      await page.getByRole("button", { name: "Back to Bible", exact: true }).click();
+      await page.waitForURL("**/bible");
       await page.locator("main h1").waitFor();
-      const row = page.locator('a[href="/shelf"]');
-      assert.equal(await row.locator(".list-row-title").innerText(), "Your shelf");
-      assert.equal(await row.locator(".list-row-value").innerText(), `${nine.length} read`);
-      await row.click();
+      assert.equal(await page.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true", "Back returns to the library with Study chosen");
+      // Opened again, then reloaded: the entry remembers where it came from.
+      await page.getByRole("link", { name: /^Your shelf/ }).click();
       await page.waitForURL("**/shelf");
-      assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1, "from You, Back names You");
       await page.reload();
       await page.locator("main h1").waitFor();
-      assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1, "after a reload too");
+      assert.equal(await page.getByRole("button", { name: "Back to Bible", exact: true }).count(), 1, "after a reload too");
+      // Today has no shelf row any more (01.2 D-04): the shelf is reached from Bible, Study only.
+      await page.goto(base + "/");
+      await page.locator("main h1").waitFor();
+      assert.equal(await page.locator('.today a[href="/shelf"]').count(), 0, "Today has no shelf row");
+      assert.equal(await page.locator(".today .mini-shelf").count(), 0, "and no mini shelf");
+      await page.goto(base + "/you");
+      const sheet = page.getByRole("dialog", { name: "You", exact: true });
+      await sheet.waitFor();
+      assert.equal(await sheet.locator('a[href="/shelf"]').count(), 0, "the You sheet has no link to the shelf");
+      assert.equal(await sheet.getByText("Your shelf").count(), 0, "and no Your shelf row");
+      assert.equal(await sheet.getByText(/\d+ read/).count(), 0, "and no count of what was read");
       assert.deepEqual(problems, []);
     } finally {
       await context.close();

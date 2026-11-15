@@ -24,6 +24,7 @@ import {checkGoogle} from "../tests/google.browser.mjs";
 import {checkPushedScreens,checkSurfaces,checkTextSweep} from "../tests/remaining.browser.mjs";
 import {checkGive} from "../tests/give.browser.mjs";
 import {checkShop} from "../tests/shop.browser.mjs";
+import {checkNavigation,checkNoOldModeName,checkTwoTaps} from "../tests/navigation.browser.mjs";
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4173";
 // Every context check the site publishes, newest first, read at run time (the daily routine adds one a day).
 const contentDir = "site/content/context-checks";
@@ -67,8 +68,16 @@ page.on("console",message=>{if(message.type()==="error")consoleErrors.push(messa
 page.on("requestfailed",request=>networkFailures.push(new URL(request.url()).pathname));
 page.on("pageerror", (e) => errors.push(e.message));
 let checks = 0;
+let skipped = 0;
+// CHECK_ONLY="<regular expression>" runs only the checks whose label matches (case-insensitive) and counts the others as
+// skipped: a focused run while working on one screen. The full run (no variable) is the one that counts.
+const only = process.env.CHECK_ONLY ? new RegExp(process.env.CHECK_ONLY, "i") : null;
 page.setDefaultTimeout(10000);
 async function check(label, fn) {
+  if (only && !only.test(label)) {
+    skipped++;
+    return;
+  }
   await fn();
   checks++;
   console.log("PASS", label);
@@ -120,6 +129,23 @@ try {
         (list) => list.filter((b) => getComputedStyle(b).backgroundColor !== "rgba(0, 0, 0, 0)").map((b) => b.getAttribute("aria-label") ?? b.textContent),
       );
       assert.deepEqual(filled, ["Read the story: " + refLabel(expected.verse)], "exactly one filled button in main");
+      // Three things, no more (01.2 D-04): the title row holds one link, "You", and no "Shop"; the first list row after the
+      // cover is the walk row.
+      assert.deepEqual(
+        await page.locator(".today-head a, .today-head button").evaluateAll((list) => list.map((el) => el.getAttribute("aria-label") ?? el.textContent.trim())),
+        ["You"],
+        "the title row holds one control, You, and no Shop",
+      );
+      assert.equal(await page.locator('.today-head [aria-label="Shop"]').count(), 0, "no bag in the title row");
+      assert.equal(
+        await page.evaluate(() => {
+          const c = document.querySelector(".cover-wrap"), row = document.querySelector(".today .list-row");
+          return !!(c.compareDocumentPosition(row) & Node.DOCUMENT_POSITION_FOLLOWING) && row.getAttribute("href") === "/walk";
+        }),
+        true,
+        "the first list row after the cover is the walk row",
+      );
+      assert.equal(await page.locator('.today a[href="/shelf"]').count(), 0, "no shelf row on Today");
       assert.equal(await cover.getByRole("button").innerText(), "Read the story");
       // The old Home furniture is gone.
       for (const gone of ["Walk with Jesus", "Welcome to your daily walk", "A gentle rhythm", "Read Scripture", "Bring a prayer", "Reflect privately"])
@@ -180,13 +206,13 @@ try {
     },
   );
   await check("welcome questionnaire: once, on the first open of the app, five screens with Back and Skip for now, saved choices, never again, no hold on a deep link, both looks and modes, 200 % text", () => checkWelcome(browser, base));
-  await check("Lamplight is direction B's room: no leather slab, one pool of lamp light, the salmon pill, a sky with a star for each day walked and its line, the walk finish with today's star lit, the light modes unchanged, 200 % text", () => checkLamplight(browser, base));
-  await check("Today: its states, the walk and shelf rows, and what each look draws (UI-SPEC A1)", () => checkToday(browser, base, published));
+  await check("Night light is direction B's room: no leather slab, one pool of lamp light, the salmon pill, a sky with a star for each day walked (no line on Today), the walk finish with today's star lit, the light modes unchanged, 200 % text", () => checkLamplight(browser, base));
+  await check("Today: the newest context check, the walk row and the Study Bibles card; no bag, no shelf row, no star line (01.2 D-04); its states and what each look draws (UI-SPEC A1)", () => checkToday(browser, base, published));
   await check("Today on controlled content: no published check, an AI-written newest check, files the app cannot read", () => checkTodayFixture(browser, base));
-  await check("Today at 200 % text on 390 and 320px: no sideways scroll, nothing clipped, the button and the last row above the tab bar, tab labels on one line", () => checkTodayLargeText(browser, base, published));
+  await check("Today at 200 % text on 390 and 320px: no sideways scroll, nothing clipped, the button and the walk row above the tab bar, tab labels on one line", () => checkTodayLargeText(browser, base, published));
   await check("sponsor slot: nothing at any of the six places while no sponsor is set; a fixture sponsor shows only where it is listed, as a sponsored link without a query string", () => checkSponsor(browser, base));
   await check("context-check story: a full-screen flow with named steps that puts a finished story on the shelf once, and says so only when it was saved (UI-SPEC A7)", () => checkStoryFlow(browser, base, published));
-  await check("Your shelf: spines on boards (7 at 390px), AI badges and legend, tomorrow place, empty and large-text states, Back and the You row (UI-SPEC A9)", () => checkShelfScreen(browser, base, published));
+  await check("Your shelf: spines on boards (7 at 390px), AI badges and legend, tomorrow place, empty and large-text states, and its Back button (UI-SPEC A9)", () => checkShelfScreen(browser, base, published));
   await check("Context checks list newest first with its marks and AI labels; an unknown check shows two ways on (UI-SPEC A8, A16)", () => checkContextList(browser, base, published));
   await check("story end: the shelf moment settles once (none under Reduce Motion), the AI line, no sponsor, and the label on the share picture and the share text (UI-SPEC A7, D-06)", () => checkStoryEnd(browser, base, published));
   await check(
@@ -266,26 +292,25 @@ try {
     },
   );
   await check("the reader puts Scripture first: sticky toolbar, verses as text with one Tab stop, a heading per look (UI-SPEC A3)", () => checkReaderText(browser, base));
-  await check("the Bible library: context checks first, saved passages, testaments, books, chapter grids, Continue reading, the download states (UI-SPEC A2, A16)", () => checkLibrary(browser, base));
+  await check("the Bible library: context checks, saved passages, testaments, books, chapter grids, Continue reading, the download states (UI-SPEC A2, A16; 01.2 D-05)", () => checkLibrary(browser, base));
   await check("the title opens the picker, search sits behind More or an icon, sheets keep focus and swipe (UI-SPEC A3, A4)", () => checkReaderSheets(browser, base));
   await check("the end of the chapter: one filled Next, Mark as read, questions to carry, topics, the WEB line (UI-SPEC A3)", () => checkChapterEnd(browser, base));
   await check("Listen plays in a mini player above the tab bar, the spoken verse is gold, Stop gives focus back (UI-SPEC A3)", () => checkListen(browser, base));
   await check("a verse opens one sheet: highlight, save, journal, copy and share; a tap or a number opens it, a selection or a long press does not (UI-SPEC A4)", () => checkVerseSheet(browser, base));
   await check("the layers around a verse: Context, AI explanation, Community in a fixed order, each apart by words, icon, frame and colour; loading, none and failure say so (UI-SPEC 5.3, A4, A16)", () => checkLayers(browser, base));
   await check("the Community layer on a controlled service: its row, its page, its words offline (UI-SPEC A4, A16)", () => checkLayersCommunity(browser, base));
-  await check("the chapter sheet and its capsule: above the tab bar and the Lamplight notice, the old ?tab= links land in the right place, no unavailable feature is announced (UI-SPEC A3, A4, 8.2)", () => checkChapterSheet(browser, base));
+  await check("the chapter sheet and its capsule: above the tab bar, the old ?tab= links land in the right place, no unavailable feature is announced (UI-SPEC A3, A4, 8.2)", () => checkChapterSheet(browser, base));
   await check("?tab=community opens the chapter sheet at Community on a controlled service", () => checkCommunityLink(browser, base));
   await check(
     "private prayer lifecycle creates an answered journal without automatic publishing",
     async () => {
       await go("/pray");
-      await page.getByLabel("Title", { exact: true }).fill("A private prayer");
-      await page
-        .getByLabel("Prayer", { exact: true })
-        .fill("Please guide this ordinary day.");
-      await page
-        .getByRole("button", { name: "Save private prayer", exact: true })
-        .click();
+      await page.getByRole("button", { name: "New prayer", exact: true }).click();
+      const newPrayer = page.getByRole("dialog", { name: "New prayer", exact: true });
+      await newPrayer.getByLabel("Title", { exact: true }).fill("A private prayer");
+      await newPrayer.getByLabel("Prayer", { exact: true }).fill("Please guide this ordinary day.");
+      await newPrayer.getByRole("button", { name: "Save private prayer", exact: true }).click();
+      await newPrayer.waitFor({ state: "detached" });
       await page.getByLabel("Move to").selectOption("Waiting");
       await page.getByLabel("Move to").selectOption("Answered");
       await page
@@ -309,7 +334,7 @@ try {
     },
   );
   await check(
-    "Pray is one quiet screen; updates and edits of a private prayer use a text sheet, deletion a confirmation (UI-SPEC A10, A15, E18)",
+    "My prayers opens with the list; New prayer in a sheet; updates and edits in a text sheet, deletion in a confirmation (01.2 D-07, UI-SPEC A15)",
     async () => {
       const browserDialogs = [];
       const onDialog = (d) => {
@@ -320,24 +345,74 @@ try {
       const prayers = () =>
         page.evaluate(() => JSON.parse(localStorage.getItem("hfg-daily-walk:v3")).prayers);
       try {
+        const emptySentence = "Your prayers stay on this device. Write the first one when you are ready.";
+        const filled = () =>
+          page.evaluate(() =>
+            [...document.querySelectorAll("main button")]
+              .filter((b) => !b.classList.contains("secondary") && !b.classList.contains("toolbar-back") && b.getAttribute("role") !== "radio")
+              .map((b) => b.textContent.trim()),
+          );
+        // Nothing may leave the device while a prayer is written: no request to another origin, none that sends a body.
+        const leaving = [];
+        const onRequest = (request) => {
+          if (new URL(request.url()).origin !== new URL(base).origin || !["GET", "HEAD", "OPTIONS"].includes(request.method())) leaving.push(request.method() + " " + request.url());
+        };
+        page.on("request", onRequest);
+        // A reader with no prayers yet.
+        await page.evaluate(() => {
+          const s = JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));
+          localStorage.setItem("hfg-daily-walk:v3", JSON.stringify({ ...s, prayers: [] }));
+        });
         await go("/pray");
         assert.equal(await page.locator("main h1").count(), 1);
-        assert.equal(await page.locator("main h1").innerText(), "Pray");
-        const segments = page.getByRole("radiogroup", { name: "Prayer views", exact: true });
-        assert.deepEqual(await segments.getByRole("radio").allInnerTexts(), ["Private prayers", "Prayer and praise"]);
-        assert.equal(await segments.getByRole("radio", { name: "Private prayers" }).getAttribute("aria-checked"), "true");
-        assert.deepEqual(
-          await page.evaluate(() =>
-            [...document.querySelectorAll("main button")]
-              .filter((b) => !b.classList.contains("secondary") && b.getAttribute("role") !== "radio")
-              .map((b) => b.textContent.trim()),
-          ),
-          ["Save private prayer"],
-          "the only filled button on the private view",
-        );
+        assert.equal(await page.locator("main h1").innerText(), "My prayers");
+        assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1);
+        assert.equal(await page.getByRole("radiogroup", { name: "Prayer views", exact: true }).count(), 0, "the public view left this screen");
+        assert.equal(await page.getByText(emptySentence, { exact: true }).count(), 1);
+        assert.equal(await page.getByRole("radiogroup", { name: "Prayer filter", exact: true }).count(), 0, "no filter before the first prayer");
+        assert.deepEqual(await filled(), ["New prayer"], "the only filled button of the empty state");
         const mainText = await page.locator("main").innerText();
-        assert.ok(!/Resources|shop|study bibles/i.test(mainText), "no Resources or shop link on Pray");
-        assert.equal(await page.locator('main a[href*="shop"]').count(), 0);
+        assert.ok(!/Resources|shop|study bibles/i.test(mainText), "no Resources or shop link on My prayers");
+        assert.equal(await page.locator('main a[href*="shop"], main a[href*="/give"]').count(), 0);
+
+        // New prayer opens the form in a sheet; Escape keeps the typed words while the screen stays open; saving writes locally only.
+        const newButton = page.getByRole("button", { name: "New prayer", exact: true });
+        const form = page.getByRole("dialog", { name: "New prayer", exact: true });
+        await newButton.click();
+        await form.waitFor();
+        assert.equal(await form.getByLabel("Title", { exact: true }).getAttribute("maxlength"), "120");
+        assert.equal(await form.getByLabel("Prayer", { exact: true }).getAttribute("maxlength"), "10000");
+        await form.getByLabel("Title", { exact: true }).fill("A half-written title");
+        await page.keyboard.press("Escape");
+        await form.waitFor({ state: "detached" });
+        assert.equal((await prayers()).length, 0, "Escape saved nothing");
+        await newButton.click();
+        await form.waitFor();
+        assert.equal(await form.getByLabel("Title", { exact: true }).inputValue(), "A half-written title", "the words are kept while the screen is open");
+        await form.getByLabel("Title", { exact: true }).fill("A private prayer");
+        await form.getByLabel("Prayer", { exact: true }).fill("Please guide this ordinary day.");
+        await form.getByRole("button", { name: "Save private prayer", exact: true }).click();
+        await form.waitFor({ state: "detached" });
+        await page.getByText("Saved privately on this device.", { exact: true }).waitFor();
+        await page.waitForTimeout(100);
+        assert.equal(await page.evaluate(() => document.activeElement?.textContent?.trim()), "New prayer", "focus returns to New prayer");
+        assert.equal((await prayers()).length, 1);
+        assert.equal((await prayers())[0].title, "A private prayer");
+        assert.deepEqual(leaving, [], "saving a prayer sent nothing anywhere");
+        page.off("request", onRequest);
+        // The list: a filter, the prayer, the privacy line under it.
+        assert.deepEqual(await filled(), ["New prayer"], "still one filled button");
+        assert.equal(await page.getByText(emptySentence, { exact: true }).count(), 0);
+        assert.equal(await page.getByText("Your prayers can stay entirely private. Nothing is uploaded automatically.", { exact: true }).count(), 1);
+        const filter = page.getByRole("radiogroup", { name: "Prayer filter", exact: true });
+        assert.deepEqual(await filter.getByRole("radio").allInnerTexts(), ["All", "Active", "Waiting", "Answered"]);
+        assert.equal(await filter.getByRole("radio", { name: "All", exact: true }).getAttribute("aria-checked"), "true");
+        assert.equal(await page.locator("main article").count(), 1);
+        await filter.getByRole("radio", { name: "Answered", exact: true }).click();
+        assert.equal(await page.locator("main article").count(), 0, "an Active prayer is not under Answered");
+        await filter.getByRole("radio", { name: "Active", exact: true }).click();
+        assert.equal(await page.locator("main article").count(), 1);
+        await filter.getByRole("radio", { name: "All", exact: true }).click();
 
         // An update, in a sheet.
         const update = page.getByRole("dialog", { name: "A private prayer update", exact: true });
@@ -443,6 +518,7 @@ try {
         await del.getByRole("button", { name: "Delete prayer", exact: true }).click();
         await del.waitFor({ state: "detached" });
         assert.equal((await prayers()).length, 0);
+        assert.equal(await page.getByText(emptySentence, { exact: true }).count(), 1, "with no prayer left the invitation is back");
         assert.deepEqual(browserDialogs, [], "no browser pop-up appeared");
       } finally {
         page.off("dialog", onDialog);
@@ -681,39 +757,13 @@ try {
     },
   );
   await check(
-    "You, Appearance: theme and Lamplight apply at once, survive a reload, and Automatic follows the device",
+    "You and Appearance: theme and Night light apply at once, survive a reload, and Automatic follows the device (01.2 D-08)",
     async () => {
-      // The row on You names the current choice; Settings no longer has a Theme select.
-      await go("/you");
-      const row = page.getByRole("link", { name: /^Appearance/ });
-      assert.equal(await row.locator(".list-row-value").innerText(), "Cover and story, Automatic");
-      assert.equal(await row.getAttribute("href"), "/settings/appearance");
-      await go("/settings");
-      assert.equal(await page.getByLabel("Theme", { exact: true }).count(), 0, "no Theme select in Settings");
-      await go("/settings/appearance");
-      assert.equal(await page.locator("main h1").innerText(), "Appearance");
-      const themes = page.getByRole("radiogroup", { name: "Theme", exact: true });
-      const lamplight = page.getByRole("radiogroup", { name: "Lamplight", exact: true });
-      assert.deepEqual(await themes.getByRole("radio").allInnerTexts(), ["Cover and story", "Marked page"]);
-      assert.deepEqual(await lamplight.getByRole("radio").allInnerTexts(), ["Automatic", "On", "Off"]);
-      assert.equal(await themes.getByRole("radio", { name: "Cover and story" }).getAttribute("aria-checked"), "true");
-      assert.equal(await lamplight.getByRole("radio", { name: "Automatic" }).getAttribute("aria-checked"), "true");
-      assert.equal(await page.getByRole("button", { name: /save/i }).count(), 0, "no Save button");
-      assert.ok(
-        await page
-          .getByText("Lamplight dims the page to warm browns for reading at night. Automatic follows your device.", { exact: true })
-          .isVisible(),
-      );
-      // The tiles are at least 152 x 176 and the segments 44px tall.
-      for (const tile of await themes.getByRole("radio").all()) {
-        const box = await tile.boundingBox();
-        assert.ok(box.width >= 152 && box.height >= 176, "tile size " + JSON.stringify(box));
-      }
-      for (const segment of await lamplight.getByRole("radio").all())
-        assert.ok((await segment.boundingBox()).height >= 43.9, "segment is 44px tall");
-      // Choosing applies at once, with no Save.
-      await themes.getByRole("radio", { name: "Marked page" }).click();
-      await lamplight.getByRole("radio", { name: "On", exact: true }).click();
+      const hints = {
+        auto: "Follows your device: Night light when it is dark.",
+        off: "Always the light pages.",
+        on: "Always Night light: warm and dim for reading at night.",
+      };
       const seen = () =>
         page.evaluate(() => ({
           look: document.documentElement.dataset.look,
@@ -723,40 +773,105 @@ try {
           stored: [localStorage.getItem("hfg-look"), localStorage.getItem("hfg-lamplight")],
           themeColor: document.querySelector('meta[name="theme-color"]').getAttribute("content"),
         }));
+      // In the You sheet: the mode control inline, with one hint line, then the Theme row to the Appearance screen.
+      await go("/you");
+      const sheet = page.getByRole("dialog", { name: "You", exact: true });
+      await sheet.waitFor();
+      const inline = sheet.getByRole("radiogroup", { name: "Appearance", exact: true });
+      assert.deepEqual(await inline.getByRole("radio").allInnerTexts(), ["Automatic", "Day", "Night light"]);
+      assert.equal(await inline.getByRole("radio", { name: "Automatic" }).getAttribute("aria-checked"), "true");
+      const hintId = await inline.getAttribute("aria-describedby");
+      assert.ok(hintId, "the radiogroup is described by its hint");
+      const hintLine = sheet.locator('[id="' + hintId + '"]');
+      assert.equal(await hintLine.innerText(), hints.auto);
+      assert.equal(await sheet.locator(".appearance-hint").count(), 1, "one hint line");
+      for (const segment of await inline.getByRole("radio").all())
+        assert.ok((await segment.boundingBox()).height >= 43.9, "inline segment is 44px tall");
+      const theme = sheet.getByRole("link", { name: /^Theme/ });
+      assert.equal(await theme.locator(".list-row-value").innerText(), "Cover and story");
+      assert.equal(await theme.getAttribute("href"), "/settings/appearance");
+      assert.equal(await sheet.getByRole("link", { name: /^Appearance/ }).count(), 0, "Appearance is a control now, not a row");
+      // Choosing there applies at once, changes the hint and leaves the sheet and the focus where they are.
+      await inline.getByRole("radio", { name: "Night light", exact: true }).click();
+      assert.deepEqual(
+        await seen(),
+        { look: "cover", mode: "lamplight", color: "rgb(246, 240, 231)", background: "rgb(26, 18, 14)", stored: [null, "on"], themeColor: "#1A120E" },
+        "Night light in the sheet applies at once",
+      );
+      assert.equal(await hintLine.innerText(), hints.on);
+      assert.equal(await page.evaluate(() => document.activeElement?.textContent), "Night light", "focus stays on the choice");
+      assert.ok(await sheet.isVisible(), "the sheet stays open");
+      await inline.getByRole("radio", { name: "Day", exact: true }).click();
+      assert.equal(await page.evaluate(() => localStorage.getItem("hfg-lamplight")), "off", "Day is stored as off");
+      assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
+      assert.equal(await hintLine.innerText(), hints.off);
+      await inline.getByRole("radio", { name: "Automatic", exact: true }).click();
+      assert.equal(await hintLine.innerText(), hints.auto);
+      // The Theme row leads to the Appearance screen.
+      await theme.click();
+      await page.waitForURL((url) => url.pathname === "/settings/appearance");
+      await go("/settings");
+      assert.equal(await page.getByLabel("Theme", { exact: true }).count(), 0, "no Theme select in Settings");
+      await go("/settings/appearance");
+      assert.equal(await page.locator("main h1").innerText(), "Appearance");
+      const themes = page.getByRole("radiogroup", { name: "Theme", exact: true });
+      const mode = page.getByRole("radiogroup", { name: "Night light", exact: true });
+      assert.deepEqual(await themes.getByRole("radio").allInnerTexts(), ["Cover and story", "Marked page"]);
+      assert.deepEqual(await mode.getByRole("radio").allInnerTexts(), ["Automatic", "Day", "Night light"]);
+      assert.equal(await themes.getByRole("radio", { name: "Cover and story" }).getAttribute("aria-checked"), "true");
+      assert.equal(await mode.getByRole("radio", { name: "Automatic" }).getAttribute("aria-checked"), "true");
+      assert.equal(await page.getByRole("button", { name: /save/i }).count(), 0, "no Save button");
+      const screenHint = page.locator("main .appearance-hint");
+      assert.equal(await screenHint.count(), 1, "one hint line on the screen");
+      assert.equal(await screenHint.innerText(), hints.auto);
+      assert.equal(await page.locator(".appearance-now").count(), 0, "no current-effect line any more");
+      // The tiles are at least 152 x 176 and the segments 44px tall.
+      for (const tile of await themes.getByRole("radio").all()) {
+        const box = await tile.boundingBox();
+        assert.ok(box.width >= 152 && box.height >= 176, "tile size " + JSON.stringify(box));
+      }
+      for (const segment of await mode.getByRole("radio").all())
+        assert.ok((await segment.boundingBox()).height >= 43.9, "segment is 44px tall");
+      // Choosing applies at once, with no Save.
+      await themes.getByRole("radio", { name: "Marked page" }).click();
+      await mode.getByRole("radio", { name: "Night light", exact: true }).click();
       const marked = { look: "marked", mode: "lamplight", color: "rgb(246, 240, 231)", background: "rgb(26, 18, 14)", stored: ["marked", "on"], themeColor: "#1A120E" };
-      assert.deepEqual(await seen(), marked, "Marked page and Lamplight On apply at once");
+      assert.deepEqual(await seen(), marked, "Marked page and Night light apply at once");
+      assert.equal(await screenHint.innerText(), hints.on);
       assert.equal(await themes.getByRole("radio", { name: "Marked page" }).getAttribute("aria-checked"), "true");
       await page.reload();
       await page.locator("main h1").waitFor();
       assert.deepEqual(await seen(), marked, "both choices survive a reload");
-      assert.equal(await lamplight.getByRole("radio", { name: "On", exact: true }).getAttribute("aria-checked"), "true");
+      assert.equal(await mode.getByRole("radio", { name: "Night light", exact: true }).getAttribute("aria-checked"), "true");
       // The old key is not written any more.
       assert.equal(await page.evaluate(() => localStorage.getItem("hfg-appearance")), null);
       // Arrow keys move the choice within a group, and only the chosen option is in the Tab order.
-      await lamplight.getByRole("radio", { name: "On", exact: true }).focus();
+      await mode.getByRole("radio", { name: "Night light", exact: true }).focus();
       await page.keyboard.press("ArrowRight");
-      assert.equal(await lamplight.getByRole("radio", { name: "Off", exact: true }).getAttribute("aria-checked"), "true");
-      assert.equal(await page.evaluate(() => document.activeElement.textContent), "Off");
+      assert.equal(await mode.getByRole("radio", { name: "Automatic", exact: true }).getAttribute("aria-checked"), "true", "the arrow wraps to Automatic");
+      await page.keyboard.press("ArrowRight");
+      assert.equal(await mode.getByRole("radio", { name: "Day", exact: true }).getAttribute("aria-checked"), "true");
+      assert.equal(await page.evaluate(() => document.activeElement.textContent), "Day");
       assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
+      assert.equal(await screenHint.innerText(), hints.off);
       assert.deepEqual(
-        await lamplight.getByRole("radio").evaluateAll((list) => list.map((r) => r.tabIndex)),
-        [-1, -1, 0],
+        await mode.getByRole("radio").evaluateAll((list) => list.map((r) => r.tabIndex)),
+        [-1, 0, -1],
       );
-      // Automatic follows the device while the app is open, and says what it does now.
+      // Automatic follows the device while the app is open.
       await themes.getByRole("radio", { name: "Cover and story" }).click();
-      await lamplight.getByRole("radio", { name: "Automatic" }).click();
+      await mode.getByRole("radio", { name: "Automatic" }).click();
       await page.emulateMedia({ colorScheme: "light" });
       assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
-      assert.equal(await page.getByRole("status").filter({ hasText: "Off now" }).innerText(), "Off now, because your device is set to light.");
       await page.emulateMedia({ colorScheme: "dark" });
       await page.waitForFunction(() => document.documentElement.dataset.mode === "lamplight");
-      assert.equal(await page.getByRole("status").filter({ hasText: "On now" }).innerText(), "On now, because your device is set to dark.");
       assert.equal(await page.evaluate(() => document.documentElement.dataset.look), "cover");
-      // On and Off say nothing about the device.
-      await lamplight.getByRole("radio", { name: "Off", exact: true }).click();
-      assert.equal(await page.locator("p.appearance-now").innerText(), "");
+      assert.equal(await screenHint.innerText(), hints.auto, "Automatic keeps its hint on a dark device");
+      // Day holds whatever the device does.
+      await mode.getByRole("radio", { name: "Day", exact: true }).click();
+      assert.equal(await page.evaluate(() => document.documentElement.dataset.mode), "light");
       // Back to the state the other checks expect: Cover and story, Automatic, a light device.
-      await lamplight.getByRole("radio", { name: "Automatic" }).click();
+      await mode.getByRole("radio", { name: "Automatic" }).click();
       await page.emulateMedia({ colorScheme: "light" });
       await page.waitForFunction(() => document.documentElement.dataset.mode === "light");
     },
@@ -804,29 +919,26 @@ try {
     },
   );
   await check(
-    "Lamplight notice: says why, is announced once without moving focus, offers Keep or Turn off, steps aside, and never shows when the reader chose On or Off",
+    "No floating appearance notice (01.2 D-09): a dark device turns Night light on silently",
     async () => {
-      const sentence = "Lamplight is on, because your device is set to dark.";
-      const turnedOff = "Lamplight is off. You can turn it on in You, Appearance.";
-      // A new context per case: nothing stored unless the case presets it (only when absent, so a reload keeps
-      // what the app wrote). The status region is watched from the first moment it exists.
-      async function withNotice(options, run) {
+      // A new context per case: nothing stored unless the case presets it (only when absent, so a reload keeps what the
+      // app wrote). Every change of the page that could announce or show something is recorded from the first moment.
+      async function withApp(options, run) {
         const { store = {}, scheme = "dark", width = 390, path = "/" } = options;
         const c = await browser.newContext({ viewport: { width, height: 844 }, colorScheme: scheme, serviceWorkers: "block" });
         const p = await c.newPage();
         p.setDefaultTimeout(10000);
         await p.addInitScript((pairs) => {
           for (const [key, value] of pairs) if (localStorage.getItem(key) === null) localStorage.setItem(key, value);
-          window.__status = [];
-          let last;
+          // Anything that could carry a notice: a region, a live region with text, a card or a dialog added to the page.
+          window.__announced = [];
           new MutationObserver(() => {
-            const region = document.getElementById("lamplight-status");
-            if (!region) return;
-            if (region.textContent !== last) {
-              last = region.textContent;
-              window.__status.push(last);
+            for (const el of document.querySelectorAll('[role="status"], [role="alert"], [aria-live], [role="region"], dialog, .lamplight-notice')) {
+              const text = (el.textContent || "").trim();
+              if (/night light|lamplight/i.test(text) || el.classList.contains("lamplight-notice") || el.id === "lamplight-status")
+                window.__announced.push(el.tagName + "#" + el.id + "." + el.className + ": " + text);
             }
-          }).observe(document, { childList: true, subtree: true, characterData: true });
+          }).observe(document, { childList: true, subtree: true, characterData: true, attributes: true });
         }, Object.entries(store));
         try {
           await p.goto(base + path);
@@ -836,292 +948,92 @@ try {
           await c.close();
         }
       }
-      const card = (p) => p.getByRole("region", { name: "Lamplight", exact: true });
       const noticeKey = (p) => p.evaluate(() => localStorage.getItem("hfg-lamplight-notice"));
-      // Longer than the notice's own start delay, so "never" means never.
+      const mode = (p) => p.evaluate(() => document.documentElement.dataset.mode);
+      const quiet = async (p, why) => {
+        assert.equal(await p.locator(".lamplight-notice").count(), 0, why + ": no notice card");
+        assert.equal(await p.locator("#lamplight-status").count(), 0, why + ": no status region of the notice");
+        assert.equal(await p.getByRole("region", { name: /lamplight|night light/i }).count(), 0, why + ": no region named after the mode");
+        assert.equal(await p.getByRole("button", { name: /keep|turn off|hide notice/i }).count(), 0, why + ": no notice buttons");
+        assert.deepEqual(await p.evaluate(() => window.__announced), [], why + ": nothing was shown or announced about the mode");
+      };
+      // Longer than the old notice's start delay, so "never" means never.
       const settle = (p) => p.waitForTimeout(1000);
 
-      // Shows with the sentence, announced once through the pre-rendered region, focus untouched, 44px buttons.
-      await withNotice({}, async (p) => {
-        const focusBefore = await p.evaluate(() => document.activeElement?.tagName);
-        await card(p).waitFor();
-        assert.equal(await card(p).locator("p").innerText(), sentence);
-        assert.deepEqual(await p.evaluate(() => window.__status), ["", sentence], "the region exists empty first, then holds the sentence once");
-        assert.equal(await p.locator("#lamplight-status").getAttribute("aria-live"), "polite");
-        assert.equal(await p.locator("#lamplight-status").getAttribute("role"), "status");
-        assert.equal(await p.evaluate(() => document.activeElement?.tagName), focusBefore, "focus is not moved");
-        assert.equal(await card(p).evaluate((el) => el.contains(document.activeElement)), false);
-        assert.deepEqual(await card(p).getByRole("button").allInnerTexts(), ["Keep Lamplight", "Turn off"]);
-        for (const button of await card(p).getByRole("button").all())
-          assert.ok((await button.boundingBox()).height >= 43.9, "button is 44px tall");
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}', "one showing is counted");
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight");
-        // Above the tab bar, 20px from the edges, nothing covered, nothing wider than the screen.
-        const geometry = await p.evaluate(() => {
-          const box = (el) => el.getBoundingClientRect();
-          const c = box(document.querySelector(".lamplight-notice"));
-          return {
-            card: { left: c.left, right: c.right, bottom: c.bottom, top: c.top },
-            bar: box(document.querySelector("nav.tabbar")).top,
-            width: innerWidth,
-            scrolls: document.documentElement.scrollWidth > innerWidth,
-            padding: parseFloat(getComputedStyle(document.querySelector("main")).paddingBottom),
-            variable: document.documentElement.style.getPropertyValue("--notice-h"),
-          };
-        });
-        assert.equal(geometry.card.left, 20);
-        assert.equal(geometry.width - geometry.card.right, 20);
-        assert.ok(geometry.card.bottom <= geometry.bar - 11.9, "12px above the tab bar: " + JSON.stringify(geometry));
-        assert.equal(geometry.scrolls, false);
-        assert.match(geometry.variable, /^\d+px$/);
-        // Main's bottom padding grows by the card while it shows, and shrinks back after.
-        await card(p).getByRole("button", { name: "Keep Lamplight" }).click();
-        const after = await p.evaluate(() => parseFloat(getComputedStyle(document.querySelector("main")).paddingBottom));
-        assert.ok(geometry.padding - after >= geometry.card.bottom - geometry.card.top, "padding grew by at least the card's height");
-        assert.equal(await p.evaluate(() => document.documentElement.style.getPropertyValue("--notice-h")), "");
-        assert.deepEqual(await p.evaluate(() => window.__status), ["", sentence, ""], "the region is emptied when the card closes");
-      });
-
-      // Turn off: Light at once, the key written, the second sentence and one button; gone after a reload.
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await card(p).getByRole("button", { name: "Turn off" }).click();
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "light");
-        assert.equal(await p.evaluate(() => localStorage.getItem("hfg-lamplight")), "off");
-        assert.equal(await card(p).locator("p").innerText(), turnedOff);
-        assert.deepEqual(await card(p).getByRole("button").allInnerTexts(), ["Hide notice"]);
-        assert.equal((await p.evaluate(() => window.__status)).at(-1), turnedOff, "the second sentence is announced too");
-        assert.equal(await p.evaluate(() => document.activeElement?.textContent), "Hide notice", "the pressed button's place is taken, focus is not lost");
-        assert.equal(await noticeKey(p), '{"shown":1,"done":true}');
-        await p.reload();
-        await p.locator("main h1").waitFor();
+      // A dark device at start with nothing stored: Night light on, silently; focus and address stay where they were.
+      await withApp({}, async (p) => {
+        const before = await p.evaluate(() => ({ url: location.href, focus: document.activeElement?.tagName }));
         await settle(p);
-        assert.equal(await card(p).count(), 0, "no card after a reload");
-      });
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await card(p).getByRole("button", { name: "Turn off" }).click();
-        await card(p).getByRole("button", { name: "Hide notice" }).click();
-        assert.equal(await card(p).count(), 0);
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "light");
-      });
-      // After Turn off the card also leaves on the next navigation.
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await card(p).getByRole("button", { name: "Turn off" }).click();
-        await card(p).getByRole("button", { name: "Hide notice" }).waitFor();
-        await p.getByRole("link", { name: "Bible", exact: true }).click();
-        await card(p).waitFor({ state: "detached" });
-      });
-
-      // Keep closes, keeps Automatic, and a reload shows nothing.
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await card(p).getByRole("button", { name: "Keep Lamplight" }).click();
-        assert.equal(await card(p).count(), 0);
-        assert.equal(await noticeKey(p), '{"shown":1,"done":true}');
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight", "Lamplight stays on");
+        assert.equal(await mode(p), "lamplight");
         assert.equal(await p.evaluate(() => localStorage.getItem("hfg-lamplight")), "auto", "the setting stays Automatic");
-        await p.reload();
-        await p.locator("main h1").waitFor();
-        await settle(p);
-        assert.equal(await card(p).count(), 0);
+        assert.deepEqual(await p.evaluate(() => ({ url: location.href, focus: document.activeElement?.tagName })), before, "focus and address are unchanged");
+        await quiet(p, "dark device at start");
+        assert.equal(await noticeKey(p), null, "nothing is written about a notice");
       });
 
-      // Escape acts only while focus is inside the card, closes it and leaves it unanswered.
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await p.getByRole("link", { name: "Pray", exact: true }).focus();
-        await p.keyboard.press("Escape");
-        assert.equal(await card(p).count(), 1, "Escape elsewhere does not dismiss the notice");
-        await card(p).getByRole("button", { name: "Keep Lamplight" }).focus();
-        await p.keyboard.press("Escape");
-        assert.equal(await card(p).count(), 0);
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}', "shown 1, still unanswered");
-        await p.waitForFunction(() => document.activeElement?.closest("nav.tabbar"));
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight");
-      });
-      // Unanswered and under three showings, it comes back at the next start.
-      await withNotice({ store: { "hfg-lamplight-notice": '{"shown":2,"done":false}' } }, async (p) => {
-        await card(p).waitFor();
-        assert.equal(await noticeKey(p), '{"shown":3,"done":false}');
+      // The device switches to dark and back while the app is open: the mode follows, nothing appears or is announced.
+      await withApp({ scheme: "light" }, async (p) => {
+        await settle(p);
+        assert.equal(await mode(p), "light");
+        const before = await p.evaluate(() => ({ url: location.href, focus: document.activeElement?.tagName }));
+        await p.emulateMedia({ colorScheme: "dark" });
+        await p.waitForFunction(() => document.documentElement.dataset.mode === "lamplight");
+        await settle(p);
+        await quiet(p, "device turned dark");
+        await p.emulateMedia({ colorScheme: "light" });
+        await p.waitForFunction(() => document.documentElement.dataset.mode === "light");
+        await settle(p);
+        await quiet(p, "device turned light");
+        assert.deepEqual(await p.evaluate(() => ({ url: location.href, focus: document.activeElement?.tagName })), before, "focus and address are unchanged");
+        assert.equal(await noticeKey(p), null);
       });
 
-      // Three showings are the most there are; an answer ends it; unreadable values count as none.
-      await withNotice({ store: { "hfg-lamplight-notice": '{"shown":3,"done":false}' } }, async (p) => {
-        await settle(p);
-        assert.equal(await card(p).count(), 0, "after three showings");
-      });
-      await withNotice({ store: { "hfg-lamplight-notice": '{"shown":0,"done":true}' } }, async (p) => {
-        await settle(p);
-        assert.equal(await card(p).count(), 0, "after an answer");
-      });
-      await withNotice({ store: { "hfg-lamplight-notice": "garbage" } }, async (p) => {
-        await card(p).waitFor();
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}');
-      });
-
-      // Never when the reader chose On or Off, and nothing is written about the notice then.
-      for (const choice of ["on", "off"]) {
-        await withNotice({ store: { "hfg-lamplight": choice } }, async (p) => {
+      // Night light and Day hold whatever the device does.
+      for (const [stored, want] of [["on", "lamplight"], ["off", "light"]]) {
+        await withApp({ store: { "hfg-lamplight": stored } }, async (p) => {
           await settle(p);
-          assert.equal(await card(p).count(), 0, "Lamplight " + choice);
+          assert.equal(await mode(p), want, stored + " on a dark device");
+          await quiet(p, stored);
+          await p.emulateMedia({ colorScheme: stored === "on" ? "light" : "dark" });
+          await settle(p);
+          assert.equal(await mode(p), want, stored + " holds when the device switches");
+          await quiet(p, stored + " after a switch");
           assert.equal(await noticeKey(p), null);
-          assert.deepEqual(await p.evaluate(() => window.__status), [""], "the region stayed empty");
         });
       }
-      // Nor on a light device at start.
-      await withNotice({ scheme: "light" }, async (p) => {
-        await settle(p);
-        assert.equal(await card(p).count(), 0);
-        // The device switches to dark while the app is open: the card appears, and closes silently when it turns light.
-        await p.emulateMedia({ colorScheme: "dark" });
-        await card(p).waitFor();
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "lamplight");
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}');
-        await p.emulateMedia({ colorScheme: "light" });
-        await card(p).waitFor({ state: "detached" });
-        assert.equal(await p.evaluate(() => document.documentElement.dataset.mode), "light");
-        assert.equal((await p.evaluate(() => window.__status)).at(-1), "", "the region is empty again");
-      });
 
-      // Ignored: it stays while the reader stays, and goes when another tab is opened (for this session).
-      await withNotice({}, async (p) => {
-        await card(p).waitFor();
-        await p.waitForTimeout(600);
-        assert.equal(await card(p).count(), 1, "no timer takes it away");
-        await p.getByRole("link", { name: "Bible", exact: true }).click();
-        await card(p).waitFor({ state: "detached" });
-        assert.equal(await noticeKey(p), '{"shown":1,"done":false}');
-        await p.getByRole("link", { name: "Today", exact: true }).click();
-        await settle(p);
-        assert.equal(await card(p).count(), 0, "it does not come back during the session");
-      });
+      // The old notice key, with any content, is removed once the app has started; nothing writes it again.
+      for (const old of ['{"shown":2,"done":false}', '{"shown":3,"done":false}', '{"shown":0,"done":true}', "garbage"]) {
+        await withApp({ store: { "hfg-lamplight-notice": old, "hfg-look": "marked" } }, async (p) => {
+          await p.waitForFunction(() => localStorage.getItem("hfg-lamplight-notice") === null);
+          await settle(p);
+          assert.equal(await noticeKey(p), null, "the old key " + old + " is gone");
+          assert.equal(await p.evaluate(() => localStorage.getItem("hfg-look")), "marked", "nothing else is removed");
+          await quiet(p, "old key " + old);
+          // Not written again by a switch of the device, a reload or a change of the choice.
+          await p.emulateMedia({ colorScheme: "light" });
+          await p.reload();
+          await p.locator("main h1").waitFor();
+          await settle(p);
+          assert.equal(await noticeKey(p), null);
+        });
+      }
 
-      // Large text on a narrow screen: the card stacks, stays above the tab bar and the page does not scroll sideways.
-      await withNotice({ width: 320 }, async (p) => {
-        await card(p).waitFor();
+      // 200 % text on 390px: no card, nothing sideways.
+      await withApp({ width: 390 }, async (p) => {
         await p.evaluate(() => {
           document.documentElement.style.fontSize = "34px";
           window.dispatchEvent(new Event("resize"));
         });
-        const geometry = await p.evaluate(() => {
-          const c = document.querySelector(".lamplight-notice").getBoundingClientRect();
-          return {
-            bottom: c.bottom,
-            left: c.left,
-            right: c.right,
-            bar: document.querySelector("nav.tabbar").getBoundingClientRect().top,
-            scrolls: document.documentElement.scrollWidth > innerWidth,
-            width: innerWidth,
-          };
-        });
-        assert.ok(geometry.bottom <= geometry.bar, "above the tab bar at 200 % text: " + JSON.stringify(geometry));
-        assert.ok(geometry.left >= 0 && geometry.right <= geometry.width);
-        assert.equal(geometry.scrolls, false);
+        await settle(p);
+        await quiet(p, "200 % text");
+        assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, "no sideways scroll");
       });
     },
   );
-  await check(
-    "five tabs are links with aria-current; no brand header or settings heart; /more lands on /you; You shows its sections",
-    async () => {
-      await page.setViewportSize({ width: 390, height: 844 });
-      await go("/");
-      const nav = page.getByRole("navigation", { name: "Main navigation" });
-      assert.equal(await nav.count(), 1, "one main navigation");
-      assert.deepEqual(await nav.getByRole("link").allInnerTexts(), ["Today", "Bible", "Pray", "Community", "You"]);
-      assert.equal(await nav.getByRole("button").count(), 0, "tabs are links, not buttons");
-      const hrefs = await nav.getByRole("link").evaluateAll((list) => list.map((a) => a.getAttribute("href")));
-      assert.deepEqual(hrefs, ["/", "/bible", "/pray", "/community", "/you"]);
-      assert.equal(await page.locator("header.brand, .brand-name").count(), 0, "no wordmark-and-slogan header");
-      assert.equal(await page.getByRole("button", { name: "Open settings" }).count(), 0, "no heart button that opens settings");
-      assert.equal(await page.getByText("JESUS AT THE CENTER").count(), 0, "no slogan row");
-      // The selected tab is the only one marked, for the route and for the screens pushed from it.
-      const selected = async () => nav.locator('a[aria-current="page"]').allInnerTexts();
-      for (const [path, tab] of [
-        ["/", "Today"],
-        ["/bible/psalms/23", "Bible"],
-        ["/pray", "Pray"],
-        ["/community", "Community"],
-        ["/community/circles", "Community"],
-        ["/you", "You"],
-        ["/profile", "You"],
-        ["/settings", "You"],
-        ["/settings/reminders", "You"],
-        ["/my-walk", "You"],
-        ["/journal", "You"],
-        ["/grow", "You"],
-        ["/give", "You"],
-        ["/shop", "You"],
-      ]) {
-        await go(path);
-        assert.deepEqual(await selected(), [tab], path);
-      }
-      // A tap on a tab navigates without a page load, and the selection follows.
-      await go("/");
-      await nav.getByRole("link", { name: "Bible", exact: true }).click();
-      await page.waitForURL("**/bible");
-      assert.deepEqual(await selected(), ["Bible"]);
-      await nav.getByRole("link", { name: "You", exact: true }).click();
-      await page.waitForURL("**/you");
-      assert.deepEqual(await selected(), ["You"]);
-      // An old /more link is replaced by /you in place, so Back does not return to it.
-      await page.goto(base + "/");
-      await page.goto(base + "/more");
-      await page.locator("main h1").first().waitFor();
-      assert.equal(new URL(page.url()).pathname, "/you");
-      assert.equal(await page.locator("main h1").innerText(), "You");
-      await page.goBack();
-      assert.equal(new URL(page.url()).pathname, "/", "Back from /you returns to where the old link was opened, not to /more");
-      // The sub-path allowlist: anything else is not found.
-      await go("/settings/other");
-      assert.equal(await page.locator("main h1").innerText(), "Page not found");
-      // You: the sections of UI-SPEC A12, in order, and one way to each screen.
-      await go("/you");
-      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Give where it helps most", "Study Bibles for your walk", "Your walk", "Settings", "About"]);
-      assert.match(await page.locator("main").innerText(), /Sign in\s+Join the community and keep your account safe\./);
-      assert.match(await page.locator("main").innerText(), /Days walked\s+\d+/);
-      assert.match(await page.locator("main").innerText(), /Daily reminder\s+Off/);
-      assert.match(await page.locator("main").innerText(), /Scripture: World English Bible, public domain\./);
-      for (const [name, path] of [
-        ["Sign in", "/profile"],
-        ["My Walk", "/my-walk"],
-        ["Journal", "/journal"],
-        ["Grow", "/grow"],
-        ["Daily rhythm", "/settings"],
-        ["Daily reminder", "/settings/reminders"],
-        ["Privacy and your data", "/settings#privacy"],
-        ["See where to give", "/give"],
-        ["Visit the shop", "/shop"],
-      ]) {
-        const row = page.getByRole("link", { name: new RegExp("^" + name) }).first();
-        assert.equal(await row.getAttribute("href"), path, name);
-        const box = await row.boundingBox();
-        assert.ok(box && box.height >= 52, name + " row is at least 52px tall");
-      }
-      assert.equal(await page.getByRole("link", { name: /^Privacy policy/ }).count(), 1, "the PR 27 legal links sit under About");
-      // Account and Settings are named for what they are, with the sections of UI-SPEC A12.
-      await go("/profile");
-      assert.equal(await page.locator("main h1").innerText(), "Account");
-      assert.ok((await page.locator("main h2").allInnerTexts()).includes("Account and privacy"));
-      assert.equal(await page.getByText("daily walks completed").count(), 0, "the stats card left Account");
-      await go("/settings");
-      assert.equal(await page.locator("main h1").innerText(), "Settings");
-      const settingsSections = await page.locator("main h2").allInnerTexts();
-      for (const name of ["Daily rhythm", "Privacy and your data", "About and legal"]) assert.ok(settingsSections.includes(name), name);
-      assert.equal(await page.getByText("Your rhythm, your settings.").count(), 0);
-      assert.equal(await page.getByText(/Browser storage\s+is unencrypted/).count(), 0, "the long privacy paragraph is gone");
-      assert.equal(await page.getByText("Your journal, prayers and reading progress stay on this device.").count(), 1);
-      // /settings/reminders opens the Reminders screen under a way back to You.
-      await go("/settings/reminders");
-      assert.equal(await page.locator("main h1").innerText(), "Daily reminder");
-      // Privacy and your data is reached from You and scrolls into view.
-      await go("/you");
-      await page.getByRole("link", { name: /^Privacy and your data/ }).click();
-      await page.waitForURL("**/settings#privacy");
-      await page.locator("#privacy").waitFor();
-    },
-  );
+  await check("a reader never sees the old name of the mode (01.2 D-08)", () => checkNoOldModeName(browser, base, published));
+  await check("three tabs, the You button and You as a sheet or a page; old addresses still work (01.2 D-01 to D-03)", () => checkNavigation(browser, base, published));
+  await check("every destination is at most two taps from a tab or You, at 390, 768 and 1180px, and every Back names where it goes (01.2 D-03, CALM-08)", () => checkTwoTaps(browser, base, published));
   await check(
     "primary routes fit 375/390/768/1280px in both themes with accessible controls",
     async () => {
@@ -1156,7 +1068,8 @@ try {
                 .getByRole("navigation", { name: "Main navigation" })
                 .getByRole("link")
                 .count(),
-              5,
+              width >= 768 ? 4 : 3,
+              `${path} ${width}: three tabs on a phone, four links (You too) in the sidebar`,
             );
             const invalidControls = await page
               .locator(
@@ -1208,7 +1121,8 @@ try {
           const plain = (b) => ({ left: b.left, right: b.right, top: b.top, bottom: b.bottom, width: b.width, height: b.height });
           const nav = document.querySelector("nav.tabbar");
           const bar = nav.getBoundingClientRect();
-          const items = [...nav.querySelectorAll("a")].map((a) => {
+          // You is a sidebar item only: below 768px it is not displayed and is not measured.
+          const items = [...nav.querySelectorAll("a")].filter((a) => a.offsetParent !== null).map((a) => {
             const label = a.querySelector(".tab-label");
             const style = getComputedStyle(label);
             return {
@@ -1236,7 +1150,7 @@ try {
           await go(path);
           const m = await measure();
           const where = `${path} at ${width}px`;
-          assert.deepEqual(m.items.map((i) => i.text), ["Today", "Bible", "Pray", "Community", "You"], where);
+          assert.deepEqual(m.items.map((i) => i.text), width >= 768 ? ["Today", "Bible", "Community", "You"] : ["Today", "Bible", "Community"], where);
           for (const item of m.items) {
             assert.ok(item.labelBox.height <= item.line + 0.5, `${where}: "${item.text}" is on one line (${item.labelBox.height} > ${item.line})`);
             assert.ok(item.box.left >= m.bar.left - 0.5 && item.box.right <= m.bar.right + 0.5, `${where}: "${item.text}" stays inside the bar`);
@@ -1247,8 +1161,8 @@ try {
           assert.ok(m.scrollWidth <= m.width, `${where}: no sideways scroll`);
           if (width < 768) {
             assert.equal(Math.round(m.bar.height), 64, `${where}: the capsule is 64px tall`);
-            assert.equal(Math.round(m.bar.left), 12, `${where}: 12px off the left edge`);
-            assert.equal(Math.round(m.width - m.bar.right), 12, `${where}: 12px off the right edge`);
+            assert.equal(Math.round(m.bar.left), 40, `${where}: 40px off the left edge`);
+            assert.equal(Math.round(m.width - m.bar.right), 40, `${where}: 40px off the right edge`);
             assert.equal(Math.round(m.height - m.bar.bottom), 12, `${where}: 12px above the bottom edge`);
             assert.ok(m.items.every((i) => i.size === m.items[0].size && Math.abs(i.size - 13) < 0.1), `${where}: labels are 13px`);
             assert.ok(m.items.every((i) => Math.abs(i.iconBox.width - 24) < 0.6), `${where}: icons are 24px`);
@@ -1258,7 +1172,7 @@ try {
           } else {
             assert.equal(Math.round(m.bar.width), 280, `${where}: a 280px sidebar`);
             assert.equal(Math.round(m.bar.left), 0);
-            assert.equal(await nav.getByRole("link").count(), 5, `${where}: five links in the sidebar`);
+            assert.equal(await nav.getByRole("link").count(), 4, `${where}: four links in the sidebar, You among them`);
             for (let i = 1; i < m.items.length; i++) assert.ok(m.items[i].box.top >= m.items[i - 1].box.bottom - 0.5, `${where}: the items are stacked`);
             for (const item of m.items) assert.ok(item.iconBox.right <= item.labelBox.left + 0.5, `${where}: "${item.text}" label sits beside its icon`);
             assert.ok(m.main.left >= 280 && m.main.width <= 680.5, `${where}: the content column is at most 680px, right of the sidebar (${m.main.left}, ${m.main.width})`);
@@ -1267,7 +1181,10 @@ try {
             assert.ok(Math.abs(gapLeft - gapRight) <= 40, `${where}: the column is centred in the rest (${gapLeft} / ${gapRight})`);
             assert.ok(m.main.width >= Math.min(680, m.width - 280 - 64) - 1, `${where}: the column uses the room it has`);
           }
-          assert.equal(await nav.locator('a[aria-current="page"]').count(), 1, `${where}: one selected tab`);
+          // /settings opened by its address on a phone has no tab root behind it, so it marks no tab (01.2 D-03); /you is the
+          // sheet over Today, and from 768px every screen of You marks You.
+          const wantSelected = path === "/settings" && width < 768 ? 0 : 1;
+          assert.equal(await nav.locator('a[aria-current="page"]').count(), wantSelected, `${where}: ${wantSelected} selected tab`);
         }
       }
       await page.setViewportSize(original);
@@ -1349,9 +1266,9 @@ try {
             const nav = document.querySelector("nav.tabbar");
             const bar = nav.getBoundingClientRect();
             return {
-              labels: [...nav.querySelectorAll(".tab-label")].map((l) => ({ text: l.textContent, height: l.getBoundingClientRect().height, line: parseFloat(getComputedStyle(l).lineHeight), size: parseFloat(getComputedStyle(l).fontSize) })),
-              icons: [...nav.querySelectorAll(".tab-icon")].map((i) => i.getBoundingClientRect().width),
-              items: [...nav.querySelectorAll("a")].map((a) => a.getBoundingClientRect()).map((b) => ({ left: b.left, right: b.right })),
+              labels: [...nav.querySelectorAll(".tab-label")].filter((l) => l.offsetParent !== null).map((l) => ({ text: l.textContent, height: l.getBoundingClientRect().height, line: parseFloat(getComputedStyle(l).lineHeight), size: parseFloat(getComputedStyle(l).fontSize) })),
+              icons: [...nav.querySelectorAll(".tab-icon")].filter((i) => i.offsetParent !== null).map((i) => i.getBoundingClientRect().width),
+              items: [...nav.querySelectorAll("a")].filter((a) => a.offsetParent !== null).map((a) => a.getBoundingClientRect()).map((b) => ({ left: b.left, right: b.right })),
               bar: { left: bar.left, right: bar.right, height: bar.height },
               overflows: nav.scrollWidth > nav.clientWidth,
               scrollWidth: document.documentElement.scrollWidth,
@@ -1414,7 +1331,8 @@ try {
         // Landscape: the side safe areas push the content in.
         await session.send("Emulation.setSafeAreaInsetsOverride", { insets: { top: 0, bottom: 21, left: 44, right: 44 } });
         await page.setViewportSize({ width: 700, height: 390 });
-        await go("/you");
+        // /settings, not /you: on a phone the h1 of /you is the tab root's, under the sheet.
+        await go("/settings");
         const side = await page.evaluate(() => {
           const h = document.querySelector("main h1").getBoundingClientRect();
           const bar = document.querySelector("nav.tabbar").getBoundingClientRect();
@@ -1623,66 +1541,183 @@ try {
     await go("/my-walk");assert.match(await page.locator("main").innerText(),/Grief/);
   });
   await check(
-    "Community is one calm screen: large title, the sentence, a Circles row, five sub-tabs in one scrolling row, topics without the repeated subtitle, the original chat as a disclosure row (UI-SPEC A11)",
+    "Community: Topics, Circles and Prayer wall, the footnote, search, Following and Saved, the live chat (01.2 D-06)",
     async () => {
+      const key = "hfg-daily-walk:v3";
+      const original = await page.evaluate((k) => JSON.parse(localStorage.getItem(k)), key);
+      const seed = (patch) =>
+        page.evaluate(([k, p]) => {
+          const s = JSON.parse(localStorage.getItem(k));
+          localStorage.setItem(k, JSON.stringify({ ...s, ...p }));
+        }, [key, patch]);
+      const footnote = "Scripture, practical help and encouragement. Experience shared here is not verified expertise.";
       try {
-        await page.setViewportSize({ width: 320, height: 568 });
+        for (const size of [{ width: 320, height: 568 }, { width: 390, height: 844 }]) {
+          await page.setViewportSize(size);
+          // A guest who follows and saves nothing sees no Following or Saved row.
+          await seed({ followedTopics: [], savedDiscussions: [], savedDiscussionTopics: {} });
+          await go("/community");
+          assert.equal(await page.locator("main h1").count(), 1);
+          assert.equal(await page.locator("main h1").innerText(), "Community");
+          assert.equal(await page.locator("main h1").getAttribute("class"), "large-title");
+          const search = page.getByRole("button", { name: "Search topics", exact: true });
+          const you = page.getByRole("link", { name: "You", exact: true });
+          for (const control of [search, you]) {
+            const box = await control.boundingBox();
+            assert.ok(box.width >= 44 && box.height >= 44, "Search topics and You are 44px targets at " + size.width);
+          }
+          // Three segments in one row that does not scroll sideways; Topics is chosen when the app opens.
+          const row = page.getByRole("radiogroup", { name: "Community sections", exact: true });
+          assert.deepEqual(await row.getByRole("radio").allInnerTexts(), ["Topics", "Circles", "Prayer wall"]);
+          assert.equal(await row.getByRole("radio", { name: "Topics", exact: true }).getAttribute("aria-checked"), "true");
+          const shape = await row.evaluate((el) => ({
+            scrolls: el.scrollWidth > el.clientWidth + 1,
+            tops: [...el.querySelectorAll('[role="radio"]')].map((r) => Math.round(r.getBoundingClientRect().top)),
+            heights: [...el.querySelectorAll('[role="radio"]')].map((r) => r.getBoundingClientRect().height),
+            page: document.documentElement.scrollWidth <= innerWidth + 1,
+          }));
+          assert.equal(shape.scrolls, false, "three segments fit " + size.width + "px without scrolling");
+          assert.equal(new Set(shape.tops).size, 1, "no segment wraps onto a second line");
+          for (const h of shape.heights) assert.ok(h >= 44, "segment height " + h);
+          assert.ok(shape.page, "the page does not scroll sideways");
+          // Topics: the eight launch topics as one grouped list, each only its name.
+          const names = await page.locator('main .group a.list-row[href^="/community/"]').allInnerTexts();
+          assert.equal(names.length, 8, "the eight launch topics");
+          for (const name of names) assert.ok(!name.includes("·") && !name.includes("Scripture"), "no repeated subtitle: " + name);
+          assert.equal(await page.getByRole("button", { name: /^(Following|Saved)\b/ }).count(), 0, "no Following or Saved row for a guest with nothing");
+          // The footnote is the last thing in the Community section, once.
+          assert.equal(await page.getByText(footnote, { exact: true }).count(), 1);
+          assert.equal(await page.evaluate(() => document.querySelector("main > section.community").lastElementChild.textContent), footnote);
+          // Live chat: the last row of the list, a closed disclosure.
+          const chat = page.locator("details.group-disclosure");
+          assert.equal(await chat.locator("summary").innerText(), "Live chat");
+          assert.equal(await chat.evaluate((el) => el.open), false);
+          assert.ok((await chat.locator("summary").evaluate((el) => el.getBoundingClientRect().height)) >= 52);
+          await chat.locator("summary").click();
+          await chat.getByLabel("Conversation room").waitFor();
+          assert.equal(await chat.getByRole("heading", { name: "Live chat", exact: true }).count(), 1);
+          await chat.locator("summary").click();
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+          // Following and Saved rows appear once the reader follows and saves; each opens a sheet with what the old sections showed.
+          const id = "a0000000-0000-4000-8000-000000000001";
+          await seed({ followedTopics: ["anxiety"], savedDiscussions: [id], savedDiscussionTopics: { [id]: "grief" } });
+          await go("/community");
+          const following = page.getByRole("button", { name: /^Following\b/ });
+          const saved = page.getByRole("button", { name: /^Saved\b/ });
+          assert.equal((await following.innerText()).replace(/\s+/g, " "), "Following 1");
+          assert.equal((await saved.innerText()).replace(/\s+/g, " "), "Saved 1");
+          for (const control of [following, saved]) assert.ok((await control.evaluate((el) => el.getBoundingClientRect().height)) >= 52);
+          assert.equal(await page.locator('main .group a.list-row[href^="/community/"]').count(), 8, "the rows do not add topics");
+          await following.click();
+          const sheetOne = page.getByRole("dialog", { name: "Following", exact: true });
+          await sheetOne.waitFor();
+          assert.equal(await sheetOne.getByText("Topics you chose to follow in this private local profile. Following does not publish membership.", { exact: true }).count(), 1);
+          assert.deepEqual(await sheetOne.locator("a.list-row").allInnerTexts(), ["Anxiety"]);
+          assert.equal(await sheetOne.locator("a.list-row").getAttribute("href"), "/community/anxiety");
+          await page.keyboard.press("Escape");
+          await sheetOne.waitFor({ state: "detached" });
+          await page.waitForTimeout(100);
+          assert.equal(await page.evaluate(() => document.activeElement?.innerText?.replace(/\s+/g, " ").trim()), "Following 1", "focus returns to the row");
+          await saved.click();
+          const sheetTwo = page.getByRole("dialog", { name: "Saved", exact: true });
+          await sheetTwo.waitFor();
+          assert.equal(await sheetTwo.getByText("Private links on this device. Opening a saved thread rechecks its visibility; removed or blocked content is unavailable.", { exact: true }).count(), 1);
+          assert.deepEqual(await sheetTwo.locator("a.list-row").allInnerTexts(), ["Saved discussion · Grief"]);
+          assert.equal(await sheetTwo.locator("a.list-row").getAttribute("href"), "/community/grief?thread=" + id);
+          await page.keyboard.press("Escape");
+          await sheetTwo.waitFor({ state: "detached" });
+          // Nothing followed or saved: the sheets say so. (Seeded back to empty with the account-less rows kept by a followed topic.)
+          await seed({ followedTopics: ["anxiety"], savedDiscussions: [], savedDiscussionTopics: {} });
+          await go("/community");
+          await page.getByRole("button", { name: /^Saved\b/ }).click();
+          await page.getByRole("dialog", { name: "Saved", exact: true }).getByText("No saved discussions yet.", { exact: true }).waitFor();
+          await page.keyboard.press("Escape");
+        }
+        // Search topics: a sheet with one labelled field; Anxiety for "anx"; its row opens the topic; Back keeps the segment.
+        await seed({ followedTopics: [], savedDiscussions: [], savedDiscussionTopics: {} });
         await go("/community");
-        assert.equal(await page.locator("main h1").count(), 1);
-        assert.equal(await page.locator("main h1").innerText(), "Community");
-        assert.equal(await page.locator("main h1").getAttribute("class"), "large-title");
-        assert.equal(
-          await page.getByText("Scripture, practical help and encouragement. Community experience and reputation are not verified expertise.", { exact: true }).count(),
-          1,
-        );
-        const circles = page.getByRole("link", { name: "Circles", exact: true });
-        assert.equal(await circles.getAttribute("href"), "/community/circles");
-        assert.ok((await circles.evaluate((el) => el.getBoundingClientRect().height)) >= 52);
-        // The five sections: one row that scrolls sideways and never wraps; the page itself does not.
         const row = page.getByRole("radiogroup", { name: "Community sections", exact: true });
-        assert.deepEqual(await row.getByRole("radio").allInnerTexts(), ["Topics", "Following", "Saved", "Testimonies", "Community feed"]);
-        const shape = await row.evaluate((el) => ({
-          scrolls: el.scrollWidth > el.clientWidth + 1,
-          overflowX: getComputedStyle(el).overflowX,
-          tops: [...el.querySelectorAll('[role="radio"]')].map((r) => Math.round(r.getBoundingClientRect().top)),
-          heights: [...el.querySelectorAll('[role="radio"]')].map((r) => r.getBoundingClientRect().height),
-          page: document.documentElement.scrollWidth <= innerWidth + 1,
-        }));
-        assert.ok(shape.scrolls, "five sections need more than 320px");
-        assert.equal(shape.overflowX, "auto");
-        assert.equal(new Set(shape.tops).size, 1, "no section wraps onto a second line");
-        for (const h of shape.heights) assert.ok(h >= 44, "section height " + h);
-        assert.ok(shape.page, "the page does not scroll sideways");
-        // The current section is brought into view; the edge shadow shows on the side with more to see.
-        await row.getByRole("radio", { name: "Community feed", exact: true }).click();
-        const seen = await row.evaluate((el) => {
-          const r = el.getBoundingClientRect();
-          const q = el.querySelector('[aria-checked="true"]').getBoundingClientRect();
-          return { inside: q.left >= r.left - 1 && q.right <= r.right + 1, label: el.querySelector('[aria-checked="true"]').textContent };
-        });
-        assert.equal(seen.label, "Community feed");
-        assert.ok(seen.inside, "the chosen section is scrolled into view");
-        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
-        await row.getByRole("radio", { name: "Topics", exact: true }).click();
-        // Topics: a grouped list of rows, each only its name.
-        const names = await page.locator('main .group a.list-row[href^="/community/"]:not([href="/community/circles"])').allInnerTexts();
-        assert.equal(names.length, 8, "the eight launch topics");
-        for (const name of names) assert.ok(!name.includes("·") && !name.includes("Scripture"), "no repeated subtitle: " + name);
-        assert.equal((await page.locator("main").innerText()).includes("practical encouragement"), false);
-        // The original chat and prayer wall is the last row, closed.
-        const chat = page.locator("details.group-disclosure");
-        assert.equal(await chat.locator("summary").innerText(), "Live chat and the original prayer wall");
-        assert.equal(await chat.evaluate((el) => el.open), false);
-        assert.ok((await chat.locator("summary").evaluate((el) => el.getBoundingClientRect().height)) >= 52);
-        assert.equal(await page.evaluate(() => document.querySelector("main").lastElementChild.tagName), "DETAILS");
-        // The Circles row goes to Circles and back.
-        await circles.click();
-        await page.waitForURL("**/community/circles");
+        await row.getByRole("radio", { name: "Circles", exact: true }).click();
+        assert.equal(await row.getByRole("radio", { name: "Circles", exact: true }).getAttribute("aria-checked"), "true");
+        const searchButton = page.getByRole("button", { name: "Search topics", exact: true });
+        await searchButton.click();
+        const dialog = page.getByRole("dialog", { name: "Search topics", exact: true });
+        await dialog.waitFor();
+        const field = dialog.getByLabel("Words to find", { exact: true });
+        await field.fill("   ");
+        await dialog.getByRole("button", { name: "Search", exact: true }).click();
+        assert.match(await dialog.getByRole("status").innerText(), /Type a word/);
+        await field.fill("zzzz");
+        await dialog.getByRole("button", { name: "Search", exact: true }).click();
+        assert.match(await dialog.getByRole("status").innerText(), /No topics found/);
+        await page.keyboard.press("Escape");
+        await dialog.waitFor({ state: "detached" });
+        await page.waitForTimeout(100);
+        assert.equal(await page.evaluate(() => document.activeElement?.getAttribute("aria-label")), "Search topics", "focus returns to the button");
+        await searchButton.click();
+        await dialog.waitFor();
+        await field.fill("anx");
+        await field.press("Enter");
+        assert.deepEqual(await dialog.locator("a.list-row").allInnerTexts(), ["Anxiety"]);
+        await dialog.locator("a.list-row").click();
+        await page.waitForURL("**/community/anxiety");
+        await page.getByRole("heading", { name: "Anxiety", exact: true }).waitFor();
         await page.goBack();
         await page.locator("main h1").waitFor();
         assert.equal(await page.locator("main h1").innerText(), "Community");
+        assert.equal(
+          await page.getByRole("radiogroup", { name: "Community sections", exact: true }).getByRole("radio", { name: "Circles", exact: true }).getAttribute("aria-checked"),
+          "true",
+          "Back shows Community on the segment chosen before",
+        );
+        // Circles: an honest line while no community service is configured, and always the way to start or join one.
+        const circlesRow = page.getByRole("radiogroup", { name: "Community sections", exact: true });
+        assert.equal(await page.getByText("Walk together around Scripture and shared encouragement.", { exact: true }).count(), 1);
+        assert.equal(await page.getByText("Circles are not available right now.", { exact: true }).count(), 1, "the preview has no community service");
+        assert.equal(await page.getByRole("heading", { name: "Circles", exact: true }).count(), 1);
+        assert.equal(await page.getByText(footnote, { exact: true }).count(), 1);
+        assert.equal(await page.evaluate(() => document.querySelector("main > section.community").lastElementChild.textContent), footnote);
+        const start = page.getByRole("link", { name: "Start or join a Circle", exact: true });
+        assert.equal(await start.getAttribute("href"), "/community/circles");
+        assert.ok((await start.evaluate((el) => el.getBoundingClientRect().height)) >= 52);
+        await start.click();
+        await page.waitForURL("**/community/circles");
+        await page.getByRole("button", { name: "Back to Community", exact: true }).click();
+        await page.locator("main h1").filter({ hasText: "Community" }).waitFor();
+        assert.equal(await circlesRow.getByRole("radio", { name: "Circles", exact: true }).getAttribute("aria-checked"), "true", "Back to Community lands on Circles");
+        // Prayer wall: the public prayers and praise, every kind in the Show filter, and the original prayer wall, closed.
+        await circlesRow.getByRole("radio", { name: "Prayer wall", exact: true }).click();
+        await page.getByRole("heading", { name: "Prayer and praise", exact: true }).waitFor();
+        assert.equal(
+          await page.getByText("Share a prayer request with the community and pray for others. Your private prayers stay under You.", { exact: true }).count(),
+          1,
+          "the Prayer wall says what it is for and where the private prayers are",
+        );
+        const show = page.getByRole("combobox", { name: /^Show/ });
+        assert.deepEqual(await show.evaluate((el) => [...el.options].map((o) => o.textContent)), ["All contributions", "reflection", "testimony", "memory", "encouragement", "prayer", "chat"]);
+        assert.equal(await show.inputValue(), "prayer", "the feed opens on prayers");
+        const wall = page.locator("details.group-disclosure");
+        assert.equal(await wall.locator("summary").innerText(), "The original prayer wall");
+        assert.equal(await wall.evaluate((el) => el.open), false);
+        assert.ok((await wall.locator("summary").evaluate((el) => el.getBoundingClientRect().height)) >= 52);
+        assert.equal(await page.getByText(footnote, { exact: true }).count(), 1);
+        assert.equal(await page.evaluate(() => document.querySelector("main > section.community").lastElementChild.textContent), footnote);
+        await wall.locator("summary").click();
+        await wall.getByRole("heading", { name: "Prayer Wall", exact: true }).waitFor();
+        assert.equal(await wall.getByRole("heading", { name: "Community", exact: true }).count(), 0, "the original wall keeps no second Community heading");
+        // The shop and Give are never placed on Community (CLAUDE.md, 01.2 D-10), on any segment.
+        for (const segment of ["Topics", "Circles", "Prayer wall"]) {
+          await circlesRow.getByRole("radio", { name: segment, exact: true }).click();
+          assert.equal(
+            await page.locator('main a[href*="/shop"], main a[href*="shop.hisfullglory.com"], main a[href*="/give"]').count(),
+            0,
+            "no shop or Give link on " + segment,
+          );
+          assert.ok(!/study bibles|give with intention/i.test(await page.locator("main").innerText()), "no shop or Give words on " + segment);
+        }
       } finally {
         await page.setViewportSize({ width: 375, height: 812 });
+        await page.evaluate(([k, s]) => localStorage.setItem(k, JSON.stringify(s)), [key, original]);
       }
     },
   );
@@ -1698,11 +1733,37 @@ try {
     assert.equal(await page.getByRole("button",{name:"Practice complete",exact:true}).isDisabled(),true);
     const state=await page.evaluate(()=>JSON.parse(localStorage.getItem("hfg-daily-walk:v3")));
     assert.deepEqual(state.pathProgress["return-to-scripture"],[0]);assert.deepEqual(state.challengeProgress["seven-days-in-scripture"],[0]);
+    // Grow is a row of My walk (01.2 D-03): Back names My walk when it was opened from there.
+    await go("/my-walk");
+    const growRow = page.getByRole("link", { name: /^Grow\b/ });
+    assert.equal(await growRow.getAttribute("href"), "/grow");
+    assert.match(await growRow.innerText(), /Journeys, paths and challenges/);
+    assert.equal(await page.getByRole("link", { name: /^My prayers\b/ }).getAttribute("href"), "/pray");
+    assert.equal(await page.getByRole("link", { name: /Open private prayers/ }).count(), 0, "the row reads My prayers now");
+    await growRow.click();
+    await page.waitForURL("**/grow");
+    await page.getByRole("button", { name: "Back to My walk", exact: true }).click();
+    await page.waitForURL("**/my-walk");
+    // My prayers names where it was opened from: My walk, and the walk's prayer step.
+    await page.getByRole("link", { name: /^My prayers\b/ }).click();
+    await page.waitForURL("**/pray");
+    await page.getByRole("button", { name: "Back to My walk", exact: true }).waitFor();
+    await page.evaluate(() => {
+      const s = JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));
+      localStorage.setItem("hfg-daily-walk:v3", JSON.stringify({ ...s, local: { ...s.local, completedDates: [] } }));
+    });
+    await go("/walk");
+    for (let i = 0; i < 6 && !(await page.getByRole("button", { name: "Save a private prayer", exact: true }).count()); i++)
+      await page.getByRole("button", { name: /^Continue to / }).click();
+    await page.getByRole("button", { name: "Save a private prayer", exact: true }).click();
+    await page.waitForURL("**/pray");
+    await page.getByRole("button", { name: "Back to Today's walk", exact: true }).click();
+    await page.waitForURL("**/walk");
   });
   await check("saved thread links persist locally and route through visibility checks",async()=>{
     const id="a0000000-0000-4000-8000-000000000001";
     await page.evaluate(id=>{const s=JSON.parse(localStorage.getItem("hfg-daily-walk:v3"));s.savedDiscussions=[id];s.savedDiscussionTopics={[id]:"grief"};localStorage.setItem("hfg-daily-walk:v3",JSON.stringify(s));},id);
-    await go("/community");await page.getByRole("radio",{name:"Saved",exact:true}).click();
+    await go("/community");await page.getByRole("button",{name:/^Saved\b/}).click();
     await page.getByRole("link",{name:"Saved discussion · Grief",exact:true}).click();
     assert.equal(new URL(page.url()).searchParams.get("thread"),id);
     assert.match(await page.locator("main").innerText(),/not configured/);
@@ -1796,9 +1857,9 @@ try {
   await check("Circles public/private lifecycle, roles, privacy, errors and responsive UI (controlled SDK)",()=>checkCircles(browser,base));
   await check("report dialog states, focus and sizes (controlled SDK)",()=>checkSafety(browser,base));
   await check("dialogs that replaced browser pop-ups: public contributions, public prayer updates, support requests (controlled SDK)",()=>checkDialogs(browser,base));
-  await check("Journal, My Walk and Grow are pushed screens of You: Back to You, one large title, no eyebrow, no uppercase text (UI-SPEC D-10, A12)",()=>checkPushedScreens(browser,base));
-  await check("Give: the card on You opens /give on page 1; the six pages change by tab, swipe and arrow keys; a card opens the outbound dialog with its host; nothing is loaded from the charities; 200 % text, the wide grid and Lamplight render",()=>checkGive(browser,base));
-  await check("Shop: the bag on Today and the card on You open the Shop screen; product links go to shop.hisfullglory.com/products/<handle>; both looks, Lamplight, 200 % text, no sideways scroll; nothing on Pray or Community links to the shop",()=>checkShop(browser,base));
+  await check("Journal, My walk and Grow are pushed screens of You: Back to You, one large title, no eyebrow, no uppercase text (UI-SPEC D-10, A12)",()=>checkPushedScreens(browser,base));
+  await check("the Give row in the You sheet opens /give on page 1; the six pages change by tab, swipe and arrow keys; a card opens the outbound dialog with its host; nothing is loaded from the charities; 200 % text, the wide grid and Lamplight render",()=>checkGive(browser,base));
+  await check("Shop: the Study Bibles card on Today and the row in Bible, Study open the Shop screen; the You sheet holds no shop; product links go to shop.hisfullglory.com/products/<handle>; Today loads nothing from another host; both looks, Night light, 200 % text, no sideways scroll; nothing calm links to the shop (01.2 D-10)",()=>checkShop(browser,base));
   await check("Give and its policy, the Shop screen, Circles, the not-found and crash screens and the install offer: shared primitives, one filled button, the words of A16 (UI-SPEC A12, A16, 9.3)",()=>checkSurfaces(browser,base));
   await check("200 % text sweep over every app route at 390 and 320px: no sideways scroll, nothing clipped, controls 44px, tab labels on one line, the first screen holds the title and content, no bare Cancel, OK, Done or Close button (UI-SPEC 15.4, 15.9)",()=>checkTextSweep(browser,base,published));
   assert.deepEqual(errors, []);
@@ -1806,7 +1867,7 @@ try {
   assert.deepEqual(consoleWarnings, [], "no unexpected main-page console warnings");
   assert.deepEqual(networkFailures, [], "no unexpected main-page network failures");
   console.log(
-    `${checks} browser flow checks passed; no page/console errors/warnings or unexpected main-page network failures; no screenshots captured.`,
+    `${checks} browser flow checks passed${skipped ? ` (${skipped} skipped by CHECK_ONLY)` : ""}; no page/console errors/warnings or unexpected main-page network failures; no screenshots captured.`,
   );
 } finally {
   await browser.close();

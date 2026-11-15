@@ -18,6 +18,7 @@ export function Sheet({
   back,
   returnFocus,
   className,
+  done,
   onClose,
   children,
 }: {
@@ -30,6 +31,8 @@ export function Sheet({
   /** Where focus goes on close; the element that was focused on open when this returns nothing. */
   returnFocus?: () => HTMLElement | null | undefined;
   className?: string;
+  /** The close button reads "Done" and is named "Done, close {object}" (01.2 N-03: the You sheet). */
+  done?: boolean;
   onClose: () => void;
   children: ReactNode;
 }) {
@@ -119,8 +122,13 @@ export function Sheet({
           <h2 id={titleId} tabIndex={-1} className={back ? "sheet-title sr-only" : "sheet-title"}>
             {title}
           </h2>
-          <button type="button" className="sheet-close" aria-label={`Close ${object ?? title}`} onClick={onClose}>
-            Close
+          <button
+            type="button"
+            className="sheet-close"
+            aria-label={done ? `Done, close ${object ?? title}` : `Close ${object ?? title}`}
+            onClick={onClose}
+          >
+            {done ? "Done" : "Close"}
           </button>
         </div>
       </div>

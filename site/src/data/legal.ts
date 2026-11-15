@@ -58,7 +58,7 @@ export const ageLabel = need(
 );
 
 // P6: the date of the founder's approval.
-export const lastUpdated = need("lastUpdated", "October 21, 2026");
+export const lastUpdated = need("lastUpdated", "November 9, 2026");
 
 // P7, P8: the law and the legal bases. Drafts proposed by Claude on 2026-10-19; the founder accepts
 // or changes them on the preview. "We" is the person named in `entity`.
@@ -178,7 +178,7 @@ export const processors: Processor[] = [
     name: "Shopify",
     does: "Runs the shop at shop.hisfullglory.com and manages the DNS records of our domain.",
     receives:
-      "What you give the shop when you order. Product pictures on our home page and Shop page, and in the app's You and Shop screens, load from Shopify, so Shopify also sees your IP address then. The shop has its own privacy policy, and your app account and your shop account are separate.",
+      "What you give the shop when you order. Product pictures on our home page and Shop page, and in the app's Shop screen, load from Shopify, so Shopify also sees your IP address then. The shop has its own privacy policy, and your app account and your shop account are separate.",
     where: "Set by Shopify. See the shop's own privacy policy.",
   },
   {
@@ -267,7 +267,7 @@ export const outboundHosts: OutboundHost[] = [
   // Written in the code.
   {
     host: "cdn.shopify.com",
-    purpose: "Product pictures on the website's home page and Shop page, and in the app's You and Shop screens.",
+    purpose: "Product pictures on the website's home page and Shop page, and in the app's Shop screen.",
     kind: "loaded by the page",
     processor: "shopify",
   },

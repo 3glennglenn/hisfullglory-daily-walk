@@ -68,10 +68,3 @@ export function starPositions(walked: readonly string[], today: string): Star[] 
   }
   return placed.slice(-MAX_STARS);
 }
-
-/** The line under the sky on Today: it carries the meaning, the sky itself is decoration. No count to beat, no zero. */
-export function skyLine(days: number): string {
-  if (days <= 0) return "Today's walk lights your first star.";
-  if (days === 1) return "1 day walked. It stays.";
-  return `${days} days walked. Each one stays.`;
-}

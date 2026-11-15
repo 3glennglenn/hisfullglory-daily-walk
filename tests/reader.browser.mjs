@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { build } from "esbuild";
 import { readdirSync, readFileSync } from "node:fs";
-import { publishedChecks } from "../src/context/checks.ts";
+import { aiUnreviewedCardLabel, publishedChecks, refLabel } from "../src/context/checks.ts";
 
 // The Bible reader in a real browser (UI-SPEC A2, A3, A4, A16). Each check opens its own context so a seeded
 // look, a text size or a stubbed browser API never leaks into the next one. They run against the built app.
@@ -232,7 +232,7 @@ async function seedState(page, change) {
 
 const focusedText = (page) => page.evaluate(() => document.activeElement?.textContent?.trim() ?? null);
 
-/** The library of A2: the context checks first, saved passages, the testaments, the books and their chapter grids. */
+/** The library of A2 and 01.2 D-05: Read and Study under the title row; Read holds Continue reading and the two testaments. */
 export async function checkLibrary(browser, base) {
   const ctx = await open(browser);
   try {
@@ -241,17 +241,138 @@ export async function checkLibrary(browser, base) {
     assert.equal(await page.locator("main h1").count(), 1);
     assert.equal(await page.locator("main h1").innerText(), "Bible");
     assert.equal(await page.getByRole("button", { name: "Search the Bible", exact: true }).count(), 1, "Search is an icon next to the title");
+    assert.equal(await page.getByRole("link", { name: "You", exact: true }).count(), 1, "the You button is in the title row");
+    // Two sections, Read chosen when the app opens.
+    const sections = page.getByRole("radiogroup", { name: "Bible sections" });
+    assert.deepEqual(await sections.getByRole("radio").allInnerTexts(), ["Read", "Study"]);
+    assert.equal(await sections.getByRole("radio", { name: "Read" }).getAttribute("aria-checked"), "true", "Read is chosen when the app opens");
     assert.equal(await page.getByText("Continue reading").count(), 0, "no Continue reading before a chapter was opened");
-    // The context checks are the library's first row, with the live count.
-    const n = published().length;
-    const row = page.getByRole("link", { name: /^Context checks/ });
-    assert.equal(await row.count(), 1);
-    assert.equal(await row.getAttribute("href"), "/context");
-    assert.equal(await row.innerText(), `Context checks\n${n === 1 ? "1 well-known verse, back in its story" : `${n} well-known verses, back in their story`}`);
-    const firstRows = await page.locator(".group").first().evaluate((el) => el.textContent);
-    assert.match(firstRows, /^Context checks/);
-    // Saved passages: empty, then with a bookmark.
+    assert.equal(await page.getByRole("link", { name: /^Context checks/ }).count(), 0, "the study tools are under Study, not Read");
+    // The testaments, counted from the Bible data.
+    const oldRow = page.getByRole("button", { name: /^Old Testament/ });
+    const newRow = page.getByRole("button", { name: /^New Testament/ });
+    assert.equal(await oldRow.innerText(), "Old Testament\n39 books");
+    assert.equal(await newRow.innerText(), "New Testament\n27 books");
+    // Old Testament: a sheet with 39 books and no Testament switch; Escape closes it and focus is back on the row.
+    await oldRow.click();
+    const oldSheet = page.getByRole("dialog", { name: "Old Testament", exact: true });
+    await oldSheet.waitFor();
+    assert.equal(await oldSheet.locator(".picker-books li").count(), 39);
+    assert.equal(await oldSheet.getByRole("radiogroup", { name: "Testament" }).count(), 0, "the sheet is fixed to one testament");
+    assert.equal(await oldSheet.getByRole("button", { name: "Genesis", exact: true }).count(), 1);
+    assert.equal(await oldSheet.getByRole("button", { name: "Matthew", exact: true }).count(), 0);
+    await page.keyboard.press("Escape");
+    await oldSheet.waitFor({ state: "detached" });
+    await page.waitForFunction(() => document.activeElement?.textContent?.trim().startsWith("Old Testament"), undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the Old Testament row"));
+    // New Testament: 27 books, John opens its 52 x 52 chapter buttons, Chapter 3 opens the chapter.
+    await newRow.click();
+    const newSheet = page.getByRole("dialog", { name: "New Testament", exact: true });
+    await newSheet.waitFor();
+    assert.equal(await newSheet.locator(".picker-books li").count(), 27);
+    await newSheet.getByRole("button", { name: "John", exact: true }).click();
+    assert.equal(await newSheet.getByRole("button", { name: "John", exact: true }).getAttribute("aria-expanded"), "true");
+    const cells = await page.locator(".chapter-cell").evaluateAll((els) => els.map((el) => ({ label: el.getAttribute("aria-label"), top: Math.round(el.getBoundingClientRect().top), w: Math.round(el.getBoundingClientRect().width), h: Math.round(el.getBoundingClientRect().height) })));
+    assert.equal(cells.length, 21, "John has 21 chapters");
+    assert.equal(cells[2].label, "Chapter 3");
+    assert.ok(cells.every((c) => c.w === 52 && c.h === 52), "52 x 52 buttons");
+    assert.ok(cells.filter((c) => c.top === cells[0].top).length >= 5, "at least 5 to a row at 390px");
+    await newSheet.getByRole("button", { name: "Chapter 3", exact: true }).click();
+    await page.waitForURL("**/bible/john/3");
+    assert.equal(await page.locator("main h1").innerText(), "John 3");
+    // Continue reading now names John 3.
+    await goto(page, base, "/bible");
+    const resume = page.getByRole("link", { name: /^Continue reading/ });
+    assert.equal(await resume.getAttribute("href"), "/bible/john/3");
+    assert.equal(await resume.innerText(), "Continue reading\nJohn 3");
+    // 320px: at least 5 to a row, 52 x 52, nothing scrolls sideways.
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.getByRole("button", { name: /^New Testament/ }).click();
+    const narrowSheet = page.getByRole("dialog", { name: "New Testament", exact: true });
+    await narrowSheet.waitFor();
+    await narrowSheet.getByRole("button", { name: "John", exact: true }).click();
+    const narrow = await page.locator(".chapter-cell").evaluateAll((els) => els.map((el) => ({ top: Math.round(el.getBoundingClientRect().top), w: Math.round(el.getBoundingClientRect().width), h: Math.round(el.getBoundingClientRect().height) })));
+    assert.ok(narrow.filter((c) => c.top === narrow[0].top).length >= 5, "at least 5 to a row at 320px");
+    assert.ok(narrow.every((c) => c.w === 52 && c.h === 52), "52 x 52 buttons at 320px");
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.deepEqual(ctx.problems, []);
+  } finally {
+    await ctx.context.close();
+  }
+  // Study: the study tools in one list, every count read from the app's data and files (UI-SPEC 2.2, D-05, D-10).
+  const study = await open(browser);
+  try {
+    const { page } = study;
+    await goto(page, base, "/bible");
+    const sections = page.getByRole("radiogroup", { name: "Bible sections" });
+    await sections.getByRole("radio", { name: "Study" }).click();
+    assert.equal(await sections.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true");
+    // The featured card comes first, in its own block above the list; the list starts with Study notes.
+    assert.equal(await page.locator(".library > .featured-check + .group").count(), 1, "the card stands right above the list");
+    assert.deepEqual(
+      await page.locator(".library .list-row-title").allInnerTexts(),
+      ["Study notes", "Saved passages", "Your shelf", "Study Bibles"],
+      "the list under the card, in the order of the spec; Context checks is not listed twice",
+    );
+    // Context checks: the count and the newest reference from the published checks, and the AI label when it applies.
+    const checks = published();
+    const newest = checks[0];
+    const contextRow = page.getByRole("link", { name: /^Context checks/ });
+    assert.equal(await contextRow.getAttribute("href"), "/context");
+    const n = checks.length;
+    const detail = n === 1 ? "1 well-known verse, back in its story" : `${n} well-known verses, back in their story`;
+    assert.equal(await contextRow.getAttribute("class"), "featured-check", "the card is the one link");
+    const contextLines = await contextRow.evaluate((el) => [...el.children].map((child) => child.textContent));
+    assert.deepEqual(
+      contextLines.slice(0, 3),
+      ["Context checks", detail, `Newest: ${refLabel(newest.verse)}`],
+      "the eyebrow, the count and the newest reference",
+    );
+    assert.equal(contextLines[3] ?? null, newest.review === "ai-unreviewed" ? "AI" + aiUnreviewedCardLabel : null, "the AI label shows exactly when the newest check was written by AI");
+    const card = await contextRow.evaluate((el) => {
+      const eyebrow = getComputedStyle(el.querySelector(".featured-eyebrow"));
+      const root = getComputedStyle(document.documentElement);
+      const css = getComputedStyle(el);
+      return { weight: eyebrow.fontWeight, eyebrowColour: eyebrow.color, face: getComputedStyle(el.querySelector(".featured-count")).fontFamily, radius: css.borderRadius, padding: css.padding, gap: css.rowGap, background: css.backgroundColor, surface: root.getPropertyValue("--surface").trim() };
+    });
+    assert.equal(card.weight, "700");
+    assert.equal(card.radius, "20px", "the grouped list's radius");
+    assert.equal(card.padding, "20px");
+    assert.equal(card.gap, "8px");
+    assert.ok(card.face.startsWith("Gelasio"), "the count line is in the scripture face: " + card.face);
+    assert.equal(card.eyebrowColour, "rgb(141, 92, 75)", "--link on the light surface, where --gilt falls short");
+    assert.equal(card.background, "rgb(255, 255, 255)", "the grouped list's surface");
+    // Study notes: one row per file in public/study; John opens its first chapter at Context.
+    const files = readdirSync("public/study").filter((f) => f.endsWith(".json"));
+    // The notes read in the canvas order: the Gospels first, in Gospel order, then the other books in Bible order.
+    const slugs = files.map((f) => f.replace(/\.json$/, ""));
+    const gospels = ["matthew", "mark", "luke", "john"].filter((g) => slugs.includes(g));
+    const shown = [...gospels, ...["psalms", "romans"].filter((b) => slugs.includes(b))];
+    const bookName = (slug) => slug[0].toUpperCase() + slug.slice(1);
+    const notesRow = page.getByRole("button", { name: /^Study notes/ });
+    assert.equal(await notesRow.locator(".list-row-detail").innerText(), shown.map(bookName).join(", "), "the row names the books in the canvas order");
+    await notesRow.click();
+    const notes = page.getByRole("dialog", { name: "Study notes", exact: true });
+    await notes.waitFor();
+    assert.equal(await notes.getByRole("link").count(), files.length, "one row per study file");
+    assert.deepEqual(await notes.getByRole("link").evaluateAll((els) => els.map((el) => el.getAttribute("href"))), shown.map((slug) => `/bible/${slug}/1?tab=context`), "the sheet follows the same order");
+    const johnRow = notes.getByRole("link", { name: /^John/ });
+    assert.equal(await johnRow.getAttribute("href"), "/bible/john/1?tab=context");
+    await johnRow.click();
+    await page.waitForURL("**/bible/john/1?tab=context");
+    await page.getByRole("dialog", { name: "Around John 1" }).waitFor();
+    assert.equal(await page.locator('article[data-layer="sourced"]').count() > 0, true, "the book note shows at Context");
+    // Back from the chapter keeps Study chosen.
+    await page.goBack();
+    await page.locator("main h1").waitFor();
+    assert.equal(await page.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true", "Back keeps Study chosen");
+    await page.getByRole("link", { name: /^Context checks/ }).click();
+    await page.waitForURL("**/context");
+    await page.goBack();
+    await page.locator("main h1").waitFor();
+    assert.equal(await page.getByRole("radio", { name: "Study" }).getAttribute("aria-checked"), "true", "Back from the context checks keeps Study chosen");
+    // Saved passages: the empty sentence, focus back on the row, two bookmarks as references, a link opens the verse.
     const saved = page.getByRole("button", { name: /^Saved passages/ });
+    assert.equal(await saved.innerText(), "Saved passages\nWhat you marked while reading");
     await saved.click();
     const sheet = page.getByRole("dialog", { name: "Saved passages" });
     await sheet.waitFor();
@@ -260,46 +381,47 @@ export async function checkLibrary(browser, base) {
     await sheet.waitFor({ state: "detached" });
     await page.waitForFunction(() => document.activeElement?.textContent?.trim().startsWith("Saved passages"), undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the row"));
     await seedState(page, { bookmarks: ["/bible/romans/8/28", "/bible/song-of-solomon/2/4"] });
+    await page.getByRole("radio", { name: "Study" }).click();
     await page.getByRole("button", { name: /^Saved passages/ }).click();
     const list = page.getByRole("dialog", { name: "Saved passages" });
     await list.waitFor();
     assert.deepEqual(await list.getByRole("link").allInnerTexts(), ["Romans 8:28", "Song of Solomon 2:4"], "bookmarks read as references");
     await list.getByRole("link", { name: "Romans 8:28" }).click();
     await page.waitForURL("**/bible/romans/8/28");
-    // Old and New Testament segments, the books, one chapter grid.
+    // Your shelf and Study Bibles.
     await goto(page, base, "/bible");
-    const segments = page.getByRole("radiogroup", { name: "Testament" });
-    assert.equal(await segments.getByRole("radio", { name: "Old Testament" }).getAttribute("aria-checked"), "true");
-    assert.equal(await page.getByRole("button", { name: "Genesis", exact: true }).count(), 1);
-    assert.equal(await page.getByRole("button", { name: "Matthew", exact: true }).count(), 0, "the New Testament books are on the other segment");
-    assert.equal(await page.locator(".picker-books li").count(), 39);
-    await segments.getByRole("radio", { name: "New Testament" }).click();
-    assert.equal(await page.locator(".picker-books li").count(), 27);
-    await page.getByRole("button", { name: "John", exact: true }).click();
-    assert.equal(await page.getByRole("button", { name: "John", exact: true }).getAttribute("aria-expanded"), "true");
-    const cells = await page.locator(".chapter-cell").evaluateAll((els) => els.map((el) => ({ label: el.getAttribute("aria-label"), top: Math.round(el.getBoundingClientRect().top), w: Math.round(el.getBoundingClientRect().width), h: Math.round(el.getBoundingClientRect().height) })));
-    assert.equal(cells.length, 21, "John has 21 chapters");
-    assert.equal(cells[2].label, "Chapter 3");
-    assert.ok(cells.every((c) => c.w === 52 && c.h === 52), "52 x 52 buttons");
-    assert.equal(cells.filter((c) => c.top === cells[0].top).length, 6, "6 to a row at 390px");
-    await page.getByRole("button", { name: "Chapter 3", exact: true }).click();
-    await page.waitForURL("**/bible/john/3");
-    assert.equal(await page.locator("main h1").innerText(), "John 3");
-    // Continue reading now names John 3.
-    await goto(page, base, "/bible");
-    const resume = page.getByRole("link", { name: /^Continue reading/ });
-    assert.equal(await resume.getAttribute("href"), "/bible/john/3");
-    assert.equal(await resume.innerText(), "Continue reading\nJohn 3");
-    // 320px: 5 to a row, nothing scrolls sideways.
-    await page.setViewportSize({ width: 320, height: 568 });
-    await page.getByRole("radio", { name: "New Testament" }).click();
-    await page.getByRole("button", { name: "John", exact: true }).click();
-    const narrow = await page.locator(".chapter-cell").evaluateAll((els) => els.map((el) => Math.round(el.getBoundingClientRect().top)));
-    assert.equal(narrow.filter((t) => t === narrow[0]).length, 5, "5 to a row at 320px");
-    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-    assert.deepEqual(ctx.problems, []);
+    await page.getByRole("radio", { name: "Study" }).click();
+    const shelfRow = page.getByRole("link", { name: /^Your shelf/ });
+    assert.equal(await shelfRow.getAttribute("href"), "/shelf");
+    assert.equal(await shelfRow.locator(".list-row-value").innerText(), "0 read");
+    assert.equal(await shelfRow.locator(".mini-shelf").count(), 0, "an empty shelf draws no picture, so the title lines up with the other rows");
+    const bibles = page.getByRole("link", { name: /^Study Bibles/ });
+    assert.equal(await bibles.getAttribute("href"), "/shop");
+    assert.equal(await bibles.innerText(), "Study Bibles\nHand-picked, from the HisFullGlory shop");
+    assert.equal(await page.locator('main a[href="/shop"]').count(), 1, "the one shop row of this screen (D-10)");
+    // Nothing in Read, or in the reader, links to the shop.
+    await page.getByRole("radio", { name: "Read" }).click();
+    assert.equal(await page.locator('main a[href="/shop"]').count(), 0, "no shop link in Read");
+    await goto(page, base, "/bible/john/3");
+    await page.locator("#verse-1").waitFor();
+    assert.equal(await page.locator('main a[href="/shop"]').count(), 0, "no shop link in the reader");
+    assert.deepEqual(study.problems, []);
   } finally {
-    await ctx.context.close();
+    await study.context.close();
+  }
+  // The featured card in Night light: --gilt on the same surface, as the canvas draws it.
+  const night = await open(browser, { colorScheme: "dark", lamplight: "on" });
+  try {
+    const { page } = night;
+    await goto(page, base, "/bible");
+    await page.getByRole("radio", { name: "Study" }).click();
+    const colours = await page.locator(".featured-eyebrow").evaluate((el) => ({ eyebrow: getComputedStyle(el).color, card: getComputedStyle(el.parentElement).backgroundColor }));
+    assert.equal(colours.eyebrow, "rgb(232, 200, 146)", "--gilt (#E8C892) in Night light");
+    assert.equal(colours.card, "rgb(37, 25, 20)", "the same surface as the grouped list (#251914)");
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.deepEqual(night.problems, []);
+  } finally {
+    await night.context.close();
   }
   // The first open: the failure with its way out.
   const failing = await open(browser);
@@ -314,11 +436,13 @@ export async function checkLibrary(browser, base) {
     await page.getByText("The Bible could not be opened. Check your connection and try again.").waitFor();
     assert.equal(await page.getByRole("button", { name: "Try downloading again", exact: true }).count(), 1);
     assert.equal(await page.getByRole("button", { name: "Search the Bible", exact: true }).isDisabled(), true, "nothing to search before the Bible has arrived");
+    assert.equal(await page.getByRole("button", { name: /^Old Testament/ }).count(), 0, "no testament rows while the Bible is missing");
     await page.unroute("**/bible/web.json");
     await page.getByRole("button", { name: "Try downloading again", exact: true }).click();
-    await page.getByRole("button", { name: "Genesis", exact: true }).waitFor();
+    await page.getByRole("button", { name: /^Old Testament/ }).waitFor();
     assert.ok(calls >= 1);
-    // Context checks and saved passages never waited for the download.
+    // Context checks never waited for the download.
+    await page.getByRole("radio", { name: "Study" }).click();
     assert.equal(await page.getByRole("link", { name: /^Context checks/ }).count(), 1);
     assert.deepEqual(failing.problems.filter((p) => !/503|Failed to load resource/.test(p)), []);
   } finally {
@@ -1099,6 +1223,7 @@ export async function checkChapterSheet(browser, base) {
     await page.waitForFunction(() => document.activeElement?.classList.contains("around-capsule"), undefined, { timeout: 3000 }).catch(() => assert.fail("focus returns to the capsule"));
     // The saved chapter shows in the library.
     await goto(page, base, "/bible");
+    await page.getByRole("radio", { name: "Study" }).click();
     await page.getByRole("button", { name: /^Saved passages/ }).click();
     assert.deepEqual(await page.getByRole("dialog", { name: "Saved passages" }).getByRole("link").allInnerTexts(), ["John 3"]);
 
@@ -1158,20 +1283,27 @@ export async function checkChapterSheet(browser, base) {
     await ctx.context.close();
   }
 
-  // Dark device: the Lamplight notice shows; the capsule sits above it and neither covers the other.
+  // Dark device: Night light is on, silently. The capsule sits 12px above the tab bar and nothing else floats there.
   const dark = await open(browser, { colorScheme: "dark" });
   try {
     const { page } = dark;
     await goto(page, base, "/bible/john/3");
     await page.locator("#verse-1").waitFor();
-    await page.locator(".lamplight-notice").waitFor();
+    await page.waitForFunction(() => document.documentElement.dataset.mode === "lamplight");
+    // Longer than the old notice's start delay, so "nothing else" includes anything that arrives late.
+    await page.waitForTimeout(1000);
+    assert.equal(await page.locator(".lamplight-notice").count(), 0, "no notice element");
+    assert.equal(await page.locator("#lamplight-status").count(), 0, "no status region of a notice");
     const rects = await page.evaluate(() => {
       const r = (s) => document.querySelector(s).getBoundingClientRect().toJSON();
-      return { capsule: r(".around-capsule"), notice: r(".lamplight-notice"), tab: r("nav.tabbar") };
+      const floating = [...document.querySelectorAll("body *")]
+        .filter((el) => getComputedStyle(el).position === "fixed" && el.getBoundingClientRect().height > 0)
+        .map((el) => el.className || el.tagName);
+      return { capsule: r(".around-capsule"), tab: r("nav.tabbar"), floating };
     });
-    assert.ok(rects.capsule.bottom <= rects.notice.top, `the capsule is above the notice (${rects.capsule.bottom} <= ${rects.notice.top})`);
-    assert.ok(rects.notice.bottom <= rects.tab.top, "the notice is above the tab bar");
-    assert.equal(Math.round(rects.notice.top - rects.capsule.bottom), 12, "12px between them");
+    assert.ok(rects.capsule.bottom <= rects.tab.top, "the capsule is above the tab bar");
+    assert.ok(Math.abs(rects.tab.top - rects.capsule.bottom - 12) <= 1, `the capsule sits 12px above the tab bar (${rects.tab.top - rects.capsule.bottom})`);
+    assert.ok(rects.floating.every((name) => /around-capsule|tabbar|tab-bar|skip/i.test(String(name))), "nothing else floats: " + JSON.stringify(rects.floating));
     assert.deepEqual(dark.problems, []);
   } finally {
     await dark.context.close();

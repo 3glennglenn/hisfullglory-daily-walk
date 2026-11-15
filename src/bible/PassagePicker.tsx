@@ -13,17 +13,21 @@ type Testament = "old" | "new";
 export function PassagePicker({
   data,
   current,
+  testament: fixed,
   onPick,
 }: {
   data: BibleData;
+  /** Only this testament's books, without the switch (the library's Old and New Testament sheets). */
+  testament?: Testament;
   /** The chapter being read, if any: its testament is shown and its book is open. */
   current?: { book: string; chapter: number };
   /** The address of the chosen chapter. */
   onPick: (path: string) => void;
 }) {
-  const [testament, setTestament] = useState<Testament>(() =>
+  const [chosen, setTestament] = useState<Testament>(() =>
     !current || isOldTestament(data, current.book) ? "old" : "new",
   );
+  const testament = fixed ?? chosen;
   const [open, setOpen] = useState<string | undefined>(current?.book);
   const root = useRef<HTMLDivElement>(null);
   // The chapter being read is brought into view when the picker opens on its book.
@@ -33,15 +37,17 @@ export function PassagePicker({
   const books = data.books.filter((_, i) => (testament === "old") === (i < oldTestamentBooks));
   return (
     <div className="picker" ref={root}>
-      <Segmented
-        label="Testament"
-        value={testament}
-        options={[
-          { value: "old", label: "Old Testament" },
-          { value: "new", label: "New Testament" },
-        ]}
-        onChange={setTestament}
-      />
+      {!fixed && (
+        <Segmented
+          label="Testament"
+          value={testament}
+          options={[
+            { value: "old", label: "Old Testament" },
+            { value: "new", label: "New Testament" },
+          ]}
+          onChange={setTestament}
+        />
+      )}
       <section className="group picker-books">
         <ul className="group-list">
           {books.map((book) => {

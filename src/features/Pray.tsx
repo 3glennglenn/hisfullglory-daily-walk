@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { usePlatform } from "../platform/store";
 import { prayerTransition, type PrayerStatus } from "../platform/models";
 import { localDate } from "../storage";
-import { ShareForm, Feed } from "../social/Feed";
-import { LargeTitle } from "../ui/Screen";
+import { ShareForm } from "../social/Feed";
+import { cameFrom } from "../platform/router";
+import { LargeTitle, Toolbar } from "../ui/Screen";
 import { Segmented } from "../ui/Segmented";
+import { Sheet } from "../ui/Sheet";
 import { ConfirmDialog } from "../ui/ConfirmDialog";
 import { TextSheet } from "../ui/TextSheet";
 export function Pray() {
   const { state, update } = usePlatform();
-  const [view, setView] = useState<"private" | "public">("private");
+  // The New prayer sheet. What was typed in it stays in this component while the screen is open (never stored).
+  const [composing, setComposing] = useState(false);
+  const newButton = useRef<HTMLButtonElement>(null);
   // The private prayer a reader is updating, editing or deleting, in the app's own sheet (UI-SPEC A15).
   const [sheet, setSheet] = useState<{ kind: "update" | "edit" | "delete"; id: string } | null>(null);
   const target = sheet ? state.prayers.find((p) => p.id === sheet.id) : undefined;
@@ -52,27 +56,124 @@ export function Pray() {
       setAnswer("");
     }
   }
+  const prayers = state.prayers.filter((p) => filter === "all" || p.status === filter);
+  // Back names where the reader came from: Today's walk (its prayer step), My walk, otherwise You.
+  const from = cameFrom();
+  const parent = from === "/walk" ? { back: "Today's walk", to: "/walk" } : from === "/my-walk" ? { back: "My walk", to: "/my-walk" } : { back: "You", to: "/you" };
   return (
     <section className="grouped-screen pray">
-      <LargeTitle>Pray</LargeTitle>
-      <p className="screen-lede">Bring your whole life to God</p>
-      <Segmented
-        label="Prayer views"
-        value={view}
-        onChange={setView}
-        options={[
-          { value: "private", label: "Private prayers" },
-          { value: "public", label: "Prayer and praise" },
-        ]}
-      />
-      {view === "public" ? (
-        <Feed initialKind="prayer" composerType="prayer" />
-      ) : (
-        <>
+      <Toolbar back={parent.back} to={parent.to} />
+      <LargeTitle>My prayers</LargeTitle>
+      {!state.prayers.length && (
+        <p className="screen-lede">Your prayers stay on this device. Write the first one when you are ready.</p>
+      )}
+      {!!state.prayers.length && (
+        <Segmented
+          label="Prayer filter"
+          value={filter}
+          onChange={setFilter}
+          options={[
+            { value: "all", label: "All" },
+            { value: "Active", label: "Active" },
+            { value: "Waiting", label: "Waiting" },
+            { value: "Answered", label: "Answered" },
+          ]}
+        />
+      )}
+      <button type="button" className="screen-action" ref={newButton} onClick={() => setComposing(true)}>
+        New prayer
+      </button>
+      <p className="screen-meta" role="status">
+        {status}
+      </p>
+      {!!state.prayers.length && !prayers.length && <p>Nothing here yet.</p>}
+      {prayers.map((p) => (
+        <article className="card" key={p.id}>
+          <small>
+            {p.status} · {new Date(p.createdAt).toLocaleDateString()}
+          </small>
+          <h2>{p.title}</h2>
+          <p className="preserve">{p.body}</p>
+          {p.answer && (
+            <>
+              <h3>How God answered</h3>
+              <p className="preserve">{p.answer}</p>
+            </>
+          )}
+          {!!p.testimonyIds?.length&&<p>{p.testimonyIds.length} explicitly published testimony link(s) saved privately. Public posts can be removed independently.</p>}
+          {p.updates.map((u, i) => (
+            <p key={i}>
+              <small>{u.date}</small> {u.body}
+            </p>
+          ))}
+          <div className="actions">
+            <label>
+              Move to
+              <select
+                value={p.status}
+                onChange={(e) => {
+                  const next = e.target.value as PrayerStatus;
+                  if (next === "Answered") {
+                    setAnswerId(p.id);
+                    setAnswer(p.answer);
+                  } else
+                    update((s) => ({
+                      ...s,
+                      prayers: s.prayers.map((x) =>
+                        x.id === p.id ? prayerTransition(x, next) : x,
+                      ),
+                    }));
+                }}
+              >
+                {["Active", "Waiting", "Answered", "Archived"].map(
+                  (s) => (
+                    <option key={s}>{s}</option>
+                  ),
+                )}
+              </select>
+            </label>
+            <button
+              className="secondary"
+              onClick={() => setSheet({ kind: "update", id: p.id })}
+            >
+              Add private update
+            </button>
+            <button
+              className="secondary"
+              onClick={() => setSheet({ kind: "edit", id: p.id })}
+            >
+              Edit
+            </button>
+            <button
+              className="secondary"
+              onClick={() => setSheet({ kind: "delete", id: p.id })}
+            >
+              Delete
+            </button>
+            <button
+              className="secondary"
+              onClick={() => {
+                setShareType(p.answer ? "testimony" : "prayer");
+                setSharingPrayerId(p.id);
+                setSharing(p.answer || p.body);
+              }}
+            >
+              Choose to share…
+            </button>
+          </div>
+        </article>
+      ))}
+      {!!state.prayers.length && (
+        <p className="screen-meta">
+          Your prayers can stay entirely private. Nothing is uploaded automatically.
+        </p>
+      )}
+      {composing && (
+        <Sheet title="New prayer" detent="large" returnFocus={() => newButton.current} onClose={() => setComposing(false)}>
           <form
-            className="card"
             onSubmit={(e) => {
               e.preventDefault();
+              // Local state only: the prayer is written to this device and goes nowhere else.
               if (
                 update((s) => ({
                   ...s,
@@ -92,127 +193,41 @@ export function Pray() {
               ) {
                 setTitle("");
                 setBody("");
+                setFilter("all");
                 setStatus("Saved privately on this device.");
+                setComposing(false);
               }
             }}
           >
-            <h2>Your private prayer</h2>
-            <label>
+            <label htmlFor="new-prayer-title" className="sheet-label">
               Title
-              <input
-                required
-                maxLength={120}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
             </label>
-            <label>
+            <input
+              id="new-prayer-title"
+              required
+              maxLength={120}
+              autoComplete="off"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <label htmlFor="new-prayer-body" className="sheet-label">
               Prayer
-              <textarea
-                required
-                maxLength={10000}
-                rows={4}
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-              />
             </label>
-            <button>Save private prayer</button>
-            <small role="status">{status}</small>
+            <textarea
+              id="new-prayer-body"
+              className="sheet-field"
+              required
+              maxLength={10000}
+              rows={4}
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+            />
+            <p className="sheet-hint">Saved on this device only. Nothing is uploaded.</p>
+            <div className="sheet-actions">
+              <button type="submit">Save private prayer</button>
+            </div>
           </form>
-          <label>
-            Prayer state
-            <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-              <option value="all">All prayers</option>
-              {["Active", "Waiting", "Answered", "Archived"].map((s) => (
-                <option key={s}>{s}</option>
-              ))}
-            </select>
-          </label>
-          {state.prayers
-            .filter((p) => filter === "all" || p.status === filter)
-            .map((p) => (
-              <article className="card" key={p.id}>
-                <small>
-                  {p.status} · {new Date(p.createdAt).toLocaleDateString()}
-                </small>
-                <h2>{p.title}</h2>
-                <p className="preserve">{p.body}</p>
-                {p.answer && (
-                  <>
-                    <h3>How God answered</h3>
-                    <p className="preserve">{p.answer}</p>
-                  </>
-                )}
-                {!!p.testimonyIds?.length&&<p>{p.testimonyIds.length} explicitly published testimony link(s) saved privately. Public posts can be removed independently.</p>}
-                {p.updates.map((u, i) => (
-                  <p key={i}>
-                    <small>{u.date}</small> {u.body}
-                  </p>
-                ))}
-                <div className="actions">
-                  <label>
-                    Move to
-                    <select
-                      value={p.status}
-                      onChange={(e) => {
-                        const next = e.target.value as PrayerStatus;
-                        if (next === "Answered") {
-                          setAnswerId(p.id);
-                          setAnswer(p.answer);
-                        } else
-                          update((s) => ({
-                            ...s,
-                            prayers: s.prayers.map((x) =>
-                              x.id === p.id ? prayerTransition(x, next) : x,
-                            ),
-                          }));
-                      }}
-                    >
-                      {["Active", "Waiting", "Answered", "Archived"].map(
-                        (s) => (
-                          <option key={s}>{s}</option>
-                        ),
-                      )}
-                    </select>
-                  </label>
-                  <button
-                    className="secondary"
-                    onClick={() => setSheet({ kind: "update", id: p.id })}
-                  >
-                    Add private update
-                  </button>
-                  <button
-                    className="secondary"
-                    onClick={() => setSheet({ kind: "edit", id: p.id })}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="secondary"
-                    onClick={() => setSheet({ kind: "delete", id: p.id })}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    className="secondary"
-                    onClick={() => {
-                      setShareType(p.answer ? "testimony" : "prayer");
-                      setSharingPrayerId(p.id);
-                      setSharing(p.answer || p.body);
-                    }}
-                  >
-                    Choose to share…
-                  </button>
-                </div>
-              </article>
-            ))}
-          {!state.prayers.length && (
-            <p>
-              Your prayers can stay entirely private. Nothing is uploaded
-              automatically.
-            </p>
-          )}
-        </>
+        </Sheet>
       )}
       {target && sheet?.kind === "update" && (
         <TextSheet

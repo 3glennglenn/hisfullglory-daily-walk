@@ -11,9 +11,9 @@ import "@fontsource/literata/latin-400-italic.css";
 import "./styles.css";
 import { usePlatform } from "./platform/store";
 import { AuthProvider } from "./platform/auth";
-import { currentRoute, navigate } from "./platform/router";
+import { cameFrom, currentRoute, lastTabRoot, navigate, parseRoute, rememberTabRoot, seenTabRoot } from "./platform/router";
 import { watchTextSize } from "./platform/appearance";
-import { AppearanceProvider, useAppearance } from "./platform/AppearanceProvider";
+import { AppearanceProvider } from "./platform/AppearanceProvider";
 import { supabase } from "./supabase";
 import { Walk } from "./features/Walk";
 import { Today } from "./features/Today";
@@ -26,16 +26,15 @@ import { ContextCheck } from "./context/ContextCheck";
 import { ContextChecks } from "./context/ContextChecks";
 import { JournalLibrary } from "./features/Journal";
 import { Settings, Profile } from "./features/Settings";
-import { You } from "./features/You";
+import { YouPage, YouSheet } from "./features/You";
 import { Appearance } from "./features/Appearance";
 import { Reminders } from "./features/Reminders";
 import { Give, GivingPolicy } from "./giving/Give";
-import { Community } from "./community";
 import { TopicHub } from "./social/TopicHub";
 import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
-import { TabBar, tabFor } from "./ui/TabBar";
-import { LamplightNotice, noticeText } from "./ui/LamplightNotice";
+import { TabBar } from "./ui/TabBar";
+import { activeTab, rootTabOf } from "./ui/tabs";
 import { LargeTitle, Toolbar } from "./ui/Screen";
 import { config, products } from "./config";
 import { contentFor } from "./data";
@@ -80,9 +79,33 @@ function RemindersScreen() {
     </section>
   );
 }
+// From 768px the sidebar layout is on and You is a page; below it You is a sheet (N-03). Follows a resize without a reload.
+function useWide() {
+  const query = "(min-width: 768px)";
+  const [wide, setWide] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    const change = () => setWide(media.matches);
+    media.addEventListener("change", change);
+    change();
+    return () => media.removeEventListener("change", change);
+  }, []);
+  return wide;
+}
+// Done, Escape and a swipe close the You sheet: back through history when the reader came from the tab root behind it,
+// otherwise (a /you opened directly, or after a resize) the entry is replaced by that root, so Back never returns to a
+// closed sheet.
+function closeYou() {
+  const root = lastTabRoot();
+  if (cameFrom() === root) {
+    history.back();
+    return;
+  }
+  history.replaceState({}, "", root);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+}
 function App() {
   const { state, notice, update } = usePlatform();
-  const lamplightNotice = useAppearance().notice;
   const [route, setRoute] = useState(currentRoute);
   // The welcome questionnaire takes over once, when the app opens on Today ("/") and has never been answered. A deep link
   // (a chapter, a context check from the website or a share) is never held back: the choice is made at the start, so a
@@ -121,12 +144,19 @@ function App() {
   // Sets data-text="large" on <html> while the system text size is 150 % or more (UI-SPEC 6.3).
   useEffect(() => watchTextSize(document.documentElement), []);
   const page = route.page;
+  const wide = useWide();
+  // The tab root the reader saw last is what the You sheet stands over on a phone (D-03); kept in memory only.
+  rememberTabRoot(route);
+  // On a phone /you renders the screen of the last tab root (the same elements and keys, so it stays mounted and keeps
+  // the You button as the place focus returns to) with the sheet over it; from 768px /you is a page of its own.
+  const shown = page === "you" && !wide ? parseRoute(lastTabRoot()) : route;
   // The story and Today's walk are full-screen flows (UI-SPEC A5, A7, 8.1): the tab bar is covered while one is open
   // and "‹ Today" is the way out. A slug that names no published check is the error state, which keeps the tab bar.
   const welcome = welcomeOpen && page === "home";
   const flow = welcome || page === "walk" || (page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id));
   let content: ReactNode;
-  switch (page) {
+  let youSheet: ReactNode = null;
+  switch (shown.page) {
     case "my-walk":
       content = <MyWalk />;
       break;
@@ -140,16 +170,16 @@ function App() {
       content = <YourShelf />;
       break;
     case "bible":
-      content = <Reader route={route} />;
+      content = <Reader route={shown} />;
       break;
     case "pray":
       content = <Pray />;
       break;
     case "context":
-      content = route.id ? <ContextCheck key={route.id} slug={route.id} /> : <ContextChecks />;
+      content = shown.id ? <ContextCheck key={shown.id} slug={shown.id} /> : <ContextChecks />;
       break;
     case "grow":
-      content = <Grow id={route.id} />;
+      content = <Grow id={shown.id} />;
       break;
     case "journal":
       content = <JournalLibrary />;
@@ -161,33 +191,27 @@ function App() {
       content = <GivingPolicy />;
       break;
     case "you":
-      content = <You />;
+      content = <YouPage />;
       break;
     case "profile":
       content = <Profile />;
       break;
     case "settings":
       content =
-        route.id === "reminders" ? <RemindersScreen /> : route.id === "appearance" ? <Appearance /> : <Settings />;
+        shown.id === "reminders" ? <RemindersScreen /> : shown.id === "appearance" ? <Appearance /> : <Settings />;
       break;
     case "circles":
-      content = <Circles key={route.id ?? "discovery"} slug={route.id} thread={route.thread}/>;
+      content = <Circles key={shown.id ?? "discovery"} slug={shown.id} thread={shown.thread}/>;
       break;
     case "community":
-      content = (
-        <>
-          <TopicHub id={route.id} thread={route.thread} />
-          <details className="group-disclosure">
-            <summary>Live chat and the original prayer wall</summary>
-            <Community verse={contentFor(date)} online={online} />
-          </details>
-        </>
-      );
+      content = <TopicHub id={shown.id} thread={shown.thread} verse={contentFor(date)} online={online} />;
       break;
-    case "shop":
+    case "shop": {
+      // Back names where the reader came from (01.2 D-03): Bible from Bible, Study's row, otherwise Today, the card's home.
+      const fromBible = cameFrom().startsWith("/bible");
       content = (
         <section className="grouped-screen">
-          <Toolbar back="You" to="/you" />
+          <Toolbar back={fromBible ? "Bible" : "Today"} to={fromBible ? "/bible" : "/"} />
           <LargeTitle>Shop</LargeTitle>
           <p className="screen-lede">Study Bibles we recommend. Price, stock and checkout are on the HisFullGlory shop.</p>
           {products.map((p) => (
@@ -199,6 +223,7 @@ function App() {
         </section>
       );
       break;
+    }
     default:
       content = (
         <section className="grouped-screen">
@@ -209,6 +234,10 @@ function App() {
         </section>
       );
   }
+  if (page === "you" && !wide) youSheet = <YouSheet onClose={closeYou} />;
+  // /you on a phone stands over the last root (Today when none was seen); another screen of You opened by its address
+  // has no root behind it, so it marks no tab (D-03).
+  const tab = activeTab(page, wide, page === "you" || seenTabRoot() ? rootTabOf(lastTabRoot()) : null);
   return (
     <div className="shell" data-flow={flow ? "true" : undefined}>
       <a className="skip-link" href="#main">
@@ -220,13 +249,9 @@ function App() {
             "You’re offline. Downloaded Scripture and your private walk remain available. Community needs a connection."}
         </aside>
       )}
-      {/* Always in the page, empty until the Lamplight notice shows (UI-SPEC 4): text written into a region that
-          already exists is announced; a region inserted together with its text often is not. */}
-      <div role="status" aria-live="polite" id="lamplight-status" className="sr-only">
-        {noticeText(lamplightNotice?.variant)}
-      </div>
       <main id="main" tabIndex={-1}>
         {content}
+        {youSheet}
         {install && !state.local.installDismissed && (
           <aside className="install-offer">
             <h2>Keep your daily walk close</h2>
@@ -260,9 +285,8 @@ function App() {
             <small role="status">{installStatus}</small>
           </aside>
         )}
-        <LamplightNotice tab={tabFor(page)} path={location.pathname} />
       </main>
-      {!flow && <TabBar active={tabFor(page)} />}
+      {!flow && <TabBar active={tab} />}
     </div>
   );
 }

@@ -1,13 +1,21 @@
 import { useId, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { GroupedList, Row } from "../ui/List";
-import { LargeTitle } from "../ui/Screen";
+import { TitleRow } from "../ui/Screen";
+import { AiBadge } from "../ui/Badges";
+import { openInApp } from "../ui/internalLink";
+import { Segmented } from "../ui/Segmented";
+import { MiniShelf } from "../ui/Shelf";
 import { Sheet } from "../ui/Sheet";
 import { contextChecks } from "../context/data";
+import { aiUnreviewedCardLabel, refLabel } from "../context/checks";
+import { shelfSummary } from "../context/shelf";
 import { usePlatform } from "../platform/store";
 import { navigate } from "../platform/router";
 import { PassagePicker } from "./PassagePicker";
-import { referenceFromPath } from "./passages";
+import { oldTestamentBooks, referenceFromPath, slugWords } from "./passages";
+import { STUDY_BOOKS_SHOWN } from "./studyBooks";
+import { scopeLabel } from "./knowledge";
 import { searchBible, type BibleData } from "./provider";
 
 export const BIBLE_ERROR = "The Bible could not be opened. Check your connection and try again.";
@@ -17,60 +25,137 @@ export const SAVED_EMPTY = "Nothing saved yet. Tap a verse and choose Save verse
 export const contextChecksDetail = (n: number) =>
   n === 1 ? "1 well-known verse, back in its story" : `${n} well-known verses, back in their story`;
 
-// The Bible library, /bible (UI-SPEC A2): a large title with a Search icon, where the reader left off, the
-// context checks as the first list (the app's reason to exist), the saved passages, then the books with the
-// chapters of the one that is opened. The Bible text itself is downloaded once; until it has arrived the books
-// list says so, and says what to do when the download fails (A16).
+// The Bible library, /bible (01.2 D-05, UI-SPEC 2.2): a large title with Search and You, then two sections. Read holds where
+// the reader left off and the two testaments, each opening the book list with the chapter grids in a sheet. Study (below)
+// holds the study tools. The chosen section is kept in module memory while the app stays open, so Back from a chapter, the
+// shelf or the context checks lands on the same section; it is never written to the device. The Bible text itself is
+// downloaded once; until it has arrived the testaments say so, and say what to do when the download fails (A16).
+const sections = [
+  { value: "read", label: "Read" },
+  { value: "study", label: "Study" },
+] as const;
+type Section = (typeof sections)[number]["value"];
+let lastSection: Section = "read";
+
+export const booksLabel = (n: number) => (n === 1 ? "1 book" : `${n} books`);
+
+type LibrarySheet = "search" | "saved" | "notes" | "old" | "new" | null;
+
 export function Library({ data, failed, onRetry }: { data: BibleData | null; failed: boolean; onRetry: () => void }) {
   const { state } = usePlatform();
-  const [sheet, setSheet] = useState<"search" | "saved" | null>(null);
+  const [section, setSectionState] = useState<Section>(lastSection);
+  const [sheet, setSheet] = useState<LibrarySheet>(null);
   const searchButton = useRef<HTMLButtonElement>(null);
-  const savedRow = useRef<HTMLElement | null>(null);
+  const opener = useRef<HTMLElement | null>(null);
   const checks = contextChecks.length;
+  const newest = contextChecks[0];
+  const { count: onShelf, ai: aiOnShelf } = shelfSummary(state.shelf, contextChecks);
+  // The names of the books with study notes: the Bible's own names once it is loaded, else the slugs written out.
+  const studyName = (slug: string) => data?.books.find((book) => book.slug === slug)?.name ?? slugWords(slug);
+  const setSection = (value: Section) => {
+    lastSection = value;
+    setSectionState(value);
+  };
+  // The row that opened a sheet gets focus back when the sheet closes.
+  const openFrom = (which: Exclude<LibrarySheet, null>) => {
+    opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setSheet(which);
+  };
+  const oldBooks = data ? Math.min(data.books.length, oldTestamentBooks) : 0;
+  const newBooks = data ? Math.max(0, data.books.length - oldTestamentBooks) : 0;
   return (
     <section className="library">
-      <div className="library-head">
-        <LargeTitle>Bible</LargeTitle>
-        <button
-          type="button"
-          className="tool-button"
-          aria-label="Search the Bible"
-          ref={searchButton}
-          disabled={!data}
-          onClick={() => setSheet("search")}
-        >
-          <Search size={22} aria-hidden="true" focusable="false" />
-        </button>
-      </div>
-      {state.lastChapter && (
-        <GroupedList>
-          <Row title="Continue reading" detail={referenceFromPath(data, state.lastChapter)} href={state.lastChapter} chevron />
-        </GroupedList>
-      )}
-      <GroupedList>
-        {checks > 0 && <Row title="Context checks" detail={contextChecksDetail(checks)} href="/context" chevron />}
-        <Row
-          title="Saved passages"
-          value={state.bookmarks.length || undefined}
-          chevron
-          onClick={() => {
-            savedRow.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-            setSheet("saved");
-          }}
-        />
-      </GroupedList>
-      {data ? (
-        <PassagePicker data={data} onPick={navigate} />
+      <TitleRow
+        title="Bible"
+        actions={
+          <button
+            type="button"
+            className="tool-button"
+            aria-label="Search the Bible"
+            ref={searchButton}
+            disabled={!data}
+            onClick={() => setSheet("search")}
+          >
+            <Search size={22} aria-hidden="true" focusable="false" />
+          </button>
+        }
+      />
+      <Segmented label="Bible sections" value={section} options={sections} onChange={setSection} />
+      {section === "read" ? (
+        <>
+          <h2 className="sr-only">Read</h2>
+          {state.lastChapter && (
+            <GroupedList>
+              <Row title="Continue reading" detail={referenceFromPath(data, state.lastChapter)} href={state.lastChapter} chevron />
+            </GroupedList>
+          )}
+          {data ? (
+            <GroupedList>
+              <Row title="Old Testament" detail={booksLabel(oldBooks)} chevron onClick={() => openFrom("old")} />
+              <Row title="New Testament" detail={booksLabel(newBooks)} chevron onClick={() => openFrom("new")} />
+            </GroupedList>
+          ) : (
+            <>
+              <p role="status" className="reader-status">
+                {failed ? BIBLE_ERROR : "Opening the Bible…"}
+              </p>
+              {failed && (
+                <button type="button" className="reader-retry" onClick={onRetry}>
+                  Try downloading again
+                </button>
+              )}
+            </>
+          )}
+        </>
       ) : (
         <>
-          <p role="status" className="reader-status">
-            {failed ? BIBLE_ERROR : "Opening the Bible…"}
-          </p>
-          {failed && (
-            <button type="button" className="reader-retry" onClick={onRetry}>
-              Try downloading again
-            </button>
+          <h2 className="sr-only">Study</h2>
+          {newest && (
+            // The featured card of the canvas: its own block above the list, one link to all the checks.
+            <a className="featured-check" href="/context" onClick={openInApp("/context")}>
+              <span className="featured-eyebrow">Context checks</span>
+              <span className="featured-count">{contextChecksDetail(checks)}</span>
+              <span className="featured-newest">Newest: {refLabel(newest.verse)}</span>
+              {newest.review === "ai-unreviewed" && (
+                <span className="check-row-ai">
+                  <AiBadge />
+                  <span>{aiUnreviewedCardLabel}</span>
+                </span>
+              )}
+            </a>
           )}
+          <GroupedList>
+            <Row
+              title="Study notes"
+              detail={STUDY_BOOKS_SHOWN.map(studyName).join(", ")}
+              chevron
+              onClick={() => openFrom("notes")}
+            />
+            <Row
+              title="Saved passages"
+              detail="What you marked while reading"
+              value={state.bookmarks.length || undefined}
+              chevron
+              onClick={() => openFrom("saved")}
+            />
+            <Row
+              href="/shelf"
+              chevron
+              // Nothing to draw on an empty shelf: the title then lines up with the rows above and below it.
+              leading={onShelf > 0 ? <MiniShelf shelf={state.shelf} checks={contextChecks} /> : undefined}
+              title="Your shelf"
+              value={`${onShelf} read`}
+              detail={
+                aiOnShelf > 0 && (
+                  <span className="row-line row-ai">
+                    <AiBadge />
+                    <span>{aiOnShelf} with context written by AI.</span>
+                  </span>
+                )
+              }
+            />
+            <Row title="Study Bibles" detail="Hand-picked, from the HisFullGlory shop" href="/shop" chevron />
+          </GroupedList>
         </>
       )}
       {sheet === "search" && data && (
@@ -84,8 +169,34 @@ export function Library({ data, failed, onRetry }: { data: BibleData | null; fai
           }}
         />
       )}
+      {(sheet === "old" || sheet === "new") && data && (
+        <Sheet
+          title={sheet === "old" ? "Old Testament" : "New Testament"}
+          detent="large"
+          returnFocus={() => opener.current}
+          onClose={() => setSheet(null)}
+        >
+          <PassagePicker
+            data={data}
+            testament={sheet}
+            onPick={(path) => {
+              setSheet(null);
+              navigate(path);
+            }}
+          />
+        </Sheet>
+      )}
+      {sheet === "notes" && (
+        <Sheet title="Study notes" detent="large" returnFocus={() => opener.current} onClose={() => setSheet(null)}>
+          <GroupedList>
+            {STUDY_BOOKS_SHOWN.map((slug) => (
+              <Row key={slug} title={studyName(slug)} detail={scopeLabel.book} href={`/bible/${slug}/1?tab=context`} chevron />
+            ))}
+          </GroupedList>
+        </Sheet>
+      )}
       {sheet === "saved" && (
-        <Sheet title="Saved passages" detent="large" returnFocus={() => savedRow.current} onClose={() => setSheet(null)}>
+        <Sheet title="Saved passages" detent="large" returnFocus={() => opener.current} onClose={() => setSheet(null)}>
           {state.bookmarks.length ? (
             <GroupedList>
               {state.bookmarks.map((path) => (

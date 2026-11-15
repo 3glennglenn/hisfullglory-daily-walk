@@ -269,13 +269,24 @@ test("the crash screen says what UI-SPEC 9.2 says, and the install offer keeps o
 
 // ---- Plan 14: the rule files match the redesign (UI-SPEC 16, T-01.1-45) ----------------------------------------------
 
-test("rule files match the redesign", () => {
+test("rule files match the redesign and the calmer navigation", () => {
   const flat = (file: string) => readFileSync(file, "utf8").replace(/\s+/g, " ");
 
   const agents = flat("AGENTS.md");
-  assert.ok(agents.includes("Primary navigation: Today, Bible, Pray, Community, You."));
+  assert.ok(agents.includes("Primary navigation: Today, Bible, Community; You opens from a button on each tab's root."));
+  assert.ok(!agents.includes("Today, Bible, Pray, Community, You"), "the five-tab sentence is gone from AGENTS.md");
   assert.ok(!agents.includes("Home, Bible, Pray, Community, More"));
-  assert.ok(agents.includes("Lamplight"));
+  assert.ok(agents.includes("Light and Night light modes"), "AGENTS.md names the mode Night light");
+  assert.ok(agents.includes("the stored value stays lamplight"));
+  assert.ok(!agents.includes("Light and Lamplight modes"), "AGENTS.md no longer calls the mode Lamplight");
+
+  // D-01, D-10 (01.2): CLAUDE.md describes three tabs, the shop placement and Night light, not the old five tabs or the bag.
+  const claude = flat("CLAUDE.md");
+  assert.ok(claude.includes("The app has three tabs, Today, Bible and Community"));
+  assert.ok(!claude.includes("stays at five tabs") && !claude.includes("five tabs"), "the five-tab sentence is gone from CLAUDE.md");
+  assert.ok(!claude.includes("a shopping-bag button at the end of Today's title row"), "the bag placement is gone from CLAUDE.md");
+  assert.ok(claude.includes("Study Bibles for your walk"));
+  assert.ok(claude.includes("Night light"));
   assert.ok(agents.includes("Gelasio and Literata for Scripture, all bundled"));
   // The founder's position on ad placement is pending: this sentence stays word for word until he answers.
   assert.ok(agents.includes("No public emails, private chat, media uploads, ads inside community, or browser admin role."));

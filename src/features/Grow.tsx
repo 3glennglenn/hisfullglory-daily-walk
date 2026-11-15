@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { usePlatform } from "../platform/store";
 import { devotionals, topics } from "./growData";
 import { Plans } from "./LegacyWalk";
-import { navigate } from "../platform/router";
+import { cameFrom, navigate } from "../platform/router";
 import { localDate } from "../storage";
 import { Feed } from "../social/Feed";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle, Toolbar } from "../ui/Screen";
+// Grow is a row of My walk (01.2 D-03): Back names My walk when the reader came from it, otherwise You.
+const parent = () => (cameFrom() === "/my-walk" ? { back: "My walk", to: "/my-walk" } : { back: "You", to: "/you" });
 export function Grow({ id }: { id?: string }) {
   const { state, update } = usePlatform();
   const [filter, setFilter] = useState("all");
@@ -27,7 +29,7 @@ export function Grow({ id }: { id?: string }) {
   if (id && !selected)
     return (
       <section className="grouped-screen">
-        <Toolbar back="You" to="/you" />
+        <Toolbar {...parent()} />
         <LargeTitle>Journey not found</LargeTitle>
         <button className="screen-action" onClick={() => navigate("/grow")}>
           Browse available journeys
@@ -153,7 +155,7 @@ export function Grow({ id }: { id?: string }) {
   // length as a 13px detail line (plan 11).
   return (
     <section className="grouped-screen">
-      <Toolbar back="You" to="/you" />
+      <Toolbar {...parent()} />
       <LargeTitle>Room to grow.</LargeTitle>
       <Journeys />
       <GroupedList plain>

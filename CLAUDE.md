@@ -1,7 +1,7 @@
 # HisFullGlory Daily Walk: working notes for Claude
 
 Read `AGENTS.md` first: its product, privacy, Scripture and migration rules still apply.
-This file adds the current state and how to work with the founder. Last updated 2026-10-26.
+This file adds the current state and how to work with the founder. Last updated 2026-11-13.
 
 ## Working with the founder
 
@@ -14,16 +14,24 @@ This file adds the current state and how to work with the founder. Last updated 
 ## Direction (decided)
 
 - The app and its community are the core. The website attracts and teaches. The Shopify
-  shop is a supporting section that is now prominent, by the founder's decision of 2026-10-22
-  ("de shop moet veel meer prominent zijn ... maar niet de ui ux verneuken"): a shopping-bag
-  button at the end of Today's title row, a Shop card under the Give card on You, a Shop screen
-  (`/shop`), "Shop" in the website's header menu (the page keeps the address `/resources`), and
-  a "Study Bibles for your walk" band on the website home. It is still never placed next to
-  prayers, the community, topic pages, the journal, the walk flow or Scripture text, and never
-  next to the home's "Start here" topics. The app's tab bar stays at five tabs: Apple's HIG keeps
-  an iPhone tab bar to five, and a sixth would turn into a "More" tab that hides things.
+  shop is a supporting section that stays prominent, by the founder's decision of 2026-10-22
+  ("de shop moet veel meer prominent zijn ... maar niet de ui ux verneuken"), placed on
+  2026-11-09 by his option 2: a "Study Bibles for your walk" card on Today under the walk row, a
+  "Study Bibles" row in Bible, Study, the Shop screen (`/shop`), "Shop" in the website's header
+  menu (the page keeps the address `/resources`) and the "Study Bibles for your walk" band on
+  the website home. It is still never placed next to prayers, the community, topic pages, the
+  journal, the walk flow or Scripture text, and never next to the home's "Start here" topics.
+  The shopping-bag button on Today and the Shop card on You are gone.
+- The app has three tabs, Today, Bible and Community (founder, 2026-11-09, option 2, after
+  TestFlight build 1). You opens from a round button at the top right of each tab's root screen,
+  as a sheet on a phone and as a page from 768px. Pray became My prayers under You, and its
+  public "Prayer and praise" lives in Community, Prayer wall. Apple's HIG keeps an iPhone tab bar
+  to five and warns against a "More" tab that hides things; three tabs keep it calm.
   Product pictures load from `cdn.shopify.com` on the website home and Shop page and in the app's
-  You and Shop screens; the privacy wording names all of them (`site/src/data/legal.ts`).
+  Shop screen only; Today draws the covers itself and loads nothing from another host. The privacy
+  wording names exactly these (`site/src/data/legal.ts`).
+- The dark mode is called Night light everywhere a reader sees it (the switch reads Automatic,
+  Day, Night light). Stored keys and code names stay: `hfg-lamplight`, `data-mode` "lamplight".
 - One English-language community. US online growth; the founder's Dutch network is the
   closed beta group. Dutch comes later, with a licensed Dutch Bible.
 - Study first, community second: Scripture with real context is the entry point.
@@ -167,6 +175,9 @@ This file adds the current state and how to work with the founder. Last updated 
   and #5; #5 carried the commits of #4). `docs-live`, `context-checks` and
   `context-stories` followed the same day. The app's code has not changed since pull
   request #2.
+- `calm-nav` (2026-11-09): phase 01.2, three tabs and Night light (You as a sheet or page, Community in
+  three segments, Bible with Read and Study, the Study Bibles card on Today, Night light in the app
+  and on the site). Waits for the founder's merge.
 - `bible-spacing` (2026-10-14): fixes words that ran together in `public/bible/web.json`
   (142 New Testament verses, spaces only; see `CHANGELOG.md`). Merged the same day
   (pull request #13).

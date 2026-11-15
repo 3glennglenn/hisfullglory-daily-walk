@@ -27,6 +27,8 @@ export const config = {
 export interface Product {
   handle: string;
   title: string;
+  /** The name drawn on the cover of the Study Bibles card on Today (01.2 D-04); it must be part of the title. */
+  shortName: string;
   price: string;
   image: string;
   benefit: string;
@@ -38,6 +40,7 @@ export const products: Product[] = [
   {
     handle: "nlt-every-woman-s-bible-filament-enabled",
     title: "NLT Every Woman’s Bible, Filament Enabled",
+    shortName: "Every Woman’s",
     price: "From $49.99 USD",
     image:
       "https://cdn.shopify.com/s/files/1/1085/1015/1001/files/NLTEveryWoman_sBible_FilamentEnabled_Hardcover_GoldDust_RedLetter_img1.avif?v=1790345711",
@@ -46,6 +49,7 @@ export const products: Product[] = [
   {
     handle: "esv-applying-the-gospel-study-bible-for-men-hardcover",
     title: "ESV Applying the Gospel Study Bible for Men, Hardcover",
+    shortName: "Applying the Gospel",
     price: "$49.99 USD",
     image:
       "https://cdn.shopify.com/s/files/1/1085/1015/1001/files/ESVApplyingtheGospelStudyBibleforMen_Hardcover_img1formaatwijzigingomgelijktezijnalsalleartikelen.jpg?v=1790344420",
@@ -54,6 +58,7 @@ export const products: Product[] = [
   {
     handle: "amplified-study-bible-hardcover",
     title: "Amplified Study Bible, Hardcover",
+    shortName: "Amplified",
     price: "$69.99 USD",
     image:
       "https://cdn.shopify.com/s/files/1/1085/1015/1001/files/theamplifiedstudybibleproductpicturejpg_613cc091-877e-4dff-b330-038bd28616a4.jpg?v=1790259084",

@@ -7,7 +7,7 @@ export async function checkTopicComposer(browser,base){
   const result=await build({entryPoints:["tests/fixtures/topic-hub.tsx"],bundle:true,write:false,format:"iife",jsx:"automatic",define:{"process.env.NODE_ENV":'"production"'},plugins:[{
     name:"controlled-topic-sdk",
     setup(b){
-      b.onResolve({filter:/^\.\.\/supabase$/},()=>({path:"sdk",namespace:"fixture"}));
+      b.onResolve({filter:/^\.{1,2}\/supabase$/},()=>({path:"sdk",namespace:"fixture"}));
       b.onLoad({filter:/.*/,namespace:"fixture"},()=>({loader:"js",contents:`
         const post={id:'b0000000-0000-4000-8000-000000000002',display_name:'Synthetic fixture',body:'Test-only public post',post_type:'question',created_at:'2026-10-07T00:00:00Z',is_owner:false,score:0,upvotes:0,voted:false,helped:0,reputation:0,replies:0,sources:[]};
         const owned={...post,id:'b0000000-0000-4000-8000-000000000009',body:'Test-only post of the reader',is_owner:true,upvotes:3};

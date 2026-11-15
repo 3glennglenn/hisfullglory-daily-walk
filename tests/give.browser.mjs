@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 
-// Give (quick 261020-give), in a real browser: the Give card at the top of You opens /give; the six pages open on
+// Give (quick 261020-give; 01.2 D-02), in a real browser: the Give row in the You sheet opens /give; the six pages open on
 // page 1; the tabs and a swipe change pages; a card's button opens the leaving-the-app dialog with the right host;
 // nothing is loaded from the charities; 200 % text has no sideways scroll; Lamplight and the wide grid render.
 // Each case opens a context of its own (the harness seeds a reader who already answered the welcome questions).
@@ -36,25 +36,29 @@ const pagerState = (page) =>
   page.locator(".give-pager").evaluate((el) => ({ left: el.scrollLeft, width: el.clientWidth, index: Math.round(el.scrollLeft / el.clientWidth) }));
 
 export async function checkGive(browser, base) {
-  // You: the Give card is the first thing under the large title and opens /give.
+  // The Give row in the You sheet opens /give on page 1 (D-02: one row, no card, no shop in the sheet).
   {
     const { context, page, problems } = await open(browser, base, "/you");
     try {
-      const order = await page.locator("main > section > *").evaluateAll((els) => els.slice(0, 3).map((el) => el.tagName + "." + el.className));
-      assert.deepEqual(order, ["H1.large-title", "SECTION.give-feature", "SECTION.shop-feature"], "the Give card sits directly under the title, the Shop card directly under the Give card");
-      const card = page.locator(".give-feature");
-      assert.equal(await card.locator("h2").innerText(), "Give where it helps most");
-      assert.match(await card.innerText(), /Six pages of charities chosen by independent evaluators, from malaria nets to Christian relief\./);
-      assert.match(await card.innerText(), /GiveWell Top Charities Fund, Against Malaria Foundation and GiveDirectly/);
-      assert.equal(await page.locator('main a[href="/give"]').count(), 1, "Give is on You once, and the old plain row is gone");
-      assert.deepEqual(await page.locator("main h2").allInnerTexts(), ["Give where it helps most", "Study Bibles for your walk", "Your walk", "Settings", "About"]);
-      const button = card.getByRole("link", { name: "See where to give", exact: true });
-      const box = await button.boundingBox();
+      const sheet = page.getByRole("dialog", { name: "You", exact: true });
+      await sheet.waitFor();
+      assert.deepEqual(await sheet.locator("h2").allInnerTexts(), ["You", "Your walk", "Settings"], "the groups of D-02 in order");
+      assert.deepEqual(
+        await sheet.locator("a.list-row").evaluateAll((list) => list.map((a) => a.getAttribute("href"))),
+        ["/profile", "/my-walk", "/pray", "/journal", "/give", "/settings/appearance", "/settings/reminders", "/settings#privacy", "/settings#about"],
+        "the rows lead where D-02 says, Give between Your walk and Settings",
+      );
+      assert.equal(await sheet.locator('a[href="/give"]').count(), 1, "exactly one link to /give in the sheet");
+      assert.equal(await sheet.locator(".give-feature").count(), 0, "no Give card");
+      const row = sheet.getByRole("link", { name: /^Give where it helps most/ });
+      assert.equal(await row.locator(".list-row-title").innerText(), "Give where it helps most");
+      assert.equal(await row.locator(".list-row-detail").innerText(), "Charities chosen by independent evaluators");
+      const box = await row.boundingBox();
       assert.ok(box && box.height >= 44, "a 44px target");
-      assert.ok(Math.abs(box.width - (await card.evaluate((el) => el.clientWidth - 40))) < 2, "the button is full width of the card");
-      await button.click();
+      await row.click();
       await page.waitForURL("**/give");
       assert.equal(await page.locator("main h1").innerText(), "Give with intention.");
+      assert.equal(await page.getByRole("tab", { selected: true }).first().innerText(), TITLES[0], "it opens on page 1");
       assert.deepEqual(problems, []);
     } finally {
       await context.close();
@@ -227,24 +231,11 @@ export async function checkGive(browser, base) {
       await context.close();
     }
   }
-  // Lamplight (both looks): the Give card button is the salmon pill, the page tabs and card buttons are pills.
+  // Lamplight (both looks): the page tabs and card buttons of the Give screen are pills.
   for (const look of ["cover", "marked"]) {
-    const { context, page, problems } = await open(browser, base, "/you", { look, lamplight: true });
+    const { context, page, problems } = await open(browser, base, "/give", { look, lamplight: true });
     try {
       const pill = (el) => parseFloat(getComputedStyle(el).borderTopLeftRadius) >= 100;
-      const button = page.locator(".give-feature > .button");
-      assert.equal(await button.evaluate(pill), true, look + ": the Give button is a pill in Lamplight");
-      const filled = await button.evaluate((el) => {
-        const probe = document.createElement("div");
-        probe.style.background = "var(--button)";
-        document.body.append(probe);
-        const colour = getComputedStyle(probe).backgroundColor;
-        probe.remove();
-        return getComputedStyle(el).backgroundColor === colour;
-      });
-      assert.equal(filled, true, look + ": filled with --button (salmon in Lamplight)");
-      await button.click();
-      await page.waitForURL("**/give");
       await page.locator(".give-tabs").waitFor();
       assert.equal(await page.locator(".give-tabs [role=tab]").first().evaluate(pill), true, look + ": pill tabs");
       assert.equal(await page.locator(".give-button").first().evaluate(pill), true, look + ": pill card buttons");
@@ -254,24 +245,14 @@ export async function checkGive(browser, base) {
       await context.close();
     }
   }
-  // Light looks: the Give card button is brand brown (--button), not a pill.
+  // Light looks: the Give screen's card buttons are rounded rectangles, not pills.
   for (const look of ["cover", "marked"]) {
-    const { context, page } = await open(browser, base, "/you", { look });
+    const { context, page } = await open(browser, base, "/give", { look });
     try {
-      const button = page.locator(".give-feature > .button");
-      const radius = await button.evaluate((el) => parseFloat(getComputedStyle(el).borderTopLeftRadius));
+      const radius = await page.locator(".give-button").first().evaluate((el) => parseFloat(getComputedStyle(el).borderTopLeftRadius));
       assert.ok(radius < 40, look + ": a rounded rectangle in the light looks");
-      assert.equal(
-        await button.evaluate((el) => {
-          const probe = document.createElement("div");
-          probe.style.background = "var(--button)";
-          document.body.append(probe);
-          const colour = getComputedStyle(probe).backgroundColor;
-          probe.remove();
-          return getComputedStyle(el).backgroundColor === colour;
-        }),
-        true,
-      );
+      const tabRadius = await page.locator(".give-tabs [role=tab]").first().evaluate((el) => parseFloat(getComputedStyle(el).borderTopLeftRadius));
+      assert.ok(tabRadius < 100, look + ": the page tabs are not pills in the light looks");
     } finally {
       await context.close();
     }

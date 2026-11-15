@@ -9,15 +9,15 @@ import {
   BookMarked,
   BookOpen,
   CircleUser,
-  Heart,
   MessagesSquare,
   type LucideIcon,
 } from "lucide-react";
 import { navigate } from "../platform/router";
+import { activeTab, tabFor, type TabId } from "./tabs";
 
-// The five tabs of UI-SPEC 8.1: single words, each one a link (aria-current on the selected one).
-// A floating capsule on a phone, a 280px sidebar from 768px (styles.css, section "TabBar").
-export type TabId = "today" | "bible" | "pray" | "community" | "you";
+// The three tabs of 01.2 (D-01, N-01): Today, Bible and Community, single words, each one a link (aria-current on the
+// selected one). You is the fourth item of the sidebar only (from 768px); on a phone it is the round button at the end
+// of each tab root's title row. A floating capsule on a phone, a 280px sidebar from 768px (styles.css, section "TabBar").
 interface Tab {
   id: TabId;
   label: string;
@@ -25,11 +25,12 @@ interface Tab {
   Icon: LucideIcon;
   // Icons that read well as a solid shape are filled when selected; the others only get a heavier stroke.
   filled: boolean;
+  // Only the sidebar lists it: below 768px the item is not displayed (styles.css, ".tab-sidebar-only").
+  sidebarOnly?: boolean;
 }
 export const tabs: readonly Tab[] = [
   { id: "today", label: "Today", path: "/", Icon: BookMarked, filled: true },
   { id: "bible", label: "Bible", path: "/bible", Icon: BookOpen, filled: true },
-  { id: "pray", label: "Pray", path: "/pray", Icon: Heart, filled: true },
   {
     id: "community",
     label: "Community",
@@ -37,29 +38,10 @@ export const tabs: readonly Tab[] = [
     Icon: MessagesSquare,
     filled: true,
   },
-  { id: "you", label: "You", path: "/you", Icon: CircleUser, filled: false },
+  { id: "you", label: "You", path: "/you", Icon: CircleUser, filled: false, sidebarOnly: true },
 ];
-// Which tab a route belongs to (UI-SPEC 8.1, 8.2). Pushed screens keep the tab they were reached from.
-const tabByPage: Record<string, TabId> = {
-  home: "today",
-  walk: "today",
-  context: "today",
-  shelf: "today",
-  bible: "bible",
-  pray: "pray",
-  community: "community",
-  circles: "community",
-  you: "you",
-  profile: "you",
-  settings: "you",
-  "my-walk": "you",
-  journal: "you",
-  grow: "you",
-  give: "you",
-  shop: "you",
-  "giving-policy": "you",
-};
-export const tabFor = (page: string): TabId | null => tabByPage[page] ?? null;
+// Which tab a route belongs to, and which one to mark, live in ./tabs (plain TypeScript, so the unit tests can read them).
+export { activeTab, tabFor };
 
 // A press held this long (or the context-menu key) shows the tab's name at twice the size (UI-SPEC 14, 1.4.4).
 const HOLD_MS = 500;
@@ -127,10 +109,10 @@ export function TabBar({ active }: { active: TabId | null }) {
   return (
     <nav className="tabbar" aria-label="Main navigation" ref={navRef}>
       <ul>
-        {tabs.map(({ id, label, path, Icon, filled }) => {
+        {tabs.map(({ id, label, path, Icon, filled, sidebarOnly }) => {
           const selected = active === id;
           return (
-            <li key={id}>
+            <li key={id} className={sidebarOnly ? "tab-sidebar-only" : undefined}>
               <a
                 href={path}
                 className="tab"

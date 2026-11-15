@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
 import { config, products } from "../src/config.ts";
 
-// The shop made prominent (quick 261022-shop, founder 2026-10-22), in a real browser: the bag at the end of Today's
-// title row and the Shop card on You both open the Shop screen; the product links point at the shop's product
-// pages; it holds in both looks, in Lamplight and at 200 % text without sideways scroll; and nothing that is meant
-// to stay calm (Pray, Community, topics, journal, the walk, the Bible) links to the shop.
+// The shop on Today and Bible (quick 261022-shop, founder 2026-10-22; 01.2 D-02, D-04, D-10), in a real browser: the Study
+// Bibles card under Today's walk row (three covers drawn on the device, a Shop link, the lowest price computed from the
+// products) and Bible, Study's row open the shop and the Shop screen; Today loads nothing from another host; the You sheet
+// holds no shop; the product links point at the shop's product pages; it holds in both looks, in Night light and at
+// 200 % text without sideways scroll; and nothing that is meant to stay calm (Pray, Community, topics, journal, the walk,
+// the Bible's Read side, the shelf) links to the shop.
 // Each case opens a context of its own (the harness seeds a reader who already answered the welcome questions).
 // The product pictures are answered locally, so the check does not depend on the shop's CDN.
 
@@ -32,11 +34,30 @@ async function open(browser, base, path, { look = "cover", lamplight = false, wi
   );
   const page = await context.newPage();
   const problems = [];
+  const hosts = new Set();
   page.on("pageerror", (e) => problems.push(e.message));
+  page.on("request", (request) => {
+    if (/^https?:/.test(request.url())) hosts.add(new URL(request.url()).host);
+  });
   await page.goto(base + path);
   await page.locator("main h1").first().waitFor();
-  return { context, page, problems };
+  return { context, page, problems, hosts };
 }
+
+/** The computed colour of a design token, read through a probe element. */
+const colour = (page, token) =>
+  page.evaluate((name) => {
+    const probe = document.createElement("i");
+    probe.style.color = `var(${name})`;
+    document.body.append(probe);
+    const value = getComputedStyle(probe).color;
+    probe.remove();
+    return value;
+  }, token);
+
+/** The lowest dollar amount in the products' price strings, worked out here on its own (not by the app's helper). */
+const lowest = () => "$" + Math.min(...products.flatMap((p) => [...p.price.matchAll(/\d+\.\d+/g)].map((m) => Number(m[0])))).toFixed(2);
+const spoken = (price) => price.replace(/\s+USD$/i, "").replace(/^From\b/, "from");
 
 const noSidewaysScroll = (page) => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth);
 
@@ -50,67 +71,118 @@ async function largeText(page) {
 }
 
 export async function checkShop(browser, base) {
-  // Today: the bag, in both looks and both modes.
+  // Today: the Study Bibles card, in both looks and both modes.
   for (const [look, lamplight] of [
     ["cover", false],
     ["cover", true],
     ["marked", false],
     ["marked", true],
   ]) {
-    const name = `${look} ${lamplight ? "Lamplight" : "Light"}`;
-    const { context, page, problems } = await open(browser, base, "/", { look, lamplight });
+    const name = `${look} ${lamplight ? "Night light" : "Day"}`;
+    const { context, page, problems, hosts } = await open(browser, base, "/", { look, lamplight });
     try {
-      await page.locator(".today .today-head").waitFor();
-      const bag = page.locator('.today a[aria-label="Shop"]');
-      assert.equal(await bag.count(), 1, name + ": one bag on Today");
-      assert.equal(await page.locator('main a[href="/shop"]').count(), 1, name + ": the bag is the only shop link on Today");
-      assert.equal(await bag.getAttribute("href"), "/shop");
-      assert.equal(await bag.locator("svg").count(), 1, name + ": an icon from the app's icon set");
-      assert.equal(await bag.locator("svg").getAttribute("aria-hidden"), "true");
-      const box = await bag.boundingBox();
-      assert.ok(box && box.width >= 44 && box.height >= 44, name + ": a 44px target " + JSON.stringify(box));
-      assert.ok(box.x + box.width <= 390, name + ": inside the screen");
-      // The title row is as tall as the title alone: the bag does not push the title or the context check down.
-      const rows = await page.evaluate(() => {
-        const head = document.querySelector(".today-head").getBoundingClientRect();
-        const h1 = document.querySelector(".today-head h1").getBoundingClientRect();
-        return { head: head.height, h1: h1.height, title: h1.top, headTop: head.top };
+      const card = page.getByRole("region", { name: "Study Bibles for your walk", exact: true });
+      await card.waitFor();
+      assert.equal(await card.count(), 1, name + ": one card on Today");
+      assert.equal(await card.locator("h2").innerText(), "Study Bibles for your walk");
+      // The card follows the walk row and comes before nothing else of the shop: it is the only shop link block on Today.
+      const order = await page.evaluate(() => {
+        const walk = document.querySelector('.today a[href="/walk"]'), card = document.querySelector(".study-card");
+        return !!(walk.compareDocumentPosition(card) & Node.DOCUMENT_POSITION_FOLLOWING);
       });
-      assert.ok(Math.abs(rows.head - rows.h1) < 1, name + ": the row is as tall as the title " + JSON.stringify(rows));
-      assert.ok(rows.title - rows.headTop < 1, name + ": the title stays at the top of its row");
-      // Tinted like the other toolbar icons (--link), never filled.
-      const colours = await page.evaluate(() => {
-        const probe = document.createElement("span");
-        probe.style.color = "var(--link)";
-        document.body.append(probe);
-        const link = getComputedStyle(probe).color;
-        probe.remove();
-        const a = getComputedStyle(document.querySelector('.today a[aria-label="Shop"]'));
-        return { link, color: a.color, background: a.backgroundColor };
-      });
-      assert.equal(colours.color, colours.link, name + ": the bag is --link");
-      assert.equal(colours.background, "rgba(0, 0, 0, 0)", name + ": the bag is not filled");
-      // The title does not run under the bag or, in Marked Light, under the ribbon.
-      const title = await page.locator(".today-head h1").boundingBox();
-      assert.ok(title.x + title.width <= box.x + 1, name + ": the title ends before the bag");
-      if (look === "marked" && !lamplight) {
-        const ribbon = await page.locator(".cover-ribbon").boundingBox();
-        assert.ok(box.x + box.width <= ribbon.x, name + ": the bag leaves the ribbon's column free");
+      assert.ok(order, name + ": the card is under the walk row");
+      assert.equal(await page.locator(".today-head a, .today-head button").count(), 1, name + ": the title row holds only the You button");
+      assert.equal(await page.locator('.today a[aria-label="Shop"]').count(), 0, name + ": no bag");
+      // The Shop link.
+      const shop = card.getByRole("link", { name: "Shop", exact: true });
+      assert.equal(await shop.getAttribute("href"), "/shop");
+      assert.equal(await page.locator('main a[href="/shop"]').count(), 1, name + ": the card's link is the only shop link on Today");
+      const shopBox = await shop.boundingBox();
+      assert.ok(shopBox.height >= 44 && shopBox.width >= 44, name + ": a 44px target " + JSON.stringify(shopBox));
+      assert.equal(await shop.evaluate((el) => getComputedStyle(el).color), await colour(page, "--link"), name + ": Shop is --link");
+      // The three covers: one link each to its page on the shop, in the order of the products, named with the book and its
+      // price, drawn from the spine tokens, with no picture.
+      const covers = card.locator(".study-cover");
+      assert.equal(await covers.count(), 3);
+      assert.deepEqual(
+        await covers.evaluateAll((list) => list.map((a) => a.getAttribute("href"))),
+        products.map((p) => `https://shop.hisfullglory.com/products/${p.handle}`),
+        name + ": each cover opens its product page, in the order of config products",
+      );
+      assert.deepEqual(
+        await covers.evaluateAll((list) => list.map((a) => a.getAttribute("aria-label"))),
+        products.map((p) => `${p.title}, ${spoken(p.price)}`),
+        name + ": each link is named with the book and its price",
+      );
+      assert.deepEqual(await covers.allInnerTexts(), products.map((p) => p.shortName), name + ": the short names are on the covers");
+      for (const [i, cover] of (await covers.all()).entries()) {
+        const box = await cover.boundingBox();
+        assert.ok(box.width >= 44 && box.height >= 44, name + ": cover " + (i + 1) + " is a 44px target " + JSON.stringify(box));
+        assert.equal(await cover.evaluate((el) => getComputedStyle(el).backgroundColor), await colour(page, `--spine-${i + 1}`), name + ": cover " + (i + 1) + " is --spine-" + (i + 1));
+        assert.equal(await cover.evaluate((el) => getComputedStyle(el).color), await colour(page, "--spine-ink"), name + ": the name is --spine-ink");
+        assert.equal(await cover.evaluate((el) => el.scrollWidth <= el.clientWidth + 1 && el.scrollHeight <= el.clientHeight + 1), true, name + ": the name is not clipped");
       }
+      assert.equal(await card.locator("img, picture, svg, [style*='url(']").count(), 0, name + ": no picture in the card");
+      // The price line, computed from the products.
+      assert.equal(await card.locator(".study-card-note").innerText(), "Hand-picked, from " + lowest(), name + ": the lowest price");
+      assert.equal(await card.locator(".study-card-note").evaluate((el) => getComputedStyle(el).color), await colour(page, "--muted"));
+      // The surface is the grouped list's own.
+      assert.equal(await card.evaluate((el) => getComputedStyle(el).backgroundColor), await colour(page, "--surface"), name + ": the card is --surface");
+      // Today loads nothing from another host: not a picture, not a script, not a font.
+      await page.waitForLoadState("networkidle");
+      assert.deepEqual([...hosts], [new URL(base).host], name + ": Today makes no request to another host, cdn.shopify.com included");
+      assert.equal(await page.locator('img[src*="cdn.shopify.com"]').count(), 0);
+      const box = await card.boundingBox();
+      assert.ok(box.x >= 0 && box.x + box.width <= 390, name + ": the card is inside the screen");
       assert.equal(await noSidewaysScroll(page), true, name + ": no sideways scroll");
-      // Keyboard: the bag takes focus and shows it.
-      await bag.focus();
-      assert.notEqual(await bag.evaluate((el) => getComputedStyle(el).outlineStyle), "none", name + ": a visible focus ring");
-      await bag.click();
+      // Keyboard: Shop and every cover take focus and show it.
+      for (const target of [shop, ...(await covers.all())]) {
+        await target.focus();
+        assert.notEqual(await target.evaluate((el) => getComputedStyle(el).outlineStyle), "none", name + ": a visible focus ring");
+      }
+      await shop.click();
       await page.waitForURL("**/shop");
-      assert.equal(await page.locator("main h1").innerText(), "Shop", name + ": the bag opens the Shop screen");
+      assert.equal(await page.locator("main h1").innerText(), "Shop", name + ": the Shop link opens the Shop screen");
       assert.deepEqual(problems, [], name + ": no page errors");
     } finally {
       await context.close();
     }
   }
+  // A cover opens its product on the shop.
+  {
+    const { context, page } = await open(browser, base, "/");
+    try {
+      await page.locator(".study-cover").nth(1).click();
+      await page.waitForURL("https://shop.hisfullglory.com/products/" + products[1].handle);
+    } finally {
+      await context.close();
+    }
+  }
+  // A failing picture host changes nothing on Today: there is no picture to fail.
+  {
+    const { context, page } = await open(browser, base, "/", { picture: false });
+    try {
+      assert.equal(await page.locator(".study-card").count(), 1);
+      assert.equal(await page.locator(".book-placeholder").count(), 0, "no cover placeholders on Today");
+    } finally {
+      await context.close();
+    }
+  }
+  // Bible, Study's "Study Bibles" row opens the Shop screen.
+  {
+    const { context, page } = await open(browser, base, "/bible");
+    try {
+      await page.getByRole("radio", { name: "Study" }).click();
+      await page.getByRole("link", { name: /^Study Bibles/ }).click();
+      await page.waitForURL("**/shop");
+      assert.equal(await page.locator("main h1").innerText(), "Shop");
+    } finally {
+      await context.close();
+    }
+  }
 
-  // You: the Shop card under the Give card, in both looks and both modes.
+  // The You sheet holds no shop (01.2 D-02, D-10): no link to the shop, no Shop card, no Study Bibles words, no product
+  // picture; in both looks and both modes. The Shop card that stood under the Give card is gone from You.
   for (const [look, lamplight] of [
     ["cover", false],
     ["cover", true],
@@ -120,47 +192,29 @@ export async function checkShop(browser, base) {
     const name = `${look} ${lamplight ? "Lamplight" : "Light"}`;
     const { context, page, problems } = await open(browser, base, "/you", { look, lamplight });
     try {
-      const order = await page.locator("main > section > *").evaluateAll((els) => els.slice(0, 3).map((el) => el.tagName + "." + el.className));
-      assert.deepEqual(order, ["H1.large-title", "SECTION.give-feature", "SECTION.shop-feature"], name + ": the Shop card is directly under the Give card");
-      const card = page.locator(".shop-feature");
-      assert.equal(await card.locator("h2").innerText(), "Study Bibles for your walk");
-      assert.equal(await card.locator("p").innerText(), "Hand-picked study Bibles from the HisFullGlory shop.");
-      const images = card.locator("img");
-      assert.equal(await images.count(), 3, name + ": three covers");
-      assert.deepEqual(await images.evaluateAll((list) => list.map((i) => i.alt)), products.map((p) => p.title), name + ": alt is the product title");
-      assert.deepEqual(await images.evaluateAll((list) => list.map((i) => i.getAttribute("loading"))), ["lazy", "lazy", "lazy"]);
-      const button = card.getByRole("link", { name: "Visit the shop", exact: true });
-      assert.equal(await button.getAttribute("href"), "/shop");
-      const box = await button.boundingBox();
-      assert.ok(box && box.height >= 44, name + ": a 44px target");
-      // Outlined, not filled: Give keeps the only filled button on the screen.
-      const styles = await page.evaluate(() => {
-        const fill = (el) => getComputedStyle(el).backgroundColor;
-        const give = document.querySelector('.give-feature a.button');
-        const shop = document.querySelector('.shop-feature a.button');
-        return { give: fill(give), shop: fill(shop), border: getComputedStyle(shop).borderTopWidth };
-      });
-      assert.notEqual(styles.shop, styles.give, name + ": the Shop button is not the filled style " + JSON.stringify(styles));
-      assert.equal(styles.border, "1px", name + ": an outline");
-      assert.equal(await page.locator("main a.button:not(.secondary)").count(), 1, name + ": one filled link on You (Give)");
-      assert.equal(await page.getByText("Resources", { exact: true }).count(), 0, name + ": the old Resources row is gone");
+      const sheet = page.getByRole("dialog", { name: "You", exact: true });
+      await sheet.waitFor();
+      assert.equal(await sheet.locator('a[href="/shop"], a[href*="shop.hisfullglory.com"]').count(), 0, name + ": no link to the shop in the sheet");
+      assert.equal(await sheet.locator(".shop-feature, .give-feature").count(), 0, name + ": no Shop or Give card in the sheet");
+      assert.equal(await sheet.getByText(/Study Bibles/).count(), 0, name + ": no shop words in the sheet");
+      assert.equal(await sheet.getByText("Resources", { exact: true }).count(), 0, name + ": the old Resources row is gone");
+      assert.equal(await sheet.locator("img").count(), 0, name + ": no product picture in the sheet");
+      assert.equal(await sheet.getByRole("link", { name: /^Visit the shop/ }).count(), 0, name + ": no Visit the shop link");
       assert.equal(await noSidewaysScroll(page), true, name + ": no sideways scroll");
-      await button.click();
-      await page.waitForURL("**/shop");
-      assert.equal(await page.locator("main h1").innerText(), "Shop");
       assert.deepEqual(problems, [], name + ": no page errors");
     } finally {
       await context.close();
     }
   }
 
-  // The thumbnails keep the placeholder when a picture fails.
+  // The covers that used to load on You are gone with the card: a failing picture host changes nothing there.
   {
     const { context, page } = await open(browser, base, "/you", { picture: false });
     try {
-      await page.locator(".shop-feature .book-placeholder").first().waitFor();
-      assert.equal(await page.locator(".shop-feature .book-placeholder").count(), 3, "a placeholder for each failed cover");
-      assert.equal(await page.locator(".shop-feature img").count(), 0);
+      const sheet = page.getByRole("dialog", { name: "You", exact: true });
+      await sheet.waitFor();
+      assert.equal(await sheet.locator(".book-placeholder, .shop-feature").count(), 0, "no cover placeholders and no Shop card on You");
+      assert.equal(await page.locator('img[src*="cdn.shopify.com"]').count(), 0, "nothing on the Today screen behind the sheet loads a shop picture");
     } finally {
       await context.close();
     }
@@ -176,7 +230,7 @@ export async function checkShop(browser, base) {
     const { context, page, problems } = await open(browser, base, "/shop", { look, lamplight });
     try {
       assert.equal(await page.locator("main h1").innerText(), "Shop");
-      assert.equal(await page.getByRole("button", { name: "Back to You", exact: true }).count(), 1);
+      assert.equal(await page.getByRole("button", { name: "Back to Today", exact: true }).count(), 1, name + ": opened directly, Back names Today");
       assert.equal(
         await page.locator(".screen-lede").innerText(),
         "Study Bibles we recommend. Price, stock and checkout are on the HisFullGlory shop.",
@@ -217,22 +271,21 @@ export async function checkShop(browser, base) {
     }
   }
 
-  // 200 % text: Today, You and the Shop screen, at 390 and 320px.
+  // 200 % text: Today (the card) and the Shop screen, at 390 and 320px (the You sheet is measured by the text sweep of remaining.browser.mjs).
   for (const width of [390, 320]) {
-    for (const path of ["/", "/you", "/shop"]) {
+    for (const path of ["/", "/shop"]) {
       const { context, page } = await open(browser, base, path, { width, height: 844 });
       try {
         await largeText(page);
         assert.equal(await noSidewaysScroll(page), true, `${path} at ${width}px, 200 %: no sideways scroll`);
         if (path === "/") {
-          const bag = await page.locator('.today a[aria-label="Shop"]').boundingBox();
-          assert.ok(bag.width >= 44 && bag.height >= 44 && bag.x >= 0 && bag.x + bag.width <= width, `bag at ${width}px, 200 %: ` + JSON.stringify(bag));
-          const title = await page.locator(".today-head h1").boundingBox();
-          assert.ok(title.x + title.width <= bag.x + 1, "the title does not run under the bag");
-        }
-        if (path === "/you") {
-          const card = await page.locator(".shop-feature").boundingBox();
-          assert.ok(card.x >= 0 && card.x + card.width <= width, "the Shop card stays inside the screen");
+          const card = await page.locator(".study-card").boundingBox();
+          assert.ok(card.x >= 0 && card.x + card.width <= width, `the card at ${width}px, 200 %: ` + JSON.stringify(card));
+          for (const box of await page.locator(".study-card .study-cover, .study-card .study-card-shop, .study-card .study-card-note").evaluateAll((list) => list.map((el) => el.getBoundingClientRect().toJSON()))) {
+            assert.ok(box.left >= 0 && box.right <= width + 0.5, `a part of the card stays inside the screen at ${width}px, 200 %: ` + JSON.stringify(box));
+          }
+          const covers = await page.locator(".study-cover").evaluateAll((list) => list.map((el) => ({ clipped: el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1 })));
+          assert.deepEqual(covers.map((c) => c.clipped), [false, false, false], `no cover name is clipped at ${width}px, 200 %`);
         }
       } finally {
         await context.close();
@@ -240,12 +293,13 @@ export async function checkShop(browser, base) {
     }
   }
 
-  // Nothing calm links to the shop: prayers, community, topics, the journal, the walk, the Bible and the Give screens.
-  for (const path of ["/pray", "/community", "/community/grief", "/community/circles", "/journal", "/my-walk", "/walk", "/bible/psalms/23", "/grow", "/grow/anxiety", "/give", "/shelf"]) {
+  // Nothing calm links to the shop (01.2 D-10): prayers, community, topics, circles, the journal, My walk, the walk, the
+  // reader, Grow, Give and the shelf. Only Today's card, Bible, Study's row and /shop do.
+  for (const path of ["/pray", "/community", "/community/grief", "/community/circles", "/journal", "/my-walk", "/walk", "/bible/psalms/23", "/grow", "/grow/anxiety", "/give", "/shelf", "/context"]) {
     const { context, page } = await open(browser, base, path);
     try {
       assert.equal(await page.locator('main a[href="/shop"], main a[href*="shop.hisfullglory.com"]').count(), 0, path + ": no link to the shop");
-      assert.equal(await page.locator('main a[aria-label="Shop"], main .shop-feature').count(), 0, path + ": no bag or Shop card");
+      assert.equal(await page.locator('main a[aria-label="Shop"], main .study-card, main .shop-feature').count(), 0, path + ": no bag or Study Bibles card");
       assert.equal(await page.locator("main").getByText(/Study Bibles/).count(), 0, path + ": no shop words");
     } finally {
       await context.close();
