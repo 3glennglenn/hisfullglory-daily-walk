@@ -6,6 +6,7 @@ import { TopicPreferences } from "../topics/Preferences";
 import { GroupedList } from "../ui/List";
 import { StepIndicator } from "../ui/StepIndicator";
 import { devotionals, recommendedJourney } from "./growData";
+import { webRemindersInApp } from "../native/storeScope";
 
 // The welcome questionnaire (founder, 2026-10-20: "you only need to have this questionaire once when people open the app
 // ... for the first time"). Five steps, one question per screen, in the walk's flow: a Large Title, the step indicator
@@ -133,7 +134,7 @@ export function Welcome({ onDone }: { onDone: () => void }) {
               </li>
             </GroupedList>
             <TopicPreferences selected={privateTopics} onChange={setPrivateTopics} />
-            <p>You can turn on a daily reminder in Settings.</p>
+            {webRemindersInApp && <p>You can turn on a daily reminder in Settings.</p>}
           </>
         ) : (
           <>

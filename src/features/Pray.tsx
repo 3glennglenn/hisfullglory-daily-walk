@@ -9,6 +9,7 @@ import { Segmented } from "../ui/Segmented";
 import { Sheet } from "../ui/Sheet";
 import { ConfirmDialog } from "../ui/ConfirmDialog";
 import { TextSheet } from "../ui/TextSheet";
+import { accountsInApp } from "../native/storeScope";
 export function Pray() {
   const { state, update } = usePlatform();
   // The New prayer sheet. What was typed in it stays in this component while the screen is open (never stored).
@@ -150,16 +151,18 @@ export function Pray() {
             >
               Delete
             </button>
-            <button
-              className="secondary"
-              onClick={() => {
-                setShareType(p.answer ? "testimony" : "prayer");
-                setSharingPrayerId(p.id);
-                setSharing(p.answer || p.body);
-              }}
-            >
-              Choose to share…
-            </button>
+            {accountsInApp && (
+              <button
+                className="secondary"
+                onClick={() => {
+                  setShareType(p.answer ? "testimony" : "prayer");
+                  setSharingPrayerId(p.id);
+                  setSharing(p.answer || p.body);
+                }}
+              >
+                Choose to share…
+              </button>
+            )}
           </div>
         </article>
       ))}
@@ -305,21 +308,25 @@ export function Pray() {
             >
               Keep private
             </button>
-            <button
-              disabled={!answer.trim()}
-              className="secondary"
-              onClick={() => answered(true)}
-            >
-              Share testimony…
-            </button>
+            {accountsInApp && (
+              <button
+                disabled={!answer.trim()}
+                className="secondary"
+                onClick={() => answered(true)}
+              >
+                Share testimony…
+              </button>
+            )}
             <button className="secondary" onClick={() => setAnswerId(null)}>
               Cancel
             </button>
           </div>
-          <small>
-            Sharing opens a separate public composer. You must publish
-            explicitly.
-          </small>
+          {accountsInApp && (
+            <small>
+              Sharing opens a separate public composer. You must publish
+              explicitly.
+            </small>
+          )}
         </div>
       )}
       {sharing !== null && (

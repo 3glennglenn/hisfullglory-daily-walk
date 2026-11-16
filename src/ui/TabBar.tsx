@@ -13,6 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { navigate } from "../platform/router";
+import { accountsInApp } from "../native/storeScope";
 import { activeTab, tabFor, type TabId } from "./tabs";
 
 // The three tabs of 01.2 (D-01, N-01): Today, Bible and Community, single words, each one a link (aria-current on the
@@ -40,6 +41,8 @@ export const tabs: readonly Tab[] = [
   },
   { id: "you", label: "You", path: "/you", Icon: CircleUser, filled: false, sidebarOnly: true },
 ];
+// The store app of version 1.0 has no community (src/native/storeScope.ts), so its bar shows Today and Bible.
+const shownTabs = accountsInApp ? tabs : tabs.filter((t) => t.id !== "community");
 // Which tab a route belongs to, and which one to mark, live in ./tabs (plain TypeScript, so the unit tests can read them).
 export { activeTab, tabFor };
 
@@ -109,7 +112,7 @@ export function TabBar({ active }: { active: TabId | null }) {
   return (
     <nav className="tabbar" aria-label="Main navigation" ref={navRef}>
       <ul>
-        {tabs.map(({ id, label, path, Icon, filled, sidebarOnly }) => {
+        {shownTabs.map(({ id, label, path, Icon, filled, sidebarOnly }) => {
           const selected = active === id;
           return (
             <li key={id} className={sidebarOnly ? "tab-sidebar-only" : undefined}>

@@ -1,6 +1,8 @@
 // Browser check of the store build (D-02, STORE-03), against npm run preview:native (dist-native on port 4174).
 // The store app serves itself from its own files, so every request to another host is aborted and recorded, and
 // the check fails if one was made. It opens Today and the Bible, opens and closes the You sheet, and proves that no service worker is registered.
+// Version 1.0 of the store app has no accounts (src/native/storeScope.ts): no Community tab, no sign-in, no Give, no
+// web-push reminder, and the community's address shows "Page not found".
 // Later store plans extend this scaffold (native sign-in, giving hidden, back button stubs).
 // DOM and behaviour only; no screenshots.
 import { chromium } from "playwright";
@@ -66,6 +68,32 @@ try {
     await verse.waitFor();
     assert.match(await verse.innerText(), /For God so loved the world/);
   });
+  await page.goto(base + "/");
+  await page.locator("main h1").first().waitFor();
+  await check("the tab bar of version 1.0 has Today and Bible, and no Community", async () => {
+    const nav = page.getByRole("navigation", { name: "Main navigation" });
+    assert.equal(await nav.getByRole("link", { name: "Today", exact: true }).count(), 1);
+    assert.equal(await nav.getByRole("link", { name: "Bible", exact: true }).count(), 1);
+    assert.equal(await nav.getByRole("link", { name: "Community", exact: true }).count(), 0, "no Community tab");
+  });
+  await check("You in version 1.0 has the walk, prayers and journal, and no sign-in, Give or web reminder", async () => {
+    await page.locator("main .title-row").getByRole("link", { name: "You", exact: true }).click();
+    const sheet = page.getByRole("dialog", { name: "You", exact: true });
+    await sheet.waitFor();
+    for (const name of ["My walk", "My prayers", "Journal"])
+      assert.equal(await sheet.getByRole("link", { name: new RegExp("^" + name) }).count(), 1, name);
+    for (const name of ["Sign in", "Give where it helps most", "Daily reminder"])
+      assert.equal(await sheet.getByRole("link", { name: new RegExp("^" + name) }).count(), 0, name + " is left out");
+    await sheet.getByRole("button", { name: "Done, close You", exact: true }).click();
+    await sheet.waitFor({ state: "detached" });
+  });
+  for (const path of ["/community", "/give", "/profile", "/settings/reminders"]) {
+    await page.goto(base + path);
+    await page.locator("main h1").first().waitFor();
+    await check(`${path} is not part of version 1.0 and shows Page not found`, async () => {
+      assert.equal(await page.locator("main h1").innerText(), "Page not found");
+    });
+  }
   await page.goto(base + "/");
   await page.locator("main h1").first().waitFor();
   await check("the You button opens the You sheet from the store bundle and Done closes it", async () => {

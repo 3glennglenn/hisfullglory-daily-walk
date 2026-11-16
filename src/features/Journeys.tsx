@@ -1,5 +1,6 @@
 import { usePlatform } from "../platform/store";
 import { navigate } from "../platform/router";
+import { accountsInApp } from "../native/storeScope";
 
 const paths = [
   {id:"return-to-scripture", title:"Return to Scripture", topic:"returning-to-god", steps:[
@@ -25,7 +26,7 @@ export function Journeys() {
         <button className="secondary" onClick={()=>navigate(step.path)}>Open practice</button>
         <button disabled={state.pathProgress[path.id]?.includes(index)} onClick={()=>update(s=>({...s,pathProgress:{...s.pathProgress,[path.id]:[...new Set([...(s.pathProgress[path.id]??[]),index])]}}))}>{state.pathProgress[path.id]?.includes(index)?"Step complete":"Mark step complete"}</button>
       </div></article>)}
-      <button className="secondary" onClick={()=>navigate("/community/"+path.topic)}>Explore related community</button>
+      {accountsInApp&&<button className="secondary" onClick={()=>navigate("/community/"+path.topic)}>Explore related community</button>}
     </details>)}
     <details className="group-disclosure"><summary>Seven days in Scripture · {complete.length}/7 practices</summary>
       <p>Revisit three selected WEB chapters at your pace. This is a local personal challenge with no public leaderboard or promised reward. Leaving preserves your progress.</p>

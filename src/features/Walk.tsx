@@ -14,6 +14,7 @@ import { StarField } from "../ui/StarField";
 import { StepIndicator } from "../ui/StepIndicator";
 import { Journal } from "./LegacyWalk";
 import { dailyReminderOn } from "./Reminders";
+import { webRemindersInApp } from "../native/storeScope";
 
 // Today's walk (UI-SPEC A5, A6, D-11): a full-screen flow of six steps that ends on the Prayer step, then a finish
 // screen that is a reason to come back and never a reproach. The tab bar is covered while it is open; "‹ Today" is the
@@ -209,7 +210,9 @@ function WalkFinish({ date }: { date: string }) {
             }
           />
         )}
-        <Row href="/settings/reminders" chevron title="Daily reminder" value={reminderOn ? "On" : "Off"} />
+        {webRemindersInApp && (
+          <Row href="/settings/reminders" chevron title="Daily reminder" value={reminderOn ? "On" : "Off"} />
+        )}
       </GroupedList>
       <button type="button" className="flow-button" onClick={() => navigate("/")}>
         Back to Today

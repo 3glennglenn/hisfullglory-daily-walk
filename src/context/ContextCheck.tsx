@@ -28,6 +28,7 @@ import { LargeTitle, Toolbar } from "../ui/Screen";
 import { MiniShelf, Spine } from "../ui/Shelf";
 import { SponsorRow } from "../ui/SponsorRow";
 import { StepIndicator } from "../ui/StepIndicator";
+import { accountsInApp } from "../native/storeScope";
 
 function Told({ value, check }: { value: string; check: AppContextCheck }) {
   return (
@@ -182,9 +183,11 @@ function Story({ check }: { check: AppContextCheck }) {
             <button type="button" className="flow-button" onClick={() => navigate(`/bible/${check.verse.book}/${check.verse.chapter}/${check.verse.start}`)}>
               Read {label.replace(/:.*/, "")} in full
             </button>
-            <button type="button" className="flow-button flow-button-secondary" onClick={() => navigate("/community")}>
-              Talk about it in the community
-            </button>
+            {accountsInApp && (
+              <button type="button" className="flow-button flow-button-secondary" onClick={() => navigate("/community")}>
+                Talk about it in the community
+              </button>
+            )}
             <button type="button" className="flow-button flow-button-secondary" onClick={share}>
               Share as a picture
             </button>

@@ -28,6 +28,15 @@ fallbacks: [STORE_BUILDS.md](STORE_BUILDS.md). Apple refuses apps that are only 
 website in a wrapper (guideline 4.2), so the shell adds things a website cannot do, starting
 with a daily reminder as a notification.
 
+## Version 1.0: no accounts (founder, 2026-11-16)
+
+To submit to Apple in the week of 2026-11-16, the first App Store version has no accounts: Today, the Bible with Read
+and Study, the context checks, the daily walk, the private journal, My prayers and the Study Bibles, offline. Sign-in,
+the community, Circles, posting, giving and the web-push reminder are left out of the store build
+(`src/native/storeScope.ts`) and come back in version 1.1. So 1.0 needs no Sign in with Apple (4.8), no reviewer
+account, no in-app account deletion (5.1.1(v)) and no reporting or blocking (1.2), and its privacy answer is that the
+app collects no data. Version 1.0 is iPhone only. The rows below describe the full app of version 1.1.
+
 ## What the stores require, and status
 
 | Requirement | Status |

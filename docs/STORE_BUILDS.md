@@ -21,8 +21,15 @@ phase 2. Decisions D-01 to D-03 and D-14 are in the phase context; the route is 
   public key (publishable or anon). It also always applies the production rule for the legal text, whatever
   `VERCEL_ENV` says. Pull-request checks build without Supabase values; the hand-run workflow requires both
   (`scripts/store-env-check.mjs`).
-- **Identity:** bundle ID `com.hisfullglory.app`, name HisFullGlory, version 1.0.0, iPhone and iPad in every
-  orientation (D-14).
+- **Identity:** bundle ID `com.hisfullglory.app`, name HisFullGlory, version 1.0.0. Version 1.0 is iPhone only
+  (`TARGETED_DEVICE_FAMILY = 1`, 2026-11-16): an iPad listing needs its own screenshots and a review on iPad, and a later
+  version may add iPad, while a released device family can never be removed. D-14 planned iPhone and iPad.
+- **Version 1.0 has no accounts** (founder, 2026-11-16, to submit to Apple that week): the store build leaves out
+  sign-in, the Community tab, Circles, posting, giving and the web-push reminder, and makes no Supabase client, so it
+  sends nothing to Supabase. One switch, `src/native/storeScope.ts`; the web build is unchanged. They return in version
+  1.1 with the native Google and Apple sign-in, the reviewer sign-in and token revocation (plans 02-08 to 02-11), because
+  inside a store app Google refuses sign-in in an embedded web view, Supabase's own mail reaches only the team, and
+  Apple asks for reporting and blocking wherever other people's posts are shown.
 
 ## The iOS project (`ios/`)
 
@@ -47,7 +54,8 @@ text on Windows:
 
 ## GitHub environment `store-release`
 
-Set up by the founder (plan 03), never by Claude. Settings > Environments > New environment `store-release`,
+Created on 2026-11-02 by Claude in the founder's Chrome with his "ja", with the values that are not keys or passwords;
+the founder entered every secret himself (plan 04 summary). Settings > Environments > New environment `store-release`,
 deployment branches limited to `main` and `store-shell`. Only workflows that name this environment can read its
 values, and only from those branches.
 
