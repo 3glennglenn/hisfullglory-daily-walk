@@ -13,6 +13,8 @@ export const config = {
   // screen of the app shows the address or links to it.
   supportEmailReady,
   siteUrl: "https://hisfullglory.com",
+  // The web app. The store app shares passage links here, because its own address (capacitor://localhost) opens nothing.
+  appUrl: "https://app.hisfullglory.com",
   // The shop moved to its own subdomain on 2026-10-13; hisfullglory.com is the website.
   storeUrl: "https://shop.hisfullglory.com",
   // The sponsor slot is built for later and empty at launch: no sponsor, no house message, nothing in its place

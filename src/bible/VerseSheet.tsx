@@ -27,6 +27,8 @@ import { supabase } from "../supabase";
 import { usePlatform } from "../platform/store";
 import { navigate, passagePath } from "../platform/router";
 import { localDate } from "../storage";
+import { storeBuild } from "../native/storeScope";
+import { config } from "../config";
 
 // One sheet for a verse, and the same sheet for a whole chapter (UI-SPEC A4, D-08). Its root page has the
 // verse's actions (no actions for a chapter) and, under "Around this verse", the three layers in a fixed order:
@@ -226,7 +228,9 @@ export function VerseSheet({ data, book, chapter, verse, startPage, records, ai,
   }
   async function share() {
     try {
-      const sharing = { title: reference, text: `${reference} (WEB)`, url: window.location.origin + source };
+      // The store app's own address (capacitor://localhost) means nothing to the person it is sent to, so it shares the
+      // same passage in the web app.
+      const sharing = { title: reference, text: `${reference} (WEB)`, url: (storeBuild ? config.appUrl : window.location.origin) + source };
       if (navigator.share) await navigator.share(sharing);
       else {
         await navigator.clipboard.writeText(sharing.url);
