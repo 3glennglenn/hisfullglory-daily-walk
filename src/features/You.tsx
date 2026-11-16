@@ -10,6 +10,7 @@ import { LargeTitle } from "../ui/Screen";
 import { Sheet } from "../ui/Sheet";
 import { ModeControl } from "./Appearance";
 import { dailyReminderOn } from "./Reminders";
+import { accountsInApp, webRemindersInApp } from "../native/storeScope";
 
 // The signed-in reader's own display name, shown on the account row. Nothing else about the account
 // is read here (T-01.1-08).
@@ -40,7 +41,7 @@ function useDisplayName(userId: string | undefined) {
 // What You holds (01.2 D-02, in this order): the account, Your walk, Give, Settings (the Night light control with its hint,
 // then the Theme row to the Appearance screen, the reminder and privacy), one help row and the Scripture line.
 // No shop and no giving card: those are rows or live elsewhere (D-10). It is the same on the sheet (a phone) and on the
-// page (from 768px).
+// page (from 768px). The store app of version 1.0 leaves out the account, Give and the reminder (src/native/storeScope.ts).
 export function YouContent() {
   const { session } = useAuth();
   const { state } = usePlatform();
@@ -51,6 +52,7 @@ export function YouContent() {
   const days = state.local.completedDates.length;
   return (
     <>
+      {accountsInApp && (
       <GroupedList>
         {session ? (
           <Row title={name || "Account"} detail={name ? "Account" : undefined} href="/profile" chevron />
@@ -58,19 +60,22 @@ export function YouContent() {
           <Row title="Sign in" detail="Join the community and keep your account safe." href="/profile" chevron />
         )}
       </GroupedList>
+      )}
       <GroupedList title="Your walk">
         <Row title="My walk" value={`${days} ${days === 1 ? "day" : "days"}`} href="/my-walk" chevron />
         <Row title="My prayers" href="/pray" chevron />
         <Row title="Journal" href="/journal" chevron />
       </GroupedList>
-      <GroupedList>
-        <Row
-          title="Give where it helps most"
-          detail="Charities chosen by independent evaluators"
-          href="/give"
-          chevron
-        />
-      </GroupedList>
+      {accountsInApp && (
+        <GroupedList>
+          <Row
+            title="Give where it helps most"
+            detail="Charities chosen by independent evaluators"
+            href="/give"
+            chevron
+          />
+        </GroupedList>
+      )}
       <GroupedList title="Settings">
         <li className="mode-item">
           <span className="mode-item-label" id={modeLabel}>
@@ -80,7 +85,9 @@ export function YouContent() {
           <ModeControl labelledBy={modeLabel} />
         </li>
         <Row title="Theme" value={LOOK_NAMES[look]} href="/settings/appearance" chevron />
-        <Row title="Daily reminder" value={reminder ? "On" : "Off"} href="/settings/reminders" chevron />
+        {webRemindersInApp && (
+          <Row title="Daily reminder" value={reminder ? "On" : "Off"} href="/settings/reminders" chevron />
+        )}
         <Row title="Privacy and your data" href="/settings#privacy" chevron />
       </GroupedList>
       <GroupedList>

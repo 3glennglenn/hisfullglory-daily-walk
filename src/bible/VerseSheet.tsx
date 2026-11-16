@@ -423,8 +423,9 @@ export function VerseSheet({ data, book, chapter, verse, startPage, records, ai,
             </>
           ) : (
             <p className="layer-body">
-              Context for this book is being written. Read the surrounding chapter, reflect in your journal or discuss it with the
-              community. A note appears here only once it names its sources.
+              {communityOn
+                ? "Context for this book is being written. Read the surrounding chapter, reflect in your journal or discuss it with the community. A note appears here only once it names its sources."
+                : "Context for this book is being written. Read the surrounding chapter or reflect in your journal. A note appears here only once it names its sources."}
             </p>
           )}
         </LayerBlock>

@@ -9,6 +9,7 @@ import { localDate } from "../storage";
 import { Feed } from "../social/Feed";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle, Toolbar } from "../ui/Screen";
+import { accountsInApp } from "../native/storeScope";
 // Grow is a row of My walk (01.2 D-03): Back names My walk when the reader came from it, otherwise You.
 const parent = () => (cameFrom() === "/my-walk" ? { back: "My walk", to: "/my-walk" } : { back: "You", to: "/you" });
 export function Grow({ id }: { id?: string }) {
@@ -121,6 +122,7 @@ export function Grow({ id }: { id?: string }) {
               : "Save journey"}
           </button>
         </article>
+        {accountsInApp && (
         <div className="actions">
           <button
             className="secondary"
@@ -130,6 +132,7 @@ export function Grow({ id }: { id?: string }) {
           </button>
           {findTopic(selected.id) && <button className="secondary" onClick={() => navigate("/community/"+selected.id)}>Explore the related topic community</button>}
         </div>
+        )}
         {showCommunity && <Feed source={`/grow/${selected.id}`} />}
       </section>
     );

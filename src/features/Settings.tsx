@@ -9,14 +9,16 @@ import { LargeTitle, Toolbar } from "../ui/Screen";
 import { ConfirmDialog } from "../ui/ConfirmDialog";
 import { supabase } from "../supabase";
 import { config } from "../config";
+import { accountsInApp } from "../native/storeScope";
 // The trust pages, reachable from inside the app: store reviewers look for them here (GATE-02). The site
 // links open in a new tab so the reader keeps their place; support is shown only once forwarding is
 // proven (config.supportEmailReady), so the app never points at an address nobody reads.
 export function LegalLinks() {
+  // The store app of version 1.0 has no accounts, so it leaves out the page about deleting one.
   const pages = [
     ["Privacy policy", "/privacy"],
     ["Terms of use", "/terms"],
-    ["How account deletion works", "/delete-account"],
+    ...(accountsInApp ? ([["How account deletion works", "/delete-account"]] as const) : []),
   ] as const;
   return (
     <nav className="legal-links" aria-label="Privacy and help">

@@ -4,6 +4,7 @@ import { Resources } from "../topics/Resources";
 import { navigate } from "../platform/router";
 import { GroupedList, Row } from "../ui/List";
 import { LargeTitle, Toolbar } from "../ui/Screen";
+import { accountsInApp } from "../native/storeScope";
 
 // My walk (UI-SPEC D-10, plan 11): a pushed screen of You. Same words as before; the cards became grouped
 // sections and the list-like ones became rows. "Private · this local profile" carries information (what kind
@@ -80,6 +81,7 @@ export function MyWalk() {
           </button>
         </div>
       </GroupedList>
+      {accountsInApp && (
       <GroupedList title="Followed communities" plain={!state.followedTopics.length}>
         {state.followedTopics.length ? (
           state.followedTopics.map((id) => (
@@ -91,6 +93,7 @@ export function MyWalk() {
           </div>
         )}
       </GroupedList>
+      )}
       <Resources />
     </section>
   );

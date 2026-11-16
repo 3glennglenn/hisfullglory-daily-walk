@@ -102,7 +102,9 @@ test("project.pbxproj: the App target signs Release manually for the App Store, 
   for (const c of [debug, release]) {
     assert.equal(setting(c.body, "DEVELOPMENT_TEAM"), "5ZYRJ5FZPU");
     assert.equal(setting(c.body, "CODE_SIGN_ENTITLEMENTS"), "App/App.entitlements");
-    assert.equal(setting(c.body, "TARGETED_DEVICE_FAMILY"), '"1,2"', "iPhone and iPad (D-14)");
+    // Version 1.0 is iPhone only (2026-11-16): a later version may add iPad (adding a device family is allowed, removing
+    // one is not), and an iPad listing needs its own screenshots and review on iPad.
+    assert.equal(setting(c.body, "TARGETED_DEVICE_FAMILY"), "1", "iPhone only in version 1.0");
     assert.equal(setting(c.body, "MARKETING_VERSION"), "1.0.0");
     assert.equal(setting(c.body, "PRODUCT_BUNDLE_IDENTIFIER"), "com.hisfullglory.app");
   }

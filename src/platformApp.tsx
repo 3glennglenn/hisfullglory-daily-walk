@@ -35,6 +35,7 @@ import { MyWalk } from "./features/MyWalk";
 import { ProductCard } from "./features/LegacyWalk";
 import { TabBar } from "./ui/TabBar";
 import { activeTab, rootTabOf } from "./ui/tabs";
+import { pageInBuild, storeBuild } from "./native/storeScope";
 import { LargeTitle, Toolbar } from "./ui/Screen";
 import { config, products } from "./config";
 import { contentFor } from "./data";
@@ -156,7 +157,8 @@ function App() {
   const flow = welcome || page === "walk" || (page === "context" && !!route.id && contextChecks.some((c) => c.slug === route.id));
   let content: ReactNode;
   let youSheet: ReactNode = null;
-  switch (shown.page) {
+  // A page the store app of version 1.0 leaves out (community, account, giving, web reminders) falls to "Page not found".
+  switch (pageInBuild(shown.page, shown.id) ? shown.page : "") {
     case "my-walk":
       content = <MyWalk />;
       break;
@@ -246,7 +248,9 @@ function App() {
       {(!online || notice) && (
         <aside className="notice" role="status">
           {notice ||
-            "You’re offline. Downloaded Scripture and your private walk remain available. Community needs a connection."}
+            (storeBuild
+              ? "You’re offline. Scripture, your walk and your journal are on this phone and still work."
+              : "You’re offline. Downloaded Scripture and your private walk remain available. Community needs a connection.")}
         </aside>
       )}
       <main id="main" tabIndex={-1}>

@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { GroupedList, Row } from "../ui/List";
 import { navigate } from "../platform/router";
+import { accountsInApp } from "../native/storeScope";
 
 // The end of a chapter (UI-SPEC A3): after the last verse, 48px below it, one clear next step and a few quiet
 // ones. "Next: John 4" is the one filled button; the chapter before is a plain button; "Mark as read" is a
@@ -68,7 +69,7 @@ export function ChapterEnd({
       <button type="button" className="end-link" onClick={onNote}>
         Write a private study note
       </button>
-      {topics.length > 0 && (
+      {accountsInApp && topics.length > 0 && (
         <GroupedList
           title="Topics that use this chapter"
           note="Editorial links, not verified interpretations or evidence of what other readers have experienced."
