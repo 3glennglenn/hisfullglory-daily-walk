@@ -1,0 +1,17 @@
+{
+  "appId": "6827766993",
+  "bundleId": "com.hisfullglory.app",
+  "version": "1.0",
+  "submit": true,
+  "build": 4,
+  "locale": "en-US",
+  "screenshotDisplayType": "APP_IPHONE_67",
+  "screenshots": [
+    "screenshots/en-US/01-today.png",
+    "screenshots/en-US/02-story.png",
+    "screenshots/en-US/03-reader.png",
+    "screenshots/en-US/04-verse-ai.png",
+    "screenshots/en-US/05-bible-study.png",
+    "screenshots/en-US/06-today-night-light.png"
+  ]
+}

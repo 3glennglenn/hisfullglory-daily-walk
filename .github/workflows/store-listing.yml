@@ -1,0 +1,63 @@
+# App Store listing (autopilot queue item 3): uploads the iPhone screenshots of store/ios/listing.json to the App
+# Store version being prepared and, when asked, attaches the newest processed build and submits it for App Review,
+# through Apple's App Store Connect API with the key of the store-release environment (scripts/asc-listing.mjs).
+#
+# Runs only by hand, like iOS TestFlight: Actions > "App Store listing" > Run workflow > branch store-shell. What it
+# does is decided in the repository, in store/ios/listing.json: "submit": true also submits, and "build" names the
+# build to submit (the script waits until Apple has processed it). The founder approved submitting version 1.0
+# ("ja insturen", 2026-11-16). It never runs for a push or a pull request.
+# Every run ends with a notice that states the version, its screenshots, the builds and the App Review contact, which
+# can be read without signing in through the check run's annotations.
+#
+# Rules this file keeps (tests/store-workflows.test.ts checks them): the key is only ever read into a step's env,
+# commands are never traced, the failure note reads only the script's log, and the last step always deletes the key.
+name: App Store listing
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: store-listing
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  listing:
+    name: Screenshots and submission
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/store-shell'
+    runs-on: ubuntu-latest
+    environment: store-release
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: App Store Connect key
+        env:
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: |
+          umask 077
+          printf '%s' "$ASC_KEY_P8" | base64 --decode > "$RUNNER_TEMP/AuthKey.p8"
+          echo "The API key file is in place."
+      - name: Screenshots, build and submission
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+        run: ASC_KEY_PATH="$RUNNER_TEMP/AuthKey.p8" node scripts/asc-listing.mjs --listing 2>&1 | tee listing.log
+      - name: Show why it failed
+        if: failure()
+        run: node scripts/ci-failure-note.mjs listing.log
+      - name: Delete the key file
+        if: always()
+        run: |
+          rm -f "$RUNNER_TEMP/AuthKey.p8"
+          echo "Key file deleted."
