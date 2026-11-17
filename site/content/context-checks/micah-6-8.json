@@ -1,0 +1,134 @@
+{
+  "slug": "micah-6-8",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-11-17",
+  "verse": {
+    "book": "micah",
+    "chapter": 6,
+    "start": 8,
+    "end": 8
+  },
+  "hook": "You know the verse about justice, mercy and walking humbly. But did you know it comes from a courtroom where the mountains hear the case?",
+  "story": "The trial opens with an odd command. The LORD tells his people to “plead your case before the mountains, and let the hills hear what you have to say.” Then the judge turns the courtroom upside down: “the LORD has a case against his people”. He does not start with a list of crimes. He starts with questions: “My people, what have I done to you? How have I burdened you? Answer me!”\n\nHe reminds them of the road behind them: Egypt, the house of bondage, and the three who led them out, “Moses, Aaron, and Miriam.”\n\nThen someone answers, and the text does not say who. The answer is a string of questions, each one bigger than the last. “Shall I come before him with burnt offerings, with calves a year old?” “Will the LORD be pleased with thousands of rams? With tens of thousands of rivers of oil?” And then the question that makes a reader stop: “Shall I give my firstborn for my disobedience?” The speaker is willing to offer more and more, and the offerings keep growing.\n\nThe reply is the verse we know, and it is short. There is nothing to buy and nothing to carry up a hill. What the LORD requires is a way of living: to act justly, to love mercy, and to walk humbly with your God. The man who spoke it, Micah, was a native of Moresheth, in the lowlands southwest of Jerusalem. An encyclopedia of the Bible calls it a frontier outpost, where military movements were easily observed, and says Assyrian armies marched through that region in 734, 711 and 701 BC. It adds that Micah, a man of the Shephelah, felt keenly the plight of poor country people.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Micah, the Prophet, in The Encyclopedia of the Bible (Bible Gateway)",
+      "url": "https://classic.biblegateway.com/resources/encyclopedia-of-the-bible/Micah-Prophet"
+    },
+    {
+      "title": "Makkot 24, on Rabbi Simlai and the 613 commandments (My Jewish Learning)",
+      "url": "https://www.myjewishlearning.com/article/makkot-24/"
+    },
+    {
+      "title": "Inaugural Address of President Jimmy Carter, January 20, 1977 (Yale Law School, Avalon Project)",
+      "url": "https://avalon.law.yale.edu/20th_century/carter.asp"
+    },
+    {
+      "title": "Jimmy Carter, 1977: Bible used at the swearing-in (United States Senate, inaugural ceremonies)",
+      "url": "https://www.inaugural.senate.gov/?p=7401"
+    },
+    {
+      "title": "Jimmy Carter: a life of faithful service (Museum of the Bible)",
+      "url": "https://www.museumofthebible.org/magazine/impact/jimmy-carter-a-life-of-faithful-service"
+    }
+  ],
+  "voices": [
+    {
+      "id": "carter",
+      "name": "Jimmy Carter",
+      "about": "thirty-ninth President of the United States, in his inaugural address of 1977, after taking the oath",
+      "words": "I have just taken the oath of office on the Bible my mother gave me a few years ago, opened to a timeless admonition from the ancient prophet Micah",
+      "source": {
+        "title": "Inaugural Address of President Jimmy Carter, January 20, 1977 (Yale Law School, Avalon Project)",
+        "url": "https://avalon.law.yale.edu/20th_century/carter.asp"
+      }
+    },
+    {
+      "id": "carter-hope",
+      "name": "Jimmy Carter",
+      "about": "later in the same speech, naming what he hoped people would say of the nation when his term ended",
+      "words": "that we had remembered the words of Micah and renewed our search for humility, mercy, and justice",
+      "source": {
+        "title": "Inaugural Address of President Jimmy Carter, January 20, 1977 (Yale Law School, Avalon Project)",
+        "url": "https://avalon.law.yale.edu/20th_century/carter.asp"
+      }
+    }
+  ],
+  "moment": "This is not a quiet sermon. It is a lawsuit, and the encyclopedia calls it probably the most outstanding example of what scholars call a rib, or lawsuit oracle: heaven and earth are called as witnesses. The same book shows what Micah thought of the people in charge. “Isn’t it for you to know justice?” he asks the rulers, and later he says they “abhor justice, and pervert all equity”. The Bible gives him a reason for his courage: “I am full of power by the LORD’s Spirit, and of judgment, and of might”.\n\nSo when the verse says to act justly, the listeners are not hearing an abstract virtue. The chapter goes on to name what is wrong in the city: “a short ephah that is accursed”, “dishonest scales” and “a bag of deceitful weights”. The answer to the question about offerings is given in a chapter that goes on to talk about crooked measures.",
+  "around": "Right after the verse the LORD speaks to the city again. He asks about the “treasures of wickedness”, and he says, “Her rich men are full of violence, her inhabitants speak lies”. The consequences follow: “You shall eat, but not be satisfied.”\n\nThe verse is therefore the hinge of the chapter. Before it, a people asks what it can bring. After it, the LORD describes what has been going on in the markets and in the houses of the powerful. The three requirements are not a replacement for worship; on the most common reading, they are what the chapter says is missing.",
+  "after": "Micah’s book also holds hard words against the rulers of Jerusalem: “Zion for your sake will be plowed like a field”. Those words were remembered in a later generation. In the reign of King Jehoiakim the prophet Jeremiah was in danger of being put to death, and elders of the land stood up and recalled that “Micah the Morashtite prophesied in the days of Hezekiah king of Judah”. They asked whether Hezekiah put him to death, and answered with a question of their own: did Hezekiah not “entreat the favor of the LORD”, so that “the LORD relented of the disaster”? Micah’s words were used to defend a later prophet.\n\nThe verse itself lived on in Jewish teaching. In the Talmud, as the My Jewish Learning page explains, Micah is the prophet who established the commandments upon three. In 1977 it was open on a Bible in Washington. When Jimmy Carter took the oath of office on January 20, 1977, the United States Senate records that the family Bible was open to Micah 6:8, together with the Bible used by George Washington. The Museum of the Bible says that Carter placed his hand on both Bibles.",
+  "readings": "Readers have heard this verse in several ways, and they overlap.\n\nOne reading hears a summary. The encyclopedia says the preaching of Amos, Hosea and Isaiah is summed up in this verse: Amos as the prophet of justice, Hosea speaking of God’s unfailing mercy, Isaiah calling the people to live with God. In the Jewish tradition the rabbis in the Talmud heard it the same way, as the place where the whole law is gathered up in three things.\n\nA second reading hears a rebuke. The people ask about rams and rivers of oil, and the answer is about how they treat each other. On this reading the verse does not despise sacrifice. It says that sacrifice cannot stand in for justice.\n\nA third reading hears an invitation. The verse begins by saying that God has already shown what is good. Nothing is hidden, and so no one can say that they did not know.",
+  "argued": "In the Talmud, in the discussion of Rabbi Simlai, the rabbis look for the true basis of the commandments. Rabbi Simlai taught that Moses was given 613, that David reduced them to eleven, and then the discussion turns to the prophets. Micah, they say, established all of them upon three, and they quote this verse. The discussion goes on to Isaiah, and it ends with two candidates for a single principle, which the rabbis do not agree on. \n\nIn modern times the verse has been quoted by people far from the synagogue and the church. On inauguration day in 1977, Jimmy Carter put his hand on a family Bible open at this verse, and in his address he said: [[carter]] Later in the same speech he named what he hoped would be said of the nation at the end of his term: [[carter-hope]]",
+  "point": "Read alone, the verse is a calm sentence about being a good person. Read in its chapter, it is the answer in a trial, given to people who ask how much they must bring while their scales are crooked. The three things the LORD requires are justice in the market, mercy toward other people and humility before God, and they are the answer to the question about offerings.",
+  "lesson": "Micah gives you a question that is easy to skip: what do you actually do with the people who depend on you? The verse does not say that prayer and generosity and worship are worthless. It says they go with something else, with fair dealing, with mercy, and with the humility to remember that you are not the judge of everything.\n\nIf you believe, you can read Micah 6 slowly this week and ask where your own scales might be crooked: a bill you are slow to pay, a person you treat as a nuisance, a story you tell that makes you look better than the facts do. If you do not share this faith, the verse still describes a way to live that people from many backgrounds recognize: be fair, be kind, and do not think too highly of yourself.\n\nYou do not need to do all three at once. You can start with one concrete act today.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "hosea",
+        "chapter": 6,
+        "start": 6,
+        "end": 6
+      },
+      "note": "A prophet from the same century gives a close answer. God says, “I desire mercy, and not sacrifice”. Worship is not rejected, but it cannot replace mercy."
+    },
+    {
+      "ref": {
+        "book": "amos",
+        "chapter": 5,
+        "start": 24,
+        "end": 24
+      },
+      "note": "Amos hears God refuse songs and offerings and then asks for something else: “let justice roll on like rivers, and righteousness like a mighty stream.”"
+    },
+    {
+      "ref": {
+        "book": "matthew",
+        "chapter": 23,
+        "start": 23,
+        "end": 23
+      },
+      "note": "Jesus tells people who are careful about small tithes that they have left undone the weightier matters: “justice, mercy, and faith.” He names the same things Micah did."
+    }
+  ],
+  "basis": [
+    {
+      "book": "micah",
+      "chapter": 6,
+      "start": 1,
+      "end": 7
+    },
+    {
+      "book": "micah",
+      "chapter": 6,
+      "start": 9,
+      "end": 16
+    },
+    {
+      "book": "micah",
+      "chapter": 3,
+      "start": 1,
+      "end": 1
+    },
+    {
+      "book": "micah",
+      "chapter": 3,
+      "start": 8,
+      "end": 9
+    },
+    {
+      "book": "micah",
+      "chapter": 3,
+      "start": 12,
+      "end": 12
+    },
+    {
+      "book": "jeremiah",
+      "chapter": 26,
+      "start": 18,
+      "end": 19
+    }
+  ]
+}
