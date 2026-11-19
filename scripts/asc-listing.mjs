@@ -286,6 +286,10 @@ export async function status(api, listing) {
   const version = await findVersion(api, listing);
   const set = await screenshotSet(api, version.id, listing, false);
   const shots = set ? (await api.get(`/v1/appScreenshotSets/${set.id}/appScreenshots`)).data.length : 0;
+  // Every screenshot set the version has, so a run shows which display type App Store Connect really uses.
+  const locs = await api.get(`/v1/appStoreVersions/${version.id}/appStoreVersionLocalizations`);
+  const loc = locs.data.find((l) => l.attributes.locale === listing.locale);
+  const allSets = loc ? (await api.get(`/v1/appStoreVersionLocalizations/${loc.id}/appScreenshotSets`)).data : [];
   const builds = await api.get(withQuery("/v1/builds", { "filter[app]": listing.appId, sort: "-uploadedDate", limit: "5" }));
   const attached = await api.get(`/v1/appStoreVersions/${version.id}/build`).catch(() => null);
   const detail = await api.get(`/v1/appStoreVersions/${version.id}/appStoreReviewDetail`).catch(() => null);
@@ -293,6 +297,7 @@ export async function status(api, listing) {
   const lines = [
     `Version ${listing.version}: ${stateOf(version)}`,
     `Screenshots (${listing.screenshotDisplayType}): ${shots}`,
+    `Screenshot sets on the version: ${allSets.map((s) => s.attributes.screenshotDisplayType).join(", ") || "none"}`,
     `Builds: ${builds.data.map((b) => `${b.attributes.version} ${b.attributes.processingState}`).join(", ") || "none"}`,
     `Attached build: ${attached?.data ? builds.data.find((b) => b.id === attached.data.id)?.attributes.version ?? attached.data.id : "none"}`,
     `App Review contact: ${missing.length ? "missing " + missing.join(", ") : "complete"}`,

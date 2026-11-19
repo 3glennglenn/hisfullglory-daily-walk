@@ -53,14 +53,14 @@ test("the review contact must be complete", () => {
   assert.equal(missingContact(null).length, 4);
 });
 
-test("listing.json names six iPhone 6.9-inch PNG screenshots without transparency", () => {
+test("listing.json names six iPhone 6.3-inch PNG screenshots (the one size App Store Connect requires since 2026) without transparency", () => {
   const listing = readListing();
-  assert.equal(listing.screenshotDisplayType, "APP_IPHONE_67");
+  assert.equal(listing.screenshotDisplayType, "APP_IPHONE_61");
   assert.equal(listing.files.length, 6);
   for (const rel of listing.screenshots) assert.ok(existsSync(`store/ios/${rel}`), rel);
   for (const file of listing.files) {
-    assert.equal(file.bytes.readUInt32BE(16), 1320, file.fileName);
-    assert.equal(file.bytes.readUInt32BE(20), 2868, file.fileName);
+    assert.equal(file.bytes.readUInt32BE(16), 1206, file.fileName);
+    assert.equal(file.bytes.readUInt32BE(20), 2622, file.fileName);
     assert.equal(file.bytes[25], 2, `${file.fileName} is RGB without alpha`);
   }
 });

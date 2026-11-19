@@ -102,7 +102,8 @@ Added on 2026-11-17 so a store release needs no clicking in App Store Connect (a
 2. GitHub > Actions > **App Store listing** > **Run workflow** > branch `store-shell` > Run.
 3. The job (`.github/workflows/store-listing.yml`, Ubuntu, at most 80 minutes) runs `scripts/asc-listing.mjs` with the
    App Store Connect API key of `store-release`. It does four things:
-   - It makes the iPhone 6.9-inch screenshot set hold exactly the listed files, in their order. Files already there
+   - It makes the iPhone 6.3-inch screenshot set (1206 x 2622, the one size App Store Connect requires since 2026;
+     it is used for every iPhone) hold exactly the listed files, in their order. Files already there
      with the same checksum are left alone.
    - When asked, it waits until Apple has processed the named build and attaches it to the version.
    - It checks that App Review Information has a contact name, phone and email.

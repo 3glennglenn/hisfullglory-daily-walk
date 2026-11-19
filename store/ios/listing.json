@@ -2,10 +2,10 @@
   "appId": "6827766993",
   "bundleId": "com.hisfullglory.app",
   "version": "1.0",
-  "submit": true,
-  "build": 4,
+  "submit": false,
+  "build": null,
   "locale": "en-US",
-  "screenshotDisplayType": "APP_IPHONE_67",
+  "screenshotDisplayType": "APP_IPHONE_61",
   "screenshots": [
     "screenshots/en-US/01-today.png",
     "screenshots/en-US/02-story.png",
