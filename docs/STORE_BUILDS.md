@@ -91,6 +91,29 @@ The pull-request checks (`checks.yml`) build the store bundle and run its browse
 **Build numbers:** `CURRENT_PROJECT_VERSION` is the workflow's run number, so every run uploads a new build number
 (a reused number is refused). The version shown in the store is `MARKETING_VERSION` (1.0.0) in the project.
 
+## Running "App Store listing"
+
+Added on 2026-11-17 so a store release needs no clicking in App Store Connect (autopilot queue item 3).
+
+1. Put what the version needs in the repository:
+   - `store/ios/listing.json` names the app, the App Store version (`1.0`), the locale and the screenshot files
+     under `store/ios/screenshots/`.
+   - `"submit": true` asks for a submission, and `"build"` names the build to submit.
+2. GitHub > Actions > **App Store listing** > **Run workflow** > branch `store-shell` > Run.
+3. The job (`.github/workflows/store-listing.yml`, Ubuntu, at most 80 minutes) runs `scripts/asc-listing.mjs` with the
+   App Store Connect API key of `store-release`. It does four things:
+   - It makes the iPhone 6.9-inch screenshot set hold exactly the listed files, in their order. Files already there
+     with the same checksum are left alone.
+   - When asked, it waits until Apple has processed the named build and attaches it to the version.
+   - It checks that App Review Information has a contact name, phone and email.
+   - It submits the version for App Review. A version that is already waiting or in review is left alone.
+4. Every run ends with a notice: the version's state, the number of screenshots, the newest builds, the attached
+   build and whether the App Review contact is complete. The notice can be read without signing in, through the
+   run's check annotations.
+
+Still done by hand in App Store Connect: App Privacy, the age rating, trader status, agreements and the App Review
+contact. The contact is the founder's personal data, so it is not kept in this public repository.
+
 ## Proven and not yet proven
 
 Proven on Windows (2026-11-02): the store bundle builds, has no service worker or web manifest, opens Today and

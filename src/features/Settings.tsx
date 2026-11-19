@@ -10,6 +10,7 @@ import { ConfirmDialog } from "../ui/ConfirmDialog";
 import { supabase } from "../supabase";
 import { config } from "../config";
 import { accountsInApp } from "../native/storeScope";
+import { shareFileNatively } from "../native/shareFile";
 // The trust pages, reachable from inside the app: store reviewers look for them here (GATE-02). The site
 // links open in a new tab so the reader keeps their place; support is shown only once forwarding is
 // proven (config.supportEmailReady), so the app never points at an address nobody reads.
@@ -75,7 +76,20 @@ export function Settings() {
     const id = location.hash.slice(1);
     if (id) document.getElementById(id)?.scrollIntoView();
   }, []);
-  function exportBackup() {
+  async function exportBackup() {
+    const name = `hisfullglory-private-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    // In the store app a download link does nothing, so the backup goes to the phone's share sheet (Save to Files).
+    try {
+      const native = await shareFileNatively(name, backupData(storage), "HisFullGlory private backup");
+      if (native !== "unavailable") {
+        if (native === "shared") setBackup(true);
+        setStatus(native === "shared" ? "Private backup exported. Store it securely." : "Backup not saved. Nothing was shared.");
+        return;
+      }
+    } catch {
+      setStatus("Backup unavailable: the file could not be made on this phone.");
+      return;
+    }
     try {
       const blob = new Blob([backupData(storage)], {
         type: "application/json",
@@ -83,7 +97,7 @@ export function Settings() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `hisfullglory-private-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = name;
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
       setBackup(true);

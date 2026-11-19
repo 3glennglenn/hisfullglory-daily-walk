@@ -2,6 +2,7 @@
 // verse and the address of the full story on the website. Drawn on the device; nothing is
 // uploaded.
 import { aiUnreviewedCardLabel, checkUrl, refLabel, shareText, type AppContextCheck } from "./checks";
+import { shareFileNatively } from "../native/shareFile";
 
 const size = { width: 1080, height: 1350 };
 // Cover Light of src/styles.css (--bg, --surface, --ink, --muted, --link), so the card looks the same in every look and mode.
@@ -90,6 +91,9 @@ export async function drawShareCard(check: AppContextCheck): Promise<Blob> {
 export async function shareCheckPicture(check: AppContextCheck): Promise<"shared" | "saved" | "cancelled"> {
   const blob = await drawShareCard(check);
   const file = new File([blob], `hisfullglory-${check.slug}.png`, { type: "image/png" });
+  // In the store app the picture goes to the phone's share sheet; a download link would do nothing there.
+  const native = await shareFileNatively(file.name, blob, shareText(check));
+  if (native !== "unavailable") return native;
   if (navigator.canShare?.({ files: [file] })) {
     try {
       await navigator.share({ files: [file], text: shareText(check) });
