@@ -1,0 +1,146 @@
+{
+  "slug": "matthew-7-7",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-11-20",
+  "verse": {
+    "book": "matthew",
+    "chapter": 7,
+    "start": 7,
+    "end": 7
+  },
+  "hook": "You know Jesus said ask, seek and knock. But did you know Luke sets those words right after a story about a shut door at midnight?",
+  "story": "A man is in bed. His children are asleep beside him. Then someone knocks.\n\nThat is the picture Jesus paints in Luke’s Gospel, just before he says almost the same words we read in Matthew. A traveler has turned up at a friend’s house late at night, and the host has nothing to set before him. So he goes to a neighbor and asks for three loaves of bread. The neighbor answers from inside: “Don’t bother me. The door is now shut, and my children are with me in bed. I can’t get up and give it to you”. Jesus finishes the story with a surprise. Friendship was not enough to get the man out of bed, “yet because of his persistence, he will get up and give him as many as he needs.”\n\nThen comes the saying. In Luke it reads “keep asking, and it will be given you. Keep seeking, and you will find. Keep knocking, and it will be opened to you.” In Matthew, Jesus says it on the mountain, in the Sermon on the Mount, a few lines after a hard warning not to throw pearls before pigs. And it is followed, in both Gospels, by a picture of a home: a son asks his father for bread, and no father hands him a stone. If people who are far from perfect know how to give their children good gifts, Jesus says, then “how much more will your Father who is in heaven give good things to those who ask him!”\n\nSo the door in this saying is not a locked door at the end of a corridor. It is the door of a house, and a child is knocking on it.",
+  "storyStatus": "scripture",
+  "sources": [
+    {
+      "title": "Augustine, Our Lord’s Sermon on the Mount, Book II (New Advent)",
+      "url": "https://www.newadvent.org/fathers/16012.htm"
+    },
+    {
+      "title": "Matthew Henry’s Commentary on Matthew 7:7-11 (Bible Gateway)",
+      "url": "https://www.biblegateway.com/resources/matthew-henry/Matt.7.7-Matt.7.11"
+    },
+    {
+      "title": "Even the wind obeyed: George Müller (Christian History Institute)",
+      "url": "https://christianhistoryinstitute.org/magazine/article/even-the-wind-obeyed"
+    }
+  ],
+  "voices": [
+    {
+      "id": "augustine",
+      "name": "Augustine of Hippo",
+      "about": "bishop in North Africa, in his commentary on the Sermon on the Mount",
+      "words": "Hence there is need of perseverance, in order that we may receive what we ask, and find what we seek, and that what we knock at may be opened.",
+      "source": {
+        "title": "Augustine, Our Lord’s Sermon on the Mount, Book II (New Advent)",
+        "url": "https://www.newadvent.org/fathers/16012.htm"
+      }
+    },
+    {
+      "id": "augustine-asking",
+      "name": "Augustine of Hippo",
+      "about": "in the same commentary, on what the three verbs mean",
+      "words": "The asking refers to the obtaining by request soundness and strength of mind",
+      "source": {
+        "title": "Augustine, Our Lord’s Sermon on the Mount, Book II (New Advent)",
+        "url": "https://www.newadvent.org/fathers/16012.htm"
+      }
+    },
+    {
+      "id": "henry",
+      "name": "Matthew Henry",
+      "about": "English Bible commentator, on Matthew 7:7",
+      "words": "not lent you, not sold you, but given you; and what is more free than gift?",
+      "source": {
+        "title": "Matthew Henry’s Commentary on Matthew 7:7-11 (Bible Gateway)",
+        "url": "https://www.biblegateway.com/resources/matthew-henry/Matt.7.7-Matt.7.11"
+      }
+    },
+    {
+      "id": "george-muller",
+      "name": "George Müller",
+      "about": "preacher in Bristol who ran orphanages by prayer, writing in his journal on November 21, 1835",
+      "words": "Today it has been impressed on my heart no longer merely to think about establishing an orphan house but actually to begin making plans.",
+      "source": {
+        "title": "Even the wind obeyed: George Müller (Christian History Institute)",
+        "url": "https://christianhistoryinstitute.org/magazine/article/even-the-wind-obeyed"
+      }
+    }
+  ],
+  "moment": "Think of who is listening. The Sermon on the Mount has just told the crowd not to pray like the hypocrites who love to be seen, and not to heap up words “as the Gentiles do”, because “your Father knows what things you need before you ask him.” That raises an honest question. If he already knows, why ask at all?\n\nThe saying does not answer that question in so many words. What it does is set asking inside a home, with a father and a child, as the verses after it show. And the three verbs do not simply repeat each other. They move toward a door: a request, a search, and then a knock. At the end of the Sermon the crowds were “astonished at his teaching”, because he taught “with authority”. Here that authority comes as something quieter: an open invitation.",
+  "around": "Right before the saying, Jesus says not to give what is holy to dogs. Right after it, he says that “whatever you desire for men to do to you, you shall also do to them”. Read in that company, asking and knocking are not the habits of someone who wants a list of things. They belong to someone learning to trust the Father, and to treat other people the way he would like to be treated.\n\nLuke puts the saying right after the Lord’s Prayer, after a disciple asked, “Lord, teach us to pray”. In both Gospels the closing promise is the same: a Father who gives good things. In Luke the good gift Jesus names is “the Holy Spirit”.",
+  "after": "The first believers did what this saying invites. After Jesus returned to heaven, Luke says that the disciples “continued steadfastly in prayer and supplication”. Later, when Peter was in prison, “constant prayer was made by the assembly to God for him.” Then, at night, Peter knocked at the door of the house where many were gathered and praying. A servant girl named Rhoda recognized his voice and was so glad that she didn’t open the gate, but ran in to tell them. They said, “You are crazy!” Luke adds that “Peter continued knocking”, and when they finally opened the door, “they saw him and were amazed.” People who had been praying were amazed when the door opened.\n\nChurch readers kept coming back to the saying. In his commentary on the Sermon on the Mount, Augustine of Hippo heard in it a promise that needs staying power. The commentator Matthew Henry noticed that Jesus says given, not lent or sold. And in 1835 George Müller of Bristol wrote in his journal that it was impressed on him to begin making plans for an orphan house. His own count, near the end of his life, was 50,000 answers to prayer, according to the Christian History Institute. That is his count, and it is a story told by people who believed in him. It is not proof for the rest of us, but it shows how one man heard these three verbs.",
+  "readings": "Many readers hear a call to persistence. Luke’s “keep asking” and the midnight friend point that way. On this reading the verse is no quick bargain, but an invitation to keep coming back to the door.\n\nAnother reading looks at what the three verbs are for. Augustine saw three different needs behind them: asking is for strength to do what is right, seeking is for finding the truth, and knocking is for being let in once the road has been found.\n\nA third reading puts the weight on the Giver. The verse promises a gift, and the point of this reading is the generosity of the Father, not the cleverness of the asker.\n\nAll three agree on one thing. This verse is about a relationship, and Jesus roots it in a household: a child and a father.",
+  "argued": "Readers have long wrestled with what this verse asks of us, and four voices show it. Augustine of Hippo, in his commentary on the Sermon on the Mount, heard a call to staying power: [[augustine]] He also took the three verbs apart, one by one: [[augustine-asking]]\n\nMatthew Henry, the commentator, heard the generosity of the giver, and wrote of the promise: [[henry]]\n\nAnd in 1835 George Müller of Bristol, who ran orphanages by prayer, took the verse as an invitation to act. He wrote in his journal: [[george-muller]] Whether one man’s story proves anything for another reader is something people still disagree about.\n\nA real question runs under all of it: does everyone who asks get what they ask for? The verse says “everyone who asks receives.” Yet many honest people have prayed and waited a long time. Augustine met the difficulty by saying a person needs perseverance. Luke names the Holy Spirit as the Father’s gift, and Matthew says “good things”. Some Christians hold that asking always receives an answer, even if it is no or not yet. Others stress that the promise is for good things, not for anything we may name. This page does not decide between them.",
+  "point": "The saying is not a promise that every request will be granted just as it was spoken. It is a call to keep coming, set inside a picture of a father and his child. Jesus sets the door in front of the crowd and tells them to knock.",
+  "lesson": "You do not have to make your prayer sound good before you pray it.\n\nLook at who Jesus uses as his picture. A man at midnight with nothing to give a guest. A child asking for bread. Neither is shown with a speech ready. Each simply asks, because there is a need and someone to ask. If you have a need today, say it plainly. You do not need to wait until you feel brave, or until you understand everything.\n\nAnd if you have asked for something for a long time, this passage does not say you are doing it wrong. Luke’s Jesus says keep asking. It is allowed to come back to the same door more than once.\n\nIf you are not sure you believe, the passage still gives you something honest to try: read Matthew 7 slowly and notice what picture of God Jesus paints. A father who gives good things to those who ask him. You can decide for yourself whether that is the God you have heard about.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "jeremiah",
+        "chapter": 29,
+        "start": 13,
+        "end": 13
+      },
+      "note": "Written to people in exile, this verse says “You shall seek me and find me, when you search for me with all your heart.” Seeking is an old theme, long before the Sermon on the Mount."
+    },
+    {
+      "ref": {
+        "book": "luke",
+        "chapter": 18,
+        "start": 1,
+        "end": 1
+      },
+      "note": "Luke introduces another story of a persistent person with the point that “they must always pray and not give up”, which fits the keep-asking sense."
+    },
+    {
+      "ref": {
+        "book": "james",
+        "chapter": 1,
+        "start": 5,
+        "end": 5
+      },
+      "note": "James says “let him ask of God, who gives to all liberally and without reproach”. It echoes the giver Jesus describes: generous, and not annoyed by the asking."
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 6,
+      "start": 7,
+      "end": 8
+    },
+    {
+      "book": "matthew",
+      "chapter": 7,
+      "start": 6,
+      "end": 12
+    },
+    {
+      "book": "matthew",
+      "chapter": 7,
+      "start": 28,
+      "end": 29
+    },
+    {
+      "book": "luke",
+      "chapter": 11,
+      "start": 1,
+      "end": 13
+    },
+    {
+      "book": "acts",
+      "chapter": 1,
+      "start": 14,
+      "end": 14
+    },
+    {
+      "book": "acts",
+      "chapter": 12,
+      "start": 5,
+      "end": 16
+    }
+  ]
+}
