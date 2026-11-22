@@ -1,0 +1,110 @@
+{
+  "slug": "john-1-1",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-11-22",
+  "verse": {
+    "book": "john",
+    "chapter": 1,
+    "start": 1,
+    "end": 1
+  },
+  "hook": "You know how John’s Gospel begins. But did you know Augustine said he found nearly these words in Platonist books, and that the next part was missing?",
+  "story": "Augustine of Hippo, in his Confessions, tells of a time when he read books of the Platonist philosophers. In them, he says, he read something very close to John’s opening line.\n\nThe Greek word John uses for “Word” is logos, and it was not new to him. Long before John wrote, Greek thinkers used it for the reason that orders the world. The Jewish philosopher Philo, writing in the first century, used it for a go-between linking God and humanity. So when John wrote, “In the beginning was the Word”, readers in the Greek-speaking world already knew the word, and knew it was big.\n\nHere is what makes Augustine’s story worth hearing. He read the idea of the Word in those books, and then he looked for the rest of John’s sentence and did not find it. The line that comes thirteen verses later is the one he missed: “The Word became flesh and lived among us.” John did not stop at a Word that rules the universe from far away. He says that Word moved in beside us.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Augustine, Confessions, Book VII (New Advent)",
+      "url": "https://www.newadvent.org/fathers/110107.htm"
+    },
+    {
+      "title": "Augustine, Tractate 1 on the Gospel of John (New Advent)",
+      "url": "https://www.newadvent.org/fathers/1701001.htm"
+    },
+    {
+      "title": "Jerome, Lives of Illustrious Men (New Advent)",
+      "url": "https://www.newadvent.org/fathers/2708.htm"
+    },
+    {
+      "title": "Eusebius, Church History, Book III (New Advent)",
+      "url": "https://www.newadvent.org/fathers/250103.htm"
+    },
+    {
+      "title": "Logos in Christianity, research starter (EBSCO)",
+      "url": "https://www.ebsco.com/research-starters/religion-and-philosophy/logos-christianity"
+    },
+    {
+      "title": "Wikipedia: Logos (Christianity)",
+      "url": "https://en.wikipedia.org/wiki/Logos_(Christianity)"
+    }
+  ],
+  "voices": [
+    {
+      "id": "augustine-flesh",
+      "name": "Augustine of Hippo",
+      "about": "in his Confessions, on what he read and did not read in the Platonist books",
+      "words": "But that the Word was made flesh, and dwelt among us, I read not there.",
+      "source": {
+        "title": "Augustine, Confessions, Book VII (New Advent)",
+        "url": "https://www.newadvent.org/fathers/110107.htm"
+      }
+    }
+  ],
+  "moment": "Look at how the sentence is built. Three times in one verse John says “the Word”, and he gives it three statements: it “was in the beginning”, it was “with God”, and it “was God”. The first echoes the first words of the Bible, “In the beginning, God created the heavens and the earth.” The writer of the Gospel is deliberately starting where Genesis starts.\n\nThen the chapter keeps going. The Word is the one through whom “All things were made”, and in whom “was life”. The light “shines in the darkness”. And then comes the turn that the philosophers did not have: “The Word became flesh and lived among us.”",
+  "around": "The Gospel does not leave the Word without a face. Within a few verses John the Baptist appears as a witness to the light, and by the end of the chapter the Word has a name: “Grace and truth were realized through Jesus Christ.” The prologue ends with a line that explains why it was written: “No one has seen God at any time. The only born Son, who is in the bosom of the Father, has declared him.”",
+  "after": "John’s Gospel was not the first to be written. Eusebius, the church historian, passes on an old account that John, who had spent his time preaching the Gospel aloud, finally came to write. The same history says that after being sent to the island of Patmos under the emperor Domitian, John came back and was still living in Asia, governing the churches there. Jerome adds that John founded and built churches throughout Asia. These are the accounts of early church writers, so they are tradition, and they are consistent with one another.\n\nThe opening verse has been read ever since. Augustine preached on it, and compared John to a mountain. In the New Testament itself, a letter that carries John’s name opens with the same kind of language: “concerning the Word of life”. The book of Revelation, in a vision, calls the rider on the white horse “The Word of God.”",
+  "readings": "Most readers, from the early church to today, take “the Word was God” as a statement that the Word shares fully in God’s own nature, and yet is also “with God”, a distinct presence beside him. Augustine, preaching on this verse, read it as saying that the Word is God and not something that was made.\n\nIn Greek, the word for God in the last clause has no article in front of it. Some groups have read that as meaning only a god. Others answer, citing a grammatical rule, that the missing article marks which noun is the subject and which describes it, so the sentence says what the Word is, and not that the Word is merely one of many.\n\nA second question is where John got the idea of the Word. Some scholars see Greek philosophy and Philo behind it, as Wikipedia puts it, that John adapted Philo’s concept. Others point to the Hebrew Scriptures, where God’s word creates, as on the first page of Genesis, and to the figure of Wisdom in Proverbs, who says, “When he established the heavens, I was there.” And the Aramaic translations of the Hebrew Bible used the word memra, meaning word, in place of God’s name. EBSCO’s summary says plainly that the idea of the Logos as the Word of God did not begin with John’s Gospel. The sources do not agree on one answer.",
+  "argued": "Augustine took up the Platonist question himself. He says he read the opening idea there, in other words, and then he marks where the books stopped: [[augustine-flesh]]\n\nThat is the core of the disagreement that still runs through the passage. Whatever John borrowed from the world around him, the line he adds is the one a philosopher’s Word would not say.",
+  "point": "Many traditions had a word for the reason behind the world. John’s Gospel says the Word was there before the world began, was with God, was God, and then became flesh and lived among us. The opening verse is where that claim starts.",
+  "lesson": "You do not have to understand all of the Greek to feel the size of this verse. It says that before anything was made, something was already there, and that what was there is not a force or an idea but a Word that was with God.\n\nAugustine looked for the rest of the sentence in the Platonist books and did not find it there. If you are curious about the Christian faith, that is a good place to read slowly. Read the first eighteen verses of John, and notice where the language turns from far away to near.\n\nIf you already believe, let the verse be bigger than the way you usually pray it. And if you do not share this faith, the verse still shows what one writer thought the world rests on: not chance, but a Word that was with God from the beginning.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "hebrews",
+        "chapter": 1,
+        "start": 1,
+        "end": 2
+      },
+      "note": "This letter says God spoke through the prophets and then “has at the end of these days spoken to us by his Son”, through whom also he made the worlds."
+    },
+    {
+      "ref": {
+        "book": "1-john",
+        "chapter": 1,
+        "start": 1,
+        "end": 1
+      },
+      "note": "A letter in John’s name opens with those who heard, saw and touched “the Word of life”, as if the Word of the prologue could be handled."
+    },
+    {
+      "ref": {
+        "book": "revelation",
+        "chapter": 19,
+        "start": 13,
+        "end": 13
+      },
+      "note": "In a vision of the rider on the white horse, His name is called “The Word of God.” The title from John’s first page shows up again at the end of the Bible."
+    }
+  ],
+  "basis": [
+    {
+      "book": "john",
+      "chapter": 1,
+      "start": 1,
+      "end": 18
+    },
+    {
+      "book": "genesis",
+      "chapter": 1,
+      "start": 1,
+      "end": 1
+    },
+    {
+      "book": "proverbs",
+      "chapter": 8,
+      "start": 27,
+      "end": 27
+    }
+  ]
+}
