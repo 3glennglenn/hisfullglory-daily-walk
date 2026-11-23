@@ -1,0 +1,127 @@
+{
+  "slug": "john-11-35",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-11-23",
+  "verse": {
+    "book": "john",
+    "chapter": 11,
+    "start": 35,
+    "end": 35
+  },
+  "hook": "You know Jesus wept is the shortest verse in the Bible. But did you know he wept after saying he was going to wake Lazarus up?",
+  "story": "Two sisters sent a message to a friend: “Lord, behold, he for whom you have great affection is sick.” John tells us that Jesus loved Martha, her sister and Lazarus. Then comes the line that is hard to read: when Jesus heard, “he stayed two days in the place where he was.”\n\nWhen he finally arrives, Lazarus has been in the tomb four days. Martha meets him on the road and says what a grieving person says: “Lord, if you would have been here, my brother wouldn’t have died.” Jesus answers her with some of the biggest words in the Gospel, “I am the resurrection and the life.” Then Mary comes, falls at his feet, and says the very same sentence her sister said. John records both sisters saying it.\n\nThe scene is crowded with tears. Jesus sees Mary “weeping, and the Jews weeping who came with her”, and John says he “groaned in the spirit and was troubled”. He asks, “Where have you laid him?” They say, “Lord, come and see.”\n\nThen the shortest sentence in the chapter: “Jesus wept.”\n\nNotice what he had said earlier: “I am going so that I may awake him out of sleep.” He says it to his disciples, before any tears. The man who weeps at this grave is the same man who had told his disciples he was going to wake his friend. John gives us both, side by side, and does not explain.",
+  "storyStatus": "scripture",
+  "sources": [
+    {
+      "title": "Augustine, Tractate 49 on the Gospel of John (New Advent)",
+      "url": "https://www.newadvent.org/fathers/1701049.htm"
+    },
+    {
+      "title": "John Chrysostom, Homily 62 on the Gospel of John (New Advent)",
+      "url": "https://www.newadvent.org/fathers/240162.htm"
+    },
+    {
+      "title": "St. Lazarus of Bethany, Catholic Encyclopedia (New Advent)",
+      "url": "https://www.newadvent.org/cathen/09097a.htm"
+    },
+    {
+      "title": "How One Man Changed the Bible With Verse Numbers (TheCollector)",
+      "url": "https://www.thecollector.com/verses-christian-bible/"
+    }
+  ],
+  "voices": [
+    {
+      "id": "augustine",
+      "name": "Augustine of Hippo",
+      "about": "bishop in North Africa, preaching on John 11 in his Tractates on the Gospel of John",
+      "words": "For why did Christ weep, but to teach man to weep?",
+      "source": {
+        "title": "Augustine, Tractate 49 on the Gospel of John (New Advent)",
+        "url": "https://www.newadvent.org/fathers/1701049.htm"
+      }
+    },
+    {
+      "id": "chrysostom",
+      "name": "John Chrysostom",
+      "about": "preacher in Antioch, speaking about grief in his homily on John 11",
+      "words": "If so you weep, you do so not as disbelieving the Resurrection, but as not enduring the separation.",
+      "source": {
+        "title": "John Chrysostom, Homily 62 on the Gospel of John (New Advent)",
+        "url": "https://www.newadvent.org/fathers/240162.htm"
+      }
+    }
+  ],
+  "moment": "The tears come in the middle of a long conversation, not at its end. Before them, Jesus talks with Martha about the resurrection on the last day, and Martha answers, “I have come to believe that you are the Christ, God’s Son, he who comes into the world.” After them, he goes to the tomb, which “was a cave, and a stone lay against it.” Martha objects to opening it: “by this time there is a stench, for he has been dead four days.” He answers, “Didn’t I tell you that if you believed, you would see God’s glory?”\n\nThe crowd reads the tears in two ways, and John records both. Some say, “See how much affection he had for him!” Others say, “Couldn’t this man, who opened the eyes of him who was blind, have also kept this man from dying?” The same tears, and two very different questions.",
+  "around": "Right after the tears, Jesus prays and calls out in a loud voice, “Lazarus, come out!” John says the man who had died “came out, bound hand and foot with wrappings”, and Jesus tells those standing there, “Free him, and let him go.”\n\nThe verse numbers were not part of what John wrote. They came much later. One of our sources says a Parisian printer, Robert Estienne, produced a numbered edition of the Greek New Testament in 1551, and that his system is the basis for most modern Bibles. In the story as John tells it, the two words belong to a scene that runs from the sisters’ message to the empty grave clothes.",
+  "after": "Lazarus does not disappear after that day. Six days before the Passover, John says, Jesus came back to Bethany, “where Lazarus was, who had been dead, whom he raised from the dead.” They made a supper, and “Lazarus was one of those who sat at the table with him.”\n\nHe also became a danger to some people. A large crowd came “not for Jesus’ sake only, but that they might see Lazarus also”. John writes that “the chief priests conspired to put Lazarus to death also”, because on account of him “many of the Jews went away and believed in Jesus.” Later, as Jesus entered Jerusalem, the crowd that had been there “was testifying about it.” After that, the Bible says nothing more about him.\n\nChurch tradition filled in the silence in several ways. The Catholic Encyclopedia tells the western story, that Lazarus went to Marseilles and became its first bishop. It also says that this belief only spread in Provence in the thirteenth century, and judges that the tradition has no solid foundation. Call it tradition, then, and not history. What the Bible gives us is smaller and surer: a man at a table, alive.",
+  "readings": "Why did Jesus weep, when he had already said he would wake Lazarus? The Gospel does not say, and readers have answered in different ways.\n\nOne answer, very old, is that the tears are a lesson. Jesus, on this reading, wept as a teacher: his grief gives people permission to grieve. Another hears the plainer sound of it: a friend has died, and the people he loved are crying, and he cries with them. The crowd in the story could not agree either, as the two questions above show.\n\nThese readings are not enemies. All of them agree on what the text does not allow: that Jesus was unmoved.",
+  "argued": "In the early fifth century Augustine of Hippo preached on this chapter in North Africa. He asked why Jesus wept at all, and answered in the form of a question: [[augustine]]\n\nA generation or so earlier, John Chrysostom preached on the same Gospel and spoke of mourners. He took the weeping at this grave as proof that sorrow at a death is not a lack of faith: [[chrysostom]]\n\nOne reads the tears as teaching, the other as company. Neither says the other is wrong, and both start from the same plain fact: Jesus wept.",
+  "point": "The shortest verse sits between a promise and a miracle, and it refuses to hurry past either. In this scene Jesus has said he will wake Lazarus, and yet he stands with the grieving and weeps. Hope does not cancel the grief. John lets them stand in the same scene.",
+  "lesson": "If you have ever been told to hurry up and feel better, notice what John does here. He lets a room full of people cry, and he lets Jesus be there with them. He does not scold Martha or Mary for saying they wished he had come sooner. He answers them, and he stands with them.\n\nSo you do not have to rush your own grief, or pretend it is smaller than it is. If you believe, this scene suggests that bringing your sorrow to God is not a lack of faith. If you are not sure what you believe, you can still read it as a story that treats the pain of death as real.\n\nYou might read the whole chapter slowly this week, and then say honestly, in your own words, what you have lost. You do not have to say it well.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "romans",
+        "chapter": 12,
+        "start": 15,
+        "end": 15
+      },
+      "note": "Paul asks Christians to share the sorrow of others: “Weep with those who weep.” At Lazarus’s grave, Jesus does just that before he does anything else."
+    },
+    {
+      "ref": {
+        "book": "hebrews",
+        "chapter": 4,
+        "start": 15,
+        "end": 15
+      },
+      "note": "The letter says Jesus is not far from human weakness: “we don’t have a high priest who can’t be touched with the feeling of our infirmities”. The tears in Bethany are one place the Gospels let us see it."
+    },
+    {
+      "ref": {
+        "book": "psalms",
+        "chapter": 56,
+        "start": 8,
+        "end": 8
+      },
+      "note": "A psalmist says to God, “You put my tears into your container.” The Bible has long said that God notices tears, and John 11 shows Jesus weeping too."
+    },
+    {
+      "ref": {
+        "book": "revelation",
+        "chapter": 21,
+        "start": 4,
+        "end": 4
+      },
+      "note": "John’s last vision promises, “He will wipe away every tear from their eyes.” Bethany’s tears and that promise sit in the same Bible, and the Bible takes both seriously."
+    }
+  ],
+  "basis": [
+    {
+      "book": "john",
+      "chapter": 11,
+      "start": 1,
+      "end": 45
+    },
+    {
+      "book": "john",
+      "chapter": 12,
+      "start": 1,
+      "end": 2
+    },
+    {
+      "book": "john",
+      "chapter": 12,
+      "start": 9,
+      "end": 11
+    },
+    {
+      "book": "john",
+      "chapter": 12,
+      "start": 17,
+      "end": 18
+    }
+  ]
+}
