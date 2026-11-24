@@ -1,0 +1,236 @@
+{
+  "slug": "matthew-6-34",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-24",
+  "verse": {
+    "book": "matthew",
+    "chapter": 6,
+    "start": 34,
+    "end": 34
+  },
+  "hook": "You know the King James line about taking no thought for the morrow. But did you know that in 1611 to take thought meant to worry?",
+  "story": "Many people first met this verse in the King James Version of 1611, where Jesus tells his listeners to take no thought for the morrow. Read today, that can sound like a ban on planning. Should a Christian not save, or plan, or think ahead?\n\nThe English has moved; the verse has not. When the King James was printed, to take thought for something meant to worry about it, and the same Bible shows it. Young Saul has spent three days looking for his father’s lost donkeys, and he tells his servant they should turn back, or his father will stop caring about the donkeys and, in the King James words, take thought for us. His father will be worried sick about them. The World English Bible gives Saul’s words as “be anxious for us.”\n\nBible commentators noticed this long ago. Albert Barnes wrote that when the Bible was translated, the word thought meant anxiety. Ellicott’s Commentary for English Readers names the same verse in 1 Samuel as an example of the old sense, and finds it in Shakespeare too. It adds that earlier English Bibles had said be not careful here, and that the translators of 1611 probably chose take thought as the stronger phrase.\n\nThe Greek verb behind it is merimnao, to be anxious. It is the word Jesus uses for Martha, “you are anxious and troubled about many things”, and the word in Paul’s “In nothing be anxious”. So the World English Bible reads: “Therefore don’t be anxious for tomorrow, for tomorrow will be anxious for itself.” Jesus is not talking about the plan on your desk. He is talking about the weight on your chest.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Matthew 6, King James Version (Bible Hub)",
+      "url": "https://biblehub.com/kjv/matthew/6.htm"
+    },
+    {
+      "title": "1 Samuel 9, King James Version (Bible Hub)",
+      "url": "https://biblehub.com/kjv/1_samuel/9.htm"
+    },
+    {
+      "title": "Commentaries on Matthew 6:25: Barnes, Ellicott, Jamieson-Fausset-Brown, Benson, Meyer and others (Bible Hub)",
+      "url": "https://biblehub.com/commentaries/matthew/6-25.htm"
+    },
+    {
+      "title": "Commentaries on Matthew 6:34: Ellicott, Barnes and others (Bible Hub)",
+      "url": "https://biblehub.com/commentaries/matthew/6-34.htm"
+    },
+    {
+      "title": "Strong’s Greek 3309, merimnaó: to be anxious, with Thayer’s lexicon (Bible Hub)",
+      "url": "https://biblehub.com/greek/3309.htm"
+    },
+    {
+      "title": "Matthew 6:34 in parallel translations (Bible Hub)",
+      "url": "https://biblehub.com/matthew/6-34.htm"
+    },
+    {
+      "title": "Augustine, On the Sermon on the Mount, Book II (New Advent)",
+      "url": "https://www.newadvent.org/fathers/16012.htm"
+    }
+  ],
+  "voices": [
+    {
+      "name": "The King James translators",
+      "about": "in the English Bible of 1611, at Matthew 6:34",
+      "words": "Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.",
+      "source": {
+        "title": "Matthew 6, King James Version (Bible Hub)",
+        "url": "https://biblehub.com/kjv/matthew/6.htm"
+      }
+    },
+    {
+      "name": "The King James translators",
+      "about": "in the same Bible, giving young Saul’s words about his father at 1 Samuel 9:5",
+      "words": "Come, and let us return; lest my father leave caring for the asses, and take thought for us.",
+      "source": {
+        "title": "1 Samuel 9, King James Version (Bible Hub)",
+        "url": "https://biblehub.com/kjv/1_samuel/9.htm"
+      }
+    },
+    {
+      "name": "Albert Barnes",
+      "about": "Bible commentator, in Barnes’ Notes on the Bible, on the word thought in Matthew 6:25, which in 1611 meant anxiety",
+      "words": "As such it is used here by our translators, and it answers exactly to the meaning of the original. Like many other words, it has since somewhat changed its signification, and would convey to most readers an improper idea.",
+      "source": {
+        "title": "Commentaries on Matthew 6:25: Barnes, Ellicott, Jamieson-Fausset-Brown, Benson, Meyer and others (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/matthew/6-25.htm"
+      }
+    },
+    {
+      "id": "augustine",
+      "name": "Augustine of Hippo",
+      "about": "in his commentary On the Sermon on the Mount, on Matthew 6:34",
+      "words": "In the use of this passage, however, we must be very specially on our guard, lest perchance, when we see any servant of God making provision that such necessaries shall not be wanting either to himself or to those with whose care he has been entrusted, we should decide that he is acting contrary to the Lord’s precept, and is anxious for the morrow.",
+      "source": {
+        "title": "Augustine, On the Sermon on the Mount, Book II (New Advent)",
+        "url": "https://www.newadvent.org/fathers/16012.htm"
+      }
+    },
+    {
+      "id": "jfb",
+      "name": "Jamieson, Fausset and Brown",
+      "about": "the three authors of the Jamieson-Fausset-Brown Bible Commentary, on Matthew 6:25",
+      "words": "It is that anxious solicitude, that oppressive care, which springs from unbelieving doubts and misgivings, which alone is here condemned.",
+      "source": {
+        "title": "Commentaries on Matthew 6:25: Barnes, Ellicott, Jamieson-Fausset-Brown, Benson, Meyer and others (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/matthew/6-25.htm"
+      }
+    },
+    {
+      "id": "meyer",
+      "name": "Heinrich Meyer",
+      "about": "German New Testament scholar, in Meyer’s NT Commentary, on Matthew 6:25",
+      "words": "The care has been unwarrantably limited to anxious care",
+      "source": {
+        "title": "Commentaries on Matthew 6:25: Barnes, Ellicott, Jamieson-Fausset-Brown, Benson, Meyer and others (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/matthew/6-25.htm"
+      }
+    }
+  ],
+  "moment": "Picture who first heard it. Matthew sets the sermon on a mountain, after Jesus has gone about all Galilee and called four fishermen from their nets, with “Great multitudes from Galilee, Decapolis, Jerusalem, Judea, and from beyond the Jordan” following him. He sits down and teaches.\n\nIn that world tomorrow was a real question for many. In one of Jesus’ parables, workers stand in the marketplace hoping to be hired “for a denarius a day”, and some are still there at the eleventh hour, “Because no one has hired us.” The law of Moses told employers to pay such a worker before sunset, “for he is poor and sets his heart on it”. In this same sermon Jesus teaches the crowd to pray, “Give us today our daily bread.”\n\nSo when he names their worries, they are not abstract: “what you will eat, or what you will drink”, “what you will wear”. He points at the birds, which “don’t sow, neither do they reap”, and at the lilies of the field. In the World English Bible the word anxious comes six times in these ten verses. The last two are in this verse, and it ends without pretending life is easy: “Each day’s own evil is sufficient.”",
+  "around": "The verse closes a passage that begins with money. “Don’t lay up treasures for yourselves on the earth,” Jesus says, and then, “You can’t serve both God and Mammon.” In this chapter, worry and wealth stand side by side.\n\nThen comes the reason not to worry, and it is not that tomorrow will be fine. It is a person: “your heavenly Father knows that you need all these things.” Right before this verse stands the line that puts everything in order: “But seek first God’s Kingdom and his righteousness; and all these things will be given to you as well.” The word therefore at the start of verse 34 points back to that promise.\n\nJesus says the birds are fed without sowing. He does not tell his listeners to stop sowing.",
+  "after": "Did Jesus’ followers stop planning? The New Testament shows the opposite. Jesus’ own group kept a money box; John mentions that Judas had it, and that the disciples thought he might be sent to buy what they needed for the feast. When a prophet named Agabus foretold a famine, the disciples in Antioch decided to send relief to Judea, each as he had plenty. Paul told the churches to set money aside “On the first day of every week”, so that no collections would have to be made when he came.\n\nAugustine of Hippo pointed to exactly these examples, the money box, Paul’s collection and the famine relief, when he explained this verse.\n\nThe English changed too. Later English versions, such as the English Revised Version and the American Standard Version, replaced take no thought with be not anxious, and modern translations say worry or be anxious. Many people still know the old phrase, which is why the verse is worth reading slowly.",
+  "readings": "Readers agree on the word and differ on how far it reaches.\n\nMost commentators read the verse as a word against anxious care, not against foresight. Albert Barnes, the Jamieson, Fausset and Brown commentary and Joseph Benson all say that thinking ahead and providing for a family is right, and that Jesus forbids the worry that comes from distrust. Ellicott’s commentary puts it as a warning not against foresight, which provides for the future, but against being harassed and vexed by its uncertainties.\n\nOthers hear a higher call. Heinrich Meyer thought it wrong to narrow the verse to anxious care. He read Jesus as asking disciples who serve God with an undivided heart to be free of all care about food and drink, and he pointed to August Hermann Francke, who founded an orphanage, as an example.\n\nEllicott’s commentary also notes that many philosophies, the Epicureans and the Stoics among them, told people to stop fretting about the future. What it finds new in Jesus is the ground he gives: a Father in heaven who cares for each person.\n\nAnd the last line keeps the verse honest. Jesus does not promise that tomorrow will be easy. He says each day has trouble enough of its own.",
+  "argued": "Christians have argued over how far to take the verse for a long time. Augustine of Hippo, explaining the Sermon on the Mount, already guarded against a harsh use of it: [[augustine]]\n\nCommentators on the English Bible went on to draw the line between planning and worry. The Jamieson, Fausset and Brown commentary, on the verses just before, named what Jesus does condemn: [[jfb]]\n\nHeinrich Meyer disagreed with that whole line of reading. He did not think the verse could be narrowed to worry alone: [[meyer]] For him the point was a trust so complete that disciples would carry no earthly cares at all.\n\nBoth sides read the same verses. One stresses that Jesus never forbade work and provision, the other that he asks for undivided trust.",
+  "point": "The King James words were right in their day: to take thought meant to worry. Read with today’s meaning, they seem to forbid planning, and the verse becomes a burden it was never meant to be. In its setting, spoken in a world where many lived from one day’s wage to the next, it lifts a weight: your Father knows what you need, so do today’s work and leave tomorrow’s fear for tomorrow.",
+  "lesson": "Studying for tomorrow’s test is planning. Lying awake at three in the morning replaying it is worry. Jesus is not against the first. When he wanted people to think hard about following him, he told of a builder who would “first sit down and count the cost”. That parable is about the cost of being his disciple, but it takes for granted that a wise person plans.\n\nWhat he takes off your shoulders is the second. Tomorrow will have its own trouble, and you cannot carry it today. You can make the plan, write the list, save what you can, and then put it down, because your heavenly Father knows what you need.\n\nIf worry keeps you awake, you could try what this chapter teaches: tell God the worry in plain words, ask for today’s bread, and leave tomorrow for tomorrow. Read Matthew 6:25-34 slowly, once, out loud. And if you do not share this faith, the line between planning and worry is still worth drawing.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "philippians",
+        "chapter": 4,
+        "start": 6,
+        "end": 6
+      },
+      "note": "Paul uses the same Greek verb: “In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God.” Worry is answered with prayer, not with a ban on plans."
+    },
+    {
+      "ref": {
+        "book": "1-peter",
+        "chapter": 5,
+        "start": 7,
+        "end": 7
+      },
+      "note": "A letter in Peter’s name hands the weight over: “casting all your worries on him, because he cares for you.” It rests on the reason Jesus gives, a Father who cares."
+    },
+    {
+      "ref": {
+        "book": "exodus",
+        "chapter": 16,
+        "start": 4,
+        "end": 4
+      },
+      "note": "In the wilderness the manna came as “a day’s portion every day”. Israel learned to trust for one day at a time, as Jesus’ prayer for daily bread does."
+    },
+    {
+      "ref": {
+        "book": "proverbs",
+        "chapter": 6,
+        "start": 6,
+        "end": 8
+      },
+      "note": "Scripture praises foresight too. The ant “provides her bread in the summer, and gathers her food in the harvest.” What Jesus lifts is the fear, not the planning."
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 6,
+      "start": 9,
+      "end": 13
+    },
+    {
+      "book": "matthew",
+      "chapter": 6,
+      "start": 19,
+      "end": 33
+    },
+    {
+      "book": "matthew",
+      "chapter": 4,
+      "start": 18,
+      "end": 25
+    },
+    {
+      "book": "matthew",
+      "chapter": 5,
+      "start": 1,
+      "end": 2
+    },
+    {
+      "book": "matthew",
+      "chapter": 20,
+      "start": 1,
+      "end": 7
+    },
+    {
+      "book": "deuteronomy",
+      "chapter": 24,
+      "start": 14,
+      "end": 15
+    },
+    {
+      "book": "1-samuel",
+      "chapter": 9,
+      "start": 3,
+      "end": 5
+    },
+    {
+      "book": "1-samuel",
+      "chapter": 9,
+      "start": 20,
+      "end": 20
+    },
+    {
+      "book": "luke",
+      "chapter": 10,
+      "start": 40,
+      "end": 42
+    },
+    {
+      "book": "luke",
+      "chapter": 14,
+      "start": 25,
+      "end": 33
+    },
+    {
+      "book": "john",
+      "chapter": 12,
+      "start": 6,
+      "end": 6
+    },
+    {
+      "book": "john",
+      "chapter": 13,
+      "start": 29,
+      "end": 29
+    },
+    {
+      "book": "acts",
+      "chapter": 11,
+      "start": 27,
+      "end": 30
+    },
+    {
+      "book": "1-corinthians",
+      "chapter": 16,
+      "start": 1,
+      "end": 2
+    }
+  ]
+}
