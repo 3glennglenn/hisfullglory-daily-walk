@@ -1,0 +1,231 @@
+{
+  "slug": "matthew-8-21-22",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Opus 5.5",
+  "written": "2026-11-24",
+  "verse": {
+    "book": "matthew",
+    "chapter": 8,
+    "start": 21,
+    "end": 22
+  },
+  "hook": "You know Jesus told a man to leave the dead to bury their own dead. But did you know the man may not have been asking for one afternoon?",
+  "story": "It sounds like the hardest thing Jesus ever said. A man who already follows him asks for one thing: “Lord, allow me first to go and bury my father.” Jesus answers, “Follow me, and leave the dead to bury their own dead.”\n\nTo hear how hard that sounds, you have to know what burying a father meant. It was one of the weightiest duties a son had. The commentator John Gill pointed out that under the Jewish law of the Mishnah, a man whose dead still lay unburied was excused even from reciting the Shema and from prayer. And the dead were buried fast. When Ananias died in the book of Acts, the young men “carried him out and buried him”, and about three hours later the feet of the men “who have buried your husband” were already at the door. Ellicott’s Commentary for English Readers notes that if the father had just died, the son’s request would have meant a delay of a few hours at most.\n\nSo why is this son out on the road with Jesus, and not at the grave? Matthew does not say. Readers have proposed two answers.\n\nOne is that his father was not yet dead. The Methodist commentator Joseph Benson read the request as: let me stay at home with my aged father until I have buried him. Ellicott’s commentary calls this by far the most probable reading. Then the son was asking to wait for as long as his father lived.\n\nThe other answer comes out of the tombs. In and around Jerusalem in Jesus’ time, many families laid the body on a shelf in a burial cave, and a year or so later came back, gathered the bones and put them in a limestone chest about two feet long, an ossuary. One found in Jerusalem bears the name Joseph son of Caiaphas, apparently from the family of the high priest at Jesus’ trial. In 1990 the scholar Byron McCane proposed that this custom solves the riddle: the son was asking to stay for the second burial, the gathering of his father’s bones.\n\nEither way, he was not asking for one afternoon. He was asking for not yet.",
+  "storyStatus": "reading",
+  "sources": [
+    {
+      "title": "Byron R. McCane, Let the Dead Bury Their Own Dead: Secondary Burial and Matt 8:21-22, Harvard Theological Review 83 (1990) (Cambridge Core)",
+      "url": "https://www.cambridge.org/core/journals/harvard-theological-review/article/let-the-dead-bury-their-own-dead-secondary-burial-and-matt-82122/B8F0C92896F6CC42689EAD53EA19930F"
+    },
+    {
+      "title": "Steven Fine, Why Bone Boxes? Biblical Archaeology Review 27:5 (2001) (Center for Online Judaic Studies)",
+      "url": "https://cojs.org/steven-fine-why-bone-boxes-biblical-archaeology-review-27-5-2001/"
+    },
+    {
+      "title": "Eldad Keynan, Jewish Burials (The Bible and Interpretation, University of Arizona, 2010)",
+      "url": "https://bibleinterp.arizona.edu/articles/burial357907"
+    },
+    {
+      "title": "Commentaries on Matthew 8:21: Ellicott, Benson, Gill and others (Bible Hub)",
+      "url": "https://biblehub.com/commentaries/matthew/8-21.htm"
+    },
+    {
+      "title": "John Chrysostom, Homily 27 on the Gospel of Matthew (New Advent)",
+      "url": "https://www.newadvent.org/fathers/200127.htm"
+    },
+    {
+      "title": "Karl Marx, The Eighteenth Brumaire of Louis Bonaparte, chapter 1, 1852 (Marxists Internet Archive)",
+      "url": "https://www.marxists.org/archive/marx/works/1852/18th-brumaire/ch01.htm"
+    },
+    {
+      "title": "Wikipedia: Joseph Benson",
+      "url": "https://en.wikipedia.org/wiki/Joseph_Benson"
+    }
+  ],
+  "voices": [
+    {
+      "name": "Joseph Benson",
+      "about": "English Methodist minister and Bible commentator, on Matthew 8:21",
+      "words": "His meaning seems to be, Suffer me to continue at home with my father, who is far advanced in years, till I have performed the last filial office to him, in committing his body to the dust: for it does not appear that his father was already dead.",
+      "source": {
+        "title": "Commentaries on Matthew 8:21: Ellicott, Benson, Gill and others (Bible Hub)",
+        "url": "https://biblehub.com/commentaries/matthew/8-21.htm"
+      }
+    },
+    {
+      "name": "Steven Fine",
+      "about": "scholar of ancient Judaism, writing in Biblical Archaeology Review in 2001",
+      "words": "Ancient Jews practiced secondary burial, gathering into bone boxes called ossuaries the bones of their dead a year or so after death, when the flesh had desiccated and fallen off.",
+      "source": {
+        "title": "Steven Fine, Why Bone Boxes? Biblical Archaeology Review 27:5 (2001) (Center for Online Judaic Studies)",
+        "url": "https://cojs.org/steven-fine-why-bone-boxes-biblical-archaeology-review-27-5-2001/"
+      }
+    },
+    {
+      "id": "chrysostom",
+      "name": "John Chrysostom",
+      "about": "preacher and bishop, in his Homilies on the Gospel of Matthew, on Matthew 8:21-22",
+      "words": "Because, on the one hand, there were those that would fulfill that duty, and the dead was not going to remain unburied; on the other, it was not fit for this man to be taken away from the weightier matters.",
+      "source": {
+        "title": "John Chrysostom, Homily 27 on the Gospel of Matthew (New Advent)",
+        "url": "https://www.newadvent.org/fathers/200127.htm"
+      }
+    },
+    {
+      "id": "mccane",
+      "name": "Byron R. McCane",
+      "about": "New Testament scholar, then at Duke University, in his article in the Harvard Theological Review, 1990",
+      "words": "In this paper, I propose that secondary burial, a widespread burial custom among Jews in first-century Palestine, can solve the riddle of these verses.",
+      "source": {
+        "title": "Byron R. McCane, Let the Dead Bury Their Own Dead: Secondary Burial and Matt 8:21-22, Harvard Theological Review 83 (1990) (Cambridge Core)",
+        "url": "https://www.cambridge.org/core/journals/harvard-theological-review/article/let-the-dead-bury-their-own-dead-secondary-burial-and-matt-82122/B8F0C92896F6CC42689EAD53EA19930F"
+      }
+    },
+    {
+      "id": "mccane-literal",
+      "name": "Byron R. McCane",
+      "about": "in the same article, on the dead in Jesus’ answer",
+      "words": "On the contrary, if the references to the dead are taken literally, the saying sounds both ironic and eschatological.",
+      "source": {
+        "title": "Byron R. McCane, Let the Dead Bury Their Own Dead: Secondary Burial and Matt 8:21-22, Harvard Theological Review 83 (1990) (Cambridge Core)",
+        "url": "https://www.cambridge.org/core/journals/harvard-theological-review/article/let-the-dead-bury-their-own-dead-secondary-burial-and-matt-82122/B8F0C92896F6CC42689EAD53EA19930F"
+      }
+    },
+    {
+      "id": "gundry",
+      "name": "Robert H. Gundry",
+      "about": "New Testament scholar, in his commentary on Matthew of 1982, as McCane quotes him",
+      "words": "Let those who have been dead for some time bury those who have just died.",
+      "source": {
+        "title": "Byron R. McCane, Let the Dead Bury Their Own Dead: Secondary Burial and Matt 8:21-22, Harvard Theological Review 83 (1990) (Cambridge Core)",
+        "url": "https://www.cambridge.org/core/journals/harvard-theological-review/article/let-the-dead-bury-their-own-dead-secondary-burial-and-matt-82122/B8F0C92896F6CC42689EAD53EA19930F"
+      }
+    }
+  ],
+  "moment": "Matthew sets the scene by the Sea of Galilee, at the end of a crowded day. Jesus has come down from the mountain where he taught, and in and around Capernaum he has healed a leper, a centurion’s servant and Peter’s mother-in-law. By evening people are bringing him the sick and the possessed. Then, seeing “great multitudes around him, he gave the order to depart to the other side.”\n\nBefore he gets into the boat, two men step forward. The first is a scribe, full of promise: “Teacher, I will follow you wherever you go.” Jesus does not turn him away, but tells him what he is signing up for: “the Son of Man has nowhere to lay his head.”\n\nThe second is already one of his disciples. He does not refuse. He says yes, with one thing first. Luke tells the same exchange on the road to Jerusalem, when Jesus has “intently set his face” toward the city, and in Luke the call comes first. Jesus says to him, “Follow me!” Only then does the man ask to bury his father.\n\nMatthew records no reply from him. The next sentence is about the others: “When he got into a boat, his disciples followed him.” A storm is waiting on the lake.",
+  "around": "The request sounds like older stories. When Jacob died in Egypt, Joseph asked Pharaoh, “please let me go up and bury my father, and I will come again”, and Pharaoh let him go. When Elijah called Elisha from his plow, Elisha said, “Let me please kiss my father and my mother, and then I will follow you.” Elijah let him go too. In Luke, the next would-be follower asks almost the same thing, and Jesus answers him with a plow: “No one, having put his hand to the plow and looking back, is fit for God’s Kingdom.”\n\nThe law itself knew callings so holy that a man could not go near his own father’s body. The high priest “must not go in to any dead body, or defile himself for his father or for his mother.” A Nazirite, set apart to God, “shall not make himself unclean for his father, or for his mother”. And Matthew has already shown what following cost others: James and John “left the boat and their father, and followed him.”\n\nJesus was not careless about parents. In the same Gospel he rebukes teachers whose tradition let a man stop helping his father and mother: “You have made the commandment of God void because of your tradition.” And John tells how, from the cross, Jesus gave his own mother into the care of his disciple.",
+  "after": "Matthew never tells us what the man did. Did he go home, or did he get into the boat? The story leaves the question open, the way it leaves it open for every reader. A tradition preserved by Clement of Alexandria said the man was Philip, though Ellicott’s commentary notes that nothing in the Gospels suggests it.\n\nLuke does tell where the call went next. Right after these scenes Jesus “appointed seventy others, and sent them two by two”, and in every town they were to say, “God’s Kingdom has come near to you.” It is the announcement the man had been asked to make.\n\nThe burial customs come back at the end of Matthew’s Gospel. Jesus himself was laid in a tomb cut in the rock: Joseph of Arimathaea put the body “in his own new tomb, which he had cut out in the rock.” In Matthew’s telling, no one ever came back a year later to gather his bones. On the first day of the week the women were told, “He is not here, for he has risen, just like he said.”\n\nThe saying itself lived on outside the church. In 1852 Karl Marx borrowed it for politics, writing that the revolution of his century must let the dead bury their dead. Jesus’ hard sentence had become a figure of speech for leaving the past behind.",
+  "readings": "Readers have taken the saying in several ways, and each of them takes its hardness seriously.\n\nThe most common reading hears two kinds of death in one sentence: let those who are dead to God bury those whose bodies have died. John Chrysostom read it this way, and he supposed the dead father was an unbeliever. Joseph Benson, too, explains the dead as those who are dead in sin.\n\nA second reading asks whether the father had died at all. Benson and Ellicott’s commentary think the son meant: let me stay until my father dies. Then Jesus is not forbidding a funeral but refusing a delay without an end.\n\nA third reading comes from archaeology. Byron McCane argues that the request belongs to secondary burial, and that the dead in Jesus’ answer can then be taken literally: those long dead can see to the newly dead. Steven Fine writes that ossuary burial was practiced mainly in and around Jerusalem, while McCane calls it widespread among Jews in first-century Palestine. Matthew sets the scene in Galilee, and readers weigh that differently.\n\nWhat the readings share is the urgency. In every one of them, Jesus will not let even a sacred duty become a reason to wait.",
+  "argued": "The saying has divided readers for a long time. John Chrysostom, preaching on Matthew, asked why Jesus did not let the man go, and answered: [[chrysostom]]\n\nLater commentators asked whether there was a funeral at all. Joseph Benson thought the father was old and still alive, and Ellicott’s commentary agreed that this was the most probable reading.\n\nIn 1990 Byron McCane opened his article by noting that none of the many solutions had been generally convincing, and he brought the tombs into the debate: [[mccane]] He took the dead in Jesus’ answer at their word: [[mccane-literal]] Before him, Robert H. Gundry had put the literal sense in one line, which McCane quotes: [[gundry]] Gundry did not connect it with secondary burial; McCane did.\n\nNone of these readers makes the saying soft. They differ on what the son was waiting for.",
+  "point": "Read on its own, the saying sounds as if Jesus despised grief and family. Read in its world, it says something else. Burial was quick and sacred, so a son on the road was not asking for an afternoon. He was asking for a delay without a clear end, until his father died or until the bones were gathered. Jesus, who defended the duty to parents and cared for his own mother from the cross, answers that the Kingdom cannot wait for a better moment. The man said “allow me first”. Jesus had already taught what comes first: “seek first God’s Kingdom”.",
+  "lesson": "Most of us know the sentence the son was saying, even if we never use his words. I will start living for what matters once everything at home settles down. Once the exams are over. Once the children are older. Once things are calmer.\n\nJesus does not mock that wish, and he does not ask anyone to stop loving their family. The same Jesus held people to the command to honor father and mother and, while dying, made sure his own mother had a home. What he refuses is the word first when it puts him second. Life at home rarely settles down for long. The call comes in the middle of life, not after it.\n\nIf there is something you keep putting off until the right moment, a prayer you mean to pray, a step toward God you plan to take later, this passage gently asks: why not now? You do not need everything at home sorted out. You can follow him with things unfinished, the way his disciples got into that boat.\n\nAnd if you do not share this faith, the saying still asks an honest question: what are you waiting for before you live for what you believe matters most?",
+  "echoes": [
+    {
+      "ref": {
+        "book": "luke",
+        "chapter": 9,
+        "start": 62,
+        "end": 62
+      },
+      "note": "Luke ends the same scene with a plowman. A man who keeps “looking back” cannot plow a straight furrow, and Jesus uses that picture for following him without waiting."
+    },
+    {
+      "ref": {
+        "book": "matthew",
+        "chapter": 6,
+        "start": 33,
+        "end": 33
+      },
+      "note": "The son asked to go home first. Earlier in Matthew, Jesus had already said what comes first: “seek first God’s Kingdom and his righteousness”."
+    },
+    {
+      "ref": {
+        "book": "john",
+        "chapter": 19,
+        "start": 26,
+        "end": 27
+      },
+      "note": "The Jesus who would not let this son wait was not careless of family. From the cross he said to his mother, “Woman, behold, your son!” and gave her a home with his disciple."
+    },
+    {
+      "ref": {
+        "book": "2-corinthians",
+        "chapter": 6,
+        "start": 2,
+        "end": 2
+      },
+      "note": "Paul puts the same urgency in other words: “now is the acceptable time.” The moment to answer God is the present one, not a calmer one later."
+    }
+  ],
+  "basis": [
+    {
+      "book": "matthew",
+      "chapter": 8,
+      "start": 1,
+      "end": 20
+    },
+    {
+      "book": "matthew",
+      "chapter": 8,
+      "start": 23,
+      "end": 24
+    },
+    {
+      "book": "luke",
+      "chapter": 9,
+      "start": 51,
+      "end": 61
+    },
+    {
+      "book": "acts",
+      "chapter": 5,
+      "start": 5,
+      "end": 10
+    },
+    {
+      "book": "genesis",
+      "chapter": 50,
+      "start": 4,
+      "end": 6
+    },
+    {
+      "book": "1-kings",
+      "chapter": 19,
+      "start": 19,
+      "end": 21
+    },
+    {
+      "book": "leviticus",
+      "chapter": 21,
+      "start": 10,
+      "end": 11
+    },
+    {
+      "book": "numbers",
+      "chapter": 6,
+      "start": 6,
+      "end": 7
+    },
+    {
+      "book": "matthew",
+      "chapter": 4,
+      "start": 21,
+      "end": 22
+    },
+    {
+      "book": "matthew",
+      "chapter": 15,
+      "start": 1,
+      "end": 6
+    },
+    {
+      "book": "matthew",
+      "chapter": 27,
+      "start": 57,
+      "end": 60
+    },
+    {
+      "book": "matthew",
+      "chapter": 28,
+      "start": 1,
+      "end": 6
+    },
+    {
+      "book": "luke",
+      "chapter": 10,
+      "start": 1,
+      "end": 9
+    }
+  ]
+}
