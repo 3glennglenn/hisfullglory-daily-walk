@@ -1,0 +1,163 @@
+{
+  "slug": "2-corinthians-5-17",
+  "review": "ai-unreviewed",
+  "drafted": "ai",
+  "model": "Claude Sonnet 5.5",
+  "written": "2026-11-26",
+  "verse": {
+    "book": "2-corinthians",
+    "chapter": 5,
+    "start": 17,
+    "end": 17
+  },
+  "hook": "You know the verse about being a new creation. But did you know Paul wrote it to a city that Rome had burned down and then refounded?",
+  "story": "Corinth knew what it was to start over. In 146 BC a Roman army under Lucius Mummius besieged the city, captured it and burned it. One account says he killed the men and sold the women and children into slavery. For a long time afterward the place stood empty.\n\nThen, in 44 BC, Julius Caesar refounded it as a Roman colony. The geographer Strabo, writing about the city, says it was restored because of its good position, and that Caesar filled it with people who were for the most part freedmen, that is, people who had been freed from slavery. So the Corinth that Paul walked into around AD 50 was a city built a second time, by people who were mostly freedmen.\n\nPaul came, found work with a married couple who were tent makers, Aquila and Priscilla, and reasoned in the synagogue every Sabbath. Crispus, the ruler of the synagogue, believed with all his house, and “Many of the Corinthians, when they heard, believed and were baptized.” One night the Lord told him in a vision, “I have many people in this city.” Paul stayed a year and six months.\n\nThe church that grew there was alive and troubled. People from Chloe’s household told Paul about contentions: some were saying “I follow Paul,” and others “I follow Apollos,” and Paul wrote hard words to them, and he says what it cost him: “out of much affliction and anguish of heart I wrote to you with many tears”. When he came to Macedonia he had no relief: “Fightings were outside. Fear was inside.” Then Titus arrived with news, and Paul wrote that God “comforted us by the coming of Titus”. The Corinthians had been grieved “to repentance”, and Paul rejoiced.\n\nThis verse comes out of that conversation, in a letter to people he says he loves and has grieved.",
+  "storyStatus": "history",
+  "sources": [
+    {
+      "title": "Strabo, Geography, Book 8, chapter 6 (LacusCurtius, University of Chicago)",
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Strabo/8F*.html"
+    },
+    {
+      "title": "Chrysostom, Homily 11 on Second Corinthians (New Advent)",
+      "url": "https://www.newadvent.org/fathers/220211.htm"
+    },
+    {
+      "title": "First Epistle of Clement to the Corinthians (New Advent)",
+      "url": "https://www.newadvent.org/fathers/1010.htm"
+    },
+    {
+      "title": "Roman Corinth (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Roman_Corinth"
+    }
+  ],
+  "voices": [
+    {
+      "name": "Strabo",
+      "about": "Greek geographer, writing on Corinth after Caesar had refounded it",
+      "words": "who colonised it with people that belonged for the most part to the freedmen class.",
+      "source": {
+        "title": "Strabo, Geography, Book 8, chapter 6 (LacusCurtius, University of Chicago)",
+        "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Strabo/8F*.html"
+      }
+    },
+    {
+      "id": "chrysostom",
+      "name": "John Chrysostom",
+      "about": "early church preacher, in his homily on Second Corinthians",
+      "words": "he has come to another creation, for he has been born again by the Spirit.",
+      "source": {
+        "title": "Chrysostom, Homily 11 on Second Corinthians (New Advent)",
+        "url": "https://www.newadvent.org/fathers/220211.htm"
+      }
+    },
+    {
+      "id": "chrysostom-old",
+      "name": "John Chrysostom",
+      "about": "in the same homily, on what the old things are",
+      "words": "What old things? He means either sins and impieties, or else all the Judaical observances.",
+      "source": {
+        "title": "Chrysostom, Homily 11 on Second Corinthians (New Advent)",
+        "url": "https://www.newadvent.org/fathers/220211.htm"
+      }
+    },
+    {
+      "name": "The church in Rome",
+      "about": "in its letter to the Corinthians, preserved among early Christian writings, pointing them back to Paul",
+      "words": "Take up the epistle of the blessed Apostle Paul.",
+      "source": {
+        "title": "First Epistle of Clement to the Corinthians (New Advent)",
+        "url": "https://www.newadvent.org/fathers/1010.htm"
+      }
+    }
+  ],
+  "moment": "Paul is writing to a church he knows well and has grieved. In the verses just before, he explains what drives him: “the love of Christ compels us; because we judge thus: that one died for all, therefore all died.” He says the aim of that death is that “those who live should no longer live to themselves, but to him who for their sakes died and rose again.”\n\nThen comes the turn that leads into this verse: “Therefore we know no one according to the flesh from now on.” Paul says he has stopped sizing people up by outward things, and he says that even his view of Christ has changed. In a church that had split into followers of Paul, Apollos and Cephas, that is a pointed thing to say.\n\nAnd then the verse itself, short and almost breathless: “if anyone is in Christ, he is a new creation. The old things have passed away. Behold, all things have become new.”",
+  "around": "The verse is not the end of a thought. Right after it Paul says, “all things are of God, who reconciled us to himself through Jesus Christ”, and gave to us “the ministry of reconciliation”. He goes on to say that God was “not reckoning to them their trespasses,” and that he and his co-workers are “ambassadors on behalf of Christ”. The newness he describes is tied from the start to being reconciled, and to carrying that message to others.\n\nIt also sits near the end of a letter that Paul closes by asking the Corinthians to “Be perfected. Be comforted. Be of the same mind. Live in peace”. He wrote about the new creation to a real, quarrelling congregation.",
+  "after": "In his first letter to the Corinthians Paul lists wrongs and then says of some of his readers, “Some of you were such, but you were washed. You were sanctified. You were justified in the name of the Lord Jesus”.\n\nBut it did not come all at once. During his stay, when Gallio was proconsul of Achaia, the Jews “brought him before the judgment seat,” as Luke tells it. And the divisions Paul warned about did not simply end. A letter from the church in Rome to the Corinthians, kept among early Christian writings, describes strife in the Corinthian church and tells its readers to take up Paul’s letter again. It reminds them that Paul had written to them about the parties that formed around Cephas, Apollos and himself. So some years on, Paul’s letters were still being pointed to as the place to turn.",
+  "readings": "One way of reading the verse is personal: a change in the one who trusts Christ. John Chrysostom, preaching on this letter, heard it that way. A second question is what the old things are, and he gives two possibilities: sins and impieties, or the Jewish observances. He does not choose between them on the page.\n\nA second question is where the weight falls: on what has already happened to the person, or on how that person now sees others. Paul has just said he no longer knows anyone “according to the flesh,” and this verse follows with a “Therefore” in the same breath. The text leaves open whether the newness is chiefly an inner change, a new way of looking at other people, or both.",
+  "argued": "John Chrysostom, in his homily on this letter, put the verse in plain terms: [[chrysostom]]\n\nThen he asked what the old things were, and gave two answers, not one: [[chrysostom-old]] Later readers have taken sides, and the text does not settle it. Both agree that something real has been left behind.",
+  "point": "The verse was written to a church in a city that knew what it meant to be burned and built again. It does not say that the past never happened. It says that for anyone in Christ, the old things are not the last word, and that this newness is tied to reconciliation.",
+  "lesson": "You do not have to pretend your past never happened. Paul did not. He wrote to a church that had real history, real failures and real quarrels, and he still said that anyone in Christ is new.\n\nLook at how he handles the Corinthians. He tells them hard things, and he weeps over it. He says what he rejoices in when they turn back. The newness he describes does not look like a person who has it all figured out. It looks like people who keep coming back and keep being met.\n\nIf you are carrying something you wish you could leave behind, you could read this chapter slowly and see what Paul says comes next: being reconciled, not being rated. You might say a short prayer about it, or tell someone you trust. And if you do not share this faith, you can still see why a sentence about starting over, written to a city rebuilt from ruins, has been kept and read for so long.",
+  "echoes": [
+    {
+      "ref": {
+        "book": "isaiah",
+        "chapter": 43,
+        "start": 18,
+        "end": 19
+      },
+      "note": "Centuries earlier, Isaiah spoke for God: “Behold, I will do a new thing.” Paul’s “Behold” sounds like this older promise of something new."
+    },
+    {
+      "ref": {
+        "book": "ezekiel",
+        "chapter": 36,
+        "start": 26,
+        "end": 26
+      },
+      "note": "The prophet promised, “I will also give you a new heart, and I will put a new spirit within you.” The change is described as something God gives."
+    },
+    {
+      "ref": {
+        "book": "galatians",
+        "chapter": 6,
+        "start": 15,
+        "end": 15
+      },
+      "note": "Paul uses the same phrase to another church: “neither is circumcision anything, nor uncircumcision, but a new creation.” There it sets outward marks aside."
+    },
+    {
+      "ref": {
+        "book": "1-corinthians",
+        "chapter": 6,
+        "start": 11,
+        "end": 11
+      },
+      "note": "To the same church Paul wrote, “you were washed. You were sanctified.” It names the change as already begun in the Corinthians."
+    }
+  ],
+  "basis": [
+    {
+      "book": "2-corinthians",
+      "chapter": 5,
+      "start": 14,
+      "end": 21
+    },
+    {
+      "book": "2-corinthians",
+      "chapter": 2,
+      "start": 4,
+      "end": 4
+    },
+    {
+      "book": "2-corinthians",
+      "chapter": 7,
+      "start": 5,
+      "end": 9
+    },
+    {
+      "book": "2-corinthians",
+      "chapter": 13,
+      "start": 11,
+      "end": 11
+    },
+    {
+      "book": "1-corinthians",
+      "chapter": 1,
+      "start": 11,
+      "end": 12
+    },
+    {
+      "book": "1-corinthians",
+      "chapter": 6,
+      "start": 11,
+      "end": 11
+    },
+    {
+      "book": "acts",
+      "chapter": 18,
+      "start": 1,
+      "end": 12
+    }
+  ]
+}
